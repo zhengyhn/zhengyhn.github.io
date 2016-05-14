@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Some interview questions about array and string &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="/zhengyhn.github.io/css/slim.css">
+<link rel="stylesheet" href="/zhengyhn.github.io/css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/zhengyhn.github.io">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="/zhengyhn.github.io/post/2013-08-25-some-interview-questions-about-array-and-string/">Some interview questions about array and string</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            
+
+<h2 id="hash-table:2cb6d5351930030c2b8bb843e6c740f7">Hash Table</h2>
+
+<p>In C++, the namespace<code>std::tr1</code> contains lots of hash tables. We can play
+with it.</p>
+
+<p>{% include_code careerup-array/careerup-hash.cpp %}</p>
+
+<h2 id="questions:2cb6d5351930030c2b8bb843e6c740f7">Questions</h2>
+
+<p><strong>1.1.</strong> Implement an algorithm to determine if a string has all unique
+characters. What if you can not use additional data structures?</p>
+
+<p>I have come up with 2 methods.</p>
+
+<ul>
+<li><p>Iterate the string and compare each character to other character. This is the
+common way to solve this problem. It will cost (O ^ 2) time.</p></li>
+
+<li><p>Use the <code>std::tr1::unordered_set</code> data structure so that we can only iterate
+the string once.</p></li>
+</ul>
+
+<p>Here is the code.</p>
+
+<p>{% include_code careerup-array/careerup-1.1.cpp %}</p>
+
+<p>However, there are two more effecient methods.</p>
+
+<ul>
+<li><p>If the string contains only ASCII(Ask the interviewer!), we can use an array
+of size 256 to mark every character. The time complexity is O(n). But this is
+to sacrifice space for time, just as the unordered_set method.</p></li>
+
+<li><p>If the string contains only letters, we can use a 4-bytes integer to mark the
+characters in the string.</p></li>
+</ul>
+
+<p>Here is the code.</p>
+
+<p>{% include_code careerup-array/careerup-1.1-answer.cpp %}</p>
+
+<p><strong>1.2.</strong> Write code to reverse a C-Style String(C-String means that &ldquo;abcd&rdquo; is
+represented as five characters, including the null character)</p>
+
+<p>The approach I come up with is described as follows.</p>
+
+<ol>
+<li><p>Get the length of the string, which needs iterate the whole string.</p></li>
+
+<li><p>According to the property of continuing, we can manipulate the string
+from the end. So we can swap the first character with the last character,
+and swap the second character with the last but not least character, &hellip;
+This needs iterate half of the string.</p></li>
+</ol>
+
+<p>In sumary, this will need O(1.5n) -&gt; O(n) time complexity. Here is the code.</p>
+
+<p>{% include_code careerup-array/careerup-1.2.cpp %}</p>
+
+<p>However, the answer is using pointer instead of index. But the algorithm and
+the time complexity are the same. Here is the code.</p>
+
+<p>{% include_code careerup-array/careerup-1.2-answer.cpp %}</p>
+
+<p>This code has several problems. First, the variable <code>end</code> and <code>tmp</code> should
+be defined in the <code>if</code> block. Otherwise, if <code>str</code> is <code>NULL</code>, the
+definition of the two variables will be wasteful. Second, using the pointer with
+the <code>++</code> and <code>--</code> is error-prone.</p>
+
+<p><strong>1.3</strong> Design an algorithm and write code to remove the duplicate characters
+in a string without using any additional buffer. NOTE: One or two additional
+variables are fine. An extra copy of the array is not.</p>
+
+<p>FOLLOW UP</p>
+
+<p>Write the test cases for this method.</p>
+
+<p>I am not so smart that I can only come up with the straightforward method. Just
+iterate the whole string and check from the former characters to find duplicate
+character. If there is duplicate, remove it by moving the rest characters front.
+Here is the code.</p>
+
+<p>{% include_code careerup-array/careerup-1.3.cpp %}</p>
+
+<p>The algorithm is ok but the program is too slow. In fact, the last <code>for</code> loop
+is not necessary. Here is the improved version according to the answer.</p>
+
+<p>{% include_code careerup-array/careerup-1.3-answer.cpp %}</p>
+
+<p><strong>1.4</strong> Write a method to decide if two strings are anagrams or not.</p>
+
+<p>From <a href="http://en.wikipedia.org/wiki/Anagram">Wikipedia</a>, An anagram is a type
+of word play, the result of rearranging the letters of a word or phrase to
+produce a new word or phrase, using all the original letters exactly once.</p>
+
+<p>For example, <code>&quot;abc&quot;</code>, <code>&quot;acb&quot;</code>, <code>&quot;bac&quot;</code>, <code>&quot;bca&quot;</code>, <code>&quot;cab&quot;</code> and <code>&quot;cba&quot;</code>
+are all anagrams.</p>
+
+<p>I come up with two approaches.</p>
+
+<ol>
+<li><p>Sort them and compare them. This will require at least O(nlogn) * 2 + O(n)
+time complexity.</p></li>
+
+<li><p>Use an extra array to record the occurrence of each character when compare
+the two string.</p></li>
+</ol>
+
+<p>I implemented the last method here.</p>
+
+<p>{% include_code careerup-array/careerup-1.4.cpp %}</p>
+
+<p><strong>1.5</strong> Write a method to replace all spaces in a string with &lsquo;%20&rsquo;.</p>
+
+<p>There is a <code>replace</code> method in class <code>std::string</code> , so I can use it
+directly. But it&rsquo;s too slow(O(n^2)). There is another method with the time
+complexity O(n). Count the number of the spaces and resize the string and
+copy the string from tail to head. If encounter the space, replace it with
+<code>%20</code>. Here is the code of the two methods.</p>
+
+<p>{% include_code careerup-array/careerup-1.5.cpp %}</p>
+
+<p><strong>1.6</strong> Given an image represented by an NxN matrix, where each pixel in the
+image is 4 bytes, write a method to rotate the image by 90 degrees  Can you
+do this in place?</p>
+
+<p>The first time I looked at this problem, I think it&rsquo;s very simple and write
+down an equation <code>a[i][j] = a[n - j - 1][i]</code>. When I implemented the program
+using this equation, I found that I was totally <strong>wrong</strong>!</p>
+
+<p>Since you can&rsquo;t request another space to store the matrix that was unmodified,
+the modified value will affect the value to be changed. So we should think about
+other solutions. One effective solution is to divide the whole matrix into
+<code>N / 2</code> parts and rotate each parts by swapping the values four times.</p>
+
+<p>Here is the code.</p>
+
+<p>{% include_code careerup-array/careerup-1.6.cpp %}</p>
+
+<p><strong>1.7</strong> Write an algorithm such that if an element in an MxN matrix is 0, its
+entire row and column is set to 0.</p>
+
+<p>I made the same mistake as problem <strong>1.6</strong>. I think we should just iterate the
+whole matrix and set its entire row and row to 0 when we met an element that is
+0. But this is <strong>wrong</strong>! It will also affect the elements that haven&rsquo;t been
+iterated.</p>
+
+<p>One solution is to use another matrix to record the original matrix. But this
+will need too much space.</p>
+
+<p>Actually, we just need two array of length <code>M</code> and <code>N</code> respectively and
+record whether there are an <code>0</code> in that row or column. If there are, set the
+entire row or column to 0.</p>
+
+<p>Here is the code.</p>
+
+<p>{% include_code careerup-array/careerup-1.7.cpp %}</p>
+
+<p><strong>1.8</strong> Assume you have a method isSubstring which checks if one word is a
+substring of another. Given two strings, s1 and s2, write code to check if
+s2 is a rotation of s1 using only one call to isSubstring (i.e., &ldquo;waterbottle&rdquo;
+is a rotation of &ldquo;erbottlewat&rdquo;).</p>
+
+<p>I am not so smart that I can&rsquo;t come up with the method to solve this problem
+after a long time. The answer amazed me.</p>
+
+<p>Just concatenate <code>s1</code> and check if <code>s2</code> is a substring of it. For example,
+<code>waterbottle</code> is a substring of <code>erbottlewaterbottlewat</code>, so it&rsquo;s a rotation
+of <code>erbottlewat</code>.</p>
+
+<p>Here is the code.</p>
+
+<p>{% include_code careerup-array/careerup-1.8.cpp %}</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="/zhengyhn.github.io/post/2013-07-25-some-basic-ruby/"> Prev</a>  
+          <a class="btn next " href="/zhengyhn.github.io/post/2013-07-22-some-reviews-about-c-plus-plus/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="/zhengyhn.github.io/js/slim.js"></script>
+  <script src="/zhengyhn.github.io/js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

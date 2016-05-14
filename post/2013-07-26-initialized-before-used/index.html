@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Initialized before used &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="/zhengyhn.github.io/css/slim.css">
+<link rel="stylesheet" href="/zhengyhn.github.io/css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/zhengyhn.github.io">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="/zhengyhn.github.io/post/2013-07-26-initialized-before-used/">Initialized before used</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            
+
+<h2 id="for-constructor:18e05882942b459f49f4d94b2214b10c">For constructor</h2>
+
+<p>In the constructor, the statements in the body are assignments, not
+initializations.</p>
+
+<pre><code>#include &lt;iostream&gt;
+
+class Girl {
+public:
+    Girl(std::string name, int age)
+    {
+        name_ = name;    // These are assignments, not initilizations.
+        age_ = age;
+    }
+private:
+    std::string name_;
+    int age_;
+};
+</code></pre>
+
+<p>If you do this, the program will be very slow.When calling the constructor,
+the program will call the <strong>default construtors</strong> to initialize the members,
+and then enter the body of the constructor.Therefor, all the work performed
+in the default constructors were wasted.</p>
+
+<p>Using the initilization list instead of the assignment will be more efficient.</p>
+
+<pre><code>#include &lt;iostream&gt;
+
+class Girl {
+public:
+    Girl(std::string name, int age)
+        :name_(name), age_(age)
+    { }
+private:
+    std::string name_;
+    int age_;
+};
+</code></pre>
+
+<p>If the member is <strong>const</strong> or <strong>reference</strong>, you must use initialization list.</p>
+
+<h2 id="for-non-local-static-objects-defined-in-different-translation-units:18e05882942b459f49f4d94b2214b10c">For non-local static objects defined in different translation units</h2>
+
+<p>How long the title was!</p>
+
+<p><strong>static objects</strong> include <em>global objects</em>, <em>objects defined at namespace</em>,
+<em>objects defined static inside classes</em>, <em>objects defined static inside
+functions</em> and <em>objects declared static at file scope</em>.</p>
+
+<p><em>objects defined static inside functions</em> are called <strong>non-local static objects</strong>.</p>
+
+<p>A <strong>translation unit</strong> is a single source file plus all of its <code>#include</code>files.</p>
+
+<p>Given an example.</p>
+
+<p>main.h:</p>
+
+<pre><code>#ifndef _MAIN_H_
+#define _MAIN_H_
+
+class Girl {
+public:
+    Girl(std::string name, int age)
+        :name_(name), age_(age)
+    { }
+    std::string
+    get_name() const
+    {
+        return &quot;Mary&quot;;
+    }
+private:
+    std::string name_;
+    int age_;
+};
+
+#endif /* _MAIN_H_ */
+</code></pre>
+
+<p>main.c:</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &quot;main.h&quot;
+
+extern Girl wife;
+
+class Man {
+public:
+    Man(std::string name, std::string wife_name)
+        :name_(name), wife_name_()
+    {
+        wife_name_ = wife.get_name();
+    }
+private:
+    std::string name_;
+    std::string wife_name_;
+};
+
+int
+main(int argc, char **argv)
+{
+    Man m(&quot;Tom&quot;, &quot;&quot;);
+
+    return 0;
+}
+</code></pre>
+
+<p><code>wife</code> is a non-local static object.In the constructor of class <code>Man</code>,
+<code>wife</code> will be used before it is initialized since <strong>the relative order</strong>
+**of initialization of non-local static objects defined in different **
+<strong>translation units is undefined</strong>.</p>
+
+<p>To let <code>wife</code> be initialized before used, change it to <strong>local static</strong>.</p>
+
+<p>main.h:</p>
+
+<pre><code>#ifndef _MAIN_H_
+#define _MAIN_H_
+
+class Girl {
+public:
+    Girl()
+    { }
+
+    Girl(std::string name, int age)
+        :name_(name), age_(age)
+    { }
+
+    std::string
+    get_name() const
+    {
+        return &quot;Mary&quot;;
+    }
+private:
+    std::string name_;
+    int age_;
+};
+
+#endif /* _MAIN_H_ */
+</code></pre>
+
+<p>main.cpp</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &quot;main.h&quot;
+
+class Man {
+public:
+    Man(std::string name, std::string wife_name)
+        :name_(name), wife_name_()
+    {
+        wife_name_ = wife().get_name();
+    }
+    Girl&amp;
+    wife()
+    {
+        static Girl w;
+
+        return w;
+    }
+private:
+    std::string name_;
+    std::string wife_name_;
+};
+
+int
+main(int argc, char **argv)
+{
+    Man m(&quot;Tom&quot;, &quot;&quot;);
+
+    return 0;
+}
+</code></pre>
+
+<p>The so-call <em>Factory pattern</em> is just like the above code.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="/zhengyhn.github.io/post/2013-09-26-implement-the-sorting-algorithms/"> Prev</a>  
+          <a class="btn next " href="/zhengyhn.github.io/post/2013-07-23-more-consts-enums-inlines-and-less-defines/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="/zhengyhn.github.io/js/slim.js"></script>
+  <script src="/zhengyhn.github.io/js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

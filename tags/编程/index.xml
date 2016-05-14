@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>编程 on Hank&#39;s Blog</title>
+    <link>zhengyhn.github.io/tags/%E7%BC%96%E7%A8%8B/</link>
+    <description>Recent content in 编程 on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 27 May 2016 20:40:43 +0800</lastBuildDate>
+    <atom:link href="zhengyhn.github.io/tags/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>improve code readability</title>
+      <link>/zhengyhn.github.io/post/improve-code-readability/</link>
+      <pubDate>Fri, 27 May 2016 20:40:43 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/improve-code-readability/</guid>
+      <description>
+
+&lt;p&gt;这是我读 &amp;ldquo;the art of readable code&amp;rdquo; 一书做的笔记&lt;/p&gt;
+
+&lt;h1 id=&#34;简化循环和逻辑:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;简化循环和逻辑&lt;/h1&gt;
+
+&lt;h2 id=&#34;making-control-flow-easy-to-read:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;making control flow easy to read&lt;/h2&gt;
+
+&lt;p&gt;下面的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (length &amp;gt;= 10)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;要比:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (10 &amp;lt;= length)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;更容易看懂。这是很显然的。而在C语言中，有的人为了避免=与==的错误，常常把
+代码写成:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (10 == length)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这种做法是为了避免错误的。其实在我看来，这明显是在掩饰自己区分不了=与==的
+弱点，如果你真的理解赋值与相等的含义，就从来不会在比较相等的时候写成=，以
+我使用C语言这么多年来，我从来没有犯过这种错误。上面的代码对于一个正常人来
+说，很难理解，因为程序员首先是一个人，自然的语言是“长度等于10”，而不是
+“10等于长度”，所以为了使代码更可读，我建议使用下面这种:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (lenght == 10)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的是有数字，有常量的比较，下面这个:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;while (bytes_received &amp;lt; bytes_expected)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;要比:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;while (bytes_expected &amp;gt; bytes_received)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;更容易看懂，因为第一个的阅读顺序符合人类的自然语言。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;对于三目运算符?:，当表达式很长时不要使用。&lt;/li&gt;
+&lt;li&gt;不要使用do/while。当你阅读do/while的时候，因为你刚开始不知道条件，你会
+把循环的主体阅读两次。我几乎不写do/while，而且我非常讨厌看do/while代码。&lt;/li&gt;
+&lt;li&gt;尽量不要使用嵌套的if/else，想尽办法使得只有一个层次。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;breaking-down-giant-expressions:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;breaking down giant expressions&lt;/h2&gt;
+
+&lt;p&gt;利用宏来简化代码。看下面的例子:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void AddStats(const Stats &amp;amp;add_from, Stats *add_to)
+{
+    add_to-&amp;gt;set_total_memory(add_from.total_memory() + 
+        add_to-&amp;gt;total_memory());
+    add_to-&amp;gt;set_free_memory(add_from.free_memory() + 
+        add_to-&amp;gt;free_memory());
+    add_to-&amp;gt;set_swap_memory(add_from.swap_memory() + 
+        add_to-&amp;gt;swap_memory());
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不管是谁，看到这样的代码都会头晕，但是你会发现其实它们都在做同一件事:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;add_to-&amp;gt;set_XXX(add_from.XXX + add_to-&amp;gt;XXX);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;于是，通过定义带参数的宏，可以简化成这样:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void AddStats(const Stats &amp;amp;add_from, Stats *add_to)
+{
+    #define ADD_FIELD(field) \
+        add_to-&amp;gt;set_#field(add_from.#field() + add_to-&amp;gt;#field())
+    ADD_FIELD(total_memory);
+    ADD_FIELD(free_memory);
+    ADD_FIELD(swap_memory);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样不仅视觉上看起来舒服，而且理解起来非常容易。&lt;/p&gt;
+
+&lt;h2 id=&#34;variables-and-readability:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;variables and readability&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;可去除一些多余的变量&lt;/li&gt;
+&lt;li&gt;尽量缩小变量的范围，即使是全局变量，这样才能让程序更清晰。&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;在C++中，有这样一个例子:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;int size = list.size();
+if (size &amp;gt; 0) {
+    cout &amp;lt;&amp;lt; size &amp;lt;&amp;lt; endl;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;假设后面再也没有用到size了，但是阅读代码的人会一直把这个变量记住，因为
+他以为后面还会用到这个变量。我们可以把它改成这样:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if ((int size = list.size()) &amp;gt; 0) {
+    cout &amp;lt;&amp;lt; size &amp;lt;&amp;lt; endl;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当然，在C语言中，这需要C99的支持，当读者看完这段代码时，就会忘记这个变量，
+因为后面已经用不上了。
+作者是这样说的，但是我觉得这不太可能，因为写代码的人不可能预知未来，它总是
+喜欢先把变量缓存起来，说不定以后还会用到，所以我不太赞成这种写法，除非是非常
+简单，很明显后面用不上的变量。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;尽量使变量只能改变一次(prefer write-once varaibles)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;改善外层代码:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;改善外层代码&lt;/h1&gt;
+
+&lt;h2 id=&#34;packing-informations-into-names:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;packing informations into names&lt;/h2&gt;
+
+&lt;h3 id=&#34;choose-specific-words:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;choose specific words&lt;/h3&gt;
+
+&lt;p&gt;书上说到getPage(url);这个函数的名字，根据我以前的看法，这绝对是一个好名字，
+但是作者却批评这种命名方式。作者说，get太模糊了，我们看不出来它是从缓存中get还是
+从数据库中get，还是从互联网上get。如果是从互联网上get,则应该使用fetchPage或者
+downloadPage()。我觉得这个说法非常好，我以后给变量或者函数起名字的时候也要注意
+这方面的东西了。&lt;/p&gt;
+
+&lt;h3 id=&#34;avoid-generic-names-like-tmp-and-retval:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;avoid generic names like tmp and retval&lt;/h3&gt;
+
+&lt;p&gt;作者批评了tmp,retval,foo这种词语，虽然我没用过retval和foo这种奇怪的名字，但是
+我却用过tmp这东西，后来想了一下，tmp这种东西的确看不出来任何含义，就算时间紧迫，我
+也不会用tmp这种变量了。但是，就像作者所说的一样，对于下面的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void swap(int *a,int *b)
+{
+    int tmp = *a;
+    *a = b;
+    *b = tmp;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这时候tmp则用得恰到好处，tmp在这里生命周期非常短，而且它的作用刚好是作为临时来用的。&lt;/p&gt;
+
+&lt;p&gt;对于计数器变量，我们经常使用i,j,k,x,y,z,a,b,c什么的，但是，正如作者所说，当有
+多个计数器变量时，这种东西就经常会让人很难看懂了。看下面的例子:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for(int i = 0; i &amp;lt; N; i++){
+    for(int j = 0; j &amp;lt; M; j++){
+        for(int k = 0; k &amp;lt; C; k++){
+            if(school[i].teacher[k] == user[j]){
+                ...
+            }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;school，teacher,user这种变量命名是很好的，但是i,j,k这种东西就很难懂了。我们怎么
+知道i,j,k分别对应哪个数组的下标呢？我以前也经常写这种代码，也经常看到其他人写这种代码，
+每当我看到这种代码时（就算是我自己的代码），我都觉得非常头疼，现在看了这本书，马上
+醒悟过来，以后再也不写这种代码了！转而使用si,ti,ui，这样
+school[si].teacher[ti] == user[ui] 就非常清楚了。&lt;/p&gt;
+
+&lt;h3 id=&#34;prefer-concrete-names-over-abstract-names:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;prefer concrete names over abstract names&lt;/h3&gt;
+
+&lt;p&gt;意思是不要抽象的名字，而是要具体的名字。以书上的一个例子说，
+serverCanStart是抽象的名字，而canListenOnPort则是一个具体的名字&lt;/p&gt;
+
+&lt;h3 id=&#34;attaching-extra-information-to-name-by-using-a-suffix-or-prefix:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;attaching extra information to name,by using a suffix or prefix&lt;/h3&gt;
+
+&lt;p&gt;如果我们有一个变量:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;string id;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;而这个id必须是十六进制，这时，直接使用id就很不好，因此你看不出来它必须使用十六进制，
+使用hex_id代替就很明确了。&lt;/p&gt;
+
+&lt;p&gt;单位数值, 使用书上的例子，看下面的js代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var start = (new Date()).getTime();
+var elapsed = (new Date()).getTime() - start;
+document.writeln(&amp;quot;time is:&amp;quot; + elapsed + &amp;quot; seconds&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果对js比较熟悉的，会知道，getTime()返回的是ms，而不是s，因此这样的命名会很容易
+产生bug，不是每个程序员都会记得那么清楚getTime()返回的单位是什么。把这2个变量改成
+start_ms和elapsed_ms就很清楚了！
+看到这里，我决定，以后遇到这种有单位的变量，都要带个单位的后缀，以写出可读的代码。&lt;/p&gt;
+
+&lt;h3 id=&#34;deciding-how-long-a-name-should-be:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;deciding how long a name should be&lt;/h3&gt;
+
+&lt;p&gt;在较短的域里面可以使用较短的变量名，比如:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if(i != k){
+    int t = a[i];
+    a[i] = a[k];
+    a[k] = t;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在，打一个长变量名已经不是问题了。&lt;/p&gt;
+
+&lt;p&gt;我以前很恶心java的类名方法名很长，看起来不简洁，现在看多了也习惯了，而且现在打长的变量
+名的确很简单了，因此现在很多编辑器或IDE都有自动补全的功能。比如我现在使用的Emacs就自带
+有补全的功能（Alt +
+/），我居然还不知道，因此我都是用auto-complete的，看来当它不起作用
+时，我就可以手动地补全了。&lt;/p&gt;
+
+&lt;p&gt;有关缩略词,
+作者说，对于工程项目的代码，最好不要写缩略词，因为新加进来的成员可能看不懂缩略词的意思，
+而一些最常见的缩写，比如evaluation写成eval,string写成str，document写成doc，则写
+成缩写比较好。其实，我觉得，像linux系统这么大的工程都使用了很多缩写，有的时候缩写还是
+非常必要的，可能是我的个人原因，我不喜欢又臭又长的代码，我喜欢简洁的代码，对于unix哲学
+中的缩写规则，我很感兴趣，在程序中还是要尽量使用缩写。&lt;/p&gt;
+
+&lt;h3 id=&#34;using-name-formating-to-pack-extra-information:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;using name formating to pack extra information&lt;/h3&gt;
+
+&lt;p&gt;不同类型的实体命名特点, 在google
+c++的规范中，类名首字母大写，使用驼峰式;宏常量名全部大写，使用下划线分隔;
+const变量则首字母大写，驼峰式，区分宏常量;类的方法首字母大写，驼峰式;类的变量全小写，
+最后要跟一个下划线;其它局部变量则全部小写，后面不跟下划线。
+在html/css中，id一般使用下划线分隔，而class使用中线（dash）来分隔。&lt;/p&gt;
+
+&lt;h2 id=&#34;names-that-can-t-be-misconstructed:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;names that can&amp;rsquo;t be misconstructed&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;关键思想是：不断地问自己，这个名字别人会不会认为是其他意思？&lt;/li&gt;
+&lt;li&gt;很多情况对变量的命名是有包含与不包含的意思的。这里列举出几种很常用的用法。
+
+&lt;ul&gt;
+&lt;li&gt;包含的情况，使用min和max，比如说min_items和max_students&lt;/li&gt;
+&lt;li&gt;两端包含，first和last。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;11%&#34; /&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;col width=&#34;9%&#34; /&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;a&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;b&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;c&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;d&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;first&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;last&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;包含前面，不包含后面，使用begin和end。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;table&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;11%&#34; /&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;col width=&#34;8%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;a&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;b&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;c&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;d&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;begin&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;end&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;在给布尔型变量命名时，注意不要带负面的意思，如不要使用:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bool disable_ssl = false;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;而要使用:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bool use_ssl = true;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;一般会使用is,can,has前缀命名布尔型变量。&lt;/li&gt;
+&lt;li&gt;函数的名字一定要和里面的操作相符，书上举了一个例子，比如函数getSum，这个函数的
+实现是计算一大堆数据的和，但是一般程序员第一眼看过去的时候就会以为仅仅是返回和，并
+没有想到里面会有代价很多的计算，很有可能会经常调用这个函数，这样就会使程序变得很慢。
+使用computeSum会使人更容易明白。&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;作者还举了STL里面的list::size()方法来批评。这个方法会一个节点一个节点地计算链
+表的长度，O(n)的速度很慢。看下面的例子:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;while (list.size() &amp;gt; max_size) {
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;连写STL的程序员也有不规范的时候，一般的程序员会以为size()是O(1)的速度，直接返回
+链表的长度，这样就会使得程序的速度非常慢了。如果改成countSize()会好很多，
+但是幸运的是，作者说了，最新版的STL已经把size()变成了O(1)速度。&lt;/p&gt;
+
+&lt;h2 id=&#34;aesthetics:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;aesthetics&lt;/h2&gt;
+
+&lt;p&gt;举的第一个例子让我震惊！看下面的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class PerformanceTester {
+        public static final TcpConnectionSimulator wifi =
+                new TcpConnectionSimulator(
+                    500,  /* Kbps */
+                    80,   /* millisecs */
+                    200,  /* jitter */
+                    1     /* packet loss % */);
+        public static final TcpConnectionSimulator t3_fiber =
+                new TcpConnectionSimulator(
+                    4500,  /* Kbps */
+                    10,    /* millisecs */
+                    0,     /* jitter */
+                    0      /* packet loss % */);
+        public static final TcpConnectionSimulator cell =
+                new TcpConnectionSimulator(
+                    100,  /* Kbps */
+                    400,  /* millisecs */
+                    250,  /* jitter */
+                    5     /* packet loss % */);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里，缩进是对齐了，注释也对齐了，但是占用的行数太多，而且注释重复了3遍。
+改成这样就好看多了:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class PerformanceTester {
+        // TcpConnectionSimulator(throughput, lantency, jitter, packet_loss)
+        //                          [Kbps]     [ms]      [ms]    [percent]
+
+        public static final TcpConnectionSimulator wifi =
+                new TcpConnectionSimulator(500, 80, 200, 1);
+        public static final TcpConnectionSimulator t3_fiber =
+                new TcpConnectionSimulator(4500, 10, 0, 0);
+        public static final TcpConnectionSimulator cell =
+                new TcpConnectionSimulator(100, 400, 250, 5);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;作者建议代码要列对齐，我之前在programming windows一书中看到过这种
+漂亮的代码，但是一直做不到，因为要打很多空格。后来发现emacs有通过正则表达式
+对齐的功能align-regexp，爽极了！&lt;/p&gt;
+
+&lt;h2 id=&#34;knowing-what-to-comment:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;knowing what to comment&lt;/h2&gt;
+
+&lt;h3 id=&#34;when-should-not-comment:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;when should not comment？&lt;/h3&gt;
+
+&lt;p&gt;看注释会浪费阅读代码的人的时间，注释还会占用屏幕的地方，导致读者时常要
+翻页，所以，没有价值的注释不要写。下面的代码的注释都没有价值:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// The class definition for Account
+class Account {
+public:
+        // Constructor
+        Account();
+
+        // Set the profit member to a new value
+        void SetProfit(double  profit);
+
+        // Return the profit from this Account
+        double GetProfit();
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;因为，注释的含义从代码中已经可以看出来了，注释没有提供额外的信息，其实是和
+代码重复了，不仅浪费地方，而且浪费写代码的人的时间和读代码的人的时间。
+记住:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;good code &amp;gt; bad code + good comment
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;what-should-comment-be:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;what should comment be？&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;写自己的想法&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;写自己的代码的缺点，比如:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// TODO:use a faster algorithm
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;有一些和TODO一样的很流行的标签&lt;/p&gt;
+
+&lt;table&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;12%&#34; /&gt;
+&lt;col width=&#34;47%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Marker&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Typical meaning&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;TODO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;things to finish&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;FIXME&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;known-broken code here&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;HACK&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;inelegant solution to a problem&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;XXX&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;danger!major problem here&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+&lt;li&gt;解释常量为什么是那个值&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;making-comments-precise-and-compact:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;making comments precise and compact&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;函数注释中，可使用举例说明，如:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//Example:strip(&amp;quot;abba/a/ba&amp;quot;, &amp;quot;ab&amp;quot;) returns &amp;quot;/a/&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;要写明你的代码的意图。看下面例子:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// Iterate through the list in reverse order
+for (i = SIZE; i &amp;gt;= 0; i--) {
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;上面的注释写了和没写差不多，改成这样就非常好了:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// display each price, from highest to lowest
+for (i = SIZE; i &amp;gt;= 0; i--) {
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;调用函数的时候也可以注释，按照书上的例子，这样的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Connect(/* timeout_ms = */ 10, /* use_encryption = */ false);
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;要比这样的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Connect(10, false);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;更容易看懂。&lt;/p&gt;
+
+&lt;h1 id=&#34;重构代码:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;重构代码&lt;/h1&gt;
+
+&lt;h2 id=&#34;extracting-unrelated-subproblems:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;extracting unrelated subproblems&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;要封装一些和本功能无关的子问题到另外一个函数上。&lt;/li&gt;
+&lt;li&gt;对于一些工具的类或函数（字符串操作，哈希表等），就分离出来。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;one-task-at-a-time:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;one task at a time&lt;/h2&gt;
+
+&lt;p&gt;每个函数应该只实现一个功能，不要实现多个功能。&lt;/p&gt;
+
+&lt;h2 id=&#34;turning-thoughts-into-code:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;turning thoughts into code&lt;/h2&gt;
+
+&lt;p&gt;记住爱因斯坦的这句话:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;You do not really understanding something unless you can explain it to
+your grandmother.               
+                                            --Albert Einstein
+代码应该用易懂的英语来写。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;writing-less-code:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;writing less code&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;一定要熟悉现存的库，这样可以减少代码量，多重用代码，少写代码。&lt;/li&gt;
+&lt;li&gt;使用Unix工具(shell命令），而不是自己写代码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;写出易懂的选择排序:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;写出易懂的选择排序&lt;/h1&gt;
+
+&lt;p&gt;以选择排序为例，我以前是直接把它记住的（当然是在理解的前提下），其中的一些
+下标i,j,k，直接记住人家的代码的，如果要我重新写，我还是会用i,j,k，造成了
+硬性的思维，现在看来，只要记住算法，用自己的方式来写出的代码才是好的代码。
+下面的选择排序是经典的课本上的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void select_sort(int *arr,int len)
+{
+    int i,j,k,temp;
+
+    for(i = 0; i &amp;lt; len - 1; i++){
+            k = i;
+            for(j = i + 1; j &amp;lt; len; j++){
+                    if(arr[j] &amp;lt; arr[k]){
+                            k = j;
+                    }
+            }
+            if(i != k){
+                    temp = arr[k];
+                    arr[k] = arr[i];
+                    arr[i] = temp;
+            }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我觉得，有经验的程序员看上面这份代码当然是没问题，但是给初学者来看，i,j,k分别
+代表什么意思，他就会摸不着头脑了，所以，我们需要给变量的名字赋予意义，更容易
+理解，于是我写了下面的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void select_sort(int *arr,int len)
+{
+    int current,next,smallest,temp;
+
+    for(current = 0; current &amp;lt; len - 1; current++){
+            smallest = current;
+            for(next = current + 1; next &amp;lt; len; next++){
+                    if(arr[next] &amp;lt; arr[smallest]){
+                            smallest = next;
+                    }
+            }
+            if(current != smallest){
+                    temp = arr[smallest];
+                    arr[smallest] = arr[current];
+                    arr[current] = temp;
+            }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样的话，单从变量名字就可以理解整个算法的思想了。虽然变量的名字是长了一点，
+但是现在的编辑器或者IDE的自动补全功能这么强大，变量名太长这个已经不是问题了。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

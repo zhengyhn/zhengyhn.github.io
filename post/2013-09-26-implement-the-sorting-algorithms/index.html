@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Implement the sorting algorithms &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="/zhengyhn.github.io/css/slim.css">
+<link rel="stylesheet" href="/zhengyhn.github.io/css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/zhengyhn.github.io">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="/zhengyhn.github.io/post/2013-09-26-implement-the-sorting-algorithms/">Implement the sorting algorithms</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            
+
+<p>The sorting algorithms are very important in programming interview. I have
+to be able to write them on a paper without even an error.</p>
+
+<h1 id="bubble-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Bubble Sort</h1>
+
+<p>The immediate thought of bubble sort is that swapping the ajacent elements
+if they are of the wrong order in each pass until there are no swapping.
+For example, consider the array <code>[5, 1, 4, 2, 8]</code>,</p>
+
+<p>First pass:</p>
+
+<p>[5, 1, 4, 2, 8] =&gt; [1, 5, 4, 2, 8] =&gt; [1, 4, 5, 2, 8] =&gt; [1, 4, 2, 5, 8]
+=&gt; [1, 4, 2, 5, 8]</p>
+
+<p>Second pass:</p>
+
+<p>[1, 2, 4, 5, 8] =&gt; [1, 2, 4, 5, 8] =&gt; [1, 2, 4, 5, 8] =&gt; [1, 2, 4, 5, 8]
+=&gt; [1, 2, 4, 5, 8]</p>
+
+<p>Third pass:</p>
+
+<p>[1, 2, 4, 5, 8] =&gt; [1, 2, 4, 5, 8] =&gt; [1, 2, 4, 5, 8] =&gt; [1, 2, 4, 5, 8]
+=&gt; [1, 2, 4, 5, 8]</p>
+
+<p>Here we found that the array has been sorted after the second pass, but we
+have apply the third pass so that we can know the array has been sorted
+because there are no swapping in that pass.</p>
+
+<p>There is an optimization that can improve the performance. Observer that
+in the second pass, there is no need to compare <code>5</code> to <code>8</code>, since they
+are in the right order in the first pass. Hence, there is no need to compare
+the last <code>ith</code> element in the <code>ith</code> pass.</p>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/sort/bubble-sort">Here</a> is the code.</p>
+
+<p>For this test cases, the average run time is <strong>0.9s</strong>.</p>
+
+<h1 id="select-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Select Sort</h1>
+
+<p>Just like its name, select sort is to select the smallest or the biggest
+element of the rest elements every pass. This algorithm is very easy and
+I can write down it with an eyes on.</p>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/sort/select-sort">Here</a> is the code.</p>
+
+<p>For this test cases, the average run time is <strong>0.4s</strong>.</p>
+
+<h1 id="insert-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Insert Sort</h1>
+
+<p>Just like playing poker, insert-sort will insert an element in a position
+of a sorted subsequence by moving the not-match elements backward. In the
+worst case, the time complexity is O(n^2). However, if the list is already
+sorted, it requires only O(n) time complexity.</p>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/sort/insert-sort">Here</a> is the code.</p>
+
+<p>For this test cases, the average run time is also <strong>0.22s</strong>.</p>
+
+<h1 id="shell-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Shell Sort</h1>
+
+<p>Shell sort is one kind of insert sort. The idea that relatively sorted list can
+be sorted more easy is used in shell sort. It will sort the list for several
+times and each time with some of the elements. These elements is divided by
+a fixed <strong>gap</strong> and the gap will decrease until becoming 1. If the gap is 1,
+it&rsquo;s the same as the insert sort. But now it will be more fast than the original
+insert sort.</p>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/sort/shell-sort">Here</a> is the code.</p>
+
+<p>For this test cases, the average run time is also <strong>0.18s</strong>.</p>
+
+<h1 id="quick-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Quick Sort</h1>
+
+<p>This is the most important algorithm in the interview. I must learn to write
+it on a paper with an eye on.</p>
+
+<h2 id="recursive-version:c82efbe47897fc68bcd3c7b3bd51c8bd">Recursive version</h2>
+
+<p>Select an element as the one to be compared(so-called <strong>pivot</strong>), and then put
+it at the end of the list. Iterate the whole list and let those elements that
+are smaller(larger) than the pivot in a part, the others in another part. Do
+the same work recursively in the two parts.</p>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/sort/quick-sort">Here</a> is the code.</p>
+
+<p>For this test cases, the average run time is <strong>0.07s</strong>.</p>
+
+<h2 id="iterate-version:c82efbe47897fc68bcd3c7b3bd51c8bd">Iterate version</h2>
+
+<p>The recursive version is just the depth-first search, so we can change it
+into stack operation.</p>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/sort/quick-sort">Here</a> is the code.</p>
+
+<p>For this test cases, the average run time is also <strong>0.07s</strong>.</p>
+
+<h1 id="merge-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Merge Sort</h1>
+
+<p>Merge sort is in terms of so-called <strong>Divided and Conquered</strong> method. Dividing
+each sequence into two subsequences and merge them after they are sorted. Merge
+sort is generally faster than Quick sort(As my test cases show) but is slower
+than Heap sort.</p>
+
+<p>I implemented three versions of merge sort.</p>
+
+<h2 id="merge-using-a-temporary-array:c82efbe47897fc68bcd3c7b3bd51c8bd">Merge using a temporary array</h2>
+
+<p>In the merge process, I used a buffer to store the sorted array from the two
+sorted subarrays and then copy the elements to the original array.</p>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/sort/merge-sort">Here</a> is the code.</p>
+
+<p>For this test cases, the average run time is <strong>0.042s</strong>.</p>
+
+<h2 id="merge-using-insert-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Merge using Insert sort</h2>
+
+<p>In the merge process, we can using insert sort to merge the two sorted arrays.
+Since the two arrays is sorted, it&rsquo;s fast to merge them.</p>
+
+<p>Note this method is <a href="http://en.wikipedia.org/wiki/In-place_algorithm">in-place</a>.</p>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/sort/merge-sort">Here</a> is the code.</p>
+
+<p>For this test cases, the average run time is also <strong>0.045s</strong>.</p>
+
+<h2 id="merge-by-exchanging-memory:c82efbe47897fc68bcd3c7b3bd51c8bd">Merge by exchanging memory</h2>
+
+<p>How to do it? Suppose we have two subarrays, say <code>a</code> and <code>b</code> and <code>a</code>
+start from <code>begin</code>, <code>b</code> start from <code>mid</code>.</p>
+
+<ol>
+<li><p>iterate <code>a</code> form <code>begin</code> to <code>i</code> until <code>a[i]</code> larger than <code>b[mid]</code>.</p></li>
+
+<li><p>iterate <code>b</code> from <code>mid</code> to <code>j</code> until <code>b[j]</code> larger than <code>a[i]</code>.</p></li>
+
+<li><p>exchange the sub-block <code>a[i..mid]</code> with <code>b[mid..j]</code>.</p></li>
+
+<li><p>now replace <code>begin</code> with the start point of the rest sub-array and repeate
+step 1, 2, 3.</p></li>
+</ol>
+
+<p>For more information, please visit <a href="http://www.cppblog.com/converse/archive/2013/08/08/63008.html">this</a>.</p>
+
+<p>Note this method is also <a href="http://en.wikipedia.org/wiki/In-place_algorithm">in-place</a>.</p>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/sort/merge-sort">Here</a> is the code.</p>
+
+<p>For this test cases, the average run time is also <strong>0.045s</strong>.</p>
+
+<h1 id="heap-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Heap Sort</h1>
+
+<p>A heap is very useful in sorting algorithm or in algorithms that find the top
+nth elements. I use a binary tree to build the tree and the binary tree is built
+from an array instead of a linked list. This makes me write the heap sort very
+easy.</p>
+
+<p>Heap sort is faster than quick sort in many cases, expecially in large data set.</p>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/sort/heap-sort">Here</a> is the code.</p>
+
+<p>For this test cases, the average run time is also <strong>0.022s</strong>.</p>
+
+<h1 id="summary:c82efbe47897fc68bcd3c7b3bd51c8bd">Summary</h1>
+
+<p>Here is the running time of these sorting algorithm with the same test cases.</p>
+
+<table>
+  <th><tr>
+    <td>Algorithm</td><td>Best time complexity</td>
+    <td>Average time complexity</td><td>Worst time complexity</td>
+    <td>Running time</td>
+  </tr></th>
+  <tr>
+    <td>Bubble Sort</td><td>O(n)</td><td>O(n^2)</td><td>O(n^2)</td>
+    <td>0.9s</td>
+  </tr>
+  <tr>
+    <td>Select Sort</td><td>O(n^2)</td><td>O(n^2)</td><td>O(n^2)</td>
+    <td>0.4s</td>
+  </tr>
+  <tr>
+    <td>Insert Sort</td><td>O(n)</td><td>O(n^2)</td><td>O(n^2)</td>
+    <td>0.22s</td>
+  </tr>
+  <tr>
+    <td>Shell Sort</td><td>O(n)</td><td>O(n^2)</td><td>O(n^2)</td>
+    <td>0.18s</td>
+  </tr>
+  <tr>
+    <td>Quick Sort</td><td>O(nlog(n))</td><td>O(nlog(n))</td><td>O(n^2)</td>
+    <td>0.07s</td>
+  </tr>
+  <tr>
+    <td>Merge Sort</td><td>O(nlog(n))</td><td>O(nlog(n))</td><td>O(nlog(n))</td>
+    <td>0.042s</td>
+  </tr>
+  <tr>
+    <td>Heap Sort</td><td>O(nlog(n))</td><td>O(nlog(n))</td><td>O(nlog(n))</td>
+    <td>0.022s</td>
+  </tr>
+</table>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="/zhengyhn.github.io/post/2013-09-26-implement-a-stack/"> Prev</a>  
+          <a class="btn next " href="/zhengyhn.github.io/post/2013-07-26-initialized-before-used/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="/zhengyhn.github.io/js/slim.js"></script>
+  <script src="/zhengyhn.github.io/js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

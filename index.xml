@@ -1,0 +1,2541 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hank&#39;s Blog</title>
+    <link>zhengyhn.github.io/</link>
+    <description>Recent content on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 27 May 2016 20:50:49 +0800</lastBuildDate>
+    <atom:link href="zhengyhn.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>c plus plus interview review</title>
+      <link>/zhengyhn.github.io/post/c-plus-plus-interview-review/</link>
+      <pubDate>Fri, 27 May 2016 20:50:49 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/c-plus-plus-interview-review/</guid>
+      <description>
+
+&lt;p&gt;这是我看了《C笔试面试宝典》一书的笔记&lt;/p&gt;
+
+&lt;h1 id=&#34;new-delete-malloc-free的关系:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;new, delete, malloc, free的关系&lt;/h1&gt;
+
+&lt;p&gt;new和delete是C++的 &lt;strong&gt;运算符&lt;/strong&gt; ，new调用构造函数，delete调用析构函数。&lt;/p&gt;
+
+&lt;p&gt;malloc和delete是C运行库的函数。&lt;/p&gt;
+
+&lt;h1 id=&#34;delete和delete-的区别:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;delete和delete[]的区别&lt;/h1&gt;
+
+&lt;p&gt;delete只会调用一次析构函数，delete[]则会调用每个成员的析构函数。&lt;/p&gt;
+
+&lt;p&gt;写程序一测:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;string&amp;gt;
+
+class Computer {
+ private:
+  std::string name;
+ public:
+  Computer();
+  ~Computer();
+};
+
+Computer::Computer() { }
+
+Computer::~Computer() { }
+
+int main(int argc, char *argv[])
+{
+  Computer *cs = new Computer[5];
+  Computer *c = new Computer;
+  int *integers = new int[5];
+  int *i = new int;
+
+  delete[] i;
+  delete[] integers;
+  delete[] cs;
+  delete[] c;
+
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;发现编译可以通过，但是运行会Segment Fault。gdb一下，发现在delete[]
+c时出错了。&lt;/p&gt;
+
+&lt;p&gt;原因是，对于基本数据类型，delete[]能代替delete，对于自定义的类型，则要严格区分，
+new[]完之后用delete[]释放，new完之后用delete释放。&lt;/p&gt;
+
+&lt;h1 id=&#34;继承和组合的优缺点:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;继承和组合的优缺点&lt;/h1&gt;
+
+&lt;p&gt;引用自
+&lt;a href=&#34;http://www.cnblogs.com/nuaalfm/archive/2010/04/23/1718453.html&#34;&gt;这里&lt;/a&gt;
+。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;45%&#34; /&gt;
+&lt;col width=&#34;54%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;组合 关 系&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;继 承 关 系&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;优点：不破坏封装，整体类与局部类之间松耦合，彼此相对独立&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;缺点：破坏封装，子类与父类之间紧密耦合，子类依赖于父类的实现，子类缺乏独立性&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;优点：具有较好的可扩展性&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;缺点：支持扩展，但是往往以增加系统结构的复杂度为代价&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;优点：支持动态组合。在运行时，整体对象可以选择不同类型的局部对象&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;缺点：不支持动态继承。在运行时，子类无法选择不同的父类&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;优点：整体类可以对局部类进行包装，封装局部类的接口，提供新的接口&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;缺点：子类不能改变父类的接口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;缺点：整体类不能自动获得和局部类同样的接口&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;优点：子类能自动继承父类的接口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;缺点：创建整体类的对象时，需要创建所有局部类的对象&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;优点：创建子类的对象时，无须创建父类的对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&#34;引用:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;引用&lt;/h1&gt;
+
+&lt;p&gt;不能建立数组的引用。引用没有定义新的变量，不占用内存空间。&lt;/p&gt;
+
+&lt;h1 id=&#34;关联-聚合和组合:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;关联，聚合和组合&lt;/h1&gt;
+
+&lt;p&gt;关联是两个类的一般性关联，如老师和学生。&lt;/p&gt;
+
+&lt;p&gt;聚合是has-a关系，聚合类不需要对被聚合类负责，用空的菱形表示，实现如下:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class A {
+
+};
+class B {
+    A *a;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;组合是contains-a关系，组合类和被组合类有相同的生命周期，组合类要对被组合类负责，
+用实的菱形表示，实现如下:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class A {
+
+};
+class B {
+    A a;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;初始化列表:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;初始化列表&lt;/h1&gt;
+
+&lt;p&gt;当类中含有const和引用成员变量时，基类构造函数只能使用初始化列表来初始化， 但是&lt;br /&gt;
+&lt;code&gt;const int&amp;amp; a;&lt;/code&gt; 这种就可以用赋值的方法。&lt;/p&gt;
+
+&lt;h1 id=&#34;类型安全:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;类型安全&lt;/h1&gt;
+
+&lt;p&gt;c++不是类型安全的，因为不同类型的指针之间可以强制转换。&lt;/p&gt;
+
+&lt;h1 id=&#34;空类:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;空类&lt;/h1&gt;
+
+&lt;p&gt;当一个类没有任何成员时，大小是1byte，这个字节是用来区分这个类的不同对象的。&lt;/p&gt;
+
+&lt;h1 id=&#34;逻辑地址-to-物理地址:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;逻辑地址 to 物理地址&lt;/h1&gt;
+
+&lt;p&gt;给出的逻辑地址格式是这样的,
+段地址:段内偏移地址，那么真实的地址（物理地址） 是： 段地址 * 10H +
+段内偏移地址。当然，这只适合于Intel 8086。&lt;/p&gt;
+
+&lt;h1 id=&#34;4种类型转换:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;4种类型转换&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;const_cast，把const的变量变成非const的，用法:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;新变量  = const_cast&amp;lt;类型&amp;gt;(变量);
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;static_cast,
+用于基本类型的转换，不能用于无关类型（不是基类与子类）之间的
+指针的转换&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;dynamic_cast,
+运行时会有安全检查，用于基类与子类之间的转换，常用于多态&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;reinterpret_cast，重新解释类型，没有转换，常用于函数指针的转换。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;数组作参数:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;数组作参数&lt;/h1&gt;
+
+&lt;p&gt;当数组作为参数传递时，它会退化成同类型的指针。&lt;/p&gt;
+
+&lt;h1 id=&#34;override和隐藏:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;override和隐藏&lt;/h1&gt;
+
+&lt;p&gt;override，基类中必须要有virtual。&lt;/p&gt;
+
+&lt;p&gt;如果基类函数名没有virtual，子类函数与父类函数签名一样，则称隐藏。&lt;/p&gt;
+
+&lt;p&gt;不管基类函数名有没有virtual，子类函数名一样，签名不一样，则也称隐藏。&lt;/p&gt;
+
+&lt;h1 id=&#34;求两个数中的最大的那个数:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;求两个数中的最大的那个数&lt;/h1&gt;
+
+&lt;p&gt;不能用判断(if, :?, switch)。答案是用abs函数:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;((a + b) + abs(a - b)) / 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;而我觉得这种方法不好，因为用到了库函数，库函数里面还可能也要判断，其实是换汤不换药。&lt;/p&gt;
+
+&lt;p&gt;我问了同学，他想到了下面的方法，我觉得很好:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+
+int max(int a, int b);
+
+int main(int argc, char *argv[])
+{
+     int a = 9999, b = 23;
+
+     printf(&amp;quot;%d\n&amp;quot;, max(a, b));
+
+     return 0;
+}
+
+int max(int a, int b)
+{
+     int c = a - b;
+     int flag = (unsigned)c &amp;gt;&amp;gt; (sizeof(int) * 8 - 1);
+
+     return (1 - flag) * a + flag * b;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;根据负数与正数的符号位的不一样，而得出那个数。&lt;/p&gt;
+
+&lt;h1 id=&#34;打印源文件的文件名和当前行号:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;打印源文件的文件名和当前行号&lt;/h1&gt;
+
+&lt;p&gt;在C/C++中，可以用__FILE__和__LINE__，由编译器来识别。&lt;/p&gt;
+
+&lt;h1 id=&#34;main函数执行完之后还能执行代码:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;main函数执行完之后还能执行代码？&lt;/h1&gt;
+
+&lt;p&gt;居然是可以的！ &lt;code&gt;&amp;lt;stdlib.h&amp;gt;&lt;/code&gt;
+中有一个奇葩的库函数叫on_exit，在linux下的man page中， 定义如下:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;int on_exit(void (*function)(int , void *), void *arg);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;传进去一个函数指针，和一个参数，这个函数必须是2个参数，分别是int和void*类型的，
+可以调用多个，以LIFO形式执行，
+on_exit在任何地方调用都只会在main函数结束之后才会执行。 测试一下:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+void one(int status, void *arg);
+void two(int status, void *arg);
+
+int main(int argc, char *argv[])
+{
+     printf(&amp;quot;top\n&amp;quot;);
+     on_exit(two, NULL);
+     on_exit(one, NULL);
+
+     printf(&amp;quot;It may be the last one.\n&amp;quot;);
+
+     return 0;
+}
+
+void one(int status, void *arg)
+{
+     printf(&amp;quot;one\n&amp;quot;);
+}
+
+void two(int status, void *arg)
+{
+     printf(&amp;quot;two\n&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;书上说的是 &lt;code&gt;_onexit&lt;/code&gt;
+，根据我找的资料，这函数应该只有在windows的VC中才有。&lt;/p&gt;
+
+&lt;h1 id=&#34;判断是由c编译器编译还是由c-编译器编译:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;判断是由C编译器编译还是由C++编译器编译&lt;/h1&gt;
+
+&lt;p&gt;使用一个宏 &lt;code&gt;__cplusplus&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#ifdef __cplusplus
+...
+#else
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;求n个数中第k大的数:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;求n个数中第k大的数&lt;/h1&gt;
+
+&lt;p&gt;我智商低，只能想到普通的办法，就是选择排序的外面循环K次。不过不能因为这样而找不到工作啊，
+学习了大牛的算法：&lt;/p&gt;
+
+&lt;p&gt;吸取快排中的思想，随机取一个数，把比它小的数放到左边，比它大的数放到右边，
+如果运气非常好，它的下标i刚好是n - k - 1，则它就是第k大的数，如果i小于 n
+- k - 1，则第k大的数在左边，否则在右边，再分为子问题进行求解。&lt;/p&gt;
+
+&lt;p&gt;写了很久终于写出来了，要是在面试的时候，估计写不出来:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+int get_maxk(int *arr, int n, int k);
+void swap(int *arr, int i, int j);
+
+int main(int argc, char *argv[])
+{
+     int a[10];
+     int i;
+
+     srand(time(NULL));
+     for (i = 0; i &amp;lt; 10; i++) {
+          a[i] = rand();
+     }
+     for (i = 1; i &amp;lt;= 10; i++) {
+          printf(&amp;quot;%d\n&amp;quot;, get_maxk(a, 10, i));
+     }
+
+     return 0;
+}
+
+int get_maxk(int *arr, int n, int k)
+{
+     int pivot, last_left, i;
+
+     if (k &amp;gt; n) {
+          fprintf(stderr, &amp;quot;k can&#39;t be larger than n\n&amp;quot;);
+          exit(1);
+     } else if (k == n) {
+          return arr[0];
+     }
+     pivot = 0;
+     last_left = pivot;
+     for (i = 1; i &amp;lt; n; i++) {
+          if (arr[i] &amp;lt; arr[pivot]) {
+               last_left++;
+               swap(arr, last_left, i);
+          }
+     }
+     swap(arr, pivot, last_left);
+     if ((n - last_left) == k) {
+          return arr[k];
+     } else if ((n - last_left) &amp;gt; k) {
+          return get_maxk(arr + last_left + 1, n - last_left - 1, k);
+     } else {
+          return get_maxk(arr, last_left, k - (n - last_left));
+     }
+}
+
+void swap(int *arr, int i, int j)
+{
+     int temp;
+
+     if (i == j) {
+          return;
+     }
+     temp = arr[i];
+     arr[i] = arr[j];
+     arr[j] = temp;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;判断单链接有环:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;判断单链接有环&lt;/h1&gt;
+
+&lt;p&gt;想到这个方法的人就是神！&lt;/p&gt;
+
+&lt;p&gt;用两个指针，一个每次走一步，另外一个每次走两步，如果有环必定重合，
+否则走两步的那个指针将到达终点。&lt;/p&gt;
+
+&lt;h1 id=&#34;传值还是传地址:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;传值还是传地址&lt;/h1&gt;
+
+&lt;p&gt;看下面的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void func(char *a)
+{
+    a = (char *)malloc(10);
+}
+
+int main(void)
+{
+    char *a = NULL;
+    func(a);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行完主函数后，a还是NULL！a不是传进去申请了空间吗？我之前也是这样认为的，
+后来发现， 其实func函数的那个参数是以传值的方式传进去的，而不是传地址！
+如果要传地址的话， 应该是 &lt;code&gt;char **a，func(&amp;amp;a)&lt;/code&gt; 这样才行！&lt;/p&gt;
+
+&lt;h1 id=&#34;extern-c:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;extern &amp;ldquo;C&amp;rdquo;&lt;/h1&gt;
+
+&lt;p&gt;这个是用于C/C++混合编程的，当引用C语言代码时在函数前面加上。&lt;/p&gt;
+
+&lt;h1 id=&#34;内联函数:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;内联函数&lt;/h1&gt;
+
+&lt;p&gt;编译器在编译内联函数时会对参数类型进行检查。&lt;/p&gt;
+
+&lt;h1 id=&#34;堆栈溢出的原因:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;堆栈溢出的原因&lt;/h1&gt;
+
+&lt;p&gt;分配了内存没有释放 递归层次太深&lt;/p&gt;
+
+&lt;h1 id=&#34;唯一不能声明为虚函数的函数:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;唯一不能声明为虚函数的函数&lt;/h1&gt;
+
+&lt;p&gt;构造函数！PS：析构函数可以声明为虚函数。&lt;/p&gt;
+
+&lt;h1 id=&#34;error:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;#error&lt;/h1&gt;
+
+&lt;p&gt;当预处理执行到#error时，会停止编译，并给出自定义的错误信息&lt;/p&gt;
+
+&lt;h1 id=&#34;指针-数组:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;指针&amp;amp;数组&lt;/h1&gt;
+
+&lt;p&gt;指向数组的指针:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;int (*a)[10];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;指向函数（返回值为int,1个int参数）的指针:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;int (*a)(int);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;volatile:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;volatile&lt;/h1&gt;
+
+&lt;p&gt;修饰的变量，表明可能会被意想不到地改变，因此编译器不会从寄存器的备份中读取（因为
+内存中的值可能已经被改变了），而要每次小心地从内存中读取。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>improve code readability</title>
+      <link>/zhengyhn.github.io/post/improve-code-readability/</link>
+      <pubDate>Fri, 27 May 2016 20:40:43 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/improve-code-readability/</guid>
+      <description>
+
+&lt;p&gt;这是我读 &amp;ldquo;the art of readable code&amp;rdquo; 一书做的笔记&lt;/p&gt;
+
+&lt;h1 id=&#34;简化循环和逻辑:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;简化循环和逻辑&lt;/h1&gt;
+
+&lt;h2 id=&#34;making-control-flow-easy-to-read:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;making control flow easy to read&lt;/h2&gt;
+
+&lt;p&gt;下面的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (length &amp;gt;= 10)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;要比:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (10 &amp;lt;= length)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;更容易看懂。这是很显然的。而在C语言中，有的人为了避免=与==的错误，常常把
+代码写成:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (10 == length)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这种做法是为了避免错误的。其实在我看来，这明显是在掩饰自己区分不了=与==的
+弱点，如果你真的理解赋值与相等的含义，就从来不会在比较相等的时候写成=，以
+我使用C语言这么多年来，我从来没有犯过这种错误。上面的代码对于一个正常人来
+说，很难理解，因为程序员首先是一个人，自然的语言是“长度等于10”，而不是
+“10等于长度”，所以为了使代码更可读，我建议使用下面这种:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (lenght == 10)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的是有数字，有常量的比较，下面这个:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;while (bytes_received &amp;lt; bytes_expected)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;要比:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;while (bytes_expected &amp;gt; bytes_received)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;更容易看懂，因为第一个的阅读顺序符合人类的自然语言。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;对于三目运算符?:，当表达式很长时不要使用。&lt;/li&gt;
+&lt;li&gt;不要使用do/while。当你阅读do/while的时候，因为你刚开始不知道条件，你会
+把循环的主体阅读两次。我几乎不写do/while，而且我非常讨厌看do/while代码。&lt;/li&gt;
+&lt;li&gt;尽量不要使用嵌套的if/else，想尽办法使得只有一个层次。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;breaking-down-giant-expressions:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;breaking down giant expressions&lt;/h2&gt;
+
+&lt;p&gt;利用宏来简化代码。看下面的例子:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void AddStats(const Stats &amp;amp;add_from, Stats *add_to)
+{
+    add_to-&amp;gt;set_total_memory(add_from.total_memory() + 
+        add_to-&amp;gt;total_memory());
+    add_to-&amp;gt;set_free_memory(add_from.free_memory() + 
+        add_to-&amp;gt;free_memory());
+    add_to-&amp;gt;set_swap_memory(add_from.swap_memory() + 
+        add_to-&amp;gt;swap_memory());
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不管是谁，看到这样的代码都会头晕，但是你会发现其实它们都在做同一件事:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;add_to-&amp;gt;set_XXX(add_from.XXX + add_to-&amp;gt;XXX);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;于是，通过定义带参数的宏，可以简化成这样:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void AddStats(const Stats &amp;amp;add_from, Stats *add_to)
+{
+    #define ADD_FIELD(field) \
+        add_to-&amp;gt;set_#field(add_from.#field() + add_to-&amp;gt;#field())
+    ADD_FIELD(total_memory);
+    ADD_FIELD(free_memory);
+    ADD_FIELD(swap_memory);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样不仅视觉上看起来舒服，而且理解起来非常容易。&lt;/p&gt;
+
+&lt;h2 id=&#34;variables-and-readability:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;variables and readability&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;可去除一些多余的变量&lt;/li&gt;
+&lt;li&gt;尽量缩小变量的范围，即使是全局变量，这样才能让程序更清晰。&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;在C++中，有这样一个例子:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;int size = list.size();
+if (size &amp;gt; 0) {
+    cout &amp;lt;&amp;lt; size &amp;lt;&amp;lt; endl;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;假设后面再也没有用到size了，但是阅读代码的人会一直把这个变量记住，因为
+他以为后面还会用到这个变量。我们可以把它改成这样:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if ((int size = list.size()) &amp;gt; 0) {
+    cout &amp;lt;&amp;lt; size &amp;lt;&amp;lt; endl;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当然，在C语言中，这需要C99的支持，当读者看完这段代码时，就会忘记这个变量，
+因为后面已经用不上了。
+作者是这样说的，但是我觉得这不太可能，因为写代码的人不可能预知未来，它总是
+喜欢先把变量缓存起来，说不定以后还会用到，所以我不太赞成这种写法，除非是非常
+简单，很明显后面用不上的变量。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;尽量使变量只能改变一次(prefer write-once varaibles)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;改善外层代码:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;改善外层代码&lt;/h1&gt;
+
+&lt;h2 id=&#34;packing-informations-into-names:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;packing informations into names&lt;/h2&gt;
+
+&lt;h3 id=&#34;choose-specific-words:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;choose specific words&lt;/h3&gt;
+
+&lt;p&gt;书上说到getPage(url);这个函数的名字，根据我以前的看法，这绝对是一个好名字，
+但是作者却批评这种命名方式。作者说，get太模糊了，我们看不出来它是从缓存中get还是
+从数据库中get，还是从互联网上get。如果是从互联网上get,则应该使用fetchPage或者
+downloadPage()。我觉得这个说法非常好，我以后给变量或者函数起名字的时候也要注意
+这方面的东西了。&lt;/p&gt;
+
+&lt;h3 id=&#34;avoid-generic-names-like-tmp-and-retval:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;avoid generic names like tmp and retval&lt;/h3&gt;
+
+&lt;p&gt;作者批评了tmp,retval,foo这种词语，虽然我没用过retval和foo这种奇怪的名字，但是
+我却用过tmp这东西，后来想了一下，tmp这种东西的确看不出来任何含义，就算时间紧迫，我
+也不会用tmp这种变量了。但是，就像作者所说的一样，对于下面的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void swap(int *a,int *b)
+{
+    int tmp = *a;
+    *a = b;
+    *b = tmp;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这时候tmp则用得恰到好处，tmp在这里生命周期非常短，而且它的作用刚好是作为临时来用的。&lt;/p&gt;
+
+&lt;p&gt;对于计数器变量，我们经常使用i,j,k,x,y,z,a,b,c什么的，但是，正如作者所说，当有
+多个计数器变量时，这种东西就经常会让人很难看懂了。看下面的例子:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for(int i = 0; i &amp;lt; N; i++){
+    for(int j = 0; j &amp;lt; M; j++){
+        for(int k = 0; k &amp;lt; C; k++){
+            if(school[i].teacher[k] == user[j]){
+                ...
+            }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;school，teacher,user这种变量命名是很好的，但是i,j,k这种东西就很难懂了。我们怎么
+知道i,j,k分别对应哪个数组的下标呢？我以前也经常写这种代码，也经常看到其他人写这种代码，
+每当我看到这种代码时（就算是我自己的代码），我都觉得非常头疼，现在看了这本书，马上
+醒悟过来，以后再也不写这种代码了！转而使用si,ti,ui，这样
+school[si].teacher[ti] == user[ui] 就非常清楚了。&lt;/p&gt;
+
+&lt;h3 id=&#34;prefer-concrete-names-over-abstract-names:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;prefer concrete names over abstract names&lt;/h3&gt;
+
+&lt;p&gt;意思是不要抽象的名字，而是要具体的名字。以书上的一个例子说，
+serverCanStart是抽象的名字，而canListenOnPort则是一个具体的名字&lt;/p&gt;
+
+&lt;h3 id=&#34;attaching-extra-information-to-name-by-using-a-suffix-or-prefix:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;attaching extra information to name,by using a suffix or prefix&lt;/h3&gt;
+
+&lt;p&gt;如果我们有一个变量:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;string id;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;而这个id必须是十六进制，这时，直接使用id就很不好，因此你看不出来它必须使用十六进制，
+使用hex_id代替就很明确了。&lt;/p&gt;
+
+&lt;p&gt;单位数值, 使用书上的例子，看下面的js代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var start = (new Date()).getTime();
+var elapsed = (new Date()).getTime() - start;
+document.writeln(&amp;quot;time is:&amp;quot; + elapsed + &amp;quot; seconds&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果对js比较熟悉的，会知道，getTime()返回的是ms，而不是s，因此这样的命名会很容易
+产生bug，不是每个程序员都会记得那么清楚getTime()返回的单位是什么。把这2个变量改成
+start_ms和elapsed_ms就很清楚了！
+看到这里，我决定，以后遇到这种有单位的变量，都要带个单位的后缀，以写出可读的代码。&lt;/p&gt;
+
+&lt;h3 id=&#34;deciding-how-long-a-name-should-be:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;deciding how long a name should be&lt;/h3&gt;
+
+&lt;p&gt;在较短的域里面可以使用较短的变量名，比如:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if(i != k){
+    int t = a[i];
+    a[i] = a[k];
+    a[k] = t;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在，打一个长变量名已经不是问题了。&lt;/p&gt;
+
+&lt;p&gt;我以前很恶心java的类名方法名很长，看起来不简洁，现在看多了也习惯了，而且现在打长的变量
+名的确很简单了，因此现在很多编辑器或IDE都有自动补全的功能。比如我现在使用的Emacs就自带
+有补全的功能（Alt +
+/），我居然还不知道，因此我都是用auto-complete的，看来当它不起作用
+时，我就可以手动地补全了。&lt;/p&gt;
+
+&lt;p&gt;有关缩略词,
+作者说，对于工程项目的代码，最好不要写缩略词，因为新加进来的成员可能看不懂缩略词的意思，
+而一些最常见的缩写，比如evaluation写成eval,string写成str，document写成doc，则写
+成缩写比较好。其实，我觉得，像linux系统这么大的工程都使用了很多缩写，有的时候缩写还是
+非常必要的，可能是我的个人原因，我不喜欢又臭又长的代码，我喜欢简洁的代码，对于unix哲学
+中的缩写规则，我很感兴趣，在程序中还是要尽量使用缩写。&lt;/p&gt;
+
+&lt;h3 id=&#34;using-name-formating-to-pack-extra-information:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;using name formating to pack extra information&lt;/h3&gt;
+
+&lt;p&gt;不同类型的实体命名特点, 在google
+c++的规范中，类名首字母大写，使用驼峰式;宏常量名全部大写，使用下划线分隔;
+const变量则首字母大写，驼峰式，区分宏常量;类的方法首字母大写，驼峰式;类的变量全小写，
+最后要跟一个下划线;其它局部变量则全部小写，后面不跟下划线。
+在html/css中，id一般使用下划线分隔，而class使用中线（dash）来分隔。&lt;/p&gt;
+
+&lt;h2 id=&#34;names-that-can-t-be-misconstructed:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;names that can&amp;rsquo;t be misconstructed&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;关键思想是：不断地问自己，这个名字别人会不会认为是其他意思？&lt;/li&gt;
+&lt;li&gt;很多情况对变量的命名是有包含与不包含的意思的。这里列举出几种很常用的用法。
+
+&lt;ul&gt;
+&lt;li&gt;包含的情况，使用min和max，比如说min_items和max_students&lt;/li&gt;
+&lt;li&gt;两端包含，first和last。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;11%&#34; /&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;col width=&#34;9%&#34; /&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;a&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;b&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;c&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;d&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;first&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;last&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;包含前面，不包含后面，使用begin和end。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;table&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;11%&#34; /&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;col width=&#34;8%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;a&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;b&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;c&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;d&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;begin&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;end&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;在给布尔型变量命名时，注意不要带负面的意思，如不要使用:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bool disable_ssl = false;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;而要使用:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bool use_ssl = true;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;一般会使用is,can,has前缀命名布尔型变量。&lt;/li&gt;
+&lt;li&gt;函数的名字一定要和里面的操作相符，书上举了一个例子，比如函数getSum，这个函数的
+实现是计算一大堆数据的和，但是一般程序员第一眼看过去的时候就会以为仅仅是返回和，并
+没有想到里面会有代价很多的计算，很有可能会经常调用这个函数，这样就会使程序变得很慢。
+使用computeSum会使人更容易明白。&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;作者还举了STL里面的list::size()方法来批评。这个方法会一个节点一个节点地计算链
+表的长度，O(n)的速度很慢。看下面的例子:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;while (list.size() &amp;gt; max_size) {
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;连写STL的程序员也有不规范的时候，一般的程序员会以为size()是O(1)的速度，直接返回
+链表的长度，这样就会使得程序的速度非常慢了。如果改成countSize()会好很多，
+但是幸运的是，作者说了，最新版的STL已经把size()变成了O(1)速度。&lt;/p&gt;
+
+&lt;h2 id=&#34;aesthetics:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;aesthetics&lt;/h2&gt;
+
+&lt;p&gt;举的第一个例子让我震惊！看下面的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class PerformanceTester {
+        public static final TcpConnectionSimulator wifi =
+                new TcpConnectionSimulator(
+                    500,  /* Kbps */
+                    80,   /* millisecs */
+                    200,  /* jitter */
+                    1     /* packet loss % */);
+        public static final TcpConnectionSimulator t3_fiber =
+                new TcpConnectionSimulator(
+                    4500,  /* Kbps */
+                    10,    /* millisecs */
+                    0,     /* jitter */
+                    0      /* packet loss % */);
+        public static final TcpConnectionSimulator cell =
+                new TcpConnectionSimulator(
+                    100,  /* Kbps */
+                    400,  /* millisecs */
+                    250,  /* jitter */
+                    5     /* packet loss % */);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里，缩进是对齐了，注释也对齐了，但是占用的行数太多，而且注释重复了3遍。
+改成这样就好看多了:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class PerformanceTester {
+        // TcpConnectionSimulator(throughput, lantency, jitter, packet_loss)
+        //                          [Kbps]     [ms]      [ms]    [percent]
+
+        public static final TcpConnectionSimulator wifi =
+                new TcpConnectionSimulator(500, 80, 200, 1);
+        public static final TcpConnectionSimulator t3_fiber =
+                new TcpConnectionSimulator(4500, 10, 0, 0);
+        public static final TcpConnectionSimulator cell =
+                new TcpConnectionSimulator(100, 400, 250, 5);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;作者建议代码要列对齐，我之前在programming windows一书中看到过这种
+漂亮的代码，但是一直做不到，因为要打很多空格。后来发现emacs有通过正则表达式
+对齐的功能align-regexp，爽极了！&lt;/p&gt;
+
+&lt;h2 id=&#34;knowing-what-to-comment:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;knowing what to comment&lt;/h2&gt;
+
+&lt;h3 id=&#34;when-should-not-comment:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;when should not comment？&lt;/h3&gt;
+
+&lt;p&gt;看注释会浪费阅读代码的人的时间，注释还会占用屏幕的地方，导致读者时常要
+翻页，所以，没有价值的注释不要写。下面的代码的注释都没有价值:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// The class definition for Account
+class Account {
+public:
+        // Constructor
+        Account();
+
+        // Set the profit member to a new value
+        void SetProfit(double  profit);
+
+        // Return the profit from this Account
+        double GetProfit();
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;因为，注释的含义从代码中已经可以看出来了，注释没有提供额外的信息，其实是和
+代码重复了，不仅浪费地方，而且浪费写代码的人的时间和读代码的人的时间。
+记住:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;good code &amp;gt; bad code + good comment
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;what-should-comment-be:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;what should comment be？&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;写自己的想法&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;写自己的代码的缺点，比如:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// TODO:use a faster algorithm
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;有一些和TODO一样的很流行的标签&lt;/p&gt;
+
+&lt;table&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;12%&#34; /&gt;
+&lt;col width=&#34;47%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Marker&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Typical meaning&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;TODO&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;things to finish&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;FIXME&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;known-broken code here&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;HACK&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;inelegant solution to a problem&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;XXX&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;danger!major problem here&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+&lt;li&gt;解释常量为什么是那个值&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;making-comments-precise-and-compact:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;making comments precise and compact&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;函数注释中，可使用举例说明，如:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//Example:strip(&amp;quot;abba/a/ba&amp;quot;, &amp;quot;ab&amp;quot;) returns &amp;quot;/a/&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;要写明你的代码的意图。看下面例子:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// Iterate through the list in reverse order
+for (i = SIZE; i &amp;gt;= 0; i--) {
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;上面的注释写了和没写差不多，改成这样就非常好了:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// display each price, from highest to lowest
+for (i = SIZE; i &amp;gt;= 0; i--) {
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;调用函数的时候也可以注释，按照书上的例子，这样的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Connect(/* timeout_ms = */ 10, /* use_encryption = */ false);
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;要比这样的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Connect(10, false);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;更容易看懂。&lt;/p&gt;
+
+&lt;h1 id=&#34;重构代码:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;重构代码&lt;/h1&gt;
+
+&lt;h2 id=&#34;extracting-unrelated-subproblems:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;extracting unrelated subproblems&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;要封装一些和本功能无关的子问题到另外一个函数上。&lt;/li&gt;
+&lt;li&gt;对于一些工具的类或函数（字符串操作，哈希表等），就分离出来。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;one-task-at-a-time:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;one task at a time&lt;/h2&gt;
+
+&lt;p&gt;每个函数应该只实现一个功能，不要实现多个功能。&lt;/p&gt;
+
+&lt;h2 id=&#34;turning-thoughts-into-code:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;turning thoughts into code&lt;/h2&gt;
+
+&lt;p&gt;记住爱因斯坦的这句话:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;You do not really understanding something unless you can explain it to
+your grandmother.               
+                                            --Albert Einstein
+代码应该用易懂的英语来写。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;writing-less-code:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;writing less code&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;一定要熟悉现存的库，这样可以减少代码量，多重用代码，少写代码。&lt;/li&gt;
+&lt;li&gt;使用Unix工具(shell命令），而不是自己写代码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;写出易懂的选择排序:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;写出易懂的选择排序&lt;/h1&gt;
+
+&lt;p&gt;以选择排序为例，我以前是直接把它记住的（当然是在理解的前提下），其中的一些
+下标i,j,k，直接记住人家的代码的，如果要我重新写，我还是会用i,j,k，造成了
+硬性的思维，现在看来，只要记住算法，用自己的方式来写出的代码才是好的代码。
+下面的选择排序是经典的课本上的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void select_sort(int *arr,int len)
+{
+    int i,j,k,temp;
+
+    for(i = 0; i &amp;lt; len - 1; i++){
+            k = i;
+            for(j = i + 1; j &amp;lt; len; j++){
+                    if(arr[j] &amp;lt; arr[k]){
+                            k = j;
+                    }
+            }
+            if(i != k){
+                    temp = arr[k];
+                    arr[k] = arr[i];
+                    arr[i] = temp;
+            }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我觉得，有经验的程序员看上面这份代码当然是没问题，但是给初学者来看，i,j,k分别
+代表什么意思，他就会摸不着头脑了，所以，我们需要给变量的名字赋予意义，更容易
+理解，于是我写了下面的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void select_sort(int *arr,int len)
+{
+    int current,next,smallest,temp;
+
+    for(current = 0; current &amp;lt; len - 1; current++){
+            smallest = current;
+            for(next = current + 1; next &amp;lt; len; next++){
+                    if(arr[next] &amp;lt; arr[smallest]){
+                            smallest = next;
+                    }
+            }
+            if(current != smallest){
+                    temp = arr[smallest];
+                    arr[smallest] = arr[current];
+                    arr[current] = temp;
+            }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样的话，单从变量名字就可以理解整个算法的思想了。虽然变量的名字是长了一点，
+但是现在的编辑器或者IDE的自动补全功能这么强大，变量名太长这个已经不是问题了。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>reStructuredText语法笔记</title>
+      <link>/zhengyhn.github.io/post/write-down-the-reStructuredText-syntax-I-frequently-use/</link>
+      <pubDate>Fri, 27 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/write-down-the-reStructuredText-syntax-I-frequently-use/</guid>
+      <description>
+
+&lt;p&gt;reStructuredText用于排版非常好。但是，和C++一样，越是灵活，越是可扩展，越是复杂。
+有些语法，你永远记不住，我经常遇到一些表示方法（比如说超链接），忘记了语法，每次都
+要去Google。为了不这么麻烦，我决定记下去，以免下次忘了又要去查。&lt;/p&gt;
+
+&lt;p&gt;大部分都来自 &lt;a href=&#34;http://sphinx-doc.org/rest.html&#34;&gt;这里&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;h1 id=&#34;代码块:aee60189ef864e8c6364c6b4392231b3&#34;&gt;代码块&lt;/h1&gt;
+
+&lt;p&gt;在段落的结尾使用 &lt;code&gt;::&lt;/code&gt; 符号,
+然后输入一个空行，然后是代码（必须缩进，空2格或4格），
+然后是一个空行。比如&lt;/p&gt;
+
+&lt;p&gt;代码如下:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
+
+int
+main(int argc, char *argv[])
+{
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;引入代码文件:aee60189ef864e8c6364c6b4392231b3&#34;&gt;引入代码文件&lt;/h1&gt;
+
+&lt;p&gt;对于我等码农来说，这应该算是最常用的了。格式为:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;.. code-include:: source-code-file
+:lexer: language-name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;超链接:aee60189ef864e8c6364c6b4392231b3&#34;&gt;超链接&lt;/h1&gt;
+
+&lt;p&gt;经常要引用一些大牛的博客，链接的格式为:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;`链接文字 &amp;lt;链接&amp;gt;`_
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;比如， &lt;a href=&#34;http://en.zhengyuanhang.com&#34;&gt;我的英文博客&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;h1 id=&#34;斜体和粗体:aee60189ef864e8c6364c6b4392231b3&#34;&gt;斜体和粗体&lt;/h1&gt;
+
+&lt;p&gt;斜体:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;*这是斜体*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;粗体:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;**这是粗体**
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;图片:aee60189ef864e8c6364c6b4392231b3&#34;&gt;图片&lt;/h1&gt;
+
+&lt;p&gt;格式是这样的:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;.. image:: /images/one_piece.gif
+ :alt: one_piece
+ :width: 200px
+ :height: 150px
+ :scale: 80 %
+ :align: left
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;align的选项是left, center, right。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A tour to The Badaling Great Wall</title>
+      <link>/zhengyhn.github.io/post/2013-08-03-a-tour-to-the-badaling-great-wall/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/2013-08-03-a-tour-to-the-badaling-great-wall/</guid>
+      <description>&lt;p&gt;Today, I went to the Badaling Great Wall &lt;strong&gt;alone&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;There is a saying that &lt;strong&gt;He who has never been to the Great Wall is not a&lt;/strong&gt;
+&lt;strong&gt;true man&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;I had read this saying for many times when I was in high school, but I have
+never been to the Great Wall util today.&lt;/p&gt;
+
+&lt;p&gt;I got up at 7:00am and began my tour at about 7:40am after the breakfast.
+It took me 30 minutes to arrive at &lt;em&gt;Xi zhi men station&lt;/em&gt; from where I live.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;zhengyhn.github.io/images/13.8.3.Great-Wall-too-many-people.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Too many people&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;I planed to take the &lt;em&gt;Shi jiao yan qing s2 line&lt;/em&gt; train to the Great Wall
+directly at &lt;em&gt;Beijing bei station&lt;/em&gt;, which is near the &lt;em&gt;Xi zhi men station&lt;/em&gt;.
+However, when I arrived there, the staff of the station said that the train
+will depart at 11:00am.I watched my smart phone, which showed that it&amp;rsquo;s
+8:24am now.So I had to wait for about 2.5 hours if I took this train.Because
+I&amp;rsquo;am those one who don&amp;rsquo;t want to stay in a place too long and want to go
+somewhere to have a look, I prefer the other type of a tour.Therefore, from
+the staff of the train, I knew that I could take buses to the Great Wall.&lt;/p&gt;
+
+&lt;p&gt;Thanks to the &lt;em&gt;Baidu Map&lt;/em&gt;, this time I need to take the &lt;em&gt;line 13 train&lt;/em&gt; and
+arrive at the &lt;em&gt;Long ze station&lt;/em&gt;, then take the &lt;em&gt;878 bus&lt;/em&gt;.However, when I
+arrived at the &lt;em&gt;Long ze station&lt;/em&gt; and the &lt;em&gt;878 bus station&lt;/em&gt;, I found something
+almost shock me.That is, the &lt;em&gt;878 bus&lt;/em&gt; only depart at 7:00am-9:00am.But my
+smart phone showed that it&amp;rsquo;s 9:03am.Oh my god!But I didn&amp;rsquo;t give up.I stayed
+there for another 20 minutes.This time, I almost wanted to go back home because
+I looked for 10 minutes to find some bus that can go to the Great Wall and I
+failed.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;zhengyhn.github.io/images/13.8.3.south-wall.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;South Wall&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;I was still stubborn so that I found another way to go to the Great Wall from
+&lt;em&gt;Baidu Map&lt;/em&gt;.This time I went back to the &lt;em&gt;Xi er qi station&lt;/em&gt;, take the
+&lt;em&gt;Chang ping line train&lt;/em&gt; and arrived at the final station &lt;em&gt;Nan shao station&lt;/em&gt;.
+When I got out of the station, I was shock again.This place is a remote village
+and I can&amp;rsquo;t find a bus after looking for 10 minutes.So I went back to the
+exit of the subway and ask a driver of the &lt;em&gt;black car&lt;/em&gt; how much of taking me
+to the Badaling Great Wall.His answer suprised me because he wanted 180 yuan.
+Although I could bargin with him to reduce the price to 100 yuan, but it&amp;rsquo;s
+still very very very expensive.This time I wanted to give up and went away to
+find another bus station.When I got there, I found it&amp;rsquo;s excactly the bus I
+could take to the Great Wall.This is the &lt;em&gt;870 bus&lt;/em&gt; and then the bus didn&amp;rsquo;t
+appear.Fortunately, the bus was coming soon and I got in without thinking.
+That is, &lt;strong&gt;there is a way out for somebody&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;After about an hour, I arrived at &lt;em&gt;Ni sha he station&lt;/em&gt; and I need to change to
+another bus.This time, I could take &lt;em&gt;919 bus&lt;/em&gt; or the &lt;em&gt;879&lt;/em&gt; bus and I felt the
+Great Wall was near.After about 5 minutes, the bus comed but there were too
+many people there, so I had to stand in the bus.I thought the bus will arrived
+at the Great Wall no more than 20 minutes, but I never wanted to know that it&amp;rsquo;s
+the most painful bus I have ever taken.I standed in the bus for more than 1.5
+hours because of the traffic jam!&lt;/p&gt;
+
+&lt;p&gt;Finally I arrived at the Great Wall.&lt;/p&gt;
+
+&lt;p&gt;First, I have a lunch at &lt;em&gt;Yong he da wang restaurant&lt;/em&gt;.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;zhengyhn.github.io/images/13.8.3.have-a-lunch.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Have a lunch&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;There were lots of people.But I thought there will be more in Spring and Autumn.
+The photo below shows the &lt;em&gt;North Wall&lt;/em&gt;.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;zhengyhn.github.io/images/13.8.3.north-wall.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;North Wall&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;It&amp;rsquo;s obvious that I was on the south wall, and the photo below is a bird&amp;rsquo;s-eye
+view of the north wall.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;zhengyhn.github.io/images/13.8.3.north-wall-bird-view.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;North Wall bird view&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;There is no doubt that I must have someone take a photo for myself.The photo
+below is it, I&amp;rsquo;m not very handsome as you imaged, though.&lt;/p&gt;
+
+&lt;p&gt;
+&lt;figure &gt;
+    
+        &lt;img src=&#34;zhengyhn.github.io/images/13.8.3.Great-Wall-me.jpg&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;Me&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The return tour was so relax because I could take the &lt;em&gt;877 bus&lt;/em&gt; to
+&lt;em&gt;De sheng men xi station&lt;/em&gt; directly!And it const me only 4.8 yuan.&lt;/p&gt;
+
+&lt;p&gt;In a word, although &lt;em&gt;the Badaling Great Wall&lt;/em&gt; is not so &lt;strong&gt;great&lt;/strong&gt; as
+&lt;em&gt;the Palace&lt;/em&gt;, I was still very happy today, because it&amp;rsquo;s the first time I have
+a tour &lt;strong&gt;alone&lt;/strong&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>About Constructors Destructors and Assignment Operators</title>
+      <link>/zhengyhn.github.io/post/2013-07-28-about-constructors-destructors-and-assignment-operators/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/2013-07-28-about-constructors-destructors-and-assignment-operators/</guid>
+      <description>
+
+&lt;h2 id=&#34;what-functions-c-will-silently-write-and-call:ad90163a5135a9ab5d66997d40229e5d&#34;&gt;What functions C++ will silently write and call?&lt;/h2&gt;
+
+&lt;p&gt;If we declare an empty class, the compiler will declare a constructor,
+a copy constructor, a copy assignment operator and a destructor for us.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Girl {
+
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But the compiler is not foolish, it will only generate them when needed.&lt;/p&gt;
+
+&lt;p&gt;What do the generated functions do?&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;For construtor, it will invoke the corresponding constructor and non-static
+members of its base class.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For destructor, it will invoke the corresponding destructor of its base class.
+If its base class&amp;rsquo;s destructor is virtual, the destructor will declare as
+virtual.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For copy constructor and copy assignment operator, they will copy each
+non-static data member from the source object to the target object.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If the class has some members that are pointer, reference or constant, there
+will be some trouble with the compiler.Therefore, always define the four
+functions when we define our own class.&lt;/p&gt;
+
+&lt;h2 id=&#34;disallow-the-use-of-generated-functions-you-don-t-want:ad90163a5135a9ab5d66997d40229e5d&#34;&gt;Disallow the use of generated functions you don&amp;rsquo;t want&lt;/h2&gt;
+
+&lt;p&gt;Sometimes, we may not want the copy constructor or the copy assignment
+operator because every member may be different with the other object&amp;rsquo;s
+members.Preventing the generation of these functions will make the
+program more effecient.&lt;/p&gt;
+
+&lt;p&gt;If we don&amp;rsquo;t declare these two functions, the compiler will generate them
+for us.&lt;/p&gt;
+
+&lt;p&gt;So how can we do?&lt;/p&gt;
+
+&lt;p&gt;The prefer solution is &lt;strong&gt;declare the copy constructor and copy assignment&lt;/strong&gt;
+&lt;strong&gt;operator as private and never implement them&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;If we implement them, the members and friends of the class can call them.But
+if we don&amp;rsquo;t implement them, the linker will complain at it.&lt;/p&gt;
+
+&lt;p&gt;In order to move the link-time error to the compile time, we should let the
+members and the friends of the class cannot call them.One method is to define
+a base class that can&amp;rsquo;t be copied and inherited by the class that you don&amp;rsquo;t
+want it to be copyable.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Uncopyable {
+protected:
+    Uncopyable()
+    { }
+    ~Uncopyable()
+    { }
+private:
+    Uncopyable(const Uncopyable&amp;amp;);
+    Uncopyable&amp;amp; operator=(const Uncopyable&amp;amp;);
+};
+
+class Person: private Uncopyable {
+
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The copy constructor and copy assignment operator of the class &lt;code&gt;Uncopyable&lt;/code&gt;
+are declared as private, so the members and friends of class &lt;code&gt;Person&lt;/code&gt; can&amp;rsquo;t
+call them.&lt;/p&gt;
+
+&lt;h2 id=&#34;declare-destructors-virtual-in-polymorphic-base-classes:ad90163a5135a9ab5d66997d40229e5d&#34;&gt;Declare destructors virtual in polymorphic base classes&lt;/h2&gt;
+
+&lt;p&gt;I have met this problem in an interview.&lt;/p&gt;
+
+&lt;p&gt;Suppose the destructor of the base class is not virtual.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Dog {
+public:
+    Dog();
+    ~Dog();
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And there are two class inherited from it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Whippet:public Dog {
+
+};
+
+class Spaniel:public Dog {
+
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can use a base class pointer to handle the derived classes.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Dog *aDog = new Whippet();
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then you should delete the pointer when you want to quit.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;delete aDog;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, the problem appears.The C++ specifies that when a derived class
+object is deleted through a pointer to a base class with a non-virtual
+destructor, results are undefined.&lt;/p&gt;
+
+&lt;p&gt;That is, the destructor of the base class will be called typically, but
+the destructor of the derived class may not be called.&lt;/p&gt;
+
+&lt;p&gt;I have written a simple program to test it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;cstdio&amp;gt;
+
+class Dog {
+public:
+    Dog()
+    { }
+    ~Dog()
+    {
+        printf(&amp;quot;Call Dog&#39;s destructor\n&amp;quot;);
+    }
+private:
+    Dog(const Dog&amp;amp;);
+    Dog&amp;amp;
+    operator=(const Dog&amp;amp;);
+};
+
+class Whippet:public Dog {
+public:
+    Whippet()
+    { }
+    ~Whippet()
+    {
+        printf(&amp;quot;Call Whippet&#39;s destructor\n&amp;quot;);
+    }
+};
+
+int
+main(int argc, char **argv)
+{
+    Dog *aDog = new Whippet();
+    delete aDog;
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I run the program several times and the results are the same.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~/test $ ./test 
+Call Dog&#39;s destructor
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, if I change the destrutor to &lt;code&gt;virtual&lt;/code&gt;, the result is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;virtual ~Dog()
+{
+    printf(&amp;quot;Call Dog&#39;s destructor\n&amp;quot;);
+}
+
+~/test $ ./test 
+Call Whippet&#39;s destructor
+Call Dog&#39;s destructor
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Therefore, when the base class have virtual member functions, you should
+always make the destructor virtual.&lt;/p&gt;
+
+&lt;p&gt;However, not every destructor of any class should be virtual.Making it
+virtual will occupy some additional information(virtual table pointer)
+that can increase the size of an object of that class.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Prevent exceptions from leaving destructors&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Never call virtual functions during construction or destruction&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I have seen the assignment operator in this form many times.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Person&amp;amp; operator=(const Person&amp;amp; p)
+{
+    ...
+    return *this;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;First, the parameter is passed by const-reference, which is more effecient.
+Second, the function returns a reference of the object.This is more effecient
+when doing this.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;p3 = p2 = p1;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Remember that always write assignment operator in this form.&lt;/p&gt;
+
+&lt;p&gt;This is also appropriate with &lt;code&gt;+=&lt;/code&gt;, &lt;code&gt;*=&lt;/code&gt; and so on.&lt;/p&gt;
+
+&lt;p&gt;Sometimes we may assignment to the object itself.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Person p;
+p = p;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It seems impossible, but how about this.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;persons[i] = persons[j];
+*p1 = *p2;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;persons[i]&lt;/code&gt; and &lt;code&gt;persons[j]&lt;/code&gt; may be the same.&lt;code&gt;p1&lt;/code&gt; and &lt;code&gt;p2&lt;/code&gt; may point
+to the same object.&lt;/p&gt;
+
+&lt;p&gt;Some assignment operator may be like this one.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Disk&amp;amp;
+Disk::operator=(const Disk&amp;amp; d)
+{
+    delete data;
+    data = new Disk(*(d.data));
+
+    return *this;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It seems reasonable that delete the original data and then allocate a
+new one using the data of &lt;code&gt;d&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;However, this is very dangerous.What if &lt;code&gt;this&lt;/code&gt; is the same as &lt;code&gt;d&lt;/code&gt;?
+If that happened, the content of &lt;code&gt;data&lt;/code&gt; and &lt;code&gt;d.data&lt;/code&gt; is the same
+thing.So the content of &lt;code&gt;d.data&lt;/code&gt; have been delete before call the
+copy constructor.&lt;/p&gt;
+
+&lt;p&gt;A direct solution to this problem is obvious.That is, just check if they
+are the same.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Disk&amp;amp;
+Disk::operator=(const Disk&amp;amp; d)
+{
+    if (this == &amp;amp;d) {
+        return *this;
+    }
+    delete data;
+    data = new Disk(*(d.data));
+
+    return *this;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I prefer the above solution.But there are another solution.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Disk&amp;amp;
+Disk::operator=(const Disk&amp;amp; d)
+{
+    Disk *origin = data;
+    data = new Disk(*(d.data));
+    delete origin;
+
+    return *this;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This code just change the order of some statement, but it make great
+difference.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;When adding a member to a class, remember to update the constructors,&lt;/strong&gt;
+&lt;strong&gt;destructor, copy constructor, copy assignment operator&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Don&amp;rsquo;t miss anyone!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;When a class is a derived class, make sure to call the constructors,
+copy constructor and copy assignment operator of the base class, respectively
+when writing my own constructors, copy constructor, assignment operator.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Do not call copy constructor in the copy assignment operator.&lt;/strong&gt;
+&lt;strong&gt;Do not call copy assignment operator in the copy constructor.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;That is all about constructors, copy constructor and copy assignment operator.
+It really helps.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Always pass parameters by reference-to-const</title>
+      <link>/zhengyhn.github.io/post/2013-08-09-always-pass-parameters-by-reference-to-const/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/2013-08-09-always-pass-parameters-by-reference-to-const/</guid>
+      <description>&lt;p&gt;We all know that &lt;em&gt;pass by value&lt;/em&gt; is not effecient.So we use &lt;em&gt;pass by pointer&lt;/em&gt;
+in C.However, in C++, we prefer &lt;strong&gt;pass by referece-to-const&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Here is an example.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+
+class Dog {
+public:
+    Dog()
+    {
+        printf(&amp;quot;Calling Dog&#39;s constructor\n&amp;quot;);
+    }
+    Dog(const Dog&amp;amp; d)
+    {
+        printf(&amp;quot;Calling Dog&#39;s copy constructor\n&amp;quot;);
+        this-&amp;gt;name = d.name;
+    }
+    virtual ~Dog()
+    {
+        printf(&amp;quot;Calling Dog&#39;s destructor\n&amp;quot;);
+    }
+private:
+    std::string name;
+};
+
+void
+walk_the_dog(Dog d)
+{
+
+}
+
+int
+main(int argc, char **argv)
+{
+    Dog dog;
+    walk_the_dog(dog);
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The running result is as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Calling Dog&#39;s constructor
+Calling Dog&#39;s copy constructor
+Calling Dog&#39;s destructor
+Calling Dog&#39;s destructor
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, let&amp;rsquo;s analysis this &lt;em&gt;passing by value&lt;/em&gt; process.
+First, &lt;code&gt;Dog dog;&lt;/code&gt; will call the constructor. Then, since the function
+&lt;code&gt;walk_the_dog&lt;/code&gt; pass the parameter &lt;code&gt;d&lt;/code&gt; by value, it will call the copy
+constructor. Before exiting the function, it will call the destructor of &lt;code&gt;Dog&lt;/code&gt;
+to destroy the parameter &lt;code&gt;d&lt;/code&gt;. In the end, before exiting the main function,
+the destructor of &lt;code&gt;Dog&lt;/code&gt; will be called again to destroy the &lt;code&gt;dog&lt;/code&gt; object.&lt;/p&gt;
+
+&lt;p&gt;Now, it seems that &lt;em&gt;passing by value&lt;/em&gt; will result in a call to copy constructor
+and a call to destructor. But, in fact, it will result in two call to copy
+constructor and two call to destructor. Note that there are a &lt;code&gt;string&lt;/code&gt; object
+as the member of the class &lt;code&gt;Dog&lt;/code&gt;, so there will be an extra call the copy
+constructor and destructor of the &lt;code&gt;string&lt;/code&gt; object.&lt;/p&gt;
+
+&lt;p&gt;Obviously, the cost of &lt;em&gt;passing by value&lt;/em&gt; is very expensive.
+How is &lt;em&gt;passing by reference-to-const&lt;/em&gt;?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void
+walk_the_dog(const Dog&amp;amp; d)
+{
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Just modify a bit and the result will be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Calling Dog&#39;s constructor
+Calling Dog&#39;s destructor
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that the &lt;code&gt;const&lt;/code&gt; is very important. If there is not a &lt;code&gt;const&lt;/code&gt;, the
+compiler will put the object in the writable part of the memory so that it
+cannot be shared by other functions. If declared as &lt;code&gt;const&lt;/code&gt;, the object
+will be put into the readonly part of the memory and can be shared by lots
+of functions so that the program need less memory.&lt;/p&gt;
+
+&lt;p&gt;The implementation of reference is using the pointer in C. Therefore, it may
+be more effecient to pass the built-in type parameters by value than referece.
+It&amp;rsquo;s true. If the parameter is an object of type &lt;code&gt;char&lt;/code&gt;, which occupies
+1 byte. But a pointer ocuppies 4 bytes in a 32-bit machine. So we should prefer
+passing by value when the parameter is of built-in type? No, we should always
+pass the parameters by reference-to-const, since &lt;strong&gt;the compiler will always&lt;/strong&gt;
+&lt;strong&gt;put the pointer in the register!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, just remember, &lt;strong&gt;always pass the parameters by reference-to-const&lt;/strong&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Const anyway!</title>
+      <link>/zhengyhn.github.io/post/2013-07-24-const-anyway/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/2013-07-24-const-anyway/</guid>
+      <description>
+
+&lt;h2 id=&#34;const-pointer:2fd84307549b01538b74d1aeefd6e52f&#34;&gt;Const pointer&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;const&lt;/code&gt; is versatile.I am always confused by the following syntax.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const char *str = &amp;quot;Hello&amp;quot;;    // const data, non-const pointer
+char * const str = &amp;quot;Hello&amp;quot;;    // const pointer, non-const data
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now there is a tip to remember it.&lt;/p&gt;
+
+&lt;p&gt;If &lt;code&gt;const&lt;/code&gt; appears to the right of the asterisk, the pointer is
+constant.If &lt;code&gt;const&lt;/code&gt; appears to the left of the asterisk, the data
+is constant.&lt;/p&gt;
+
+&lt;p&gt;So the following two statements are the same.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;const char *str = &amp;quot;Hello&amp;quot;;
+char const *str = &amp;quot;Hello&amp;quot;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In STL, &lt;code&gt;iterator&lt;/code&gt; is just like a &lt;code&gt;T *&lt;/code&gt; pointer.
+* &lt;code&gt;const std::vector&amp;lt;int&amp;gt;::iterator iter&lt;/code&gt; is just like &lt;code&gt;T * const iter&lt;/code&gt;.
+* &lt;code&gt;std::vector&amp;lt;int&amp;gt;::const_iterator cIter&lt;/code&gt; is just like &lt;code&gt;const T *iter&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;So, in a loop, if we don&amp;rsquo;t want to modify the data, use &lt;code&gt;const_iterator&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;const-member-function:2fd84307549b01538b74d1aeefd6e52f&#34;&gt;Const member function&lt;/h2&gt;
+
+&lt;p&gt;Sometimes, we have two version member functions.One is const and the other is
+not.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;string&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+
+class Str {
+public:
+    Str(std::string str)
+    :data(str)
+    { }
+
+    const char&amp;amp;
+    operator[](std::size_t pos) const    // Const objects use this
+    {
+        return data[pos];
+    }
+
+    char&amp;amp;
+    operator[](std::size_t pos)    // Non-const objects use this
+    {
+        return data[pos];
+    }
+
+private:
+    std::string data;
+};
+
+void
+print(const Str&amp;amp; const_str)
+{
+    std::cout &amp;lt;&amp;lt; const_str[1] &amp;lt;&amp;lt; std::endl;
+}
+
+int
+main(int argc, char **argv)
+{
+    Str nonconst_str(&amp;quot;abc&amp;quot;);
+    std::cout &amp;lt;&amp;lt; nonconst_str[1] &amp;lt;&amp;lt; std::endl;
+    nonconst_str[1] = &#39;a&#39;;
+
+    print(nonconst_str);
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In &lt;code&gt;main&lt;/code&gt;, &lt;code&gt;nonconst_str&lt;/code&gt; is a non-const object and it can be modified
+by &lt;code&gt;[]&lt;/code&gt;.In &lt;code&gt;print&lt;/code&gt;, &lt;code&gt;const Str&amp;amp; const_str&lt;/code&gt; means
+&lt;strong&gt;pass parameters by reference-to-const&lt;/strong&gt;, so &lt;code&gt;const_str&lt;/code&gt; is a const object.&lt;/p&gt;
+
+&lt;p&gt;We observe that the &lt;code&gt;const&lt;/code&gt; keyword is after the closing parenthesis of the
+argument list.This means the function is a const member function.&lt;/p&gt;
+
+&lt;p&gt;Reference to &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/6ke686zh.aspx&#34;&gt;MSDN&lt;/a&gt;,
+&lt;strong&gt;A constant member function cannot modify any non-static members or call any&lt;/strong&gt;
+&lt;strong&gt;member functions that aren&amp;rsquo;t constant.&lt;/strong&gt;That is, the cons member function
+can&amp;rsquo;t modify the object that it is called.&lt;/p&gt;
+
+&lt;p&gt;The above philosophy is called &lt;strong&gt;bitwise constness&lt;/strong&gt; or &lt;strong&gt;physical constness&lt;/strong&gt;.
+There are another philosophy called &lt;strong&gt;logical constness&lt;/strong&gt;.Adherents to this
+philosophy argue that &lt;strong&gt;a const member function might modify some of the bits&lt;/strong&gt;
+&lt;strong&gt;in the object on which it&amp;rsquo;s invoked, but only in ways that clients cannot&lt;/strong&gt;
+&lt;strong&gt;detect&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;For example, if we add a new member function &lt;code&gt;length()&lt;/code&gt; to the above class.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    std::size_t
+    length() const
+    {
+        len = data.length();
+
+        return len;
+    }
+
+private:
+    std::string data;
+    std::size_t len;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will generate the following compiled error.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;test.cpp:25:6: error: assignment of member ‘Str::len’ in read-only object
+  len = data.length();
+      ^
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Since member variable &lt;code&gt;len&lt;/code&gt; has been modified and the compiler use the
+&lt;strong&gt;bitwise const&lt;/strong&gt;, error produces.However, return and object&amp;rsquo;s length seems
+not modify the object it is called.&lt;/p&gt;
+
+&lt;p&gt;To solved this problem, use the &lt;strong&gt;mutable&lt;/strong&gt; keyword.It can free non-static
+data members from bitwise constness constraints.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mutable std::size_t len;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I beleive in code reusing forever!In the above example, the duplicate code
+in the two &lt;code&gt;operator[]&lt;/code&gt; functions can be merged into one.&lt;/p&gt;
+
+&lt;p&gt;Only then non-const function should be modified.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;char&amp;amp;
+operator[](std::size_t pos)    // Non-const objects use this
+{
+    return const_cast&amp;lt;char&amp;amp;&amp;gt;(static_cast&amp;lt;const Str&amp;amp;&amp;gt;(*this)[pos]);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;static_cast&amp;lt;const Str&amp;amp;&amp;gt;&lt;/code&gt;will make &lt;code&gt;*this&lt;/code&gt;const and then it can call
+&lt;code&gt;operator[]&lt;/code&gt;.Finally, &lt;code&gt;const_cast&lt;/code&gt; is used the free the const constraint.&lt;/p&gt;
+
+&lt;p&gt;This is all about &lt;code&gt;const&lt;/code&gt;, it&amp;rsquo;s an amazing keyword.For readable and efficient
+code, use it anyway.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Cpp Resource Management</title>
+      <link>/zhengyhn.github.io/post/2013-08-01-cpp-resource-management/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/2013-08-01-cpp-resource-management/</guid>
+      <description>
+
+&lt;p&gt;I always forget freeing a memory that allocated from the heap.And I always
+forget closing the file handler.&lt;/p&gt;
+
+&lt;p&gt;Resources include file descriptors, mutex locks, fonts, brushes, database
+connections and network sockets.&lt;/p&gt;
+
+&lt;p&gt;I think less programmers can remember closing a file handler, especially
+in a large project.&lt;/p&gt;
+
+&lt;p&gt;Nowadays, many programming languages have the garbage collection function.
+In C++, since the destructor will be automatically called, we can release
+the resources automatically if we put the resource into an object.&lt;/p&gt;
+
+&lt;p&gt;How can do that?Use the &lt;em&gt;smart pointer&lt;/em&gt;:&lt;code&gt;std::auto_ptr&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;memory&amp;gt;
+
+int
+main(int argc, char **argv)
+{
+    int *num = NULL;
+    {
+        num = new int();
+        std::auto_ptr&amp;lt;int&amp;gt; ap(num);
+    }
+    // delete num;
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If trying to delete num after the block, that will be a double free error.&lt;/p&gt;
+
+&lt;p&gt;Reference from &lt;a href=&#34;http://www.cplusplus.com/reference/memory/auto_ptr/&#34;&gt;cplusplus.com&lt;/a&gt;, &lt;code&gt;auto_ptr&lt;/code&gt; is deprecated in C++11 and is replaced by &lt;code&gt;unique_ptr&lt;/code&gt;.
+But they are similar.&lt;/p&gt;
+
+&lt;p&gt;However, multiple &lt;code&gt;auto_ptr&lt;/code&gt; cannot contain the same object.&lt;/p&gt;
+
+&lt;p&gt;Here is the test program.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;memory&amp;gt;
+
+int
+main(int argc, char **argv)
+{
+    int *num = NULL;
+    {
+        num = new int();
+        std::auto_ptr&amp;lt;int&amp;gt; ap1(num);
+        std::auto_ptr&amp;lt;int&amp;gt; ap2(ap1);
+
+        printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap1);
+        ap1 = ap2;
+        printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap2);
+    }
+    // delete num;
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here is the gdb debug output information.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Temporary breakpoint 1, main (argc=1, argv=0x7fffffffe6e8) at test.cpp:7
+7       int *num = NULL;
+(gdb) n
+9       num = new int();
+(gdb) n
+10      std::auto_ptr&amp;lt;int&amp;gt; ap1(num);
+(gdb) n
+11      std::auto_ptr&amp;lt;int&amp;gt; ap2(ap1);
+(gdb) p ap1
+$1 = {_M_ptr = 0x601010}
+(gdb) p ap2
+$2 = {_M_ptr = 0x7fff00000001}
+(gdb) n
+13      printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap1);
+(gdb) p ap1
+$3 = {_M_ptr = 0x0}
+(gdb) p ap2
+$4 = {_M_ptr = 0x601010}
+(gdb) n
+0x7fffffffe5e0
+14      ap1 = ap2;
+(gdb) p ap1
+$5 = {_M_ptr = 0x0}
+(gdb) p ap2
+$6 = {_M_ptr = 0x601010}
+(gdb) n
+15      printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap2);
+(gdb) p ap1
+$7 = {_M_ptr = 0x601010}
+(gdb) p ap2
+$8 = {_M_ptr = 0x0}
+(gdb) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But there are another smart pointer that can do this.It&amp;rsquo;s the
+&lt;code&gt;std::tr1::shared_ptr&lt;/code&gt;.Mutiple shared_ptr can contain the same object.&lt;/p&gt;
+
+&lt;p&gt;The testing program is as follow.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;tr1/memory&amp;gt;
+
+int
+main(int argc, char **argv)
+{
+    int *num = NULL;
+    {
+        num = new int();
+        std::tr1::shared_ptr&amp;lt;int&amp;gt; ap1(num);
+        std::tr1::shared_ptr&amp;lt;int&amp;gt; ap2(ap1);
+
+        printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap1);
+        ap1 = ap2;
+        printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap2);
+    }
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And the gdb debug information is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Temporary breakpoint 1, main (argc=1, argv=0x7fffffffe6e8) at test.cpp:7
+7       int *num = NULL;
+(gdb) n
+9       num = new int();
+(gdb) n
+10      std::tr1::shared_ptr&amp;lt;int&amp;gt; ap1(num);
+(gdb) n
+11      std::tr1::shared_ptr&amp;lt;int&amp;gt; ap2(ap1);
+(gdb) n
+13      printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap1);
+(gdb) p ap1
+$1 = std::tr1::shared_ptr (count 2, weak 0) 0x602010
+(gdb) p ap2
+$2 = std::tr1::shared_ptr (count 2, weak 0) 0x602010
+(gdb) n
+0x7fffffffe5d0
+14      ap1 = ap2;
+(gdb) n
+15      printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap2);
+(gdb) p ap1
+$3 = std::tr1::shared_ptr (count 2, weak 0) 0x602010
+(gdb) p ap2
+$4 = std::tr1::shared_ptr (count 2, weak 0) 0x602010
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can see that both of &lt;code&gt;ap1&lt;/code&gt; and &lt;code&gt;ap2&lt;/code&gt; point to the same object.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;auto_ptr&lt;/code&gt; and &lt;code&gt;shared_ptr&lt;/code&gt; use &lt;code&gt;delete&lt;/code&gt; but not &lt;code&gt;delete[]&lt;/code&gt;,
+so they don&amp;rsquo;t support array.But the &lt;code&gt;unique_ptr&lt;/code&gt; support.&lt;/p&gt;
+
+&lt;p&gt;Sometimes, the resource may be a mutex, and we don&amp;rsquo;t want to remember
+unlocking the mutex every time we lock it.So a resource management object
+may be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;cstdio&amp;gt;
+
+typedef int Mutex;
+
+void
+lock(Mutex *p)
+{
+    printf(&amp;quot;Locking...\n&amp;quot;);
+}
+
+void
+unlock(Mutex *p)
+{
+    printf(&amp;quot;Unlocked\n&amp;quot;);
+}
+
+class Lock {
+public:
+    explicit Lock(Mutex *p)
+        :pMutex(p)
+    {
+        lock(pMutex);
+    }
+    ~Lock()
+    {
+        unlock(pMutex);
+    }
+private:
+    Mutex *pMutex;
+};
+
+int
+main(int argc, char **argv)
+{
+    Mutex m;
+    {
+        Lock ml(&amp;amp;m);
+    }
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;However, when we copy the &lt;code&gt;Lock&lt;/code&gt; object, problems appear.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Lock ml2(ml);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The default copy constructor will directly copy the pointer &lt;code&gt;pMutex&lt;/code&gt; to
+the target object.So we should let the object uncopyable.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;private:
+Lock(const Lock&amp;amp;);
+Lock&amp;amp;
+operator=(const Lock&amp;amp;);
+
+Mutex *pMutex;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Multiple objects can use the same resource, so the resource may be existed
+until the last object has been destroyed.The &lt;code&gt;tr1::shared_ptr&lt;/code&gt; provide a
+&lt;code&gt;deleter&lt;/code&gt; and its &lt;strong&gt;shared ability&lt;/strong&gt; to solve this problem.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Lock {
+public:
+    explicit Lock(Mutex *p)
+        :pMutex(p, unlock)
+    {
+        lock(pMutex.get());
+    }
+private:
+    Lock(const Lock&amp;amp;);
+    Lock&amp;amp;
+    operator=(const Lock&amp;amp;);
+
+    std::tr1::shared_ptr&amp;lt;Mutex&amp;gt; pMutex;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;provide-access-to-raw-resources:caeb39714cb04ae6190d0970b322f1ee&#34;&gt;Provide access to raw resources&lt;/h2&gt;
+
+&lt;p&gt;Sometimes we may only want to access the raw resource but the object that
+contains the resource.For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;tr1/memory&amp;gt;
+
+typedef int Mutex;
+
+static Mutex *
+createMutex()
+{
+    static Mutex *p = new Mutex();
+
+    return p;
+}
+
+int
+main(int argc, char **argv)
+{
+    std::tr1::shared_ptr&amp;lt;Mutex&amp;gt; pMutex;
+
+    printf(&amp;quot;%d\n&amp;quot;, pMutex);
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Therefore, we must provide a method to access the raw resource.Like this.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    printf(&amp;quot;%d\n&amp;quot;, pMutex.get());
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are two ways, one is explicit and the other is implicit.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class MutexManager {
+public:
+    explicit MutexManager(Mutex* p)
+        :p_(p)
+    { }
+    ~MutexManager()
+    {
+        delete p_;
+    }
+    Mutex
+    get() const
+    {
+        return *p_;
+    }
+private:
+    Mutex *p_;
+};
+
+int
+main(int argc, char **argv)
+{
+    MutexManager mm(createMutex());
+
+    printf(&amp;quot;%d\n&amp;quot;, mm.get());
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This one above is exciplit conversion.And this one below is implicit.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class MutexManager {
+public:
+    explicit MutexManager(Mutex* p)
+        :p_(p)
+    { }
+    ~MutexManager()
+    {
+        delete p_;
+    }
+    operator Mutex() const
+    {
+        return *p_;
+    }
+private:
+    Mutex *p_;
+};
+
+void
+print(Mutex m)
+{
+    printf(&amp;quot;%d\n&amp;quot;, m);
+}
+
+int
+main(int argc, char **argv)
+{
+    MutexManager mm(createMutex());
+
+    print(mm);
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s obviously that the explicit method is safer and the implicit method is
+more convenient for clients.&lt;/p&gt;
+
+&lt;h2 id=&#34;keep-new-and-delete-in-the-same-form:caeb39714cb04ae6190d0970b322f1ee&#34;&gt;Keep new and delete in the same form&lt;/h2&gt;
+
+&lt;p&gt;We all know that the following code is wrong.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;std::string *str = new std::string[10];
+delete str;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We should use &lt;code&gt;delete []str;&lt;/code&gt; instead of &lt;code&gt;delete str;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;But how about this?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
+
+typedef std::string Lines[4];
+
+int
+main(int argc, char **argv)
+{
+    std::string *p = new Lines;
+    delete p;
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If let me delete the pointer p, I will use this &lt;code&gt;delete p;&lt;/code&gt;.But I am wrong.
+I shouldn&amp;rsquo;t look at the left of the pointer, that is, &lt;code&gt;std::string&lt;/code&gt;.I should
+look at the right of the &lt;code&gt;new&lt;/code&gt;, that is, &lt;code&gt;Lines&lt;/code&gt;.So, in this case, we
+should use &lt;code&gt;delete []p;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Avoid typedef for array types, use &lt;code&gt;vector&lt;/code&gt; instead.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Do not hide inherited names</title>
+      <link>/zhengyhn.github.io/post/2013-08-15-do-not-hide-inherited-names/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/2013-08-15-do-not-hide-inherited-names/</guid>
+      <description>&lt;p&gt;In inheritance, there are some rules defined by C++, one of which is that
+the virables or the functions in the base class will be hidden if there
+are virables and functions with the same name.&lt;/p&gt;
+
+&lt;p&gt;It seems perfect, but it&amp;rsquo;s a pitfall of C++. Consider the following example.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+
+class Person {
+public:
+    explicit Person()
+    { }
+    ~Person()
+    { }
+    void
+    sleep() const
+    { printf(&amp;quot;Person sleep\n&amp;quot;); }
+    void
+    sleep(const int sec) const
+    { printf(&amp;quot;Person sleep %d s\n&amp;quot;, sec); }
+private:
+    Person(const Person&amp;amp;);
+    const Person&amp;amp;
+    operator=(const Person&amp;amp;);
+};
+
+class Student:public Person {
+public:
+    explicit Student()
+    { }
+    ~Person()
+    { }
+    void
+    sleep() const
+    { printf(&amp;quot;Student sleep\n&amp;quot;); }
+private:
+    Student(const Student&amp;amp;);
+    const Student&amp;amp;
+    operator=(const Student&amp;amp;);
+};
+
+int
+main(int argc, char **argv)
+{
+    Student stu;
+
+    stu.sleep();
+    stu.sleep(1);
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This program won&amp;rsquo;t be compiled. It shows the following error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;test.cpp:39:16: error: no matching function for call to ‘Student::sleep(int)’
+     stu.sleep(1);
+                ^
+test.cpp:39:16: note: candidate is:
+test.cpp:25:5: note: void Student::sleep() const
+     sleep() const
+     ^
+test.cpp:25:5: note:   candidate expects 0 arguments, 1 provided
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That is because C++ will hide all the names in the base class as long as there
+are the same names in the derived class. In the &lt;code&gt;Person&lt;/code&gt; class, &lt;code&gt;sleep()&lt;/code&gt;
+and &lt;code&gt;sleep(const int sec)&lt;/code&gt; have the same name. In the &lt;code&gt;Student&lt;/code&gt; class, it
+only want to override the &lt;code&gt;sleep()&lt;/code&gt; function, but the overriding cause the
+hiding of the &lt;code&gt;sleep(const int sec)&lt;/code&gt; function!&lt;/p&gt;
+
+&lt;p&gt;So how to solve this problem? There are two methods so far.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Don&amp;rsquo;t hide the names in the base class will using overloading functions.&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use &lt;code&gt;using&lt;/code&gt; directive to make the certain methods visible.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Student:public Person {
+public:
+    using Person::sleep;
+
+
+    explicit Student()
+    { }
+    ~Person()
+    { }
+    void
+    sleep() const
+    { printf(&amp;quot;Student sleep\n&amp;quot;); }
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Finally, another important thing should be stated. In the above example, I
+implement &lt;code&gt;sleep()&lt;/code&gt; function in the definition of the class. Why do that?
+I have worked in some very large C++ projects and there are many implementation
+in the definition. In fact, this is so-called &lt;strong&gt;implicit inline&lt;/strong&gt;. The compiler
+will inline the functions that are implemented in the class definition
+automatically. Therefore, it&amp;rsquo;s good to implement some small functions in the
+definition of class. And let the large function implement in another file.
+This will make my code more effecient and I will follow this guide in the
+future.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Implement a bidirectional linked list</title>
+      <link>/zhengyhn.github.io/post/2013-09-21-implement-a-bidirectional-linked-list/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/2013-09-21-implement-a-bidirectional-linked-list/</guid>
+      <description>&lt;p&gt;A bidirectional linked list is the same as a singular linked list except that
+there are two links between two nodes.&lt;/p&gt;
+
+&lt;p&gt;Here is the specification of my BiLinkedList.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;BiLinkedList()&lt;/code&gt;, Create an empty BiLinkedList.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BiLinkedList(const BiLinkedList&amp;amp; list)&lt;/code&gt;, Create a BiLinkedList from another
+BiLinkedList &lt;code&gt;list&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BiLinkedList(const T&amp;amp; value)&lt;/code&gt;, Create a BiLinkedList whose first element
+is &lt;code&gt;value&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BiLinkedList(const T values[], size_t size)&lt;/code&gt;, Create a BiLinkedList from
+an array &lt;code&gt;values&lt;/code&gt; of size &lt;code&gt;size&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;const BiLinkedList&amp;amp; operator=(const BiLinkedList&amp;amp; list)&lt;/code&gt;, Support
+BiLinkedList assignment.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;~BiLinkedList()&lt;/code&gt;, Free all the space requested by the BiLinkedList.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;std::ostream&amp;amp; operator&amp;lt;&amp;lt;(std::ostream&amp;amp;, const BiLinkedList&amp;lt;T&amp;gt;&amp;amp;);&lt;/code&gt;,
+Output the BiLinkedList in the form &lt;strong&gt;[a, b, c &amp;hellip;]&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void append(const T&amp;amp; value)&lt;/code&gt;, Append an element &lt;code&gt;value&lt;/code&gt; to the
+BiLinkedList.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;const T&amp;amp; operator[](size_t index)&lt;/code&gt;, Access the element of the BiLinkedList,
+but it&amp;rsquo;s not random accessible.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void insert(size_t index, const T&amp;amp; value)&lt;/code&gt;, Insert an element &lt;code&gt;value&lt;/code&gt;
+in the position &lt;code&gt;index&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void remove(size_t index)&lt;/code&gt;, Remove the element in the position &lt;code&gt;index&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;size_t size()&lt;/code&gt;, Return the size of the BiLinkedList.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/zhengyhn/hugo-blog-code/tree/master/bidirectional-list&#34;&gt;Here&lt;/a&gt; is the code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Implement a binary search tree</title>
+      <link>/zhengyhn.github.io/post/2013-10-03-implement-a-binary-search-tree/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/2013-10-03-implement-a-binary-search-tree/</guid>
+      <description>&lt;p&gt;A binary search tree is very useful in solving the real world problems. The
+red-black tree is one kind of binary search tree. For more information about
+binary search tree, please visit the &lt;a href=&#34;http://en.wikipedia.org/wiki/Binary_search_tree&#34;&gt;wikipedia&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Here is the specification of my binary search tree.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;BinarySearchTree()&lt;/code&gt;, Create an empty binary search tree.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;BinarySearchTree(const T&amp;amp; root_val)&lt;/code&gt;, Create an binary search tree whose
+root node is constructed from &lt;code&gt;root_val&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;BinarySearchTree(const T values[], const size_t&amp;amp; size)&lt;/code&gt;, Create an binary
+search tree from an array &lt;code&gt;values&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;BinarySearchTree(const BinarySearchTree&amp;lt;T&amp;gt;&amp;amp; tree)&lt;/code&gt;, Create an binary search
+tree from the other tree &lt;code&gt;tree&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;const BinarySearchTree&amp;amp; operator=(const BinarySearchTree&amp;amp; tree)&lt;/code&gt;, Support
+assignment between trees.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;~BinarySearchTree()&lt;/code&gt;, free all the spaces.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Node&amp;lt;T&amp;gt; * proot() const&lt;/code&gt;, return the root pointer.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;void proot(Node&amp;lt;T&amp;gt; *root)&lt;/code&gt;, set the root pointer to &lt;code&gt;root&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;const T&amp;amp; root() const&lt;/code&gt;, return the data stored in the root node.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;bool is_empty() const&lt;/code&gt;, return whether the tree is empty.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;void insert(const T&amp;amp; value)&lt;/code&gt;, insert a node with &lt;code&gt;value&lt;/code&gt; into the tree.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;std::string inorder_string() const&lt;/code&gt;, return the inorder travel string.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;std::vector&amp;lt;T&amp;gt; retrieve(const T&amp;amp; key)&lt;/code&gt;, return the search result of key
+&lt;code&gt;key&lt;/code&gt;, the result may contain more than one element.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;void remove(const T&amp;amp; key)&lt;/code&gt;, delete the node with key &lt;code&gt;key&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/zhengyhn/hugo-blog-code/tree/master/binary-search-tree&#34;&gt;Here&lt;/a&gt; is the code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Implement a circular linked list</title>
+      <link>/zhengyhn.github.io/post/2013-09-21-implement-a-circular-linked-list/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/2013-09-21-implement-a-circular-linked-list/</guid>
+      <description>&lt;p&gt;A circular linked list is the same as a singular linked list except that
+there last node points to the first node.&lt;/p&gt;
+
+&lt;p&gt;Here is the specification of my CiLinkedList.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;CiLinkedList()&lt;/code&gt;, Create an empty CiLinkedList.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CiLinkedList(const CiLinkedList&amp;amp; list)&lt;/code&gt;, Create a CiLinkedList from another
+CiLinkedList &lt;code&gt;list&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CiLinkedList(const T&amp;amp; value)&lt;/code&gt;, Create a CiLinkedList whose first element
+is &lt;code&gt;value&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CiLinkedList(const T values[], size_t size)&lt;/code&gt;, Create a CiLinkedList from
+an array &lt;code&gt;values&lt;/code&gt; of size &lt;code&gt;size&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;const CiLinkedList&amp;amp; operator=(const CiLinkedList&amp;amp; list)&lt;/code&gt;, Support
+CiLinkedList assignment.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;~CiLinkedList()&lt;/code&gt;, Free all the space requested by the CiLinkedList.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;std::ostream&amp;amp; operator&amp;lt;&amp;lt;(std::ostream&amp;amp;, const CiLinkedList&amp;lt;T&amp;gt;&amp;amp;);&lt;/code&gt;,
+Output the CiLinkedList in the form &lt;strong&gt;[a, b, c &amp;hellip;]&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;const T&amp;amp; operator[](size_t index)&lt;/code&gt;, Access the element of the CiLinkedList,
+but it&amp;rsquo;s not random accessible.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;size_t size()&lt;/code&gt;, Return the size of the CiLinkedList.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rm_dup()&lt;/code&gt;, Remove duplicate elements int the CiLinkedList.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/zhengyhn/hugo-blog-code/tree/master/circular-list&#34;&gt;Here&lt;/a&gt; is the code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Implement a queue</title>
+      <link>/zhengyhn.github.io/post/2013-09-25-implement-a-queue/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/2013-09-25-implement-a-queue/</guid>
+      <description>&lt;p&gt;A queue is based on the Linked List. The most explicit feature of a queue
+is FIFO(First in first out).&lt;/p&gt;
+
+&lt;p&gt;Here is the specification of my Queue.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Queue()&lt;/code&gt;, Create an empty queue.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Queue(const T&amp;amp; value)&lt;/code&gt;, Create a queue whose first element is
+&lt;code&gt;value&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Queue(const T values[], const size_t&amp;amp; size)&lt;/code&gt;, Create a queue from an
+array &lt;code&gt;values&lt;/code&gt; whose size is &lt;code&gt;size&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Queue(const Queue&amp;lt;T&amp;gt;&amp;amp; queue)&lt;/code&gt;, Create a queue from another queue.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;const Queue&amp;lt;T&amp;gt;&amp;amp; operator=(const Queue&amp;lt;T&amp;gt;&amp;amp; queue)&lt;/code&gt;, Support queue
+assignment.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;~Queue()&lt;/code&gt;, Free all the spaces allocated by the queue.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;std::ostream&amp;amp; operator&amp;lt;&amp;lt;(std::ostream&amp;amp; os, const Queue&amp;lt;T&amp;gt;&amp;amp; queue)&lt;/code&gt;,
+Output the queue in the form &lt;strong&gt;[1 | 2 | 3]&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;const T&amp;amp; head() const&lt;/code&gt;, return the head element of the queue.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;size_t size() const&lt;/code&gt;, return the size of the queue.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void enQueue(const T&amp;amp; value)&lt;/code&gt;, append the element &lt;code&gt;value&lt;/code&gt; into the
+back of the queue.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;const T deQueue()&lt;/code&gt;, remove and return the first element of the queue.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/zhengyhn/hugo-blog-code/tree/master/queue&#34;&gt;Here&lt;/a&gt;  is the code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Implement a queue using two stacks</title>
+      <link>/zhengyhn.github.io/post/2013-09-27-implement-a-queue-using-two-stacks/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/2013-09-27-implement-a-queue-using-two-stacks/</guid>
+      <description>&lt;p&gt;A queue can be implemented using two stacks. One stack store the elements
+appended to the queue. The other stack store the elements to be popped from
+the queue.&lt;/p&gt;
+
+&lt;p&gt;Here is the specification of my Queue.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;StQueue()&lt;/code&gt;, Create an empty queue.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;StQueue(const T&amp;amp; value)&lt;/code&gt;, Create a queue whose first element is
+&lt;code&gt;value&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;StQueue(const T values[], const size_t&amp;amp; size)&lt;/code&gt;, Create a queue from an
+array &lt;code&gt;values&lt;/code&gt; whose size is &lt;code&gt;size&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;StQueue(const StQueue&amp;lt;T&amp;gt;&amp;amp; queue)&lt;/code&gt;, Create a queue from another queue.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;const StQueue&amp;lt;T&amp;gt;&amp;amp; operator=(const StQueue&amp;lt;T&amp;gt;&amp;amp; queue)&lt;/code&gt;, Support queue
+assignment.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;~StQueue()&lt;/code&gt;, Free all the spaces allocated by the queue.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;std::ostream&amp;amp; operator&amp;lt;&amp;lt;(std::ostream&amp;amp; os, const StQueue&amp;lt;T&amp;gt;&amp;amp; queue)&lt;/code&gt;,
+Output the queue in the form &lt;strong&gt;[1 | 2 | 3]&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;const T&amp;amp; head() const&lt;/code&gt;, return the head element of the queue.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;size_t size() const&lt;/code&gt;, return the size of the queue.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void enQueue(const T&amp;amp; value)&lt;/code&gt;, append the element &lt;code&gt;value&lt;/code&gt; into the
+back of the queue.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;const T deQueue()&lt;/code&gt;, remove and return the first element of the queue.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/zhengyhn/hugo-blog-code/tree/master/st-queue&#34;&gt;Here&lt;/a&gt; is the code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Implement a singular LinkedList</title>
+      <link>/zhengyhn.github.io/post/2013-09-12-implement-a-singular-linkedlist/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>/zhengyhn.github.io/post/2013-09-12-implement-a-singular-linkedlist/</guid>
+      <description>&lt;p&gt;LinkedList is a very common data structure. Three years ago, I could write
+a singular LinkedList very quickly in C/C++. But the code is ugly and very
+ineffecient. Now I am going to implement a singular LinkedList in C++ in order
+to cracking the interview.&lt;/p&gt;
+
+&lt;p&gt;Here is the specification of my LinkedList.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;LinkedList()&lt;/code&gt;, Create an empty LinkedList.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LinkedList(const LinkedList&amp;amp; list)&lt;/code&gt;, Create a LinkedList from another
+LinkedList &lt;code&gt;list&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LinkedList(const T&amp;amp; value)&lt;/code&gt;, Create a LinkedList whose first element
+is &lt;code&gt;value&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LinkedList(const T values[], size_t size)&lt;/code&gt;, Create a LinkedList from
+an array &lt;code&gt;values&lt;/code&gt; of size &lt;code&gt;size&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;const LinkedList&amp;amp; operator=(const LinkedList&amp;amp; list)&lt;/code&gt;, Support LinkedList
+assignment.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;~LinkedList()&lt;/code&gt;, Free all the space requested by the LinkedList.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;std::ostream&amp;amp; operator&amp;lt;&amp;lt;(std::ostream&amp;amp;, const LinkedList&amp;lt;T&amp;gt;&amp;amp;);&lt;/code&gt;,
+Output the LinkedList in the form &lt;strong&gt;[a, b, c &amp;hellip;]&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void append(const T&amp;amp; value)&lt;/code&gt;, Append an element &lt;code&gt;value&lt;/code&gt; to the LinkedList.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;const T&amp;amp; operator[](size_t index)&lt;/code&gt;, Access the element of the LinkedList,
+but it&amp;rsquo;s not random accessible.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void insert(size_t index, const T&amp;amp; value)&lt;/code&gt;, Insert an element &lt;code&gt;value&lt;/code&gt;
+in the position &lt;code&gt;index&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void remove(size_t index)&lt;/code&gt;, Remove the element in the position &lt;code&gt;index&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;size_t size()&lt;/code&gt;, Return the size of the LinkedList.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void reverse()&lt;/code&gt;, Reverse the whole LinkedList.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void sort()&lt;/code&gt;, Sort the whole LinkedList using merge sort.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There are some interview problems about LinkedList.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.1&lt;/strong&gt; Write code to remove duplicates from an unsorted linked list. How would
+you solve this problem if a temporary buffer is not allowed?&lt;/p&gt;
+
+&lt;p&gt;I solve it in the method &lt;code&gt;rm_dup()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.2&lt;/strong&gt; Implement an algorithm to find the nth to last element of a singly
+linked list.&lt;/p&gt;
+
+&lt;p&gt;I solve it in the method &lt;code&gt;nth_last()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/zhengyhn/hugo-blog-code/tree/master/singular-list&#34;&gt;Here&lt;/a&gt; is the code.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

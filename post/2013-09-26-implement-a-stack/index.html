@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Implement a stack &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="/zhengyhn.github.io/css/slim.css">
+<link rel="stylesheet" href="/zhengyhn.github.io/css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/zhengyhn.github.io">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="/zhengyhn.github.io/post/2013-09-26-implement-a-stack/">Implement a stack</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            <p>A stack is based on the Linked List. The most explicit feature of a stack
+is FILO(First in last out).</p>
+
+<p>Here is the specification of my Stack.</p>
+
+<ul>
+<li><code>Stack()</code>, Create an empty stack.</li>
+<li><code>Stack(const T&amp; value)</code>, Create a stack whose first element is <code>value</code>.</li>
+<li><code>Stack(const T values[], const size_t&amp; size)</code>, Create a stack from an
+array <code>values</code> whose size is <code>size</code>.</li>
+<li><code>Stack(const Stack&lt;T&gt;&amp; stack)</code>, Create a stack from another stack.</li>
+<li><code>const Stack&lt;T&gt;&amp; operator=(const Stack&lt;T&gt;&amp; stack)</code>, Support stack
+assignment.</li>
+<li><code>~Stack()</code>, Free all the spaces allocated by the stack.</li>
+<li><code>std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Stack&lt;T&gt;&amp; stack)</code>,
+Output the stack in the form <strong>[1 | 2 | 3]</strong>.</li>
+<li><code>const T&amp; top() const</code>, return the head element of the stack.</li>
+<li><code>size_t size() const</code>, return the size of the stack.</li>
+<li><code>void push(const T&amp; value)</code>, append the element <code>value</code> into the
+back of the stack.</li>
+<li><code>const T pop()</code>, remove and return the first element of the stack.</li>
+<li><code>Node&lt;T&gt; * ptop() const</code>, return the top pointer.</li>
+</ul>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/stack">Here</a> is the code.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="/zhengyhn.github.io/post/2013-09-12-implement-a-singular-linkedlist/"> Prev</a>  
+          <a class="btn next " href="/zhengyhn.github.io/post/2013-09-26-implement-the-sorting-algorithms/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="/zhengyhn.github.io/js/slim.js"></script>
+  <script src="/zhengyhn.github.io/js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

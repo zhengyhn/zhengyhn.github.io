@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Implement a bidirectional linked list &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="/zhengyhn.github.io/css/slim.css">
+<link rel="stylesheet" href="/zhengyhn.github.io/css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/zhengyhn.github.io">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="/zhengyhn.github.io/post/2013-09-21-implement-a-bidirectional-linked-list/">Implement a bidirectional linked list</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            <p>A bidirectional linked list is the same as a singular linked list except that
+there are two links between two nodes.</p>
+
+<p>Here is the specification of my BiLinkedList.</p>
+
+<ul>
+<li><code>BiLinkedList()</code>, Create an empty BiLinkedList.</li>
+<li><code>BiLinkedList(const BiLinkedList&amp; list)</code>, Create a BiLinkedList from another
+BiLinkedList <code>list</code>.</li>
+<li><code>BiLinkedList(const T&amp; value)</code>, Create a BiLinkedList whose first element
+is <code>value</code>.</li>
+<li><code>BiLinkedList(const T values[], size_t size)</code>, Create a BiLinkedList from
+an array <code>values</code> of size <code>size</code>.</li>
+<li><code>const BiLinkedList&amp; operator=(const BiLinkedList&amp; list)</code>, Support
+BiLinkedList assignment.</li>
+<li><code>~BiLinkedList()</code>, Free all the space requested by the BiLinkedList.</li>
+<li><code>std::ostream&amp; operator&lt;&lt;(std::ostream&amp;, const BiLinkedList&lt;T&gt;&amp;);</code>,
+Output the BiLinkedList in the form <strong>[a, b, c &hellip;]</strong>.</li>
+<li><code>void append(const T&amp; value)</code>, Append an element <code>value</code> to the
+BiLinkedList.</li>
+<li><code>const T&amp; operator[](size_t index)</code>, Access the element of the BiLinkedList,
+but it&rsquo;s not random accessible.</li>
+<li><code>void insert(size_t index, const T&amp; value)</code>, Insert an element <code>value</code>
+in the position <code>index</code>.</li>
+<li><code>void remove(size_t index)</code>, Remove the element in the position <code>index</code>.</li>
+<li><code>size_t size()</code>, Return the size of the BiLinkedList.</li>
+</ul>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/bidirectional-list">Here</a> is the code.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="/zhengyhn.github.io/post/2013-08-15-do-not-hide-inherited-names/"> Prev</a>  
+          <a class="btn next " href="/zhengyhn.github.io/post/2013-10-03-implement-a-binary-search-tree/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="/zhengyhn.github.io/js/slim.js"></script>
+  <script src="/zhengyhn.github.io/js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

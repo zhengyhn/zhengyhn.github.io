@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Understanding Encapsulation &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="/zhengyhn.github.io/css/slim.css">
+<link rel="stylesheet" href="/zhengyhn.github.io/css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/zhengyhn.github.io">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="/zhengyhn.github.io/post/2013-08-09-understanding-encapsulation/">Understanding Encapsulation</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            
+
+<p>Once I loved <em>C</em> very much and I thought it&rsquo;s the best programming language
+in the world. I used to argue that <em>C</em> can be used to implement the
+object-oriented design with <code>struct</code>. I used to argue that <code>private</code> and
+<code>public</code> is useless in <em>C++</em>. However, now I know I was wrong.</p>
+
+<h2 id="why-we-need-private:36f60f66079caf07ce5570082a998a02">Why we need private</h2>
+
+<p>It&rsquo;s related to a very important concept in C++, that is, <strong>encapsulation</strong>.</p>
+
+<p><strong>Encapsulation is not invisibility. It&rsquo;s maintainability.</strong></p>
+
+<p>Suppose a class is very popular and is used by many projects. For example,
+the <code>string</code> class. If every members in this class is <code>public</code>, the clients
+can use many interfaces to manipulate <code>string</code>. One day, when the <code>string</code>
+class is going to be modified(some members&rsquo; name change), then lots of clients
+have to modify there code. This is painful! If we declare some of the members
+<code>private</code> and change the name of the private members, only the implementations
+in the public member functions should be modified. None of the clients need to
+change their codes.</p>
+
+<p>Therefore, <strong>public means unchangable and public means unencapsulated</strong>.</p>
+
+<p>The public member functions should not be changed in the future. Since you don&rsquo;t
+know how your clients will use your class, don&rsquo;t expose the members that may be
+changed in the future to the clients.</p>
+
+<h2 id="prefer-non-member-non-friend-functions-to-member-functions:36f60f66079caf07ce5570082a998a02">Prefer non-member non-friend functions to member functions</h2>
+
+<p>Consider the following class.</p>
+
+<pre><code>class Person {
+public:
+    explicit Person()
+    { }
+    ~Person()
+    { }
+    void
+    say_age() const
+    { printf(&quot;%d\n&quot;, age); }
+    void
+    say_name() const
+    { printf(&quot;%s\n&quot;, name.c_str()); }
+private:
+    Person(const Person&amp;);
+    const Person&amp;
+    operator=(const Person&amp;);
+    int age;
+    std::string name;
+};
+</code></pre>
+
+<p>Somebody may want to use the functions together, so we add another member
+function.</p>
+
+<pre><code>class Person {
+public:
+    explicit Person()
+    { }
+    ~Person()
+    { }
+    void
+    say_age() const
+    { printf(&quot;%d\n&quot;, age); }
+    void
+    say_name() const
+    { printf(&quot;%s\n&quot;, name.c_str()); }
+    void
+    say() const
+    {
+        say_age();
+        say_name();
+    }
+private:
+    Person(const Person&amp;);
+    const Person&amp;
+    operator=(const Person&amp;);
+    int age;
+    std::string name;
+};
+</code></pre>
+
+<p>This is straightforward, especially for those Java and C# programmers. Every
+functions should be in a class and everything is object. It&rsquo;s obvious, right?</p>
+
+<p>However, e have another option, that is, using the non-member function.</p>
+
+<pre><code>class Person {
+public:
+    explicit Person()
+    { }
+    ~Person()
+    { }
+    void
+    say_age() const
+    { printf(&quot;%d\n&quot;, age); }
+    void
+    say_name() const
+    { printf(&quot;%s\n&quot;, name.c_str()); }
+private:
+    Person(const Person&amp;);
+    const Person&amp;
+    operator=(const Person&amp;);
+    int age;
+    std::string name;
+};
+
+void
+person_say(const Person&amp; p)
+{
+    p.say_age();
+    p.say_name();
+}
+</code></pre>
+
+<p>Which is better? It seems that they are the same.</p>
+
+<p>We should use the non-member function instead of the member function.</p>
+
+<p>As we all know, **the less the public member functions and the friend **
+ <strong>functions, the greater encapsulation is</strong>, since member functions and
+friend functions are the only interface that can access the private members.</p>
+
+<p>In this example, if we add another public member function, we decrease the
+encapsulation of the class since this member function can access the private
+members of the class. But if we use the non-member non-friend function, it
+won&rsquo;t have impact with the class because it&rsquo;s the function outside.</p>
+
+<p>Does it explain that <em>C++</em> is not so object-oriented? From Java or C#, those
+programmers will say that everything is object and classes are everywhere.
+However, they are wrong. Object-oriented princiles state that <strong>data should be</strong>
+<strong>encapsulated as possible</strong>. Therefore, prefering non-member non-friend
+functions is more <em>object-oriented</em>.</p>
+
+<p>Until now, I can say that I really understand the meaning of encapsulation and
+why it&rsquo;s so important in object-oriented programming.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="/zhengyhn.github.io/post/2013-07-22-some-reviews-about-c-plus-plus/"> Prev</a>  
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="/zhengyhn.github.io/js/slim.js"></script>
+  <script src="/zhengyhn.github.io/js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

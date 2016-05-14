@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 编程 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="/zhengyhn.github.io/css/slim.css">
+<link rel="stylesheet" href="/zhengyhn.github.io/css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="zhengyhn.github.io/tags/%E7%BC%96%E7%A8%8B/index.xml" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/zhengyhn.github.io">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="/zhengyhn.github.io/post/improve-code-readability/">improve code readability</a></h2>
+          <span class="post-date">May 27, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="/tags/%E7%BC%96%E7%A8%8B">编程</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				这是我读 &ldquo;the art of readable code&rdquo; 一书做的笔记 简化循环和逻辑 making control flow easy to read 下面的代码: if (length &gt;= 10) 要比: if (10 &lt;= length) 更容易看懂。这是很显然的。而在C语言中，有的人为了避免=与==的错误，常常把 代码写成: if (10 == length) 这种做法是为了避免错误的。其实在我看来，这明显是在掩饰自己区分不了=与==的 弱点，如果你真的理解赋值与相等的含义，就从来不会在比较相等的时候写成=，以 我使用C语言这么多年来，我从来没有犯过这种错误。上面的代码对于一个正常人来 说，很难理解，因为程序员首先是一个人，自然的语言是“长度等于10”，而不是 “10等于长度”，所以为了使代码更可读，我建议使用下面这种: if (lenght == 10) 上面的是有数字，有常量的比较，下面这个: while (bytes_received &lt; bytes_expected) 要比: while (bytes_expected &gt; bytes_received) 更容易看懂，因为第一个的阅读顺序符合人类的自然语言。 对于三目运算符?:，当表达式很长时不要使用。 不要使用do/while。当你阅读do/while的时候，因为你刚开始不知道条件，你会 把循环的主体阅读两次。我几乎不写do/while，而且我非常讨厌看do/while代码。 尽量不要使用嵌套的if/else，想尽办法使得只有一个层次。 breaking down giant expressions 利用宏来简化代码。看下面的例子: void AddStats(const Stats &amp;add_from, Stats *add_to) { add_to-&gt;set_total_memory(add_from.total_memory() + add_to-&gt;total_memory()); add_to-&gt;set_free_memory(add_from.free_memory() + add_to-&gt;free_memory()); add_to-&gt;set_swap_memory(add_from.swap_memory() + add_to-&gt;swap_memory()); } 不管是谁，看到这样的代码都会头晕，但是你会发现其实它们都在做同一件事: add_to-&gt;set_XXX(add_from.XXX + add_to-&gt;XXX); 于是，通过定义带参数的宏，可以简化成这样: void AddStats(const Stats &amp;add_from, Stats *add_to) { #define ADD_FIELD(field) \ add_to-&gt;set_#field(add_from.#field() + add_to-&gt;#field()) ADD_FIELD(total_memory); ADD_FIELD(free_memory); ADD_FIELD(swap_memory); } 这样不仅视觉上看起来舒服，而且理解起来非常容易。 variables and readability 可去除一些多余的变量 尽量缩小变量的范围，即使是全局变量，这样才能让程序更清晰。 在C++中，有这样一个例子: int size = list.size(); if (size &gt; 0) { cout &lt;&lt; size &lt;&lt; endl; } 假设后面再也没有用到size了，但是阅读代码的人会一直把这个变量记住，因为 他以为后面还会用到这个变量。我们可以把它改成这样: if ((int size = list.size()) &gt; 0) { cout &lt;&lt; size &lt;&lt; endl; } 当然，在C语言中，这需要C99的支持，当读者看完这段代码时，就会忘记这个变量， 因为后面已经用不上了。 作者是这样说的，但是我觉得这不太可能，因为写代码的人不可能预知未来，它总是 喜欢先把变量缓存起来，说不定以后还会用到，所以我不太赞成这种写法，除非是非常 简单，很明显后面用不上的变量。 尽量使变量只能改变一次(prefer write-once varaibles) 改善外层代码 packing informations into names choose specific words 书上说到getPage(url);这个函数的名字，根据我以前的看法，这绝对是一个好名字， 但是作者却批评这种命名方式。作者说，get太模糊了，我们看不出来它是从缓存中get还是 从数据库中get，还是从互联网上get。如果是从互联网上get,则应该使用fetchPage或者 downloadPage()。我觉得这个说法非常好，我以后给变量或者函数起名字的时候也要注意 这方面的东西了。 avoid generic names like tmp and retval 作者批评了tmp,retval,foo这种词语，虽然我没用过retval和foo这种奇怪的名字，但是 我却用过tmp这东西，后来想了一下，tmp这种东西的确看不出来任何含义，就算时间紧迫，我 也不会用tmp这种变量了。但是，就像作者所说的一样，对于下面的代码: void swap(int *a,int *b) { int tmp = *a; *a = b; *b = tmp; } 这时候tmp则用得恰到好处，tmp在这里生命周期非常短，而且它的作用刚好是作为临时来用的。 对于计数器变量，我们经常使用i,j,k,x,y,z,a,b,c什么的，但是，正如作者所说，当有 多个计数器变量时，这种东西就经常会让人很难看懂了。看下面的例子: for(int i = 0; i &lt; N; i++){ for(int j = 0; j &lt; M; j++){ for(int k = 0; k &lt; C; k++){ if(school[i].teacher[k] == user[j]){ ...
+				<a class="read-more" href="/zhengyhn.github.io/post/improve-code-readability/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+</div>
+    </div>
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="/zhengyhn.github.iojs/slim.js"></script>
+  
+
+</body>
+
+</html>

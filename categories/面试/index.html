@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 面试 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="/zhengyhn.github.io/css/slim.css">
+<link rel="stylesheet" href="/zhengyhn.github.io/css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="zhengyhn.github.io/categories/%E9%9D%A2%E8%AF%95/index.xml" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/zhengyhn.github.io">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+         
+        <div class="post">
+          <h2 class="post-title"><a href="/zhengyhn.github.io/post/c-plus-plus-interview-review/">c plus plus interview review</a></h2>
+          <span class="post-date">May 27, 2016</span>
+		  
+			<span class="post-tags">
+		  	
+			          #<a href="/tags/%E9%9D%A2%E8%AF%95">面试</a>&nbsp;
+		  	
+		    </span>
+		  
+		  
+		  	<div class="summary">
+				这是我看了《C笔试面试宝典》一书的笔记 new, delete, malloc, free的关系 new和delete是C++的 运算符 ，new调用构造函数，delete调用析构函数。 malloc和delete是C运行库的函数。 delete和delete[]的区别 delete只会调用一次析构函数，delete[]则会调用每个成员的析构函数。 写程序一测: #include &lt;iostream&gt; #include &lt;string&gt; class Computer { private: std::string name; public: Computer(); ~Computer(); }; Computer::Computer() { } Computer::~Computer() { } int main(int argc, char *argv[]) { Computer *cs = new Computer[5]; Computer *c = new Computer; int *integers = new int[5]; int *i = new int; delete[] i; delete[] integers; delete[] cs; delete[] c; return 0; } 发现编译可以通过，但是运行会Segment Fault。gdb一下，发现在delete[] c时出错了。 原因是，对于基本数据类型，delete[]能代替delete，对于自定义的类型，则要严格区分， new[]完之后用delete[]释放，new完之后用delete释放。 继承和组合的优缺点 引用自 这里 。 组合 关 系 继 承 关 系 优点：不破坏封装，整体类与局部类之间松耦合，彼此相对独立 缺点：破坏封装，子类与父类之间紧密耦合，子类依赖于父类的实现，子类缺乏独立性 优点：具有较好的可扩展性 缺点：支持扩展，但是往往以增加系统结构的复杂度为代价 优点：支持动态组合。在运行时，整体对象可以选择不同类型的局部对象 缺点：不支持动态继承。在运行时，子类无法选择不同的父类 优点：整体类可以对局部类进行包装，封装局部类的接口，提供新的接口 缺点：子类不能改变父类的接口 缺点：整体类不能自动获得和局部类同样的接口 优点：子类能自动继承父类的接口 缺点：创建整体类的对象时，需要创建所有局部类的对象 优点：创建子类的对象时，无须创建父类的对象 引用 不能建立数组的引用。引用没有定义新的变量，不占用内存空间。 关联，聚合和组合 关联是两个类的一般性关联，如老师和学生。 聚合是has-a关系，聚合类不需要对被聚合类负责，用空的菱形表示，实现如下: class A { }; class B { A *a; }; 组合是contains-a关系，组合类和被组合类有相同的生命周期，组合类要对被组合类负责， 用实的菱形表示，实现如下: class A { }; class B { A a; }; 初始化列表 当类中含有const和引用成员变量时，基类构造函数只能使用初始化列表来初始化， 但是 const int&amp; a; 这种就可以用赋值的方法。 类型安全 c++不是类型安全的，因为不同类型的指针之间可以强制转换。 空类 当一个类没有任何成员时，大小是1byte，这个字节是用来区分这个类的不同对象的。 逻辑地址 to 物理地址 给出的逻辑地址格式是这样的, 段地址:段内偏移地址，那么真实的地址（物理地址） 是： 段地址 * 10H + 段内偏移地址。当然，这只适合于Intel 8086。 4种类型转换 const_cast，把const的变量变成非const的，用法: 新变量 = const_cast&lt;类型&gt;(变量); static_cast, 用于基本类型的转换，不能用于无关类型（不是基类与子类）之间的 指针的转换 dynamic_cast, 运行时会有安全检查，用于基类与子类之间的转换，常用于多态 reinterpret_cast，重新解释类型，没有转换，常用于函数指针的转换。 数组作参数 当数组作为参数传递时，它会退化成同类型的指针。 override和隐藏 override，基类中必须要有virtual。 如果基类函数名没有virtual，子类函数与父类函数签名一样，则称隐藏。 不管基类函数名有没有virtual，子类函数名一样，签名不一样，则也称隐藏。 求两个数中的最大的那个数 不能用判断(if, :?, switch)。答案是用abs函数: ((a + b) + abs(a - b)) / 2 而我觉得这种方法不好，因为用到了库函数，库函数里面还可能也要判断，其实是换汤不换药。 我问了同学，他想到了下面的方法，我觉得很好: #include &lt;stdio.h&gt; int max(int a, int b); int main(int argc, char *argv[]) { int a = 9999, b = 23; printf(&quot;%d\n&quot;, max(a, b)); return 0; } int max(int a, int b) { int c = a - b; int flag = (unsigned)c &gt;&gt; (sizeof(int) * 8 - 1); return (1 - flag) * a + flag * b; } 根据负数与正数的符号位的不一样，而得出那个数。 打印源文件的文件名和当前行号 在C/C++中，可以用__FILE__和__LINE__，由编译器来识别。 main函数执行完之后还能执行代码？ 居然是可以的！ &lt;stdlib.h&gt; 中有一个奇葩的库函数叫on_exit，在linux下的man page中， 定义如下: int on_exit(void (*function)(int , void *), void *arg); 传进去一个函数指针，和一个参数，这个函数必须是2个参数，分别是int和void*类型的， 可以调用多个，以LIFO形式执行， on_exit在任何地方调用都只会在main函数结束之后才会执行。 测试一下: #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; void one(int status, void *arg); void two(int status, void *arg); int main(int argc, char *argv[]) { printf(&quot;top\n&quot;); on_exit(two, NULL); on_exit(one, NULL); printf(&quot;It may be the last one.\n&quot;); return 0; } void one(int status, void *arg) { printf(&quot;one\n&quot;); } void two(int status, void *arg) { printf(&quot;two\n&quot;); } 书上说的是 _onexit ，根据我找的资料，这函数应该只有在windows的VC中才有。 判断是由C编译器编译还是由C++编译器编译 使用一个宏 __cplusplus: #ifdef __cplusplus ...
+				<a class="read-more" href="/zhengyhn.github.io/post/c-plus-plus-interview-review/">&hellip;</a>
+			</div>
+		  
+        </div>
+        
+      </div>
+      <div class="pagination">
+   
+</div>
+    </div>
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="/zhengyhn.github.iojs/slim.js"></script>
+  
+
+</body>
+
+</html>

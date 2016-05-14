@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> More consts enums inlines and less #defines &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="/zhengyhn.github.io/css/slim.css">
+<link rel="stylesheet" href="/zhengyhn.github.io/css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/zhengyhn.github.io">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="/zhengyhn.github.io/post/2013-07-23-more-consts-enums-inlines-and-less-defines/">More consts enums inlines and less #defines</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            
+
+<p>This is an old topic.</p>
+
+<h1 id="for-constants:05b5f8e3c153459373412ad15be01d74">For constants</h1>
+
+<p>Consider a macro below.</p>
+
+<pre><code>#define PI 3.14
+</code></pre>
+
+<p>There are several drawbacks when using a macro.</p>
+
+<ul>
+<li><p>It&rsquo;s hard to debug.As we all know, the macros are resolved by the
+preprocessor and the compiler know nothing about them.When you get an error
+when compiling the program, the error message may refer to <code>3.14</code> but not
+<code>PI</code> because <code>PI</code> is not in the symbol table.</p></li>
+
+<li><p>It will result in more object codes.When the preprocessor replace <code>PI</code>
+with <code>3.14</code>, there will be several copy of 3.14 in the object code.</p></li>
+</ul>
+
+<p>If we use the <strong>constant</strong> instead of the macro,</p>
+
+<pre><code>const double Pi = 3.14;
+</code></pre>
+
+<p>it has the following advantages, respectively.</p>
+
+<ul>
+<li><p>It&rsquo;s easy to debug, since the constant is in the symble table.</p></li>
+
+<li><p>It has only one copy in the object code.The other place it appears is just
+its references.</p></li>
+</ul>
+
+<p>But I think it has disadvantages too.</p>
+
+<p>When replacing lots of <strong>macros</strong> with <strong>constant</strong>, there will be
+lots of entries in the symbol table.And it will make the object files or
+executable files larger.</p>
+
+<p>When defining a constant string, we may want to do this.</p>
+
+<pre><code>const char *Name = &quot;Tom&quot;;
+</code></pre>
+
+<p>But this is not effecient.</p>
+
+<p>If defined above, the value &ldquo;Tom&rdquo; cannot be changed, but what the pointer
+<code>Name</code> points to can be changed.So the compiler will allocate a piece of
+memory for the pointer <code>Name</code> in the normal data segment.Moreover, when
+the linker starts working, it need to perform some relocations for <code>Name</code>.</p>
+
+<p>So, it&rsquo;s better to be defined as follows.</p>
+
+<pre><code>const char * const Name = &quot;Tom&quot;;
+</code></pre>
+
+<p>or
+    const char Name[] = &ldquo;Tom&rdquo;;</p>
+
+<p>Now the compiler will put <code>Name</code> in the read only data segment and the linker
+needn&rsquo;t performing relocations.</p>
+
+<p>Alternatively, we can use this.</p>
+
+<pre><code>const std::string Name(&quot;Tom&quot;);
+</code></pre>
+
+<h1 id="for-class-specific-constants:05b5f8e3c153459373412ad15be01d74">For class-specific constants</h1>
+
+<p>Sometimes we need a constant member in the class, for example.</p>
+
+<pre><code>class Hand {
+private:
+    static const int NumFingers = 5;
+    int fingers[NumFingers];
+};
+</code></pre>
+
+<p>In order to ensure there is only one copy of the constant, it must be
+<code>static</code>.</p>
+
+<p>However, <code>static const int NumFingers = 5;</code> is just a <strong>declaration</strong> for
+<code>NumFinger</code>.Why this can be compiled with no error message?Everything
+should have its definition, does it?However, the class-specific constants
+that are static and with integral type(<code>int</code>, <code>char</code>, <code>bool</code>,&hellip;) is
+an exception.</p>
+
+<p>You can even use the constant.</p>
+
+<pre><code>#include &lt;cstdio&gt;
+
+class Hand {
+ public:
+    static const int NumFingers = 5;
+    int fingers[NumFingers];
+};
+
+int main(int argc, char *argv[])
+{
+    printf(&quot;%d\n&quot;, Hand::NumFingers);
+
+    return 0;
+}
+</code></pre>
+
+<p>But when you want to use the address of <code>NumFingers</code>, you must put the
+definition of <code>NumFingers</code> in the implemetation file of the class.</p>
+
+<pre><code>#include &lt;cstdio&gt;
+
+class Hand {
+ public:
+    static const int NumFingers = 5;
+    int fingers[NumFingers];
+};
+
+const int Hand::NumFingers;
+
+int main(int argc, char *argv[])
+{
+    printf(&quot;%p\n&quot;, &amp;Hand::NumFingers);
+
+    return 0;
+}
+</code></pre>
+
+<p>Remember, there is no need to put <code>static</code> at the begining of the definition.</p>
+
+<p>We know that the size of the array <code>finger</code> is just the value of the static
+constant <code>NumFingers</code>.But there is another way to do that.</p>
+
+<pre><code>class Hand {
+ public:
+    enum {NumFingers = 5};
+    int fingers[NumFingers];
+};
+</code></pre>
+
+<p>That is fine, too.</p>
+
+<h1 id="for-functions:05b5f8e3c153459373412ad15be01d74">For functions</h1>
+
+<p>Macros like this</p>
+
+<pre><code>#define MAX(a, b) ((a) &gt; (b) ? (a) : (b))
+</code></pre>
+
+<p>can result in many painful problems.</p>
+
+<ul>
+<li><p>First, you have to remember parenthesizing all the arguments(We all know
+why).</p></li>
+
+<li><p>There are problems when calling it like this <code>MAX(++a, b)</code>(It&rsquo;s easy to
+think about it).</p></li>
+</ul>
+
+<p>If using <code>inline</code> and <code>template</code>, we can solve all this problems.</p>
+
+<pre><code>#include &lt;cstdio&gt;
+
+template&lt;typename T&gt;
+inline T
+max(const T&amp; a, const T&amp; b)
+{
+    return a &gt; b ? a : b;
+}
+
+int
+main(int argc, char *argv[])
+{
+    char a = 'a', b = 'b';
+    int c = 1, d = 2;
+
+    printf(&quot;%c\n&quot;, max(a, b));
+    printf(&quot;%d\n&quot;, max(c, d));
+
+    return 0;
+}
+</code></pre>
+
+<p>However, I don&rsquo;t think macros are useless and should be replaced by const,
+enum and inline.In a way, macro can decrease the time of compiling and
+linking.And there are still lots of code that using macros.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="/zhengyhn.github.io/post/2013-07-26-initialized-before-used/"> Prev</a>  
+          <a class="btn next " href="/zhengyhn.github.io/post/2013-09-25-my-c-plus-plus-coding-style/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="/zhengyhn.github.io/js/slim.js"></script>
+  <script src="/zhengyhn.github.io/js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

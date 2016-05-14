@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Some reviews about C plus plus &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="/zhengyhn.github.io/css/slim.css">
+<link rel="stylesheet" href="/zhengyhn.github.io/css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/zhengyhn.github.io">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="/zhengyhn.github.io/post/2013-07-22-some-reviews-about-c-plus-plus/">Some reviews about C plus plus</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            
+
+<h1 id="declaration-and-definition:ce9fbf0fe0f5039fa72ecbca9216ee13">Declaration and Definition</h1>
+
+<p>I have already known the difference between <strong>declaration</strong> and <strong>definion</strong>,
+but now I find that my understanding is not complete.</p>
+
+<p><strong>Declaration</strong> just tells the compiler about the name and the type of
+something.It&rsquo;s very common about the declaration of <em>objects</em> and <em>functions</em>.</p>
+
+<pre><code>extern int a;
+
+int max(int a, int b);
+</code></pre>
+
+<p>However, I never think about the declaration of <em>class</em>.Recently, I have to
+view some codes in a large project and I have found many of these declarations.</p>
+
+<pre><code>class Option;
+class Parameter;
+</code></pre>
+
+<p>Additionally, there are many declarations of the <em>template class</em>.</p>
+
+<pre><code>template&lt;typename T&gt;
+class Swap;
+</code></pre>
+
+<p>Another interesting thing is that the official C++ definition of
+<em>function signature</em> excludes the return type.I think this is strange and I
+will consider it, anyway.</p>
+
+<p><strong>Definition</strong> gives the details of something to the compiler.In the past, I
+hold the opinion that <em>definition</em> always be related to <em>memory</em>.In fact, it is
+not allways.
+- For object, the definition tell the compiler about the memory asigned for the
+object.
+- For function or function template, the definition provides the function body.
+- For class or class template, the definition lists the members of the class.</p>
+
+<p>For example:</p>
+
+<pre><code>int a;
+
+int max(int a, int b)
+{
+    return a &gt; b ? a : b;
+}
+
+class Option {
+public:
+    Option();
+    ~Option();
+    ...
+};
+</code></pre>
+
+<h1 id="defaul-constructor:ce9fbf0fe0f5039fa72ecbca9216ee13">Defaul constructor</h1>
+
+<p>I found I can&rsquo;t tell whether a constructor is a <strong>default constructor</strong> or not.
+But now, I know.A <strong>default constructor</strong> is a constructor that can be called
+without any arguments.That is, either no parameters or every parameter is
+initialized.</p>
+
+<p>The following are default constructors.</p>
+
+<pre><code>Option();
+explicit Option(bool short = true);
+</code></pre>
+
+<p>And this one is not a default constructor.</p>
+
+<pre><code>explicit Option(bool short);
+</code></pre>
+
+<p>What the hell <strong>explicit</strong> is doing here?I have never used this reserved word
+even if I have learned C++ for several years.But this guy, <em>explicit</em>, is of
+great importance.</p>
+
+<p>Placing <em>explicit</em> before the constructor can prevent the objects of the class
+being used to perform implicit type conversions.Obviously, they can be used
+for explicit type conversions.</p>
+
+<p>For example, if we have two classes and a function.</p>
+
+<pre><code>class Dog {
+    explicit Dog();
+    ...
+}
+
+Dog aDog;
+Cat aCat;
+
+void kill(Dog d);
+</code></pre>
+
+<p>Now call the <code>kill</code> function passing <code>aDog</code> as parameter.
+    kill(aDog);    // No problem.</p>
+
+<p>If with the <code>explicit</code> reserved word and call the <code>kill</code> function passing
+<code>aCat</code> as parameter, it will be error since it prevents implicit type
+conversions.</p>
+
+<pre><code>kill(aCat);    // Error, prevent implicit conversion.
+</code></pre>
+
+<p>But if without the <code>explicit</code> reserved word and call the <code>kill</code> function
+passing <code>aCat</code> as parameter, it will lead the compiler to perform unexpected
+type conversions.So the policy is:</p>
+
+<p><strong>Always declare the constructor as explicit.</strong></p>
+
+<h1 id="copy-constructor-and-copy-assignment-operator:ce9fbf0fe0f5039fa72ecbca9216ee13">Copy constructor and copy assignment operator</h1>
+
+<p>I have already known that this</p>
+
+<pre><code>Parameter p1;
+</code></pre>
+
+<p>will invoke the <em>default constructor</em> and this</p>
+
+<pre><code>Parameter p2(p1);
+</code></pre>
+
+<p>will invoke the <em>copy constructor</em> and this</p>
+
+<pre><code>p1 = p2;
+</code></pre>
+
+<p>will invoke the <em>copy assignment operator</em>, but I have never known that this</p>
+
+<pre><code>Parameter p3 = p2;
+</code></pre>
+
+<p>will not invoke the <em>copy assignment operator</em> but the <em>copy constructor</em>.</p>
+
+<p>This amazes me very much.But now I can distinguish it easily.</p>
+
+<p>If a new object is being defined, invoke the <em>copy constructor</em>.Otherwise,
+invoke the <em>copy assignment operator</em> since it&rsquo;s just the <strong>asignment</strong>.</p>
+
+<h1 id="some-common-sense:ce9fbf0fe0f5039fa72ecbca9216ee13">Some common sense</h1>
+
+<ul>
+<li>TR1, Technical Report 1, is a specification for new functionality in
+C++ standard library.</li>
+</ul>
+
+<p>This really deepens my understanding of C plus plus and now I am very
+interested in this great programming language.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="/zhengyhn.github.io/post/2013-08-25-some-interview-questions-about-array-and-string/"> Prev</a>  
+          <a class="btn next " href="/zhengyhn.github.io/post/2013-08-09-understanding-encapsulation/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="/zhengyhn.github.io/js/slim.js"></script>
+  <script src="/zhengyhn.github.io/js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>
