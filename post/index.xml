@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Hank&#39;s Blog</title>
+    <link>zhengyhn.githuh.io/post/</link>
+    <description>Recent content in Posts on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 May 2016 16:35:19 +0800</lastBuildDate>
+    <atom:link href="zhengyhn.githuh.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Cpp Resource Management</title>
+      <link>/zhengyhn.githuh.io/post/cpp-resource-management/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>/zhengyhn.githuh.io/post/cpp-resource-management/</guid>
+      <description>
+
+&lt;p&gt;I always forget freeing a memory that allocated from the heap.And I always
+forget closing the file handler.&lt;/p&gt;
+
+&lt;p&gt;Resources include file descriptors, mutex locks, fonts, brushes, database
+connections and network sockets.&lt;/p&gt;
+
+&lt;p&gt;I think less programmers can remember closing a file handler, especially
+in a large project.&lt;/p&gt;
+
+&lt;p&gt;Nowadays, many programming languages have the garbage collection function.
+In C++, since the destructor will be automatically called, we can release
+the resources automatically if we put the resource into an object.&lt;/p&gt;
+
+&lt;p&gt;How can do that?Use the &lt;em&gt;smart pointer&lt;/em&gt;:&lt;code&gt;std::auto_ptr&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;memory&amp;gt;
+
+int
+main(int argc, char **argv)
+{
+    int *num = NULL;
+    {
+        num = new int();
+        std::auto_ptr&amp;lt;int&amp;gt; ap(num);
+    }
+    // delete num;
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If trying to delete num after the block, that will be a double free error.&lt;/p&gt;
+
+&lt;p&gt;Reference from &lt;a href=&#34;http://www.cplusplus.com/reference/memory/auto_ptr/&#34;&gt;cplusplus.com&lt;/a&gt;, &lt;code&gt;auto_ptr&lt;/code&gt; is deprecated in C++11 and is replaced by &lt;code&gt;unique_ptr&lt;/code&gt;.
+But they are similar.&lt;/p&gt;
+
+&lt;p&gt;However, multiple &lt;code&gt;auto_ptr&lt;/code&gt; cannot contain the same object.&lt;/p&gt;
+
+&lt;p&gt;Here is the test program.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;memory&amp;gt;
+
+int
+main(int argc, char **argv)
+{
+    int *num = NULL;
+    {
+        num = new int();
+        std::auto_ptr&amp;lt;int&amp;gt; ap1(num);
+        std::auto_ptr&amp;lt;int&amp;gt; ap2(ap1);
+
+        printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap1);
+        ap1 = ap2;
+        printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap2);
+    }
+    // delete num;
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here is the gdb debug output information.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Temporary breakpoint 1, main (argc=1, argv=0x7fffffffe6e8) at test.cpp:7
+7       int *num = NULL;
+(gdb) n
+9       num = new int();
+(gdb) n
+10      std::auto_ptr&amp;lt;int&amp;gt; ap1(num);
+(gdb) n
+11      std::auto_ptr&amp;lt;int&amp;gt; ap2(ap1);
+(gdb) p ap1
+$1 = {_M_ptr = 0x601010}
+(gdb) p ap2
+$2 = {_M_ptr = 0x7fff00000001}
+(gdb) n
+13      printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap1);
+(gdb) p ap1
+$3 = {_M_ptr = 0x0}
+(gdb) p ap2
+$4 = {_M_ptr = 0x601010}
+(gdb) n
+0x7fffffffe5e0
+14      ap1 = ap2;
+(gdb) p ap1
+$5 = {_M_ptr = 0x0}
+(gdb) p ap2
+$6 = {_M_ptr = 0x601010}
+(gdb) n
+15      printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap2);
+(gdb) p ap1
+$7 = {_M_ptr = 0x601010}
+(gdb) p ap2
+$8 = {_M_ptr = 0x0}
+(gdb) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But there are another smart pointer that can do this.It&amp;rsquo;s the
+&lt;code&gt;std::tr1::shared_ptr&lt;/code&gt;.Mutiple shared_ptr can contain the same object.&lt;/p&gt;
+
+&lt;p&gt;The testing program is as follow.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;tr1/memory&amp;gt;
+
+int
+main(int argc, char **argv)
+{
+    int *num = NULL;
+    {
+        num = new int();
+        std::tr1::shared_ptr&amp;lt;int&amp;gt; ap1(num);
+        std::tr1::shared_ptr&amp;lt;int&amp;gt; ap2(ap1);
+
+        printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap1);
+        ap1 = ap2;
+        printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap2);
+    }
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And the gdb debug information is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Temporary breakpoint 1, main (argc=1, argv=0x7fffffffe6e8) at test.cpp:7
+7       int *num = NULL;
+(gdb) n
+9       num = new int();
+(gdb) n
+10      std::tr1::shared_ptr&amp;lt;int&amp;gt; ap1(num);
+(gdb) n
+11      std::tr1::shared_ptr&amp;lt;int&amp;gt; ap2(ap1);
+(gdb) n
+13      printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap1);
+(gdb) p ap1
+$1 = std::tr1::shared_ptr (count 2, weak 0) 0x602010
+(gdb) p ap2
+$2 = std::tr1::shared_ptr (count 2, weak 0) 0x602010
+(gdb) n
+0x7fffffffe5d0
+14      ap1 = ap2;
+(gdb) n
+15      printf(&amp;quot;%p\n&amp;quot;, &amp;amp;ap2);
+(gdb) p ap1
+$3 = std::tr1::shared_ptr (count 2, weak 0) 0x602010
+(gdb) p ap2
+$4 = std::tr1::shared_ptr (count 2, weak 0) 0x602010
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can see that both of &lt;code&gt;ap1&lt;/code&gt; and &lt;code&gt;ap2&lt;/code&gt; point to the same object.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;auto_ptr&lt;/code&gt; and &lt;code&gt;shared_ptr&lt;/code&gt; use &lt;code&gt;delete&lt;/code&gt; but not &lt;code&gt;delete[]&lt;/code&gt;,
+so they don&amp;rsquo;t support array.But the &lt;code&gt;unique_ptr&lt;/code&gt; support.&lt;/p&gt;
+
+&lt;p&gt;Sometimes, the resource may be a mutex, and we don&amp;rsquo;t want to remember
+unlocking the mutex every time we lock it.So a resource management object
+may be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;cstdio&amp;gt;
+
+typedef int Mutex;
+
+void
+lock(Mutex *p)
+{
+    printf(&amp;quot;Locking...\n&amp;quot;);
+}
+
+void
+unlock(Mutex *p)
+{
+    printf(&amp;quot;Unlocked\n&amp;quot;);
+}
+
+class Lock {
+public:
+    explicit Lock(Mutex *p)
+        :pMutex(p)
+    {
+        lock(pMutex);
+    }
+    ~Lock()
+    {
+        unlock(pMutex);
+    }
+private:
+    Mutex *pMutex;
+};
+
+int
+main(int argc, char **argv)
+{
+    Mutex m;
+    {
+        Lock ml(&amp;amp;m);
+    }
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;However, when we copy the &lt;code&gt;Lock&lt;/code&gt; object, problems appear.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Lock ml2(ml);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The default copy constructor will directly copy the pointer &lt;code&gt;pMutex&lt;/code&gt; to
+the target object.So we should let the object uncopyable.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;private:
+Lock(const Lock&amp;amp;);
+Lock&amp;amp;
+operator=(const Lock&amp;amp;);
+
+Mutex *pMutex;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Multiple objects can use the same resource, so the resource may be existed
+until the last object has been destroyed.The &lt;code&gt;tr1::shared_ptr&lt;/code&gt; provide a
+&lt;code&gt;deleter&lt;/code&gt; and its &lt;strong&gt;shared ability&lt;/strong&gt; to solve this problem.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Lock {
+public:
+    explicit Lock(Mutex *p)
+        :pMutex(p, unlock)
+    {
+        lock(pMutex.get());
+    }
+private:
+    Lock(const Lock&amp;amp;);
+    Lock&amp;amp;
+    operator=(const Lock&amp;amp;);
+
+    std::tr1::shared_ptr&amp;lt;Mutex&amp;gt; pMutex;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;provide-access-to-raw-resources:29d34860a4144be93b1626862a2c23af&#34;&gt;Provide access to raw resources&lt;/h2&gt;
+
+&lt;p&gt;Sometimes we may only want to access the raw resource but the object that
+contains the resource.For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;tr1/memory&amp;gt;
+
+typedef int Mutex;
+
+static Mutex *
+createMutex()
+{
+    static Mutex *p = new Mutex();
+
+    return p;
+}
+
+int
+main(int argc, char **argv)
+{
+    std::tr1::shared_ptr&amp;lt;Mutex&amp;gt; pMutex;
+
+    printf(&amp;quot;%d\n&amp;quot;, pMutex);
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Therefore, we must provide a method to access the raw resource.Like this.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    printf(&amp;quot;%d\n&amp;quot;, pMutex.get());
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are two ways, one is explicit and the other is implicit.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class MutexManager {
+public:
+    explicit MutexManager(Mutex* p)
+        :p_(p)
+    { }
+    ~MutexManager()
+    {
+        delete p_;
+    }
+    Mutex
+    get() const
+    {
+        return *p_;
+    }
+private:
+    Mutex *p_;
+};
+
+int
+main(int argc, char **argv)
+{
+    MutexManager mm(createMutex());
+
+    printf(&amp;quot;%d\n&amp;quot;, mm.get());
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This one above is exciplit conversion.And this one below is implicit.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class MutexManager {
+public:
+    explicit MutexManager(Mutex* p)
+        :p_(p)
+    { }
+    ~MutexManager()
+    {
+        delete p_;
+    }
+    operator Mutex() const
+    {
+        return *p_;
+    }
+private:
+    Mutex *p_;
+};
+
+void
+print(Mutex m)
+{
+    printf(&amp;quot;%d\n&amp;quot;, m);
+}
+
+int
+main(int argc, char **argv)
+{
+    MutexManager mm(createMutex());
+
+    print(mm);
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s obviously that the explicit method is safer and the implicit method is
+more convenient for clients.&lt;/p&gt;
+
+&lt;h2 id=&#34;keep-new-and-delete-in-the-same-form:29d34860a4144be93b1626862a2c23af&#34;&gt;Keep new and delete in the same form&lt;/h2&gt;
+
+&lt;p&gt;We all know that the following code is wrong.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;std::string *str = new std::string[10];
+delete str;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We should use &lt;code&gt;delete []str;&lt;/code&gt; instead of &lt;code&gt;delete str;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;But how about this?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
+
+typedef std::string Lines[4];
+
+int
+main(int argc, char **argv)
+{
+    std::string *p = new Lines;
+    delete p;
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If let me delete the pointer p, I will use this &lt;code&gt;delete p;&lt;/code&gt;.But I am wrong.
+I shouldn&amp;rsquo;t look at the left of the pointer, that is, &lt;code&gt;std::string&lt;/code&gt;.I should
+look at the right of the &lt;code&gt;new&lt;/code&gt;, that is, &lt;code&gt;Lines&lt;/code&gt;.So, in this case, we
+should use &lt;code&gt;delete []p;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Avoid typedef for array types, use &lt;code&gt;vector&lt;/code&gt; instead.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
