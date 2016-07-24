@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Implement a circular linked list &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="//css/slim.css">
+<link rel="stylesheet" href="//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="/post/2013-09-21-implement-a-circular-linked-list/">Implement a circular linked list</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            <p>A circular linked list is the same as a singular linked list except that
+there last node points to the first node.</p>
+
+<p>Here is the specification of my CiLinkedList.</p>
+
+<ul>
+<li><code>CiLinkedList()</code>, Create an empty CiLinkedList.</li>
+<li><code>CiLinkedList(const CiLinkedList&amp; list)</code>, Create a CiLinkedList from another
+CiLinkedList <code>list</code>.</li>
+<li><code>CiLinkedList(const T&amp; value)</code>, Create a CiLinkedList whose first element
+is <code>value</code>.</li>
+<li><code>CiLinkedList(const T values[], size_t size)</code>, Create a CiLinkedList from
+an array <code>values</code> of size <code>size</code>.</li>
+<li><code>const CiLinkedList&amp; operator=(const CiLinkedList&amp; list)</code>, Support
+CiLinkedList assignment.</li>
+<li><code>~CiLinkedList()</code>, Free all the space requested by the CiLinkedList.</li>
+<li><code>std::ostream&amp; operator&lt;&lt;(std::ostream&amp;, const CiLinkedList&lt;T&gt;&amp;);</code>,
+Output the CiLinkedList in the form <strong>[a, b, c &hellip;]</strong>.</li>
+<li><code>const T&amp; operator[](size_t index)</code>, Access the element of the CiLinkedList,
+but it&rsquo;s not random accessible.</li>
+<li><code>size_t size()</code>, Return the size of the CiLinkedList.</li>
+<li><code>rm_dup()</code>, Remove duplicate elements int the CiLinkedList.</li>
+</ul>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/circular-list">Here</a> is the code.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="/post/2013-10-03-implement-a-binary-search-tree/"> Prev</a>  
+          <a class="btn next " href="/post/2013-09-25-implement-a-queue/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="//js/slim.js"></script>
+  <script src="//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

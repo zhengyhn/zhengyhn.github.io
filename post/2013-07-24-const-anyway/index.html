@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Const anyway! &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="//css/slim.css">
+<link rel="stylesheet" href="//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="/post/2013-07-24-const-anyway/">Const anyway!</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            
+
+<h2 id="const-pointer:2fd84307549b01538b74d1aeefd6e52f">Const pointer</h2>
+
+<p><code>const</code> is versatile.I am always confused by the following syntax.</p>
+
+<pre><code>const char *str = &quot;Hello&quot;;    // const data, non-const pointer
+char * const str = &quot;Hello&quot;;    // const pointer, non-const data
+</code></pre>
+
+<p>Now there is a tip to remember it.</p>
+
+<p>If <code>const</code> appears to the right of the asterisk, the pointer is
+constant.If <code>const</code> appears to the left of the asterisk, the data
+is constant.</p>
+
+<p>So the following two statements are the same.</p>
+
+<pre><code>const char *str = &quot;Hello&quot;;
+char const *str = &quot;Hello&quot;;
+</code></pre>
+
+<p>In STL, <code>iterator</code> is just like a <code>T *</code> pointer.
+* <code>const std::vector&lt;int&gt;::iterator iter</code> is just like <code>T * const iter</code>.
+* <code>std::vector&lt;int&gt;::const_iterator cIter</code> is just like <code>const T *iter</code>.</p>
+
+<p>So, in a loop, if we don&rsquo;t want to modify the data, use <code>const_iterator</code>.</p>
+
+<h2 id="const-member-function:2fd84307549b01538b74d1aeefd6e52f">Const member function</h2>
+
+<p>Sometimes, we have two version member functions.One is const and the other is
+not.</p>
+
+<pre><code>#include &lt;string&gt;
+#include &lt;iostream&gt;
+
+class Str {
+public:
+    Str(std::string str)
+    :data(str)
+    { }
+
+    const char&amp;
+    operator[](std::size_t pos) const    // Const objects use this
+    {
+        return data[pos];
+    }
+
+    char&amp;
+    operator[](std::size_t pos)    // Non-const objects use this
+    {
+        return data[pos];
+    }
+
+private:
+    std::string data;
+};
+
+void
+print(const Str&amp; const_str)
+{
+    std::cout &lt;&lt; const_str[1] &lt;&lt; std::endl;
+}
+
+int
+main(int argc, char **argv)
+{
+    Str nonconst_str(&quot;abc&quot;);
+    std::cout &lt;&lt; nonconst_str[1] &lt;&lt; std::endl;
+    nonconst_str[1] = 'a';
+
+    print(nonconst_str);
+
+    return 0;
+}
+</code></pre>
+
+<p>In <code>main</code>, <code>nonconst_str</code> is a non-const object and it can be modified
+by <code>[]</code>.In <code>print</code>, <code>const Str&amp; const_str</code> means
+<strong>pass parameters by reference-to-const</strong>, so <code>const_str</code> is a const object.</p>
+
+<p>We observe that the <code>const</code> keyword is after the closing parenthesis of the
+argument list.This means the function is a const member function.</p>
+
+<p>Reference to <a href="http://msdn.microsoft.com/en-us/library/6ke686zh.aspx">MSDN</a>,
+<strong>A constant member function cannot modify any non-static members or call any</strong>
+<strong>member functions that aren&rsquo;t constant.</strong>That is, the cons member function
+can&rsquo;t modify the object that it is called.</p>
+
+<p>The above philosophy is called <strong>bitwise constness</strong> or <strong>physical constness</strong>.
+There are another philosophy called <strong>logical constness</strong>.Adherents to this
+philosophy argue that <strong>a const member function might modify some of the bits</strong>
+<strong>in the object on which it&rsquo;s invoked, but only in ways that clients cannot</strong>
+<strong>detect</strong>.</p>
+
+<p>For example, if we add a new member function <code>length()</code> to the above class.</p>
+
+<pre><code>    std::size_t
+    length() const
+    {
+        len = data.length();
+
+        return len;
+    }
+
+private:
+    std::string data;
+    std::size_t len;
+</code></pre>
+
+<p>This will generate the following compiled error.</p>
+
+<pre><code>test.cpp:25:6: error: assignment of member ‘Str::len’ in read-only object
+  len = data.length();
+      ^
+</code></pre>
+
+<p>Since member variable <code>len</code> has been modified and the compiler use the
+<strong>bitwise const</strong>, error produces.However, return and object&rsquo;s length seems
+not modify the object it is called.</p>
+
+<p>To solved this problem, use the <strong>mutable</strong> keyword.It can free non-static
+data members from bitwise constness constraints.</p>
+
+<pre><code>mutable std::size_t len;
+</code></pre>
+
+<p>I beleive in code reusing forever!In the above example, the duplicate code
+in the two <code>operator[]</code> functions can be merged into one.</p>
+
+<p>Only then non-const function should be modified.</p>
+
+<pre><code>char&amp;
+operator[](std::size_t pos)    // Non-const objects use this
+{
+    return const_cast&lt;char&amp;&gt;(static_cast&lt;const Str&amp;&gt;(*this)[pos]);
+}
+</code></pre>
+
+<p><code>static_cast&lt;const Str&amp;&gt;</code>will make <code>*this</code>const and then it can call
+<code>operator[]</code>.Finally, <code>const_cast</code> is used the free the const constraint.</p>
+
+<p>This is all about <code>const</code>, it&rsquo;s an amazing keyword.For readable and efficient
+code, use it anyway.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="/post/2013-08-09-always-pass-parameters-by-reference-to-const/"> Prev</a>  
+          <a class="btn next " href="/post/2013-08-01-cpp-resource-management/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="//js/slim.js"></script>
+  <script src="//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

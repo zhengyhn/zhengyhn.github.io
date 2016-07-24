@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Implement a queue &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="//css/slim.css">
+<link rel="stylesheet" href="//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="/post/2013-09-25-implement-a-queue/">Implement a queue</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            <p>A queue is based on the Linked List. The most explicit feature of a queue
+is FIFO(First in first out).</p>
+
+<p>Here is the specification of my Queue.</p>
+
+<ul>
+<li><code>Queue()</code>, Create an empty queue.</li>
+<li><code>Queue(const T&amp; value)</code>, Create a queue whose first element is
+<code>value</code>.</li>
+<li><code>Queue(const T values[], const size_t&amp; size)</code>, Create a queue from an
+array <code>values</code> whose size is <code>size</code>.</li>
+<li><code>Queue(const Queue&lt;T&gt;&amp; queue)</code>, Create a queue from another queue.</li>
+<li><code>const Queue&lt;T&gt;&amp; operator=(const Queue&lt;T&gt;&amp; queue)</code>, Support queue
+assignment.</li>
+<li><code>~Queue()</code>, Free all the spaces allocated by the queue.</li>
+<li><code>std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Queue&lt;T&gt;&amp; queue)</code>,
+Output the queue in the form <strong>[1 | 2 | 3]</strong>.</li>
+<li><code>const T&amp; head() const</code>, return the head element of the queue.</li>
+<li><code>size_t size() const</code>, return the size of the queue.</li>
+<li><code>void enQueue(const T&amp; value)</code>, append the element <code>value</code> into the
+back of the queue.</li>
+<li><code>const T deQueue()</code>, remove and return the first element of the queue.</li>
+</ul>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/queue">Here</a>  is the code.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="/post/2013-09-21-implement-a-circular-linked-list/"> Prev</a>  
+          <a class="btn next " href="/post/2013-09-27-implement-a-queue-using-two-stacks/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="//js/slim.js"></script>
+  <script src="//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Implement a binary search tree &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="//css/slim.css">
+<link rel="stylesheet" href="//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="/post/2013-10-03-implement-a-binary-search-tree/">Implement a binary search tree</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            <p>A binary search tree is very useful in solving the real world problems. The
+red-black tree is one kind of binary search tree. For more information about
+binary search tree, please visit the <a href="http://en.wikipedia.org/wiki/Binary_search_tree">wikipedia</a>.</p>
+
+<p>Here is the specification of my binary search tree.</p>
+
+<ul>
+<li><p><code>BinarySearchTree()</code>, Create an empty binary search tree.</p></li>
+
+<li><p><code>BinarySearchTree(const T&amp; root_val)</code>, Create an binary search tree whose
+root node is constructed from <code>root_val</code>.</p></li>
+
+<li><p><code>BinarySearchTree(const T values[], const size_t&amp; size)</code>, Create an binary
+search tree from an array <code>values</code>.</p></li>
+
+<li><p><code>BinarySearchTree(const BinarySearchTree&lt;T&gt;&amp; tree)</code>, Create an binary search
+tree from the other tree <code>tree</code>.</p></li>
+
+<li><p><code>const BinarySearchTree&amp; operator=(const BinarySearchTree&amp; tree)</code>, Support
+assignment between trees.</p></li>
+
+<li><p><code>~BinarySearchTree()</code>, free all the spaces.</p></li>
+
+<li><p><code>Node&lt;T&gt; * proot() const</code>, return the root pointer.</p></li>
+
+<li><p><code>void proot(Node&lt;T&gt; *root)</code>, set the root pointer to <code>root</code>.</p></li>
+
+<li><p><code>const T&amp; root() const</code>, return the data stored in the root node.</p></li>
+
+<li><p><code>bool is_empty() const</code>, return whether the tree is empty.</p></li>
+
+<li><p><code>void insert(const T&amp; value)</code>, insert a node with <code>value</code> into the tree.</p></li>
+
+<li><p><code>std::string inorder_string() const</code>, return the inorder travel string.</p></li>
+
+<li><p><code>std::vector&lt;T&gt; retrieve(const T&amp; key)</code>, return the search result of key
+<code>key</code>, the result may contain more than one element.</p></li>
+
+<li><p><code>void remove(const T&amp; key)</code>, delete the node with key <code>key</code>.</p></li>
+</ul>
+
+<p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/binary-search-tree">Here</a> is the code.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="/post/2013-09-21-implement-a-bidirectional-linked-list/"> Prev</a>  
+          <a class="btn next " href="/post/2013-09-21-implement-a-circular-linked-list/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="//js/slim.js"></script>
+  <script src="//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

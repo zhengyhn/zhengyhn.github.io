@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Hank&#39;s Blog</title>
-    <link>zhengyhn.github.io/post/</link>
+    <link>/post/</link>
     <description>Recent content in Posts on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 27 May 2016 20:50:49 +0800</lastBuildDate>
-    <atom:link href="zhengyhn.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>c plus plus interview review</title>
-      <link>/zhengyhn.github.io/post/c-plus-plus-interview-review/</link>
+      <link>/post/c-plus-plus-interview-review/</link>
       <pubDate>Fri, 27 May 2016 20:50:49 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/c-plus-plus-interview-review/</guid>
+      <guid>/post/c-plus-plus-interview-review/</guid>
       <description>
 
 &lt;p&gt;这是我看了《C笔试面试宝典》一书的笔记&lt;/p&gt;
@@ -424,10 +424,10 @@ int main(void)
     
     <item>
       <title>improve code readability</title>
-      <link>/zhengyhn.github.io/post/improve-code-readability/</link>
+      <link>/post/improve-code-readability/</link>
       <pubDate>Fri, 27 May 2016 20:40:43 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/improve-code-readability/</guid>
+      <guid>/post/improve-code-readability/</guid>
       <description>
 
 &lt;p&gt;这是我读 &amp;ldquo;the art of readable code&amp;rdquo; 一书做的笔记&lt;/p&gt;
@@ -1005,10 +1005,10 @@ your grandmother.
     
     <item>
       <title>reStructuredText语法笔记</title>
-      <link>/zhengyhn.github.io/post/write-down-the-reStructuredText-syntax-I-frequently-use/</link>
+      <link>/post/write-down-the-reStructuredText-syntax-I-frequently-use/</link>
       <pubDate>Fri, 27 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/write-down-the-reStructuredText-syntax-I-frequently-use/</guid>
+      <guid>/post/write-down-the-reStructuredText-syntax-I-frequently-use/</guid>
       <description>
 
 &lt;p&gt;reStructuredText用于排版非常好。但是，和C++一样，越是灵活，越是可扩展，越是复杂。
@@ -1081,10 +1081,10 @@ main(int argc, char *argv[])
     
     <item>
       <title>A tour to The Badaling Great Wall</title>
-      <link>/zhengyhn.github.io/post/2013-08-03-a-tour-to-the-badaling-great-wall/</link>
+      <link>/post/2013-08-03-a-tour-to-the-badaling-great-wall/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/2013-08-03-a-tour-to-the-badaling-great-wall/</guid>
+      <guid>/post/2013-08-03-a-tour-to-the-badaling-great-wall/</guid>
       <description>&lt;p&gt;Today, I went to the Badaling Great Wall &lt;strong&gt;alone&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;There is a saying that &lt;strong&gt;He who has never been to the Great Wall is not a&lt;/strong&gt;
@@ -1099,7 +1099,7 @@ It took me 30 minutes to arrive at &lt;em&gt;Xi zhi men station&lt;/em&gt; from 
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;zhengyhn.github.io/images/13.8.3.Great-Wall-too-many-people.jpg&#34; /&gt;
+        &lt;img src=&#34;/images/13.8.3.Great-Wall-too-many-people.jpg&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -1131,7 +1131,7 @@ failed.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;zhengyhn.github.io/images/13.8.3.south-wall.jpg&#34; /&gt;
+        &lt;img src=&#34;/images/13.8.3.south-wall.jpg&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -1171,7 +1171,7 @@ hours because of the traffic jam!&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;zhengyhn.github.io/images/13.8.3.have-a-lunch.jpg&#34; /&gt;
+        &lt;img src=&#34;/images/13.8.3.have-a-lunch.jpg&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -1188,7 +1188,7 @@ The photo below shows the &lt;em&gt;North Wall&lt;/em&gt;.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;zhengyhn.github.io/images/13.8.3.north-wall.jpg&#34; /&gt;
+        &lt;img src=&#34;/images/13.8.3.north-wall.jpg&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -1205,7 +1205,7 @@ view of the north wall.&lt;/p&gt;
 
 &lt;figure &gt;
     
-        &lt;img src=&#34;zhengyhn.github.io/images/13.8.3.north-wall-bird-view.jpg&#34; /&gt;
+        &lt;img src=&#34;/images/13.8.3.north-wall-bird-view.jpg&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -1222,7 +1222,7 @@ below is it, I&amp;rsquo;m not very handsome as you imaged, though.&lt;/p&gt;
 &lt;p&gt;
 &lt;figure &gt;
     
-        &lt;img src=&#34;zhengyhn.github.io/images/13.8.3.Great-Wall-me.jpg&#34; /&gt;
+        &lt;img src=&#34;/images/13.8.3.Great-Wall-me.jpg&#34; /&gt;
     
     
     &lt;figcaption&gt;
@@ -1244,10 +1244,10 @@ a tour &lt;strong&gt;alone&lt;/strong&gt;.&lt;/p&gt;
     
     <item>
       <title>About Constructors Destructors and Assignment Operators</title>
-      <link>/zhengyhn.github.io/post/2013-07-28-about-constructors-destructors-and-assignment-operators/</link>
+      <link>/post/2013-07-28-about-constructors-destructors-and-assignment-operators/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/2013-07-28-about-constructors-destructors-and-assignment-operators/</guid>
+      <guid>/post/2013-07-28-about-constructors-destructors-and-assignment-operators/</guid>
       <description>
 
 &lt;h2 id=&#34;what-functions-c-will-silently-write-and-call:ad90163a5135a9ab5d66997d40229e5d&#34;&gt;What functions C++ will silently write and call?&lt;/h2&gt;
@@ -1538,10 +1538,10 @@ It really helps.&lt;/p&gt;
     
     <item>
       <title>Always pass parameters by reference-to-const</title>
-      <link>/zhengyhn.github.io/post/2013-08-09-always-pass-parameters-by-reference-to-const/</link>
+      <link>/post/2013-08-09-always-pass-parameters-by-reference-to-const/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/2013-08-09-always-pass-parameters-by-reference-to-const/</guid>
+      <guid>/post/2013-08-09-always-pass-parameters-by-reference-to-const/</guid>
       <description>&lt;p&gt;We all know that &lt;em&gt;pass by value&lt;/em&gt; is not effecient.So we use &lt;em&gt;pass by pointer&lt;/em&gt;
 in C.However, in C++, we prefer &lt;strong&gt;pass by referece-to-const&lt;/strong&gt;.&lt;/p&gt;
 
@@ -1642,10 +1642,10 @@ pass the parameters by reference-to-const, since &lt;strong&gt;the compiler will
     
     <item>
       <title>Const anyway!</title>
-      <link>/zhengyhn.github.io/post/2013-07-24-const-anyway/</link>
+      <link>/post/2013-07-24-const-anyway/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/2013-07-24-const-anyway/</guid>
+      <guid>/post/2013-07-24-const-anyway/</guid>
       <description>
 
 &lt;h2 id=&#34;const-pointer:2fd84307549b01538b74d1aeefd6e52f&#34;&gt;Const pointer&lt;/h2&gt;
@@ -1795,10 +1795,10 @@ code, use it anyway.&lt;/p&gt;
     
     <item>
       <title>Cpp Resource Management</title>
-      <link>/zhengyhn.github.io/post/2013-08-01-cpp-resource-management/</link>
+      <link>/post/2013-08-01-cpp-resource-management/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/2013-08-01-cpp-resource-management/</guid>
+      <guid>/post/2013-08-01-cpp-resource-management/</guid>
       <description>
 
 &lt;p&gt;I always forget freeing a memory that allocated from the heap.And I always
@@ -2182,10 +2182,10 @@ should use &lt;code&gt;delete []p;&lt;/code&gt;.&lt;/p&gt;
     
     <item>
       <title>Do not hide inherited names</title>
-      <link>/zhengyhn.github.io/post/2013-08-15-do-not-hide-inherited-names/</link>
+      <link>/post/2013-08-15-do-not-hide-inherited-names/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/2013-08-15-do-not-hide-inherited-names/</guid>
+      <guid>/post/2013-08-15-do-not-hide-inherited-names/</guid>
       <description>&lt;p&gt;In inheritance, there are some rules defined by C++, one of which is that
 the virables or the functions in the base class will be hidden if there
 are virables and functions with the same name.&lt;/p&gt;
@@ -2294,10 +2294,10 @@ future.&lt;/p&gt;
     
     <item>
       <title>Implement a bidirectional linked list</title>
-      <link>/zhengyhn.github.io/post/2013-09-21-implement-a-bidirectional-linked-list/</link>
+      <link>/post/2013-09-21-implement-a-bidirectional-linked-list/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/2013-09-21-implement-a-bidirectional-linked-list/</guid>
+      <guid>/post/2013-09-21-implement-a-bidirectional-linked-list/</guid>
       <description>&lt;p&gt;A bidirectional linked list is the same as a singular linked list except that
 there are two links between two nodes.&lt;/p&gt;
 
@@ -2332,10 +2332,10 @@ in the position &lt;code&gt;index&lt;/code&gt;.&lt;/li&gt;
     
     <item>
       <title>Implement a binary search tree</title>
-      <link>/zhengyhn.github.io/post/2013-10-03-implement-a-binary-search-tree/</link>
+      <link>/post/2013-10-03-implement-a-binary-search-tree/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/2013-10-03-implement-a-binary-search-tree/</guid>
+      <guid>/post/2013-10-03-implement-a-binary-search-tree/</guid>
       <description>&lt;p&gt;A binary search tree is very useful in solving the real world problems. The
 red-black tree is one kind of binary search tree. For more information about
 binary search tree, please visit the &lt;a href=&#34;http://en.wikipedia.org/wiki/Binary_search_tree&#34;&gt;wikipedia&lt;/a&gt;.&lt;/p&gt;
@@ -2383,10 +2383,10 @@ assignment between trees.&lt;/p&gt;&lt;/li&gt;
     
     <item>
       <title>Implement a circular linked list</title>
-      <link>/zhengyhn.github.io/post/2013-09-21-implement-a-circular-linked-list/</link>
+      <link>/post/2013-09-21-implement-a-circular-linked-list/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/2013-09-21-implement-a-circular-linked-list/</guid>
+      <guid>/post/2013-09-21-implement-a-circular-linked-list/</guid>
       <description>&lt;p&gt;A circular linked list is the same as a singular linked list except that
 there last node points to the first node.&lt;/p&gt;
 
@@ -2417,10 +2417,10 @@ but it&amp;rsquo;s not random accessible.&lt;/li&gt;
     
     <item>
       <title>Implement a queue</title>
-      <link>/zhengyhn.github.io/post/2013-09-25-implement-a-queue/</link>
+      <link>/post/2013-09-25-implement-a-queue/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/2013-09-25-implement-a-queue/</guid>
+      <guid>/post/2013-09-25-implement-a-queue/</guid>
       <description>&lt;p&gt;A queue is based on the Linked List. The most explicit feature of a queue
 is FIFO(First in first out).&lt;/p&gt;
 
@@ -2451,10 +2451,10 @@ back of the queue.&lt;/li&gt;
     
     <item>
       <title>Implement a queue using two stacks</title>
-      <link>/zhengyhn.github.io/post/2013-09-27-implement-a-queue-using-two-stacks/</link>
+      <link>/post/2013-09-27-implement-a-queue-using-two-stacks/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/2013-09-27-implement-a-queue-using-two-stacks/</guid>
+      <guid>/post/2013-09-27-implement-a-queue-using-two-stacks/</guid>
       <description>&lt;p&gt;A queue can be implemented using two stacks. One stack store the elements
 appended to the queue. The other stack store the elements to be popped from
 the queue.&lt;/p&gt;
@@ -2486,10 +2486,10 @@ back of the queue.&lt;/li&gt;
     
     <item>
       <title>Implement a singular LinkedList</title>
-      <link>/zhengyhn.github.io/post/2013-09-12-implement-a-singular-linkedlist/</link>
+      <link>/post/2013-09-12-implement-a-singular-linkedlist/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>/zhengyhn.github.io/post/2013-09-12-implement-a-singular-linkedlist/</guid>
+      <guid>/post/2013-09-12-implement-a-singular-linkedlist/</guid>
       <description>&lt;p&gt;LinkedList is a very common data structure. Three years ago, I could write
 a singular LinkedList very quickly in C/C++. But the code is ugly and very
 ineffecient. Now I am going to implement a singular LinkedList in C++ in order

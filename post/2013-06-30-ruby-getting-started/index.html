@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Ruby-getting started &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="//css/slim.css">
+<link rel="stylesheet" href="//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="/post/2013-06-30-ruby-getting-started/">Ruby-getting started</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            
+
+<h1 id="running-ruby:89464246a28bbafbc850468d079d5ef1">Running ruby</h1>
+
+<h2 id="interactive:89464246a28bbafbc850468d079d5ef1">Interactive</h2>
+
+<p>In the past, I always tested some ruby statements with <code>irb</code>. Now I can
+test a small ruby program in the following way.</p>
+
+<pre><code>[monkey@itlodge octopress]$ ruby
+str = &quot;abc&quot;
+puts str
+Ctrl+d
+abc
+</code></pre>
+
+<p>After hit <code>ruby</code>, it allows me to type as many code as possible.Finally,
+press <code>Ctrl+d</code> will end the input and it will evaluate the code.</p>
+
+<h2 id="programs:89464246a28bbafbc850468d079d5ef1">Programs</h2>
+
+<p>When writing a script, we always use <code>#!</code> and specific which language used
+to run the code.This is the Unix <a href="http://en.wikipedia.org/wiki/Shebang_%28Unix%29">Shebang</a> notation.For example:</p>
+
+<pre><code>#!/usr/bin/ruby -w
+puts &quot;abc&quot;
+</code></pre>
+
+<p>From the man page, I know that the <code>-w</code> option means <em>Enables verbose mode
+without printing version message at the beginning</em>.</p>
+
+<p>But, many guys like this style:</p>
+
+<pre><code>#!/usr/bin/env ruby
+puts &quot;abc&quot;
+</code></pre>
+
+<p>From the man page, I know that the <code>env</code> is a program that <em>run a program in
+a modified environment</em>.So it can search the <code>$PATH</code> and find the <code>ruby</code>
+program to run.</p>
+
+<h1 id="ruby-documentation:89464246a28bbafbc850468d079d5ef1">Ruby documentation</h1>
+
+<p>The site <a href="http://www.ruby-doc.org">ruby-doc.org</a> contains a complete set of the
+RDoc documentation for Ruby.</p>
+
+<p>The <code>ri</code> tool is very useful for looking up documentation.If you want to find
+the documentation for a class, just type <code>ri ClassName</code>. For example:</p>
+
+<pre><code>[monkey@itlodge ~]$ ri Vector
+= Vector &lt; Object
+
+------------------------------------------------------------------------------
+= Includes:
+Enumerable (from ruby core)
+
+(from ruby core)
+------------------------------------------------------------------------------
+The Vector class represents a mathematical vector, which is useful in its own
+right, and also constitutes a row or column of a Matrix.
+
+== Method Catalogue
+
+To create a Vector:
+*   Vector.[](*array)                   
+*   Vector.elements(array, copy = true) 
+
+To access elements:
+*   [](i)                               
+
+To enumerate the elements:
+*  #each2(v)                            
+*  #collect2(v)                         
+:
+</code></pre>
+
+<p>If you want to find the documentation for a method, just type
+<code>ri method's name</code>.For example:</p>
+
+<pre><code>[monkey@itlodge ~]$ ri sleep
+= .sleep
+
+(from ruby core)
+=== Implementation from Kernel
+------------------------------------------------------------------------------
+  sleep([duration])    -&gt; fixnum
+
+
+------------------------------------------------------------------------------
+
+Suspends the current thread for duration seconds (which may be
+any number, including a Float with fractional seconds). Returns the actual
+number of seconds slept (rounded), which may be less than that asked for if
+another thread calls Thread#run. Called without an argument, sleep() will
+sleep forever.
+
+  Time.new    #=&gt; 2008-03-08 19:56:19 +0900
+  sleep 1.2   #=&gt; 1
+  Time.new    #=&gt; 2008-03-08 19:56:20 +0900
+  sleep 1.9   #=&gt; 2
+  Time.new    #=&gt; 2008-03-08 19:56:22 +0900
+
+
+:
+</code></pre>
+
+<p>A method&rsquo;s name may be the same in different classes or modules.In this case,
+<code>ri</code> will list all of them.If you type <code>ri ClassName.method's name</code>, it
+will show only the documentation of the corresponding class&rsquo;s.</p>
+
+<p>More contributions, more reputations.If a class or module hasn&rsquo;t yet documented
+in RDoc, send an email to <code>suggestions@ruby-doc.org</code> to ask them to add.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="/post/2013-08-11-postponing-definitions-instead-of-preponing/"> Prev</a>  
+          <a class="btn next " href="/post/2013-07-25-some-basic-ruby/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="//js/slim.js"></script>
+  <script src="//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

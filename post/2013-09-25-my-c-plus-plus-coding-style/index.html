@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> My C&#43;&#43; coding style &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="//css/slim.css">
+<link rel="stylesheet" href="//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="/post/2013-09-25-my-c-plus-plus-coding-style/">My C&#43;&#43; coding style</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            <p>Every programmer has his/her own coding style. Time goes by, and my coding
+style is changing. There following is my note on c++ coding style. I will
+explain why I want to coding in that style.</p>
+
+<p>Why do I care about my coding style so much? Because I am a virgo.</p>
+
+<ul>
+<li><strong>Always add a <code>m_</code> prefix to the members and use <code>this</code> to refer to
+other member functions in the member function.</strong></li>
+</ul>
+
+<p>This seems ridiculous. But I prefer. In a member function, there may be
+various kinds of variables, such as memeber variables, global variables
+and local variables. If we don&rsquo;t add some flag to refer to the member
+variables, we will confused when we met a variable. Is it a local variable
+or a member variable? For example, there is a statement in a member function.</p>
+
+<pre><code>size1 = size2 + 1;
+</code></pre>
+
+<p>How can you know what this statement exactly means? Which <code>size</code> is the
+class&rsquo;s size? However, if we write this statement as this,</p>
+
+<pre><code>m_size1 = size2 + 1;
+</code></pre>
+
+<p>we can know that we set the class&rsquo;s size be the value of local variable <code>size</code>
+plus one. This code is readable and it can relieve the code reader&rsquo;s headache.</p>
+
+<p>For the member functions. When refering to a member function, always use
+<code>this</code>.</p>
+
+<pre><code>int *p = this-&gt;next();
+</code></pre>
+
+<p>Someone may argue that using <code>this</code> will let use write more code. My
+experience told me that the whole world is balanced. You make yourself happy
+and your code will make the code readers headache. Instead, you write readable
+codes with some extra typing and you will make the code readers happy. This is
+a balance and you can balance yourself. I am a so kind man and I always want
+those who read my codes be happy. So I will use <code>this</code> always.</p>
+
+<p>Note: In PHP, you must use <code>$this</code> to refer to members. In Python, you must
+use <code>self</code> to refer to members. In most of the source code in <strong>Android</strong>,
+members in C++ class is always with prefix <code>m_</code> and members in JAVA class is
+always with prefix <code>m</code>.</p>
+
+<ul>
+<li><strong>Always leave the return type name in a single line.</strong></li>
+</ul>
+
+<p>I used to leave the return type name on the left of a function name. The first
+time I saw some programmers put them in a single line is the
+<a href="http://en.wikipedia.org/wiki/Pintos">Pintos</a> project. I thought it&rsquo;s ugly.
+But after I worked on the code of <a href="http://en.wikipedia.org/wiki/Gold_(linker">Gold</a>),
+I changed my mind. I followed the author&rsquo;s style, even in a main function.</p>
+
+<pre><code>int
+main(int argc, char *argv[]) { }
+</code></pre>
+
+<p>Why do I leave the return value in a line? Because, in many large project, most
+of the names of the return types are very long, most of the function names are
+very long and most of functions has several parameters which have a long type
+name. For example,</p>
+
+<pre><code>std::map&lt;size_t, LinkedList&lt;T&gt; *&gt; *
+get_map(const std::string&amp; name, bool is_global=true) const;
+</code></pre>
+
+<p>If you don&rsquo;t leave the return type name in a single line, the function
+declaration will becomes</p>
+
+<pre><code>std::map&lt;size_t, LinkedList&lt;T&gt; *&gt; * get_map(const std::string&amp; name, bool is_global=true) const;
+</code></pre>
+
+<p>which is very very ugly!</p>
+
+<p>If we leave the return type name in a single line, the code readers will see
+the return type of the function more quickly. So the code will be more readable.</p>
+
+<p>Someone may argue that it looks more beautiful to leave the return type name on
+the left of the function name when the type name is short like this.</p>
+
+<pre><code>int get(size_t index);
+</code></pre>
+
+<p>This may be right. But most of the return type name is long in a large project.
+So for consistence, I always leave them in a single line.</p>
+
+<ul>
+<li><strong>Use <code>return</code> or <code>continue</code> to avoid indentation</strong></li>
+</ul>
+
+<p>The code will look ugly when there are many indentations. For example,</p>
+
+<pre><code>if (arr != NULL &amp;&amp; begin &lt; end - 1) {
+    ...
+    while (top &gt; 0) {
+        ...
+        for (int i = begin; i &lt; end - 1; ++i) {
+            if (arr[i] &lt; arr[pivot]) {
+                for (int j = i;  j &lt; end; ++j) {
+                    ...
+                }
+            }
+        }
+    }
+    ...
+}
+</code></pre>
+
+<p>There are <strong>5</strong> level of indentations, which is very ugly. However, we can use
+<code>return</code> and <code>continue</code> to make it look better.</p>
+
+<pre><code>if (arr == NULL || begin &gt;= end - 1) {
+    return;
+}
+...
+while (top &gt; 0) {
+    ...
+    for (int i = begin; i &lt; end - 1; ++i) {
+        if (arr[i] &gt;= arr[pivot]) {
+            continue;
+        }
+        for (int j = i;  j &lt; end; ++j) {
+            ...
+        }
+    }
+}
+...
+</code></pre>
+
+<p>Now, it&rsquo;s only <strong>3</strong> level of indentations, which looks more beautiful.
+This is an important skills to make my code more beautiful.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="/post/2013-07-23-more-consts-enums-inlines-and-less-defines/"> Prev</a>  
+          <a class="btn next " href="/post/2013-08-11-postponing-definitions-instead-of-preponing/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="//js/slim.js"></script>
+  <script src="//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>
