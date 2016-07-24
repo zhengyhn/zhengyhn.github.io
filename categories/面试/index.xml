@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>面试 on Hank&#39;s Blog</title>
-    <link>/categories/%E9%9D%A2%E8%AF%95/</link>
+    <link>http://zhengyhn.github.io/categories/%E9%9D%A2%E8%AF%95/</link>
     <description>Recent content in 面试 on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 27 May 2016 20:50:49 +0800</lastBuildDate>
-    <atom:link href="/categories/%E9%9D%A2%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://zhengyhn.github.io/categories/%E9%9D%A2%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>c plus plus interview review</title>
-      <link>/post/c-plus-plus-interview-review/</link>
+      <link>http://zhengyhn.github.io/post/c-plus-plus-interview-review/</link>
       <pubDate>Fri, 27 May 2016 20:50:49 +0800</pubDate>
       
-      <guid>/post/c-plus-plus-interview-review/</guid>
+      <guid>http://zhengyhn.github.io/post/c-plus-plus-interview-review/</guid>
       <description>
 
 &lt;p&gt;这是我看了《C笔试面试宝典》一书的笔记&lt;/p&gt;
