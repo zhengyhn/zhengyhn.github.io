@@ -46,9 +46,9 @@
 
 <p>这是我读 &ldquo;the art of readable code&rdquo; 一书做的笔记</p>
 
-<h1 id="简化循环和逻辑:4a3523512546b6c0f4201728a4c7bf5b">简化循环和逻辑</h1>
+<h1 id="简化循环和逻辑">简化循环和逻辑</h1>
 
-<h2 id="making-control-flow-easy-to-read:4a3523512546b6c0f4201728a4c7bf5b">making control flow easy to read</h2>
+<h2 id="making-control-flow-easy-to-read">making control flow easy to read</h2>
 
 <p>下面的代码:</p>
 
@@ -94,7 +94,7 @@
 <li>尽量不要使用嵌套的if/else，想尽办法使得只有一个层次。</li>
 </ul>
 
-<h2 id="breaking-down-giant-expressions:4a3523512546b6c0f4201728a4c7bf5b">breaking down giant expressions</h2>
+<h2 id="breaking-down-giant-expressions">breaking down giant expressions</h2>
 
 <p>利用宏来简化代码。看下面的例子:</p>
 
@@ -128,7 +128,7 @@
 
 <p>这样不仅视觉上看起来舒服，而且理解起来非常容易。</p>
 
-<h2 id="variables-and-readability:4a3523512546b6c0f4201728a4c7bf5b">variables and readability</h2>
+<h2 id="variables-and-readability">variables and readability</h2>
 
 <ul>
 <li>可去除一些多余的变量</li>
@@ -161,11 +161,11 @@ if (size &gt; 0) {
 <li>尽量使变量只能改变一次(prefer write-once varaibles)</li>
 </ul>
 
-<h1 id="改善外层代码:4a3523512546b6c0f4201728a4c7bf5b">改善外层代码</h1>
+<h1 id="改善外层代码">改善外层代码</h1>
 
-<h2 id="packing-informations-into-names:4a3523512546b6c0f4201728a4c7bf5b">packing informations into names</h2>
+<h2 id="packing-informations-into-names">packing informations into names</h2>
 
-<h3 id="choose-specific-words:4a3523512546b6c0f4201728a4c7bf5b">choose specific words</h3>
+<h3 id="choose-specific-words">choose specific words</h3>
 
 <p>书上说到getPage(url);这个函数的名字，根据我以前的看法，这绝对是一个好名字，
 但是作者却批评这种命名方式。作者说，get太模糊了，我们看不出来它是从缓存中get还是
@@ -173,7 +173,7 @@ if (size &gt; 0) {
 downloadPage()。我觉得这个说法非常好，我以后给变量或者函数起名字的时候也要注意
 这方面的东西了。</p>
 
-<h3 id="avoid-generic-names-like-tmp-and-retval:4a3523512546b6c0f4201728a4c7bf5b">avoid generic names like tmp and retval</h3>
+<h3 id="avoid-generic-names-like-tmp-and-retval">avoid generic names like tmp and retval</h3>
 
 <p>作者批评了tmp,retval,foo这种词语，虽然我没用过retval和foo这种奇怪的名字，但是
 我却用过tmp这东西，后来想了一下，tmp这种东西的确看不出来任何含义，就算时间紧迫，我
@@ -209,12 +209,12 @@ downloadPage()。我觉得这个说法非常好，我以后给变量或者函数
 醒悟过来，以后再也不写这种代码了！转而使用si,ti,ui，这样
 school[si].teacher[ti] == user[ui] 就非常清楚了。</p>
 
-<h3 id="prefer-concrete-names-over-abstract-names:4a3523512546b6c0f4201728a4c7bf5b">prefer concrete names over abstract names</h3>
+<h3 id="prefer-concrete-names-over-abstract-names">prefer concrete names over abstract names</h3>
 
 <p>意思是不要抽象的名字，而是要具体的名字。以书上的一个例子说，
 serverCanStart是抽象的名字，而canListenOnPort则是一个具体的名字</p>
 
-<h3 id="attaching-extra-information-to-name-by-using-a-suffix-or-prefix:4a3523512546b6c0f4201728a4c7bf5b">attaching extra information to name,by using a suffix or prefix</h3>
+<h3 id="attaching-extra-information-to-name-by-using-a-suffix-or-prefix">attaching extra information to name,by using a suffix or prefix</h3>
 
 <p>如果我们有一个变量:</p>
 
@@ -236,7 +236,7 @@ document.writeln(&quot;time is:&quot; + elapsed + &quot; seconds&quot;);
 start_ms和elapsed_ms就很清楚了！
 看到这里，我决定，以后遇到这种有单位的变量，都要带个单位的后缀，以写出可读的代码。</p>
 
-<h3 id="deciding-how-long-a-name-should-be:4a3523512546b6c0f4201728a4c7bf5b">deciding how long a name should be</h3>
+<h3 id="deciding-how-long-a-name-should-be">deciding how long a name should be</h3>
 
 <p>在较短的域里面可以使用较短的变量名，比如:</p>
 
@@ -262,7 +262,7 @@ start_ms和elapsed_ms就很清楚了！
 非常必要的，可能是我的个人原因，我不喜欢又臭又长的代码，我喜欢简洁的代码，对于unix哲学
 中的缩写规则，我很感兴趣，在程序中还是要尽量使用缩写。</p>
 
-<h3 id="using-name-formating-to-pack-extra-information:4a3523512546b6c0f4201728a4c7bf5b">using name formating to pack extra information</h3>
+<h3 id="using-name-formating-to-pack-extra-information">using name formating to pack extra information</h3>
 
 <p>不同类型的实体命名特点, 在google
 c++的规范中，类名首字母大写，使用驼峰式;宏常量名全部大写，使用下划线分隔;
@@ -270,7 +270,7 @@ const变量则首字母大写，驼峰式，区分宏常量;类的方法首字�
 最后要跟一个下划线;其它局部变量则全部小写，后面不跟下划线。
 在html/css中，id一般使用下划线分隔，而class使用中线（dash）来分隔。</p>
 
-<h2 id="names-that-can-t-be-misconstructed:4a3523512546b6c0f4201728a4c7bf5b">names that can&rsquo;t be misconstructed</h2>
+<h2 id="names-that-can-t-be-misconstructed">names that can&rsquo;t be misconstructed</h2>
 
 <ul>
 <li>关键思想是：不断地问自己，这个名字别人会不会认为是其他意思？</li>
@@ -372,7 +372,7 @@ const变量则首字母大写，驼峰式，区分宏常量;类的方法首字�
 链表的长度，这样就会使得程序的速度非常慢了。如果改成countSize()会好很多，
 但是幸运的是，作者说了，最新版的STL已经把size()变成了O(1)速度。</p>
 
-<h2 id="aesthetics:4a3523512546b6c0f4201728a4c7bf5b">aesthetics</h2>
+<h2 id="aesthetics">aesthetics</h2>
 
 <p>举的第一个例子让我震惊！看下面的代码:</p>
 
@@ -418,9 +418,9 @@ const变量则首字母大写，驼峰式，区分宏常量;类的方法首字�
 漂亮的代码，但是一直做不到，因为要打很多空格。后来发现emacs有通过正则表达式
 对齐的功能align-regexp，爽极了！</p>
 
-<h2 id="knowing-what-to-comment:4a3523512546b6c0f4201728a4c7bf5b">knowing what to comment</h2>
+<h2 id="knowing-what-to-comment">knowing what to comment</h2>
 
-<h3 id="when-should-not-comment:4a3523512546b6c0f4201728a4c7bf5b">when should not comment？</h3>
+<h3 id="when-should-not-comment">when should not comment？</h3>
 
 <p>看注释会浪费阅读代码的人的时间，注释还会占用屏幕的地方，导致读者时常要
 翻页，所以，没有价值的注释不要写。下面的代码的注释都没有价值:</p>
@@ -446,7 +446,7 @@ public:
 <pre><code>good code &gt; bad code + good comment
 </code></pre>
 
-<h3 id="what-should-comment-be:4a3523512546b6c0f4201728a4c7bf5b">what should comment be？</h3>
+<h3 id="what-should-comment-be">what should comment be？</h3>
 
 <ul>
 <li>写自己的想法</li>
@@ -492,7 +492,7 @@ public:
 <li>解释常量为什么是那个值</li>
 </ul>
 
-<h2 id="making-comments-precise-and-compact:4a3523512546b6c0f4201728a4c7bf5b">making comments precise and compact</h2>
+<h2 id="making-comments-precise-and-compact">making comments precise and compact</h2>
 
 <ul>
 <li><p>函数注释中，可使用举例说明，如:</p>
@@ -531,20 +531,20 @@ for (i = SIZE; i &gt;= 0; i--) {
 
 <p>更容易看懂。</p>
 
-<h1 id="重构代码:4a3523512546b6c0f4201728a4c7bf5b">重构代码</h1>
+<h1 id="重构代码">重构代码</h1>
 
-<h2 id="extracting-unrelated-subproblems:4a3523512546b6c0f4201728a4c7bf5b">extracting unrelated subproblems</h2>
+<h2 id="extracting-unrelated-subproblems">extracting unrelated subproblems</h2>
 
 <ul>
 <li>要封装一些和本功能无关的子问题到另外一个函数上。</li>
 <li>对于一些工具的类或函数（字符串操作，哈希表等），就分离出来。</li>
 </ul>
 
-<h2 id="one-task-at-a-time:4a3523512546b6c0f4201728a4c7bf5b">one task at a time</h2>
+<h2 id="one-task-at-a-time">one task at a time</h2>
 
 <p>每个函数应该只实现一个功能，不要实现多个功能。</p>
 
-<h2 id="turning-thoughts-into-code:4a3523512546b6c0f4201728a4c7bf5b">turning thoughts into code</h2>
+<h2 id="turning-thoughts-into-code">turning thoughts into code</h2>
 
 <p>记住爱因斯坦的这句话:</p>
 
@@ -554,14 +554,14 @@ your grandmother.
 代码应该用易懂的英语来写。
 </code></pre>
 
-<h2 id="writing-less-code:4a3523512546b6c0f4201728a4c7bf5b">writing less code</h2>
+<h2 id="writing-less-code">writing less code</h2>
 
 <ul>
 <li>一定要熟悉现存的库，这样可以减少代码量，多重用代码，少写代码。</li>
 <li>使用Unix工具(shell命令），而不是自己写代码</li>
 </ul>
 
-<h1 id="写出易懂的选择排序:4a3523512546b6c0f4201728a4c7bf5b">写出易懂的选择排序</h1>
+<h1 id="写出易懂的选择排序">写出易懂的选择排序</h1>
 
 <p>以选择排序为例，我以前是直接把它记住的（当然是在理解的前提下），其中的一些
 下标i,j,k，直接记住人家的代码的，如果要我重新写，我还是会用i,j,k，造成了

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 如何在Sails.js中使用generator &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/how-to-use-generator-in-sails/">如何在Sails.js中使用generator</a></h2>
+          <span class="post-date">Mar 13, 2017 </span>
+          <div class="post-content">
+            <p>由于历史原因，公司的App项目用Sails.js框架来开发，那时候还没有ES6，当然是一层一层callback下去，后来引进了Async和Thenjs，代码才清晰了很多，但是遇到复杂的业务逻辑，写起来依旧痛苦。</p>
+
+<p>在这个不写ES6都不好意思说写Nodejs的年代，天天写callback很不是滋味，所以必须找个机会在不换框架的情况也能使用yield来解决callback的问题。</p>
+
+<p>首先想到的肯定是用co这个包，它有一个wrap的方法，可以把generator转成callback，试想一下，如果所有的controller的每个方法，都用co.wrap一下，岂不是达到了想要的效果？看了下sails的源码，貌似必须要修改它的源码才行。那么问题来了，怎么样才能在不修改它源码的情况也能达到同样的效果呢？</p>
+
+<p>由于javascript默认对象传引用，所以是不是可以直接把加载到内存中的controller方法全部用co.wrap包一下呢？</p>
+
+<p>在看了sails的很多源码，经过很多次的尝试后，事实证明这种猜想是可以的！</p>
+
+<p>只需要在config/bootstrap.js文件加上下面的代码，就可以在controller中使用generator了。</p>
+
+<pre><code>var _ = require('lodash');
+var coExpress = require('co-express');
+
+sails.modules.loadControllers(function (err, modules) {
+  if (err) {
+    return callback(err);
+  }
+  sails.controllers = _.merge(sails.controllers, modules);
+
+  // hacking every action of all controllers
+  _.each(sails.controllers, function(controller, controllerId) {
+    _.each(controller, function(action, actionId) {
+      actionId = actionId.toLowerCase();
+      console.log('hacking route:', controllerId, actionId);
+      // co.wrap，generator =&gt; callback
+      action = coExpress(action);
+      sails.hooks.controllers.middleware[controllerId][actionId] = action;
+    });
+  });
+  // reload routes
+  sails.router.load(function () {
+    // reload blueprints
+    sails.hooks.blueprints.initialize(function () {
+      sails.hooks.blueprints.extendControllerMiddleware();
+      sails.hooks.blueprints.bindShadowRoutes();
+      callback();
+    });
+  });
+});
+</code></pre>
+
+<p>这里用了一个叫co-express的包，它的源码很简单，就是使用co.wrap包装了一下。重要的是，在修改了每个action之后，我们需要重新load一次routes和blueprints，这样才真正在内存中生效。</p>
+
+          </div>
+        </div>
+        <div class="pagination"> 
+          <a class="btn next " href="http://zhengyhn.github.io/post/c-plus-plus-interview-review/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

@@ -44,7 +44,7 @@
           <div class="post-content">
             
 
-<h2 id="what-functions-c-will-silently-write-and-call:ad90163a5135a9ab5d66997d40229e5d">What functions C++ will silently write and call?</h2>
+<h2 id="what-functions-c-will-silently-write-and-call">What functions C++ will silently write and call?</h2>
 
 <p>If we declare an empty class, the compiler will declare a constructor,
 a copy constructor, a copy assignment operator and a destructor for us.</p>
@@ -74,7 +74,7 @@ non-static data member from the source object to the target object.</p></li>
 will be some trouble with the compiler.Therefore, always define the four
 functions when we define our own class.</p>
 
-<h2 id="disallow-the-use-of-generated-functions-you-don-t-want:ad90163a5135a9ab5d66997d40229e5d">Disallow the use of generated functions you don&rsquo;t want</h2>
+<h2 id="disallow-the-use-of-generated-functions-you-don-t-want">Disallow the use of generated functions you don&rsquo;t want</h2>
 
 <p>Sometimes, we may not want the copy constructor or the copy assignment
 operator because every member may be different with the other object&rsquo;s
@@ -117,7 +117,7 @@ class Person: private Uncopyable {
 are declared as private, so the members and friends of class <code>Person</code> can&rsquo;t
 call them.</p>
 
-<h2 id="declare-destructors-virtual-in-polymorphic-base-classes:ad90163a5135a9ab5d66997d40229e5d">Declare destructors virtual in polymorphic base classes</h2>
+<h2 id="declare-destructors-virtual-in-polymorphic-base-classes">Declare destructors virtual in polymorphic base classes</h2>
 
 <p>I have met this problem in an interview.</p>
 

@@ -47,7 +47,7 @@
 <p>The sorting algorithms are very important in programming interview. I have
 to be able to write them on a paper without even an error.</p>
 
-<h1 id="bubble-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Bubble Sort</h1>
+<h1 id="bubble-sort">Bubble Sort</h1>
 
 <p>The immediate thought of bubble sort is that swapping the ajacent elements
 if they are of the wrong order in each pass until there are no swapping.
@@ -81,7 +81,7 @@ the last <code>ith</code> element in the <code>ith</code> pass.</p>
 
 <p>For this test cases, the average run time is <strong>0.9s</strong>.</p>
 
-<h1 id="select-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Select Sort</h1>
+<h1 id="select-sort">Select Sort</h1>
 
 <p>Just like its name, select sort is to select the smallest or the biggest
 element of the rest elements every pass. This algorithm is very easy and
@@ -91,7 +91,7 @@ I can write down it with an eyes on.</p>
 
 <p>For this test cases, the average run time is <strong>0.4s</strong>.</p>
 
-<h1 id="insert-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Insert Sort</h1>
+<h1 id="insert-sort">Insert Sort</h1>
 
 <p>Just like playing poker, insert-sort will insert an element in a position
 of a sorted subsequence by moving the not-match elements backward. In the
@@ -102,7 +102,7 @@ sorted, it requires only O(n) time complexity.</p>
 
 <p>For this test cases, the average run time is also <strong>0.22s</strong>.</p>
 
-<h1 id="shell-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Shell Sort</h1>
+<h1 id="shell-sort">Shell Sort</h1>
 
 <p>Shell sort is one kind of insert sort. The idea that relatively sorted list can
 be sorted more easy is used in shell sort. It will sort the list for several
@@ -115,12 +115,12 @@ insert sort.</p>
 
 <p>For this test cases, the average run time is also <strong>0.18s</strong>.</p>
 
-<h1 id="quick-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Quick Sort</h1>
+<h1 id="quick-sort">Quick Sort</h1>
 
 <p>This is the most important algorithm in the interview. I must learn to write
 it on a paper with an eye on.</p>
 
-<h2 id="recursive-version:c82efbe47897fc68bcd3c7b3bd51c8bd">Recursive version</h2>
+<h2 id="recursive-version">Recursive version</h2>
 
 <p>Select an element as the one to be compared(so-called <strong>pivot</strong>), and then put
 it at the end of the list. Iterate the whole list and let those elements that
@@ -131,7 +131,7 @@ the same work recursively in the two parts.</p>
 
 <p>For this test cases, the average run time is <strong>0.07s</strong>.</p>
 
-<h2 id="iterate-version:c82efbe47897fc68bcd3c7b3bd51c8bd">Iterate version</h2>
+<h2 id="iterate-version">Iterate version</h2>
 
 <p>The recursive version is just the depth-first search, so we can change it
 into stack operation.</p>
@@ -140,7 +140,7 @@ into stack operation.</p>
 
 <p>For this test cases, the average run time is also <strong>0.07s</strong>.</p>
 
-<h1 id="merge-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Merge Sort</h1>
+<h1 id="merge-sort">Merge Sort</h1>
 
 <p>Merge sort is in terms of so-called <strong>Divided and Conquered</strong> method. Dividing
 each sequence into two subsequences and merge them after they are sorted. Merge
@@ -149,7 +149,7 @@ than Heap sort.</p>
 
 <p>I implemented three versions of merge sort.</p>
 
-<h2 id="merge-using-a-temporary-array:c82efbe47897fc68bcd3c7b3bd51c8bd">Merge using a temporary array</h2>
+<h2 id="merge-using-a-temporary-array">Merge using a temporary array</h2>
 
 <p>In the merge process, I used a buffer to store the sorted array from the two
 sorted subarrays and then copy the elements to the original array.</p>
@@ -158,7 +158,7 @@ sorted subarrays and then copy the elements to the original array.</p>
 
 <p>For this test cases, the average run time is <strong>0.042s</strong>.</p>
 
-<h2 id="merge-using-insert-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Merge using Insert sort</h2>
+<h2 id="merge-using-insert-sort">Merge using Insert sort</h2>
 
 <p>In the merge process, we can using insert sort to merge the two sorted arrays.
 Since the two arrays is sorted, it&rsquo;s fast to merge them.</p>
@@ -169,7 +169,7 @@ Since the two arrays is sorted, it&rsquo;s fast to merge them.</p>
 
 <p>For this test cases, the average run time is also <strong>0.045s</strong>.</p>
 
-<h2 id="merge-by-exchanging-memory:c82efbe47897fc68bcd3c7b3bd51c8bd">Merge by exchanging memory</h2>
+<h2 id="merge-by-exchanging-memory">Merge by exchanging memory</h2>
 
 <p>How to do it? Suppose we have two subarrays, say <code>a</code> and <code>b</code> and <code>a</code>
 start from <code>begin</code>, <code>b</code> start from <code>mid</code>.</p>
@@ -193,7 +193,7 @@ step 1, 2, 3.</p></li>
 
 <p>For this test cases, the average run time is also <strong>0.045s</strong>.</p>
 
-<h1 id="heap-sort:c82efbe47897fc68bcd3c7b3bd51c8bd">Heap Sort</h1>
+<h1 id="heap-sort">Heap Sort</h1>
 
 <p>A heap is very useful in sorting algorithm or in algorithms that find the top
 nth elements. I use a binary tree to build the tree and the binary tree is built
@@ -206,7 +206,7 @@ easy.</p>
 
 <p>For this test cases, the average run time is also <strong>0.022s</strong>.</p>
 
-<h1 id="summary:c82efbe47897fc68bcd3c7b3bd51c8bd">Summary</h1>
+<h1 id="summary">Summary</h1>
 
 <p>Here is the running time of these sorting algorithm with the same test cases.</p>
 
