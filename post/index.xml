@@ -2,12 +2,65 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Hank&#39;s Blog</title>
-    <link>http://zhengyhn.github.io/post/</link>
+    <link>http://zhengyhn.github.io/post/index.xml</link>
     <description>Recent content in Posts on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 May 2016 20:50:49 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 Mar 2017 22:50:49 +0800</lastBuildDate>
     <atom:link href="http://zhengyhn.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>如何在Sails.js中使用generator</title>
+      <link>http://zhengyhn.github.io/post/how-to-use-generator-in-sails/</link>
+      <pubDate>Mon, 13 Mar 2017 22:50:49 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/how-to-use-generator-in-sails/</guid>
+      <description>&lt;p&gt;由于历史原因，公司的App项目用Sails.js框架来开发，那时候还没有ES6，当然是一层一层callback下去，后来引进了Async和Thenjs，代码才清晰了很多，但是遇到复杂的业务逻辑，写起来依旧痛苦。&lt;/p&gt;
+
+&lt;p&gt;在这个不写ES6都不好意思说写Nodejs的年代，天天写callback很不是滋味，所以必须找个机会在不换框架的情况也能使用yield来解决callback的问题。&lt;/p&gt;
+
+&lt;p&gt;首先想到的肯定是用co这个包，它有一个wrap的方法，可以把generator转成callback，试想一下，如果所有的controller的每个方法，都用co.wrap一下，岂不是达到了想要的效果？看了下sails的源码，貌似必须要修改它的源码才行。那么问题来了，怎么样才能在不修改它源码的情况也能达到同样的效果呢？&lt;/p&gt;
+
+&lt;p&gt;由于javascript默认对象传引用，所以是不是可以直接把加载到内存中的controller方法全部用co.wrap包一下呢？&lt;/p&gt;
+
+&lt;p&gt;在看了sails的很多源码，经过很多次的尝试后，事实证明这种猜想是可以的！&lt;/p&gt;
+
+&lt;p&gt;只需要在config/bootstrap.js文件加上下面的代码，就可以在controller中使用generator了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var _ = require(&#39;lodash&#39;);
+var coExpress = require(&#39;co-express&#39;);
+
+sails.modules.loadControllers(function (err, modules) {
+  if (err) {
+    return callback(err);
+  }
+  sails.controllers = _.merge(sails.controllers, modules);
+
+  // hacking every action of all controllers
+  _.each(sails.controllers, function(controller, controllerId) {
+    _.each(controller, function(action, actionId) {
+      actionId = actionId.toLowerCase();
+      console.log(&#39;hacking route:&#39;, controllerId, actionId);
+      // co.wrap，generator =&amp;gt; callback
+      action = coExpress(action);
+      sails.hooks.controllers.middleware[controllerId][actionId] = action;
+    });
+  });
+  // reload routes
+  sails.router.load(function () {
+    // reload blueprints
+    sails.hooks.blueprints.initialize(function () {
+      sails.hooks.blueprints.extendControllerMiddleware();
+      sails.hooks.blueprints.bindShadowRoutes();
+      callback();
+    });
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里用了一个叫co-express的包，它的源码很简单，就是使用co.wrap包装了一下。重要的是，在修改了每个action之后，我们需要重新load一次routes和blueprints，这样才真正在内存中生效。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>c plus plus interview review</title>
@@ -19,13 +72,13 @@
 
 &lt;p&gt;这是我看了《C笔试面试宝典》一书的笔记&lt;/p&gt;
 
-&lt;h1 id=&#34;new-delete-malloc-free的关系:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;new, delete, malloc, free的关系&lt;/h1&gt;
+&lt;h1 id=&#34;new-delete-malloc-free的关系&#34;&gt;new, delete, malloc, free的关系&lt;/h1&gt;
 
 &lt;p&gt;new和delete是C++的 &lt;strong&gt;运算符&lt;/strong&gt; ，new调用构造函数，delete调用析构函数。&lt;/p&gt;
 
 &lt;p&gt;malloc和delete是C运行库的函数。&lt;/p&gt;
 
-&lt;h1 id=&#34;delete和delete-的区别:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;delete和delete[]的区别&lt;/h1&gt;
+&lt;h1 id=&#34;delete和delete-的区别&#34;&gt;delete和delete[]的区别&lt;/h1&gt;
 
 &lt;p&gt;delete只会调用一次析构函数，delete[]则会调用每个成员的析构函数。&lt;/p&gt;
 
@@ -68,7 +121,7 @@ c时出错了。&lt;/p&gt;
 &lt;p&gt;原因是，对于基本数据类型，delete[]能代替delete，对于自定义的类型，则要严格区分，
 new[]完之后用delete[]释放，new完之后用delete释放。&lt;/p&gt;
 
-&lt;h1 id=&#34;继承和组合的优缺点:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;继承和组合的优缺点&lt;/h1&gt;
+&lt;h1 id=&#34;继承和组合的优缺点&#34;&gt;继承和组合的优缺点&lt;/h1&gt;
 
 &lt;p&gt;引用自
 &lt;a href=&#34;http://www.cnblogs.com/nuaalfm/archive/2010/04/23/1718453.html&#34;&gt;这里&lt;/a&gt;
@@ -111,11 +164,11 @@ new[]完之后用delete[]释放，new完之后用delete释放。&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h1 id=&#34;引用:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;引用&lt;/h1&gt;
+&lt;h1 id=&#34;引用&#34;&gt;引用&lt;/h1&gt;
 
 &lt;p&gt;不能建立数组的引用。引用没有定义新的变量，不占用内存空间。&lt;/p&gt;
 
-&lt;h1 id=&#34;关联-聚合和组合:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;关联，聚合和组合&lt;/h1&gt;
+&lt;h1 id=&#34;关联-聚合和组合&#34;&gt;关联，聚合和组合&lt;/h1&gt;
 
 &lt;p&gt;关联是两个类的一般性关联，如老师和学生。&lt;/p&gt;
 
@@ -140,26 +193,26 @@ class B {
 };
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;初始化列表:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;初始化列表&lt;/h1&gt;
+&lt;h1 id=&#34;初始化列表&#34;&gt;初始化列表&lt;/h1&gt;
 
 &lt;p&gt;当类中含有const和引用成员变量时，基类构造函数只能使用初始化列表来初始化， 但是&lt;br /&gt;
 &lt;code&gt;const int&amp;amp; a;&lt;/code&gt; 这种就可以用赋值的方法。&lt;/p&gt;
 
-&lt;h1 id=&#34;类型安全:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;类型安全&lt;/h1&gt;
+&lt;h1 id=&#34;类型安全&#34;&gt;类型安全&lt;/h1&gt;
 
 &lt;p&gt;c++不是类型安全的，因为不同类型的指针之间可以强制转换。&lt;/p&gt;
 
-&lt;h1 id=&#34;空类:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;空类&lt;/h1&gt;
+&lt;h1 id=&#34;空类&#34;&gt;空类&lt;/h1&gt;
 
 &lt;p&gt;当一个类没有任何成员时，大小是1byte，这个字节是用来区分这个类的不同对象的。&lt;/p&gt;
 
-&lt;h1 id=&#34;逻辑地址-to-物理地址:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;逻辑地址 to 物理地址&lt;/h1&gt;
+&lt;h1 id=&#34;逻辑地址-to-物理地址&#34;&gt;逻辑地址 to 物理地址&lt;/h1&gt;
 
 &lt;p&gt;给出的逻辑地址格式是这样的,
 段地址:段内偏移地址，那么真实的地址（物理地址） 是： 段地址 * 10H +
 段内偏移地址。当然，这只适合于Intel 8086。&lt;/p&gt;
 
-&lt;h1 id=&#34;4种类型转换:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;4种类型转换&lt;/h1&gt;
+&lt;h1 id=&#34;4种类型转换&#34;&gt;4种类型转换&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;const_cast，把const的变量变成非const的，用法:&lt;/p&gt;
@@ -177,11 +230,11 @@ class B {
 &lt;li&gt;&lt;p&gt;reinterpret_cast，重新解释类型，没有转换，常用于函数指针的转换。&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;数组作参数:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;数组作参数&lt;/h1&gt;
+&lt;h1 id=&#34;数组作参数&#34;&gt;数组作参数&lt;/h1&gt;
 
 &lt;p&gt;当数组作为参数传递时，它会退化成同类型的指针。&lt;/p&gt;
 
-&lt;h1 id=&#34;override和隐藏:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;override和隐藏&lt;/h1&gt;
+&lt;h1 id=&#34;override和隐藏&#34;&gt;override和隐藏&lt;/h1&gt;
 
 &lt;p&gt;override，基类中必须要有virtual。&lt;/p&gt;
 
@@ -189,7 +242,7 @@ class B {
 
 &lt;p&gt;不管基类函数名有没有virtual，子类函数名一样，签名不一样，则也称隐藏。&lt;/p&gt;
 
-&lt;h1 id=&#34;求两个数中的最大的那个数:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;求两个数中的最大的那个数&lt;/h1&gt;
+&lt;h1 id=&#34;求两个数中的最大的那个数&#34;&gt;求两个数中的最大的那个数&lt;/h1&gt;
 
 &lt;p&gt;不能用判断(if, :?, switch)。答案是用abs函数:&lt;/p&gt;
 
@@ -224,11 +277,11 @@ int max(int a, int b)
 
 &lt;p&gt;根据负数与正数的符号位的不一样，而得出那个数。&lt;/p&gt;
 
-&lt;h1 id=&#34;打印源文件的文件名和当前行号:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;打印源文件的文件名和当前行号&lt;/h1&gt;
+&lt;h1 id=&#34;打印源文件的文件名和当前行号&#34;&gt;打印源文件的文件名和当前行号&lt;/h1&gt;
 
 &lt;p&gt;在C/C++中，可以用__FILE__和__LINE__，由编译器来识别。&lt;/p&gt;
 
-&lt;h1 id=&#34;main函数执行完之后还能执行代码:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;main函数执行完之后还能执行代码？&lt;/h1&gt;
+&lt;h1 id=&#34;main函数执行完之后还能执行代码&#34;&gt;main函数执行完之后还能执行代码？&lt;/h1&gt;
 
 &lt;p&gt;居然是可以的！ &lt;code&gt;&amp;lt;stdlib.h&amp;gt;&lt;/code&gt;
 中有一个奇葩的库函数叫on_exit，在linux下的man page中， 定义如下:&lt;/p&gt;
@@ -271,7 +324,7 @@ void two(int status, void *arg)
 &lt;p&gt;书上说的是 &lt;code&gt;_onexit&lt;/code&gt;
 ，根据我找的资料，这函数应该只有在windows的VC中才有。&lt;/p&gt;
 
-&lt;h1 id=&#34;判断是由c编译器编译还是由c-编译器编译:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;判断是由C编译器编译还是由C++编译器编译&lt;/h1&gt;
+&lt;h1 id=&#34;判断是由c编译器编译还是由c-编译器编译&#34;&gt;判断是由C编译器编译还是由C++编译器编译&lt;/h1&gt;
 
 &lt;p&gt;使用一个宏 &lt;code&gt;__cplusplus&lt;/code&gt;:&lt;/p&gt;
 
@@ -281,7 +334,7 @@ void two(int status, void *arg)
 ...
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;求n个数中第k大的数:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;求n个数中第k大的数&lt;/h1&gt;
+&lt;h1 id=&#34;求n个数中第k大的数&#34;&gt;求n个数中第k大的数&lt;/h1&gt;
 
 &lt;p&gt;我智商低，只能想到普通的办法，就是选择排序的外面循环K次。不过不能因为这样而找不到工作啊，
 学习了大牛的算法：&lt;/p&gt;
@@ -356,14 +409,14 @@ void swap(int *arr, int i, int j)
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;判断单链接有环:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;判断单链接有环&lt;/h1&gt;
+&lt;h1 id=&#34;判断单链接有环&#34;&gt;判断单链接有环&lt;/h1&gt;
 
 &lt;p&gt;想到这个方法的人就是神！&lt;/p&gt;
 
 &lt;p&gt;用两个指针，一个每次走一步，另外一个每次走两步，如果有环必定重合，
 否则走两步的那个指针将到达终点。&lt;/p&gt;
 
-&lt;h1 id=&#34;传值还是传地址:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;传值还是传地址&lt;/h1&gt;
+&lt;h1 id=&#34;传值还是传地址&#34;&gt;传值还是传地址&lt;/h1&gt;
 
 &lt;p&gt;看下面的代码:&lt;/p&gt;
 
@@ -383,27 +436,27 @@ int main(void)
 后来发现， 其实func函数的那个参数是以传值的方式传进去的，而不是传地址！
 如果要传地址的话， 应该是 &lt;code&gt;char **a，func(&amp;amp;a)&lt;/code&gt; 这样才行！&lt;/p&gt;
 
-&lt;h1 id=&#34;extern-c:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;extern &amp;ldquo;C&amp;rdquo;&lt;/h1&gt;
+&lt;h1 id=&#34;extern-c&#34;&gt;extern &amp;ldquo;C&amp;rdquo;&lt;/h1&gt;
 
 &lt;p&gt;这个是用于C/C++混合编程的，当引用C语言代码时在函数前面加上。&lt;/p&gt;
 
-&lt;h1 id=&#34;内联函数:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;内联函数&lt;/h1&gt;
+&lt;h1 id=&#34;内联函数&#34;&gt;内联函数&lt;/h1&gt;
 
 &lt;p&gt;编译器在编译内联函数时会对参数类型进行检查。&lt;/p&gt;
 
-&lt;h1 id=&#34;堆栈溢出的原因:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;堆栈溢出的原因&lt;/h1&gt;
+&lt;h1 id=&#34;堆栈溢出的原因&#34;&gt;堆栈溢出的原因&lt;/h1&gt;
 
 &lt;p&gt;分配了内存没有释放 递归层次太深&lt;/p&gt;
 
-&lt;h1 id=&#34;唯一不能声明为虚函数的函数:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;唯一不能声明为虚函数的函数&lt;/h1&gt;
+&lt;h1 id=&#34;唯一不能声明为虚函数的函数&#34;&gt;唯一不能声明为虚函数的函数&lt;/h1&gt;
 
 &lt;p&gt;构造函数！PS：析构函数可以声明为虚函数。&lt;/p&gt;
 
-&lt;h1 id=&#34;error:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;#error&lt;/h1&gt;
+&lt;h1 id=&#34;error&#34;&gt;#error&lt;/h1&gt;
 
 &lt;p&gt;当预处理执行到#error时，会停止编译，并给出自定义的错误信息&lt;/p&gt;
 
-&lt;h1 id=&#34;指针-数组:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;指针&amp;amp;数组&lt;/h1&gt;
+&lt;h1 id=&#34;指针-数组&#34;&gt;指针&amp;amp;数组&lt;/h1&gt;
 
 &lt;p&gt;指向数组的指针:&lt;/p&gt;
 
@@ -415,7 +468,7 @@ int main(void)
 &lt;pre&gt;&lt;code&gt;int (*a)(int);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;volatile:59a5f49c2dadf82bb0327bad32ec766b&#34;&gt;volatile&lt;/h1&gt;
+&lt;h1 id=&#34;volatile&#34;&gt;volatile&lt;/h1&gt;
 
 &lt;p&gt;修饰的变量，表明可能会被意想不到地改变，因此编译器不会从寄存器的备份中读取（因为
 内存中的值可能已经被改变了），而要每次小心地从内存中读取。&lt;/p&gt;
@@ -432,9 +485,9 @@ int main(void)
 
 &lt;p&gt;这是我读 &amp;ldquo;the art of readable code&amp;rdquo; 一书做的笔记&lt;/p&gt;
 
-&lt;h1 id=&#34;简化循环和逻辑:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;简化循环和逻辑&lt;/h1&gt;
+&lt;h1 id=&#34;简化循环和逻辑&#34;&gt;简化循环和逻辑&lt;/h1&gt;
 
-&lt;h2 id=&#34;making-control-flow-easy-to-read:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;making control flow easy to read&lt;/h2&gt;
+&lt;h2 id=&#34;making-control-flow-easy-to-read&#34;&gt;making control flow easy to read&lt;/h2&gt;
 
 &lt;p&gt;下面的代码:&lt;/p&gt;
 
@@ -480,7 +533,7 @@ int main(void)
 &lt;li&gt;尽量不要使用嵌套的if/else，想尽办法使得只有一个层次。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;breaking-down-giant-expressions:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;breaking down giant expressions&lt;/h2&gt;
+&lt;h2 id=&#34;breaking-down-giant-expressions&#34;&gt;breaking down giant expressions&lt;/h2&gt;
 
 &lt;p&gt;利用宏来简化代码。看下面的例子:&lt;/p&gt;
 
@@ -514,7 +567,7 @@ int main(void)
 
 &lt;p&gt;这样不仅视觉上看起来舒服，而且理解起来非常容易。&lt;/p&gt;
 
-&lt;h2 id=&#34;variables-and-readability:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;variables and readability&lt;/h2&gt;
+&lt;h2 id=&#34;variables-and-readability&#34;&gt;variables and readability&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;可去除一些多余的变量&lt;/li&gt;
@@ -547,11 +600,11 @@ if (size &amp;gt; 0) {
 &lt;li&gt;尽量使变量只能改变一次(prefer write-once varaibles)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;改善外层代码:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;改善外层代码&lt;/h1&gt;
+&lt;h1 id=&#34;改善外层代码&#34;&gt;改善外层代码&lt;/h1&gt;
 
-&lt;h2 id=&#34;packing-informations-into-names:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;packing informations into names&lt;/h2&gt;
+&lt;h2 id=&#34;packing-informations-into-names&#34;&gt;packing informations into names&lt;/h2&gt;
 
-&lt;h3 id=&#34;choose-specific-words:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;choose specific words&lt;/h3&gt;
+&lt;h3 id=&#34;choose-specific-words&#34;&gt;choose specific words&lt;/h3&gt;
 
 &lt;p&gt;书上说到getPage(url);这个函数的名字，根据我以前的看法，这绝对是一个好名字，
 但是作者却批评这种命名方式。作者说，get太模糊了，我们看不出来它是从缓存中get还是
@@ -559,7 +612,7 @@ if (size &amp;gt; 0) {
 downloadPage()。我觉得这个说法非常好，我以后给变量或者函数起名字的时候也要注意
 这方面的东西了。&lt;/p&gt;
 
-&lt;h3 id=&#34;avoid-generic-names-like-tmp-and-retval:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;avoid generic names like tmp and retval&lt;/h3&gt;
+&lt;h3 id=&#34;avoid-generic-names-like-tmp-and-retval&#34;&gt;avoid generic names like tmp and retval&lt;/h3&gt;
 
 &lt;p&gt;作者批评了tmp,retval,foo这种词语，虽然我没用过retval和foo这种奇怪的名字，但是
 我却用过tmp这东西，后来想了一下，tmp这种东西的确看不出来任何含义，就算时间紧迫，我
@@ -595,12 +648,12 @@ downloadPage()。我觉得这个说法非常好，我以后给变量或者函数
 醒悟过来，以后再也不写这种代码了！转而使用si,ti,ui，这样
 school[si].teacher[ti] == user[ui] 就非常清楚了。&lt;/p&gt;
 
-&lt;h3 id=&#34;prefer-concrete-names-over-abstract-names:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;prefer concrete names over abstract names&lt;/h3&gt;
+&lt;h3 id=&#34;prefer-concrete-names-over-abstract-names&#34;&gt;prefer concrete names over abstract names&lt;/h3&gt;
 
 &lt;p&gt;意思是不要抽象的名字，而是要具体的名字。以书上的一个例子说，
 serverCanStart是抽象的名字，而canListenOnPort则是一个具体的名字&lt;/p&gt;
 
-&lt;h3 id=&#34;attaching-extra-information-to-name-by-using-a-suffix-or-prefix:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;attaching extra information to name,by using a suffix or prefix&lt;/h3&gt;
+&lt;h3 id=&#34;attaching-extra-information-to-name-by-using-a-suffix-or-prefix&#34;&gt;attaching extra information to name,by using a suffix or prefix&lt;/h3&gt;
 
 &lt;p&gt;如果我们有一个变量:&lt;/p&gt;
 
@@ -622,7 +675,7 @@ document.writeln(&amp;quot;time is:&amp;quot; + elapsed + &amp;quot; seconds&amp
 start_ms和elapsed_ms就很清楚了！
 看到这里，我决定，以后遇到这种有单位的变量，都要带个单位的后缀，以写出可读的代码。&lt;/p&gt;
 
-&lt;h3 id=&#34;deciding-how-long-a-name-should-be:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;deciding how long a name should be&lt;/h3&gt;
+&lt;h3 id=&#34;deciding-how-long-a-name-should-be&#34;&gt;deciding how long a name should be&lt;/h3&gt;
 
 &lt;p&gt;在较短的域里面可以使用较短的变量名，比如:&lt;/p&gt;
 
@@ -648,7 +701,7 @@ start_ms和elapsed_ms就很清楚了！
 非常必要的，可能是我的个人原因，我不喜欢又臭又长的代码，我喜欢简洁的代码，对于unix哲学
 中的缩写规则，我很感兴趣，在程序中还是要尽量使用缩写。&lt;/p&gt;
 
-&lt;h3 id=&#34;using-name-formating-to-pack-extra-information:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;using name formating to pack extra information&lt;/h3&gt;
+&lt;h3 id=&#34;using-name-formating-to-pack-extra-information&#34;&gt;using name formating to pack extra information&lt;/h3&gt;
 
 &lt;p&gt;不同类型的实体命名特点, 在google
 c++的规范中，类名首字母大写，使用驼峰式;宏常量名全部大写，使用下划线分隔;
@@ -656,7 +709,7 @@ const变量则首字母大写，驼峰式，区分宏常量;类的方法首字�
 最后要跟一个下划线;其它局部变量则全部小写，后面不跟下划线。
 在html/css中，id一般使用下划线分隔，而class使用中线（dash）来分隔。&lt;/p&gt;
 
-&lt;h2 id=&#34;names-that-can-t-be-misconstructed:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;names that can&amp;rsquo;t be misconstructed&lt;/h2&gt;
+&lt;h2 id=&#34;names-that-can-t-be-misconstructed&#34;&gt;names that can&amp;rsquo;t be misconstructed&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;关键思想是：不断地问自己，这个名字别人会不会认为是其他意思？&lt;/li&gt;
@@ -758,7 +811,7 @@ const变量则首字母大写，驼峰式，区分宏常量;类的方法首字�
 链表的长度，这样就会使得程序的速度非常慢了。如果改成countSize()会好很多，
 但是幸运的是，作者说了，最新版的STL已经把size()变成了O(1)速度。&lt;/p&gt;
 
-&lt;h2 id=&#34;aesthetics:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;aesthetics&lt;/h2&gt;
+&lt;h2 id=&#34;aesthetics&#34;&gt;aesthetics&lt;/h2&gt;
 
 &lt;p&gt;举的第一个例子让我震惊！看下面的代码:&lt;/p&gt;
 
@@ -804,9 +857,9 @@ const变量则首字母大写，驼峰式，区分宏常量;类的方法首字�
 漂亮的代码，但是一直做不到，因为要打很多空格。后来发现emacs有通过正则表达式
 对齐的功能align-regexp，爽极了！&lt;/p&gt;
 
-&lt;h2 id=&#34;knowing-what-to-comment:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;knowing what to comment&lt;/h2&gt;
+&lt;h2 id=&#34;knowing-what-to-comment&#34;&gt;knowing what to comment&lt;/h2&gt;
 
-&lt;h3 id=&#34;when-should-not-comment:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;when should not comment？&lt;/h3&gt;
+&lt;h3 id=&#34;when-should-not-comment&#34;&gt;when should not comment？&lt;/h3&gt;
 
 &lt;p&gt;看注释会浪费阅读代码的人的时间，注释还会占用屏幕的地方，导致读者时常要
 翻页，所以，没有价值的注释不要写。下面的代码的注释都没有价值:&lt;/p&gt;
@@ -832,7 +885,7 @@ public:
 &lt;pre&gt;&lt;code&gt;good code &amp;gt; bad code + good comment
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;what-should-comment-be:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;what should comment be？&lt;/h3&gt;
+&lt;h3 id=&#34;what-should-comment-be&#34;&gt;what should comment be？&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;写自己的想法&lt;/li&gt;
@@ -878,7 +931,7 @@ public:
 &lt;li&gt;解释常量为什么是那个值&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;making-comments-precise-and-compact:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;making comments precise and compact&lt;/h2&gt;
+&lt;h2 id=&#34;making-comments-precise-and-compact&#34;&gt;making comments precise and compact&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;函数注释中，可使用举例说明，如:&lt;/p&gt;
@@ -917,20 +970,20 @@ for (i = SIZE; i &amp;gt;= 0; i--) {
 
 &lt;p&gt;更容易看懂。&lt;/p&gt;
 
-&lt;h1 id=&#34;重构代码:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;重构代码&lt;/h1&gt;
+&lt;h1 id=&#34;重构代码&#34;&gt;重构代码&lt;/h1&gt;
 
-&lt;h2 id=&#34;extracting-unrelated-subproblems:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;extracting unrelated subproblems&lt;/h2&gt;
+&lt;h2 id=&#34;extracting-unrelated-subproblems&#34;&gt;extracting unrelated subproblems&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;要封装一些和本功能无关的子问题到另外一个函数上。&lt;/li&gt;
 &lt;li&gt;对于一些工具的类或函数（字符串操作，哈希表等），就分离出来。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;one-task-at-a-time:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;one task at a time&lt;/h2&gt;
+&lt;h2 id=&#34;one-task-at-a-time&#34;&gt;one task at a time&lt;/h2&gt;
 
 &lt;p&gt;每个函数应该只实现一个功能，不要实现多个功能。&lt;/p&gt;
 
-&lt;h2 id=&#34;turning-thoughts-into-code:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;turning thoughts into code&lt;/h2&gt;
+&lt;h2 id=&#34;turning-thoughts-into-code&#34;&gt;turning thoughts into code&lt;/h2&gt;
 
 &lt;p&gt;记住爱因斯坦的这句话:&lt;/p&gt;
 
@@ -940,14 +993,14 @@ your grandmother.
 代码应该用易懂的英语来写。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;writing-less-code:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;writing less code&lt;/h2&gt;
+&lt;h2 id=&#34;writing-less-code&#34;&gt;writing less code&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;一定要熟悉现存的库，这样可以减少代码量，多重用代码，少写代码。&lt;/li&gt;
 &lt;li&gt;使用Unix工具(shell命令），而不是自己写代码&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;写出易懂的选择排序:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;写出易懂的选择排序&lt;/h1&gt;
+&lt;h1 id=&#34;写出易懂的选择排序&#34;&gt;写出易懂的选择排序&lt;/h1&gt;
 
 &lt;p&gt;以选择排序为例，我以前是直接把它记住的（当然是在理解的前提下），其中的一些
 下标i,j,k，直接记住人家的代码的，如果要我重新写，我还是会用i,j,k，造成了
@@ -1017,7 +1070,7 @@ your grandmother.
 
 &lt;p&gt;大部分都来自 &lt;a href=&#34;http://sphinx-doc.org/rest.html&#34;&gt;这里&lt;/a&gt; 。&lt;/p&gt;
 
-&lt;h1 id=&#34;代码块:aee60189ef864e8c6364c6b4392231b3&#34;&gt;代码块&lt;/h1&gt;
+&lt;h1 id=&#34;代码块&#34;&gt;代码块&lt;/h1&gt;
 
 &lt;p&gt;在段落的结尾使用 &lt;code&gt;::&lt;/code&gt; 符号,
 然后输入一个空行，然后是代码（必须缩进，空2格或4格），
@@ -1034,7 +1087,7 @@ main(int argc, char *argv[])
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;引入代码文件:aee60189ef864e8c6364c6b4392231b3&#34;&gt;引入代码文件&lt;/h1&gt;
+&lt;h1 id=&#34;引入代码文件&#34;&gt;引入代码文件&lt;/h1&gt;
 
 &lt;p&gt;对于我等码农来说，这应该算是最常用的了。格式为:&lt;/p&gt;
 
@@ -1042,7 +1095,7 @@ main(int argc, char *argv[])
 :lexer: language-name
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;超链接:aee60189ef864e8c6364c6b4392231b3&#34;&gt;超链接&lt;/h1&gt;
+&lt;h1 id=&#34;超链接&#34;&gt;超链接&lt;/h1&gt;
 
 &lt;p&gt;经常要引用一些大牛的博客，链接的格式为:&lt;/p&gt;
 
@@ -1051,7 +1104,7 @@ main(int argc, char *argv[])
 
 &lt;p&gt;比如， &lt;a href=&#34;http://en.zhengyuanhang.com&#34;&gt;我的英文博客&lt;/a&gt; 。&lt;/p&gt;
 
-&lt;h1 id=&#34;斜体和粗体:aee60189ef864e8c6364c6b4392231b3&#34;&gt;斜体和粗体&lt;/h1&gt;
+&lt;h1 id=&#34;斜体和粗体&#34;&gt;斜体和粗体&lt;/h1&gt;
 
 &lt;p&gt;斜体:&lt;/p&gt;
 
@@ -1063,7 +1116,7 @@ main(int argc, char *argv[])
 &lt;pre&gt;&lt;code&gt;**这是粗体**
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;图片:aee60189ef864e8c6364c6b4392231b3&#34;&gt;图片&lt;/h1&gt;
+&lt;h1 id=&#34;图片&#34;&gt;图片&lt;/h1&gt;
 
 &lt;p&gt;格式是这样的:&lt;/p&gt;
 
@@ -1219,7 +1272,7 @@ view of the north wall.&lt;/p&gt;
 &lt;p&gt;There is no doubt that I must have someone take a photo for myself.The photo
 below is it, I&amp;rsquo;m not very handsome as you imaged, though.&lt;/p&gt;
 
-&lt;p&gt;
+
 &lt;figure &gt;
     
         &lt;img src=&#34;http://zhengyhn.github.io/images/13.8.3.Great-Wall-me.jpg&#34; /&gt;
@@ -1231,7 +1284,7 @@ below is it, I&amp;rsquo;m not very handsome as you imaged, though.&lt;/p&gt;
     &lt;/figcaption&gt;
     
 &lt;/figure&gt;
-&lt;/p&gt;
+
 
 &lt;p&gt;The return tour was so relax because I could take the &lt;em&gt;877 bus&lt;/em&gt; to
 &lt;em&gt;De sheng men xi station&lt;/em&gt; directly!And it const me only 4.8 yuan.&lt;/p&gt;
@@ -1250,7 +1303,7 @@ a tour &lt;strong&gt;alone&lt;/strong&gt;.&lt;/p&gt;
       <guid>http://zhengyhn.github.io/post/2013-07-28-about-constructors-destructors-and-assignment-operators/</guid>
       <description>
 
-&lt;h2 id=&#34;what-functions-c-will-silently-write-and-call:ad90163a5135a9ab5d66997d40229e5d&#34;&gt;What functions C++ will silently write and call?&lt;/h2&gt;
+&lt;h2 id=&#34;what-functions-c-will-silently-write-and-call&#34;&gt;What functions C++ will silently write and call?&lt;/h2&gt;
 
 &lt;p&gt;If we declare an empty class, the compiler will declare a constructor,
 a copy constructor, a copy assignment operator and a destructor for us.&lt;/p&gt;
@@ -1280,7 +1333,7 @@ non-static data member from the source object to the target object.&lt;/p&gt;&lt
 will be some trouble with the compiler.Therefore, always define the four
 functions when we define our own class.&lt;/p&gt;
 
-&lt;h2 id=&#34;disallow-the-use-of-generated-functions-you-don-t-want:ad90163a5135a9ab5d66997d40229e5d&#34;&gt;Disallow the use of generated functions you don&amp;rsquo;t want&lt;/h2&gt;
+&lt;h2 id=&#34;disallow-the-use-of-generated-functions-you-don-t-want&#34;&gt;Disallow the use of generated functions you don&amp;rsquo;t want&lt;/h2&gt;
 
 &lt;p&gt;Sometimes, we may not want the copy constructor or the copy assignment
 operator because every member may be different with the other object&amp;rsquo;s
@@ -1323,7 +1376,7 @@ class Person: private Uncopyable {
 are declared as private, so the members and friends of class &lt;code&gt;Person&lt;/code&gt; can&amp;rsquo;t
 call them.&lt;/p&gt;
 
-&lt;h2 id=&#34;declare-destructors-virtual-in-polymorphic-base-classes:ad90163a5135a9ab5d66997d40229e5d&#34;&gt;Declare destructors virtual in polymorphic base classes&lt;/h2&gt;
+&lt;h2 id=&#34;declare-destructors-virtual-in-polymorphic-base-classes&#34;&gt;Declare destructors virtual in polymorphic base classes&lt;/h2&gt;
 
 &lt;p&gt;I have met this problem in an interview.&lt;/p&gt;
 
@@ -1648,7 +1701,7 @@ pass the parameters by reference-to-const, since &lt;strong&gt;the compiler will
       <guid>http://zhengyhn.github.io/post/2013-07-24-const-anyway/</guid>
       <description>
 
-&lt;h2 id=&#34;const-pointer:2fd84307549b01538b74d1aeefd6e52f&#34;&gt;Const pointer&lt;/h2&gt;
+&lt;h2 id=&#34;const-pointer&#34;&gt;Const pointer&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;const&lt;/code&gt; is versatile.I am always confused by the following syntax.&lt;/p&gt;
 
@@ -1674,7 +1727,7 @@ char const *str = &amp;quot;Hello&amp;quot;;
 
 &lt;p&gt;So, in a loop, if we don&amp;rsquo;t want to modify the data, use &lt;code&gt;const_iterator&lt;/code&gt;.&lt;/p&gt;
 
-&lt;h2 id=&#34;const-member-function:2fd84307549b01538b74d1aeefd6e52f&#34;&gt;Const member function&lt;/h2&gt;
+&lt;h2 id=&#34;const-member-function&#34;&gt;Const member function&lt;/h2&gt;
 
 &lt;p&gt;Sometimes, we have two version member functions.One is const and the other is
 not.&lt;/p&gt;
@@ -2041,7 +2094,7 @@ private:
 };
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;provide-access-to-raw-resources:caeb39714cb04ae6190d0970b322f1ee&#34;&gt;Provide access to raw resources&lt;/h2&gt;
+&lt;h2 id=&#34;provide-access-to-raw-resources&#34;&gt;Provide access to raw resources&lt;/h2&gt;
 
 &lt;p&gt;Sometimes we may only want to access the raw resource but the object that
 contains the resource.For example:&lt;/p&gt;
@@ -2145,7 +2198,7 @@ main(int argc, char **argv)
 &lt;p&gt;It&amp;rsquo;s obviously that the explicit method is safer and the implicit method is
 more convenient for clients.&lt;/p&gt;
 
-&lt;h2 id=&#34;keep-new-and-delete-in-the-same-form:caeb39714cb04ae6190d0970b322f1ee&#34;&gt;Keep new and delete in the same form&lt;/h2&gt;
+&lt;h2 id=&#34;keep-new-and-delete-in-the-same-form&#34;&gt;Keep new and delete in the same form&lt;/h2&gt;
 
 &lt;p&gt;We all know that the following code is wrong.&lt;/p&gt;
 
@@ -2268,7 +2321,6 @@ hiding of the &lt;code&gt;sleep(const int sec)&lt;/code&gt; function!&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;class Student:public Person {
 public:
     using Person::sleep;
-
 
     explicit Student()
     { }
@@ -2481,59 +2533,6 @@ back of the queue.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/zhengyhn/hugo-blog-code/tree/master/st-queue&#34;&gt;Here&lt;/a&gt; is the code.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Implement a singular LinkedList</title>
-      <link>http://zhengyhn.github.io/post/2013-09-12-implement-a-singular-linkedlist/</link>
-      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/2013-09-12-implement-a-singular-linkedlist/</guid>
-      <description>&lt;p&gt;LinkedList is a very common data structure. Three years ago, I could write
-a singular LinkedList very quickly in C/C++. But the code is ugly and very
-ineffecient. Now I am going to implement a singular LinkedList in C++ in order
-to cracking the interview.&lt;/p&gt;
-
-&lt;p&gt;Here is the specification of my LinkedList.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;LinkedList()&lt;/code&gt;, Create an empty LinkedList.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;LinkedList(const LinkedList&amp;amp; list)&lt;/code&gt;, Create a LinkedList from another
-LinkedList &lt;code&gt;list&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;LinkedList(const T&amp;amp; value)&lt;/code&gt;, Create a LinkedList whose first element
-is &lt;code&gt;value&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;LinkedList(const T values[], size_t size)&lt;/code&gt;, Create a LinkedList from
-an array &lt;code&gt;values&lt;/code&gt; of size &lt;code&gt;size&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;const LinkedList&amp;amp; operator=(const LinkedList&amp;amp; list)&lt;/code&gt;, Support LinkedList
-assignment.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;~LinkedList()&lt;/code&gt;, Free all the space requested by the LinkedList.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;std::ostream&amp;amp; operator&amp;lt;&amp;lt;(std::ostream&amp;amp;, const LinkedList&amp;lt;T&amp;gt;&amp;amp;);&lt;/code&gt;,
-Output the LinkedList in the form &lt;strong&gt;[a, b, c &amp;hellip;]&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;void append(const T&amp;amp; value)&lt;/code&gt;, Append an element &lt;code&gt;value&lt;/code&gt; to the LinkedList.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;const T&amp;amp; operator[](size_t index)&lt;/code&gt;, Access the element of the LinkedList,
-but it&amp;rsquo;s not random accessible.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;void insert(size_t index, const T&amp;amp; value)&lt;/code&gt;, Insert an element &lt;code&gt;value&lt;/code&gt;
-in the position &lt;code&gt;index&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;void remove(size_t index)&lt;/code&gt;, Remove the element in the position &lt;code&gt;index&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;size_t size()&lt;/code&gt;, Return the size of the LinkedList.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;void reverse()&lt;/code&gt;, Reverse the whole LinkedList.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;void sort()&lt;/code&gt;, Sort the whole LinkedList using merge sort.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;There are some interview problems about LinkedList.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;2.1&lt;/strong&gt; Write code to remove duplicates from an unsorted linked list. How would
-you solve this problem if a temporary buffer is not allowed?&lt;/p&gt;
-
-&lt;p&gt;I solve it in the method &lt;code&gt;rm_dup()&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;2.2&lt;/strong&gt; Implement an algorithm to find the nth to last element of a singly
-linked list.&lt;/p&gt;
-
-&lt;p&gt;I solve it in the method &lt;code&gt;nth_last()&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/zhengyhn/hugo-blog-code/tree/master/singular-list&#34;&gt;Here&lt;/a&gt; is the code.&lt;/p&gt;
 </description>
     </item>
     

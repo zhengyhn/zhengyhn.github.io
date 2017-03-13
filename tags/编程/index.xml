@@ -2,11 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>编程 on Hank&#39;s Blog</title>
-    <link>http://zhengyhn.github.io/tags/%E7%BC%96%E7%A8%8B/</link>
+    <link>http://zhengyhn.github.io/tags/%E7%BC%96%E7%A8%8B/index.xml</link>
     <description>Recent content in 编程 on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 May 2016 20:40:43 +0800</lastBuildDate>
     <atom:link href="http://zhengyhn.github.io/tags/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -19,9 +18,9 @@
 
 &lt;p&gt;这是我读 &amp;ldquo;the art of readable code&amp;rdquo; 一书做的笔记&lt;/p&gt;
 
-&lt;h1 id=&#34;简化循环和逻辑:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;简化循环和逻辑&lt;/h1&gt;
+&lt;h1 id=&#34;简化循环和逻辑&#34;&gt;简化循环和逻辑&lt;/h1&gt;
 
-&lt;h2 id=&#34;making-control-flow-easy-to-read:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;making control flow easy to read&lt;/h2&gt;
+&lt;h2 id=&#34;making-control-flow-easy-to-read&#34;&gt;making control flow easy to read&lt;/h2&gt;
 
 &lt;p&gt;下面的代码:&lt;/p&gt;
 
@@ -67,7 +66,7 @@
 &lt;li&gt;尽量不要使用嵌套的if/else，想尽办法使得只有一个层次。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;breaking-down-giant-expressions:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;breaking down giant expressions&lt;/h2&gt;
+&lt;h2 id=&#34;breaking-down-giant-expressions&#34;&gt;breaking down giant expressions&lt;/h2&gt;
 
 &lt;p&gt;利用宏来简化代码。看下面的例子:&lt;/p&gt;
 
@@ -101,7 +100,7 @@
 
 &lt;p&gt;这样不仅视觉上看起来舒服，而且理解起来非常容易。&lt;/p&gt;
 
-&lt;h2 id=&#34;variables-and-readability:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;variables and readability&lt;/h2&gt;
+&lt;h2 id=&#34;variables-and-readability&#34;&gt;variables and readability&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;可去除一些多余的变量&lt;/li&gt;
@@ -134,11 +133,11 @@ if (size &amp;gt; 0) {
 &lt;li&gt;尽量使变量只能改变一次(prefer write-once varaibles)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;改善外层代码:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;改善外层代码&lt;/h1&gt;
+&lt;h1 id=&#34;改善外层代码&#34;&gt;改善外层代码&lt;/h1&gt;
 
-&lt;h2 id=&#34;packing-informations-into-names:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;packing informations into names&lt;/h2&gt;
+&lt;h2 id=&#34;packing-informations-into-names&#34;&gt;packing informations into names&lt;/h2&gt;
 
-&lt;h3 id=&#34;choose-specific-words:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;choose specific words&lt;/h3&gt;
+&lt;h3 id=&#34;choose-specific-words&#34;&gt;choose specific words&lt;/h3&gt;
 
 &lt;p&gt;书上说到getPage(url);这个函数的名字，根据我以前的看法，这绝对是一个好名字，
 但是作者却批评这种命名方式。作者说，get太模糊了，我们看不出来它是从缓存中get还是
@@ -146,7 +145,7 @@ if (size &amp;gt; 0) {
 downloadPage()。我觉得这个说法非常好，我以后给变量或者函数起名字的时候也要注意
 这方面的东西了。&lt;/p&gt;
 
-&lt;h3 id=&#34;avoid-generic-names-like-tmp-and-retval:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;avoid generic names like tmp and retval&lt;/h3&gt;
+&lt;h3 id=&#34;avoid-generic-names-like-tmp-and-retval&#34;&gt;avoid generic names like tmp and retval&lt;/h3&gt;
 
 &lt;p&gt;作者批评了tmp,retval,foo这种词语，虽然我没用过retval和foo这种奇怪的名字，但是
 我却用过tmp这东西，后来想了一下，tmp这种东西的确看不出来任何含义，就算时间紧迫，我
@@ -182,12 +181,12 @@ downloadPage()。我觉得这个说法非常好，我以后给变量或者函数
 醒悟过来，以后再也不写这种代码了！转而使用si,ti,ui，这样
 school[si].teacher[ti] == user[ui] 就非常清楚了。&lt;/p&gt;
 
-&lt;h3 id=&#34;prefer-concrete-names-over-abstract-names:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;prefer concrete names over abstract names&lt;/h3&gt;
+&lt;h3 id=&#34;prefer-concrete-names-over-abstract-names&#34;&gt;prefer concrete names over abstract names&lt;/h3&gt;
 
 &lt;p&gt;意思是不要抽象的名字，而是要具体的名字。以书上的一个例子说，
 serverCanStart是抽象的名字，而canListenOnPort则是一个具体的名字&lt;/p&gt;
 
-&lt;h3 id=&#34;attaching-extra-information-to-name-by-using-a-suffix-or-prefix:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;attaching extra information to name,by using a suffix or prefix&lt;/h3&gt;
+&lt;h3 id=&#34;attaching-extra-information-to-name-by-using-a-suffix-or-prefix&#34;&gt;attaching extra information to name,by using a suffix or prefix&lt;/h3&gt;
 
 &lt;p&gt;如果我们有一个变量:&lt;/p&gt;
 
@@ -209,7 +208,7 @@ document.writeln(&amp;quot;time is:&amp;quot; + elapsed + &amp;quot; seconds&amp
 start_ms和elapsed_ms就很清楚了！
 看到这里，我决定，以后遇到这种有单位的变量，都要带个单位的后缀，以写出可读的代码。&lt;/p&gt;
 
-&lt;h3 id=&#34;deciding-how-long-a-name-should-be:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;deciding how long a name should be&lt;/h3&gt;
+&lt;h3 id=&#34;deciding-how-long-a-name-should-be&#34;&gt;deciding how long a name should be&lt;/h3&gt;
 
 &lt;p&gt;在较短的域里面可以使用较短的变量名，比如:&lt;/p&gt;
 
@@ -235,7 +234,7 @@ start_ms和elapsed_ms就很清楚了！
 非常必要的，可能是我的个人原因，我不喜欢又臭又长的代码，我喜欢简洁的代码，对于unix哲学
 中的缩写规则，我很感兴趣，在程序中还是要尽量使用缩写。&lt;/p&gt;
 
-&lt;h3 id=&#34;using-name-formating-to-pack-extra-information:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;using name formating to pack extra information&lt;/h3&gt;
+&lt;h3 id=&#34;using-name-formating-to-pack-extra-information&#34;&gt;using name formating to pack extra information&lt;/h3&gt;
 
 &lt;p&gt;不同类型的实体命名特点, 在google
 c++的规范中，类名首字母大写，使用驼峰式;宏常量名全部大写，使用下划线分隔;
@@ -243,7 +242,7 @@ const变量则首字母大写，驼峰式，区分宏常量;类的方法首字�
 最后要跟一个下划线;其它局部变量则全部小写，后面不跟下划线。
 在html/css中，id一般使用下划线分隔，而class使用中线（dash）来分隔。&lt;/p&gt;
 
-&lt;h2 id=&#34;names-that-can-t-be-misconstructed:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;names that can&amp;rsquo;t be misconstructed&lt;/h2&gt;
+&lt;h2 id=&#34;names-that-can-t-be-misconstructed&#34;&gt;names that can&amp;rsquo;t be misconstructed&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;关键思想是：不断地问自己，这个名字别人会不会认为是其他意思？&lt;/li&gt;
@@ -345,7 +344,7 @@ const变量则首字母大写，驼峰式，区分宏常量;类的方法首字�
 链表的长度，这样就会使得程序的速度非常慢了。如果改成countSize()会好很多，
 但是幸运的是，作者说了，最新版的STL已经把size()变成了O(1)速度。&lt;/p&gt;
 
-&lt;h2 id=&#34;aesthetics:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;aesthetics&lt;/h2&gt;
+&lt;h2 id=&#34;aesthetics&#34;&gt;aesthetics&lt;/h2&gt;
 
 &lt;p&gt;举的第一个例子让我震惊！看下面的代码:&lt;/p&gt;
 
@@ -391,9 +390,9 @@ const变量则首字母大写，驼峰式，区分宏常量;类的方法首字�
 漂亮的代码，但是一直做不到，因为要打很多空格。后来发现emacs有通过正则表达式
 对齐的功能align-regexp，爽极了！&lt;/p&gt;
 
-&lt;h2 id=&#34;knowing-what-to-comment:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;knowing what to comment&lt;/h2&gt;
+&lt;h2 id=&#34;knowing-what-to-comment&#34;&gt;knowing what to comment&lt;/h2&gt;
 
-&lt;h3 id=&#34;when-should-not-comment:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;when should not comment？&lt;/h3&gt;
+&lt;h3 id=&#34;when-should-not-comment&#34;&gt;when should not comment？&lt;/h3&gt;
 
 &lt;p&gt;看注释会浪费阅读代码的人的时间，注释还会占用屏幕的地方，导致读者时常要
 翻页，所以，没有价值的注释不要写。下面的代码的注释都没有价值:&lt;/p&gt;
@@ -419,7 +418,7 @@ public:
 &lt;pre&gt;&lt;code&gt;good code &amp;gt; bad code + good comment
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;what-should-comment-be:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;what should comment be？&lt;/h3&gt;
+&lt;h3 id=&#34;what-should-comment-be&#34;&gt;what should comment be？&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;写自己的想法&lt;/li&gt;
@@ -465,7 +464,7 @@ public:
 &lt;li&gt;解释常量为什么是那个值&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;making-comments-precise-and-compact:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;making comments precise and compact&lt;/h2&gt;
+&lt;h2 id=&#34;making-comments-precise-and-compact&#34;&gt;making comments precise and compact&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;函数注释中，可使用举例说明，如:&lt;/p&gt;
@@ -504,20 +503,20 @@ for (i = SIZE; i &amp;gt;= 0; i--) {
 
 &lt;p&gt;更容易看懂。&lt;/p&gt;
 
-&lt;h1 id=&#34;重构代码:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;重构代码&lt;/h1&gt;
+&lt;h1 id=&#34;重构代码&#34;&gt;重构代码&lt;/h1&gt;
 
-&lt;h2 id=&#34;extracting-unrelated-subproblems:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;extracting unrelated subproblems&lt;/h2&gt;
+&lt;h2 id=&#34;extracting-unrelated-subproblems&#34;&gt;extracting unrelated subproblems&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;要封装一些和本功能无关的子问题到另外一个函数上。&lt;/li&gt;
 &lt;li&gt;对于一些工具的类或函数（字符串操作，哈希表等），就分离出来。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;one-task-at-a-time:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;one task at a time&lt;/h2&gt;
+&lt;h2 id=&#34;one-task-at-a-time&#34;&gt;one task at a time&lt;/h2&gt;
 
 &lt;p&gt;每个函数应该只实现一个功能，不要实现多个功能。&lt;/p&gt;
 
-&lt;h2 id=&#34;turning-thoughts-into-code:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;turning thoughts into code&lt;/h2&gt;
+&lt;h2 id=&#34;turning-thoughts-into-code&#34;&gt;turning thoughts into code&lt;/h2&gt;
 
 &lt;p&gt;记住爱因斯坦的这句话:&lt;/p&gt;
 
@@ -527,14 +526,14 @@ your grandmother.
 代码应该用易懂的英语来写。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;writing-less-code:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;writing less code&lt;/h2&gt;
+&lt;h2 id=&#34;writing-less-code&#34;&gt;writing less code&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;一定要熟悉现存的库，这样可以减少代码量，多重用代码，少写代码。&lt;/li&gt;
 &lt;li&gt;使用Unix工具(shell命令），而不是自己写代码&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;写出易懂的选择排序:4a3523512546b6c0f4201728a4c7bf5b&#34;&gt;写出易懂的选择排序&lt;/h1&gt;
+&lt;h1 id=&#34;写出易懂的选择排序&#34;&gt;写出易懂的选择排序&lt;/h1&gt;
 
 &lt;p&gt;以选择排序为例，我以前是直接把它记住的（当然是在理解的前提下），其中的一些
 下标i,j,k，直接记住人家的代码的，如果要我重新写，我还是会用i,j,k，造成了
