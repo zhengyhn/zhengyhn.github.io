@@ -25,15 +25,17 @@
 
 &lt;p&gt;中途有想过用tcpkill之类的工具，最后没采用这种方法。&lt;/p&gt;
 
-&lt;p&gt;情急之下，想到了取巧的办法：
-1. 先用config set maxclients 20000将最大连接数变成20000
-2. 然后执行client list命令，发现不会报错了，那就是说明可以执行client kill了
-3. kill掉这些ip的客户端&lt;/p&gt;
+&lt;p&gt;情急之下，想到了取巧的办法：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;sudo netstat -anp |grep 6379| grep &#39;xxx.xxx.xxx.xxx&#39; | awk &#39;{print $5}&#39; | xargs -I % redis-cli -p 6379 client kill %
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;等tcp四次招手结束后，连接数终于降下来了&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先用config set maxclients 20000将最大连接数变成20000&lt;/li&gt;
+&lt;li&gt;然后执行client list命令，发现不会报错了，那就是说明可以执行client kill了&lt;/li&gt;
+&lt;li&gt;kill掉这些ip的客户端
+&lt;code&gt;
+sudo netstat -anp |grep 6379| grep &#39;xxx.xxx.xxx.xxx&#39; | awk &#39;{print $5}&#39; | xargs -I % redis-cli -p 6379 client kill %
+&lt;/code&gt;
+等tcp四次招手结束后，连接数终于降下来了&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
