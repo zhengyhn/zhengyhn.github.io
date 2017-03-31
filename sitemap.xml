@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhengyhn.github.io/post/design-guide/</loc>
+    <lastmod>2017-03-31T10:50:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/redis-max-client-limit/</loc>
+    <lastmod>2017-03-30T22:50:49+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://zhengyhn.github.io/post/how-to-use-generator-in-sails/</loc>
     <lastmod>2017-03-13T22:50:49+08:00</lastmod>
   </url>
@@ -142,8 +152,20 @@
   </url>
   
   <url>
+    <loc>http://zhengyhn.github.io/tags/design/</loc>
+    <lastmod>2017-03-31T10:50:49+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/categories/design/</loc>
+    <lastmod>2017-03-31T10:50:49+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://zhengyhn.github.io/</loc>
-    <lastmod>2017-03-13T22:50:49+08:00</lastmod>
+    <lastmod>2017-03-31T10:50:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -161,7 +183,19 @@
   
   <url>
     <loc>http://zhengyhn.github.io/post/</loc>
-    <lastmod>2017-03-13T22:50:49+08:00</lastmod>
+    <lastmod>2017-03-31T10:50:49+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/tags/redis/</loc>
+    <lastmod>2017-03-30T22:50:49+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/categories/redis/</loc>
+    <lastmod>2017-03-30T22:50:49+08:00</lastmod>
     <priority>0</priority>
   </url>
   
