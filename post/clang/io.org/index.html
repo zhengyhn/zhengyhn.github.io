@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> tcpl读书笔记：输入和输出 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/clang/io.org/">tcpl读书笔记：输入和输出</a></h2>
+          <span class="post-date">Mar 10, 2013 </span>
+          <div class="post-content">
+            
+
+<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为the c programming language一书的笔记
+@&lt;/font&gt;</p>
+
+<h1 id="错误处理-stderr-and-exit">错误处理——stderr and exit</h1>
+
+<ul>
+<li>为什么要有stderr呢？</li>
+</ul>
+
+<p>当我们用到屏幕的时候，如果出错了，可以通过stdout把错误信息输出到屏幕，但是，
+如果我们不是打印到屏幕，而是重定向到文件或者其它文件，就不能使用printf等函数
+来输出错误信息了。这时候就该stderr上场了，因为它只会输出到屏幕。</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    fprintf(stderr, &quot;slfdjdfj\n&quot;);
+
+    return 0;
+}
+</code></pre>
+
+<p>结果如下： [monkey@itlodge test]\$ ./t slfdjdfj [monkey@itlodge
+test]\$ ./t &gt; t.txt slfdjdfj</p>
+
+<ul>
+<li>对于exit(int status)函数，status为0表示成功，非0表示异常退出。</li>
+<li>命令执行函数system(char
+*s),传进去一个字符串，表示命令，会执行这个命令。</li>
+</ul>
+
+<p>但是这个命令强烈依赖于系统，比如：</p>
+
+<pre><code class="language-example">system(&quot;date&quot;);
+</code></pre>
+
+<p>在Linux会打印出来日期信息，而在win中可能不行。</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/clang/structure.org/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/test/blinder.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

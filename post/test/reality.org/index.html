@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 软件测试的现状 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/test/reality.org/">软件测试的现状</a></h2>
+          <span class="post-date">Mar 2, 2013 </span>
+          <div class="post-content">
+            
+
+<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记
+@&lt;/font&gt;</p>
+
+<h1 id="测试公理">测试公理</h1>
+
+<h2 id="不可能完整地测试一个程序">不可能完整地测试一个程序</h2>
+
+<p>原因有：</p>
+
+<ul>
+<li>可能的输入是巨大的</li>
+<li>可能的输出也是巨大的</li>
+<li>软件的使用方式是多种多样的</li>
+<li>软件说明是主观的。</li>
+</ul>
+
+<h2 id="软件测试是一个冒险的工作">软件测试是一个冒险的工作</h2>
+
+<p>随着测试用例的增加，找到的bug会越来越少，从而测试的代价就越来越高，我们要
+合理地设置测试用例的范围，减少测试的冒险性和成本。</p>
+
+<h2 id="测试并不表明有的bug不存在">测试并不表明有的bug不存在</h2>
+
+<h2 id="你哪里找到的bug越多-那里的bug就越多">你哪里找到的bug越多，那里的bug就越多</h2>
+
+<p>原因有：</p>
+
+<ul>
+<li>程序员可能会在某天很开心，于是写出的代码很好，可能在某天很不开心，写出来的</li>
+</ul>
+
+<p>代码就有bug，于是bug都聚集在一起。</p>
+
+<ul>
+<li>程序员总是犯同一个错误，这是人类的习惯造成的。</li>
+</ul>
+
+<h2 id="杀虫剂矛盾-你用同样的方法找bug-下次就不管用了">杀虫剂矛盾（你用同样的方法找bug，下次就不管用了）</h2>
+
+<h2 id="你找到的bug中-不会全部被修复">你找到的bug中，不会全部被修复</h2>
+
+<p>原因有：</p>
+
+<ul>
+<li>时间不够</li>
+<li>你找到的其实不是一个bug</li>
+<li>修复这个bug太危险了，可能会诞生更多的bug</li>
+<li>修复这个bug不值得。</li>
+</ul>
+
+<h2 id="有时候不知道这个是不是一个bug">有时候不知道这个是不是一个bug</h2>
+
+<h2 id="产品说明从来不会终止">产品说明从来不会终止</h2>
+
+<h2 id="软件测试师不是一个项目组里面最受欢迎的人">软件测试师不是一个项目组里面最受欢迎的人</h2>
+
+<p>下面是和队友搞好关系的贴士：</p>
+
+<ul>
+<li>尽早找到bug</li>
+<li>不要太骄傲（当你找到bug的时候）</li>
+<li>不要总是报告坏消息</li>
+</ul>
+
+<h1 id="软件测试名词和定义">软件测试名词和定义</h1>
+
+<ul>
+<li>precision准确性 and accuracy精确性</li>
+</ul>
+
+<p>下面这幅图很好地说明了两者之间的区别： <em>~/pictures/images.jpe</em></p>
+
+<ul>
+<li>verification and validation</li>
+</ul>
+
+<p>verification是验证软件是否符合产品说明的过程，
+validation是验证软件是否符合用户需求的过程。</p>
+
+<ul>
+<li>quality and reliability</li>
+</ul>
+
+<p>quality:高质量, reliability,可靠性。 可靠性只是高质量的一个方面。</p>
+
+<ul>
+<li>testing and quality assurance(QA)</li>
+</ul>
+
+<p>软件测试是要尽早地找到bug，并确保它们被修复。
+质量保证是要创造和加强标准、方法来改善软件开发过程，防止bug的产生。</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/sevenhabbits/personal_success.org/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/sevenhabbits/review_myself.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

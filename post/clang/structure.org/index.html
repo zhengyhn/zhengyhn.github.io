@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> tcpl读书笔记：结构体 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/clang/structure.org/">tcpl读书笔记：结构体</a></h2>
+          <span class="post-date">Mar 10, 2013 </span>
+          <div class="post-content">
+            
+
+<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为the c programming language一书的笔记
+@&lt;/font&gt;</p>
+
+<h1 id="基础">基础</h1>
+
+<ul>
+<li>原来可以这样初始化：</li>
+</ul>
+
+<pre><code class="language-c">struct point {
+    int x;
+    int y;
+};
+
+struct maxpt = { 300, 200 };
+</code></pre>
+
+<p>这样就定义了一个坐标为(300, 200)的点。</p>
+
+<ul>
+<li>在定义的时候初始化：</li>
+</ul>
+
+<pre><code class="language-c">struct key {
+    char *word;
+    int count;
+} keytab[] = {
+    &quot;break&quot;, 0,
+    &quot;continue&quot;, 0
+};
+</code></pre>
+
+<ul>
+<li>sizeof不能用在#if里面，因为预处理器不能解释类型名</li>
+<li>指针的加法是非法的，而指针的减法是合法的。</li>
+</ul>
+
+<h1 id="typedef">typedef</h1>
+
+<ul>
+<li>看下面这个例子：</li>
+</ul>
+
+<pre><code class="language-example">typedef int (*PFI)(char *, char *);
+</code></pre>
+
+<p>居然可以这样用！上面的代码起了一个类型别名，用于表示一个指向一个函数的指针，
+这个函数有2个char *参数，返回类型为int。
+看到这里，我终于知道typedef应该怎样理解了。比如：</p>
+
+<pre><code class="language-example">typedef struct point *Point;
+</code></pre>
+
+<p>这里，添加的类型别名为Point，当使用它的时候：</p>
+
+<pre><code class="language-example">Point pp;
+</code></pre>
+
+<p>当理解的时候，只需要把Point换成pp就行了：</p>
+
+<pre><code class="language-example">typedef struct point *pp;
+</code></pre>
+
+<p>这样，就可以解释上面那个函数指针了。</p>
+
+<h1 id="union">union</h1>
+
+<ul>
+<li>联合体里面的存储空间等于占用空间最大的元素所占的空间</li>
+</ul>
+
+<h1 id="位域">位域</h1>
+
+<ul>
+<li>看下面的例子：</li>
+</ul>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+typedef unsigned int uint;
+
+struct {
+    uint is_keyword : 1;
+    uint is_extern  : 1;
+    uint is_static  : 1;
+} flags;
+
+int main()
+{
+    printf(&quot;%d\n&quot;, sizeof(flags));
+    flags.is_keyword = 1;
+    printf(&quot;%d\n&quot;, flags.is_keyword);
+
+    return 0;
+}
+</code></pre>
+
+<p>结果为:</p>
+
+<hr />
+
+<p>4
+  1</p>
+
+<hr />
+
+<p>占用4个字节，而不是12个字节，因为这里只用到3位，为了内存对齐，就是4个字节了。</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/clang/type_op_exp.org/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/clang/io.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

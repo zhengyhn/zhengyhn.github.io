@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 配置测试与兼容性测试 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/test/config_comp.org/">配置测试与兼容性测试</a></h2>
+          <span class="post-date">Mar 17, 2013 </span>
+          <div class="post-content">
+            
+
+<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记
+@&lt;/font&gt;</p>
+
+<h1 id="配置测试">配置测试</h1>
+
+<p>其实是有关硬件的测试。需要测试的内容：</p>
+
+<ul>
+<li>PC类型（戴尔的？联想的？苹果的？）</li>
+<li>PC部件（不同的主板，CPU，声卡，显卡，网卡等）</li>
+<li>外围设备（鼠标，键盘，打印机，摄像头等）</li>
+<li>接口（USB，PCI，PS/2等）</li>
+<li>存储量大小（比如显卡有显存大小，内存条有内存大小）</li>
+<li>设备驱动（该设备的驱动程序有没有？）</li>
+</ul>
+
+<p>在进行配置测试时，可能需要买（或者借）很多种品牌的硬件来测试，比如可能需要
+几百种声卡和显卡，要测试完所有的种类是不可能的，这个时候就需要等价划分了，
+或者只测试主流的设备。</p>
+
+<p>要了解这些PC的主流硬件，需要去搜索相关资料，有获取信息的途径，比如PC
+Magzine 和Mac
+World。在同一个等价划分里面的硬件没必要都测试，应该测试那些与众不同的
+特性。</p>
+
+<p>怎么获取这些硬件呢？首先，那些经常要用到的硬件应该直接买下来。第二种办法，联系
+厂家问他们能不能借来测试。第三种办法，问公司的同事借。当然，你应该要找PM要相关
+的经费。</p>
+
+<h1 id="兼容性测试">兼容性测试</h1>
+
+<p>上面是与硬件的兼容，现在是与其他软件的兼容。</p>
+
+<ul>
+<li>向后兼容：该软件与低版本的其他软件兼容。</li>
+<li>向前兼容：该软件与未来版本的其他软件兼容。</li>
+</ul>
+
+<p>选择要兼容的软件的方法：</p>
+
+<ul>
+<li>看这方面软件的流行度</li>
+<li>看软件的年龄</li>
+<li>软件的类型</li>
+<li>厂家</li>
+</ul>
+
+<p>通过这些方法来确定等价划分。</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/test/exam_code.org/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/algorithm/number/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 基础知识 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/shell/basics/">基础知识</a></h2>
+          <span class="post-date">Aug 13, 2017 </span>
+          <div class="post-content">
+            
+
+<h1 id="特殊字符">特殊字符</h1>
+
+<h2 id="toc_1">#</h2>
+
+<ul>
+<li>在双引号和单引号里面的#不会被认为是注释开始，经\转义的#不会认为是注释开始。</li>
+</ul>
+
+<pre><code class="language-bash">echo &quot;#这里不是注释&quot;
+echo '#这里不是注释'
+echo \#这里不是注释
+echo #这里不是注释
+</code></pre>
+
+<h2 id="toc_2">;</h2>
+
+<ul>
+<li>和C语言不同，这里分号用于在同一行中分隔两条命令，这一点和pascal很相似</li>
+</ul>
+
+<pre><code class="language-bash">if [ -z $1 ]; then
+    echo &quot;--&gt;must with paramether 'start' or 'stop'&quot;
+elif [ $1 == &quot;start&quot; ]; then
+    echo &quot;starting...&quot;
+    sudo systemctl start smbd nmbd
+    echo &quot;done!&quot;
+elif [ $1 == &quot;stop&quot; ]; then
+    echo &quot;stoping...&quot;
+    sudo systemctl stop smbd nmbd
+    echo &quot;done!&quot;
+else
+    echo &quot;--&gt;error parameter!&quot;
+fi
+</code></pre>
+
+<p>上面的分号就是用于分隔前面的判断和后面的then，分号后面最好加个空格，好区别一点。</p>
+
+<h2 id="toc_3">;;</h2>
+
+<ul>
+<li>两个分号用于case语句中选项的结束符</li>
+</ul>
+
+<pre><code class="language-bash">case &quot;$1&quot; in
+    &quot;abc&quot;) echo &quot;\$1 = abc&quot; ;;
+    &quot;xyz&quot;) echo &quot;\$1 = xyz&quot; ;;
+esac    
+</code></pre>
+
+<ul>
+<li>原来case的结构是这样的，和pascal的很相似，最后的结束esac，就是case倒过来，</li>
+</ul>
+
+<p>我发现了规律，因为if的结束是fi，因此我猜其它的也是这个规律。</p>
+
+<h2 id="toc_4">.</h2>
+
+<ul>
+<li>当用于命令时，它和source是一样的功能。source是什么功能呢？以前看到修改了.bashrc</li>
+</ul>
+
+<p>总是要source一下才会使配置生效，今天看了这本书，才发现，原来source就相当于C语言中
+的#include指令，用于给脚本包含一个文件。</p>
+
+<ul>
+<li>在正则表达式中，dot匹配单个字符。</li>
+</ul>
+
+<h2 id="and">&rdquo; and &lsquo;</h2>
+
+<ul>
+<li>&ldquo;表示partial quoting,&lsquo;表示full quoting</li>
+</ul>
+
+<h2 id="toc_6">,</h2>
+
+<ul>
+<li>逗号可以用于分隔数学表达式，和C语言一样，只返回最后一个逗号后面的表达式的值。如：</li>
+</ul>
+
+<p>let &ldquo;t = ((a = 9, 15 / 3))&rdquo;</p>
+
+<h2 id="toc_7">`</h2>
+
+<ul>
+<li>这个符号，在我的键盘里，是和波浪号～在一个键的，它的作用是命令替换，即`command`</li>
+</ul>
+
+<dl>
+<dt>得到的是执行command这个命令之后的结果，它的英文名是backquote或者backtick</dt>
+</dl>
+
+<h2 id="toc_8">:</h2>
+
+<ul>
+<li>冒号的英文名叫colon，在bash
+shell里面起空命令的作用，相当于汇编里面的NOP。</li>
+<li>它还表示true。比如：</li>
+</ul>
+
+<pre><code class="language-bash">while :
+do
+    echo &quot;wow&quot;
+done
+</code></pre>
+
+<p>相当于</p>
+
+<pre><code class="language-bash">while true
+do
+    echo &quot;wow&quot;
+done
+</code></pre>
+
+<ul>
+<li>它的退出状态是0</li>
+</ul>
+
+<pre><code class="language-bash">:
+echo $?
+</code></pre>
+
+<p>结果是：</p>
+
+<pre><code class="language-example">0
+</code></pre>
+
+<ul>
+<li>在if/then结构中，用于空操作，相当于C语言中的分号。</li>
+</ul>
+
+<pre><code class="language-bash">if condition
+then 
+    :
+else
+    ...
+fi
+</code></pre>
+
+<ul>
+<li>它还有一个巧妙的用法，就是防止当作命令使用。比如：</li>
+</ul>
+
+<pre><code class="language-bash">: ${username=`whoami`}
+echo $username
+</code></pre>
+
+<p>这里，如果不用:，则后面拿到的用户名会当作命令来用。</p>
+
+<ul>
+<li>它还用作路径的分隔符，在\$PATH中就会看到。</li>
+</ul>
+
+<h2 id="toc_9">!</h2>
+
+<ul>
+<li>一般用于“非”，用法和C语言一样</li>
+<li>两个!表示上一个命令，一般打某个命令忘了打sudo，则下一个命令可以使用sudo
+!!</li>
+</ul>
+
+<h2 id="toc_10">*</h2>
+
+<ul>
+<li>通配符来的，通配符的英文是wild card，不查我还真不明白wild
+card到底是什么意思！</li>
+<li>在正则表达式中，它匹配0个或多个字符。</li>
+<li>在数学表达式中，一个*表示乘号，两个*表示幂运算。</li>
+<li>两个*还有一个特殊功能，它表示递归的文件匹配。看下面的例子：</li>
+</ul>
+
+<pre><code class="language-bash">#!/bin/bash
+
+shopt -s globstar
+
+for file in **
+do
+    echo $file
+done    
+</code></pre>
+
+<p>但是，需要开启globstar，因为这个是bash 4里面的新加的功能。</p>
+
+<h2 id="toc_11">?</h2>
+
+<ul>
+<li>像C语言中的三目运算符一样，可以和?:一起构成if/then/else结构，但是必须要用双括号。</li>
+</ul>
+
+<pre><code class="language-bash">a=1
+b=2
+((min = $a &lt; $b ? $a : $b))
+echo $min       
+</code></pre>
+
+<h2 id="toc_12">\$</h2>
+
+<ul>
+<li>最普遍的应用是用于变量替换。</li>
+<li>在正则表达式中，\$表示字符串的结束。</li>
+<li>\$?取得结束状态(exit status)</li>
+<li>\$\$取得当前脚本的进程ID</li>
+</ul>
+
+<h2 id="toc_13">()</h2>
+
+<ul>
+<li>第一个作用是命令组，有点像C语言中的区块的概念。</li>
+</ul>
+
+<pre><code class="language-bash">a=123
+(a=321;)
+echo $a
+</code></pre>
+
+<p>结果为：</p>
+
+<pre><code class="language-example">123
+</code></pre>
+
+<ul>
+<li>第二个作用用于数组初始化。</li>
+</ul>
+
+<h2 id="toc_14">{}</h2>
+
+<ul>
+<li>这个才是真正的区块，但是奇怪的是，这里的区块里面的变量外面却是可见的。</li>
+</ul>
+
+<pre><code class="language-bash">a=123
+{ a=321; }
+echo $a
+</code></pre>
+
+<p>结果为：</p>
+
+<pre><code class="language-example">321
+</code></pre>
+
+<p>注意{}里面要加空格。</p>
+
+<h2 id="gt-and-gt-gt-and-gt-gt">&gt; and &amp;&gt; &gt;&amp; and &gt;&gt;</h2>
+
+<ul>
+<li>&gt;用于把stdout重定向到文件</li>
+<li>&amp;&gt;用于把stdout和stderr重定向到文件</li>
+<li>&gt;&amp;用于把stdout重定向到stderr</li>
+<li>&gt;&gt;和&gt;的不同之处在于，&gt;&gt;是append到文件的结尾。</li>
+</ul>
+
+<h1 id="控制字符">控制字符</h1>
+
+<h2 id="ctrl-c">Ctrl-c</h2>
+
+<ul>
+<li>break用于结束前台作业</li>
+</ul>
+
+<h2 id="ctrl-d">Ctrl-d</h2>
+
+<ul>
+<li>退出</li>
+<li>EOF</li>
+</ul>
+
+<h2 id="ctrl-h">Ctrl-h</h2>
+
+<ul>
+<li>相当于退格键，但是要比退格键快</li>
+</ul>
+
+<h2 id="ctrl-l">Ctrl-L</h2>
+
+<ul>
+<li>相当于clear命令。</li>
+</ul>
+
+<h2 id="ctrl-t">Ctrl-t</h2>
+
+<ul>
+<li>当前光标所在的字符与上一个字符交换，打错的时候特别有用。</li>
+</ul>
+
+<h2 id="ctrl-u">Ctrl-u</h2>
+
+<ul>
+<li>清除一行命令（再也不用按那么多退格键了）</li>
+</ul>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/about/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/design-guide/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

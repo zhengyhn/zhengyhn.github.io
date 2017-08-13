@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> C语言实现的矩阵类 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/clang/matrix/">C语言实现的矩阵类</a></h2>
+          <span class="post-date">Mar 6, 2013 </span>
+          <div class="post-content">
+            <p>随着学习的深入，数学是必不可少的，最近复习到矩阵，于是用我最喜欢的C语言写
+了一个矩阵类，使用面向对象的方法，只实现了简单的操作:新建，删除，加，减，
+乘，求幂，转置等，以后会再增加。</p>
+
+<p>matrix.h</p>
+
+<pre><code class="language-c">#ifndef _MATRIX_H_
+#define _MATRIX_H_
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+//matrix element's type
+typedef double matrix_t;
+typedef struct matrix Matrix;
+
+struct matrix {
+    int row_no;       //row number
+    int col_no;       //column number
+    matrix_t *elem;   //point to the elements
+};
+
+/* create a matrix from a file pointed by FP, with
+ * ROW_NO rows and COL_NO columns, return the pointer
+ * to the matrix.
+ * [note]:if FP is NULL, return an empty matrix */
+Matrix *
+matrix_from_file(FILE *fp, int row_no, int col_no);
+
+/* create a matrix from an two dimension pointer ARR with
+ * ROW_NO rows and COL_NO columns, return the pointer
+ * to the matrix.
+ * [note]:if ARR is NULL, return an empty matrix */
+Matrix *
+matrix_from_array(float **arr, int row_no, int col_no);
+
+/* free all memory */
+void matrix_delete(Matrix *m);
+
+/* initial the matrix M as identity matrix */
+void matrix_identity(Matrix *m);
+
+/* change all elements of matrix M to their opposite sign elements */
+void matrix_minus(Matrix *m);
+
+/* add two matrix M1 and M2, the result is matrix RESULT */
+void matrix_add(const Matrix *m1, const Matrix *m2, Matrix *result);
+
+/* substract matrix SUBSTRAHEND from matrix MINUEND, the result is
+ * matrix RESULT */
+void matrix_substract(Matrix *minuend, Matrix *substrahend, Matrix *result);
+
+/* multiple matrix LEFT and RIGHT, the result is matrix RESULT.
+ * with a stupid algorithm. */
+void matrix_multiple(Matrix *left, Matrix *right, Matrix *result);
+
+/* calculate the matrix's power of exponent EXP, the result is
+ * the matrix RESULT. */   
+void matrix_power(Matrix *m, int exp, Matrix *result);
+
+/* calculate the transposition of matrix M, the result is TRANS */
+void matrix_trans(Matrix *m, Matrix *trans);
+
+/* print the matrix M */
+void matrix_print(const Matrix *m);
+
+#endif /* _MATRIX_H_ */
+</code></pre>
+
+<p>matrix.c</p>
+
+<pre><code class="language-c">#include &quot;matrix.h&quot;
+
+static void assert_matrix(const Matrix *);
+static int can_add(const Matrix *m1, const Matrix *m2, const Matrix *result);
+static int can_mul(const Matrix *left, const Matrix *right,
+                   const Matrix *result);
+static int is_square(const Matrix *m);
+
+Matrix *
+matrix_from_file(FILE *fp, int row_no, int col_no)
+{
+    int i;
+    Matrix *m = (Matrix *)malloc(sizeof(Matrix));
+
+    if (m == NULL) {
+        fprintf(stderr, &quot;memory no enough!&quot;);
+        exit(1);
+    }
+    m-&gt;row_no = row_no;
+    m-&gt;col_no = col_no;
+    m-&gt;elem = (matrix_t *)malloc(row_no * col_no * sizeof(matrix_t));
+    if (m-&gt;elem == NULL) {
+        fprintf(stderr, &quot;memory no enough!&quot;);
+        exit(1);
+    }
+    if (fp != NULL) {
+        for (i = 0; i &lt; row_no * col_no; i++) {
+            fscanf(fp, &quot;%lf&quot;, (m-&gt;elem + i));
+        }
+    }
+
+    return m;
+}
+
+Matrix *
+matrix_from_array(float **arr, int row_no, int col_no)
+{
+    int i, j;
+    Matrix *m = (Matrix *)malloc(sizeof(Matrix));
+
+    if (m == NULL) {
+        fprintf(stderr, &quot;memory no enough!&quot;);
+        exit(1);
+    }
+    m-&gt;row_no = row_no;
+    m-&gt;col_no = col_no;
+    m-&gt;elem = (matrix_t *)malloc(row_no * col_no * sizeof(matrix_t));
+    if (m-&gt;elem == NULL) {
+        fprintf(stderr, &quot;memory no enough!&quot;);
+        exit(1);
+    }
+    if (arr != NULL) {
+        for (i = 0; i &lt; row_no; i++) {
+            for (j = 0; j &lt; col_no; j++) {
+                *(m-&gt;elem + i * col_no + j) = arr[i][j];
+            }
+        }
+    }
+
+    return m;
+}
+
+void matrix_delete(Matrix *m)
+{
+    assert_matrix(m);
+
+    if (m-&gt;elem) {
+        free(m-&gt;elem);
+    }
+    free(m);
+}
+
+void matrix_identity(Matrix *m)
+{
+    int i;
+
+    assert_matrix(m);
+
+    if (!is_square(m)) {
+        fprintf(stderr, &quot;identity: the matrix is not square!&quot;);
+        exit(1);
+    }
+    for (i = 0; i &lt; m-&gt;row_no * m-&gt;col_no; i++) {
+        if (((i / m-&gt;col_no) * m-&gt;row_no) + (i / m-&gt;col_no) == i) {
+            *(m-&gt;elem + i) = 1;
+        } else {
+            *(m-&gt;elem + i) = 0;
+        }
+    }
+}
+
+void matrix_minus(Matrix *m)
+{
+    int i;
+
+    assert_matrix(m);
+
+    for (i = 0; i &lt; m-&gt;row_no * m-&gt;col_no; i++) {
+        *(m-&gt;elem + i) = -(*(m-&gt;elem + i));
+    }
+}
+
+void matrix_print(const Matrix *m)
+{
+    int i, j;
+
+    assert_matrix(m);
+
+    for (i = 0; i &lt; m-&gt;row_no; i++) {
+        for (j = 0; j &lt; m-&gt;col_no; j++) {
+            printf(&quot;%5g&quot;, *(m-&gt;elem + i * m-&gt;col_no + j));
+        }
+        printf(&quot;\n&quot;);
+    }
+}
+
+void matrix_add(const Matrix *m1, const Matrix *m2,
+                Matrix *result)
+{
+    int i;
+
+    assert_matrix(m1);
+    assert_matrix(m2);
+    assert_matrix(result);
+
+    if (!can_add(m1, m2, result)) {
+        fprintf(stderr, &quot;add: row number or column number not match!&quot;);
+        exit(1);
+    }
+    for (i = 0; i &lt; result-&gt;row_no * result-&gt;col_no; i++) {
+        *(result-&gt;elem + i) = *(m1-&gt;elem + i) + *(m2-&gt;elem + i);
+    }
+}
+
+void matrix_substract(Matrix *minuend, Matrix *substrahend,
+                      Matrix *result)
+{
+    matrix_minus(substrahend);
+    matrix_add(minuend, substrahend, result);
+    matrix_minus(substrahend);
+}
+
+void matrix_multiple(Matrix *left, Matrix *right, Matrix *result)
+{
+    int i, j, k, left_elem, right_elem;
+    matrix_t sum;
+    Matrix *temp;
+
+    assert_matrix(left);
+    assert_matrix(right);
+    assert_matrix(result);
+
+    if (!can_mul(left, right, result)) {
+        fprintf(stderr, &quot;multiple: row number or column number not match!&quot;);
+        exit(1);
+    }
+    if (result == left || result == right) {
+        temp = matrix_from_file(NULL, result-&gt;row_no, result-&gt;col_no);
+        for (i = 0; i &lt; result-&gt;row_no * result-&gt;col_no; i++) {
+            *(temp-&gt;elem + i) = *(result-&gt;elem + i);
+        }
+    } else {
+        temp = result;
+    }
+    for (i = 0; i &lt; left-&gt;row_no; i++) {
+        for (j = 0; j &lt; right-&gt;col_no; j++) {
+            sum = 0.0;
+            for (k = 0; k &lt; left-&gt;col_no; k++) {
+                left_elem = *(left-&gt;elem + i * left-&gt;col_no + k);
+                right_elem = *(right-&gt;elem + j * right-&gt;col_no + k);
+                if ((left_elem != 0) &amp;&amp; (right_elem != 0)) {
+                    sum += left_elem * right_elem;
+                }
+            }
+            *(temp-&gt;elem + i * temp-&gt;col_no + j) = sum;
+        }
+    }
+    if (result == left || result == right) {
+        for (i = 0; i &lt; result-&gt;row_no * result-&gt;col_no; i++) {
+            *(result-&gt;elem + i) = *(temp-&gt;elem + i);
+        }
+    }
+}
+
+void matrix_power(Matrix *m, int exp, Matrix *result)
+{
+    matrix_identity(result);
+
+    while (exp &gt; 0) {
+        if ((exp &amp; 1) == 1) {
+            matrix_multiple(m, result, result);
+        }
+        matrix_multiple(m, m, m);
+        exp &gt;&gt;= 1;
+    }
+}
+
+void matrix_trans(Matrix *m, Matrix *trans)
+{
+    int i, j;
+
+    assert_matrix(m);
+    assert_matrix(trans);
+
+    if (!(m-&gt;row_no == trans-&gt;col_no &amp;&amp;
+          m-&gt;col_no == trans-&gt;row_no)) {
+        fprintf(stderr, &quot;row number or column number not match!&quot;);
+        exit(1);
+    }
+    for (i = 0; i &lt; m-&gt;row_no; i++) {
+        for (j = 0; j &lt; m-&gt;col_no; j++) {
+            *(trans-&gt;elem + j * trans-&gt;col_no + i) =
+                *(m-&gt;elem + i * m-&gt;row_no + j);
+        }
+    }
+}
+
+static void assert_matrix(const Matrix *m)
+{
+    if (m == NULL) {
+        fprintf(stderr, &quot;the matrix is NULL!&quot;);
+    }
+}
+
+static int can_add(const Matrix *m1, const Matrix *m2,
+                   const Matrix *result)
+{
+    if (m1-&gt;row_no == m2-&gt;row_no &amp;&amp;
+        m1-&gt;col_no == m2-&gt;col_no &amp;&amp;
+        m1-&gt;row_no == result-&gt;row_no &amp;&amp;
+        m1-&gt;col_no == result-&gt;col_no) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+static int can_mul(const Matrix *left, const Matrix *right,
+                   const Matrix *result)
+{
+    if (left-&gt;col_no == right-&gt;row_no &amp;&amp;
+        right-&gt;row_no == result-&gt;row_no &amp;&amp;
+        right-&gt;col_no == result-&gt;col_no) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+static int is_square(const Matrix *m)
+{
+    return m-&gt;row_no == m-&gt;col_no;
+}
+</code></pre>
+
+<p>main.c</p>
+
+<pre><code class="language-c">#include &quot;matrix.h&quot;
+
+#define M 5
+#define N 5
+
+/* return the fibonacci number of NUM */
+float fibonacci(int num);
+
+int main(int argc, char *argv[])
+{
+    Matrix *m1, *m2, *result;
+    FILE *fp;
+
+    fp = fopen(&quot;input.txt&quot;, &quot;r&quot;);
+    if (fp == NULL) {
+        perror(&quot;open input.txt&quot;);
+        exit(1);
+    }
+    m1 = matrix_from_file(fp, 5, 5);
+    m2 = matrix_from_file(fp, 5, 5);
+    result = matrix_from_file(NULL, 5, 5);
+
+    matrix_print(m1);
+    printf(&quot;\n&quot;);
+
+    matrix_minus(m1);
+    matrix_print(m1);
+    printf(&quot;\n&quot;);
+
+    matrix_add(m1, m2, result);
+    matrix_print(result);
+    printf(&quot;\n&quot;);
+
+    matrix_substract(m2, m1, result);
+    matrix_print(result);
+    printf(&quot;\n&quot;);
+
+    matrix_multiple(m1, m2, result);
+    matrix_print(result);
+    printf(&quot;\n&quot;);
+
+    matrix_trans(m1, result);
+    matrix_print(result);
+    printf(&quot;\n&quot;);
+
+    matrix_delete(m1);
+    matrix_delete(m2);
+    fclose(fp);
+    matrix_delete(result);
+
+    printf(&quot;%g\n&quot;, fibonacci(10));
+
+    return 0;
+}
+
+float fibonacci(int num)
+{
+    Matrix *m1, *m2, *exp;
+    float **arr, **vector, result;
+    int i, j;
+
+    arr = (float **)malloc(2 * sizeof(float *));
+    for (i = 0; i &lt; 2; i++) {
+        arr[i] = (float *)malloc(2 * sizeof(float));
+        for (j = 0; j &lt; 2; j++) {
+            arr[i][j] = 1;
+        }
+    }
+    arr[0][0] = 0;
+
+    vector = (float **)malloc(2 * sizeof(float *));
+    for (i = 0; i &lt; 2; i++) {
+        vector[i] = (float *)malloc(sizeof(float));
+    }
+    vector[0][0] = 0;
+    vector[1][0] = 1;
+
+    m1 = matrix_from_array(arr, 2, 2);
+    m2 = matrix_from_array(vector, 2, 1);
+    exp = matrix_from_file(NULL, 2, 2);
+
+    matrix_power(m1, num, exp);
+    matrix_multiple(exp, m2, m2);
+    result = *(m2-&gt;elem);
+
+    matrix_delete(m1);
+    matrix_delete(m2);
+    matrix_delete(exp);
+    for (i = 0; i &lt; 2; i++) {
+        free(arr[i]);
+    }
+    free(arr);
+    for (i = 0; i &lt; 2; i++) {
+        free(vector[i]);
+    }
+    free(vector);
+
+    return result;
+}
+</code></pre>
+
+<p>input.txt</p>
+
+<pre><code class="language-example">1 2 3 4 5
+6 7 8 9 10
+9 8 7 6 5
+4 3 2 1 -1
+-2 0 1 2 3
+
+1 1 1 1 1
+2 2 2 2 2
+3 3 3 3 3
+4 4 4 4 4
+5 5 5 5 5
+
+</code></pre>
+
+<p>Makefile</p>
+
+<pre><code class="language-example">#for matrix
+
+CC = gcc
+CFLAGS = -Wall -o2 -g
+HEADER = matrix.h
+SRC = matrix.c main.c
+OBJ = $(SRC:.c=.o)
+
+main: $(OBJ)
+    $(CC) $(CFLAGS) $^ -o $@
+
+.PHONY: clean
+
+clean:
+    rm -rf *.o
+</code></pre>
+
+<p>能看到这里的，已经不是普通人了，希望多多指教！</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/haskell/recursion.org/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/haskell/function.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

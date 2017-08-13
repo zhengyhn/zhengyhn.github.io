@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> About Constructors Destructors and Assignment Operators &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/cpp/2013-07-28-about-constructors-destructors-and-assignment-operators/">About Constructors Destructors and Assignment Operators</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            
+
+<h2 id="what-functions-c-will-silently-write-and-call">What functions C++ will silently write and call?</h2>
+
+<p>If we declare an empty class, the compiler will declare a constructor,
+a copy constructor, a copy assignment operator and a destructor for us.</p>
+
+<pre><code>class Girl {
+
+};
+</code></pre>
+
+<p>But the compiler is not foolish, it will only generate them when needed.</p>
+
+<p>What do the generated functions do?</p>
+
+<ul>
+<li><p>For construtor, it will invoke the corresponding constructor and non-static
+members of its base class.</p></li>
+
+<li><p>For destructor, it will invoke the corresponding destructor of its base class.
+If its base class&rsquo;s destructor is virtual, the destructor will declare as
+virtual.</p></li>
+
+<li><p>For copy constructor and copy assignment operator, they will copy each
+non-static data member from the source object to the target object.</p></li>
+</ul>
+
+<p>If the class has some members that are pointer, reference or constant, there
+will be some trouble with the compiler.Therefore, always define the four
+functions when we define our own class.</p>
+
+<h2 id="disallow-the-use-of-generated-functions-you-don-t-want">Disallow the use of generated functions you don&rsquo;t want</h2>
+
+<p>Sometimes, we may not want the copy constructor or the copy assignment
+operator because every member may be different with the other object&rsquo;s
+members.Preventing the generation of these functions will make the
+program more effecient.</p>
+
+<p>If we don&rsquo;t declare these two functions, the compiler will generate them
+for us.</p>
+
+<p>So how can we do?</p>
+
+<p>The prefer solution is <strong>declare the copy constructor and copy assignment</strong>
+<strong>operator as private and never implement them</strong>.</p>
+
+<p>If we implement them, the members and friends of the class can call them.But
+if we don&rsquo;t implement them, the linker will complain at it.</p>
+
+<p>In order to move the link-time error to the compile time, we should let the
+members and the friends of the class cannot call them.One method is to define
+a base class that can&rsquo;t be copied and inherited by the class that you don&rsquo;t
+want it to be copyable.</p>
+
+<pre><code>class Uncopyable {
+protected:
+    Uncopyable()
+    { }
+    ~Uncopyable()
+    { }
+private:
+    Uncopyable(const Uncopyable&amp;);
+    Uncopyable&amp; operator=(const Uncopyable&amp;);
+};
+
+class Person: private Uncopyable {
+
+};
+</code></pre>
+
+<p>The copy constructor and copy assignment operator of the class <code>Uncopyable</code>
+are declared as private, so the members and friends of class <code>Person</code> can&rsquo;t
+call them.</p>
+
+<h2 id="declare-destructors-virtual-in-polymorphic-base-classes">Declare destructors virtual in polymorphic base classes</h2>
+
+<p>I have met this problem in an interview.</p>
+
+<p>Suppose the destructor of the base class is not virtual.</p>
+
+<pre><code>class Dog {
+public:
+    Dog();
+    ~Dog();
+};
+</code></pre>
+
+<p>And there are two class inherited from it.</p>
+
+<pre><code>class Whippet:public Dog {
+
+};
+
+class Spaniel:public Dog {
+
+};
+</code></pre>
+
+<p>We can use a base class pointer to handle the derived classes.</p>
+
+<pre><code>Dog *aDog = new Whippet();
+...
+</code></pre>
+
+<p>Then you should delete the pointer when you want to quit.</p>
+
+<pre><code>delete aDog;
+</code></pre>
+
+<p>Now, the problem appears.The C++ specifies that when a derived class
+object is deleted through a pointer to a base class with a non-virtual
+destructor, results are undefined.</p>
+
+<p>That is, the destructor of the base class will be called typically, but
+the destructor of the derived class may not be called.</p>
+
+<p>I have written a simple program to test it.</p>
+
+<pre><code>#include &lt;cstdio&gt;
+
+class Dog {
+public:
+    Dog()
+    { }
+    ~Dog()
+    {
+        printf(&quot;Call Dog's destructor\n&quot;);
+    }
+private:
+    Dog(const Dog&amp;);
+    Dog&amp;
+    operator=(const Dog&amp;);
+};
+
+class Whippet:public Dog {
+public:
+    Whippet()
+    { }
+    ~Whippet()
+    {
+        printf(&quot;Call Whippet's destructor\n&quot;);
+    }
+};
+
+int
+main(int argc, char **argv)
+{
+    Dog *aDog = new Whippet();
+    delete aDog;
+
+    return 0;
+}
+</code></pre>
+
+<p>I run the program several times and the results are the same.</p>
+
+<pre><code>~/test $ ./test 
+Call Dog's destructor
+</code></pre>
+
+<p>Now, if I change the destrutor to <code>virtual</code>, the result is:</p>
+
+<pre><code>virtual ~Dog()
+{
+    printf(&quot;Call Dog's destructor\n&quot;);
+}
+
+~/test $ ./test 
+Call Whippet's destructor
+Call Dog's destructor
+</code></pre>
+
+<p>Therefore, when the base class have virtual member functions, you should
+always make the destructor virtual.</p>
+
+<p>However, not every destructor of any class should be virtual.Making it
+virtual will occupy some additional information(virtual table pointer)
+that can increase the size of an object of that class.</p>
+
+<p><strong>Prevent exceptions from leaving destructors</strong></p>
+
+<p><strong>Never call virtual functions during construction or destruction</strong></p>
+
+<p>I have seen the assignment operator in this form many times.</p>
+
+<pre><code>Person&amp; operator=(const Person&amp; p)
+{
+    ...
+    return *this;
+}
+</code></pre>
+
+<p>First, the parameter is passed by const-reference, which is more effecient.
+Second, the function returns a reference of the object.This is more effecient
+when doing this.</p>
+
+<pre><code>p3 = p2 = p1;
+</code></pre>
+
+<p>Remember that always write assignment operator in this form.</p>
+
+<p>This is also appropriate with <code>+=</code>, <code>*=</code> and so on.</p>
+
+<p>Sometimes we may assignment to the object itself.</p>
+
+<pre><code>Person p;
+p = p;
+</code></pre>
+
+<p>It seems impossible, but how about this.</p>
+
+<pre><code>persons[i] = persons[j];
+*p1 = *p2;
+</code></pre>
+
+<p><code>persons[i]</code> and <code>persons[j]</code> may be the same.<code>p1</code> and <code>p2</code> may point
+to the same object.</p>
+
+<p>Some assignment operator may be like this one.</p>
+
+<pre><code>Disk&amp;
+Disk::operator=(const Disk&amp; d)
+{
+    delete data;
+    data = new Disk(*(d.data));
+
+    return *this;
+}
+</code></pre>
+
+<p>It seems reasonable that delete the original data and then allocate a
+new one using the data of <code>d</code>.</p>
+
+<p>However, this is very dangerous.What if <code>this</code> is the same as <code>d</code>?
+If that happened, the content of <code>data</code> and <code>d.data</code> is the same
+thing.So the content of <code>d.data</code> have been delete before call the
+copy constructor.</p>
+
+<p>A direct solution to this problem is obvious.That is, just check if they
+are the same.</p>
+
+<pre><code>Disk&amp;
+Disk::operator=(const Disk&amp; d)
+{
+    if (this == &amp;d) {
+        return *this;
+    }
+    delete data;
+    data = new Disk(*(d.data));
+
+    return *this;
+}
+</code></pre>
+
+<p>I prefer the above solution.But there are another solution.</p>
+
+<pre><code>Disk&amp;
+Disk::operator=(const Disk&amp; d)
+{
+    Disk *origin = data;
+    data = new Disk(*(d.data));
+    delete origin;
+
+    return *this;
+}
+</code></pre>
+
+<p>This code just change the order of some statement, but it make great
+difference.</p>
+
+<p><strong>When adding a member to a class, remember to update the constructors,</strong>
+<strong>destructor, copy constructor, copy assignment operator</strong>.</p>
+
+<p><strong>Don&rsquo;t miss anyone!</strong></p>
+
+<p>When a class is a derived class, make sure to call the constructors,
+copy constructor and copy assignment operator of the base class, respectively
+when writing my own constructors, copy constructor, assignment operator.</p>
+
+<p><strong>Do not call copy constructor in the copy assignment operator.</strong>
+<strong>Do not call copy assignment operator in the copy constructor.</strong></p>
+
+<p>That is all about constructors, copy constructor and copy assignment operator.
+It really helps.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/2013-08-03-a-tour-to-the-badaling-great-wall/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/cpp/2013-08-09-always-pass-parameters-by-reference-to-const/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

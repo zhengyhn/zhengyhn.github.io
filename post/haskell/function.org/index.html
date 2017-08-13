@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 函数中的语法 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/haskell/function.org/">函数中的语法</a></h2>
+          <span class="post-date">Mar 6, 2013 </span>
+          <div class="post-content">
+            
+
+<h1 id="模式匹配-pattern-matching">模式匹配(pattern matching)</h1>
+
+<p>这里的模式匹配有点像switch&hellip;case&hellip;下面的函数判断传入的参数是不是7</p>
+
+<pre><code class="language-haskell">lucky :: (Integral a) =&gt; a -&gt; String
+lucky 7 = &quot;yes&quot;
+lucky x = &quot;no&quot;
+</code></pre>
+
+<p>这个函数会从上而下判断，先看是不是7,如果是，则返回&rdquo;yes&rdquo;，再看下一条规则，
+这里的x表示任何变量（可以用任何名字表示）。
+可以想到，可以使用这个办法来实现递归：</p>
+
+<pre><code class="language-haskell">fact :: (Integral a) =&gt; a -&gt; a
+fact 0 = 1
+fact n = n * (fact (n - 1))
+</code></pre>
+
+<p>注意：如果找不到匹配项，则程序会崩溃。
+模式匹配也可以用于list中，我们知道在list中，:号可以用于在前面加入元素，如：</p>
+
+<pre><code class="language-haskell">1 : [2, 3]
+</code></pre>
+
+<p>结果为：</p>
+
+<pre><code class="language-haskell">[1, 2, 3]
+</code></pre>
+
+<p>模式x:xs用于表示把list的头绑定在x上，剩下的绑定在xs上，看下例：</p>
+
+<pre><code class="language-haskell">-- function head'
+head' :: [a] -&gt; a
+head' [] = error &quot;list empty!&quot;
+head' (x:_) = x
+</code></pre>
+
+<p>又学习到了注释的写法，单选注释是&ndash;，多行注释是{- -}，如：</p>
+
+<pre><code class="language-haskell">-- comment
+{- ---------------------------
+-- comment.hs 
+-- Author: yuanhang zheng
+--------------------------- -}
+</code></pre>
+
+<p>有一种给模式起别名的表示方法，使用@，下次使用的时候就不用重新写这个模式了,
+这叫as pattern</p>
+
+<pre><code class="language-haskell">-- function first
+first :: String -&gt; String
+first &quot;&quot; = &quot;empty!&quot;
+first all@(x:rest) = &quot;first of &quot; ++ all ++ &quot;is&quot; ++ [x]
+</code></pre>
+
+<h1 id="guard">guard</h1>
+
+<p>翻译成“哨兵”应该是不错的。
+它就和if&hellip;else差不多，判断一个布尔表达式，使用管道符|,pipe，从上往下检查，
+一般最后一个就是otherwise，看下例：</p>
+
+<pre><code class="language-haskell">-- function checkAge
+checkAge :: (Integral a) =&gt; a -&gt; String
+checkAge age
+  | age &lt; 18             = &quot;too young!&quot;
+  | age &lt; 25             = &quot;fine!&quot;
+  | age &lt; 40             = &quot;old.&quot;
+  | otherwise            = &quot;too old!&quot;               
+</code></pre>
+
+<p>guard和pattern
+matching有点类似，唯一不同的是guard检查的是一个布尔表达式， 而pattern
+matching检查的是一个模式。</p>
+
+<h1 id="where语句">where语句</h1>
+
+<p>我们来写一个函数，传入收入和成本，计算是否有利润，这个程序太简单了：</p>
+
+<pre><code class="language-haskell">-- function showProfit
+showProfit :: (RealFloat a) =&gt; a -&gt; a -&gt; String
+showProfit cost income
+  | (income - cost) &lt; 0  = &quot;oh no!the profit is minus&quot;
+  | (income - cost) == 0 = &quot;come on,zero profit&quot;
+  | otherwise            = &quot;congratulation!Your profit is good&quot;
+</code></pre>
+
+<p>但是，这里有个问题，(income -
+cost)这个东西重复了很多次，程序员最忌的就是
+重复了，在其它语言里面，可以用一个变量来代替，这里我们也可以用，于是出来了where
+语句：</p>
+
+<pre><code class="language-haskell">-- function showProfit
+showProfit :: (RealFloat a) =&gt; a -&gt; a -&gt; String
+showProfit cost income
+  | profit &lt; 0  = &quot;oh no!the profit is minus&quot;
+  | profit == 0 = &quot;come on,zero profit&quot;
+  | otherwise   = &quot;congratulation!Your profit is good&quot;
+  where profit = income - cost                           
+</code></pre>
+
+<p>有点类型于C#中的where语句。 当然后面还可以加更多变量：</p>
+
+<pre><code class="language-haskell">where profit = income - const
+      one = 1
+      two = 2
+</code></pre>
+
+<p>这些变量只属于这个函数，不影响其它函数。所有的变量都要对齐到同一列。
+where语句后面还能定义函数。</p>
+
+<h1 id="let语句">let语句</h1>
+
+<p>它和where非常像，</p>
+
+<pre><code class="language-haskell">-- function cylinder_volume
+cylinder_volume :: (RealFloat a) =&gt; a -&gt; a -&gt; a
+cylinder_volume radius height =
+    let area = pi * radius * radius
+    in  area * height
+</code></pre>
+
+<p>主要形式为let &hellip; in
+&hellip;在let后面定义变量，在in中使用这些变量。where是放到
+后面的，let是放到前面的。let绑定的是表达式，而where绑定的是语法结构。
+if和let还有下面这种奇葩的用法：</p>
+
+<pre><code class="language-haskell">*Main&gt; [if 1 &gt; 0 then &quot;abc&quot; else &quot;cba&quot;]
+[&quot;abc&quot;]
+*Main&gt; (let a = 1 in a + a) * 2
+4
+</code></pre>
+
+<p>let后面如果有多个变量，并且在同一行，则用分号分开，最后一个变量后面可以加分号也
+可以不加。</p>
+
+<pre><code class="language-haskell">*Main&gt; (let a = 1; b = 2; c = 3 in a * b * c) + 1
+7
+</code></pre>
+
+<p>有时候，in可以忽略。</p>
+
+<h1 id="case语句">case语句</h1>
+
+<p>和C语言中的case很像：</p>
+
+<pre><code class="language-haskell">-- function start
+start :: [a] -&gt; a
+start s = case s of [] -&gt; error &quot;empty&quot;
+                    (x:_) -&gt; x
+</code></pre>
+
+<p>注意后面两个情况的代码一定要对齐。</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/clang/matrix/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/how-to-become-a-hacker/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> elisp笔记：introduction &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/elisp/data_type/">elisp笔记：introduction</a></h2>
+          <span class="post-date">Aug 13, 2017 </span>
+          <div class="post-content">
+            
+
+<h1 id="lisp历史">lisp历史</h1>
+
+<ul>
+<li>原来lisp是list processing
+language,1950s后期推出，主要为了研究人工智能。</li>
+</ul>
+
+<h1 id="数据类型">数据类型</h1>
+
+<h2 id="概述">概述</h2>
+
+<ul>
+<li>每个对象至少属于一种类型</li>
+<li>对于打印出来的对象，一般都可读，但是有一些是不可读的.这些对象以hash表示法表示。</li>
+</ul>
+
+<p>即以#&lt;开头，以&gt;结束。比如：</p>
+
+<pre><code class="language-example">(current-buffer)
+#&lt;buffer *scratch*&gt;
+</code></pre>
+
+<ul>
+<li>在elisp中有两大类类型
+
+<ol>
+<li>用于lisp编程的类型</li>
+<li>用于emacs编辑的类型</li>
+</ol></li>
+</ul>
+
+<h2 id="整型">整型</h2>
+
+<ul>
+<li>在32位机器上，整型是30位，即-2 \^ 29到2 \^ 29 -
+1，64位的会提供更多，但是官方</li>
+</ul>
+
+<p>文档没有说明。</p>
+
+<ul>
+<li>elisp中不会检测溢出。</li>
+<li>整数的表示法一般为：</li>
+</ul>
+
+<p>(sign)digit(period) 即，1可以表示成+1,1,1.,+1.</p>
+
+<ul>
+<li>如果一个数字太小或太大，不在整数范围内，则会当成浮点数来存储。</li>
+</ul>
+
+<h2 id="浮点型">浮点型</h2>
+
+<ul>
+<li>使用C语言中的double来存储，实际上对于十进制浮点数内部是2的幂而不是10的幂。</li>
+</ul>
+
+<h2 id="字符类型">字符类型</h2>
+
+<ul>
+<li>字符其实就是一个整数</li>
+<li>在字符串和缓冲区中，字符的范围是0-4194303(22位整数),其中0-127个是ASCII码，而</li>
+</ul>
+
+<p>剩下的是非ASCII码。</p>
+
+<ul>
+<li>在C语言中，字符以&rsquo;a&rsquo;这种方式表示，而在elisp中，以?a这种方式表示</li>
+</ul>
+
+<pre><code class="language-example">ELISP&gt; ?a
+97
+</code></pre>
+
+<p>这种方式也可以用来表示标点符号(punctuation)字符，但是最好加一个\，因为有的字符
+需要转义。</p>
+
+<pre><code class="language-example">ELISP&gt; ?\\
+92
+ELISP&gt; ?\(
+40
+</code></pre>
+
+<ul>
+<li>部分字符的表示方法</li>
+</ul>
+
+<p>character presentation   corresponding integer   character</p>
+
+<hr />
+
+<p>?\a                      7                       C-g
+  ?\b                      8                       backspace
+  ?\t                      9                       tab
+  ?\n                      10                      newline
+  ?| 11                    vertical tab
+  ?\f                      12                      formfeed
+  ?\r                      13                      carriage return
+  ?\e                      27                      ESC
+  ?\s                      32                      space
+  ?\                       92                      backslash
+  ?\d                      127                     DEL</p>
+
+          </div>
+        </div>
+        <div class="pagination"> 
+          <a class="btn next " href="http://zhengyhn.github.io/post/elisp/arithmetic/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

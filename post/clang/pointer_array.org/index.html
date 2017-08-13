@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> tcpl读书笔记：指针和数组 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/clang/pointer_array.org/">tcpl读书笔记：指针和数组</a></h2>
+          <span class="post-date">Mar 10, 2013 </span>
+          <div class="post-content">
+            
+
+<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为the c programming language一书的笔记
+@&lt;/font&gt;</p>
+
+<h1 id="多维数组">多维数组</h1>
+
+<ul>
+<li>对于一个二维数组，如果要作为函数参数来传递，必须要包含列数，行数可加可不加。</li>
+</ul>
+
+<p>因为，传递过去的是指向行的指针。比如,可以这样：</p>
+
+<pre><code class="language-example">fun(int arr[2][13])
+{
+    ...
+}
+</code></pre>
+
+<p>也可以这样：</p>
+
+<pre><code class="language-example">fun(int arr[][13])
+{
+    ...
+}
+</code></pre>
+
+<p>还可以这样：</p>
+
+<pre><code class="language-example">fun(int (*arr)[13])
+{
+    ...
+}
+</code></pre>
+
+<p>注意，*arr一定要加括号，因为[]的优先级比*要高。</p>
+
+<h1 id="命令行参数">命令行参数</h1>
+
+<ul>
+<li>看下面的代码：</li>
+</ul>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main(int argc, char *argv[])
+{
+    ...
+
+    return 0;
+}
+</code></pre>
+
+<p>其中argc代表argument count，argv代表argument vector。
+argv[0]是程序的名字,因此argc至少为1。</p>
+
+<h1 id="复杂的表示">复杂的表示</h1>
+
+<pre><code class="language-example">- int (*p)[13]，指向int类型13个元素的数组的指针
+- int *p[13]，一个包含13个int类型的指针的数组
+</code></pre>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/clang/function.org/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/clang/introduction.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> tcpl读书笔记：函数与程序结构化 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/clang/function.org/">tcpl读书笔记：函数与程序结构化</a></h2>
+          <span class="post-date">Mar 10, 2013 </span>
+          <div class="post-content">
+            
+
+<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为the c programming language一书的笔记
+@&lt;/font&gt;</p>
+
+<h1 id="exercise-4-2">exercise 4-2</h1>
+
+<ul>
+<li>扩展atof函数，支持科学计数法。下面是我写的代码，未完全测试正确。</li>
+</ul>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;math.h&gt;
+
+int isBlank(char c)
+{
+    return c == ' ' ||
+        c == '\n' ||
+        c == '\t';
+}
+
+int isDigit(char c)
+{
+    return c &gt;= '0' &amp;&amp; c &lt;= '9';
+}
+
+double atof(char *str)
+{
+    double intPart,fraction,power;
+    int i,len,exp,sign,exp_sign;
+
+    len = strlen(str);
+    i = 0;
+    if(str[i] == '-'){
+        sign = -1;
+        i++;
+    }else{
+        sign = 1;
+    }
+    while(isBlank(str[i])){
+        i++;
+    }
+    for(intPart = 0.0; isDigit(str[i]); i++){
+        intPart = intPart * 10 + str[i] - '0';
+    }
+    if(str[i] == '.'){
+        i++;
+    }else if(str[i] == '\0'){
+        return sign * intPart;
+    }else{
+        printf(&quot;digit form incorrect!\n&quot;);
+        return 0.0;
+    }
+    for(fraction = 0.0,power = 10.0; isDigit(str[i]); i++){
+        fraction += (str[i] - '0') / power;
+        power *= 10;
+    }
+    if(str[i] == 'e' || str[i] == 'E'){
+        i++;
+    }else if(str[i] == '\0'){
+        return sign * (intPart + fraction);
+    }else{
+        printf(&quot;digit form incorrect!\n&quot;);
+        return 0.0;
+    }
+    if(str[i] == '-'){
+        exp_sign = -1;
+        i++;
+    }else{
+        exp_sign = 1;
+    }
+    for(exp = 0; isDigit(str[i]); i++){
+        exp = exp * 10 + str[i] - '0';
+    }
+    if(str[i] == '\0'){
+        return sign * (intPart + fraction) * pow(10,exp_sign * exp);
+    }else{
+        printf(&quot;digit form incorrect!\n&quot;);
+        return 0.0;
+    }
+}
+
+int main()
+{
+    char *str[5] = {&quot;123&quot;,&quot;-123.4&quot;,&quot;123.45e4&quot;,&quot;-123.123e-2&quot;,&quot;0.0&quot;};
+    int i;
+
+    for(i = 0; i &lt; 5; i++){
+        printf(&quot;%lg\n&quot;,atof(str[i]));
+    }
+
+    return 0;
+}
+</code></pre>
+
+<h1 id="递归的quick-sort例子">递归的quick sort例子。</h1>
+
+<ul>
+<li>书上的算法，刚开始我有点看不懂，不太像我以前使用的qsort，倒更像选择排序。
+但是后来研究了一番之后，发现是我错了，人家写得真的很巧妙。下面的是书上的代码：</li>
+</ul>
+
+<pre><code class="language-c">void swap(int *arr, int i, int j)
+{
+    int temp;
+
+    temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+void qsort(int *arr, int left, int right)
+{
+    int i, last;
+
+    if (left &gt;= right){
+        return;
+    }
+    swap(arr, left, (left + right) / 2);
+    last = left;
+    for (i = left + 1; i &lt;= right; i++) {
+        if (arr[i] &lt; arr[left]) {
+            swap(arr, ++last, i);
+        }
+    }
+    swap(arr, left, last);
+    qsort(arr, left, last - 1);
+    qsort(arr, last + 1, right);
+}
+</code></pre>
+
+<p>刚开始，找一个元素作为参照元素，作者选中间的那个，并把它与第一个元素交换。
+接着，遍历后面的每个元素，与参照元素进行比较，如果发现有元素比参照元素小，则
+放到参照元素的后面，并把一个变量last来记录最后一个比参照元素小的元素的下标。
+遍历一次后，再把last记录的那个元素与第一个元素（参照元素）交换。这样，在参照
+元素左边的元素都比它小，在它右边的元素都比它大。二分两边再递归qsort，即实现了
+整个算法。</p>
+
+<ul>
+<li>因为听说面试要现场写快排，现在不赶紧练一下，到时候会OVER的，于是参照上面的</li>
+</ul>
+
+<p>方法写了一个快排，尽量写得漂亮并且readable。</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void swap(int *arr, int i, int j)
+{
+    int temp;
+
+    temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+void qsort(int *arr, int first, int last)
+{
+    int i, last_small;
+
+    if (first &gt;= last){
+        return;
+    }
+    last_small = first;
+    for (i = first + 1; i &lt;= last; i++) {
+        if (arr[i] &lt; arr[first]) {
+            last_small++;
+            swap(arr, last_small, i);
+        }
+    }
+    swap(arr, first, last_small);
+    qsort(arr, first, last_small - 1);
+    qsort(arr, last_small + 1, last);
+}
+
+int main()
+{
+    int arr[7] = { 5, 2, 7, 1, 4, 3, 6 };
+    int i;
+
+    qsort(arr, 0, 6);
+    for (i = 0; i &lt; 7; i++) {
+        printf(&quot;%d\n&quot;, arr[i]);
+    }
+
+    return 0;
+}
+</code></pre>
+
+<ul>
+<li>上面的代码其实和K&amp;R的差不多，只不过我使用的是第一个元素作为参照元素，这样就</li>
+</ul>
+
+<p>减少了一次交换（其实选择哪个元素貌似和概率有关），我其实只是把变量改了一下，使
+程序读起来更容易，第一次看last的时候，都不知道它想表达什么意思，而使用last~small~
+就很容易看懂这个变量的作用。</p>
+
+<h1 id="预处理">预处理</h1>
+
+<ul>
+<li>在带参数的宏定义中，通过#符号可引用该参数，并转化为字符串，看下面的例子：</li>
+</ul>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+#define printd(digit) printf(#digit&quot;=%d\n&quot;,digit)
+
+int main()
+{
+    printd(10);
+
+    return 0;
+}
+</code></pre>
+
+<p>结果如下：</p>
+
+<pre><code class="language-example">10=10
+</code></pre>
+
+<p>这里，#digit将会引用参数10,并替换成&rdquo;10&rdquo;，在C语言中，两个相连的字符串是可以连接的，
+则最后会变成printf(&ldquo;10=%d\n&rdquo;,digit)</p>
+
+<ul>
+<li>##这个运算符用于连接宏参数，看下面的例子：</li>
+</ul>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+#define concatenate(a,b) a##b
+
+int main()
+{
+    int concatenate(hello,world) = 1;
+    printf(&quot;%d\n&quot;, concatenate(hello,world));
+
+    return 0;
+}
+</code></pre>
+
+<p>结果如下：</p>
+
+<pre><code class="language-example">1
+</code></pre>
+
+<p>这东西比较神奇。</p>
+
+<ul>
+<li>练习4-14,写一个宏swap(t, x, y)，交换2个t类型的元素。下面是我的代码：</li>
+</ul>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+#define swap(t, x, y) \
+    t temp = x;       \
+    x = y;            \
+    y = temp;         \
+
+int main()
+{
+    double a = 1, b = 2;
+
+    swap(double, a, b);
+
+    printf(&quot;a = %lf\n&quot;
+           &quot;b = %lf\n&quot;, a, b);
+
+    return 0;
+}
+</code></pre>
+
+<p>结果如下：</p>
+
+<hr />
+
+<p>a   =   2.0
+  b   =   1.0</p>
+
+<hr />
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/haskell/high.order.function.org/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/clang/pointer_array.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

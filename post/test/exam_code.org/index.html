@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 检查代码 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/test/exam_code.org/">检查代码</a></h2>
+          <span class="post-date">Mar 17, 2013 </span>
+          <div class="post-content">
+            
+
+<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记
+@&lt;/font&gt;</p>
+
+<h1 id="静态白盒测试-检查设计和代码">静态白盒测试：检查设计和代码</h1>
+
+<h2 id="formal-review">formal review</h2>
+
+<p>这个过程有4个方面要做：</p>
+
+<ul>
+<li>找到问题（错误的地方或者漏掉的地方）</li>
+<li>遵守规则（遵守架构规则和代码规范）</li>
+<li>要有所准备（不打无准备之战）</li>
+<li>写报告（有助于后期维护）</li>
+</ul>
+
+<p>完成这个过程有助于：</p>
+
+<ul>
+<li>团队成员之间的交流</li>
+<li>项目的质量</li>
+<li>增进团队成员之间的友谊(camaraderie)</li>
+<li>可能会找到一些难题的解决方案</li>
+</ul>
+
+<h2 id="peer-review">peer review</h2>
+
+<p>这是一种非正式的过程，通过是一个程序员设计和写的代码被其它几个程序员
+和测试师来检查，小团队里面的成员会互相检查代码。</p>
+
+<h2 id="walkthrough">walkthrough</h2>
+
+<p>不知道怎么翻译，主要是某个程序员把自己的代码展示给一个检查小组，
+这个小组需要写下评论和问题。一个小组里面最好是要有一个高级程序员。
+这个程序员需要一个函数一个函数或者一行代码一行代码地解释给这个小组的人
+听，小组的人来提问，最后这个程序员需要写一个报告，说明找到的问题以及
+以后要怎么解决。</p>
+
+<h2 id="inspection">inspection</h2>
+
+<p>这是一个最正式的过程，分为很多种角色。一种是presenter或者reader，他不是
+写代码的程序员，他是被迫来阅读那个程序员写的代码，写下来他的理解，然后在
+inspection meeting上展示他的理解。剩下的人称为inspector，专门通过不同的
+角度（用户，测试题，客户）来检查代码。在inspector中，有部分的人称为moderator
+或者recorder, 负责准备检查报告，说明问题出现在哪里。</p>
+
+<h1 id="编码标准和规范">编码标准和规范</h1>
+
+<p>好的代码需要满足下面的几点：</p>
+
+<ul>
+<li>可靠</li>
+<li>可读/可维护</li>
+<li>可移植</li>
+</ul>
+
+<h1 id="一些常见的代码错误">一些常见的代码错误</h1>
+
+<p>虽然这些是靠编程经验的积累来理解的，但是知道比不知道要好。</p>
+
+<h2 id="数据引用错误">数据引用错误</h2>
+
+<ul>
+<li>引用一个未初始化的变量</li>
+<li>数组下标不是整数或者数组下标越界</li>
+<li>数组下标差了一个位置（比如一些编程语言下标从0开始）</li>
+<li>一些可以用常量代替的地方却用了变量（比如数组长度）</li>
+<li>变量被赋了不同类型的值</li>
+<li>引用的指针没有分配内存</li>
+</ul>
+
+<h2 id="数据定义错误">数据定义错误</h2>
+
+<ul>
+<li>变量没有定义正确的长度和类型</li>
+<li>很多变量有类似的名字（会让看代码的人混淆）</li>
+<li>有一些变量从未被使用或者只使用了一次</li>
+</ul>
+
+<h2 id="计算错误">计算错误</h2>
+
+<ul>
+<li>左边的变量存不下右边的计算结果</li>
+<li>溢出在计算的中间过程产生</li>
+<li>除0错误</li>
+<li>整数除法中丢失了精度</li>
+<li>计算结果背离了有意义的范围（比如不在0%-100%之间）</li>
+<li>运算符优先级错误</li>
+</ul>
+
+<h2 id="比较错误">比较错误</h2>
+
+<ul>
+<li>比较两个浮点数，可能会存在精度问题</li>
+</ul>
+
+<h2 id="控制流错误">控制流错误</h2>
+
+<ul>
+<li>有死循环</li>
+<li>分支语句永远不会被执行</li>
+<li>循环中计数器差了一个位置，出现了&rdquo;off by one&rdquo;错误</li>
+</ul>
+
+<h2 id="函数参数错误">函数参数错误</h2>
+
+<ul>
+<li>实参和形参类型不对，顺序不对</li>
+<li>函数修改了一个参数，但是这个参数本来是不能被修改的</li>
+<li>本来可以使用传递参数的方法解决问题却使用了全局变量</li>
+</ul>
+
+<h2 id="输入输出错误">输入输出错误</h2>
+
+<ul>
+<li>输入输出没有特定格式，但是没有实现</li>
+<li>没有判断文件或设备打不开的情况</li>
+<li>没有检查用户输入的正确性，语法错误和拼写错误</li>
+</ul>
+
+<h2 id="其他错误">其他错误</h2>
+
+<ul>
+<li>没有考虑软件需要多国语言支持</li>
+<li>没有考虑软件需要移植到其他CPU或平台</li>
+<li>没有考虑兼容性（比如说不同的显卡声卡等）</li>
+<li>软件编译过程没有产生一些提示信息。</li>
+</ul>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/test/x_ray.org/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/test/config_comp.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

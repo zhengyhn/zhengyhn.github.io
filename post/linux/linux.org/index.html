@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 鸟哥的linux私房菜笔记：linux是什么&amp;主机规划 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/linux/linux.org/">鸟哥的linux私房菜笔记：linux是什么&amp;主机规划</a></h2>
+          <span class="post-date">Mar 22, 2013 </span>
+          <div class="post-content">
+            
+
+<p>@&lt;font color=&ldquo;red&rdquo;&gt;
+本文为&rdquo;鸟哥的linux私房菜基础学习篇(第三版)&ldquo;一书的笔记 @&lt;/font&gt;</p>
+
+<h1 id="概念">概念</h1>
+
+<p>原来BSD是指Berkeley Software Distribution.</p>
+
+<p>System V是AT&amp;T自家的Unix</p>
+
+<p>LSB, Linux Standard Base</p>
+
+<p>FHS, File system Hierarchy Standard</p>
+
+<h1 id="常识">常识</h1>
+
+<p>常见设备的文件名：</p>
+
+<p>设备                文件名</p>
+
+<hr />
+
+<p>IDE硬盘             /dev/hd[a-d]
+  SCSI/SATA/USB磁盘   /dev/sd[a-p]
+  软盘                /dev/fd[0-1]
+  25针打印机          /dev/lp[0-2]
+  USB打印机           /dev/lp[0-15]
+  USB鼠标             /dev/usb/mouse[0-15]
+                      我的是：
+                      /dev/input/mouse[0-15]
+  PS2鼠标             /dev/psaux
+  当前CDROM/DVDROM    /dev/cdrom</p>
+
+<h1 id="ide">IDE</h1>
+
+<p>一般的主机会提供2个IDE接口，通常称为IDE1（primary）和IDE2（secondary），
+每个IDE接口可以连接2个IDE装置，通常称为master和slave，于是最多可连接4个IDE
+装置。如下表：</p>
+
+<p>IDE    master   slave</p>
+
+<hr />
+
+<p>IDE1   hda      hdb
+  IDE2   hdc      hdd</p>
+
+<h1 id="磁盘">磁盘</h1>
+
+<p>磁盘第一个扇区记录了两个重要信息：</p>
+
+<ul>
+<li>Master Boot
+Recorder，即大名鼎鼎的MBR，用于安装系统引导程序，占446字节</li>
+<li>分区表(Partition Table)，记录整个磁盘的分区情况，共64字节</li>
+</ul>
+
+<h2 id="分区表">分区表</h2>
+
+<p>磁柱(cylinder)是文件系统的最小单位，也是分区的最小单位。</p>
+
+<p>第一个扇区中的64字节的分区表，只能记录4个分区记录，每个记录16字节，记录了起始
+磁柱号和结束磁柱号。</p>
+
+<p>是不是只有分4个区呢？不是的，有人想出了很好的方法，可以分很多区。使用的是
+extended partition的方法。</p>
+
+<pre><code class="language-example">比如有400个磁柱，那么按照传统的方法，分成4个区为sda1:1-100, sda2:101-200,
+sda3:201-300, sda4:301-400，4个都是primary partition.
+如果使用extended partition的方法，则为sda1:1-100, sda2:101-400,sda2中
+没有直接保存分区表信息，而是指向另外的扇区，比如一共要分6个区，sda1已经是一个
+了，sda2中没有，sda3和sda4这2个名字是保留给主分区用的，这里已经不存在了，于是
+下一个是sda5:101-160, sda6:161-220, sda7:221-280, sda8:281-340,
+sda9:341-400。
+</code></pre>
+
+<p>晒一下我现在的分区情况：</p>
+
+<pre><code class="language-example">Disk /dev/sda: 160.0 GB, 160041885696 bytes, 312581808 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0xc3ffc3ff
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *          63    61448624    30724281    7  HPFS/NTFS/exFAT
+/dev/sda2        61448686   312578047   125564681    f  W95 Ext'd (LBA)
+/dev/sda5        61448688    92903766    15727539+  83  Linux
+/dev/sda6        92907520   310310911   108701696   83  Linux
+/dev/sda7       310312960   312578047     1132544   82  Linux swap / Solaris
+
+</code></pre>
+
+<p>可以看到sda2记录的是61448686-312578047, sda5又从61448688开始，sda7结束
+位置为312578047.</p>
+
+<p>扩展分区只能有1个,由扩展分区分出来的区称为逻辑分区，扩展分区无法格式化。</p>
+
+<h2 id="mbr">MBR</h2>
+
+<p>CMOS是记录硬件各项参数且嵌入在主板上的存储器</p>
+
+<p>BIOS是一个写入主板的固件(firmware)，即一个写入硬件的软件程序，它是开机时执行
+的第一个软件程序。BIOS会根据设定从某个磁盘（硬盘，软盘，光盘，U盘）启动，然后
+从磁盘中的第一个扇区读取MBR，MBR中包含了bootloader，bootloader可以读取
+操作系统内核，于是就开始启动系统了。</p>
+
+<p>每个分区都有自己的启动扇区，在安装引导（比如grub)时，可以选择安装到MBR还是某个
+分区的启动扇区。</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/python/python.org/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/linux/computer.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

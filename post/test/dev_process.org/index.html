@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 软件测试读书笔记：软件开发过程 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/test/dev_process.org/">软件测试读书笔记：软件开发过程</a></h2>
+          <span class="post-date">Mar 1, 2013 </span>
+          <div class="post-content">
+            
+
+<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记
+@&lt;/font&gt;</p>
+
+<h1 id="产品的组成部分">产品的组成部分</h1>
+
+<ol>
+<li>用户需求</li>
+<li>产品说明书</li>
+<li>进度表</li>
+<li>设计文档
+
+<ul>
+<li>架构</li>
+<li>数据流程图</li>
+<li>状态转换图</li>
+<li>流程图</li>
+<li>易懂的代码</li>
+</ul></li>
+<li>测试文档
+
+<ul>
+<li>测试计划</li>
+<li>测试样例</li>
+<li>bug报告</li>
+<li>测试工具</li>
+<li>测试总结</li>
+</ul></li>
+</ol>
+
+<h1 id="软件项目人员组成">软件项目人员组成</h1>
+
+<ul>
+<li>项目经理: 写产品说明书，管理进度，做重要决定</li>
+<li>系统架构师: 设计整个项目的架构，通常是技术专家。</li>
+<li>程序员: 设计并写代码。</li>
+<li>测试师或QA(quality assurance): 找出并报告软件的错误</li>
+<li>技术文档编写者: 写用户文档，技术文档的。</li>
+<li>配置管理和软件打包者: 把软件文档等打包，写安装说明的</li>
+</ul>
+
+<h1 id="软件开发生命周期模型">软件开发生命周期模型</h1>
+
+<h2 id="大爆炸模型">大爆炸模型</h2>
+
+<p>源自宇宙大爆炸，很多人和材料聚集在一起，开发一个项目，没有太多的用户需求书，
+产品说明书之类的东西，开发时间无法确定，一般不需要专门的测试师，这种模型适合
+那种不成熟的，需求非常明确的的项目。</p>
+
+<h2 id="code-and-fix模型">code-and-fix模型</h2>
+
+<p>开始于一份不怎么正式的产品说明书，然后进入编码-&gt;解决bug-&gt;编码-&gt;&hellip;的循环中，
+这种模型适合于小项目，软件测试师一般在循环里面不断地报告bug。</p>
+
+<h2 id="瀑布模型">瀑布模型</h2>
+
+<p>主要流程为：idea-&gt;analysis-&gt;design&ndash;&gt;development-&gt;test&ndash;&gt;final
+product 每做完一步，都要回顾一下前面的有没有做好，能不能进入下一步。
+一旦处在中间的某个步骤，你就不能回头，除非重做。</p>
+
+<h2 id="螺旋模型">螺旋模型</h2>
+
+<p>把整个项目分为多个层次，每个层次其实是一个瀑布模型里面的各个步骤，做完一个层次，
+开始准备下一个层次，并修正上一个层次的错误，如此下去，就像一个螺旋，把项目越做
+越大。 <em>~/pictures/spiral.jpg</em></p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/clang/c_traps_pitfalls/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/test/stbg.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

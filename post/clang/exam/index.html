@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 复习C/C&#43;&#43; &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/clang/exam/">复习C/C&#43;&#43;</a></h2>
+          <span class="post-date">Apr 20, 2013 </span>
+          <div class="post-content">
+            
+
+<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为《C笔试面试宝典》一书的笔记
+@&lt;/font&gt;</p>
+
+<h1 id="new-delete-malloc-free的关系">new, delete, malloc, free的关系</h1>
+
+<p>new和delete是C++的运算符，new调用构造函数，delete调用析构函数。</p>
+
+<h1 id="delete和delete-的区别">delete和delete[]的区别</h1>
+
+<p>delete只会调用一次析构函数，delete[]则会调用每个成员的析构函数。</p>
+
+<p>写程序一测：</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+class Computer {
+ private:
+  std::string name;
+ public:
+  Computer();
+  ~Computer();
+};
+
+Computer::Computer()
+{
+
+}
+
+Computer::~Computer()
+{
+
+}
+
+int main(int argc, char *argv[])
+{
+  Computer *cs = new Computer[5];
+  Computer *c = new Computer;
+  int *integers = new int[5];
+  int *i = new int;
+
+  delete[] i;
+  delete[] integers;
+  delete[] cs;
+  delete[] c;
+
+  return 0;
+}
+</code></pre>
+
+<p>发现编译可以通过，但是运行会Segment Fault。gdb一下，发现在delete[]
+c时出错了。</p>
+
+<p>原因是，对于基本数据类型，delete和delete[]的功能是相同的，对于自定义的类型，则
+要严格区分，new[]完之后用delete[]释放，new完之后用delete释放。</p>
+
+<h1 id="继承和组合的优缺点">继承和组合的优缺点</h1>
+
+<p>引用自<a href="http://www.cnblogs.com/nuaalfm/archive/2010/04/23/1718453.html">这里</a>
+。</p>
+
+<p>组合 关 系                                                         继 承 关 系</p>
+
+<hr />
+
+<p>优点：不破坏封装，整体类与局部类之间松耦合，彼此相对独立           缺点：破坏封装，子类与父类之间紧密耦合，子类依赖于父类的实现，子类缺乏独立性
+  优点：具有较好的可扩展性                                           缺点：支持扩展，但是往往以增加系统结构的复杂度为代价
+  优点：支持动态组合。在运行时，整体对象可以选择不同类型的局部对象   缺点：不支持动态继承。在运行时，子类无法选择不同的父类
+  优点：整体类可以对局部类进行包装，封装局部类的接口，提供新的接口   缺点：子类不能改变父类的接口
+  缺点：整体类不能自动获得和局部类同样的接口                         优点：子类能自动继承父类的接口
+  缺点：创建整体类的对象时，需要创建所有局部类的对象                 优点：创建子类的对象时，无须创建父类的对象</p>
+
+<h1 id="引用">引用</h1>
+
+<p>不能建立数组的引用。引用没有定义新的变量，不占用内存空间。</p>
+
+<h1 id="关联-聚合和组合">关联，聚合和组合</h1>
+
+<ul>
+<li>关联是两个类的一般性关联，如老师和学生。</li>
+<li>聚合是has-a关系，聚合类不需要对被聚合类负责，用空的菱形表示，实现如下：</li>
+</ul>
+
+<!-- -->
+
+<pre><code>class A {
+
+};
+class B {
+    A *a;
+};
+</code></pre>
+
+<ul>
+<li>组合是</li>
+</ul>
+
+<h1 id="初始化列表">初始化列表</h1>
+
+<p>当类中含有const和引用成员变量时，基类构造函数只能使用初始化列表来初始化，
+但是const int&amp; a;这种就可以用赋值的方法。</p>
+
+<h1 id="类型安全">类型安全</h1>
+
+<p>c++不是类型安全的，因为不同类型的指针之间可以强制转换。</p>
+
+<h1 id="全局和static变量是在编译阶段分配内存的">全局和static变量是在编译阶段分配内存的</h1>
+
+<h1 id="空类">空类</h1>
+
+<p>当一个类没有任何成员时，大小是1byte，这个字节是用来区分这个类的不同对象的。</p>
+
+<h1 id="逻辑地址-to-物理地址">逻辑地址 to 物理地址</h1>
+
+<p>给出的逻辑地址格式是这样的,
+段地址:段内偏移地址，那么真实的地址（物理地址） 是：段地址 * 10H +
+段内偏移地址。当然，这只适合于Intel 8086。</p>
+
+<h1 id="4种类型转换">4种类型转换</h1>
+
+<ol>
+<li>const_cast，把const的变量变成非const的，用法：</li>
+</ol>
+
+<pre><code class="language-example">新变量  = const_cast&lt;类型&gt;(变量);
+</code></pre>
+
+<ol>
+<li>static_cast,
+用于基本类型的转换，不能用于无关类型（不是基类与子类）之间的</li>
+</ol>
+
+<p>指针的转换</p>
+
+<ol>
+<li>dynamic_cast,
+运行时会有安全检查，用于基类与子类之间的转换，常用于多态</li>
+<li>reinterpret_cast，重新解释类型，没有转换，常用于函数指针的转换。</li>
+</ol>
+
+<h1 id="数组作参数">数组作参数</h1>
+
+<p>当数组作为参数传递时，它会退化成同类型的指针。</p>
+
+<h1 id="override和隐藏">override和隐藏</h1>
+
+<ul>
+<li>override，基类中必须要有virtual。</li>
+<li>如果基类函数名没有virtual，子类函数与父类函数签名一样，则称隐藏。</li>
+<li>不管基类函数名有没有virtual，子类函数名一样，签名不一样，则也称隐藏。</li>
+</ul>
+
+<h1 id="求两个数中的最大的那个数">求两个数中的最大的那个数</h1>
+
+<p>不能用判断(if, :?, switch)。答案是用abs函数：</p>
+
+<pre><code class="language-example">((a + b) + abs(a - b)) / 2
+</code></pre>
+
+<p>而我觉得这种方法不好，因为用到了库函数，库函数里面还可能也要判断，其实
+是换汤不换药。</p>
+
+<p>我问了同学，他想到了下面的方法，我觉得很好：</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int max(int a, int b);
+
+int main(int argc, char *argv[])
+{
+     int a = 9999, b = 23;
+
+     printf(&quot;%d\n&quot;, max(a, b));
+
+     return 0;
+}
+
+int max(int a, int b)
+{
+     int c = a - b;
+     int flag = (unsigned)c &gt;&gt; (sizeof(int) * 8 - 1);
+
+     return (1 - flag) * a + flag * b;
+}
+</code></pre>
+
+<p>根据负数与正数的符号位的不一样，而得出那个数。</p>
+
+<h1 id="打印源文件的文件名和当前行号">打印源文件的文件名和当前行号</h1>
+
+<p>在C/C++中，可以用__FILE__和__LINE__，由编译器来识别。</p>
+
+<h1 id="main函数执行完之后还能执行代码">main函数执行完之后还能执行代码？</h1>
+
+<p>居然是可以的！&lt;stdlib.h&gt;中有一个奇葩的库函数叫on_exit，在linux下的man
+page中， 定义如下：</p>
+
+<pre><code class="language-example">int on_exit(void (*function)(int , void *), void *arg);
+</code></pre>
+
+<p>传进去一个函数指针，和一个参数，这个函数必须是2个参数，分别是int和void*类型的，
+可以调用多个，以LIFO形式执行，
+on_exit在任何地方调用都只会在main函数结束之后 才会执行。</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void one(int status, void *arg);
+void two(int status, void *arg);
+
+int main(int argc, char *argv[])
+{
+     printf(&quot;top\n&quot;);
+     on_exit(two, NULL);
+     on_exit(one, NULL);
+
+     printf(&quot;It may be the last one.\n&quot;);
+
+     return 0;
+}
+
+void one(int status, void *arg)
+{
+     printf(&quot;one\n&quot;);
+}
+
+void two(int status, void *arg)
+{
+     printf(&quot;two\n&quot;);
+}
+</code></pre>
+
+<p>书上说的是_onexit，根据我找的资料，这函数应该只有在windows的VC中才有。</p>
+
+<h1 id="判断是由c编译器编译还是由c-编译器编译">判断是由C编译器编译还是由C++编译器编译</h1>
+
+<p>使用一个宏__cplusplus,</p>
+
+<pre><code class="language-example">#ifdef __cplusplus
+...
+#else
+...
+</code></pre>
+
+<h1 id="求n个数中第k大的数">求n个数中第k大的数</h1>
+
+<p>我智商低，只能想到普通的办法，就是选择排序的外面循环K次。不过不能因为这样
+而找不到工作啊，学习了大牛的算法：</p>
+
+<pre><code class="language-example">吸取快排中的思想，随机取一个数，把比它小的数放到左边，比它大的数放到右边，
+如果运气非常好，它的下标i刚好是n - k - 1，则它就是第k大的数，如果i小于
+n - k - 1，则第k大的数在左边，否则在右边，再分为子问题进行求解。
+</code></pre>
+
+<p>写了很久终于写出来了，要是在面试的时候，估计写不出来。</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdlib.h&gt;
+
+int get_maxk(int *arr, int n, int k);
+void swap(int *arr, int i, int j);
+
+int main(int argc, char *argv[])
+{
+     int a[10];
+     int i;
+
+     srand(time(NULL));
+     for (i = 0; i &lt; 10; i++) {
+      a[i] = rand();
+     }
+     for (i = 1; i &lt;= 10; i++) {
+      printf(&quot;%d\n&quot;, get_maxk(a, 10, i));
+     }
+
+     return 0;
+}
+
+int get_maxk(int *arr, int n, int k)
+{
+     int pivot, last_left, i;
+
+     if (k &gt; n) {
+      fprintf(stderr, &quot;k can't be larger than n\n&quot;);
+      exit(1);
+     } else if (k == n) {
+      return arr[0];
+     }
+     pivot = 0;
+     last_left = pivot;
+     for (i = 1; i &lt; n; i++) {
+      if (arr[i] &lt; arr[pivot]) {
+           last_left++;
+           swap(arr, last_left, i);
+      }
+     }
+     swap(arr, pivot, last_left);
+     if ((n - last_left) == k) {
+      return arr[k];
+     } else if ((n - last_left) &gt; k) {
+      return get_maxk(arr + last_left + 1, n - last_left - 1, k);
+     } else {
+      return get_maxk(arr, last_left, k - (n - last_left));
+     }
+}
+
+void swap(int *arr, int i, int j)
+{
+     int temp;
+
+     if (i == j) {
+      return;
+     }
+     temp = arr[i];
+     arr[i] = arr[j];
+     arr[j] = temp;
+}
+</code></pre>
+
+<h1 id="判断单链接有环">判断单链接有环</h1>
+
+<p>想到这个方法的人就是神！</p>
+
+<pre><code class="language-example">用两个指针，一个每次走一步，另外一个每次走两步，如果有环必定重合，
+否则走两步的那个指针将到达终点。
+</code></pre>
+
+<h1 id="传值还是传地址">传值还是传地址</h1>
+
+<p>看下面的代码：</p>
+
+<pre><code class="language-c">void func(char *a)
+{
+    a = (char *)malloc(10);
+}
+
+int main(void)
+{
+    char *a = NULL;
+    func(a);
+}
+</code></pre>
+
+<p>执行完主函数后，a还是NULL！a不是传进去申请了空间吗？我之前也是这样认为的，
+后来发现，其实func函数的那个参数是以传值的方式传进去的，而不是传地址！
+如果要传地址的话，应该是char **a，func(&amp;a)这样才行！</p>
+
+<h1 id="extern-c">extern &ldquo;C&rdquo;</h1>
+
+<p>这个是用于C/C++混合编程的，当引用C语言代码时在函数前面加上。</p>
+
+<h1 id="内联函数">内联函数</h1>
+
+<p>编译器在编译内联函数时会对参数类型进行检查。</p>
+
+<h1 id="堆栈溢出的原因">堆栈溢出的原因</h1>
+
+<ol>
+<li>分配了内存没有释放</li>
+<li>递归层次太深</li>
+</ol>
+
+<h1 id="唯一不能声明为虚函数的函数">唯一不能声明为虚函数的函数</h1>
+
+<p>构造函数！PS：析构函数可以声明为虚函数。</p>
+
+<h1 id="ip地址的两部分">IP地址的两部分</h1>
+
+<p>网络号：主机号</p>
+
+<h1 id="error">#error</h1>
+
+<p>当预处理执行到#error时，会停止编译，并给出自定义的错误信息</p>
+
+<h1 id="指针-数组">指针&amp;数组</h1>
+
+<ul>
+<li>指向数组的指针：</li>
+</ul>
+
+<pre><code class="language-example">int (*a)[10];
+</code></pre>
+
+<ul>
+<li>指向函数（返回值为int,1个int参数）的指针：</li>
+</ul>
+
+<pre><code class="language-example">int (*a)(int);
+</code></pre>
+
+<h1 id="volatile">volatile</h1>
+
+<p>修饰的变量，表明可能会被意想不到地改变，因此编译器不会从寄存器的备份中
+读取（因为内存中的值可能已经被改变了），而要每次小心地从内存中读取。</p>
+
+<h1 id="事务处理的acid">事务处理的ACID</h1>
+
+<ul>
+<li>actomic: 原子性，不能再细分</li>
+<li>consistent: 事务处理前后，数据保持一致</li>
+<li>isolated: 一个事务处理对另一个没有影响</li>
+<li>durable: 永久保存</li>
+</ul>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/programmer_interview/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/pm/env.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

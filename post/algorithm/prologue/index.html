@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 开幕 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/algorithm/prologue/">开幕</a></h2>
+          <span class="post-date">Mar 3, 2013 </span>
+          <div class="post-content">
+            
+
+<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;Algorithms&rdquo;一书的笔记 @&lt;/font&gt;</p>
+
+<h1 id="fibonacci">fibonacci</h1>
+
+<p>书上给出了另外一种我想不到的解法：</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+#define MAXN 100
+
+int fib[MAXN];
+
+int get_fib(int num);
+
+int main(int argc, char *argv[])
+{
+    printf(&quot;%d\n&quot;, get_fib(10));
+
+    return 0;
+}
+
+int get_fib(int num)
+{
+    int i;
+
+    fib[0] = 0;
+    fib[1] = 1;
+
+    for (i = 2; i &lt;= num; i++) {
+        fib[i] = fib[i - 1] + fib[i - 2];
+    }
+
+    return fib[num];
+}
+</code></pre>
+
+<p>我以前写过递归的，记忆性递归的，迭代的，但是这种以循环代替递归的还没写过，
+也没见过，虽然理解起来非常简单，但是为什么我就想不到呢？
+不过这个程序，如果要求多个数的fibonacci值，还要在循环里面判断一下：</p>
+
+<pre><code class="language-c">if (fib[i] != 0) {
+    fib[i] = fib[i - 1] + fib[i - 2];
+}
+</code></pre>
+
+<p>这样可以避免每次计算，以空间换取时间。</p>
+
+<h1 id="big-oh-notation">Big-oh notation</h1>
+
+<p>每一本算法书都会讲这个东西，离散数学也讲这东西，基本讲一次忘一次，这次算是
+回忆，却让我理解更透彻了。 Ο(n)，英文读作：big oh of n 定义如下：</p>
+
+<hr />
+
+<p>Let f(n) and g(n) be functions from positive integers to positive reals.</p>
+
+<p>We say f = Ο(g) if there is a constant c &gt; 0 such that f(n) &lt;= c
+* g(n).</p>
+
+<hr />
+
+<p>f = Ο(g)表明f增长得没有g快，是f &lt;= g的一个简单模拟。 比如：</p>
+
+<hr />
+
+<p>f1(n) = n \^ 2, f2(n) = 2 * n + 20,</p>
+
+<p>f2 = Ο(f1), 因为：</p>
+
+<p>f2(n) / f1(n) = (2 * n + 20) / n \^ 2 &lt;= 22</p>
+
+<p>可以取1到22之间的任意一个常数。</p>
+
+<p>而f1 != Ο(f2)，因为：</p>
+
+<p>f1(n) / f2(n) = n \^ 2/ (2 * n + 20) 趋于无穷</p>
+
+<hr />
+
+<p>有关Ο 的一些常识：</p>
+
+<ol>
+<li>常数相乘可以忽略，如：14 * n \^ 2 &ndash;&gt; n \^ 2</li>
+<li>如果有n \^ a和n \^ b，且a &gt; b，忽略n \^ b，如：n \^ 2 + n &ndash;&gt;
+n \^ 2</li>
+<li>如果有指数和多项式，则忽略多项式，如：n \^ 3 + n \^ 5 &ndash;&gt; n \^ 3</li>
+<li>如果有多项式和对数，则忽略对数，如：n + (logn) \^ 3 &ndash;&gt; n，再如：</li>
+</ol>
+
+<p>n \^ 2 + nlogn &ndash;&gt; n \^ 2 作为扩展，有如下定义：</p>
+
+<hr />
+
+<p>如果f = Ο(g)，则g = <em>Ω</em>(f)</p>
+
+<p>如果f = Ο(g), 且f = <em>Ω</em>(g)，则f = <em>Θ</em>(g)</p>
+
+<hr />
+
+<h1 id="more-fibonacci-algorithms">more fibonacci algorithms</h1>
+
+<p>第一种方法： 用矩阵来求</p>
+
+<p>我们知道：</p>
+
+<pre><code class="language-example">0 * bullet F0 + F1 = F1
+F0 + F1 = F2
+</code></pre>
+
+<p>根据线性方程组转矩阵的方法，可以变成：</p>
+
+<p>\begin{equation}
+\left(
+\begin{array}{cc}
+0 &amp; 1 <br />
+1 &amp; 1
+\end{array}
+\right)
+\bullet
+\left(
+\begin{array}{c}
+F0 <br />
+F1
+\end{array}</p>
+
+<h1 id="right">\right)</h1>
+
+<p>\left(
+\begin{array}{c}
+F1 <br />
+F2
+\end{array}
+\right)
+\end{equation}</p>
+
+<p>通过数学归纳法，可以推出：</p>
+
+<p>\begin{equation}
+\left(
+\begin{array}{cc}
+0 &amp; 1 <br />
+1 &amp; 1
+\end{array}
+\right)^{n}
+\bullet
+\left(
+\begin{array}{c}
+F0 <br />
+F1
+\end{array}</p>
+
+<h1 id="right-1">\right)</h1>
+
+<p>\left(
+\begin{array}{c}
+F<em>{n} <br />
+F</em>{n+1}
+\end{array}
+\right)
+\end{equation}</p>
+
+<p>于是，可以写代码来实现这个算法了。</p>
+
+<p>main.c</p>
+
+<pre><code class="language-c">#include &quot;matrix.h&quot;
+
+/* return the fibonacci number of NUM */
+float fibonacci(int num);
+
+int main(int argc, char *argv[])
+{
+    printf(&quot;%g\n&quot;, fibonacci(10));
+
+    return 0;
+}
+
+float fibonacci(int num)
+{
+    Matrix *m1, *m2, *exp;
+    float **arr, **vector, result;
+    int i, j;
+
+    arr = (float **)malloc(2 * sizeof(float *));
+    for (i = 0; i &lt; 2; i++) {
+        arr[i] = (float *)malloc(2 * sizeof(float));
+        for (j = 0; j &lt; 2; j++) {
+            arr[i][j] = 1;
+        }
+    }
+    arr[0][0] = 0;
+
+    vector = (float **)malloc(2 * sizeof(float *));
+    for (i = 0; i &lt; 2; i++) {
+        vector[i] = (float *)malloc(sizeof(float));
+    }
+    vector[0][0] = 0;
+    vector[1][0] = 1;
+
+    m1 = matrix_from_array(arr, 2, 2);
+    m2 = matrix_from_array(vector, 2, 1);
+    exp = matrix_from_file(NULL, 2, 2);
+
+    matrix_power(m1, num, exp);
+    matrix_multiple(exp, m2, m2);
+    result = *(m2-&gt;elem);
+
+    matrix_delete(m1);
+    matrix_delete(m2);
+    matrix_delete(exp);
+    for (i = 0; i &lt; 2; i++) {
+        free(arr[i]);
+    }
+    free(arr);
+    for (i = 0; i &lt; 2; i++) {
+        free(vector[i]);
+    }
+    free(vector);
+
+    return result;
+}
+</code></pre>
+
+<p>matrix.h</p>
+
+<pre><code class="language-c">#ifndef _MATRIX_H_
+#define _MATRIX_H_
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+//matrix element's type
+typedef double matrix_t;
+typedef struct matrix Matrix;
+
+struct matrix {
+    int row_no;       //row number
+    int col_no;       //column number
+    matrix_t *elem;   //point to the elements
+};
+
+/* create a matrix from a file pointed by FP, with
+ * ROW_NO rows and COL_NO columns, return the pointer
+ * to the matrix.
+ * [note]:if FP is NULL, return an empty matrix */
+Matrix *
+matrix_from_file(FILE *fp, int row_no, int col_no);
+
+/* create a matrix from an two dimension pointer ARR with
+ * ROW_NO rows and COL_NO columns, return the pointer
+ * to the matrix.
+ * [note]:if ARR is NULL, return an empty matrix */
+Matrix *
+matrix_from_array(float **arr, int row_no, int col_no);
+
+/* free all memory */
+void matrix_delete(Matrix *m);
+
+/* initial the matrix M as identity matrix */
+void matrix_identity(Matrix *m);
+
+/* multiple matrix LEFT and RIGHT, the result is matrix RESULT.
+ * with a stupid algorithm. */
+void matrix_multiple(Matrix *left, Matrix *right, Matrix *result);
+
+/* calculate the matrix's power of exponent EXP, the result is
+ * the matrix RESULT. */   
+void matrix_power(Matrix *m, int exp, Matrix *result);
+
+#endif /* _MATRIX_H_ */
+</code></pre>
+
+<p>matrix.c</p>
+
+<pre><code class="language-c">#include &quot;matrix.h&quot;
+
+static void assert_matrix(const Matrix *);
+static int can_mul(const Matrix *left, const Matrix *right,
+                   const Matrix *result);
+static int is_square(const Matrix *m);
+
+Matrix *
+matrix_from_file(FILE *fp, int row_no, int col_no)
+{
+    int i;
+    Matrix *m = (Matrix *)malloc(sizeof(Matrix));
+
+    if (m == NULL) {
+        fprintf(stderr, &quot;memory no enough!&quot;);
+        exit(1);
+    }
+    m-&gt;row_no = row_no;
+    m-&gt;col_no = col_no;
+    m-&gt;elem = (matrix_t *)malloc(row_no * col_no * sizeof(matrix_t));
+    if (m-&gt;elem == NULL) {
+        fprintf(stderr, &quot;memory no enough!&quot;);
+        exit(1);
+    }
+    if (fp != NULL) {
+        for (i = 0; i &lt; row_no * col_no; i++) {
+            fscanf(fp, &quot;%lf&quot;, (m-&gt;elem + i));
+        }
+    }
+
+    return m;
+}
+
+Matrix *
+matrix_from_array(float **arr, int row_no, int col_no)
+{
+    int i, j;
+    Matrix *m = (Matrix *)malloc(sizeof(Matrix));
+
+    if (m == NULL) {
+        fprintf(stderr, &quot;memory no enough!&quot;);
+        exit(1);
+    }
+    m-&gt;row_no = row_no;
+    m-&gt;col_no = col_no;
+    m-&gt;elem = (matrix_t *)malloc(row_no * col_no * sizeof(matrix_t));
+    if (m-&gt;elem == NULL) {
+        fprintf(stderr, &quot;memory no enough!&quot;);
+        exit(1);
+    }
+    if (arr != NULL) {
+        for (i = 0; i &lt; row_no; i++) {
+            for (j = 0; j &lt; col_no; j++) {
+                *(m-&gt;elem + i * col_no + j) = arr[i][j];
+            }
+        }
+    }
+
+    return m;
+}
+
+void matrix_delete(Matrix *m)
+{
+    assert_matrix(m);
+
+    if (m-&gt;elem) {
+        free(m-&gt;elem);
+    }
+    free(m);
+}
+
+void matrix_identity(Matrix *m)
+{
+    int i;
+
+    assert_matrix(m);
+
+    if (!is_square(m)) {
+        fprintf(stderr, &quot;identity: the matrix is not square!&quot;);
+        exit(1);
+    }
+    for (i = 0; i &lt; m-&gt;row_no * m-&gt;col_no; i++) {
+        if (((i / m-&gt;col_no) * m-&gt;row_no) + (i / m-&gt;col_no) == i) {
+            *(m-&gt;elem + i) = 1;
+        } else {
+            *(m-&gt;elem + i) = 0;
+        }
+    }
+}
+
+void matrix_multiple(Matrix *left, Matrix *right, Matrix *result)
+{
+    int i, j, k, left_elem, right_elem;
+    matrix_t sum;
+    Matrix *temp;
+
+    assert_matrix(left);
+    assert_matrix(right);
+    assert_matrix(result);
+
+    if (!can_mul(left, right, result)) {
+        fprintf(stderr, &quot;multiple: row number or column number not match!&quot;);
+        exit(1);
+    }
+    if (result == left || result == right) {
+        temp = matrix_from_file(NULL, result-&gt;row_no, result-&gt;col_no);
+        for (i = 0; i &lt; result-&gt;row_no * result-&gt;col_no; i++) {
+            *(temp-&gt;elem + i) = *(result-&gt;elem + i);
+        }
+    } else {
+        temp = result;
+    }
+    for (i = 0; i &lt; left-&gt;row_no; i++) {
+        for (j = 0; j &lt; right-&gt;col_no; j++) {
+            sum = 0.0;
+            for (k = 0; k &lt; left-&gt;col_no; k++) {
+                left_elem = *(left-&gt;elem + i * left-&gt;col_no + k);
+                right_elem = *(right-&gt;elem + j * right-&gt;col_no + k);
+                if ((left_elem != 0) &amp;&amp; (right_elem != 0)) {
+                    sum += left_elem * right_elem;
+                }
+            }
+            *(temp-&gt;elem + i * temp-&gt;col_no + j) = sum;
+        }
+    }
+    if (result == left || result == right) {
+        for (i = 0; i &lt; result-&gt;row_no * result-&gt;col_no; i++) {
+            *(result-&gt;elem + i) = *(temp-&gt;elem + i);
+        }
+    }
+}
+
+void matrix_power(Matrix *m, int exp, Matrix *result)
+{
+    matrix_identity(result);
+
+    while (exp &gt; 0) {
+        if ((exp &amp; 1) == 1) {
+            matrix_multiple(m, result, result);
+        }
+        matrix_multiple(m, m, m);
+        exp &gt;&gt;= 1;
+    }
+}
+
+static void assert_matrix(const Matrix *m)
+{
+    if (m == NULL) {
+        fprintf(stderr, &quot;the matrix is NULL!&quot;);
+    }
+}
+
+static int can_mul(const Matrix *left, const Matrix *right,
+                   const Matrix *result)
+{
+    if (left-&gt;col_no == right-&gt;row_no &amp;&amp;
+        right-&gt;row_no == result-&gt;row_no &amp;&amp;
+        right-&gt;col_no == result-&gt;col_no) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+static int is_square(const Matrix *m)
+{
+    return m-&gt;row_no == m-&gt;col_no;
+}
+</code></pre>
+
+<p>完整的矩阵类，请参见<a href="http://www.zhengyuanhang.com/article/207.html">这里</a></p>
+
+<p>第二种方法：称为fast
+doubling，引用自<a href="http://nayuki.eigenstate.org/page/fast-fibonacci-algorithms">这里</a>
+。</p>
+
+<p>从上面的矩阵法中，可以推出下面这个等式：</p>
+
+<p>\begin{equation}
+\left(
+\begin{array}{cc}
+0 &amp; 1 <br />
+1 &amp; 1
+\end{array}</p>
+
+<h1 id="right-n">\right)^n</h1>
+
+<p>\left(
+\begin{array}{cc}
+F(n-1) &amp; F(n) <br />
+F(n) &amp; F(n+1)
+\end{array}
+\right)^n
+\end{equation}</p>
+
+<p>这个等式是可以通过数学归纳法证明的，也比较容易记忆（虽然我很不喜欢记公式，
+但是有的东西，能记住是非常好的）。</p>
+
+<p>于是，我们可以根据这个等式推出fast doubling的算法：</p>
+
+<p>\begin{equation}
+\begin{split}
+\left(
+\begin{array}{cc}
+F(2n-1) &amp; F(2n) <br />
+F(2n) &amp; F(2n+1)
+\end{array}</p>
+
+<h1 id="right-2">\right)</h1>
+
+<p>\left(
+\begin{array}{cc}
+0 &amp; 1 <br />
+1 &amp; 1
+\end{array}</p>
+
+<h1 id="right-2n">\right)^{2n}</h1>
+
+<p>\left(
+\left(
+\begin{array}{cc}
+0 &amp; 1 <br />
+1 &amp; 1
+\end{array}
+\right)^n</p>
+
+<h1 id="right-2-1">\right)^2</h1>
+
+<p>\left(
+\begin{array}{cc}
+F(n-1) &amp; F(n) <br />
+F(n) &amp; F(n+1)
+\end{array}
+\right)^2</p>
+
+<h1 id="toc_9">\</h1>
+
+<p>\left(
+\begin{array}{cc}
+F(n-1)^2 + F(n)^2 &amp; F(n-1)F(n) + F(n)F(n+1) <br />
+F(n)F(n-1) + F(n+1)F(n) &amp; F(n)^2 + F(n+1)^2
+\end{array}
+\right)
+\end{split}
+\end{equation}</p>
+
+<p>于是有：</p>
+
+<p>F(2n+1) = F(n)^2^ + F(n+1)^2^</p>
+
+<p>F(2n) = F(n-1)F(n) + F(n)F(n+1) = F(n)( F(n-1) + F(n+1) ) = F(n)( F(n+1)
+- F(n) + F(n+1) ) = F(n)( 2F(n+1) - F(n) )</p>
+
+<p>所以，如果知道F(k+1)和F(k)，可以知道：</p>
+
+<p>F(2k+1) = F(k)^2^ + F(k+1)^2^</p>
+
+<p>F(2k) = F(k)( 2F(k+1) - F(k))</p>
+
+<p>这样就得到了通用的方法。</p>
+
+<p>有了算法，实现不了也是没用，马上敲代码吧！</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+/* calculate the fibonacci number of n with fast doubling algorithm. */
+int fibonacci(int n);
+
+int main(int argc, char *argv[])
+{
+    int i;
+
+    for (i = 0; i &lt; 20; i++) {
+        printf(&quot;%d\n&quot;, fibonacci(i));
+    }
+
+    return 0;
+}
+
+int fibonacci(int n)
+{
+    int fn, fn1;
+
+    if (n == 0) {
+        return 0;
+    }
+    if (n == 1 || n == 2) {
+        return 1;
+    }
+    if (n &amp; 1) {
+        fn = fibonacci((n - 1) / 2);
+        fn1 = fibonacci((n - 1) / 2 + 1);
+        return fn * fn + fn1 * fn1;
+    } else {
+        fn = fibonacci(n / 2);
+        fn1 = fibonacci(n / 2 + 1);
+        return fn * (2 * fn1 - fn);
+    }
+}
+</code></pre>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/how-to-become-a-hacker/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/test/specification.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

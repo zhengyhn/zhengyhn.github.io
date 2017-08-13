@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> elisp笔记：运算 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/elisp/arithmetic/">elisp笔记：运算</a></h2>
+          <span class="post-date">Aug 13, 2017 </span>
+          <div class="post-content">
+            
+
+<p>声明：此文章为学习<a href="http://www.xahlee.org">xahlee</a>
+的<a href="http://ergoemacs.org/emacs/elisp_basics.html">elisp教程</a> 而写的笔记。</p>
+
+<h2 id="数学计算基础">数学计算基础</h2>
+
+<h3 id="运算符也是函数">运算符也是函数</h3>
+
+<p>和其它函数式语言一样，elisp中，加减乘除也是一个函数。我做了下面的练习：</p>
+
+<pre><code class="language-commonlisp">ELISP&gt; (+ 1 1)
+2
+ELISP&gt; (+ 1 2 3)
+6
+ELISP&gt; (+ 1 2 3 4)
+10
+ELISP&gt; (- 4 1)
+3
+ELISP&gt; (- 4 2 1)
+1
+ELISP&gt; (* 3 3)
+9
+ELISP&gt; (/ 2 1)
+2
+ELISP&gt; (/ 1 2)
+0
+ELISP&gt; (/ 1.0 2)
+0.5
+ELISP&gt; (% 5 3)
+2
+ELISP&gt; (expt 2 10)
+1024
+</code></pre>
+
+<h3 id="判断对象的类型">判断对象的类型</h3>
+
+<p>规律为：类型+p，如：</p>
+
+<pre><code class="language-commonlisp">(integerp 1)
+</code></pre>
+
+<p>用于判断1是不是整数,其中p表示predicate（是）。我做了下面的练习：</p>
+
+<pre><code class="language-commonlisp">ELISP&gt; (integerp 3.)
+t
+ELISP&gt; (integerp 3)
+t
+ELISP&gt; (floatp 3.1)
+t
+ELISP&gt; (stringp &quot;&quot;)
+t
+ELISP&gt; (listp '(1 2))
+t
+</code></pre>
+
+<h3 id="数字与字符串互转">数字与字符串互转</h3>
+
+<p>可以猜到函数，数字转字符串为number-to-string，字符串转数字为string-to-number：</p>
+
+<pre><code class="language-commonlisp">ELISP&gt; (string-to-number &quot;1&quot;)
+1
+ELISP&gt; (number-to-string 1.0)
+&quot;1.0&quot;
+</code></pre>
+
+<h2 id="数字操作">数字操作</h2>
+
+<h3 id="整数">整数</h3>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/elisp/data_type/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/shell/getting.start/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

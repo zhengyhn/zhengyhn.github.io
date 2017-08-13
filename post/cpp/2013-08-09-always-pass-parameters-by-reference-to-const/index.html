@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Always pass parameters by reference-to-const &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/cpp/2013-08-09-always-pass-parameters-by-reference-to-const/">Always pass parameters by reference-to-const</a></h2>
+          <span class="post-date">May 14, 2016 </span>
+          <div class="post-content">
+            <p>We all know that <em>pass by value</em> is not effecient.So we use <em>pass by pointer</em>
+in C.However, in C++, we prefer <strong>pass by referece-to-const</strong>.</p>
+
+<p>Here is an example.</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+class Dog {
+public:
+    Dog()
+    {
+        printf(&quot;Calling Dog's constructor\n&quot;);
+    }
+    Dog(const Dog&amp; d)
+    {
+        printf(&quot;Calling Dog's copy constructor\n&quot;);
+        this-&gt;name = d.name;
+    }
+    virtual ~Dog()
+    {
+        printf(&quot;Calling Dog's destructor\n&quot;);
+    }
+private:
+    std::string name;
+};
+
+void
+walk_the_dog(Dog d)
+{
+
+}
+
+int
+main(int argc, char **argv)
+{
+    Dog dog;
+    walk_the_dog(dog);
+
+    return 0;
+}
+</code></pre>
+
+<p>The running result is as follows:</p>
+
+<pre><code>Calling Dog's constructor
+Calling Dog's copy constructor
+Calling Dog's destructor
+Calling Dog's destructor
+</code></pre>
+
+<p>Now, let&rsquo;s analysis this <em>passing by value</em> process.
+First, <code>Dog dog;</code> will call the constructor. Then, since the function
+<code>walk_the_dog</code> pass the parameter <code>d</code> by value, it will call the copy
+constructor. Before exiting the function, it will call the destructor of <code>Dog</code>
+to destroy the parameter <code>d</code>. In the end, before exiting the main function,
+the destructor of <code>Dog</code> will be called again to destroy the <code>dog</code> object.</p>
+
+<p>Now, it seems that <em>passing by value</em> will result in a call to copy constructor
+and a call to destructor. But, in fact, it will result in two call to copy
+constructor and two call to destructor. Note that there are a <code>string</code> object
+as the member of the class <code>Dog</code>, so there will be an extra call the copy
+constructor and destructor of the <code>string</code> object.</p>
+
+<p>Obviously, the cost of <em>passing by value</em> is very expensive.
+How is <em>passing by reference-to-const</em>?</p>
+
+<pre><code>void
+walk_the_dog(const Dog&amp; d)
+{
+
+}
+</code></pre>
+
+<p>Just modify a bit and the result will be:</p>
+
+<pre><code>Calling Dog's constructor
+Calling Dog's destructor
+</code></pre>
+
+<p>Note that the <code>const</code> is very important. If there is not a <code>const</code>, the
+compiler will put the object in the writable part of the memory so that it
+cannot be shared by other functions. If declared as <code>const</code>, the object
+will be put into the readonly part of the memory and can be shared by lots
+of functions so that the program need less memory.</p>
+
+<p>The implementation of reference is using the pointer in C. Therefore, it may
+be more effecient to pass the built-in type parameters by value than referece.
+It&rsquo;s true. If the parameter is an object of type <code>char</code>, which occupies
+1 byte. But a pointer ocuppies 4 bytes in a 32-bit machine. So we should prefer
+passing by value when the parameter is of built-in type? No, we should always
+pass the parameters by reference-to-const, since <strong>the compiler will always</strong>
+<strong>put the pointer in the register!</strong></p>
+
+<p>Finally, just remember, <strong>always pass the parameters by reference-to-const</strong>.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/cpp/2013-07-28-about-constructors-destructors-and-assignment-operators/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/cpp/2013-07-24-const-anyway/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

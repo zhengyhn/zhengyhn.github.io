@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 一个带颜色输出的echo &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/echoc/">一个带颜色输出的echo</a></h2>
+          <span class="post-date">Mar 20, 2013 </span>
+          <div class="post-content">
+            
+
+<h1 id="动机">动机</h1>
+
+<p>为了找到工作，最近需要多写shell了，有时候我很想输出信息的时候有颜色，比如
+成功的信息用绿色，错误的信息用红色，去查了一下echo，发现写起来一大堆麻烦，
+甚至是硬编码，没办法，参考自<a href="http://hi.baidu.com/lonelycorn/item/c7472d4bc25127ea1e19bc96">这篇文章</a>
+，自己写了一个给自己用。</p>
+
+<h1 id="基础知识积累">基础知识积累</h1>
+
+<p>通过echo的man手册及网友的帮助，发现，echo用-e来开启转义，设置颜色的格式为：</p>
+
+<pre><code class="language-example">\e[background;foreground;高亮m字符串
+</code></pre>
+
+<p>默认的为：</p>
+
+<pre><code class="language-example">\e[0m
+</code></pre>
+
+<p>背景色的数字：</p>
+
+<p>number   color</p>
+
+<hr />
+
+<p>0        transparent
+  40       black
+  41       red
+  42       green
+  43       yellow
+  44       blue
+  45       purple
+  46       dark green
+  47       white</p>
+
+<p>前景色的数字：</p>
+
+<p>number   color</p>
+
+<hr />
+
+<p>30       black
+  31       red
+  32       green
+  33       yellow
+  34       blue
+  35       purple
+  36       dark green
+  37       white</p>
+
+<p>高亮的数字是1,非高亮为0</p>
+
+<p>那为什么后面是m呢？根据<a href="http://www.freeos.com/guides/lsst/misc.htm">教程</a>
+,m是一个标志，表示用来改变文字的颜色和特效的。
+原来前面用分号分开的就是m指定的特性，还能用2指定加粗，这里不详细说了。</p>
+
+<h1 id="实现">实现</h1>
+
+<p>刚学bash shell不久，写了下面的echoc，表示有颜色的输出。</p>
+
+<pre><code class="language-bash">#!/bin/bash
+# can: echo string with color
+# usage: echoc [-color] [string]
+# author: yuanhang zheng
+
+if [ $# -lt 2 ]; then
+    if [ $# == 1 ]; then
+        if [ ${1:0:1} == &quot;-&quot; ]; then
+            echo &quot;&quot;
+        else
+            echo &quot;$1&quot;
+        fi
+    else
+        echo &quot;&quot; 
+    fi
+elif [ $# == 2 ]; then
+    if [ ${1:0:1} != &quot;-&quot; ]; then
+        echo &quot;usage: ${0##*/} [-color] [string]&quot;
+        echo &quot;e.g: ${0##*/} -red hey! &quot;
+        exit 1
+    elif [ &quot;$1&quot; == &quot;-red&quot; ]; then
+        echo -e &quot;\e[0;31;1m$2\e[0m&quot;
+    elif [ &quot;$1&quot; == &quot;-green&quot; ]; then
+        echo -e &quot;\e[0;32;1m$2\e[0m&quot;
+    elif [ &quot;$1&quot; == &quot;-yellow&quot; ]; then
+        echo -e &quot;\e[0;33;1m$2\e[0m&quot;
+    elif [ &quot;$1&quot; == &quot;-blue&quot; ]; then
+        echo -e &quot;\e[0;34;1m$2\e[0m&quot;
+    elif [ &quot;$1&quot; == &quot;-purple&quot; ]; then
+        echo -e &quot;\e[0;35;1m$2\e[0m&quot;
+    elif [ &quot;$1&quot; == &quot;-white&quot; ]; then
+        echo -e &quot;\e[0;37;1m$2\e[0m&quot;
+    else
+        echo &quot;no such color!&quot;
+        echo &quot;you have only 'red', 'green', 'yellow', 'blue',
+'purple', 'white'&quot;
+        exit 1
+    fi
+else
+    echo &quot;too many parameters!&quot;
+    echo &quot;usage: ${0##*/} [-color] [string]&quot;
+    echo &quot;e.g: ${0##*/} -red hey! &quot;
+    exit 1
+fi
+</code></pre>
+
+<p>好了，如果你觉得有用，就直接用吧，如果你觉得里面的语法不太懂，去查吧。</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/linux/computer.org/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/test/x_ray.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> 软件测试读书笔记：软件测试背景 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/test/stbg.org/">软件测试读书笔记：软件测试背景</a></h2>
+          <span class="post-date">Mar 1, 2013 </span>
+          <div class="post-content">
+            
+
+<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记
+@&lt;/font&gt;</p>
+
+<h1 id="什么是bug">什么是bug</h1>
+
+<ul>
+<li>当下面5种情况中的一种出现时，说明有bug了</li>
+</ul>
+
+<ol>
+<li>软件没有做产品说明书说应该做的事情。</li>
+</ol>
+
+<p>比如计算器相加应该得到正确结果，而它没有得到。</p>
+
+<ol>
+<li>软件做了产品说明书说不应该做的事情</li>
+</ol>
+
+<p>比如计算器死机了。</p>
+
+<ol>
+<li>软件做了产品说明书没有提到的事情</li>
+</ol>
+
+<p>比如某个计算器的产品说明书里面没有说要实现开平方功能，而这个软件却实现了，
+这也是一个bug，因为测试师没有准备这个功能的测试用例，可能会导致更多的错误。</p>
+
+<ol>
+<li>软件没有做产品说明书没有提到的但是应该做的事情</li>
+</ol>
+
+<p>比如产品说明书没有提到电池没电了会怎样，而程序员需要考虑这种情况，如果没有
+考虑，则也是一个bug。</p>
+
+<ol>
+<li>软件很难用，很慢，或者看起来不对劲</li>
+</ol>
+
+<p>比如说计算器的某个按键太小，哪里用起来不习惯等。</p>
+
+<h1 id="bug产生的原因">bug产生的原因：</h1>
+
+<p>一般人以为bug产生的原因是因为编码错误，而事实上，大部分bug是因为产品说明做得不好。
+下图是bug产生原因的统计图： <em>~/pictures/schema1.JPG</em></p>
+
+<h1 id="软件测试师的工作">软件测试师的工作</h1>
+
+<ul>
+<li>软件测试师的目标是尽早地找到bugs,并且确保它们被修复</li>
+</ul>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/test/dev_process.org/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/clang/linux.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

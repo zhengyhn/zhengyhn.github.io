@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> c陷井和缺陷 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/clang/c_traps_pitfalls/">c陷井和缺陷</a></h2>
+          <span class="post-date">Mar 1, 2013 </span>
+          <div class="post-content">
+            
+
+<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;c traps and pitfalls&rdquo;一书的笔记
+@&lt;/font&gt;</p>
+
+<h1 id="词法陷井">词法陷井</h1>
+
+<ul>
+<li>看下面的代码：</li>
+</ul>
+
+<pre><code class="language-example">y = x/*p;  /* p points to the divisor */
+</code></pre>
+
+<p>本意是x除以p指向的变量，而事实上这样写/*会认为是注释的开头。
+所以，双目运算符两边加空格是非常好的。</p>
+
+<h1 id="语法陷井">语法陷井</h1>
+
+<ul>
+<li>!=的优先级要比&amp;之类的逻辑运算符高，所以不要有下面的写法</li>
+</ul>
+
+<pre><code class="language-example">if (flags &amp; FLAG != 0)
+</code></pre>
+
+<ul>
+<li>+号等运算符优先级要比[]{#和}的高，所以不要有下面的写法</li>
+</ul>
+
+<pre><code class="language-example">r = h &lt;&lt; 4 + 1
+</code></pre>
+
+<ul>
+<li>运算符优先级的记忆方法</li>
+</ul>
+
+<ol>
+<li>优先级最高的是那些不是“真的”运算符：函数调用()，数组下标[]，</li>
+</ol>
+
+<p>结构体成员-&gt;和.</p>
+
+<ol>
+<li>然后是一元运算符，! ~ <del>+ &ndash; 正号</del> 负号- 指针* 类型转换(type)
+sizeof，</li>
+</ol>
+
+<p>所以使用函数指针的时候，一定要这样：(*p)()。记住，所有的一元运算符都是右结合的。
+所以*p++会被认为是*(p++)</p>
+
+<ol>
+<li>接着是二元运算符，它们有下面的规律：</li>
+</ol>
+
+<p>代数运算符 &gt; 移位运算符 &gt; 关系运算符 &gt; 逻辑运算符 &gt;
+赋值运算符 &gt; 条件运算符</p>
+
+<h1 id="链接陷井">链接陷井</h1>
+
+<ul>
+<li>假设一个文件里面有下面的定义：</li>
+</ul>
+
+<pre><code class="language-example">char filename[] = &quot;/etc/passwd&quot;;
+</code></pre>
+
+<p>另外一个文件里面有下面的定义：</p>
+
+<pre><code class="language-example">char *filename;
+</code></pre>
+
+<p>这2个变量的类型一样吗？虽然指针和数组很相似，但是它们不是同一样东西。
+第一个filename，它是一个字符串数组的名字，使用这个名字会生成一个指向这个
+字符串第一个字符的指针，仅在需要的时候生成，不会一直存在。
+第二个filename，它是一个指针，定义时就给它分配了空间，程序员想要让它指向
+哪里它就会指向哪里，如果不给它赋值，它会指向NULL</p>
+
+<h1 id="语义陷井">语义陷井</h1>
+
+<ul>
+<li>表达式的顺序陷井。看下面的例子：</li>
+</ul>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a[] = { 1, 2, 3 };
+    int b[] = { 10, 20, 30};
+    int i = 0;
+
+    while (i &lt; 3) {
+        a[i++] = b[i];
+    }
+    for (i = 0; i &lt; 3; i++) {
+        printf(&quot;%d\n&quot;, a[i]);
+    }
+
+    return 0;
+}
+</code></pre>
+
+<p>会输出什么呢？我刚开始是这样想的，先计算右边，再赋值给左边，所以会输出
+10 20 30 作者再给了一个例子：</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a[] = { 1, 2, 3 };
+    int b[] = { 10, 20, 30};
+    int i = 0;
+
+    while (i &lt; 3) {
+        a[i] = b[i++];
+    }
+    for (i = 0; i &lt; 3; i++) {
+        printf(&quot;%d\n&quot;, a[i]);
+    }
+
+    return 0;
+}
+</code></pre>
+
+<p>会输出什么呢？根据我刚才的推理，理应数组越界的，因为赋值给最后一个元素的时候，
+i++，i已经超过了数组a的范围了。而事实上，结果还是 10 20 30
+作者的解释是，编译器无法保证获取数组元素的操作先于i自增的操作，这是不确定的。
+所以在写程序的时候，最好分开写。</p>
+
+<h1 id="库函数陷井">库函数陷井</h1>
+
+<ul>
+<li>getchar()函数居然返回int!下面是从&lt;stdio.h&gt;复制过来的代码：</li>
+</ul>
+
+<pre><code class="language-c">/* Read a character from stdin.  */
+__STDIO_INLINE int
+getchar (void)
+{
+  return _IO_getc (stdin);
+}
+</code></pre>
+
+<p>而且putchar居然也是传进int参数，返回int参数</p>
+
+<pre><code class="language-c">/* Write a character to stdout.  */
+__STDIO_INLINE int
+putchar (int __c)
+{
+  return _IO_putc (__c, stdout);
+}
+</code></pre>
+
+<h1 id="预处理陷井">预处理陷井</h1>
+
+<ul>
+<li>宏不是函数，看下面的例子：</li>
+</ul>
+
+<pre><code class="language-c">#define max(a,b) ((a) &gt; (b) ? (a) : (b))
+
+largest = max(largest,x[i++]);
+</code></pre>
+
+<p>虽然，在定义宏的时候很小心，加了很多括号，不至于有表达式优先级的问题，但是
+这样调用还是背离了本义，因为x[i++]，会使i自加多次，因为宏只是替换，而不是
+拷贝参数。</p>
+
+<ul>
+<li>宏不是类型定义，看下面的例子：</li>
+</ul>
+
+<pre><code class="language-c">#define STU struct student *
+typedef struct student *STUDENT;
+
+STU a, b;
+STUDENT c, d;
+</code></pre>
+
+<p>后面的两条定义等价于：</p>
+
+<pre><code class="language-c">struct student *a, b;
+struct student *c, *d;
+</code></pre>
+
+<p>显然，第一条背离了本意，b定义成了结构体类型，而不是指向它的指针类型。虽然
+typedef的定义看起来有点别扭，但是在实际的代码中还是要使用typedef，不要
+使用宏。</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/sevenhabbits/review_myself.org/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/test/dev_process.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

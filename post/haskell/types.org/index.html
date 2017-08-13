@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> types and typeclasses &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/haskell/types.org/">types and typeclasses</a></h2>
+          <span class="post-date">Feb 18, 2013 </span>
+          <div class="post-content">
+            
+
+<h1 id="概述">概述</h1>
+
+<ul>
+<li>haskell有类型推理机制，如果我们写一个数字，我们不用告诉编译器它是一个数字，</li>
+</ul>
+
+<p>编译器能够推理出它是一个数字。</p>
+
+<ul>
+<li>使用:t命令可以查看一个表达式的类型。</li>
+</ul>
+
+<pre><code class="language-haskell">ghci&gt; :t 'a'
+'a' :: Char
+ghci&gt; :t False
+False :: Bool
+ghci&gt; :t &quot;aaa&quot;
+&quot;aaa&quot; :: [Char]
+ghci&gt; :t ('a', &quot;aaa&quot;)
+('a', &quot;aaa&quot;) :: (Char, [Char])
+</code></pre>
+
+<p>::读作has type of 我们看到&rdquo;aaa&rdquo;有类型[Char]，表明是一个list
+而元组(&lsquo;a&rsquo;, &ldquo;aaa&rdquo;)有类型(char, [char]) 类型的首字母都是大写</p>
+
+<ul>
+<li>函数也有类型，看下面这个函数</li>
+</ul>
+
+<pre><code class="language-haskell">remove_uppercase str = [ ch | ch &lt;- str, ch `elem` ['a'..'z']]
+</code></pre>
+
+<p>查看它的类型：</p>
+
+<pre><code class="language-haskell">ghci&gt; :t remove_uppercase
+remove_uppercase :: [Char] -&gt; [Char]
+</code></pre>
+
+<p>如果带多个参数会怎么样呢？</p>
+
+<pre><code class="language-haskell">my_sum a b c = a + b + c
+</code></pre>
+
+<p>这样，会得到下面的结果：</p>
+
+<pre><code class="language-haskell">ghci&gt; :t my_sum
+my_sum :: Num a =&gt; a -&gt; a -&gt; a -&gt; a
+</code></pre>
+
+<p>这是什么乱七八糟的呢？先不管，我们给这个函数声明类型：</p>
+
+<pre><code class="language-haskell">my_sum :: Int -&gt; Int -&gt; Int -&gt; Int
+my_sum a b c = a + b + c
+</code></pre>
+
+<p>再来看一下：</p>
+
+<pre><code class="language-haskell">ghci&gt; :t my_sum
+my_sum :: Int -&gt; Int -&gt; Int -&gt; Int
+</code></pre>
+
+<p>原来多个参数的类型是这样表示的。</p>
+
+<h1 id="一些基本的数据类型">一些基本的数据类型</h1>
+
+<ul>
+<li>Int</li>
+</ul>
+
+<p>用来表示整数，它是有界的，比如32位的环境下是-2 \^ 31 - 1至2 \^ 31</p>
+
+<ul>
+<li>Integer</li>
+</ul>
+
+<p>也是用来表示整数的，但是它是无界的，于是它可以用来表示很大的数字，
+虽然很大，但是你懂的，不可能无限大。可以想到，有界的Int要高效一 些。</p>
+
+<ul>
+<li>Float</li>
+</ul>
+
+<p>表示单精度浮点数</p>
+
+<ul>
+<li>Double</li>
+</ul>
+
+<p>表示双精度浮点数</p>
+
+<ul>
+<li>Bool</li>
+</ul>
+
+<p>boolean类型，只有两个值True和False</p>
+
+<ul>
+<li>Char</li>
+</ul>
+
+<p>字符</p>
+
+<h1 id="类型变量-type-variable">类型变量(type variable)</h1>
+
+<p>操作list中有一个函数叫head，它的类型是：</p>
+
+<pre><code class="language-haskell">Prelude&gt; :t head
+head :: [a] -&gt; a
+</code></pre>
+
+<p>由于a不是以大写字母开头的，所以它不是一个类型，而事实上它是一个类型变量（
+type variable)，表明a可以是任意类型，这个有点像C++中的泛型。存在类型变量
+的函数称为多态函数(polymorphic function)。 再来看看fst函数：</p>
+
+<pre><code class="language-haskell">Prelude&gt; :t fst
+fst :: (a, b) -&gt; a
+</code></pre>
+
+<p>可以看出，类型变量使用小写字母a, b, c, d&hellip;来表示。</p>
+
+<h1 id="类型类-typeclass">类型类(typeclass)</h1>
+
+<p>一个类型类是一个定义了一些动作的接口，如果一个类型是一个类型类的一部分，则这
+个类型实现了这个类型类定义的一些动作。</p>
+
+<pre><code class="language-haskell">Prelude&gt; :t (==)
+(==) :: Eq a =&gt; a -&gt; a -&gt; Bool
+</code></pre>
+
+<p>这里，=&gt;右边表明==这个函数接受2个任意类型的参数，返回Bool类型，左边表明参数
+a必须是Eq类的成员。左边的称为类约束(class constraint)。 再看看elem：</p>
+
+<pre><code class="language-haskell">Prelude&gt; :t elem
+elem :: Eq a =&gt; a -&gt; [a] -&gt; Bool
+</code></pre>
+
+<p>下面是一些基本的typeclass：</p>
+
+<ul>
+<li>Eq，用于比较相等，它里面的成员实现的函数有=<code>和/</code></li>
+<li>Ord，用于操作顺序，它的成员实现的函数有&gt;, &lt;, &gt;=,
+&lt;=和compare</li>
+</ul>
+
+<pre><code class="language-haskell">Prelude&gt; 5 &gt; 2
+True
+Prelude&gt; compare 5 3
+GT
+</code></pre>
+
+<p>compare接受2个相同类型的参数，返回类型Ordering.Ordering可以为GT，LT或者EQ。
+要成为Ord的成员，必须要先是Eq的成员。</p>
+
+<ul>
+<li>Show，用于显示字符串，它的成员实现的函数主要是show。</li>
+</ul>
+
+<pre><code class="language-haskell">Prelude&gt; show 1.23
+&quot;1.23&quot;
+</code></pre>
+
+<ul>
+<li>Read，用于读取一个字符串,它的成员实现的函数主要是read，读取一个字符串，返回</li>
+</ul>
+
+<p>一个在Read成员中有的类型。</p>
+
+<pre><code class="language-haskell">Prelude&gt; read &quot;1.2&quot; + 2.1
+3.3
+</code></pre>
+
+<p>它是怎么知道是哪个类型的呢？看下面的例子：</p>
+
+<pre><code class="language-haskell">Prelude&gt; read &quot;2&quot;
+
+&lt;interactive&gt;:19:1:
+    No instance for (Read a0) arising from a use of `read'
+    The type variable `a0' is ambiguous
+    Possible fix: add a type signature that fixes these type variable(s)
+    Note: there are several potential instances:
+      instance Read () -- Defined in `GHC.Read'
+      instance (Read a, Read b) =&gt; Read (a, b) -- Defined in `GHC.Read'
+      instance (Read a, Read b, Read c) =&gt; Read (a, b, c)
+        -- Defined in `GHC.Read'
+      ...plus 25 others
+    In the expression: read &quot;2&quot;
+    In an equation for `it': it = read &quot;2&quot;
+</code></pre>
+
+<p>它提示错误了，因为它不知道是哪个类型。看一下read函数的类型：</p>
+
+<pre><code class="language-haskell">Prelude&gt; :t read
+read :: Read a =&gt; String -&gt; a
+</code></pre>
+
+<p>它返回了a，表明可以是任意变量，而上例中两个数相加，是因为编译器猜到了类型，
+如果要用read函数，则最好是给它强制转换类型,通过加上::符号：</p>
+
+<pre><code class="language-haskell">Prelude&gt; read &quot;2&quot; :: Int
+2
+</code></pre>
+
+<ul>
+<li>Enum，它的成员是顺序的有序类型，有2个函数：succ和pred，用来求某个元素</li>
+</ul>
+
+<p>的successor和predecesor。它里面的成员有：(), Bool, Char, Ordering, Int,
+Integer, Float, Double。其中()是空元组类型，它们都是可以枚举的。</p>
+
+<ul>
+<li>Bounded，它的成员都有一个上界和一个下界，有2个有趣的函数，minBound和</li>
+</ul>
+
+<p>maxBound，看下例：</p>
+
+<pre><code class="language-haskell">Prelude&gt; :t minBound 
+minBound :: Bounded a =&gt; a
+Prelude&gt; minBound :: Int
+-9223372036854775808
+Prelude&gt; :t maxBound
+maxBound :: Bounded a =&gt; a
+Prelude&gt; maxBound :: Char
+'\1114111'
+</code></pre>
+
+<p>所有的元组都是它的成员：</p>
+
+<pre><code class="language-haskell">Prelude&gt; minBound :: (Bool, Char, Int)
+(False,'\NUL',-9223372036854775808)
+</code></pre>
+
+<ul>
+<li>Num，顾名思义，它是一个数字的类型类。</li>
+</ul>
+
+<p>一个数字就是一个多态常量：</p>
+
+<pre><code class="language-haskell">Prelude&gt; :t 2
+2 :: Num a =&gt; a
+Prelude&gt; 2 :: Int
+2
+Prelude&gt; 2 :: Integer
+2
+Prelude&gt; 2 :: Float
+2.0
+Prelude&gt; 2 :: Double
+2.0
+</code></pre>
+
+<p>要成为Num的成员，必须要先成为Show和Eq的成员。</p>
+
+<ul>
+<li>Integral，Num包括所有的数字类型，而Integral只包含整数类型（Int和Integer）。</li>
+</ul>
+
+<p>一个有用的函数是fromIntegral，它的类型为：</p>
+
+<pre><code class="language-haskell">Prelude&gt; :t fromIntegral
+fromIntegral :: (Integral a, Num b) =&gt; a -&gt; b
+</code></pre>
+
+<p>注意到一个奇怪的地方，它的类约束有2个，用逗号隔开。</p>
+
+<ul>
+<li>Floating，只包括浮点数类型(Float, Double)。</li>
+</ul>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://zhengyhn.github.io/post/gtk/intro/"> Prev</a>  
+          <a class="btn next " href="http://zhengyhn.github.io/post/clang/real.org/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>
