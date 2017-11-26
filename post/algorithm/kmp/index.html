@@ -105,12 +105,47 @@ pattern开头的3个字母为aba，这样匹配的可能性比较大。这是偶
 
 <p>对每个模式，它自身的内容有一些规律，下表就是所谓的partial match table:</p>
 
-<p>pattern:   a   b   a   b   a   b   c   a</p>
+<table>
+<thead>
+<tr>
+<th align="left">pattern</th>
+<th align="left">a</th>
+<th align="left">b</th>
+<th align="left">a</th>
+<th align="left">b</th>
+<th align="left">a</th>
+<th align="left">b</th>
+<th align="left">c</th>
+<th align="left">a</th>
+</tr>
+</thead>
 
-<hr />
+<tbody>
+<tr>
+<td align="left">index</td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">3</td>
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">6</td>
+<td align="left">7</td>
+</tr>
 
-<p>index:     0   1   2   3   4   5   6   7
-  value:     0   0   1   2   3   4   0   1</p>
+<tr>
+<td align="left">value</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">3</td>
+<td align="left">4</td>
+<td align="left">0</td>
+<td align="left">1</td>
+</tr>
+</tbody>
+</table>
 
 <p>要计算这个表中的value，必须先理解下面的概念：</p>
 
