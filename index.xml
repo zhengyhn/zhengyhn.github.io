@@ -2,12 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hank&#39;s Blog</title>
-    <link>http://zhengyhn.github.io/index.xml</link>
+    <link>http://zhengyhn.github.io/</link>
     <description>Recent content on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 10 Dec 2017 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://zhengyhn.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://zhengyhn.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>maxiumn-subarray 和最大的子数组</title>
@@ -15,345 +17,7 @@
       <pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/leetcode/maxiumn-subarray/</guid>
-      <description>
-
-&lt;h4 id=&#34;题目&#34;&gt;题目&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
-
-For example, given the array [-2, 1, -3, 4, -1, 2, 1, -5, 4], 
-the contiguous subarray [4, -1, 2, 1] has the largest sum = 6.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;思路一&#34;&gt;思路一&lt;/h4&gt;
-
-&lt;p&gt;首先，可以直接两重循环，找到所有的子数组，然后计算出来和最大的那个，时间复杂度为O(n)，空间复杂度为O(1)。代码如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    int maxSubArray(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
-      if (nums.size() == 1) {
-        return nums[0];
-      }
-      int result = -pow(2, 31);
-      for (int i = 0; i &amp;lt; nums.size(); ++i) {
-        int sum = 0;
-        for (int j = i + 1; j &amp;lt; nums.size(); ++j) {
-          sum += nums[j];
-          if (sum &amp;gt; result) {
-            result = sum;
-          }
-        }
-      }
-      return result; 
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;思路二&#34;&gt;思路二&lt;/h4&gt;
-
-&lt;p&gt;举例子说明：&lt;/p&gt;
-
-&lt;p&gt;题目要求数组[-2, 1, -3, 4, -1, 2, 1, -5, 4]的任意连续子数组中和最大的那个连续子数组的和。&lt;/p&gt;
-
-&lt;p&gt;我们可以将该数组拆分成下面的数组：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;[-2, 1, -3, 4, -1, 2, 1, -5, 4]&lt;/li&gt;
-&lt;li&gt;[-2, 1, -3, 4, -1, 2, 1, -5]&lt;/li&gt;
-&lt;li&gt;[-2, 1, -3, 4, -1, 2, 1]&lt;/li&gt;
-&lt;li&gt;[-2, 1, -3, 4, -1, 2]&lt;/li&gt;
-&lt;li&gt;[-2, 1, -3, 4, -1]&lt;/li&gt;
-&lt;li&gt;[-2, 1, -3, 4]&lt;/li&gt;
-&lt;li&gt;[-2, 1, -3]&lt;/li&gt;
-&lt;li&gt;[-2, 1]&lt;/li&gt;
-&lt;li&gt;[-2]&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;对于这里的每个数组，可以求出来它的每个以最后一个元素为结束的子数组，看哪一个子数组的和最大。&lt;/p&gt;
-
-&lt;p&gt;例如：&lt;/p&gt;
-
-&lt;p&gt;[-2, 1, -3, 4, -1, 2, 1], 它的以最后一个元素为结束的子数组有[-2, 1, -3, 4, -1, 2, 1], [1, -3, 4, -1, 2, 1], [-3, 4, -1, 2, 1], [4, -1, 2, 1], [-1, 2, 1], [2, 1], [1]，和最大的是[4, -1, 2, 1], 和为6。&lt;/p&gt;
-
-&lt;p&gt;[-2, 1, -3, 4, -1, 2], 它的以最后一个元素为结束的子数组有[-2, 1, -3, 4, -1, 2], [1, -3, 4, -1, 2], [-3, 4, -1, 2], [4, -1, 2], [-1, 2], [2], 和最大的是[4, -1, 2], 和为5。&lt;/p&gt;
-
-&lt;p&gt;相比前面的思路一，我们相当于倒序遍历了所有的子数组，但是, 我们并不需要O(n^2)的时间复杂度，因为很多重复的计算可以利用，只需要遍历一次，时间复杂度为O(n)，而重复的计算，可以用变量记下来, 空间复杂度为O(n)。&lt;/p&gt;
-
-&lt;p&gt;现在一步一步来求各个子数组array中, 最大子数组的和max, 要求array的子数组必须以array的最后一个元素结束&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;max([-2]), 明显为-2，子数组为[-2]&lt;/li&gt;
-&lt;li&gt;max([-2, 1]), 由于-2小于0，如果子数组以-2作为起点，肯定只会让和更小，所以应该以1作为起点，这里明显max([-2, 1]) = 1, 子数组为[1]&lt;/li&gt;
-&lt;li&gt;max([-2, 1, -3])，由于上面已经得出1作为起点更优，而1大于0，所以加上-3之后，目前max([-2, 1, -3]) = 1 + -3 = -2, 子数组为[1, -3]&lt;/li&gt;
-&lt;li&gt;max([-2, 1, -3, 4])，由于上面计算得到的最优值为-2，小于0，如果子数组以前面得出的结论作为起点，肯定只会让和更小，所以应该从4作为起点，目前max([-2, 1, -3, 4]) = 4, 子数组为[4]&lt;/li&gt;
-&lt;li&gt;max([-2, 1, -3, 4, -1])，由于上面计算得到的最优值为4，大于0，所以加上-1之后，目前max([-2, 1, -3, 4, -1]) = 4 + -1 = 3, 子数组为[4, -1]&lt;/li&gt;
-&lt;li&gt;max([-2, 1, -3, 4, -1, 2])，由于上面计算得到的最优值为3，大于0，所以加上2之后，目前max([-2, 1, -3, 4, -1, 2]) = 3 + 2 = 5, 子数组为[4, -1, 2]&lt;/li&gt;
-&lt;li&gt;max([-2, 1, -3, 4, -1, 2, 1])，由于上面计算得到的最优值为5，大于0，所以加上1之后，目前max([-2, 1, -3, 4, -1, 2, 1]) = 5 + 1 = 6, 子数组为[4, -1, 2, 1]&lt;/li&gt;
-&lt;li&gt;max([-2, 1, -3, 4, -1, 2, 1, -5])，由于上面计算得到的最优值为6，大于0，所以加上-5之后，目前max([-2, 1, -3, 4, -1, 2, 1, -5]) = 6 + -5 = 1, 子数组为[4, -1, 2, 1, -5]&lt;/li&gt;
-&lt;li&gt;max([-2, 1, -3, 4, -1, 2, 1, -5, 4])，由于上面计算得到的最优值为1，大于0，所以加上4之后，目前max([-2, 1, -3, 4, -1, 2, 1, -5, 4]) = 1 + 4 = 5, 子数组为[4, -1, 2, 1, -5, 4]&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这个时候，我们再来看各个子数组的最大子数组的和，分别是1, -2, 3, 5, 6, 1, 5，最大的是6，对应的子数组是[4, -1, 2, 1], 就是题目的答案。&lt;/p&gt;
-
-&lt;p&gt;代码如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    int maxSubArray(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
-      int result = nums[0];
-      int *max = new int[nums.size()];
-      max[0] = nums[0];
-      for (int i = 1; i &amp;lt; nums.size(); ++i) {
-        if (max[i - 1] &amp;gt; 0) {
-          max[i] = max[i - 1] + nums[i];
-        } else {
-          max[i] = nums[i];
-        }
-        if (max[i] &amp;gt; result) {
-          result = max[i];
-        }
-      }
-      return result; 
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;由于我们每一步都在根据上一步的结果做决策和规划，所以这叫做&lt;strong&gt;动态规则&lt;/strong&gt; 。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>elisp笔记：introduction</title>
-      <link>http://zhengyhn.github.io/post/elisp/data_type/</link>
-      <pubDate>Sun, 13 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/elisp/data_type/</guid>
-      <description>
-
-&lt;h1 id=&#34;lisp历史&#34;&gt;lisp历史&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;原来lisp是list processing
-language,1950s后期推出，主要为了研究人工智能。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;数据类型&#34;&gt;数据类型&lt;/h1&gt;
-
-&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;每个对象至少属于一种类型&lt;/li&gt;
-&lt;li&gt;对于打印出来的对象，一般都可读，但是有一些是不可读的.这些对象以hash表示法表示。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;即以#&amp;lt;开头，以&amp;gt;结束。比如：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-example&#34;&gt;(current-buffer)
-#&amp;lt;buffer *scratch*&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;在elisp中有两大类类型
-
-&lt;ol&gt;
-&lt;li&gt;用于lisp编程的类型&lt;/li&gt;
-&lt;li&gt;用于emacs编辑的类型&lt;/li&gt;
-&lt;/ol&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;整型&#34;&gt;整型&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;在32位机器上，整型是30位，即-2 \^ 29到2 \^ 29 -
-1，64位的会提供更多，但是官方&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;文档没有说明。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;elisp中不会检测溢出。&lt;/li&gt;
-&lt;li&gt;整数的表示法一般为：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;(sign)digit(period) 即，1可以表示成+1,1,1.,+1.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;如果一个数字太小或太大，不在整数范围内，则会当成浮点数来存储。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;浮点型&#34;&gt;浮点型&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;使用C语言中的double来存储，实际上对于十进制浮点数内部是2的幂而不是10的幂。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;字符类型&#34;&gt;字符类型&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;字符其实就是一个整数&lt;/li&gt;
-&lt;li&gt;在字符串和缓冲区中，字符的范围是0-4194303(22位整数),其中0-127个是ASCII码，而&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;剩下的是非ASCII码。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;在C语言中，字符以&amp;rsquo;a&amp;rsquo;这种方式表示，而在elisp中，以?a这种方式表示&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-example&#34;&gt;ELISP&amp;gt; ?a
-97
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这种方式也可以用来表示标点符号(punctuation)字符，但是最好加一个\，因为有的字符
-需要转义。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-example&#34;&gt;ELISP&amp;gt; ?\\
-92
-ELISP&amp;gt; ?\(
-40
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;部分字符的表示方法&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;character presentation   corresponding integer   character&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;?\a                      7                       C-g
-  ?\b                      8                       backspace
-  ?\t                      9                       tab
-  ?\n                      10                      newline
-  ?| 11                    vertical tab
-  ?\f                      12                      formfeed
-  ?\r                      13                      carriage return
-  ?\e                      27                      ESC
-  ?\s                      32                      space
-  ?\                       92                      backslash
-  ?\d                      127                     DEL&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>elisp笔记：运算</title>
-      <link>http://zhengyhn.github.io/post/elisp/arithmetic/</link>
-      <pubDate>Sun, 13 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/elisp/arithmetic/</guid>
-      <description>
-
-&lt;p&gt;声明：此文章为学习&lt;a href=&#34;http://www.xahlee.org&#34;&gt;xahlee&lt;/a&gt;
-的&lt;a href=&#34;http://ergoemacs.org/emacs/elisp_basics.html&#34;&gt;elisp教程&lt;/a&gt; 而写的笔记。&lt;/p&gt;
-
-&lt;h2 id=&#34;数学计算基础&#34;&gt;数学计算基础&lt;/h2&gt;
-
-&lt;h3 id=&#34;运算符也是函数&#34;&gt;运算符也是函数&lt;/h3&gt;
-
-&lt;p&gt;和其它函数式语言一样，elisp中，加减乘除也是一个函数。我做了下面的练习：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-commonlisp&#34;&gt;ELISP&amp;gt; (+ 1 1)
-2
-ELISP&amp;gt; (+ 1 2 3)
-6
-ELISP&amp;gt; (+ 1 2 3 4)
-10
-ELISP&amp;gt; (- 4 1)
-3
-ELISP&amp;gt; (- 4 2 1)
-1
-ELISP&amp;gt; (* 3 3)
-9
-ELISP&amp;gt; (/ 2 1)
-2
-ELISP&amp;gt; (/ 1 2)
-0
-ELISP&amp;gt; (/ 1.0 2)
-0.5
-ELISP&amp;gt; (% 5 3)
-2
-ELISP&amp;gt; (expt 2 10)
-1024
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;判断对象的类型&#34;&gt;判断对象的类型&lt;/h3&gt;
-
-&lt;p&gt;规律为：类型+p，如：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-commonlisp&#34;&gt;(integerp 1)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;用于判断1是不是整数,其中p表示predicate（是）。我做了下面的练习：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-commonlisp&#34;&gt;ELISP&amp;gt; (integerp 3.)
-t
-ELISP&amp;gt; (integerp 3)
-t
-ELISP&amp;gt; (floatp 3.1)
-t
-ELISP&amp;gt; (stringp &amp;quot;&amp;quot;)
-t
-ELISP&amp;gt; (listp &#39;(1 2))
-t
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;数字与字符串互转&#34;&gt;数字与字符串互转&lt;/h3&gt;
-
-&lt;p&gt;可以猜到函数，数字转字符串为number-to-string，字符串转数字为string-to-number：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-commonlisp&#34;&gt;ELISP&amp;gt; (string-to-number &amp;quot;1&amp;quot;)
-1
-ELISP&amp;gt; (number-to-string 1.0)
-&amp;quot;1.0&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;数字操作&#34;&gt;数字操作&lt;/h2&gt;
-
-&lt;h3 id=&#34;整数&#34;&gt;整数&lt;/h3&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>shell 编程！</title>
-      <link>http://zhengyhn.github.io/post/shell/getting.start/</link>
-      <pubDate>Sun, 13 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/shell/getting.start/</guid>
-      <description>
-
-&lt;h1 id=&#34;引言&#34;&gt;引言&lt;/h1&gt;
-
-&lt;p&gt;我非常欣赏这句话。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。
-&amp;ndash;Herbert Mayer&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;写脚本&#34;&gt;写脚本&lt;/h1&gt;
-
-&lt;p&gt;我之前也写过一点点的bash shell，完全是为了少打一些命令。但是我之前
-写的代码很不规范，今天看了第一份代码，立刻发现了我应该注意的地方。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;注释#后面要加一个空格，一行写不完的注释后面几行的要以#+开头。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-example&#34;&gt;# this is a comment,but it may be
-#+ too long
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;程序的结束要写一个exit 0，这个就像C语言中的return 0&lt;/li&gt;
-&lt;li&gt;引用变量，最好要加上双引号&lt;/li&gt;
-&lt;li&gt;引用命令的执行结果使用``（和波浪号同一个键的那个符号）&lt;/li&gt;
-&lt;li&gt;#!这个叫sha-bang&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&#34;执行脚本&#34;&gt;执行脚本&lt;/h1&gt;
-
-&lt;p&gt;我以前总是通过先赋予文件可执行权限，再执行的方式运行脚本，今天看到的
-方法令我眼前一亮。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;通过bash filename或者sh filename的方式执行。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>题目 Find the contiguous subarray within an array (containing at least one number) which has the largest sum. For example, given the array [-2, 1, -3, 4, -1, 2, 1, -5, 4], the contiguous subarray [4, -1, 2, 1] has the largest sum = 6. 思路一 首先，可以直接两重循环，找到所有的子数组，</description>
     </item>
     
     <item>
@@ -362,308 +26,7 @@ ELISP&amp;gt; (number-to-string 1.0)
       <pubDate>Sun, 13 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/about/</guid>
-      <description>&lt;p&gt;I am Hank.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>基础知识</title>
-      <link>http://zhengyhn.github.io/post/shell/basics/</link>
-      <pubDate>Sun, 13 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/shell/basics/</guid>
-      <description>
-
-&lt;h1 id=&#34;特殊字符&#34;&gt;特殊字符&lt;/h1&gt;
-
-&lt;h2 id=&#34;toc_1&#34;&gt;#&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;在双引号和单引号里面的#不会被认为是注释开始，经\转义的#不会认为是注释开始。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;echo &amp;quot;#这里不是注释&amp;quot;
-echo &#39;#这里不是注释&#39;
-echo \#这里不是注释
-echo #这里不是注释
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;toc_2&#34;&gt;;&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;和C语言不同，这里分号用于在同一行中分隔两条命令，这一点和pascal很相似&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;if [ -z $1 ]; then
-    echo &amp;quot;--&amp;gt;must with paramether &#39;start&#39; or &#39;stop&#39;&amp;quot;
-elif [ $1 == &amp;quot;start&amp;quot; ]; then
-    echo &amp;quot;starting...&amp;quot;
-    sudo systemctl start smbd nmbd
-    echo &amp;quot;done!&amp;quot;
-elif [ $1 == &amp;quot;stop&amp;quot; ]; then
-    echo &amp;quot;stoping...&amp;quot;
-    sudo systemctl stop smbd nmbd
-    echo &amp;quot;done!&amp;quot;
-else
-    echo &amp;quot;--&amp;gt;error parameter!&amp;quot;
-fi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面的分号就是用于分隔前面的判断和后面的then，分号后面最好加个空格，好区别一点。&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_3&#34;&gt;;;&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;两个分号用于case语句中选项的结束符&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;case &amp;quot;$1&amp;quot; in
-    &amp;quot;abc&amp;quot;) echo &amp;quot;\$1 = abc&amp;quot; ;;
-    &amp;quot;xyz&amp;quot;) echo &amp;quot;\$1 = xyz&amp;quot; ;;
-esac    
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;原来case的结构是这样的，和pascal的很相似，最后的结束esac，就是case倒过来，&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;我发现了规律，因为if的结束是fi，因此我猜其它的也是这个规律。&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_4&#34;&gt;.&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;当用于命令时，它和source是一样的功能。source是什么功能呢？以前看到修改了.bashrc&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;总是要source一下才会使配置生效，今天看了这本书，才发现，原来source就相当于C语言中
-的#include指令，用于给脚本包含一个文件。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;在正则表达式中，dot匹配单个字符。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;and&#34;&gt;&amp;rdquo; and &amp;lsquo;&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&amp;ldquo;表示partial quoting,&amp;lsquo;表示full quoting&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;toc_6&#34;&gt;,&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;逗号可以用于分隔数学表达式，和C语言一样，只返回最后一个逗号后面的表达式的值。如：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;let &amp;ldquo;t = ((a = 9, 15 / 3))&amp;rdquo;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_7&#34;&gt;`&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;这个符号，在我的键盘里，是和波浪号～在一个键的，它的作用是命令替换，即`command`&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;得到的是执行command这个命令之后的结果，它的英文名是backquote或者backtick&lt;/dt&gt;
-&lt;/dl&gt;
-
-&lt;h2 id=&#34;toc_8&#34;&gt;:&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;冒号的英文名叫colon，在bash
-shell里面起空命令的作用，相当于汇编里面的NOP。&lt;/li&gt;
-&lt;li&gt;它还表示true。比如：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;while :
-do
-    echo &amp;quot;wow&amp;quot;
-done
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;相当于&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;while true
-do
-    echo &amp;quot;wow&amp;quot;
-done
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;它的退出状态是0&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;:
-echo $?
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;结果是：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-example&#34;&gt;0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;在if/then结构中，用于空操作，相当于C语言中的分号。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;if condition
-then 
-    :
-else
-    ...
-fi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;它还有一个巧妙的用法，就是防止当作命令使用。比如：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;: ${username=`whoami`}
-echo $username
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这里，如果不用:，则后面拿到的用户名会当作命令来用。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;它还用作路径的分隔符，在\$PATH中就会看到。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;toc_9&#34;&gt;!&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;一般用于“非”，用法和C语言一样&lt;/li&gt;
-&lt;li&gt;两个!表示上一个命令，一般打某个命令忘了打sudo，则下一个命令可以使用sudo
-!!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;toc_10&#34;&gt;*&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;通配符来的，通配符的英文是wild card，不查我还真不明白wild
-card到底是什么意思！&lt;/li&gt;
-&lt;li&gt;在正则表达式中，它匹配0个或多个字符。&lt;/li&gt;
-&lt;li&gt;在数学表达式中，一个*表示乘号，两个*表示幂运算。&lt;/li&gt;
-&lt;li&gt;两个*还有一个特殊功能，它表示递归的文件匹配。看下面的例子：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/bash
-
-shopt -s globstar
-
-for file in **
-do
-    echo $file
-done    
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;但是，需要开启globstar，因为这个是bash 4里面的新加的功能。&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_11&#34;&gt;?&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;像C语言中的三目运算符一样，可以和?:一起构成if/then/else结构，但是必须要用双括号。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;a=1
-b=2
-((min = $a &amp;lt; $b ? $a : $b))
-echo $min       
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;toc_12&#34;&gt;\$&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;最普遍的应用是用于变量替换。&lt;/li&gt;
-&lt;li&gt;在正则表达式中，\$表示字符串的结束。&lt;/li&gt;
-&lt;li&gt;\$?取得结束状态(exit status)&lt;/li&gt;
-&lt;li&gt;\$\$取得当前脚本的进程ID&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;toc_13&#34;&gt;()&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;第一个作用是命令组，有点像C语言中的区块的概念。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;a=123
-(a=321;)
-echo $a
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;结果为：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-example&#34;&gt;123
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;第二个作用用于数组初始化。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;toc_14&#34;&gt;{}&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;这个才是真正的区块，但是奇怪的是，这里的区块里面的变量外面却是可见的。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;a=123
-{ a=321; }
-echo $a
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;结果为：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-example&#34;&gt;321
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;注意{}里面要加空格。&lt;/p&gt;
-
-&lt;h2 id=&#34;gt-and-gt-gt-and-gt-gt&#34;&gt;&amp;gt; and &amp;amp;&amp;gt; &amp;gt;&amp;amp; and &amp;gt;&amp;gt;&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&amp;gt;用于把stdout重定向到文件&lt;/li&gt;
-&lt;li&gt;&amp;amp;&amp;gt;用于把stdout和stderr重定向到文件&lt;/li&gt;
-&lt;li&gt;&amp;gt;&amp;amp;用于把stdout重定向到stderr&lt;/li&gt;
-&lt;li&gt;&amp;gt;&amp;gt;和&amp;gt;的不同之处在于，&amp;gt;&amp;gt;是append到文件的结尾。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;控制字符&#34;&gt;控制字符&lt;/h1&gt;
-
-&lt;h2 id=&#34;ctrl-c&#34;&gt;Ctrl-c&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;break用于结束前台作业&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;ctrl-d&#34;&gt;Ctrl-d&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;退出&lt;/li&gt;
-&lt;li&gt;EOF&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;ctrl-h&#34;&gt;Ctrl-h&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;相当于退格键，但是要比退格键快&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;ctrl-l&#34;&gt;Ctrl-L&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;相当于clear命令。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;ctrl-t&#34;&gt;Ctrl-t&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;当前光标所在的字符与上一个字符交换，打错的时候特别有用。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;ctrl-u&#34;&gt;Ctrl-u&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;清除一行命令（再也不用按那么多退格键了）&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>I am Hank.</description>
     </item>
     
     <item>
@@ -672,99 +35,7 @@ echo $a
       <pubDate>Fri, 31 Mar 2017 10:50:49 +0800</pubDate>
       
       <guid>http://zhengyhn.github.io/post/design-guide/</guid>
-      <description>
-
-&lt;p&gt;这里将说说个人对设计的想法，必然会有争议之处，内容包括系统之间设计，系统内部模块之间设计，细到每个函数的设计。&lt;/p&gt;
-
-&lt;h4 id=&#34;系统设计&#34;&gt;系统设计&lt;/h4&gt;
-
-&lt;h5 id=&#34;不要为了拆系统而拆系统&#34;&gt;不要为了拆系统而拆系统&lt;/h5&gt;
-
-&lt;p&gt;一般我们会因为下面几个原因拆分系统：
-* 这个模块被几个系统共用
-* 这个模块压力很大，独立出来可以扩展分流，优化
-* 这个模块代码量太大，需要很多人维护，独立出来，易于管理&lt;/p&gt;
-
-&lt;p&gt;拆分系统之后一般会产生下面的问题：
-* 原系统调用独立出来的模块之间通讯会变慢，内存寻址 -&amp;gt; 网络通讯
-* 开发联调成本增大，开发效率降低
-* 团队沟通成本变大，开发效率降低&lt;/p&gt;
-
-&lt;p&gt;所以，在你的团队人员没有填充，工具方法上没有提高的情况下，不要随意拆分系统&lt;/p&gt;
-
-&lt;h5 id=&#34;系统的资源应该保证私有&#34;&gt;系统的资源应该保证私有&lt;/h5&gt;
-
-&lt;p&gt;最常见的资源就是数据库数据了，数据库的实例可以各个系统共用，但是表一定要独立。
-如果一张表可以被多个系统读写，说明这两个系统就不应该拆分，设计上有问题。
-数据库表必须私有，如果其他的系统想要读写，必须通过接口的方式进行，这也是面向对象里面的封装思想。&lt;/p&gt;
-
-&lt;p&gt;曾经有家公司，其中一个系统A直接读了另外一个系统B的数据库表，一个月后，系统B上线了新功能，改造了表的结构，导致系统A出现严重bug，
-直接经济损失7000多万，两个团队都有10多人，团队之间很少沟通，谁也不知道对方做了什么事情。&lt;/p&gt;
-
-&lt;p&gt;在团队很小的时候，可能任何改动大家都知道，一旦团队扩充了，如果资源不封装，就会产生这样的问题。&lt;/p&gt;
-
-&lt;h4 id=&#34;系统内模块设计&#34;&gt;系统内模块设计&lt;/h4&gt;
-
-&lt;h5 id=&#34;面向对象&#34;&gt;面向对象&lt;/h5&gt;
-
-&lt;p&gt;世界是面向对象的，现代计算机是面向过程的。目前能接触到的计算机都是基于冯.诺依曼体系架构（计算，存储，输入，输出），很久很久以前有面向函数的Lisp机，
-可是时代证明，它只适合做计算，而且性能并不高效，冯.诺依曼体系架构是经过时间的考验沉淀下来，因为世界并不全是计算，特别是互联网业务系统，大部分是输入输出和存储。
-所以，函数式编程仅仅适用于很少量的计算中。
-面向过程编程适合一个简单的模块，并不适合复杂的情景，在复杂的业务下，面向过程式编程将变得难以维护。&lt;/p&gt;
-
-&lt;p&gt;我以前维护过一个汇款模块，纯面向过程，1000多行，全局变量全部定义在前面100行，用户可以从四端(柜台，电脑版，网页版，手机银行）发起汇款，每端都有自己特殊的业务逻辑，
-一开始写这份代码的时候只有两个端（柜台和网页），那个时候还是2000年左右，看起来写得比较简洁，问题不大，后来有了电脑版，手机银行，就有了很多if channel == xxx的代码，
-越来越难维护，一个全局变量，有可能被下面的很多个过程改变。
-其实，上面的例子，遇到的if else问题，在面向对象里面是可以通过多态来解决的，全局变量的问题，是可以通过封装来解决的。&lt;/p&gt;
-
-&lt;h6 id=&#34;封装&#34;&gt;封装&lt;/h6&gt;
-
-&lt;p&gt;&lt;strong&gt;封装的本质是为了提高系统的可维护性&lt;/strong&gt;。如果一个私有方法被另外一个模块引用了，当你要改变你的私有方法的逻辑时，你就必须要考虑到使用到的地方会不会受影响，这增大了维护成本，
-在面向对象里面，区分公有和私有，就是强制规定，公有方法，它是固定的，既然公开了，就不能改变，私有的方法，你内部可以灵活变化，这样就可以降低维护成本，提高开发效率。&lt;/p&gt;
-
-&lt;h6 id=&#34;继承-组合&#34;&gt;继承，组合&lt;/h6&gt;
-
-&lt;p&gt;世界是继承的，组合的，一个产品组合包含了若干个产品，每个产品包含了多个资产，每个资产有它的利率，金额等，世界就是这样的，如果你的代码依照这个规律来组织，
-任何一个团队新成员，都能在短时间内熟悉，并接手项目。&lt;/p&gt;
-
-&lt;h6 id=&#34;多态&#34;&gt;多态&lt;/h6&gt;
-
-&lt;p&gt;世界是多态的，上面的汇款就是一个例子。简单地说，多态就是用于减少if else，使得模块组织更清晰，更简洁，更容易维护。&lt;/p&gt;
-
-&lt;h6 id=&#34;高内聚-低耦合&#34;&gt;高内聚，低耦合&lt;/h6&gt;
-
-&lt;p&gt;模块之间的交互尽量少，模块内部灵活调用。模块之间交互越多，系统复杂度越高，越难以维护。&lt;/p&gt;
-
-&lt;h6 id=&#34;层级设计-杜绝循环依赖&#34;&gt;层级设计，杜绝循环依赖&lt;/h6&gt;
-
-&lt;p&gt;各个模块之间的调用应该是单向的，如果出现双向，说明本身设计上就有问题。建议每增加一个模块时都由项目负责人审核。&lt;/p&gt;
-
-&lt;h4 id=&#34;模块内设计&#34;&gt;模块内设计&lt;/h4&gt;
-
-&lt;h5 id=&#34;不要为了拆函数而拆函数&#34;&gt;不要为了拆函数而拆函数&lt;/h5&gt;
-
-&lt;p&gt;一个函数做一件事情，一件事情这是个有争议的话题，一行代码也是一件事情，但是如果一个函数只有一行代码，抽出来的意义是什么呢？
-函数越多，阅读代码的难度越大，因为你需要不断地跳转，归位，理解，合并。&lt;/p&gt;
-
-&lt;h5 id=&#34;关键位置写上一点点注释&#34;&gt;关键位置写上一点点注释&lt;/h5&gt;
-
-&lt;p&gt;并不是所有人都能从函数名或变量名中看出来你的代码含义，请从他人的角度思考，而不要从自己的角度看待这个问题。
-在比较特殊或一般人很难看懂的地方，写上注释，对自己负责，也对他人负责。代码在写在时候是给自己看的，剩余的所有时间都是给其他人（包含你自己）看的。&lt;/p&gt;
-
-&lt;h5 id=&#34;写任何代码时都要考虑基本的性能问题&#34;&gt;写任何代码时都要考虑基本的性能问题&lt;/h5&gt;
-
-&lt;p&gt;基本的性能问题，主要是执行速度，内存占用等。举例：
-* 有没有多余的循环代码，O(n)的执行速度有没有可能换个算法变成O(logn)
-* 有没有多余的内存占用，比如拷贝内存占用过大的对象，大数组等等
-* 数据库操作时，会不会出现数据量很大的情况，会不会崩溃，有没有返回多余的数据等等&lt;/p&gt;
-
-&lt;h5 id=&#34;写任何代码时都要考虑将来接手的人&#34;&gt;写任何代码时都要考虑将来接手的人&lt;/h5&gt;
-
-&lt;p&gt;比如，我这样写，会不会给看代码的人带来阅读上的困难？拆分这么多函数看代码的人会不会看起来很麻烦？代码没有一个换行，看代码的人会不会看得不清晰？&lt;/p&gt;
-
-&lt;p&gt;一个团队的效率高不高，很多时候体现在代码质量上，代码质量高，维护成本低，bug少，时间都花费在完成需求和提高质量上面，效率怎么会不高呢。
-不像隔壁团队，天天在修bug，做个需求要一天，测试测出来一堆问题，一堆没有考虑到的依赖问题。&lt;/p&gt;
-</description>
+      <description>这里将说说个人对设计的想法，必然会有争议之处，内容包括系统之间设计，系统内部模块之间设计，细到每个函数的设计。 系统设计 不要为了拆系统而拆系统</description>
     </item>
     
     <item>
@@ -773,29 +44,7 @@ echo $a
       <pubDate>Thu, 30 Mar 2017 22:50:49 +0800</pubDate>
       
       <guid>http://zhengyhn.github.io/post/redis-max-client-limit/</guid>
-      <description>&lt;p&gt;最近出了一次事故，应用crash，并报错: max number of clients reached. 查了一下reids的连接：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;netstat -anp |grep 6379 | wc -l
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;发现，连接数达10000多个，大致扫了一下，发现某个ip的连接占了7000多个。于是去把这个ip的服务器上的应用都停止掉了，可是连接数还是没降下来。
-研究了一段时间，发现redis有client list和client kill的命令，想到，可以通过这种方式kill掉这个ip的client。
-但是进去redis里面执行client list和client kill命令，居然报错：max number of clients reached.&lt;/p&gt;
-
-&lt;p&gt;中途有想过用tcpkill之类的工具，最后没采用这种方法。&lt;/p&gt;
-
-&lt;p&gt;情急之下，想到了取巧的办法：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;先用config set maxclients 20000将最大连接数变成20000&lt;/li&gt;
-&lt;li&gt;然后执行client list命令，发现不会报错了，那就是说明可以执行client kill了&lt;/li&gt;
-&lt;li&gt;kill掉这些ip的客户端
-&lt;code&gt;
-sudo netstat -anp |grep 6379| grep &#39;xxx.xxx.xxx.xxx&#39; | awk &#39;{print $5}&#39; | xargs -I % redis-cli -p 6379 client kill %
-&lt;/code&gt;
-等tcp四次招手结束后，连接数终于降下来了&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>最近出了一次事故，应用crash，并报错: max number of clients reached. 查了一下reids的连接： netstat -anp |grep 6379 | wc -l 发现，连接数达10000多个，大致扫了一下，发现</description>
     </item>
     
     <item>
@@ -804,51 +53,7 @@ sudo netstat -anp |grep 6379| grep &#39;xxx.xxx.xxx.xxx&#39; | awk &#39;{print $
       <pubDate>Mon, 13 Mar 2017 22:50:49 +0800</pubDate>
       
       <guid>http://zhengyhn.github.io/post/how-to-use-generator-in-sails/</guid>
-      <description>&lt;p&gt;由于历史原因，公司的App项目用Sails.js框架来开发，那时候还没有ES6，当然是一层一层callback下去，后来引进了Async和Thenjs，代码才清晰了很多，但是遇到复杂的业务逻辑，写起来依旧痛苦。&lt;/p&gt;
-
-&lt;p&gt;在这个不写ES6都不好意思说写Nodejs的年代，天天写callback很不是滋味，所以必须找个机会在不换框架的情况也能使用yield来解决callback的问题。&lt;/p&gt;
-
-&lt;p&gt;首先想到的肯定是用co这个包，它有一个wrap的方法，可以把generator转成callback，试想一下，如果所有的controller的每个方法，都用co.wrap一下，岂不是达到了想要的效果？看了下sails的源码，貌似必须要修改它的源码才行。那么问题来了，怎么样才能在不修改它源码的情况也能达到同样的效果呢？&lt;/p&gt;
-
-&lt;p&gt;由于javascript默认对象传引用，所以是不是可以直接把加载到内存中的controller方法全部用co.wrap包一下呢？&lt;/p&gt;
-
-&lt;p&gt;在看了sails的很多源码，经过很多次的尝试后，事实证明这种猜想是可以的！&lt;/p&gt;
-
-&lt;p&gt;只需要在config/bootstrap.js文件加上下面的代码，就可以在controller中使用generator了。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var _ = require(&#39;lodash&#39;);
-var coExpress = require(&#39;co-express&#39;);
-
-sails.modules.loadControllers(function (err, modules) {
-  if (err) {
-    return callback(err);
-  }
-  sails.controllers = _.merge(sails.controllers, modules);
-
-  // hacking every action of all controllers
-  _.each(sails.controllers, function(controller, controllerId) {
-    _.each(controller, function(action, actionId) {
-      actionId = actionId.toLowerCase();
-      console.log(&#39;hacking route:&#39;, controllerId, actionId);
-      // co.wrap，generator =&amp;gt; callback
-      action = coExpress(action);
-      sails.hooks.controllers.middleware[controllerId][actionId] = action;
-    });
-  });
-  // reload routes
-  sails.router.load(function () {
-    // reload blueprints
-    sails.hooks.blueprints.initialize(function () {
-      sails.hooks.blueprints.extendControllerMiddleware();
-      sails.hooks.blueprints.bindShadowRoutes();
-      callback();
-    });
-  });
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这里用了一个叫co-express的包，它的源码很简单，就是使用co.wrap包装了一下。重要的是，在修改了每个action之后，我们需要重新load一次routes和blueprints，这样才真正在内存中生效。&lt;/p&gt;
-</description>
+      <description>由于历史原因，公司的App项目用Sails.js框架来开发，那时候还没有ES6，当然是一层一层callback下去，后来引进了Async和T</description>
     </item>
     
     <item>
@@ -857,411 +62,7 @@ sails.modules.loadControllers(function (err, modules) {
       <pubDate>Fri, 27 May 2016 20:50:49 +0800</pubDate>
       
       <guid>http://zhengyhn.github.io/post/cpp/c-plus-plus-interview-review/</guid>
-      <description>
-
-&lt;p&gt;这是我看了《C笔试面试宝典》一书的笔记&lt;/p&gt;
-
-&lt;h1 id=&#34;new-delete-malloc-free的关系&#34;&gt;new, delete, malloc, free的关系&lt;/h1&gt;
-
-&lt;p&gt;new和delete是C++的 &lt;strong&gt;运算符&lt;/strong&gt; ，new调用构造函数，delete调用析构函数。&lt;/p&gt;
-
-&lt;p&gt;malloc和delete是C运行库的函数。&lt;/p&gt;
-
-&lt;h1 id=&#34;delete和delete-的区别&#34;&gt;delete和delete[]的区别&lt;/h1&gt;
-
-&lt;p&gt;delete只会调用一次析构函数，delete[]则会调用每个成员的析构函数。&lt;/p&gt;
-
-&lt;p&gt;写程序一测:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
-#include &amp;lt;string&amp;gt;
-
-class Computer {
- private:
-  std::string name;
- public:
-  Computer();
-  ~Computer();
-};
-
-Computer::Computer() { }
-
-Computer::~Computer() { }
-
-int main(int argc, char *argv[])
-{
-  Computer *cs = new Computer[5];
-  Computer *c = new Computer;
-  int *integers = new int[5];
-  int *i = new int;
-
-  delete[] i;
-  delete[] integers;
-  delete[] cs;
-  delete[] c;
-
-  return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;发现编译可以通过，但是运行会Segment Fault。gdb一下，发现在delete[]
-c时出错了。&lt;/p&gt;
-
-&lt;p&gt;原因是，对于基本数据类型，delete[]能代替delete，对于自定义的类型，则要严格区分，
-new[]完之后用delete[]释放，new完之后用delete释放。&lt;/p&gt;
-
-&lt;h1 id=&#34;继承和组合的优缺点&#34;&gt;继承和组合的优缺点&lt;/h1&gt;
-
-&lt;p&gt;引用自
-&lt;a href=&#34;http://www.cnblogs.com/nuaalfm/archive/2010/04/23/1718453.html&#34;&gt;这里&lt;/a&gt;
-。&lt;/p&gt;
-
-&lt;table&gt;
-&lt;colgroup&gt;
-&lt;col width=&#34;45%&#34; /&gt;
-&lt;col width=&#34;54%&#34; /&gt;
-&lt;/colgroup&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;组合 关 系&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;继 承 关 系&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;优点：不破坏封装，整体类与局部类之间松耦合，彼此相对独立&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;缺点：破坏封装，子类与父类之间紧密耦合，子类依赖于父类的实现，子类缺乏独立性&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;优点：具有较好的可扩展性&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;缺点：支持扩展，但是往往以增加系统结构的复杂度为代价&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;优点：支持动态组合。在运行时，整体对象可以选择不同类型的局部对象&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;缺点：不支持动态继承。在运行时，子类无法选择不同的父类&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;优点：整体类可以对局部类进行包装，封装局部类的接口，提供新的接口&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;缺点：子类不能改变父类的接口&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;缺点：整体类不能自动获得和局部类同样的接口&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;优点：子类能自动继承父类的接口&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;缺点：创建整体类的对象时，需要创建所有局部类的对象&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;优点：创建子类的对象时，无须创建父类的对象&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h1 id=&#34;引用&#34;&gt;引用&lt;/h1&gt;
-
-&lt;p&gt;不能建立数组的引用。引用没有定义新的变量，不占用内存空间。&lt;/p&gt;
-
-&lt;h1 id=&#34;关联-聚合和组合&#34;&gt;关联，聚合和组合&lt;/h1&gt;
-
-&lt;p&gt;关联是两个类的一般性关联，如老师和学生。&lt;/p&gt;
-
-&lt;p&gt;聚合是has-a关系，聚合类不需要对被聚合类负责，用空的菱形表示，实现如下:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class A {
-
-};
-class B {
-    A *a;
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;组合是contains-a关系，组合类和被组合类有相同的生命周期，组合类要对被组合类负责，
-用实的菱形表示，实现如下:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class A {
-
-};
-class B {
-    A a;
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;初始化列表&#34;&gt;初始化列表&lt;/h1&gt;
-
-&lt;p&gt;当类中含有const和引用成员变量时，基类构造函数只能使用初始化列表来初始化， 但是&lt;br /&gt;
-&lt;code&gt;const int&amp;amp; a;&lt;/code&gt; 这种就可以用赋值的方法。&lt;/p&gt;
-
-&lt;h1 id=&#34;类型安全&#34;&gt;类型安全&lt;/h1&gt;
-
-&lt;p&gt;c++不是类型安全的，因为不同类型的指针之间可以强制转换。&lt;/p&gt;
-
-&lt;h1 id=&#34;空类&#34;&gt;空类&lt;/h1&gt;
-
-&lt;p&gt;当一个类没有任何成员时，大小是1byte，这个字节是用来区分这个类的不同对象的。&lt;/p&gt;
-
-&lt;h1 id=&#34;逻辑地址-to-物理地址&#34;&gt;逻辑地址 to 物理地址&lt;/h1&gt;
-
-&lt;p&gt;给出的逻辑地址格式是这样的,
-段地址:段内偏移地址，那么真实的地址（物理地址） 是： 段地址 * 10H +
-段内偏移地址。当然，这只适合于Intel 8086。&lt;/p&gt;
-
-&lt;h1 id=&#34;4种类型转换&#34;&gt;4种类型转换&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;const_cast，把const的变量变成非const的，用法:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;新变量  = const_cast&amp;lt;类型&amp;gt;(变量);
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;static_cast,
-用于基本类型的转换，不能用于无关类型（不是基类与子类）之间的
-指针的转换&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;dynamic_cast,
-运行时会有安全检查，用于基类与子类之间的转换，常用于多态&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;reinterpret_cast，重新解释类型，没有转换，常用于函数指针的转换。&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;数组作参数&#34;&gt;数组作参数&lt;/h1&gt;
-
-&lt;p&gt;当数组作为参数传递时，它会退化成同类型的指针。&lt;/p&gt;
-
-&lt;h1 id=&#34;override和隐藏&#34;&gt;override和隐藏&lt;/h1&gt;
-
-&lt;p&gt;override，基类中必须要有virtual。&lt;/p&gt;
-
-&lt;p&gt;如果基类函数名没有virtual，子类函数与父类函数签名一样，则称隐藏。&lt;/p&gt;
-
-&lt;p&gt;不管基类函数名有没有virtual，子类函数名一样，签名不一样，则也称隐藏。&lt;/p&gt;
-
-&lt;h1 id=&#34;求两个数中的最大的那个数&#34;&gt;求两个数中的最大的那个数&lt;/h1&gt;
-
-&lt;p&gt;不能用判断(if, :?, switch)。答案是用abs函数:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;((a + b) + abs(a - b)) / 2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;而我觉得这种方法不好，因为用到了库函数，库函数里面还可能也要判断，其实是换汤不换药。&lt;/p&gt;
-
-&lt;p&gt;我问了同学，他想到了下面的方法，我觉得很好:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
-
-int max(int a, int b);
-
-int main(int argc, char *argv[])
-{
-     int a = 9999, b = 23;
-
-     printf(&amp;quot;%d\n&amp;quot;, max(a, b));
-
-     return 0;
-}
-
-int max(int a, int b)
-{
-     int c = a - b;
-     int flag = (unsigned)c &amp;gt;&amp;gt; (sizeof(int) * 8 - 1);
-
-     return (1 - flag) * a + flag * b;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;根据负数与正数的符号位的不一样，而得出那个数。&lt;/p&gt;
-
-&lt;h1 id=&#34;打印源文件的文件名和当前行号&#34;&gt;打印源文件的文件名和当前行号&lt;/h1&gt;
-
-&lt;p&gt;在C/C++中，可以用__FILE__和__LINE__，由编译器来识别。&lt;/p&gt;
-
-&lt;h1 id=&#34;main函数执行完之后还能执行代码&#34;&gt;main函数执行完之后还能执行代码？&lt;/h1&gt;
-
-&lt;p&gt;居然是可以的！ &lt;code&gt;&amp;lt;stdlib.h&amp;gt;&lt;/code&gt;
-中有一个奇葩的库函数叫on_exit，在linux下的man page中， 定义如下:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;int on_exit(void (*function)(int , void *), void *arg);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;传进去一个函数指针，和一个参数，这个函数必须是2个参数，分别是int和void*类型的，
-可以调用多个，以LIFO形式执行，
-on_exit在任何地方调用都只会在main函数结束之后才会执行。 测试一下:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
-#include &amp;lt;stdlib.h&amp;gt;
-
-void one(int status, void *arg);
-void two(int status, void *arg);
-
-int main(int argc, char *argv[])
-{
-     printf(&amp;quot;top\n&amp;quot;);
-     on_exit(two, NULL);
-     on_exit(one, NULL);
-
-     printf(&amp;quot;It may be the last one.\n&amp;quot;);
-
-     return 0;
-}
-
-void one(int status, void *arg)
-{
-     printf(&amp;quot;one\n&amp;quot;);
-}
-
-void two(int status, void *arg)
-{
-     printf(&amp;quot;two\n&amp;quot;);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;书上说的是 &lt;code&gt;_onexit&lt;/code&gt;
-，根据我找的资料，这函数应该只有在windows的VC中才有。&lt;/p&gt;
-
-&lt;h1 id=&#34;判断是由c编译器编译还是由c-编译器编译&#34;&gt;判断是由C编译器编译还是由C++编译器编译&lt;/h1&gt;
-
-&lt;p&gt;使用一个宏 &lt;code&gt;__cplusplus&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#ifdef __cplusplus
-...
-#else
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;求n个数中第k大的数&#34;&gt;求n个数中第k大的数&lt;/h1&gt;
-
-&lt;p&gt;我智商低，只能想到普通的办法，就是选择排序的外面循环K次。不过不能因为这样而找不到工作啊，
-学习了大牛的算法：&lt;/p&gt;
-
-&lt;p&gt;吸取快排中的思想，随机取一个数，把比它小的数放到左边，比它大的数放到右边，
-如果运气非常好，它的下标i刚好是n - k - 1，则它就是第k大的数，如果i小于 n
-- k - 1，则第k大的数在左边，否则在右边，再分为子问题进行求解。&lt;/p&gt;
-
-&lt;p&gt;写了很久终于写出来了，要是在面试的时候，估计写不出来:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
-#include &amp;lt;stdlib.h&amp;gt;
-#include &amp;lt;stdlib.h&amp;gt;
-
-int get_maxk(int *arr, int n, int k);
-void swap(int *arr, int i, int j);
-
-int main(int argc, char *argv[])
-{
-     int a[10];
-     int i;
-
-     srand(time(NULL));
-     for (i = 0; i &amp;lt; 10; i++) {
-          a[i] = rand();
-     }
-     for (i = 1; i &amp;lt;= 10; i++) {
-          printf(&amp;quot;%d\n&amp;quot;, get_maxk(a, 10, i));
-     }
-
-     return 0;
-}
-
-int get_maxk(int *arr, int n, int k)
-{
-     int pivot, last_left, i;
-
-     if (k &amp;gt; n) {
-          fprintf(stderr, &amp;quot;k can&#39;t be larger than n\n&amp;quot;);
-          exit(1);
-     } else if (k == n) {
-          return arr[0];
-     }
-     pivot = 0;
-     last_left = pivot;
-     for (i = 1; i &amp;lt; n; i++) {
-          if (arr[i] &amp;lt; arr[pivot]) {
-               last_left++;
-               swap(arr, last_left, i);
-          }
-     }
-     swap(arr, pivot, last_left);
-     if ((n - last_left) == k) {
-          return arr[k];
-     } else if ((n - last_left) &amp;gt; k) {
-          return get_maxk(arr + last_left + 1, n - last_left - 1, k);
-     } else {
-          return get_maxk(arr, last_left, k - (n - last_left));
-     }
-}
-
-void swap(int *arr, int i, int j)
-{
-     int temp;
-
-     if (i == j) {
-          return;
-     }
-     temp = arr[i];
-     arr[i] = arr[j];
-     arr[j] = temp;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;判断单链接有环&#34;&gt;判断单链接有环&lt;/h1&gt;
-
-&lt;p&gt;想到这个方法的人就是神！&lt;/p&gt;
-
-&lt;p&gt;用两个指针，一个每次走一步，另外一个每次走两步，如果有环必定重合，
-否则走两步的那个指针将到达终点。&lt;/p&gt;
-
-&lt;h1 id=&#34;传值还是传地址&#34;&gt;传值还是传地址&lt;/h1&gt;
-
-&lt;p&gt;看下面的代码:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;void func(char *a)
-{
-    a = (char *)malloc(10);
-}
-
-int main(void)
-{
-    char *a = NULL;
-    func(a);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;执行完主函数后，a还是NULL！a不是传进去申请了空间吗？我之前也是这样认为的，
-后来发现， 其实func函数的那个参数是以传值的方式传进去的，而不是传地址！
-如果要传地址的话， 应该是 &lt;code&gt;char **a，func(&amp;amp;a)&lt;/code&gt; 这样才行！&lt;/p&gt;
-
-&lt;h1 id=&#34;extern-c&#34;&gt;extern &amp;ldquo;C&amp;rdquo;&lt;/h1&gt;
-
-&lt;p&gt;这个是用于C/C++混合编程的，当引用C语言代码时在函数前面加上。&lt;/p&gt;
-
-&lt;h1 id=&#34;内联函数&#34;&gt;内联函数&lt;/h1&gt;
-
-&lt;p&gt;编译器在编译内联函数时会对参数类型进行检查。&lt;/p&gt;
-
-&lt;h1 id=&#34;堆栈溢出的原因&#34;&gt;堆栈溢出的原因&lt;/h1&gt;
-
-&lt;p&gt;分配了内存没有释放 递归层次太深&lt;/p&gt;
-
-&lt;h1 id=&#34;唯一不能声明为虚函数的函数&#34;&gt;唯一不能声明为虚函数的函数&lt;/h1&gt;
-
-&lt;p&gt;构造函数！PS：析构函数可以声明为虚函数。&lt;/p&gt;
-
-&lt;h1 id=&#34;error&#34;&gt;#error&lt;/h1&gt;
-
-&lt;p&gt;当预处理执行到#error时，会停止编译，并给出自定义的错误信息&lt;/p&gt;
-
-&lt;h1 id=&#34;指针-数组&#34;&gt;指针&amp;amp;数组&lt;/h1&gt;
-
-&lt;p&gt;指向数组的指针:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;int (*a)[10];
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;指向函数（返回值为int,1个int参数）的指针:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;int (*a)(int);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;volatile&#34;&gt;volatile&lt;/h1&gt;
-
-&lt;p&gt;修饰的变量，表明可能会被意想不到地改变，因此编译器不会从寄存器的备份中读取（因为
-内存中的值可能已经被改变了），而要每次小心地从内存中读取。&lt;/p&gt;
-</description>
+      <description>这是我看了《C笔试面试宝典》一书的笔记 new, delete, malloc, free的关系 new和delete是C++的 运算符 ，new调用构造函数，delete调用析构函数</description>
     </item>
     
     <item>
@@ -1270,655 +71,16 @@ int main(void)
       <pubDate>Fri, 27 May 2016 20:40:43 +0800</pubDate>
       
       <guid>http://zhengyhn.github.io/post/improve-code-readability/</guid>
-      <description>
-
-&lt;p&gt;这是我读 &amp;ldquo;the art of readable code&amp;rdquo; 一书做的笔记&lt;/p&gt;
-
-&lt;h1 id=&#34;简化循环和逻辑&#34;&gt;简化循环和逻辑&lt;/h1&gt;
-
-&lt;h2 id=&#34;making-control-flow-easy-to-read&#34;&gt;making control flow easy to read&lt;/h2&gt;
-
-&lt;p&gt;下面的代码:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;if (length &amp;gt;= 10)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;要比:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;if (10 &amp;lt;= length)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;更容易看懂。这是很显然的。而在C语言中，有的人为了避免=与==的错误，常常把
-代码写成:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;if (10 == length)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这种做法是为了避免错误的。其实在我看来，这明显是在掩饰自己区分不了=与==的
-弱点，如果你真的理解赋值与相等的含义，就从来不会在比较相等的时候写成=，以
-我使用C语言这么多年来，我从来没有犯过这种错误。上面的代码对于一个正常人来
-说，很难理解，因为程序员首先是一个人，自然的语言是“长度等于10”，而不是
-“10等于长度”，所以为了使代码更可读，我建议使用下面这种:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;if (lenght == 10)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面的是有数字，有常量的比较，下面这个:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;while (bytes_received &amp;lt; bytes_expected)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;要比:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;while (bytes_expected &amp;gt; bytes_received)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;更容易看懂，因为第一个的阅读顺序符合人类的自然语言。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;对于三目运算符?:，当表达式很长时不要使用。&lt;/li&gt;
-&lt;li&gt;不要使用do/while。当你阅读do/while的时候，因为你刚开始不知道条件，你会
-把循环的主体阅读两次。我几乎不写do/while，而且我非常讨厌看do/while代码。&lt;/li&gt;
-&lt;li&gt;尽量不要使用嵌套的if/else，想尽办法使得只有一个层次。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;breaking-down-giant-expressions&#34;&gt;breaking down giant expressions&lt;/h2&gt;
-
-&lt;p&gt;利用宏来简化代码。看下面的例子:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;void AddStats(const Stats &amp;amp;add_from, Stats *add_to)
-{
-    add_to-&amp;gt;set_total_memory(add_from.total_memory() + 
-        add_to-&amp;gt;total_memory());
-    add_to-&amp;gt;set_free_memory(add_from.free_memory() + 
-        add_to-&amp;gt;free_memory());
-    add_to-&amp;gt;set_swap_memory(add_from.swap_memory() + 
-        add_to-&amp;gt;swap_memory());
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;不管是谁，看到这样的代码都会头晕，但是你会发现其实它们都在做同一件事:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;add_to-&amp;gt;set_XXX(add_from.XXX + add_to-&amp;gt;XXX);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;于是，通过定义带参数的宏，可以简化成这样:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;void AddStats(const Stats &amp;amp;add_from, Stats *add_to)
-{
-    #define ADD_FIELD(field) \
-        add_to-&amp;gt;set_#field(add_from.#field() + add_to-&amp;gt;#field())
-    ADD_FIELD(total_memory);
-    ADD_FIELD(free_memory);
-    ADD_FIELD(swap_memory);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这样不仅视觉上看起来舒服，而且理解起来非常容易。&lt;/p&gt;
-
-&lt;h2 id=&#34;variables-and-readability&#34;&gt;variables and readability&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;可去除一些多余的变量&lt;/li&gt;
-&lt;li&gt;尽量缩小变量的范围，即使是全局变量，这样才能让程序更清晰。&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;在C++中，有这样一个例子:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;int size = list.size();
-if (size &amp;gt; 0) {
-    cout &amp;lt;&amp;lt; size &amp;lt;&amp;lt; endl;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;假设后面再也没有用到size了，但是阅读代码的人会一直把这个变量记住，因为
-他以为后面还会用到这个变量。我们可以把它改成这样:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;if ((int size = list.size()) &amp;gt; 0) {
-    cout &amp;lt;&amp;lt; size &amp;lt;&amp;lt; endl;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;当然，在C语言中，这需要C99的支持，当读者看完这段代码时，就会忘记这个变量，
-因为后面已经用不上了。
-作者是这样说的，但是我觉得这不太可能，因为写代码的人不可能预知未来，它总是
-喜欢先把变量缓存起来，说不定以后还会用到，所以我不太赞成这种写法，除非是非常
-简单，很明显后面用不上的变量。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;尽量使变量只能改变一次(prefer write-once varaibles)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;改善外层代码&#34;&gt;改善外层代码&lt;/h1&gt;
-
-&lt;h2 id=&#34;packing-informations-into-names&#34;&gt;packing informations into names&lt;/h2&gt;
-
-&lt;h3 id=&#34;choose-specific-words&#34;&gt;choose specific words&lt;/h3&gt;
-
-&lt;p&gt;书上说到getPage(url);这个函数的名字，根据我以前的看法，这绝对是一个好名字，
-但是作者却批评这种命名方式。作者说，get太模糊了，我们看不出来它是从缓存中get还是
-从数据库中get，还是从互联网上get。如果是从互联网上get,则应该使用fetchPage或者
-downloadPage()。我觉得这个说法非常好，我以后给变量或者函数起名字的时候也要注意
-这方面的东西了。&lt;/p&gt;
-
-&lt;h3 id=&#34;avoid-generic-names-like-tmp-and-retval&#34;&gt;avoid generic names like tmp and retval&lt;/h3&gt;
-
-&lt;p&gt;作者批评了tmp,retval,foo这种词语，虽然我没用过retval和foo这种奇怪的名字，但是
-我却用过tmp这东西，后来想了一下，tmp这种东西的确看不出来任何含义，就算时间紧迫，我
-也不会用tmp这种变量了。但是，就像作者所说的一样，对于下面的代码:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;void swap(int *a,int *b)
-{
-    int tmp = *a;
-    *a = b;
-    *b = tmp;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这时候tmp则用得恰到好处，tmp在这里生命周期非常短，而且它的作用刚好是作为临时来用的。&lt;/p&gt;
-
-&lt;p&gt;对于计数器变量，我们经常使用i,j,k,x,y,z,a,b,c什么的，但是，正如作者所说，当有
-多个计数器变量时，这种东西就经常会让人很难看懂了。看下面的例子:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;for(int i = 0; i &amp;lt; N; i++){
-    for(int j = 0; j &amp;lt; M; j++){
-        for(int k = 0; k &amp;lt; C; k++){
-            if(school[i].teacher[k] == user[j]){
-                ...
-            }
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;school，teacher,user这种变量命名是很好的，但是i,j,k这种东西就很难懂了。我们怎么
-知道i,j,k分别对应哪个数组的下标呢？我以前也经常写这种代码，也经常看到其他人写这种代码，
-每当我看到这种代码时（就算是我自己的代码），我都觉得非常头疼，现在看了这本书，马上
-醒悟过来，以后再也不写这种代码了！转而使用si,ti,ui，这样
-school[si].teacher[ti] == user[ui] 就非常清楚了。&lt;/p&gt;
-
-&lt;h3 id=&#34;prefer-concrete-names-over-abstract-names&#34;&gt;prefer concrete names over abstract names&lt;/h3&gt;
-
-&lt;p&gt;意思是不要抽象的名字，而是要具体的名字。以书上的一个例子说，
-serverCanStart是抽象的名字，而canListenOnPort则是一个具体的名字&lt;/p&gt;
-
-&lt;h3 id=&#34;attaching-extra-information-to-name-by-using-a-suffix-or-prefix&#34;&gt;attaching extra information to name,by using a suffix or prefix&lt;/h3&gt;
-
-&lt;p&gt;如果我们有一个变量:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;string id;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;而这个id必须是十六进制，这时，直接使用id就很不好，因此你看不出来它必须使用十六进制，
-使用hex_id代替就很明确了。&lt;/p&gt;
-
-&lt;p&gt;单位数值, 使用书上的例子，看下面的js代码:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var start = (new Date()).getTime();
-var elapsed = (new Date()).getTime() - start;
-document.writeln(&amp;quot;time is:&amp;quot; + elapsed + &amp;quot; seconds&amp;quot;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果对js比较熟悉的，会知道，getTime()返回的是ms，而不是s，因此这样的命名会很容易
-产生bug，不是每个程序员都会记得那么清楚getTime()返回的单位是什么。把这2个变量改成
-start_ms和elapsed_ms就很清楚了！
-看到这里，我决定，以后遇到这种有单位的变量，都要带个单位的后缀，以写出可读的代码。&lt;/p&gt;
-
-&lt;h3 id=&#34;deciding-how-long-a-name-should-be&#34;&gt;deciding how long a name should be&lt;/h3&gt;
-
-&lt;p&gt;在较短的域里面可以使用较短的变量名，比如:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;if(i != k){
-    int t = a[i];
-    a[i] = a[k];
-    a[k] = t;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;现在，打一个长变量名已经不是问题了。&lt;/p&gt;
-
-&lt;p&gt;我以前很恶心java的类名方法名很长，看起来不简洁，现在看多了也习惯了，而且现在打长的变量
-名的确很简单了，因此现在很多编辑器或IDE都有自动补全的功能。比如我现在使用的Emacs就自带
-有补全的功能（Alt +
-/），我居然还不知道，因此我都是用auto-complete的，看来当它不起作用
-时，我就可以手动地补全了。&lt;/p&gt;
-
-&lt;p&gt;有关缩略词,
-作者说，对于工程项目的代码，最好不要写缩略词，因为新加进来的成员可能看不懂缩略词的意思，
-而一些最常见的缩写，比如evaluation写成eval,string写成str，document写成doc，则写
-成缩写比较好。其实，我觉得，像linux系统这么大的工程都使用了很多缩写，有的时候缩写还是
-非常必要的，可能是我的个人原因，我不喜欢又臭又长的代码，我喜欢简洁的代码，对于unix哲学
-中的缩写规则，我很感兴趣，在程序中还是要尽量使用缩写。&lt;/p&gt;
-
-&lt;h3 id=&#34;using-name-formating-to-pack-extra-information&#34;&gt;using name formating to pack extra information&lt;/h3&gt;
-
-&lt;p&gt;不同类型的实体命名特点, 在google
-c++的规范中，类名首字母大写，使用驼峰式;宏常量名全部大写，使用下划线分隔;
-const变量则首字母大写，驼峰式，区分宏常量;类的方法首字母大写，驼峰式;类的变量全小写，
-最后要跟一个下划线;其它局部变量则全部小写，后面不跟下划线。
-在html/css中，id一般使用下划线分隔，而class使用中线（dash）来分隔。&lt;/p&gt;
-
-&lt;h2 id=&#34;names-that-can-t-be-misconstructed&#34;&gt;names that can&amp;rsquo;t be misconstructed&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;关键思想是：不断地问自己，这个名字别人会不会认为是其他意思？&lt;/li&gt;
-&lt;li&gt;很多情况对变量的命名是有包含与不包含的意思的。这里列举出几种很常用的用法。
-
-&lt;ul&gt;
-&lt;li&gt;包含的情况，使用min和max，比如说min_items和max_students&lt;/li&gt;
-&lt;li&gt;两端包含，first和last。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;table&gt;
-&lt;colgroup&gt;
-&lt;col width=&#34;11%&#34; /&gt;
-&lt;col width=&#34;5%&#34; /&gt;
-&lt;col width=&#34;5%&#34; /&gt;
-&lt;col width=&#34;9%&#34; /&gt;
-&lt;col width=&#34;5%&#34; /&gt;
-&lt;/colgroup&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;a&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;b&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;c&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;d&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;first&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;last&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;包含前面，不包含后面，使用begin和end。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;table&gt;
-&lt;colgroup&gt;
-&lt;col width=&#34;11%&#34; /&gt;
-&lt;col width=&#34;5%&#34; /&gt;
-&lt;col width=&#34;5%&#34; /&gt;
-&lt;col width=&#34;5%&#34; /&gt;
-&lt;col width=&#34;8%&#34; /&gt;
-&lt;/colgroup&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;a&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;b&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;c&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;d&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;begin&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;end&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;在给布尔型变量命名时，注意不要带负面的意思，如不要使用:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;bool disable_ssl = false;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;而要使用:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;bool use_ssl = true;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;一般会使用is,can,has前缀命名布尔型变量。&lt;/li&gt;
-&lt;li&gt;函数的名字一定要和里面的操作相符，书上举了一个例子，比如函数getSum，这个函数的
-实现是计算一大堆数据的和，但是一般程序员第一眼看过去的时候就会以为仅仅是返回和，并
-没有想到里面会有代价很多的计算，很有可能会经常调用这个函数，这样就会使程序变得很慢。
-使用computeSum会使人更容易明白。&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;作者还举了STL里面的list::size()方法来批评。这个方法会一个节点一个节点地计算链
-表的长度，O(n)的速度很慢。看下面的例子:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;while (list.size() &amp;gt; max_size) {
-    ...
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;连写STL的程序员也有不规范的时候，一般的程序员会以为size()是O(1)的速度，直接返回
-链表的长度，这样就会使得程序的速度非常慢了。如果改成countSize()会好很多，
-但是幸运的是，作者说了，最新版的STL已经把size()变成了O(1)速度。&lt;/p&gt;
-
-&lt;h2 id=&#34;aesthetics&#34;&gt;aesthetics&lt;/h2&gt;
-
-&lt;p&gt;举的第一个例子让我震惊！看下面的代码:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class PerformanceTester {
-        public static final TcpConnectionSimulator wifi =
-                new TcpConnectionSimulator(
-                    500,  /* Kbps */
-                    80,   /* millisecs */
-                    200,  /* jitter */
-                    1     /* packet loss % */);
-        public static final TcpConnectionSimulator t3_fiber =
-                new TcpConnectionSimulator(
-                    4500,  /* Kbps */
-                    10,    /* millisecs */
-                    0,     /* jitter */
-                    0      /* packet loss % */);
-        public static final TcpConnectionSimulator cell =
-                new TcpConnectionSimulator(
-                    100,  /* Kbps */
-                    400,  /* millisecs */
-                    250,  /* jitter */
-                    5     /* packet loss % */);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这里，缩进是对齐了，注释也对齐了，但是占用的行数太多，而且注释重复了3遍。
-改成这样就好看多了:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class PerformanceTester {
-        // TcpConnectionSimulator(throughput, lantency, jitter, packet_loss)
-        //                          [Kbps]     [ms]      [ms]    [percent]
-
-        public static final TcpConnectionSimulator wifi =
-                new TcpConnectionSimulator(500, 80, 200, 1);
-        public static final TcpConnectionSimulator t3_fiber =
-                new TcpConnectionSimulator(4500, 10, 0, 0);
-        public static final TcpConnectionSimulator cell =
-                new TcpConnectionSimulator(100, 400, 250, 5);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;作者建议代码要列对齐，我之前在programming windows一书中看到过这种
-漂亮的代码，但是一直做不到，因为要打很多空格。后来发现emacs有通过正则表达式
-对齐的功能align-regexp，爽极了！&lt;/p&gt;
-
-&lt;h2 id=&#34;knowing-what-to-comment&#34;&gt;knowing what to comment&lt;/h2&gt;
-
-&lt;h3 id=&#34;when-should-not-comment&#34;&gt;when should not comment？&lt;/h3&gt;
-
-&lt;p&gt;看注释会浪费阅读代码的人的时间，注释还会占用屏幕的地方，导致读者时常要
-翻页，所以，没有价值的注释不要写。下面的代码的注释都没有价值:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// The class definition for Account
-class Account {
-public:
-        // Constructor
-        Account();
-
-        // Set the profit member to a new value
-        void SetProfit(double  profit);
-
-        // Return the profit from this Account
-        double GetProfit();
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;因为，注释的含义从代码中已经可以看出来了，注释没有提供额外的信息，其实是和
-代码重复了，不仅浪费地方，而且浪费写代码的人的时间和读代码的人的时间。
-记住:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;good code &amp;gt; bad code + good comment
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;what-should-comment-be&#34;&gt;what should comment be？&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;写自己的想法&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;写自己的代码的缺点，比如:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// TODO:use a faster algorithm
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;有一些和TODO一样的很流行的标签&lt;/p&gt;
-
-&lt;table&gt;
-&lt;colgroup&gt;
-&lt;col width=&#34;12%&#34; /&gt;
-&lt;col width=&#34;47%&#34; /&gt;
-&lt;/colgroup&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Marker&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Typical meaning&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;TODO&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;things to finish&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;FIXME&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;known-broken code here&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;HACK&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;inelegant solution to a problem&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;XXX&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;danger!major problem here&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;ul&gt;
-&lt;li&gt;解释常量为什么是那个值&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;making-comments-precise-and-compact&#34;&gt;making comments precise and compact&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;函数注释中，可使用举例说明，如:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//Example:strip(&amp;quot;abba/a/ba&amp;quot;, &amp;quot;ab&amp;quot;) returns &amp;quot;/a/&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;要写明你的代码的意图。看下面例子:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// Iterate through the list in reverse order
-for (i = SIZE; i &amp;gt;= 0; i--) {
-    ...
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;上面的注释写了和没写差不多，改成这样就非常好了:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// display each price, from highest to lowest
-for (i = SIZE; i &amp;gt;= 0; i--) {
-    ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;调用函数的时候也可以注释，按照书上的例子，这样的代码:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Connect(/* timeout_ms = */ 10, /* use_encryption = */ false);
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;要比这样的代码:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Connect(10, false);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;更容易看懂。&lt;/p&gt;
-
-&lt;h1 id=&#34;重构代码&#34;&gt;重构代码&lt;/h1&gt;
-
-&lt;h2 id=&#34;extracting-unrelated-subproblems&#34;&gt;extracting unrelated subproblems&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;要封装一些和本功能无关的子问题到另外一个函数上。&lt;/li&gt;
-&lt;li&gt;对于一些工具的类或函数（字符串操作，哈希表等），就分离出来。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;one-task-at-a-time&#34;&gt;one task at a time&lt;/h2&gt;
-
-&lt;p&gt;每个函数应该只实现一个功能，不要实现多个功能。&lt;/p&gt;
-
-&lt;h2 id=&#34;turning-thoughts-into-code&#34;&gt;turning thoughts into code&lt;/h2&gt;
-
-&lt;p&gt;记住爱因斯坦的这句话:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;You do not really understanding something unless you can explain it to
-your grandmother.               
-                                            --Albert Einstein
-代码应该用易懂的英语来写。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;writing-less-code&#34;&gt;writing less code&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;一定要熟悉现存的库，这样可以减少代码量，多重用代码，少写代码。&lt;/li&gt;
-&lt;li&gt;使用Unix工具(shell命令），而不是自己写代码&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;写出易懂的选择排序&#34;&gt;写出易懂的选择排序&lt;/h1&gt;
-
-&lt;p&gt;以选择排序为例，我以前是直接把它记住的（当然是在理解的前提下），其中的一些
-下标i,j,k，直接记住人家的代码的，如果要我重新写，我还是会用i,j,k，造成了
-硬性的思维，现在看来，只要记住算法，用自己的方式来写出的代码才是好的代码。
-下面的选择排序是经典的课本上的代码:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;void select_sort(int *arr,int len)
-{
-    int i,j,k,temp;
-
-    for(i = 0; i &amp;lt; len - 1; i++){
-            k = i;
-            for(j = i + 1; j &amp;lt; len; j++){
-                    if(arr[j] &amp;lt; arr[k]){
-                            k = j;
-                    }
-            }
-            if(i != k){
-                    temp = arr[k];
-                    arr[k] = arr[i];
-                    arr[i] = temp;
-            }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;我觉得，有经验的程序员看上面这份代码当然是没问题，但是给初学者来看，i,j,k分别
-代表什么意思，他就会摸不着头脑了，所以，我们需要给变量的名字赋予意义，更容易
-理解，于是我写了下面的代码:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;void select_sort(int *arr,int len)
-{
-    int current,next,smallest,temp;
-
-    for(current = 0; current &amp;lt; len - 1; current++){
-            smallest = current;
-            for(next = current + 1; next &amp;lt; len; next++){
-                    if(arr[next] &amp;lt; arr[smallest]){
-                            smallest = next;
-                    }
-            }
-            if(current != smallest){
-                    temp = arr[smallest];
-                    arr[smallest] = arr[current];
-                    arr[current] = temp;
-            }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这样的话，单从变量名字就可以理解整个算法的思想了。虽然变量的名字是长了一点，
-但是现在的编辑器或者IDE的自动补全功能这么强大，变量名太长这个已经不是问题了。&lt;/p&gt;
-</description>
+      <description>这是我读 &amp;ldquo;the art of readable code&amp;rdquo; 一书做的笔记 简化循环和逻辑 making control flow easy to read 下面的代码: if (length &amp;gt;= 10) 要比: if (10 &amp;lt;= length) 更容易看懂。这是很显然的。而在C语言中，有的人为了</description>
     </item>
     
     <item>
       <title>reStructuredText语法笔记</title>
-      <link>http://zhengyhn.github.io/post/write-down-the-reStructuredText-syntax-I-frequently-use/</link>
+      <link>http://zhengyhn.github.io/post/write-down-the-restructuredtext-syntax-i-frequently-use/</link>
       <pubDate>Fri, 27 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/write-down-the-reStructuredText-syntax-I-frequently-use/</guid>
-      <description>
-
-&lt;p&gt;reStructuredText用于排版非常好。但是，和C++一样，越是灵活，越是可扩展，越是复杂。
-有些语法，你永远记不住，我经常遇到一些表示方法（比如说超链接），忘记了语法，每次都
-要去Google。为了不这么麻烦，我决定记下去，以免下次忘了又要去查。&lt;/p&gt;
-
-&lt;p&gt;大部分都来自 &lt;a href=&#34;http://sphinx-doc.org/rest.html&#34;&gt;这里&lt;/a&gt; 。&lt;/p&gt;
-
-&lt;h1 id=&#34;代码块&#34;&gt;代码块&lt;/h1&gt;
-
-&lt;p&gt;在段落的结尾使用 &lt;code&gt;::&lt;/code&gt; 符号,
-然后输入一个空行，然后是代码（必须缩进，空2格或4格），
-然后是一个空行。比如&lt;/p&gt;
-
-&lt;p&gt;代码如下:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
-
-int
-main(int argc, char *argv[])
-{
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;引入代码文件&#34;&gt;引入代码文件&lt;/h1&gt;
-
-&lt;p&gt;对于我等码农来说，这应该算是最常用的了。格式为:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;.. code-include:: source-code-file
-:lexer: language-name
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;超链接&#34;&gt;超链接&lt;/h1&gt;
-
-&lt;p&gt;经常要引用一些大牛的博客，链接的格式为:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;`链接文字 &amp;lt;链接&amp;gt;`_
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;比如， &lt;a href=&#34;http://en.zhengyuanhang.com&#34;&gt;我的英文博客&lt;/a&gt; 。&lt;/p&gt;
-
-&lt;h1 id=&#34;斜体和粗体&#34;&gt;斜体和粗体&lt;/h1&gt;
-
-&lt;p&gt;斜体:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;*这是斜体*
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;粗体:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;**这是粗体**
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;图片&#34;&gt;图片&lt;/h1&gt;
-
-&lt;p&gt;格式是这样的:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;.. image:: /images/one_piece.gif
- :alt: one_piece
- :width: 200px
- :height: 150px
- :scale: 80 %
- :align: left
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;align的选项是left, center, right。&lt;/p&gt;
-</description>
+      <guid>http://zhengyhn.github.io/post/write-down-the-restructuredtext-syntax-i-frequently-use/</guid>
+      <description>reStructuredText用于排版非常好。但是，和C++一样，越是灵活，越是可扩展，越是复杂。 有些语法，你永远记不住，我经常遇到一些表</description>
     </item>
     
     <item>
@@ -1927,161 +89,10 @@ main(int argc, char *argv[])
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
       <guid>http://zhengyhn.github.io/post/2013-08-03-a-tour-to-the-badaling-great-wall/</guid>
-      <description>&lt;p&gt;Today, I went to the Badaling Great Wall &lt;strong&gt;alone&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;There is a saying that &lt;strong&gt;He who has never been to the Great Wall is not a&lt;/strong&gt;
-&lt;strong&gt;true man&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;I had read this saying for many times when I was in high school, but I have
-never been to the Great Wall util today.&lt;/p&gt;
-
-&lt;p&gt;I got up at 7:00am and began my tour at about 7:40am after the breakfast.
-It took me 30 minutes to arrive at &lt;em&gt;Xi zhi men station&lt;/em&gt; from where I live.&lt;/p&gt;
-
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;http://zhengyhn.github.io/images/13.8.3.Great-Wall-too-many-people.jpg&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Too many people&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
-&lt;/figure&gt;
-
-
-&lt;p&gt;I planed to take the &lt;em&gt;Shi jiao yan qing s2 line&lt;/em&gt; train to the Great Wall
-directly at &lt;em&gt;Beijing bei station&lt;/em&gt;, which is near the &lt;em&gt;Xi zhi men station&lt;/em&gt;.
-However, when I arrived there, the staff of the station said that the train
-will depart at 11:00am.I watched my smart phone, which showed that it&amp;rsquo;s
-8:24am now.So I had to wait for about 2.5 hours if I took this train.Because
-I&amp;rsquo;am those one who don&amp;rsquo;t want to stay in a place too long and want to go
-somewhere to have a look, I prefer the other type of a tour.Therefore, from
-the staff of the train, I knew that I could take buses to the Great Wall.&lt;/p&gt;
-
-&lt;p&gt;Thanks to the &lt;em&gt;Baidu Map&lt;/em&gt;, this time I need to take the &lt;em&gt;line 13 train&lt;/em&gt; and
-arrive at the &lt;em&gt;Long ze station&lt;/em&gt;, then take the &lt;em&gt;878 bus&lt;/em&gt;.However, when I
-arrived at the &lt;em&gt;Long ze station&lt;/em&gt; and the &lt;em&gt;878 bus station&lt;/em&gt;, I found something
-almost shock me.That is, the &lt;em&gt;878 bus&lt;/em&gt; only depart at 7:00am-9:00am.But my
-smart phone showed that it&amp;rsquo;s 9:03am.Oh my god!But I didn&amp;rsquo;t give up.I stayed
-there for another 20 minutes.This time, I almost wanted to go back home because
-I looked for 10 minutes to find some bus that can go to the Great Wall and I
-failed.&lt;/p&gt;
-
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;http://zhengyhn.github.io/images/13.8.3.south-wall.jpg&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;South Wall&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
-&lt;/figure&gt;
-
-
-&lt;p&gt;I was still stubborn so that I found another way to go to the Great Wall from
-&lt;em&gt;Baidu Map&lt;/em&gt;.This time I went back to the &lt;em&gt;Xi er qi station&lt;/em&gt;, take the
-&lt;em&gt;Chang ping line train&lt;/em&gt; and arrived at the final station &lt;em&gt;Nan shao station&lt;/em&gt;.
-When I got out of the station, I was shock again.This place is a remote village
-and I can&amp;rsquo;t find a bus after looking for 10 minutes.So I went back to the
-exit of the subway and ask a driver of the &lt;em&gt;black car&lt;/em&gt; how much of taking me
-to the Badaling Great Wall.His answer suprised me because he wanted 180 yuan.
-Although I could bargin with him to reduce the price to 100 yuan, but it&amp;rsquo;s
-still very very very expensive.This time I wanted to give up and went away to
-find another bus station.When I got there, I found it&amp;rsquo;s excactly the bus I
-could take to the Great Wall.This is the &lt;em&gt;870 bus&lt;/em&gt; and then the bus didn&amp;rsquo;t
-appear.Fortunately, the bus was coming soon and I got in without thinking.
-That is, &lt;strong&gt;there is a way out for somebody&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;After about an hour, I arrived at &lt;em&gt;Ni sha he station&lt;/em&gt; and I need to change to
-another bus.This time, I could take &lt;em&gt;919 bus&lt;/em&gt; or the &lt;em&gt;879&lt;/em&gt; bus and I felt the
-Great Wall was near.After about 5 minutes, the bus comed but there were too
-many people there, so I had to stand in the bus.I thought the bus will arrived
-at the Great Wall no more than 20 minutes, but I never wanted to know that it&amp;rsquo;s
-the most painful bus I have ever taken.I standed in the bus for more than 1.5
-hours because of the traffic jam!&lt;/p&gt;
-
-&lt;p&gt;Finally I arrived at the Great Wall.&lt;/p&gt;
-
-&lt;p&gt;First, I have a lunch at &lt;em&gt;Yong he da wang restaurant&lt;/em&gt;.&lt;/p&gt;
-
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;http://zhengyhn.github.io/images/13.8.3.have-a-lunch.jpg&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Have a lunch&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
-&lt;/figure&gt;
-
-
-&lt;p&gt;There were lots of people.But I thought there will be more in Spring and Autumn.
-The photo below shows the &lt;em&gt;North Wall&lt;/em&gt;.&lt;/p&gt;
-
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;http://zhengyhn.github.io/images/13.8.3.north-wall.jpg&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;North Wall&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
-&lt;/figure&gt;
-
-
-&lt;p&gt;It&amp;rsquo;s obvious that I was on the south wall, and the photo below is a bird&amp;rsquo;s-eye
-view of the north wall.&lt;/p&gt;
-
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;http://zhengyhn.github.io/images/13.8.3.north-wall-bird-view.jpg&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;North Wall bird view&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
-&lt;/figure&gt;
-
-
-&lt;p&gt;There is no doubt that I must have someone take a photo for myself.The photo
-below is it, I&amp;rsquo;m not very handsome as you imaged, though.&lt;/p&gt;
-
-
-&lt;figure &gt;
-    
-        &lt;img src=&#34;http://zhengyhn.github.io/images/13.8.3.Great-Wall-me.jpg&#34; /&gt;
-    
-    
-    &lt;figcaption&gt;
-        &lt;h4&gt;Me&lt;/h4&gt;
-        
-    &lt;/figcaption&gt;
-    
-&lt;/figure&gt;
-
-
-&lt;p&gt;The return tour was so relax because I could take the &lt;em&gt;877 bus&lt;/em&gt; to
-&lt;em&gt;De sheng men xi station&lt;/em&gt; directly!And it const me only 4.8 yuan.&lt;/p&gt;
-
-&lt;p&gt;In a word, although &lt;em&gt;the Badaling Great Wall&lt;/em&gt; is not so &lt;strong&gt;great&lt;/strong&gt; as
-&lt;em&gt;the Palace&lt;/em&gt;, I was still very happy today, because it&amp;rsquo;s the first time I have
-a tour &lt;strong&gt;alone&lt;/strong&gt;.&lt;/p&gt;
-</description>
+      <description>Today, I went to the Badaling Great Wall alone.
+There is a saying that He who has never been to the Great Wall is not a true man.
+I had read this saying for many times when I was in high school, but I have never been to the Great Wall util today.
+I got up at 7:00am and began my tour at about 7:40am after the breakfast. It took me 30 minutes to arrive at Xi zhi men station from where I live.</description>
     </item>
     
     <item>
@@ -2090,292 +101,10 @@ a tour &lt;strong&gt;alone&lt;/strong&gt;.&lt;/p&gt;
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
       <guid>http://zhengyhn.github.io/post/cpp/2013-07-28-about-constructors-destructors-and-assignment-operators/</guid>
-      <description>
-
-&lt;h2 id=&#34;what-functions-c-will-silently-write-and-call&#34;&gt;What functions C++ will silently write and call?&lt;/h2&gt;
-
-&lt;p&gt;If we declare an empty class, the compiler will declare a constructor,
-a copy constructor, a copy assignment operator and a destructor for us.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class Girl {
-
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;But the compiler is not foolish, it will only generate them when needed.&lt;/p&gt;
-
-&lt;p&gt;What do the generated functions do?&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;For construtor, it will invoke the corresponding constructor and non-static
-members of its base class.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;For destructor, it will invoke the corresponding destructor of its base class.
-If its base class&amp;rsquo;s destructor is virtual, the destructor will declare as
-virtual.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;For copy constructor and copy assignment operator, they will copy each
-non-static data member from the source object to the target object.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If the class has some members that are pointer, reference or constant, there
-will be some trouble with the compiler.Therefore, always define the four
-functions when we define our own class.&lt;/p&gt;
-
-&lt;h2 id=&#34;disallow-the-use-of-generated-functions-you-don-t-want&#34;&gt;Disallow the use of generated functions you don&amp;rsquo;t want&lt;/h2&gt;
-
-&lt;p&gt;Sometimes, we may not want the copy constructor or the copy assignment
-operator because every member may be different with the other object&amp;rsquo;s
-members.Preventing the generation of these functions will make the
-program more effecient.&lt;/p&gt;
-
-&lt;p&gt;If we don&amp;rsquo;t declare these two functions, the compiler will generate them
-for us.&lt;/p&gt;
-
-&lt;p&gt;So how can we do?&lt;/p&gt;
-
-&lt;p&gt;The prefer solution is &lt;strong&gt;declare the copy constructor and copy assignment&lt;/strong&gt;
-&lt;strong&gt;operator as private and never implement them&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;If we implement them, the members and friends of the class can call them.But
-if we don&amp;rsquo;t implement them, the linker will complain at it.&lt;/p&gt;
-
-&lt;p&gt;In order to move the link-time error to the compile time, we should let the
-members and the friends of the class cannot call them.One method is to define
-a base class that can&amp;rsquo;t be copied and inherited by the class that you don&amp;rsquo;t
-want it to be copyable.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class Uncopyable {
-protected:
-    Uncopyable()
-    { }
-    ~Uncopyable()
-    { }
-private:
-    Uncopyable(const Uncopyable&amp;amp;);
-    Uncopyable&amp;amp; operator=(const Uncopyable&amp;amp;);
-};
-
-class Person: private Uncopyable {
-
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The copy constructor and copy assignment operator of the class &lt;code&gt;Uncopyable&lt;/code&gt;
-are declared as private, so the members and friends of class &lt;code&gt;Person&lt;/code&gt; can&amp;rsquo;t
-call them.&lt;/p&gt;
-
-&lt;h2 id=&#34;declare-destructors-virtual-in-polymorphic-base-classes&#34;&gt;Declare destructors virtual in polymorphic base classes&lt;/h2&gt;
-
-&lt;p&gt;I have met this problem in an interview.&lt;/p&gt;
-
-&lt;p&gt;Suppose the destructor of the base class is not virtual.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class Dog {
-public:
-    Dog();
-    ~Dog();
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And there are two class inherited from it.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class Whippet:public Dog {
-
-};
-
-class Spaniel:public Dog {
-
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We can use a base class pointer to handle the derived classes.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Dog *aDog = new Whippet();
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then you should delete the pointer when you want to quit.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;delete aDog;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now, the problem appears.The C++ specifies that when a derived class
-object is deleted through a pointer to a base class with a non-virtual
-destructor, results are undefined.&lt;/p&gt;
-
-&lt;p&gt;That is, the destructor of the base class will be called typically, but
-the destructor of the derived class may not be called.&lt;/p&gt;
-
-&lt;p&gt;I have written a simple program to test it.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;cstdio&amp;gt;
-
-class Dog {
-public:
-    Dog()
-    { }
-    ~Dog()
-    {
-        printf(&amp;quot;Call Dog&#39;s destructor\n&amp;quot;);
-    }
-private:
-    Dog(const Dog&amp;amp;);
-    Dog&amp;amp;
-    operator=(const Dog&amp;amp;);
-};
-
-class Whippet:public Dog {
-public:
-    Whippet()
-    { }
-    ~Whippet()
-    {
-        printf(&amp;quot;Call Whippet&#39;s destructor\n&amp;quot;);
-    }
-};
-
-int
-main(int argc, char **argv)
-{
-    Dog *aDog = new Whippet();
-    delete aDog;
-
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I run the program several times and the results are the same.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;~/test $ ./test 
-Call Dog&#39;s destructor
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now, if I change the destrutor to &lt;code&gt;virtual&lt;/code&gt;, the result is:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;virtual ~Dog()
-{
-    printf(&amp;quot;Call Dog&#39;s destructor\n&amp;quot;);
-}
-
-~/test $ ./test 
-Call Whippet&#39;s destructor
-Call Dog&#39;s destructor
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Therefore, when the base class have virtual member functions, you should
-always make the destructor virtual.&lt;/p&gt;
-
-&lt;p&gt;However, not every destructor of any class should be virtual.Making it
-virtual will occupy some additional information(virtual table pointer)
-that can increase the size of an object of that class.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Prevent exceptions from leaving destructors&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Never call virtual functions during construction or destruction&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;I have seen the assignment operator in this form many times.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Person&amp;amp; operator=(const Person&amp;amp; p)
-{
-    ...
-    return *this;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;First, the parameter is passed by const-reference, which is more effecient.
-Second, the function returns a reference of the object.This is more effecient
-when doing this.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;p3 = p2 = p1;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Remember that always write assignment operator in this form.&lt;/p&gt;
-
-&lt;p&gt;This is also appropriate with &lt;code&gt;+=&lt;/code&gt;, &lt;code&gt;*=&lt;/code&gt; and so on.&lt;/p&gt;
-
-&lt;p&gt;Sometimes we may assignment to the object itself.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Person p;
-p = p;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It seems impossible, but how about this.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;persons[i] = persons[j];
-*p1 = *p2;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;persons[i]&lt;/code&gt; and &lt;code&gt;persons[j]&lt;/code&gt; may be the same.&lt;code&gt;p1&lt;/code&gt; and &lt;code&gt;p2&lt;/code&gt; may point
-to the same object.&lt;/p&gt;
-
-&lt;p&gt;Some assignment operator may be like this one.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Disk&amp;amp;
-Disk::operator=(const Disk&amp;amp; d)
-{
-    delete data;
-    data = new Disk(*(d.data));
-
-    return *this;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It seems reasonable that delete the original data and then allocate a
-new one using the data of &lt;code&gt;d&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;However, this is very dangerous.What if &lt;code&gt;this&lt;/code&gt; is the same as &lt;code&gt;d&lt;/code&gt;?
-If that happened, the content of &lt;code&gt;data&lt;/code&gt; and &lt;code&gt;d.data&lt;/code&gt; is the same
-thing.So the content of &lt;code&gt;d.data&lt;/code&gt; have been delete before call the
-copy constructor.&lt;/p&gt;
-
-&lt;p&gt;A direct solution to this problem is obvious.That is, just check if they
-are the same.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Disk&amp;amp;
-Disk::operator=(const Disk&amp;amp; d)
-{
-    if (this == &amp;amp;d) {
-        return *this;
-    }
-    delete data;
-    data = new Disk(*(d.data));
-
-    return *this;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I prefer the above solution.But there are another solution.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Disk&amp;amp;
-Disk::operator=(const Disk&amp;amp; d)
-{
-    Disk *origin = data;
-    data = new Disk(*(d.data));
-    delete origin;
-
-    return *this;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This code just change the order of some statement, but it make great
-difference.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;When adding a member to a class, remember to update the constructors,&lt;/strong&gt;
-&lt;strong&gt;destructor, copy constructor, copy assignment operator&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Don&amp;rsquo;t miss anyone!&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;When a class is a derived class, make sure to call the constructors,
-copy constructor and copy assignment operator of the base class, respectively
-when writing my own constructors, copy constructor, assignment operator.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Do not call copy constructor in the copy assignment operator.&lt;/strong&gt;
-&lt;strong&gt;Do not call copy assignment operator in the copy constructor.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;That is all about constructors, copy constructor and copy assignment operator.
-It really helps.&lt;/p&gt;
-</description>
+      <description>What functions C++ will silently write and call? If we declare an empty class, the compiler will declare a constructor, a copy constructor, a copy assignment operator and a destructor for us.
+class Girl { };  But the compiler is not foolish, it will only generate them when needed.
+What do the generated functions do?
+ For construtor, it will invoke the corresponding constructor and non-static members of its base class.</description>
     </item>
     
     <item>
@@ -2384,102 +113,658 @@ It really helps.&lt;/p&gt;
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
       <guid>http://zhengyhn.github.io/post/cpp/2013-08-09-always-pass-parameters-by-reference-to-const/</guid>
-      <description>&lt;p&gt;We all know that &lt;em&gt;pass by value&lt;/em&gt; is not effecient.So we use &lt;em&gt;pass by pointer&lt;/em&gt;
-in C.However, in C++, we prefer &lt;strong&gt;pass by referece-to-const&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;Here is an example.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
-#include &amp;lt;cstdio&amp;gt;
-
-class Dog {
-public:
-    Dog()
-    {
-        printf(&amp;quot;Calling Dog&#39;s constructor\n&amp;quot;);
-    }
-    Dog(const Dog&amp;amp; d)
-    {
-        printf(&amp;quot;Calling Dog&#39;s copy constructor\n&amp;quot;);
-        this-&amp;gt;name = d.name;
-    }
-    virtual ~Dog()
-    {
-        printf(&amp;quot;Calling Dog&#39;s destructor\n&amp;quot;);
-    }
-private:
-    std::string name;
-};
-
-void
-walk_the_dog(Dog d)
-{
-
-}
-
-int
-main(int argc, char **argv)
-{
-    Dog dog;
-    walk_the_dog(dog);
-
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The running result is as follows:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Calling Dog&#39;s constructor
-Calling Dog&#39;s copy constructor
-Calling Dog&#39;s destructor
-Calling Dog&#39;s destructor
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now, let&amp;rsquo;s analysis this &lt;em&gt;passing by value&lt;/em&gt; process.
-First, &lt;code&gt;Dog dog;&lt;/code&gt; will call the constructor. Then, since the function
-&lt;code&gt;walk_the_dog&lt;/code&gt; pass the parameter &lt;code&gt;d&lt;/code&gt; by value, it will call the copy
-constructor. Before exiting the function, it will call the destructor of &lt;code&gt;Dog&lt;/code&gt;
-to destroy the parameter &lt;code&gt;d&lt;/code&gt;. In the end, before exiting the main function,
-the destructor of &lt;code&gt;Dog&lt;/code&gt; will be called again to destroy the &lt;code&gt;dog&lt;/code&gt; object.&lt;/p&gt;
-
-&lt;p&gt;Now, it seems that &lt;em&gt;passing by value&lt;/em&gt; will result in a call to copy constructor
-and a call to destructor. But, in fact, it will result in two call to copy
-constructor and two call to destructor. Note that there are a &lt;code&gt;string&lt;/code&gt; object
-as the member of the class &lt;code&gt;Dog&lt;/code&gt;, so there will be an extra call the copy
-constructor and destructor of the &lt;code&gt;string&lt;/code&gt; object.&lt;/p&gt;
-
-&lt;p&gt;Obviously, the cost of &lt;em&gt;passing by value&lt;/em&gt; is very expensive.
-How is &lt;em&gt;passing by reference-to-const&lt;/em&gt;?&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;void
-walk_the_dog(const Dog&amp;amp; d)
-{
-
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Just modify a bit and the result will be:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Calling Dog&#39;s constructor
-Calling Dog&#39;s destructor
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Note that the &lt;code&gt;const&lt;/code&gt; is very important. If there is not a &lt;code&gt;const&lt;/code&gt;, the
-compiler will put the object in the writable part of the memory so that it
-cannot be shared by other functions. If declared as &lt;code&gt;const&lt;/code&gt;, the object
-will be put into the readonly part of the memory and can be shared by lots
-of functions so that the program need less memory.&lt;/p&gt;
-
-&lt;p&gt;The implementation of reference is using the pointer in C. Therefore, it may
-be more effecient to pass the built-in type parameters by value than referece.
-It&amp;rsquo;s true. If the parameter is an object of type &lt;code&gt;char&lt;/code&gt;, which occupies
-1 byte. But a pointer ocuppies 4 bytes in a 32-bit machine. So we should prefer
-passing by value when the parameter is of built-in type? No, we should always
-pass the parameters by reference-to-const, since &lt;strong&gt;the compiler will always&lt;/strong&gt;
-&lt;strong&gt;put the pointer in the register!&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Finally, just remember, &lt;strong&gt;always pass the parameters by reference-to-const&lt;/strong&gt;.&lt;/p&gt;
-</description>
+      <description>We all know that pass by value is not effecient.So we use pass by pointer in C.However, in C++, we prefer pass by referece-to-const.
+Here is an example.
+#include &amp;lt;iostream&amp;gt; #include &amp;lt;cstdio&amp;gt; class Dog { public: Dog() { printf(&amp;quot;Calling Dog&#39;s constructor\n&amp;quot;); } Dog(const Dog&amp;amp; d) { printf(&amp;quot;Calling Dog&#39;s copy constructor\n&amp;quot;); this-&amp;gt;name = d.name; } virtual ~Dog() { printf(&amp;quot;Calling Dog&#39;s destructor\n&amp;quot;); } private: std::string name; }; void walk_the_dog(Dog d) { } int main(int argc, char **argv) { Dog dog; walk_the_dog(dog); return 0; }  The running result is as follows:</description>
+    </item>
+    
+    <item>
+      <title>Const anyway!</title>
+      <link>http://zhengyhn.github.io/post/cpp/2013-07-24-const-anyway/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/cpp/2013-07-24-const-anyway/</guid>
+      <description>Const pointer const is versatile.I am always confused by the following syntax.
+const char *str = &amp;quot;Hello&amp;quot;; // const data, non-const pointer char * const str = &amp;quot;Hello&amp;quot;; // const pointer, non-const data  Now there is a tip to remember it.
+If const appears to the right of the asterisk, the pointer is constant.If const appears to the left of the asterisk, the data is constant.
+So the following two statements are the same.</description>
+    </item>
+    
+    <item>
+      <title>Cpp Resource Management</title>
+      <link>http://zhengyhn.github.io/post/cpp/2013-08-01-cpp-resource-management/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/cpp/2013-08-01-cpp-resource-management/</guid>
+      <description>I always forget freeing a memory that allocated from the heap.And I always forget closing the file handler.
+Resources include file descriptors, mutex locks, fonts, brushes, database connections and network sockets.
+I think less programmers can remember closing a file handler, especially in a large project.
+Nowadays, many programming languages have the garbage collection function. In C++, since the destructor will be automatically called, we can release the resources automatically if we put the resource into an object.</description>
+    </item>
+    
+    <item>
+      <title>Do not hide inherited names</title>
+      <link>http://zhengyhn.github.io/post/cpp/2013-08-15-do-not-hide-inherited-names/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/cpp/2013-08-15-do-not-hide-inherited-names/</guid>
+      <description>In inheritance, there are some rules defined by C++, one of which is that the virables or the functions in the base class will be hidden if there are virables and functions with the same name.
+It seems perfect, but it&amp;rsquo;s a pitfall of C++. Consider the following example.
+#include &amp;lt;cstdio&amp;gt; #include &amp;lt;iostream&amp;gt; class Person { public: explicit Person() { } ~Person() { } void sleep() const { printf(&amp;quot;Person sleep\n&amp;quot;); } void sleep(const int sec) const { printf(&amp;quot;Person sleep %d s\n&amp;quot;, sec); } private: Person(const Person&amp;amp;); const Person&amp;amp; operator=(const Person&amp;amp;); }; class Student:public Person { public: explicit Student() { } ~Person() { } void sleep() const { printf(&amp;quot;Student sleep\n&amp;quot;); } private: Student(const Student&amp;amp;); const Student&amp;amp; operator=(const Student&amp;amp;); }; int main(int argc, char **argv) { Student stu; stu.</description>
+    </item>
+    
+    <item>
+      <title>Implement a bidirectional linked list</title>
+      <link>http://zhengyhn.github.io/post/datastructure/2013-09-21-implement-a-bidirectional-linked-list/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/datastructure/2013-09-21-implement-a-bidirectional-linked-list/</guid>
+      <description>A bidirectional linked list is the same as a singular linked list except that there are two links between two nodes.
+Here is the specification of my BiLinkedList.
+ BiLinkedList(), Create an empty BiLinkedList. BiLinkedList(const BiLinkedList&amp;amp; list), Create a BiLinkedList from another BiLinkedList list. BiLinkedList(const T&amp;amp; value), Create a BiLinkedList whose first element is value. BiLinkedList(const T values[], size_t size), Create a BiLinkedList from an array values of size size. const BiLinkedList&amp;amp; operator=(const BiLinkedList&amp;amp; list), Support BiLinkedList assignment.</description>
+    </item>
+    
+    <item>
+      <title>Implement a binary search tree</title>
+      <link>http://zhengyhn.github.io/post/datastructure/2013-10-03-implement-a-binary-search-tree/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/datastructure/2013-10-03-implement-a-binary-search-tree/</guid>
+      <description>A binary search tree is very useful in solving the real world problems. The red-black tree is one kind of binary search tree. For more information about binary search tree, please visit the wikipedia.
+Here is the specification of my binary search tree.
+ BinarySearchTree(), Create an empty binary search tree.
+ BinarySearchTree(const T&amp;amp; root_val), Create an binary search tree whose root node is constructed from root_val.
+ BinarySearchTree(const T values[], const size_t&amp;amp; size), Create an binary search tree from an array values.</description>
+    </item>
+    
+    <item>
+      <title>Implement a circular linked list</title>
+      <link>http://zhengyhn.github.io/post/datastructure/2013-09-21-implement-a-circular-linked-list/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/datastructure/2013-09-21-implement-a-circular-linked-list/</guid>
+      <description>A circular linked list is the same as a singular linked list except that there last node points to the first node.
+Here is the specification of my CiLinkedList.
+ CiLinkedList(), Create an empty CiLinkedList. CiLinkedList(const CiLinkedList&amp;amp; list), Create a CiLinkedList from another CiLinkedList list. CiLinkedList(const T&amp;amp; value), Create a CiLinkedList whose first element is value. CiLinkedList(const T values[], size_t size), Create a CiLinkedList from an array values of size size.</description>
+    </item>
+    
+    <item>
+      <title>Implement a queue</title>
+      <link>http://zhengyhn.github.io/post/datastructure/2013-09-25-implement-a-queue/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/datastructure/2013-09-25-implement-a-queue/</guid>
+      <description>A queue is based on the Linked List. The most explicit feature of a queue is FIFO(First in first out).
+Here is the specification of my Queue.
+ Queue(), Create an empty queue. Queue(const T&amp;amp; value), Create a queue whose first element is value. Queue(const T values[], const size_t&amp;amp; size), Create a queue from an array values whose size is size. Queue(const Queue&amp;lt;T&amp;gt;&amp;amp; queue), Create a queue from another queue. const Queue&amp;lt;T&amp;gt;&amp;amp; operator=(const Queue&amp;lt;T&amp;gt;&amp;amp; queue), Support queue assignment.</description>
+    </item>
+    
+    <item>
+      <title>Implement a queue using two stacks</title>
+      <link>http://zhengyhn.github.io/post/datastructure/2013-09-27-implement-a-queue-using-two-stacks/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/datastructure/2013-09-27-implement-a-queue-using-two-stacks/</guid>
+      <description>A queue can be implemented using two stacks. One stack store the elements appended to the queue. The other stack store the elements to be popped from the queue.
+Here is the specification of my Queue.
+ StQueue(), Create an empty queue. StQueue(const T&amp;amp; value), Create a queue whose first element is value. StQueue(const T values[], const size_t&amp;amp; size), Create a queue from an array values whose size is size. StQueue(const StQueue&amp;lt;T&amp;gt;&amp;amp; queue), Create a queue from another queue.</description>
+    </item>
+    
+    <item>
+      <title>Implement a singular LinkedList</title>
+      <link>http://zhengyhn.github.io/post/datastructure/2013-09-12-implement-a-singular-linkedlist/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/datastructure/2013-09-12-implement-a-singular-linkedlist/</guid>
+      <description>LinkedList is a very common data structure. Three years ago, I could write a singular LinkedList very quickly in C/C++. But the code is ugly and very ineffecient. Now I am going to implement a singular LinkedList in C++ in order to cracking the interview.
+Here is the specification of my LinkedList.
+ LinkedList(), Create an empty LinkedList. LinkedList(const LinkedList&amp;amp; list), Create a LinkedList from another LinkedList list. LinkedList(const T&amp;amp; value), Create a LinkedList whose first element is value.</description>
+    </item>
+    
+    <item>
+      <title>Implement a stack</title>
+      <link>http://zhengyhn.github.io/post/datastructure/2013-09-26-implement-a-stack/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/datastructure/2013-09-26-implement-a-stack/</guid>
+      <description>A stack is based on the Linked List. The most explicit feature of a stack is FILO(First in last out).
+Here is the specification of my Stack.
+ Stack(), Create an empty stack. Stack(const T&amp;amp; value), Create a stack whose first element is value. Stack(const T values[], const size_t&amp;amp; size), Create a stack from an array values whose size is size. Stack(const Stack&amp;lt;T&amp;gt;&amp;amp; stack), Create a stack from another stack. const Stack&amp;lt;T&amp;gt;&amp;amp; operator=(const Stack&amp;lt;T&amp;gt;&amp;amp; stack), Support stack assignment.</description>
+    </item>
+    
+    <item>
+      <title>Implement the sorting algorithms</title>
+      <link>http://zhengyhn.github.io/post/datastructure/2013-09-26-implement-the-sorting-algorithms/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/datastructure/2013-09-26-implement-the-sorting-algorithms/</guid>
+      <description>The sorting algorithms are very important in programming interview. I have to be able to write them on a paper without even an error.
+Bubble Sort The immediate thought of bubble sort is that swapping the ajacent elements if they are of the wrong order in each pass until there are no swapping. For example, consider the array [5, 1, 4, 2, 8],
+First pass:
+[5, 1, 4, 2, 8] =&amp;gt; [1, 5, 4, 2, 8] =&amp;gt; [1, 4, 5, 2, 8] =&amp;gt; [1, 4, 2, 5, 8] =&amp;gt; [1, 4, 2, 5, 8]</description>
+    </item>
+    
+    <item>
+      <title>Initialized before used</title>
+      <link>http://zhengyhn.github.io/post/cpp/2013-07-26-initialized-before-used/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/cpp/2013-07-26-initialized-before-used/</guid>
+      <description>For constructor In the constructor, the statements in the body are assignments, not initializations.
+#include &amp;lt;iostream&amp;gt; class Girl { public: Girl(std::string name, int age) { name_ = name; // These are assignments, not initilizations. age_ = age; } private: std::string name_; int age_; };  If you do this, the program will be very slow.When calling the constructor, the program will call the default construtors to initialize the members, and then enter the body of the constructor.</description>
+    </item>
+    
+    <item>
+      <title>More consts enums inlines and less #defines</title>
+      <link>http://zhengyhn.github.io/post/cpp/2013-07-23-more-consts-enums-inlines-and-less-defines/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/cpp/2013-07-23-more-consts-enums-inlines-and-less-defines/</guid>
+      <description>This is an old topic.
+For constants Consider a macro below.
+#define PI 3.14  There are several drawbacks when using a macro.
+ It&amp;rsquo;s hard to debug.As we all know, the macros are resolved by the preprocessor and the compiler know nothing about them.When you get an error when compiling the program, the error message may refer to 3.14 but not PI because PI is not in the symbol table.</description>
+    </item>
+    
+    <item>
+      <title>My C&#43;&#43; coding style</title>
+      <link>http://zhengyhn.github.io/post/cpp/2013-09-25-my-c-plus-plus-coding-style/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/cpp/2013-09-25-my-c-plus-plus-coding-style/</guid>
+      <description>Every programmer has his/her own coding style. Time goes by, and my coding style is changing. There following is my note on c++ coding style. I will explain why I want to coding in that style.
+Why do I care about my coding style so much? Because I am a virgo.
+ Always add a m_ prefix to the members and use this to refer to other member functions in the member function.</description>
+    </item>
+    
+    <item>
+      <title>Postponing definitions instead of preponing</title>
+      <link>http://zhengyhn.github.io/post/cpp/2013-08-11-postponing-definitions-instead-of-preponing/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/cpp/2013-08-11-postponing-definitions-instead-of-preponing/</guid>
+      <description>Prepone definitions? Wrong! Before C99, you must prepone all the variables&amp;rsquo; definitions before any statements. But after C99 was released, you can put a variable&amp;rsquo;s definition in any place as long as before being used. I think this new feature is introduced by learning from C++.
+This makes programer write codes more convenient. But I used to insist the old style. I even teach my students that they should use the old style when I was a TA of the course Programming with C.</description>
+    </item>
+    
+    <item>
+      <title>Ruby-getting started</title>
+      <link>http://zhengyhn.github.io/post/2013-06-30-ruby-getting-started/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/2013-06-30-ruby-getting-started/</guid>
+      <description>Running ruby Interactive In the past, I always tested some ruby statements with irb. Now I can test a small ruby program in the following way.
+[monkey@itlodge octopress]$ ruby str = &amp;quot;abc&amp;quot; puts str Ctrl+d abc  After hit ruby, it allows me to type as many code as possible.Finally, press Ctrl+d will end the input and it will evaluate the code.
+Programs When writing a script, we always use #!</description>
+    </item>
+    
+    <item>
+      <title>Some basic Ruby</title>
+      <link>http://zhengyhn.github.io/post/2013-07-25-some-basic-ruby/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/2013-07-25-some-basic-ruby/</guid>
+      <description>String and name When defining a function, the parentheses are not necessary.So this one
+def say_hello name &amp;quot;Hello &amp;quot; + name end puts say_hello &amp;quot;man&amp;quot;  is the same as this.
+def say_hello(name) &amp;quot;Hello &amp;quot; + name end puts(say_hello(&amp;quot;man&amp;quot;))  However, when there are more than one parameters, it will be difficult to know which argument goes with which method invocation.So it&amp;rsquo;s recommended using parentheses in all but the simplest cases.</description>
+    </item>
+    
+    <item>
+      <title>Some interview questions about array and string</title>
+      <link>http://zhengyhn.github.io/post/cpp/2013-08-25-some-interview-questions-about-array-and-string/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/cpp/2013-08-25-some-interview-questions-about-array-and-string/</guid>
+      <description>Hash Table In C++, the namespacestd::tr1 contains lots of hash tables. We can play with it.
+{% include_code careerup-array/careerup-hash.cpp %}
+Questions 1.1. Implement an algorithm to determine if a string has all unique characters. What if you can not use additional data structures?
+I have come up with 2 methods.
+ Iterate the string and compare each character to other character. This is the common way to solve this problem.</description>
+    </item>
+    
+    <item>
+      <title>Some reviews about C plus plus</title>
+      <link>http://zhengyhn.github.io/post/cpp/2013-07-22-some-reviews-about-c-plus-plus/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/cpp/2013-07-22-some-reviews-about-c-plus-plus/</guid>
+      <description>Declaration and Definition I have already known the difference between declaration and definion, but now I find that my understanding is not complete.
+Declaration just tells the compiler about the name and the type of something.It&amp;rsquo;s very common about the declaration of objects and functions.
+extern int a; int max(int a, int b);  However, I never think about the declaration of class.Recently, I have to view some codes in a large project and I have found many of these declarations.</description>
+    </item>
+    
+    <item>
+      <title>Understanding Encapsulation</title>
+      <link>http://zhengyhn.github.io/post/cpp/2013-08-09-understanding-encapsulation/</link>
+      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/cpp/2013-08-09-understanding-encapsulation/</guid>
+      <description>Once I loved C very much and I thought it&amp;rsquo;s the best programming language in the world. I used to argue that C can be used to implement the object-oriented design with struct. I used to argue that private and public is useless in C++. However, now I know I was wrong.
+Why we need private It&amp;rsquo;s related to a very important concept in C++, that is, encapsulation.
+Encapsulation is not invisibility.</description>
+    </item>
+    
+    <item>
+      <title>elisp笔记：introduction</title>
+      <link>http://zhengyhn.github.io/post/elisp/data_type/</link>
+      <pubDate>Tue, 13 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/elisp/data_type/</guid>
+      <description>lisp历史 原来lisp是list processing language,1950s后期推出，主要为了研究人工智能。 数据类型 概述 每个对象至少属于一种类型 对于打印</description>
+    </item>
+    
+    <item>
+      <title>elisp笔记：运算</title>
+      <link>http://zhengyhn.github.io/post/elisp/arithmetic/</link>
+      <pubDate>Tue, 13 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/elisp/arithmetic/</guid>
+      <description>声明：此文章为学习xahlee 的elisp教程 而写的笔记。 数学计算基础 运算符也是函数 和其它函数式语言一样，elisp中，加减乘除也是一个函数</description>
+    </item>
+    
+    <item>
+      <title>shell 编程！</title>
+      <link>http://zhengyhn.github.io/post/shell/getting.start/</link>
+      <pubDate>Tue, 13 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/shell/getting.start/</guid>
+      <description>引言 我非常欣赏这句话。 没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。 &amp;ndash;Herbert Mayer 写脚本 我之前也写过一点点的bash shell，完全</description>
+    </item>
+    
+    <item>
+      <title>shell基础知识</title>
+      <link>http://zhengyhn.github.io/post/shell/basics/</link>
+      <pubDate>Tue, 13 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/shell/basics/</guid>
+      <description>特殊字符 # 在双引号和单引号里面的#不会被认为是注释开始，经\转义的#不会认为是注释开始。 echo &amp;quot;#这里不是注释&amp;quot; echo &#39;#这里不</description>
+    </item>
+    
+    <item>
+      <title>KMP算法-我的理解</title>
+      <link>http://zhengyhn.github.io/post/algorithm/kmp/</link>
+      <pubDate>Wed, 24 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/algorithm/kmp/</guid>
+      <description>动机 在被各大公司的笔试面试给鄙视之后，我要开始努力了。看了一本叫做 《C/C++面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于</description>
+    </item>
+    
+    <item>
+      <title>程序员面试宝典读书笔记</title>
+      <link>http://zhengyhn.github.io/post/programmer_interview/</link>
+      <pubDate>Wed, 24 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/programmer_interview/</guid>
+      <description>C/C++程序设计 浮点数的存储 有下面的代码： #include &amp;lt;stdio.h&amp;gt; int main(int argc, char *argv[]) { int a; float *b = (float *)&amp;amp;a; *b = 13.0f; printf(&amp;quot;%d\n&amp;quot;, a); printf(&amp;quot;%#x\n&amp;quot;, a); return 0; } 最后的输出会是多少呢？ 答案是： 1095761920 0x41500000 涉及到IEE</description>
+    </item>
+    
+    <item>
+      <title>复习C/C&#43;&#43;</title>
+      <link>http://zhengyhn.github.io/post/clang/exam/</link>
+      <pubDate>Sat, 20 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/exam/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为《C笔试面试宝典》一书的笔记 @&amp;lt;/font&amp;gt; new, delete, malloc, free的关系 new和delete是C++的运算符，new调用构造函数，delete调用析构函</description>
+    </item>
+    
+    <item>
+      <title>项目管理与信息技术环境</title>
+      <link>http://zhengyhn.github.io/post/pm/env.org/</link>
+      <pubDate>Mon, 01 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/pm/env.org/</guid>
+      <description>系统观点 高层管理者和项目经理必须遵循系统哲学，使用系统分析的方法来满足解决问题的需要。 系统管理的三维模型：业务，组织，技术。 组织 项目经理应该</description>
+    </item>
+    
+    <item>
+      <title>linux系统初识</title>
+      <link>http://zhengyhn.github.io/post/linux/intuition.org/</link>
+      <pubDate>Thu, 28 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/linux/intuition.org/</guid>
+      <description>常识 当命令太长时，可以使用反斜杠\来防止按RET执行命令，能在下一行继续输入 可以用分号;来分隔命令，因为可以在同一行输入多个命令 显示日历：c</description>
+    </item>
+    
+    <item>
+      <title>learn python the hard way笔记</title>
+      <link>http://zhengyhn.github.io/post/python/python.org/</link>
+      <pubDate>Mon, 25 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/python/python.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;learn python the hard way&amp;rdquo;一书的笔记 @&amp;lt;/font&amp;gt; 方法 在python交互窗口中，打help()，会进入帮助模式，这里可</description>
+    </item>
+    
+    <item>
+      <title>鸟哥的linux私房菜笔记：linux是什么&amp;主机规划</title>
+      <link>http://zhengyhn.github.io/post/linux/linux.org/</link>
+      <pubDate>Fri, 22 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/linux/linux.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;鸟哥的linux私房菜基础学习篇(第三版)&amp;ldquo;一书的笔记 @&amp;lt;/font&amp;gt; 概念 原来BSD是指Berkeley Software Distribution. System V是AT</description>
+    </item>
+    
+    <item>
+      <title>鸟哥的linux私房菜笔记：计算机概论</title>
+      <link>http://zhengyhn.github.io/post/linux/computer.org/</link>
+      <pubDate>Thu, 21 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/linux/computer.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;鸟哥的linux私房菜基础学习篇(第三版)&amp;ldquo;一书的笔记 @&amp;lt;/font&amp;gt; 计算机常识 原来Eeepc就是现在所说的上网本ne</description>
+    </item>
+    
+    <item>
+      <title>一个带颜色输出的echo</title>
+      <link>http://zhengyhn.github.io/post/echoc/</link>
+      <pubDate>Wed, 20 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/echoc/</guid>
+      <description>动机 为了找到工作，最近需要多写shell了，有时候我很想输出信息的时候有颜色，比如 成功的信息用绿色，错误的信息用红色，去查了一下echo，发</description>
+    </item>
+    
+    <item>
+      <title>带上X光眼镜测试软件</title>
+      <link>http://zhengyhn.github.io/post/test/x_ray.org/</link>
+      <pubDate>Sun, 17 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/test/x_ray.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;software testing&amp;rdquo;一书的读书笔记 @&amp;lt;/font&amp;gt; 动态白盒测试 显然，动态即要运行，白盒即要看到代码。dyn</description>
+    </item>
+    
+    <item>
+      <title>检查代码</title>
+      <link>http://zhengyhn.github.io/post/test/exam_code.org/</link>
+      <pubDate>Sun, 17 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/test/exam_code.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;software testing&amp;rdquo;一书的读书笔记 @&amp;lt;/font&amp;gt; 静态白盒测试：检查设计和代码 formal review 这个过程有4个方面要做：</description>
+    </item>
+    
+    <item>
+      <title>配置测试与兼容性测试</title>
+      <link>http://zhengyhn.github.io/post/test/config_comp.org/</link>
+      <pubDate>Sun, 17 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/test/config_comp.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;software testing&amp;rdquo;一书的读书笔记 @&amp;lt;/font&amp;gt; 配置测试 其实是有关硬件的测试。需要测试的内容： PC类型（</description>
+    </item>
+    
+    <item>
+      <title>数字的算法</title>
+      <link>http://zhengyhn.github.io/post/algorithm/number/</link>
+      <pubDate>Wed, 13 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/algorithm/number/</guid>
+      <description>基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：</description>
+    </item>
+    
+    <item>
+      <title>简介</title>
+      <link>http://zhengyhn.github.io/post/pm/intro.org/</link>
+      <pubDate>Wed, 13 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/pm/intro.org/</guid>
+      <description>项目 什么是项目 一个项目，就是为了创造一个独特的产品、服务或结果的临时性努力。 A project is a temporary endeavor undertaken to create a unique product, service or result. 而IT项目则是使用硬件、软件或网络</description>
+    </item>
+    
+    <item>
+      <title>比较高效的整数求幂法</title>
+      <link>http://zhengyhn.github.io/post/algorithm/quick.exp/</link>
+      <pubDate>Mon, 11 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/algorithm/quick.exp/</guid>
+      <description>最近在看快速求fibonaci数列的方法，需要用到快速求幂法，于是参考了这篇文章 ， 做下笔记。 最直观的方法 如果叫我求一个整数的n次幂，我要么用</description>
+    </item>
+    
+    <item>
+      <title>高阶函数</title>
+      <link>http://zhengyhn.github.io/post/haskell/high.order.function.org/</link>
+      <pubDate>Mon, 11 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/haskell/high.order.function.org/</guid>
+      <description>curried function 我还是直接翻译成“用咖啡煮的函数吧”。 有一个有趣的现象： Prelude&amp;gt; max 1 2 2 Prelude&amp;gt; (max 1) 2 2 我刚开始觉得这太不可思议了，max 1居然可以执行，而且它的返</description>
+    </item>
+    
+    <item>
+      <title>tcpl读书笔记：函数与程序结构化</title>
+      <link>http://zhengyhn.github.io/post/clang/function.org/</link>
+      <pubDate>Sun, 10 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/function.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为the c programming language一书的笔记 @&amp;lt;/font&amp;gt; exercise 4-2 扩展atof函数，支持科学计数法。下面是我写的代码，未完全测试正确。 #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;string.h&amp;gt; #include &amp;lt;math.h&amp;gt; int isBlank(char c) {</description>
+    </item>
+    
+    <item>
+      <title>tcpl读书笔记：指针和数组</title>
+      <link>http://zhengyhn.github.io/post/clang/pointer_array.org/</link>
+      <pubDate>Sun, 10 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/pointer_array.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为the c programming language一书的笔记 @&amp;lt;/font&amp;gt; 多维数组 对于一个二维数组，如果要作为函数参数来传递，必须要包含列数，行数可加可不加。 因为，传</description>
+    </item>
+    
+    <item>
+      <title>tcpl读书笔记：简介与基础</title>
+      <link>http://zhengyhn.github.io/post/clang/introduction.org/</link>
+      <pubDate>Sun, 10 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/introduction.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为the c programming language一书的笔记 @&amp;lt;/font&amp;gt; 铭记c语言之父 不要忘记他们的名字，也不要写错他们的名字，他们是： Brian W. Kernighan Dennis M. Ritchie 简介 历史 c语言受</description>
+    </item>
+    
+    <item>
+      <title>tcpl读书笔记：类型与表达式</title>
+      <link>http://zhengyhn.github.io/post/clang/type_op_exp.org/</link>
+      <pubDate>Sun, 10 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/type_op_exp.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为the c programming language一书的笔记 @&amp;lt;/font&amp;gt; 数据类型和大小 有关short,int,long的大小。 它们的大小由编译器决定，但是有一个规定</description>
+    </item>
+    
+    <item>
+      <title>tcpl读书笔记：结构体</title>
+      <link>http://zhengyhn.github.io/post/clang/structure.org/</link>
+      <pubDate>Sun, 10 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/structure.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为the c programming language一书的笔记 @&amp;lt;/font&amp;gt; 基础 原来可以这样初始化： struct point { int x; int y; }; struct maxpt = { 300, 200 }; 这样就定义了一个坐标为(300, 200</description>
+    </item>
+    
+    <item>
+      <title>tcpl读书笔记：输入和输出</title>
+      <link>http://zhengyhn.github.io/post/clang/io.org/</link>
+      <pubDate>Sun, 10 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/io.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为the c programming language一书的笔记 @&amp;lt;/font&amp;gt; 错误处理——stderr and exit 为什么要有stderr呢？ 当我们用到屏幕的时候，如果出错了，可以</description>
+    </item>
+    
+    <item>
+      <title>带上眼罩测试软件</title>
+      <link>http://zhengyhn.github.io/post/test/blinder.org/</link>
+      <pubDate>Sun, 10 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/test/blinder.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;software testing&amp;rdquo;一书的读书笔记 @&amp;lt;/font&amp;gt; 动态黑盒测试 动态，因为运行程序来测试。黑盒，因为看不到代</description>
+    </item>
+    
+    <item>
+      <title>递归</title>
+      <link>http://zhengyhn.github.io/post/haskell/recursion.org/</link>
+      <pubDate>Sun, 10 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/haskell/recursion.org/</guid>
+      <description>一些基本的递归函数 在haskell中，没有循环，有的只是函数，要完成一些事情，只能使用递归来做，而且 完成得比较好。看下面的求最大值函数： -- function</description>
+    </item>
+    
+    <item>
+      <title>C语言实现的矩阵类</title>
+      <link>http://zhengyhn.github.io/post/clang/matrix/</link>
+      <pubDate>Wed, 06 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/matrix/</guid>
+      <description>随着学习的深入，数学是必不可少的，最近复习到矩阵，于是用我最喜欢的C语言写 了一个矩阵类，使用面向对象的方法，只实现了简单的操作:新建，删除，</description>
+    </item>
+    
+    <item>
+      <title>函数中的语法</title>
+      <link>http://zhengyhn.github.io/post/haskell/function.org/</link>
+      <pubDate>Wed, 06 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/haskell/function.org/</guid>
+      <description>模式匹配(pattern matching) 这里的模式匹配有点像switch&amp;hellip;case&amp;hellip;下面的函数判断传入的参数是不是7 lucky :: (Integral a) =&amp;gt;</description>
+    </item>
+    
+    <item>
+      <title>如何成为一个黑客</title>
+      <link>http://zhengyhn.github.io/post/how-to-become-a-hacker/</link>
+      <pubDate>Mon, 04 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/how-to-become-a-hacker/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;how to become a hacker&amp;rdquo;一书的笔记 @&amp;lt;/font&amp;gt; 什么是一个黑客 有一个社区，里面有共享的文化，有顶级的编程高手，有网</description>
+    </item>
+    
+    <item>
+      <title>开幕</title>
+      <link>http://zhengyhn.github.io/post/algorithm/prologue/</link>
+      <pubDate>Sun, 03 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/algorithm/prologue/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;Algorithms&amp;rdquo;一书的笔记 @&amp;lt;/font&amp;gt; fibonacci 书上给出了另外一种我想不到的解法： #include &amp;lt;stdio.h&amp;gt; #define MAXN 100 int fib[MAXN]; int get_fib(int num); int main(int argc, char *argv[]) { printf(&amp;quot;%d\n&amp;quot;,</description>
+    </item>
+    
+    <item>
+      <title>检查产品说明</title>
+      <link>http://zhengyhn.github.io/post/test/specification.org/</link>
+      <pubDate>Sun, 03 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/test/specification.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;software testing&amp;rdquo;一书的读书笔记 @&amp;lt;/font&amp;gt; 原来在项目经理写好产品说明书，软件测试师就要开始工作，检</description>
+    </item>
+    
+    <item>
+      <title>个人的成功——从依赖到独立</title>
+      <link>http://zhengyhn.github.io/post/sevenhabbits/personal_success.org/</link>
+      <pubDate>Sat, 02 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/sevenhabbits/personal_success.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为《高效能人士的七个习惯》一书的笔记 @&amp;lt;/font&amp;gt; 掌握“选择的自由”——操之在我的力量 人有“选择的自由”，这种自由来自人类特有的四种天赋： 自我意</description>
+    </item>
+    
+    <item>
+      <title>人际关系的成功——从独立到互赖</title>
+      <link>http://zhengyhn.github.io/post/sevenhabbits/relationship_success.org/</link>
+      <pubDate>Sat, 02 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/sevenhabbits/relationship_success.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为《高效能人士的七个习惯》一书的笔记 @&amp;lt;/font&amp;gt; 你不是一座孤岛 开一个感谢账户，存入六种感情存款： 了解别人 注意小节 信守承诺 阐明期望 诚恳正直 勇于道</description>
+    </item>
+    
+    <item>
+      <title>软件测试的现状</title>
+      <link>http://zhengyhn.github.io/post/test/reality.org/</link>
+      <pubDate>Sat, 02 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/test/reality.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;software testing&amp;rdquo;一书的读书笔记 @&amp;lt;/font&amp;gt; 测试公理 不可能完整地测试一个程序 原因有： 可能的输入是巨大</description>
+    </item>
+    
+    <item>
+      <title>重新探索自我</title>
+      <link>http://zhengyhn.github.io/post/sevenhabbits/review_myself.org/</link>
+      <pubDate>Sat, 02 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/sevenhabbits/review_myself.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为《高效能人士的七个习惯》一书的笔记 @&amp;lt;/font&amp;gt; 由内而外全面造就自己 引言 你希望在工作上享有更多自主吗 那么先做个更负责尽职的员工吧 你希望获得信任</description>
+    </item>
+    
+    <item>
+      <title>c陷井和缺陷</title>
+      <link>http://zhengyhn.github.io/post/clang/c_traps_pitfalls/</link>
+      <pubDate>Fri, 01 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/c_traps_pitfalls/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;c traps and pitfalls&amp;rdquo;一书的笔记 @&amp;lt;/font&amp;gt; 词法陷井 看下面的代码： y = x/*p; /* p points to the divisor */ 本意是x除以p指向的变量，</description>
+    </item>
+    
+    <item>
+      <title>软件测试读书笔记：软件开发过程</title>
+      <link>http://zhengyhn.github.io/post/test/dev_process.org/</link>
+      <pubDate>Fri, 01 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/test/dev_process.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;software testing&amp;rdquo;一书的读书笔记 @&amp;lt;/font&amp;gt; 产品的组成部分 用户需求 产品说明书 进度表 设计文档 架构 数据流</description>
+    </item>
+    
+    <item>
+      <title>软件测试读书笔记：软件测试背景</title>
+      <link>http://zhengyhn.github.io/post/test/stbg.org/</link>
+      <pubDate>Fri, 01 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/test/stbg.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;software testing&amp;rdquo;一书的读书笔记 @&amp;lt;/font&amp;gt; 什么是bug 当下面5种情况中的一种出现时，说明有bug了</description>
+    </item>
+    
+    <item>
+      <title>linux系统编程</title>
+      <link>http://zhengyhn.github.io/post/clang/linux.org/</link>
+      <pubDate>Wed, 27 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/linux.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;linux c编程一站式学习&amp;rdquo;一书的笔记 @&amp;lt;/font&amp;gt; 文件与I/O 再来一个hello world 我也来写一段汇编的hello world .data</description>
+    </item>
+    
+    <item>
+      <title>gtk, widget</title>
+      <link>http://zhengyhn.github.io/post/gtk/base/</link>
+      <pubDate>Fri, 22 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/gtk/base/</guid>
+      <description>看下面一个装载widget的程序： #include &amp;lt;gtk/gtk.h&amp;gt; #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; #include &amp;lt;string.h&amp;gt; //macros #define BORDER_WIDTH 10 //global variables GtkWidget *win; GtkWidget *btn; GtkWidget *top_box; GtkWidget *separator; GtkWidget *bottom_box; GtkWidget *label; GtkWidget *quitbox; //functions gint delete_event(GtkWidget *widget, GdkEvent *event, gpointer data); void make_box(GtkWidget *parent, gboolean homogeneous, gint spacing, gboolean expand, gboolean fill, guint padding); void make_btn(GtkWidget *box, GtkWidget</description>
+    </item>
+    
+    <item>
+      <title>gtk, introduction</title>
+      <link>http://zhengyhn.github.io/post/gtk/intro/</link>
+      <pubDate>Thu, 21 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/gtk/intro/</guid>
+      <description>简介 GTK(GIMP ToolKit)，是用于构建GUI的库来的。取这个名字，是因为GTK是用于开发GIMP (GNU image manipulation program)的，现在也用来开发GNOM</description>
+    </item>
+    
+    <item>
+      <title>types and typeclasses</title>
+      <link>http://zhengyhn.github.io/post/haskell/types.org/</link>
+      <pubDate>Mon, 18 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/haskell/types.org/</guid>
+      <description>概述 haskell有类型推理机制，如果我们写一个数字，我们不用告诉编译器它是一个数字， 编译器能够推理出它是一个数字。 使用:t命令可以查看一个</description>
+    </item>
+    
+    <item>
+      <title>Linux c编程一站式学习笔记：C语言本质</title>
+      <link>http://zhengyhn.github.io/post/clang/real.org/</link>
+      <pubDate>Sat, 16 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/real.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;linux c编程一站式学习&amp;rdquo;一书的笔记 @&amp;lt;/font&amp;gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以</description>
+    </item>
+    
+    <item>
+      <title>introduction</title>
+      <link>http://zhengyhn.github.io/post/haskell/intro.org/</link>
+      <pubDate>Sat, 16 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/haskell/intro.org/</guid>
+      <description>what is haskell haskell是一种纯粹的函数式编程语言 没有副作用 一种懒惰的语言，只有当要显示结果的时候才执行函数 静态类型化，不用指定类型，编译器能自</description>
+    </item>
+    
+    <item>
+      <title>Linux c编程一站式学习笔记：C语言基础</title>
+      <link>http://zhengyhn.github.io/post/clang/overview.org/</link>
+      <pubDate>Wed, 13 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/overview.org/</guid>
+      <description>@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;linux c编程一站式学习&amp;rdquo;一书的笔记 @&amp;lt;/font&amp;gt; 程序和编程语言 平台这个词有很多说法，可以指计算机体系结构，也可以</description>
     </item>
     
   </channel>
