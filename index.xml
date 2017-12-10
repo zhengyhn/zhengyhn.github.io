@@ -6,8 +6,116 @@
     <description>Recent content on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 10 Dec 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://zhengyhn.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>maxiumn-subarray 和最大的子数组</title>
+      <link>http://zhengyhn.github.io/post/leetcode/maxiumn-subarray/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/leetcode/maxiumn-subarray/</guid>
+      <description>
+
+&lt;h4 id=&#34;题目&#34;&gt;题目&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
+
+For example, given the array [-2, 1, -3, 4, -1, 2, 1, -5, 4], 
+the contiguous subarray [4, -1, 2, 1] has the largest sum = 6.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;思路一&#34;&gt;思路一&lt;/h4&gt;
+
+&lt;p&gt;首先，可以直接两重循环，找到所有的子数组，然后计算出来和最大的那个，时间复杂度为O(n)，空间复杂度为O(1)。代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    int maxSubArray(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+      if (nums.size() == 1) {
+        return nums[0];
+      }
+      int result = -pow(2, 31);
+      for (int i = 0; i &amp;lt; nums.size(); ++i) {
+        int sum = 0;
+        for (int j = i + 1; j &amp;lt; nums.size(); ++j) {
+          sum += nums[j];
+          if (sum &amp;gt; result) {
+            result = sum;
+          }
+        }
+      }
+      return result; 
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;思路二&#34;&gt;思路二&lt;/h4&gt;
+
+&lt;p&gt;举例子说明：&lt;/p&gt;
+
+&lt;p&gt;题目要求数组[-2, 1, -3, 4, -1, 2, 1, -5, 4]的任意连续子数组中和最大的那个连续子数组的和。&lt;/p&gt;
+
+&lt;p&gt;我们可以将该数组拆分成下面的数组：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[-2, 1, -3, 4, -1, 2, 1, -5, 4]&lt;/li&gt;
+&lt;li&gt;[-2, 1, -3, 4, -1, 2, 1, -5]&lt;/li&gt;
+&lt;li&gt;[-2, 1, -3, 4, -1, 2, 1]&lt;/li&gt;
+&lt;li&gt;[-2, 1, -3, 4, -1, 2]&lt;/li&gt;
+&lt;li&gt;[-2, 1, -3, 4, -1]&lt;/li&gt;
+&lt;li&gt;[-2, 1, -3, 4]&lt;/li&gt;
+&lt;li&gt;[-2, 1, -3]&lt;/li&gt;
+&lt;li&gt;[-2, 1]&lt;/li&gt;
+&lt;li&gt;[-2]&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;对于这里的每个数组，可以求出来它的每个以最后一个元素为结束的子数组，看哪一个子数组的和最大。&lt;/p&gt;
+
+&lt;p&gt;例如：&lt;/p&gt;
+
+&lt;p&gt;[-2, 1, -3, 4, -1, 2, 1], 它的以最后一个元素为结束的子数组有[-2, 1, -3, 4, -1, 2, 1], [1, -3, 4, -1, 2, 1], [-3, 4, -1, 2, 1], [4, -1, 2, 1], [-1, 2, 1], [2, 1], [1]，和最大的是[4, -1, 2, 1], 和为6。&lt;/p&gt;
+
+&lt;p&gt;[-2, 1, -3, 4, -1, 2], 它的以最后一个元素为结束的子数组有[-2, 1, -3, 4, -1, 2], [1, -3, 4, -1, 2], [-3, 4, -1, 2], [4, -1, 2], [-1, 2], [2], 和最大的是[4, -1, 2], 和为5。&lt;/p&gt;
+
+&lt;p&gt;相比前面的思路一，我们相当于倒序遍历了所有的子数组，但是, 我们并不需要O(n^2)的时间复杂度，因为很多重复的计算可以利用，只需要遍历一次，时间复杂度为O(n)，而重复的计算，可以用变量记下来, 空间复杂度为O(n)。&lt;/p&gt;
+
+&lt;p&gt;现在一步一步来求各个子数组array中, 最大子数组的和max, 要求array的子数组必须以array的最后一个元素结束&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;max([-2]), 明显为-2，子数组为[-2]&lt;/li&gt;
+&lt;li&gt;max([-2, 1]), 由于-2小于0，如果子数组以-2作为起点，肯定只会让和更小，所以应该以1作为起点，这里明显max([-2, 1]) = 1, 子数组为[1]&lt;/li&gt;
+&lt;li&gt;max([-2, 1, -3])，由于上面已经得出1作为起点更优，而1大于0，所以加上-3之后，目前max([-2, 1, -3]) = 1 + -3 = -2, 子数组为[1, -3]&lt;/li&gt;
+&lt;li&gt;max([-2, 1, -3, 4])，由于上面计算得到的最优值为-2，小于0，如果子数组以前面得出的结论作为起点，肯定只会让和更小，所以应该从4作为起点，目前max([-2, 1, -3, 4]) = 4, 子数组为[4]&lt;/li&gt;
+&lt;li&gt;max([-2, 1, -3, 4, -1])，由于上面计算得到的最优值为4，大于0，所以加上-1之后，目前max([-2, 1, -3, 4, -1]) = 4 + -1 = 3, 子数组为[4, -1]&lt;/li&gt;
+&lt;li&gt;max([-2, 1, -3, 4, -1, 2])，由于上面计算得到的最优值为3，大于0，所以加上2之后，目前max([-2, 1, -3, 4, -1, 2]) = 3 + 2 = 5, 子数组为[4, -1, 2]&lt;/li&gt;
+&lt;li&gt;max([-2, 1, -3, 4, -1, 2, 1])，由于上面计算得到的最优值为5，大于0，所以加上1之后，目前max([-2, 1, -3, 4, -1, 2, 1]) = 5 + 1 = 6, 子数组为[4, -1, 2, 1]&lt;/li&gt;
+&lt;li&gt;max([-2, 1, -3, 4, -1, 2, 1, -5])，由于上面计算得到的最优值为6，大于0，所以加上-5之后，目前max([-2, 1, -3, 4, -1, 2, 1, -5]) = 6 + -5 = 1, 子数组为[4, -1, 2, 1, -5]&lt;/li&gt;
+&lt;li&gt;max([-2, 1, -3, 4, -1, 2, 1, -5, 4])，由于上面计算得到的最优值为1，大于0，所以加上4之后，目前max([-2, 1, -3, 4, -1, 2, 1, -5, 4]) = 1 + 4 = 5, 子数组为[4, -1, 2, 1, -5, 4]&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这个时候，我们再来看各个子数组的最大子数组的和，分别是1, -2, 3, 5, 6, 1, 5，最大的是6，对应的子数组是[4, -1, 2, 1], 就是题目的答案。&lt;/p&gt;
+
+&lt;p&gt;代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    int maxSubArray(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+      int result = nums[0];
+      int *max = new int[nums.size()];
+      max[0] = nums[0];
+      for (int i = 1; i &amp;lt; nums.size(); ++i) {
+        if (max[i - 1] &amp;gt; 0) {
+          max[i] = max[i - 1] + nums[i];
+        } else {
+          max[i] = nums[i];
+        }
+        if (max[i] &amp;gt; result) {
+          result = max[i];
+        }
+      }
+      return result; 
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;由于我们每一步都在根据上一步的结果做决策和规划，所以这叫做&lt;strong&gt;动态规则&lt;/strong&gt; 。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>elisp笔记：introduction</title>
@@ -2371,159 +2479,6 @@ pass the parameters by reference-to-const, since &lt;strong&gt;the compiler will
 &lt;strong&gt;put the pointer in the register!&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Finally, just remember, &lt;strong&gt;always pass the parameters by reference-to-const&lt;/strong&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Const anyway!</title>
-      <link>http://zhengyhn.github.io/post/cpp/2013-07-24-const-anyway/</link>
-      <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/cpp/2013-07-24-const-anyway/</guid>
-      <description>
-
-&lt;h2 id=&#34;const-pointer&#34;&gt;Const pointer&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;const&lt;/code&gt; is versatile.I am always confused by the following syntax.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;const char *str = &amp;quot;Hello&amp;quot;;    // const data, non-const pointer
-char * const str = &amp;quot;Hello&amp;quot;;    // const pointer, non-const data
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now there is a tip to remember it.&lt;/p&gt;
-
-&lt;p&gt;If &lt;code&gt;const&lt;/code&gt; appears to the right of the asterisk, the pointer is
-constant.If &lt;code&gt;const&lt;/code&gt; appears to the left of the asterisk, the data
-is constant.&lt;/p&gt;
-
-&lt;p&gt;So the following two statements are the same.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;const char *str = &amp;quot;Hello&amp;quot;;
-char const *str = &amp;quot;Hello&amp;quot;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In STL, &lt;code&gt;iterator&lt;/code&gt; is just like a &lt;code&gt;T *&lt;/code&gt; pointer.
-* &lt;code&gt;const std::vector&amp;lt;int&amp;gt;::iterator iter&lt;/code&gt; is just like &lt;code&gt;T * const iter&lt;/code&gt;.
-* &lt;code&gt;std::vector&amp;lt;int&amp;gt;::const_iterator cIter&lt;/code&gt; is just like &lt;code&gt;const T *iter&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;So, in a loop, if we don&amp;rsquo;t want to modify the data, use &lt;code&gt;const_iterator&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;const-member-function&#34;&gt;Const member function&lt;/h2&gt;
-
-&lt;p&gt;Sometimes, we have two version member functions.One is const and the other is
-not.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;string&amp;gt;
-#include &amp;lt;iostream&amp;gt;
-
-class Str {
-public:
-    Str(std::string str)
-    :data(str)
-    { }
-
-    const char&amp;amp;
-    operator[](std::size_t pos) const    // Const objects use this
-    {
-        return data[pos];
-    }
-
-    char&amp;amp;
-    operator[](std::size_t pos)    // Non-const objects use this
-    {
-        return data[pos];
-    }
-
-private:
-    std::string data;
-};
-
-void
-print(const Str&amp;amp; const_str)
-{
-    std::cout &amp;lt;&amp;lt; const_str[1] &amp;lt;&amp;lt; std::endl;
-}
-
-int
-main(int argc, char **argv)
-{
-    Str nonconst_str(&amp;quot;abc&amp;quot;);
-    std::cout &amp;lt;&amp;lt; nonconst_str[1] &amp;lt;&amp;lt; std::endl;
-    nonconst_str[1] = &#39;a&#39;;
-
-    print(nonconst_str);
-
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In &lt;code&gt;main&lt;/code&gt;, &lt;code&gt;nonconst_str&lt;/code&gt; is a non-const object and it can be modified
-by &lt;code&gt;[]&lt;/code&gt;.In &lt;code&gt;print&lt;/code&gt;, &lt;code&gt;const Str&amp;amp; const_str&lt;/code&gt; means
-&lt;strong&gt;pass parameters by reference-to-const&lt;/strong&gt;, so &lt;code&gt;const_str&lt;/code&gt; is a const object.&lt;/p&gt;
-
-&lt;p&gt;We observe that the &lt;code&gt;const&lt;/code&gt; keyword is after the closing parenthesis of the
-argument list.This means the function is a const member function.&lt;/p&gt;
-
-&lt;p&gt;Reference to &lt;a href=&#34;http://msdn.microsoft.com/en-us/library/6ke686zh.aspx&#34;&gt;MSDN&lt;/a&gt;,
-&lt;strong&gt;A constant member function cannot modify any non-static members or call any&lt;/strong&gt;
-&lt;strong&gt;member functions that aren&amp;rsquo;t constant.&lt;/strong&gt;That is, the cons member function
-can&amp;rsquo;t modify the object that it is called.&lt;/p&gt;
-
-&lt;p&gt;The above philosophy is called &lt;strong&gt;bitwise constness&lt;/strong&gt; or &lt;strong&gt;physical constness&lt;/strong&gt;.
-There are another philosophy called &lt;strong&gt;logical constness&lt;/strong&gt;.Adherents to this
-philosophy argue that &lt;strong&gt;a const member function might modify some of the bits&lt;/strong&gt;
-&lt;strong&gt;in the object on which it&amp;rsquo;s invoked, but only in ways that clients cannot&lt;/strong&gt;
-&lt;strong&gt;detect&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;For example, if we add a new member function &lt;code&gt;length()&lt;/code&gt; to the above class.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    std::size_t
-    length() const
-    {
-        len = data.length();
-
-        return len;
-    }
-
-private:
-    std::string data;
-    std::size_t len;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This will generate the following compiled error.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;test.cpp:25:6: error: assignment of member ‘Str::len’ in read-only object
-  len = data.length();
-      ^
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Since member variable &lt;code&gt;len&lt;/code&gt; has been modified and the compiler use the
-&lt;strong&gt;bitwise const&lt;/strong&gt;, error produces.However, return and object&amp;rsquo;s length seems
-not modify the object it is called.&lt;/p&gt;
-
-&lt;p&gt;To solved this problem, use the &lt;strong&gt;mutable&lt;/strong&gt; keyword.It can free non-static
-data members from bitwise constness constraints.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mutable std::size_t len;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I beleive in code reusing forever!In the above example, the duplicate code
-in the two &lt;code&gt;operator[]&lt;/code&gt; functions can be merged into one.&lt;/p&gt;
-
-&lt;p&gt;Only then non-const function should be modified.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;char&amp;amp;
-operator[](std::size_t pos)    // Non-const objects use this
-{
-    return const_cast&amp;lt;char&amp;amp;&amp;gt;(static_cast&amp;lt;const Str&amp;amp;&amp;gt;(*this)[pos]);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;static_cast&amp;lt;const Str&amp;amp;&amp;gt;&lt;/code&gt;will make &lt;code&gt;*this&lt;/code&gt;const and then it can call
-&lt;code&gt;operator[]&lt;/code&gt;.Finally, &lt;code&gt;const_cast&lt;/code&gt; is used the free the const constraint.&lt;/p&gt;
-
-&lt;p&gt;This is all about &lt;code&gt;const&lt;/code&gt;, it&amp;rsquo;s an amazing keyword.For readable and efficient
-code, use it anyway.&lt;/p&gt;
 </description>
     </item>
     

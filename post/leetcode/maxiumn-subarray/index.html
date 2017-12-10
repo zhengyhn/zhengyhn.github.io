@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> maxiumn-subarray 和最大的子数组 &middot; Hank&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/slim.css">
+<link rel="stylesheet" href="http://zhengyhn.github.io//css/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="Hank&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://zhengyhn.github.io/">Hank&#39;s Blog</a></h1>
+  <p class="site-tagline">坚持做一件事，然后静静地等待时间的回报</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+       
+	  <li class="spacer">&ac;</li>
+
+      <li><a href="https://github.com/zhengyhn">Github</a></li>  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://zhengyhn.github.io/post/leetcode/maxiumn-subarray/">maxiumn-subarray 和最大的子数组</a></h2>
+          <span class="post-date">Dec 10, 2017 </span>
+          <div class="post-content">
+            
+
+<h4 id="题目">题目</h4>
+
+<pre><code>Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
+
+For example, given the array [-2, 1, -3, 4, -1, 2, 1, -5, 4], 
+the contiguous subarray [4, -1, 2, 1] has the largest sum = 6.
+</code></pre>
+
+<h4 id="思路一">思路一</h4>
+
+<p>首先，可以直接两重循环，找到所有的子数组，然后计算出来和最大的那个，时间复杂度为O(n)，空间复杂度为O(1)。代码如下：</p>
+
+<pre><code>    int maxSubArray(vector&lt;int&gt;&amp; nums) {
+      if (nums.size() == 1) {
+        return nums[0];
+      }
+      int result = -pow(2, 31);
+      for (int i = 0; i &lt; nums.size(); ++i) {
+        int sum = 0;
+        for (int j = i + 1; j &lt; nums.size(); ++j) {
+          sum += nums[j];
+          if (sum &gt; result) {
+            result = sum;
+          }
+        }
+      }
+      return result; 
+    }
+</code></pre>
+
+<h4 id="思路二">思路二</h4>
+
+<p>举例子说明：</p>
+
+<p>题目要求数组[-2, 1, -3, 4, -1, 2, 1, -5, 4]的任意连续子数组中和最大的那个连续子数组的和。</p>
+
+<p>我们可以将该数组拆分成下面的数组：</p>
+
+<ul>
+<li>[-2, 1, -3, 4, -1, 2, 1, -5, 4]</li>
+<li>[-2, 1, -3, 4, -1, 2, 1, -5]</li>
+<li>[-2, 1, -3, 4, -1, 2, 1]</li>
+<li>[-2, 1, -3, 4, -1, 2]</li>
+<li>[-2, 1, -3, 4, -1]</li>
+<li>[-2, 1, -3, 4]</li>
+<li>[-2, 1, -3]</li>
+<li>[-2, 1]</li>
+<li>[-2]</li>
+</ul>
+
+<p>对于这里的每个数组，可以求出来它的每个以最后一个元素为结束的子数组，看哪一个子数组的和最大。</p>
+
+<p>例如：</p>
+
+<p>[-2, 1, -3, 4, -1, 2, 1], 它的以最后一个元素为结束的子数组有[-2, 1, -3, 4, -1, 2, 1], [1, -3, 4, -1, 2, 1], [-3, 4, -1, 2, 1], [4, -1, 2, 1], [-1, 2, 1], [2, 1], [1]，和最大的是[4, -1, 2, 1], 和为6。</p>
+
+<p>[-2, 1, -3, 4, -1, 2], 它的以最后一个元素为结束的子数组有[-2, 1, -3, 4, -1, 2], [1, -3, 4, -1, 2], [-3, 4, -1, 2], [4, -1, 2], [-1, 2], [2], 和最大的是[4, -1, 2], 和为5。</p>
+
+<p>相比前面的思路一，我们相当于倒序遍历了所有的子数组，但是, 我们并不需要O(n^2)的时间复杂度，因为很多重复的计算可以利用，只需要遍历一次，时间复杂度为O(n)，而重复的计算，可以用变量记下来, 空间复杂度为O(n)。</p>
+
+<p>现在一步一步来求各个子数组array中, 最大子数组的和max, 要求array的子数组必须以array的最后一个元素结束</p>
+
+<ul>
+<li>max([-2]), 明显为-2，子数组为[-2]</li>
+<li>max([-2, 1]), 由于-2小于0，如果子数组以-2作为起点，肯定只会让和更小，所以应该以1作为起点，这里明显max([-2, 1]) = 1, 子数组为[1]</li>
+<li>max([-2, 1, -3])，由于上面已经得出1作为起点更优，而1大于0，所以加上-3之后，目前max([-2, 1, -3]) = 1 + -3 = -2, 子数组为[1, -3]</li>
+<li>max([-2, 1, -3, 4])，由于上面计算得到的最优值为-2，小于0，如果子数组以前面得出的结论作为起点，肯定只会让和更小，所以应该从4作为起点，目前max([-2, 1, -3, 4]) = 4, 子数组为[4]</li>
+<li>max([-2, 1, -3, 4, -1])，由于上面计算得到的最优值为4，大于0，所以加上-1之后，目前max([-2, 1, -3, 4, -1]) = 4 + -1 = 3, 子数组为[4, -1]</li>
+<li>max([-2, 1, -3, 4, -1, 2])，由于上面计算得到的最优值为3，大于0，所以加上2之后，目前max([-2, 1, -3, 4, -1, 2]) = 3 + 2 = 5, 子数组为[4, -1, 2]</li>
+<li>max([-2, 1, -3, 4, -1, 2, 1])，由于上面计算得到的最优值为5，大于0，所以加上1之后，目前max([-2, 1, -3, 4, -1, 2, 1]) = 5 + 1 = 6, 子数组为[4, -1, 2, 1]</li>
+<li>max([-2, 1, -3, 4, -1, 2, 1, -5])，由于上面计算得到的最优值为6，大于0，所以加上-5之后，目前max([-2, 1, -3, 4, -1, 2, 1, -5]) = 6 + -5 = 1, 子数组为[4, -1, 2, 1, -5]</li>
+<li>max([-2, 1, -3, 4, -1, 2, 1, -5, 4])，由于上面计算得到的最优值为1，大于0，所以加上4之后，目前max([-2, 1, -3, 4, -1, 2, 1, -5, 4]) = 1 + 4 = 5, 子数组为[4, -1, 2, 1, -5, 4]</li>
+</ul>
+
+<p>这个时候，我们再来看各个子数组的最大子数组的和，分别是1, -2, 3, 5, 6, 1, 5，最大的是6，对应的子数组是[4, -1, 2, 1], 就是题目的答案。</p>
+
+<p>代码如下：</p>
+
+<pre><code>    int maxSubArray(vector&lt;int&gt;&amp; nums) {
+      int result = nums[0];
+      int *max = new int[nums.size()];
+      max[0] = nums[0];
+      for (int i = 1; i &lt; nums.size(); ++i) {
+        if (max[i - 1] &gt; 0) {
+          max[i] = max[i - 1] + nums[i];
+        } else {
+          max[i] = nums[i];
+        }
+        if (max[i] &gt; result) {
+          result = max[i];
+        }
+      }
+      return result; 
+    }
+</code></pre>
+
+<p>由于我们每一步都在根据上一步的结果做决策和规划，所以这叫做<strong>动态规则</strong> 。</p>
+
+          </div>
+        </div>
+        <div class="pagination"> 
+          <a class="btn next " href="http://zhengyhn.github.io/post/elisp/data_type/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+</div>
+
+  </div>
+  <script src="http://zhengyhn.github.io//js/slim.js"></script>
+  <script src="http://zhengyhn.github.io//js/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>
