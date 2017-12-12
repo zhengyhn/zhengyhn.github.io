@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Leetcode on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/categories/leetcode/</link>
+    <description>Recent content in Leetcode on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 12 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://zhengyhn.github.io/categories/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>merge-two-binary-trees 合并二叉树</title>
+      <link>http://zhengyhn.github.io/post/leetcode/merge-two-binary-trees/</link>
+      <pubDate>Tue, 12 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/leetcode/merge-two-binary-trees/</guid>
+      <description>题目 Given two binary trees and imagine that when you put one of them to cover the other, some nodes of the two trees are overlapped while the others are not. You need to merge them into a new binary tree. The merge rule is that if two nodes overlap, then sum node values up as the new value of the merged node. Otherwise, the NOT null node will</description>
+    </item>
+    
+    <item>
+      <title>maxiumn-subarray 和最大的子数组</title>
+      <link>http://zhengyhn.github.io/post/leetcode/maxiumn-subarray/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/leetcode/maxiumn-subarray/</guid>
+      <description>题目 Find the contiguous subarray within an array (containing at least one number) which has the largest sum. For example, given the array [-2, 1, -3, 4, -1, 2, 1, -5, 4], the contiguous subarray [4, -1, 2, 1] has the largest sum = 6. 思路一 首先，可以直接两重循环，找到所有的子数组，</description>
+    </item>
+    
+  </channel>
+</rss>

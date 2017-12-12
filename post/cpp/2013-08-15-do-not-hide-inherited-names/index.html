@@ -21,7 +21,7 @@
 It seems perfect, but it&amp;rsquo;s a pitfall of C&#43;&#43;. Consider the following example.
 #include &amp;lt;cstdio&amp;gt; #include &amp;lt;iostream&amp;gt; class Person { public: explicit Person() { } ~Person() { } void sleep() const { printf(&amp;quot;Person sleep\n&amp;quot;); } void sleep(const int sec) const { printf(&amp;quot;Person sleep %d s\n&amp;quot;, sec); } private: Person(const Person&amp;amp;); const Person&amp;amp; operator=(const Person&amp;amp;); }; class Student:public Person { public: explicit Student() { } ~Person() { } void sleep() const { printf(&amp;quot;Student sleep\n&amp;quot;); } private: Student(const Student&amp;amp;); const Student&amp;amp; operator=(const Student&amp;amp;); }; int main(int argc, char **argv) { Student stu; stu." />
 
-  <meta name="keywords" content="Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb" />
+  <meta name="keywords" content="Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
