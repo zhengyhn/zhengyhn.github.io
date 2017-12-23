@@ -6,10 +6,19 @@
     <description>Recent content in 算法 on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 23 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>battelships-in-a-board</title>
+      <link>http://zhengyhn.github.io/post/leetcode/battelships-in-a-board/</link>
+      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/leetcode/battelships-in-a-board/</guid>
+      <description>题目 Given an 2D board, count how many battleships are in it. The battleships are represented with &#39;X&#39;s, empty slots are represented with &#39;.&#39;s. You may assume the following rules: You receive a valid board, made of only battleships or empty slots. Battleships can only be placed horizontally or vertically. In other words, they can only be made of the shape 1xN (1 row, N columns) or Nx1 (N</description>
+    </item>
     
     <item>
       <title>array-partition-i</title>
