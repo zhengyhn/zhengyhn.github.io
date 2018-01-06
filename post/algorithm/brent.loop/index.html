@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>配置测试与兼容性测试 - Hank&#39;s Blog</title>
+  <title>Brent判圈算法学习 - Hank&#39;s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -17,7 +17,7 @@
 
 
 <meta name="author" content="Hank" />
-  <meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;software testing&amp;rdquo;一书的读书笔记 @&amp;lt;/font&amp;gt; 配置测试 其实是有关硬件的测试。需要测试的内容： PC类型（" />
+  <meta name="description" content="判断一个链接有没有环，很著名的算法是Floyd判圈算法，也叫龟兔算法。但是，原来还有一种算法，可以比Floyd更快一点，这种算法叫做Bren" />
 
   <meta name="keywords" content="Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
@@ -29,7 +29,7 @@
 <meta name="generator" content="Hugo 0.30.2" />
 
 
-<link rel="canonical" href="http://zhengyhn.github.io/post/test/config_comp.org/" />
+<link rel="canonical" href="http://zhengyhn.github.io/post/algorithm/brent.loop/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -44,20 +44,16 @@
 <link href="/dist/even.min.css?v=2.7.0" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
-<meta property="og:title" content="配置测试与兼容性测试" />
-<meta property="og:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 配置测试 其实是有关硬件的测试。需要测试的内容： PC类型（" />
+<meta property="og:title" content="Brent判圈算法学习" />
+<meta property="og:description" content="判断一个链接有没有环，很著名的算法是Floyd判圈算法，也叫龟兔算法。但是，原来还有一种算法，可以比Floyd更快一点，这种算法叫做Bren" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/test/config_comp.org/" />
+<meta property="og:url" content="http://zhengyhn.github.io/post/algorithm/brent.loop/" />
 
 
 
-<meta property="article:published_time" content="2013-03-17T00:00:00&#43;00:00"/>
+<meta property="article:published_time" content="2018-01-06T00:00:00&#43;00:00"/>
 
-<meta property="article:modified_time" content="2013-03-17T00:00:00&#43;00:00"/>
-
-
-
-
+<meta property="article:modified_time" content="2018-01-06T00:00:00&#43;00:00"/>
 
 
 
@@ -65,19 +61,23 @@
 
 
 
-<meta itemprop="name" content="配置测试与兼容性测试">
-<meta itemprop="description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 配置测试 其实是有关硬件的测试。需要测试的内容： PC类型（">
-
-
-<meta itemprop="datePublished" content="2013-03-17T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2013-03-17T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="541">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="配置测试与兼容性测试"/>
-<meta name="twitter:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 配置测试 其实是有关硬件的测试。需要测试的内容： PC类型（"/>
+
+<meta itemprop="name" content="Brent判圈算法学习">
+<meta itemprop="description" content="判断一个链接有没有环，很著名的算法是Floyd判圈算法，也叫龟兔算法。但是，原来还有一种算法，可以比Floyd更快一点，这种算法叫做Bren">
+
+
+<meta itemprop="datePublished" content="2018-01-06T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-01-06T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="460">
+
+
+
+<meta itemprop="keywords" content="算法," />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Brent判圈算法学习"/>
+<meta name="twitter:description" content="判断一个链接有没有环，很著名的算法是Floyd判圈算法，也叫龟兔算法。但是，原来还有一种算法，可以比Floyd更快一点，这种算法叫做Bren"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -144,13 +144,17 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">配置测试与兼容性测试</h1>
+      <h1 class="post-title">Brent判圈算法学习</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2013-03-17 </span>
-        
-        <span class="more-meta"> 约 541 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span class="post-time"> 2018-01-06 </span>
+        <div class="post-category">
+            
+              <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            
+          </div>
+        <span class="more-meta"> 约 460 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
       </div>
     </header>
 
@@ -162,8 +166,17 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#配置测试">配置测试</a></li>
-<li><a href="#兼容性测试">兼容性测试</a></li>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#算法思想">算法思想</a></li>
+<li><a href="#代码实现">代码实现</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
 </ul>
 </nav>
   </div>
@@ -173,54 +186,41 @@
     <div class="post-content">
       
 
-<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记
-@&lt;/font&gt;</p>
+<p>判断一个链接有没有环，很著名的算法是Floyd判圈算法，也叫龟兔算法。但是，原来还有一种算法，可以比Floyd更快一点，这种算法叫做Brent判圈算法。</p>
 
-<h1 id="配置测试">配置测试</h1>
+<h4 id="算法思想">算法思想</h4>
 
-<p>其实是有关硬件的测试。需要测试的内容：</p>
+<p>用2个指针rabbit和turtle从链表头出发。
+- rabbit先一步一步走，最多走2步，如果走到尽头，则无环，如果和turtle相遇，则有环，否则，本轮结束。
+- 这个时候，把turtle放到rabbit当前位置，rabbit继续一步一步走，但是最多走4步，如果走到尽头，则无环，如果和turtle相遇，则有环，否则，本轮结束。
+- 然后，把turtle放到rabbit当前位置，rabbit继续一步一步走，但是最多走8步，如果走到尽头，则无环，如果和turtle相遇，则有环，否则，本轮结束。
+&hellip;</p>
 
-<ul>
-<li>PC类型（戴尔的？联想的？苹果的？）</li>
-<li>PC部件（不同的主板，CPU，声卡，显卡，网卡等）</li>
-<li>外围设备（鼠标，键盘，打印机，摄像头等）</li>
-<li>接口（USB，PCI，PS/2等）</li>
-<li>存储量大小（比如显卡有显存大小，内存条有内存大小）</li>
-<li>设备驱动（该设备的驱动程序有没有？）</li>
-</ul>
+<p>跟Floyd算法相比，假设一个5个元素的圆圈链表（尾部元素指回头部），Floyd算法需要走3 * 5 = 15步，而Brent算法只需要走2 + 4 + 5 + 2 = 13步。</p>
 
-<p>在进行配置测试时，可能需要买（或者借）很多种品牌的硬件来测试，比如可能需要
-几百种声卡和显卡，要测试完所有的种类是不可能的，这个时候就需要等价划分了，
-或者只测试主流的设备。</p>
+<h4 id="代码实现">代码实现</h4>
 
-<p>要了解这些PC的主流硬件，需要去搜索相关资料，有获取信息的途径，比如PC
-Magzine 和Mac
-World。在同一个等价划分里面的硬件没必要都测试，应该测试那些与众不同的
-特性。</p>
+<pre><code>    bool hasCycleBrent(ListNode *head) {
+      ListNode *p1 = head;
+      ListNode *p2 = head;
+      int steps = 0;
+      int limit = 2;
+      while (p1 != NULL &amp;&amp; p2 != NULL) {
+        p1 = p1-&gt;next;
+        if (p1 == p2) {
+          return true;
+        }
+        ++steps;
+        if (steps == limit) {
+          p2 = p1;
+          steps = 0;
+          limit *= 2;
+        }
+      }
+      return false;
+    }
 
-<p>怎么获取这些硬件呢？首先，那些经常要用到的硬件应该直接买下来。第二种办法，联系
-厂家问他们能不能借来测试。第三种办法，问公司的同事借。当然，你应该要找PM要相关
-的经费。</p>
-
-<h1 id="兼容性测试">兼容性测试</h1>
-
-<p>上面是与硬件的兼容，现在是与其他软件的兼容。</p>
-
-<ul>
-<li>向后兼容：该软件与低版本的其他软件兼容。</li>
-<li>向前兼容：该软件与未来版本的其他软件兼容。</li>
-</ul>
-
-<p>选择要兼容的软件的方法：</p>
-
-<ul>
-<li>看这方面软件的流行度</li>
-<li>看软件的年龄</li>
-<li>软件的类型</li>
-<li>厂家</li>
-</ul>
-
-<p>通过这些方法来确定等价划分。</p>
+</code></pre>
 
     </div>
 
@@ -233,7 +233,7 @@ World。在同一个等价划分里面的硬件没必要都测试，应该测试
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
-    <span class="item-content">2013-03-17</span>
+    <span class="item-content">2018-01-06</span>
   </p>
   
   <p class="copyright-item">
@@ -263,19 +263,18 @@ World。在同一个等价划分里面的硬件没必要都测试，应该测试
 </div>
 
     <footer class="post-footer">
-      
+      <div class="post-tags">
+          
+          <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+          
+        </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/test/exam_code.org/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">检查代码</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
         
-          <a class="next" href="/post/algorithm/number/">
-            <span class="next-text nav-default">数字的算法</span>
+          <a class="next" href="/post/leetcode/find-all-duplicates-in-an-array/">
+            <span class="next-text nav-default">find-all-duplicates-in-an-array</span>
             <span class="prev-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

@@ -6,10 +6,28 @@
     <description>Recent content in Posts on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 23 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 06 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Brent判圈算法学习</title>
+      <link>http://zhengyhn.github.io/post/algorithm/brent.loop/</link>
+      <pubDate>Sat, 06 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/algorithm/brent.loop/</guid>
+      <description>判断一个链接有没有环，很著名的算法是Floyd判圈算法，也叫龟兔算法。但是，原来还有一种算法，可以比Floyd更快一点，这种算法叫做Bren</description>
+    </item>
+    
+    <item>
+      <title>find-all-duplicates-in-an-array</title>
+      <link>http://zhengyhn.github.io/post/leetcode/find-all-duplicates-in-an-array/</link>
+      <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/leetcode/find-all-duplicates-in-an-array/</guid>
+      <description>题目 Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once. Find all the elements that appear twice in this array. Could you do it without extra space and in O(n) runtime? Example: Input: [4,3,2,7,8,2,3,1] Output: [2,3] 思路 想了好久，终于想出来了。首先，题目</description>
+    </item>
     
     <item>
       <title>battelships-in-a-board</title>
@@ -18,15 +36,6 @@
       
       <guid>http://zhengyhn.github.io/post/leetcode/battelships-in-a-board/</guid>
       <description>题目 Given an 2D board, count how many battleships are in it. The battleships are represented with &#39;X&#39;s, empty slots are represented with &#39;.&#39;s. You may assume the following rules: You receive a valid board, made of only battleships or empty slots. Battleships can only be placed horizontally or vertically. In other words, they can only be made of the shape 1xN (1 row, N columns) or Nx1 (N</description>
-    </item>
-    
-    <item>
-      <title>find-all-duplicates-in-an-array</title>
-      <link>http://zhengyhn.github.io/post/leetcode/find-all-duplicates-in-an-array/</link>
-      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/leetcode/find-all-duplicates-in-an-array/</guid>
-      <description>题目 Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once. Find all the elements that appear twice in this array. Could you do it without extra space and in O(n) runtime? Example: Input: [4,3,2,7,8,2,3,1] Output: [2,3] 思路 想了好久，终于想出来了。首先，题目</description>
     </item>
     
     <item>

@@ -22,7 +22,7 @@
     <item>
       <title>Leetcode</title>
       <link>http://zhengyhn.github.io/categories/leetcode/</link>
-      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/categories/leetcode/</guid>
       <description></description>
@@ -43,6 +43,15 @@
       <pubDate>Thu, 30 Mar 2017 22:50:49 +0800</pubDate>
       
       <guid>http://zhengyhn.github.io/categories/redis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>算法</title>
+      <link>http://zhengyhn.github.io/categories/%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sat, 06 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/categories/%E7%AE%97%E6%B3%95/</guid>
       <description></description>
     </item>
     
