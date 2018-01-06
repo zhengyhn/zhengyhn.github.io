@@ -71,7 +71,7 @@
 
 <meta itemprop="datePublished" content="2018-01-06T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-01-06T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="460">
+<meta itemprop="wordCount" content="457">
 
 
 
@@ -153,7 +153,7 @@
               <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
             
           </div>
-        <span class="more-meta"> 约 460 字 </span>
+        <span class="more-meta"> 约 457 字 </span>
         <span class="more-meta"> 预计阅读 1 分钟 </span>
       </div>
     </header>
@@ -190,11 +190,14 @@
 
 <h4 id="算法思想">算法思想</h4>
 
-<p>用2个指针rabbit和turtle从链表头出发。
-- rabbit先一步一步走，最多走2步，如果走到尽头，则无环，如果和turtle相遇，则有环，否则，本轮结束。
-- 这个时候，把turtle放到rabbit当前位置，rabbit继续一步一步走，但是最多走4步，如果走到尽头，则无环，如果和turtle相遇，则有环，否则，本轮结束。
-- 然后，把turtle放到rabbit当前位置，rabbit继续一步一步走，但是最多走8步，如果走到尽头，则无环，如果和turtle相遇，则有环，否则，本轮结束。
-&hellip;</p>
+<p>用2个指针rabbit和turtle从链表头出发。</p>
+
+<ul>
+<li>rabbit先一步一步走，最多走2步，如果走到尽头，则无环，如果和turtle相遇，则有环，否则，本轮结束。</li>
+<li>这个时候，把turtle放到rabbit当前位置，rabbit继续一步一步走，但是最多走4步，如果走到尽头，则无环，如果和turtle相遇，则有环，否则，本轮结束。</li>
+<li>然后，把turtle放到rabbit当前位置，rabbit继续一步一步走，但是最多走8步，如果走到尽头，则无环，如果和turtle相遇，则有环，否则，本轮结束。</li>
+<li>&hellip;</li>
+</ul>
 
 <p>跟Floyd算法相比，假设一个5个元素的圆圈链表（尾部元素指回头部），Floyd算法需要走3 * 5 = 15步，而Brent算法只需要走2 + 4 + 5 + 2 = 13步。</p>
 
