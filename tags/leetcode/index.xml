@@ -6,10 +6,19 @@
     <description>Recent content in Leetcode on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>sqrtx 求整数平方根</title>
+      <link>http://zhengyhn.github.io/post/leetcode/sqrtx/</link>
+      <pubDate>Sun, 14 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/leetcode/sqrtx/</guid>
+      <description>题目 Implement int sqrt(int x). Compute and return the square root of x. x is guaranteed to be a non-negative integer. 我的思路 我能想到的只有暴力方法，从一个位置开始，一步一步加一，直到找到平方根。 代码 int mySqrt(int x) { long long times</description>
+    </item>
     
     <item>
       <title>find-all-duplicates-in-an-array</title>
