@@ -6,10 +6,19 @@
     <description>Recent content in Leetcode on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/tags/leetcode/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>N皇后问题</title>
+      <link>http://zhengyhn.github.io/post/leetcode/n-queens/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/leetcode/n-queens/</guid>
+      <description>题目 The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other. Given an integer n, return all distinct solutions to the n-queens puzzle. Each solution contains a distinct board configuration of the n-queens&#39; placement, where &#39;Q&#39; and &#39;.&#39; both indicate a queen and an empty space respectively. For example, There exist two distinct solutions to</description>
+    </item>
     
     <item>
       <title>sqrtx 求整数平方根</title>

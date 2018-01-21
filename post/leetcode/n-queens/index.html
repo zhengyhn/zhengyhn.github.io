@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>sqrtx 求整数平方根 - Hank&#39;s Blog</title>
+  <title>N皇后问题 - Hank&#39;s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -17,7 +17,7 @@
 
 
 <meta name="author" content="Hank" />
-  <meta name="description" content="题目 Implement int sqrt(int x). Compute and return the square root of x. x is guaranteed to be a non-negative integer. 我的思路 我能想到的只有暴力方法，从一个位置开始，一步一步加一，直到找到平方根。 代码 int mySqrt(int x) { long long times" />
+  <meta name="description" content="题目 The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other. Given an integer n, return all distinct solutions to the n-queens puzzle. Each solution contains a distinct board configuration of the n-queens&#39; placement, where &#39;Q&#39; and &#39;.&#39; both indicate a queen and an empty space respectively. For example, There exist two distinct solutions to" />
 
   <meta name="keywords" content="Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
@@ -29,7 +29,7 @@
 <meta name="generator" content="Hugo 0.30.2" />
 
 
-<link rel="canonical" href="http://zhengyhn.github.io/post/leetcode/sqrtx/" />
+<link rel="canonical" href="http://zhengyhn.github.io/post/leetcode/n-queens/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -44,20 +44,16 @@
 <link href="/dist/even.min.css?v=2.7.0" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
-<meta property="og:title" content="sqrtx 求整数平方根" />
-<meta property="og:description" content="题目 Implement int sqrt(int x). Compute and return the square root of x. x is guaranteed to be a non-negative integer. 我的思路 我能想到的只有暴力方法，从一个位置开始，一步一步加一，直到找到平方根。 代码 int mySqrt(int x) { long long times" />
+<meta property="og:title" content="N皇后问题" />
+<meta property="og:description" content="题目 The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other. Given an integer n, return all distinct solutions to the n-queens puzzle. Each solution contains a distinct board configuration of the n-queens&#39; placement, where &#39;Q&#39; and &#39;.&#39; both indicate a queen and an empty space respectively. For example, There exist two distinct solutions to" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/leetcode/sqrtx/" />
+<meta property="og:url" content="http://zhengyhn.github.io/post/leetcode/n-queens/" />
 
 
 
-<meta property="article:published_time" content="2018-01-14T00:00:00&#43;00:00"/>
+<meta property="article:published_time" content="2018-01-21T00:00:00&#43;00:00"/>
 
-<meta property="article:modified_time" content="2018-01-14T00:00:00&#43;00:00"/>
-
-
-
-
+<meta property="article:modified_time" content="2018-01-21T00:00:00&#43;00:00"/>
 
 
 
@@ -65,19 +61,23 @@
 
 
 
-<meta itemprop="name" content="sqrtx 求整数平方根">
-<meta itemprop="description" content="题目 Implement int sqrt(int x). Compute and return the square root of x. x is guaranteed to be a non-negative integer. 我的思路 我能想到的只有暴力方法，从一个位置开始，一步一步加一，直到找到平方根。 代码 int mySqrt(int x) { long long times">
 
 
-<meta itemprop="datePublished" content="2018-01-14T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2018-01-14T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="486">
+
+
+<meta itemprop="name" content="N皇后问题">
+<meta itemprop="description" content="题目 The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other. Given an integer n, return all distinct solutions to the n-queens puzzle. Each solution contains a distinct board configuration of the n-queens&#39; placement, where &#39;Q&#39; and &#39;.&#39; both indicate a queen and an empty space respectively. For example, There exist two distinct solutions to">
+
+
+<meta itemprop="datePublished" content="2018-01-21T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-01-21T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="548">
 
 
 
 <meta itemprop="keywords" content="leetcode,算法," />
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="sqrtx 求整数平方根"/>
-<meta name="twitter:description" content="题目 Implement int sqrt(int x). Compute and return the square root of x. x is guaranteed to be a non-negative integer. 我的思路 我能想到的只有暴力方法，从一个位置开始，一步一步加一，直到找到平方根。 代码 int mySqrt(int x) { long long times"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="N皇后问题"/>
+<meta name="twitter:description" content="题目 The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other. Given an integer n, return all distinct solutions to the n-queens puzzle. Each solution contains a distinct board configuration of the n-queens&#39; placement, where &#39;Q&#39; and &#39;.&#39; both indicate a queen and an empty space respectively. For example, There exist two distinct solutions to"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -144,17 +144,17 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">sqrtx 求整数平方根</h1>
+      <h1 class="post-title">N皇后问题</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2018-01-14 </span>
+        <span class="post-time"> 2018-01-21 </span>
         <div class="post-category">
             
               <a href="/categories/leetcode/"> leetcode </a>
             
           </div>
-        <span class="more-meta"> 约 486 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
+        <span class="more-meta"> 约 548 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
       </div>
     </header>
 
@@ -175,9 +175,6 @@
 <li><a href="#题目">题目</a></li>
 <li><a href="#我的思路">我的思路</a></li>
 <li><a href="#代码">代码</a></li>
-<li><a href="#牛顿迭代法">牛顿迭代法</a></li>
-<li><a href="#代码-1">代码</a></li>
-<li><a href="#参考资料">参考资料</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -192,71 +189,119 @@
 
 <h4 id="题目">题目</h4>
 
-<pre><code>Implement int sqrt(int x).
+<pre><code>The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
 
-Compute and return the square root of x.
+Given an integer n, return all distinct solutions to the n-queens puzzle.
 
-x is guaranteed to be a non-negative integer.
+Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space respectively.
+
+For example,
+There exist two distinct solutions to the 4-queens puzzle:
+
+[
+ [&quot;.Q..&quot;,  // Solution 1
+  &quot;...Q&quot;,
+  &quot;Q...&quot;,
+  &quot;..Q.&quot;],
+
+ [&quot;..Q.&quot;,  // Solution 2
+  &quot;Q...&quot;,
+  &quot;...Q&quot;,
+  &quot;.Q..&quot;]
+]
 </code></pre>
 
 <h4 id="我的思路">我的思路</h4>
 
-<p>我能想到的只有暴力方法，从一个位置开始，一步一步加一，直到找到平方根。</p>
+<p>本来这是很经典的问题，有很多人分享解决办法，不应该再发出来。但是，这次是我想了很久才想出来的，写下来纪念一下。</p>
+
+<p>转化成图，n * n的图，第一行有n个位置可以摆放，一共有n * n种状态，找出互相无法攻击的那些状态(上下左右对角线没有皇后)。</p>
+
+<p>直接使用深度优先搜索，遍历一棵n层的树，除了节节点，每个节点都有n个子节点，遇到无法遍历下去的，直接剪枝。递归可以解决，这里使用栈来实现非递归。</p>
 
 <h4 id="代码">代码</h4>
 
-<pre><code>    int mySqrt(int x) {
-      long long times = 0;
-      int y = x;
-      while (y &gt; 0) {
-        y &gt;&gt;= 1;
-        ++times;
-        if (y &lt;= times) {
-          break;
-        }
+<pre><code>class Solution {
+  public:
+    vector&lt;vector&lt;string&gt;&gt; solveNQueens(int n) {
+      vector&lt;vector&lt;string&gt;&gt; ret;
+      if (n &lt;= 0) {
+        return ret;
       }
-      long long z = x;
-      while (true) {
-        long long product = times * times;
-        if (product == z) {
-          return times;
-        } else if (product &gt; z) {
-          return times - 1;
+      int stack[n];
+      int top = -1;
+      stack[++top] = -1;
+
+      while (top &gt;= 0) {
+        ++stack[top];
+        if (stack[top] &gt;= n) {
+          --top;
+          continue;
         }
-        ++times;
-      }
-    }
-</code></pre>
-
-<h4 id="牛顿迭代法">牛顿迭代法</h4>
-
-<p>原来有一种牛逼的算法，叫做牛顿-拉弗森方法, 可以用来计算平方根。想求一个数a的平方，其实就是x^2 = a, 写成函数就是f(x) = x^2 - a, 所以我们只要求出让f(x) = 0时x的值就行了。</p>
-
-<p>这种算法的思想是，f(x)是一个抛物线往下方平移a所形成的图形，我们随便选一个点(x0, f(x0)), 做一条切线，那切线方程就是f(x)的导数g(x) = 2x .</p>
-
-<p>导数其实就是切线的斜率t, 设切线与x轴的交点(x1, 0)与(x0, 0) 的距离为d, 根据三角定理，t = f(x) / d = 2x, 则d = f(x) / 2x = (x^2 - a) / 2x .</p>
-
-<p>容易得出，x1 = x0 - d = x0 - (x0^2 - a) / 2x0 = (x0 + a / x0) / 2 .</p>
-
-<p>一直迭代下去，计算出来x2, x3, x4 &hellip; , 就会不断地逼近a的平方根。</p>
-
-<h4 id="代码-1">代码</h4>
-
-<pre><code>    int mySqrt(int x) {
-      long long ret = x;
-      while (ret * ret &gt; x) {
-        ret = (ret + x / ret) / 2;
+        // this-&gt;print(stack, top + 1, n);
+        bool isValid = this-&gt;isValidBoard(stack, top + 1, n);
+        // std::cout &lt;&lt; isValid &lt;&lt; std::endl;
+        if (isValid) {
+          if (top == n - 1) {
+            ret.push_back(this-&gt;toString(stack, top + 1, n));
+          } else {
+            stack[++top] = -1;
+          }
+        }
       }
       return ret;
     }
+  private:
+    bool isValidBoard(int *stack, int stackLen, int boardLen) {
+      if (stackLen == 1) {
+        return true;
+      }
+      int it = stack[stackLen - 1];
+      if (it &gt;= boardLen) {
+        return false;
+      }
+      for (int i = 0; i &lt; stackLen - 1; ++i) {
+        if (it == stack[i]) {
+          return false;
+        }
+        int left = it - stackLen + 1 + i;
+        if (left &gt;= 0 &amp;&amp; left == stack[i]) {
+          return false;
+        }
+        int right = stackLen - i - 1 + it;
+        if (right &lt; boardLen &amp;&amp; right == stack[i]) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    vector&lt;string&gt; toString(int *stack, int stackLen, int n) {
+      vector&lt;string&gt; ret(n);
+
+      for (int i = 0; i &lt; n; ++i) {
+        string item(n, '.');
+        if (i &lt; stackLen) {
+          item[stack[i]] = 'Q';
+        }
+        ret[i] = item;
+      }
+      return ret;
+    }
+
+    void print(int *stack, int stackLen, int n) {
+      vector&lt;string&gt; ret = this-&gt;toString(stack, stackLen, n);
+      for (auto row: ret) {
+        for (auto item: row) {
+          std::cout &lt;&lt; item;
+        }
+        std::cout &lt;&lt; std::endl;
+      }
+      std::cout &lt;&lt; &quot;--------&quot; &lt;&lt; std::endl;
+    }
+};
+
 </code></pre>
-
-<h4 id="参考资料">参考资料</h4>
-
-<ul>
-<li><a href="https://www.zhihu.com/question/20690553">如何通俗易懂地讲解牛顿迭代法求开方？</a></li>
-<li><a href="http://www.matrix67.com/blog/archives/361">牛顿迭代法快速寻找平方根</a></li>
-</ul>
 
     </div>
 
@@ -269,7 +314,7 @@ x is guaranteed to be a non-negative integer.
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
-    <span class="item-content">2018-01-14</span>
+    <span class="item-content">2018-01-21</span>
   </p>
   
   <p class="copyright-item">
@@ -310,14 +355,9 @@ x is guaranteed to be a non-negative integer.
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/leetcode/n-queens/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">N皇后问题</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
         
-          <a class="next" href="/post/algorithm/brent.loop/">
-            <span class="next-text nav-default">Brent判圈算法学习</span>
+          <a class="next" href="/post/leetcode/sqrtx/">
+            <span class="next-text nav-default">sqrtx 求整数平方根</span>
             <span class="prev-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
