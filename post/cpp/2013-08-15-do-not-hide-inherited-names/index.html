@@ -28,7 +28,7 @@ It seems perfect, but it&amp;rsquo;s a pitfall of C&#43;&#43;. Consider the foll
 
 
 
-<meta name="generator" content="Hugo 0.30.2" />
+<meta name="generator" content="Hugo 0.37.1" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/cpp/2013-08-15-do-not-hide-inherited-names/" />
@@ -82,7 +82,8 @@ It seems perfect, but it&rsquo;s a pitfall of C&#43;&#43;. Consider the followin
 
 
 <meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Do not hide inherited names"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Do not hide inherited names"/>
 <meta name="twitter:description" content="In inheritance, there are some rules defined by C&#43;&#43;, one of which is that the virables or the functions in the base class will be hidden if there are virables and functions with the same name.
 It seems perfect, but it&rsquo;s a pitfall of C&#43;&#43;. Consider the following example.
 #include &lt;cstdio&gt; #include &lt;iostream&gt; class Person { public: explicit Person() { } ~Person() { } void sleep() const { printf(&quot;Person sleep\n&quot;); } void sleep(const int sec) const { printf(&quot;Person sleep %d s\n&quot;, sec); } private: Person(const Person&amp;); const Person&amp; operator=(const Person&amp;); }; class Student:public Person { public: explicit Student() { } ~Person() { } void sleep() const { printf(&quot;Student sleep\n&quot;); } private: Student(const Student&amp;); const Student&amp; operator=(const Student&amp;); }; int main(int argc, char **argv) { Student stu; stu."/>
