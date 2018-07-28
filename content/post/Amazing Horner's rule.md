@@ -1,9 +1,9 @@
 ---
 {
-  "date": "2018-07-27",
-  "slug": "Amazing Horner's rule",
+  "title": "Amazing Horner's rule",
   "subtitle": "Generic subtitle",
-  "title": "Amazing Horner's rule"
+  "date": "2018-07-27",
+  "slug": "Amazing Horner's rule"
 }
 ---
 <!--more-->
