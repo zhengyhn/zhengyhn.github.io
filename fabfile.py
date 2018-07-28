@@ -102,7 +102,7 @@ def publish():
     local('rm -rf .git/worktrees/public/')
 
     # checkout out gh-pages branch into public
-    local('git worktree add -B master public upstream/master')
+    local('git worktree add -B master public origin/master')
 
     # removing any existing files
     local('rm -rf public/*')
@@ -117,7 +117,7 @@ def publish():
         local('git commit -m "Committing to master (Fabfile)"')
 
     # push to master
-    local('git push upstream master')
+    local('git push origin master')
     print('push succeeded')
 
 
