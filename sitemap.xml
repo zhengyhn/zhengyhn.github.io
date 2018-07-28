@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhengyhn.github.io/post/amazing-horners-rule/</loc>
+    <lastmod>2018-07-27T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://zhengyhn.github.io/post/insert-sort-algorithm-in-python/</loc>
     <lastmod>2018-07-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
