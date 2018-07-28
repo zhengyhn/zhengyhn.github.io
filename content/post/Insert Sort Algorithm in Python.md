@@ -1,9 +1,9 @@
 ---
 {
-  "date": "2018-07-27",
-  "slug": "Insert Sort Algorithm in Python",
+  "title": "Insert Sort Algorithm in Python",
   "subtitle": "Generic subtitle",
-  "title": "Insert Sort Algorithm in Python"
+  "date": "2018-07-27",
+  "slug": "Insert Sort Algorithm in Python"
 }
 ---
 <!--more-->
