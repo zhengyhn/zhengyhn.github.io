@@ -1,9 +1,9 @@
 ---
 {
-  "date": "2018-08-03",
-  "slug": "Bloom Filter in action",
+  "title": "Bloom Filter in action",
   "subtitle": "Generic subtitle",
-  "title": "Bloom Filter in action"
+  "date": "2018-08-03",
+  "slug": "Bloom Filter in action"
 }
 ---
 <!--more-->
