@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Learning KD Tree - Hank&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Hank" />
+  <meta name="description" content="
+" />
+
+  <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.37.1" />
+
+
+<link rel="canonical" href="http://zhengyhn.github.io/post/learning-kd-tree/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<link href="/dist/even.min.css?v=3.1.1" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="Learning KD Tree" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://zhengyhn.github.io/post/learning-kd-tree/" />
+
+
+
+<meta property="article:published_time" content="2018-08-18T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-08-18T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Learning KD Tree">
+<meta itemprop="description" content="">
+
+
+<meta itemprop="datePublished" content="2018-08-18T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-08-18T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1297">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Learning KD Tree"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Hank&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Hank&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Learning KD Tree</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-18 </span>
+        
+        <span class="more-meta"> 约 1297 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#参考链接">参考链接</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    
+
+    
+    <div class="post-content">
+      <p></p>
+
+<p>最近在学习KD树，研究了一天，终于是搞懂了！把自己实现的代码记录下来。</p>
+
+<p>KNN的算法思想非常简单，但是暴力的计算距离，计算量非常大，而KD树这种数据结构的使用，可以将KNN的时间复杂度从$O(KN)$降低到$O(KlogN)$，这也是我非常感兴趣的一点。</p>
+
+<p>学习的过程中，发现还有一种叫ball树，是为了解决KD树在高维时计算慢的问题，学无止境啊，这个就得后面慢慢研究了。</p>
+
+<p>原理就不记录了，可以参考<a href="https://www.joinquant.com/post/2627">这个链接</a>, 下面是我实现的代码:</p>
+
+<pre><code class="language-python">import numpy as np
+import timeit
+import matplotlib.pyplot as plt
+%matplotlib notebook
+
+
+class Node:
+    def __init__(self, val=None, left=None, right=None, split_dim=None):
+        # 节点值
+        self.val = val
+        # 左孩子
+        self.left = left
+        # 右孩子
+        self.right = right
+        # 切分维度
+        self.split_dim = split_dim
+
+
+class KDTree:
+    def __init__(self, data_set):
+        self.root = self._create_node(data_set)
+
+    def _create_node(self, data_set=None):
+        # 递归停止条件
+        if len(data_set) == 0:
+            return None
+        # 目前数据集选取切分的维度，使用方差最大的维度做为切分维度
+        split_dim = self._get_split_dim(data_set)
+
+        # 在切分的维度上排序，选取中间的点进行切分
+        data_set.sort(key=lambda x: x[split_dim])
+        mid = len(data_set) // 2
+        val = data_set[mid]
+        # 递归创建左子树和右子树
+        left = self._create_node(data_set[:mid])
+        right = self._create_node(data_set[mid + 1:])
+
+        return Node(val=val, left=left, right=right, split_dim=split_dim)
+
+    def _get_split_dim(self, data_set):
+        &quot;&quot;&quot;
+        选择方差最大的维度，因为这样划分更均匀
+        &quot;&quot;&quot;
+        return np.argmax(np.var(data_set, axis=0))
+
+    def knn(self, target=None, k=3):
+        # 记录k个近邻
+        # (点，与目标点的距离)
+        nearests = [(self.root.val, float(&quot;inf&quot;))]
+        stack = []
+        # 向下搜索目标点，并记录搜索的路径到stack
+        # 经过的点，记录到k近邻列表
+        self._search_down(root=self.root, stack=stack, nearests=nearests, target=target, k=k)
+        # 回溯查找
+        while len(stack) &gt; 0:
+            node = stack.pop()
+            dist = target[node.split_dim] - node.val[node.split_dim]
+            # 如果目标点与分隔超平面的距离大于目前k个近邻点与目标点的最大距离，
+            # 那这个分隔点的右子树就不需要查找了，因为右子树的距离更远
+            if abs(dist) &gt; nearests[len(nearests) - 1][1]:
+                continue
+            # dist &gt; 0, 则在该切分维度上，目标点大于切分点，说明目标点在切分点的右子树上，所以应该往左子树寻找，看下有没有离目标点更近的
+            if dist &gt; 0:
+                self._search_down(root=node.left, stack=stack, nearests=nearests, target=target, k=k)
+            else:
+                self._search_down(root=node.right, stack=stack, nearests=nearests, target=target, k=k)
+        return nearests
+
+    def _search_down(self, root=None, stack=[], nearests=[], target=None, k=0):
+        node = root
+        while node:
+            # 记录路径
+            stack.append(node)
+            # 计算点与目标点的距离
+            dist = self._get_dist(node.val, target)
+            # 类似插入排序更新nearests
+            self._update_nearests(nearests=nearests, point=node.val, dist=dist, k=k)
+            # 如果目标点在切分维度上的值小于该点在该维度上的值，往左子树搜索
+            if target[node.split_dim] &lt; node.val[node.split_dim]:
+                node = node.left
+            else:
+                node = node.right
+
+    def _update_nearests(self, nearests=[], point=None, dist=0, k=0):
+        size = len(nearests)
+        tail = nearests[size - 1]
+        # 如果距离比nearests里面最大的值还要大，而且nearests已经有k个数了，就没必要再加进去了
+        if dist &gt; tail[1] and size &gt;= k:
+            return
+        # 如果nearests还不够k个数，就往后面加一个
+        if size &lt; k and tail[1] != float(&quot;inf&quot;):
+            nearests.append((point, float(&quot;inf&quot;)))
+        for i in range(len(nearests) - 1, -1, -1):
+            # 找到插入的位置
+            if dist &gt; nearests[i - 1][1] or i == 0:
+                nearests[i] = (point, dist)
+                break
+            else:
+                nearests[i] = nearests[i - 1]
+
+    def _get_dist(self, left, right):
+        # L2欧拉距离
+        return np.sqrt(np.sum(np.power(np.array(left) - np.array(right), 2)))
+</code></pre>
+
+<p>现在来写一个暴力计算的KNN算法，直接遍历所有数据，计算与目标点的距离:</p>
+
+<pre><code class="language-python">def l2_dist(left, right):
+    return np.sqrt(np.sum(np.power(np.array(left) - np.array(right), 2)))
+
+def update_nearests(nearests=[], point=None, dist=0, k=0):
+    size = len(nearests)
+    tail = nearests[size - 1]
+    if dist &gt; tail[1]:
+        return
+    if k &gt; size and tail[1] != float(&quot;inf&quot;):
+        nearests.append((point, float(&quot;inf&quot;)))
+    for i in range(len(nearests) - 1, -1, -1):
+        if dist &gt; nearests[i - 1][1] or i == 0:
+            nearests[i] = (point, dist)
+            break
+        else:
+            nearests[i] = nearests[i - 1]
+
+def simple_knn(data_set=[], target=None, k=1):
+    nearests = [(None, float('inf'))]
+    for item in data_set:
+        dist = l2_dist(target, item)
+        update_nearests(nearests=nearests, point=item, dist=dist, k=k)
+    return nearests
+</code></pre>
+
+<p>然后，我做了一下性能测试，看下两种算法的性能比较:</p>
+
+<pre><code class="language-python">def kdtree_knn():
+    tree = KDTree(data_set)
+    for i in range(0, 100):
+        target = np.random.normal(loc=10, scale=10, size=5).tolist()
+        tree.knn(target=target, k=3)
+
+def brute_force_knn():
+    for i in range(0, 100):
+        target = np.random.normal(loc=10, scale=10, size=5).tolist()
+        simple_knn(data_set=data_set, target=target, k=3)      
+
+# plt.axis((0, 5, 0, 5))
+# plt.xlabel('x',size=15)
+# plt.ylabel('y', size=15)
+# data_array = np.array(data_set)
+# plt.scatter(data_array[:,0], data_array[:,1])
+# plt.scatter(target[0], target[1], marker='*')
+
+data_set = np.random.normal(loc=10, scale=10, size=200).reshape((-1, 5)).tolist()
+
+print(timeit.repeat('brute_force_knn()', number=1, setup=&quot;from __main__ import brute_force_knn&quot;))
+print(timeit.repeat('kdtree_knn()', number=1, setup=&quot;from __main__ import kdtree_knn&quot;))
+</code></pre>
+
+<pre><code>[0.06312151486054063, 0.059134894981980324, 0.056395760271698236]
+[0.0651028179563582, 0.07302056299522519, 0.06238660495728254]
+</code></pre>
+
+<p>可以看出来，在数据量比较小的时候，上面的代码是40个样本，5维，暴力算法还是比KD树要快的。
+现在来看一下数据量比较大的时候，</p>
+
+<pre><code class="language-python">data_set = np.random.normal(loc=10, scale=10, size=10000).reshape((-1, 5)).tolist()
+
+print(timeit.repeat('brute_force_knn()', number=1, setup=&quot;from __main__ import brute_force_knn&quot;))
+print(timeit.repeat('kdtree_knn()', number=1, setup=&quot;from __main__ import kdtree_knn&quot;))
+</code></pre>
+
+<pre><code>[2.565840309020132, 2.955948404967785, 2.6631450951099396]
+[0.6005713860504329, 0.48381843604147434, 0.472601052839309]
+</code></pre>
+
+<p>当样本数量达到2000个的时候，暴力算法基本要2.5s左右才能跑完，而KD树只需要0.45s左右。</p>
+
+<h3 id="参考链接">参考链接</h3>
+
+<ul>
+<li><a href="https://www.joinquant.com/post/2627">kd 树算法之思路篇</a></li>
+<li><a href="https://www.joinquant.com/post/2843">kd 树算法之详细篇</a></li>
+<li><a href="https://www.joinquant.com/post/2227?f=study&amp;m=math">一只兔子帮你理解 kNN</a></li>
+<li><a href="https://www.jianshu.com/p/521f00393504">基于kd树的KNN算法的实现</a></li>
+</ul>
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Hank</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2018-08-18</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/bloom-filter-in-action/">
+            <span class="next-text nav-default">Bloom Filter in action</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:yuanhang.zheng@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/zhengyhn" class="iconfont icon-github" title="github"></a>
+  <a href="http://zhengyhn.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+    <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2017 - 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Hank</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+<script></script>
+<script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script>
+<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.min.js?v=3.1.1"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
