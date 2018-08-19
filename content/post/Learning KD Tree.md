@@ -1,9 +1,9 @@
 ---
 {
-  "date": "2018-08-18",
-  "slug": "Learning KD Tree",
+  "title": "Learning KD Tree",
   "subtitle": "Generic subtitle",
-  "title": "Learning KD Tree"
+  "date": "2018-08-18",
+  "slug": "Learning KD Tree"
 }
 ---
 <!--more-->
