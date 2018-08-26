@@ -1,9 +1,9 @@
 ---
 {
-  "date": "2018-08-26",
-  "slug": "Learning Topological Sort",
+  "title": "Learning Topological Sort",
   "subtitle": "Generic subtitle",
-  "title": "Learning Topological Sort"
+  "date": "2018-08-26",
+  "slug": "Learning Topological Sort"
 }
 ---
 <!--more-->
