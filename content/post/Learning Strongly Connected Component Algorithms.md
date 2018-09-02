@@ -1,9 +1,9 @@
 ---
 {
-  "date": "2018-08-28",
-  "slug": "Learning Strongly Connected Component Algorithms",
+  "title": "Learning Strongly Connected Component Algorithms",
   "subtitle": "Generic subtitle",
-  "title": "Learning Strongly Connected Component Algorithms"
+  "date": "2018-08-28",
+  "slug": "Learning Strongly Connected Component Algorithms"
 }
 ---
 <!--more-->
@@ -121,7 +121,6 @@ Koasaraju算法的步骤是这样的:
 
 ```python
 reverse_chats = [(chat[1], chat[0]) for chat in chats]
-reverse_graph = DiGraph(reverse_chats)
 
 G = nx.DiGraph()
 G.add_edges_from(reverse_chats)
@@ -160,14 +159,76 @@ class DiGraph:
             if rule[0] not in self.adjacent:
                 self.adjacent[rule[0]] = []
             self.adjacent[rule[0]].append(rule[1])
+    def get_reverse_post_order(self):
+        """
+        返回图的逆后序遍历结果
+        """
+        result = deque([])
+        for node in self.adjacent:
+            if not self.marked[node]:
+                self.dfs_topological(node, result)
+        return result
+    
+    def dfs_topological(self, node, result):
+        self.marked[node] = True
+        for neighbor in self.adjacent[node]:
+            if not self.marked[node]:
+                self.dfs_topological(node, result)
+        result.appendleft(node)
+        
     def get_strongly_connected_components(self, nodes):
+        """
+        找到图的强连通分量
+        """
         count = 0
         for node in nodes:
-            self.dfs(node, count)
+            if not self.marked[node]:
+                self.dfs(node, count)
+                count += 1
             
-    
     def dfs(self, node, count):
+        if len(self.strongly_connected_components) <= count:
+            self.strongly_connected_components.append([])
+        self.strongly_connected_components[count].append(node)
+        self.marked[node] = True
         
+        for neighbor in self.adjacent[node]:
+            if not self.marked[neighbor]:
+                self.dfs(neighbor, count)
+       
+# 原图
 graph = DiGraph(chats)
+# 反向图
+reverse_chats = [(chat[1], chat[0]) for chat in chats]
+reverse_graph = DiGraph(reverse_chats)
+# 得到伪拓扑排序
+reverse_post_order = reverse_graph.get_reverse_post_order()
+print('reverse_post_order: ', reverse_post_order)
+
+graph.get_strongly_connected_components(reverse_post_order)
+# 把结果打印出来
+for i in range(0, len(graph.strongly_connected_components)):
+    for item in graph.strongly_connected_components[i]:
+        print(item, end=', ')
+    print('')
 ```
+
+    reverse_post_order:  deque(['Orange', 'Rowland', 'Ada', 'Mia', 'Suli', 'White', 'Micy', 'Vivi', 'Swen', 'Jamie', 'Hank', 'Nick'])
+    Orange, White, Rowland, Hank, Nick, Jamie, Swen, 
+    Ada, Vivi, Micy, Suli, Mia, 
+
+
+看上面的结果，成功的找到了原图的2个强连通分量，可以看到，第一伙人是技术，第二伙人是财务，非常精准！
+
+现在问题来了，凭什么先求反向图的逆后序遍历顺序，然后根据这个顺序深度优先搜索，就能得到强连通分量呢？我研究一天想明白的原理是这样的:
+
+- 从强连通分量的概念里面可以得到，两个节点在同一个连通分量里面，比如Orange和White，说明Orange可以有路径到达White, White也有路径到达Orange
+- 我们从反向图的伪拓扑排序结果看到，Orange是排在White前面的，说明Orange有路径到达White
+- 如果我们从原图的White出发，深度搜索一次，能到达Orange(看了原图，我得找到了White->Rowland->Orange)的路径，那就说明White是有路径到达Orange的
+- 两个结合起来，就说明这2个节点是在同一个连通分量了
+
+整个算法的原理就是这样么简单!!
+
+## 参考资料
+- [理解强连通分量Kosaraju算法的正确性](https://blog.csdn.net/lhl1124281072/article/details/79699870)
 
