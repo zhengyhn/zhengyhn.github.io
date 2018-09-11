@@ -1,9 +1,9 @@
 ---
 {
-  "date": "2018-09-08",
-  "slug": "Learning LSD String Sorting Algorithm",
+  "title": "Learning LSD String Sorting Algorithm",
   "subtitle": "Generic subtitle",
-  "title": "Learning LSD String Sorting Algorithm"
+  "date": "2018-09-08",
+  "slug": "Learning LSD String Sorting Algorithm"
 }
 ---
 <!--more-->
