@@ -144,6 +144,31 @@
     
       <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-08-01-cpp-resource-management/">Cpp Resource Management</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+      <span class="more-meta"> 约 979 字 </span>
+      <span class="more-meta"> 预计阅读 5 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      I always forget freeing a memory that allocated from the heap.And I always forget closing the file handler.
+Resources include file descriptors, mutex locks, fonts, brushes, database connections and network sockets.
+I think less programmers can remember closing a file handler, especially in a large project.
+Nowadays, many programming languages have the garbage collection function. In C++, since the destructor will be automatically called, we can release the resources automatically if we put the resource into an object.
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/2013-08-01-cpp-resource-management/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    
+      <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-08-15-do-not-hide-inherited-names/">Do not hide inherited names</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2016-05-14 </span>
@@ -356,29 +381,6 @@ First pass:
     </div>
     <div class="read-more">
       <a href="/post/datastructure/2013-09-26-implement-the-sorting-algorithms/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-07-26-initialized-before-used/">Initialized before used</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-      <span class="more-meta"> 约 414 字 </span>
-      <span class="more-meta"> 预计阅读 2 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      For constructor In the constructor, the statements in the body are assignments, not initializations.
-#include &lt;iostream&gt; class Girl { public: Girl(std::string name, int age) { name_ = name; // These are assignments, not initilizations. age_ = age; } private: std::string name_; int age_; };  If you do this, the program will be very slow.When calling the constructor, the program will call the default construtors to initialize the members, and then enter the body of the constructor.
-    </div>
-    <div class="read-more">
-      <a href="/post/cpp/2013-07-26-initialized-before-used/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
