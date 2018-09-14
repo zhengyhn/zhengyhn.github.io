@@ -1,9 +1,9 @@
 ---
 {
-  "date": "2018-09-13",
-  "slug": "List Rotate Algorithms",
+  "title": "List Rotate Algorithms",
   "subtitle": "Generic subtitle",
-  "title": "List Rotate Algorithms"
+  "date": "2018-09-13",
+  "slug": "List Rotate Algorithms"
 }
 ---
 <!--more-->
