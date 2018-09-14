@@ -1,9 +1,9 @@
 ---
 {
-  "title": "List Rotate Algorithms",
-  "subtitle": "Generic subtitle",
   "date": "2018-09-13",
-  "slug": "List Rotate Algorithms"
+  "slug": "List Rotate Algorithms",
+  "subtitle": "Generic subtitle",
+  "title": "List Rotate Algorithms"
 }
 ---
 <!--more-->
@@ -107,3 +107,36 @@ print(test_texts)
 
 
 非常神奇，而且很简洁！三种算法的时间复杂度都是$O(n)$，后面2种方法空间复杂度为$O(1)$，不过最后一种算法最简洁，也容易理解。
+
+现在来比较一下三种算法的性能:
+
+
+```python
+import timeit
+import random
+
+nums = [random.randint(0, 10000) for i in range(10000)]
+
+def test_left_rotate_reverse():
+    test_nums = nums[:]
+    left_rotate_reverse(nums, random.randint(0, len(test_nums)))
+    
+def test_left_rotate_jump():
+    test_nums = nums[:]
+    left_rotate_jump(nums, random.randint(0, len(test_nums)))
+
+def test_left_rotate_normal():
+    test_nums = nums[:]
+    left_rotate_normal(nums, random.randint(0, len(test_nums)))
+
+print(timeit.timeit('test_left_rotate_reverse()', number=1000, setup="from __main__ import test_left_rotate_reverse"))
+print(timeit.timeit('test_left_rotate_jump()', number=1000, setup="from __main__ import test_left_rotate_jump"))
+print(timeit.timeit('test_left_rotate_normal()', number=1000, setup="from __main__ import test_left_rotate_normal"))
+```
+
+    2.267212925973581
+    2.8630741160013713
+    0.15271255999687128
+
+
+多利用$O(N)$空间的正常方法居然是最快的！这也许是python的slice的功劳，而求逆的方法比跳转法要快一些。
