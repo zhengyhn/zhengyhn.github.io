@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Git Cheat Sheet in Our Team - Hank&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Hank" />
+  <meta name="description" content="
+" />
+
+  <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.37.1" />
+
+
+<link rel="canonical" href="http://zhengyhn.github.io/post/git-cheat-sheet-in-our-team/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<link href="/dist/even.min.css?v=3.1.1" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="Git Cheat Sheet in Our Team" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://zhengyhn.github.io/post/git-cheat-sheet-in-our-team/" />
+
+
+
+<meta property="article:published_time" content="2018-09-26T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-09-26T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Git Cheat Sheet in Our Team">
+<meta itemprop="description" content="">
+
+
+<meta itemprop="datePublished" content="2018-09-26T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-09-26T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="3234">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git Cheat Sheet in Our Team"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Hank&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Hank&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Git Cheat Sheet in Our Team</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-09-26 </span>
+        
+        <span class="more-meta"> 约 3234 字 </span>
+        <span class="more-meta"> 预计阅读 7 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#git流程">Git流程</a></li>
+<li><a href="#保持本地master分支最新">保持本地master分支最新</a></li>
+<li><a href="#新建分支规范">新建分支规范</a></li>
+<li><a href="#commit规范">commit规范</a>
+<ul>
+<li><a href="#commit-message应该要详细清晰">commit message应该要详细清晰</a></li>
+<li><a href="#提pr之前相对于master分支应该只有一个commit">提pr之前相对于master分支应该只有一个commit</a></li>
+</ul></li>
+<li><a href="#如何将多个commit合并成一个">如何将多个commit合并成一个</a>
+<ul>
+<li><a href="#使用rebase">使用rebase</a></li>
+<li><a href="#使用reset">使用reset</a></li>
+</ul></li>
+<li><a href="#在当前任务分支强制推送到远程分支">在当前任务分支强制推送到远程分支</a></li>
+<li><a href="#应该经常rebase最新的master代码">应该经常rebase最新的master代码</a></li>
+<li><a href="#如何回滚代码">如何回滚代码</a></li>
+<li><a href="#本地的commit弄乱了-如何同步远程分支的代码并保留我的改动">本地的commit弄乱了，如何同步远程分支的代码并保留我的改动?</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    
+
+    
+    <div class="post-content">
+      <p></p>
+
+<p>由于近期有团队成员对git不是很熟悉，加上团队对git操作没有规范，通过此文规范团队的git规范，同时让成员学会一些常用的git操作，提高工作效率，减少错误。</p>
+
+<p>其实本人也是半桶水，git有很多技巧以及高级用法，我都没用上，只是记录一些工作中经常使用的技巧和个人推崇的规范。</p>
+
+<h2 id="git流程">Git流程</h2>
+
+<p>结合团队的情况，由于我们追求快速迭代，业务不是特别复杂，并且把任务拆分很细，所以基本每个人独立开发一个任务，开发完立即发布，没有太多任务之间的依赖，所以制定Git流程如下：</p>
+
+<p>接到任务 &ndash;&gt; 基于本地master分支新建任务分支 &ndash;&gt; 开发 &ndash;&gt; 在该分支上构建docker镜像部署到测试环境测试 &ndash;&gt; 提pull request &ndash;&gt; 合并到远程master分支</p>
+
+<p>整个开发过程基本上会使用到下面的命令:</p>
+
+<pre><code>
+# 切换到master本地分支
+git checkout master
+# 拉取远程master分支代码并合并到本地master分支
+git pull origin master
+
+# 基于本地master分支新创建本地分支feat-refract-register
+git checkout -b feat-refract-register
+# 查看当前修改状态
+git status
+# 将修改放入暂存区
+git add -A
+# 将暂存区的修改放入本地仓库
+git commit -m &quot;refract register&quot;
+# 将修改放入暂存区
+git add -A
+# 将暂存区的修改放入本地仓库，并合并到上一个commit中
+git commit --amend
+# 将本地分支feat-refract-register推送到远程的同名分支
+git push origin feat-refract-register -f
+
+# 切换到master本地分支
+git checkout master
+# 拉取远程master分支代码并合并到本地master分支
+git pull origin master
+
+# 重新以本地master分支为base，将修改置于该base之上，并修复冲突
+git rebase master
+# 将本地分支feat-refract-register推送到远程的同名分支
+git push origin feat-refract-register -f
+</code></pre>
+
+<h2 id="保持本地master分支最新">保持本地master分支最新</h2>
+
+<p>养成习惯，在新建分支之前，保持本地master分支最新，可以防止在一份很旧的代码上修改，以碰到bug或者奇怪的问题。</p>
+
+<pre><code>
+# 切换到master本地分支
+git checkout master
+# 拉取远程master分支代码并合并到本地master分支
+git pull origin master
+</code></pre>
+
+<h2 id="新建分支规范">新建分支规范</h2>
+
+<p>由于我们的业务简单，而且发布快速，不会出现将所有改动合并成一个release一起发布的情况，所以制定新建分支规范如下：</p>
+
+<ul>
+<li>任务分支: feat-xxxx</li>
+<li>修bug分支: fix-xxxx</li>
+</ul>
+
+<p>除非特殊情况，每次新建分支应该在本地master分支的基础上创建。</p>
+
+<pre><code>
+# 基于本地master分支新创建本地分支feat-refract-register
+git checkout -b feat-refract-register
+</code></pre>
+
+<h2 id="commit规范">commit规范</h2>
+
+<h3 id="commit-message应该要详细清晰">commit message应该要详细清晰</h3>
+
+<p>下面是好的message:</p>
+
+<pre><code>
+commit 72508447e05deec792832f5286d27b25a373be1a (HEAD -&gt; master)
+Author: yuanhang zheng &lt;yuanhang.zheng@qq.com&gt;
+Date:   Thu Sep 27 23:36:27 2018 +0800
+
+    1. 增加了注册功能
+    2. 增加redis缓存加快查询功能
+</code></pre>
+
+<p>而这一个是差的message:</p>
+
+<pre><code>
+commit 7f3cbe4ff557550807999df6604f5b1220821fc2 (origin/master, origin/HEAD)
+Author: yuanhang zheng &lt;yuanhang.zheng@qq.com&gt;
+Date:   Mon Sep 3 22:11:32 2018 +0800
+
+    solve some problems
+</code></pre>
+
+<h3 id="提pr之前相对于master分支应该只有一个commit">提pr之前相对于master分支应该只有一个commit</h3>
+
+<p>由于我们的任务一般情况下只有一个人在开发，所以所有的改动应该合并成一个commit，通过下面的方法来实现。</p>
+
+<pre><code>
+# 将修改放入暂存区
+git add -A
+# 将暂存区的修改放入本地仓库
+git commit -m &quot;refract register&quot;
+
+# 切换另外一个分支开发另外一个功能
+# 切换回这个分支，继续开发
+
+# 将修改放入暂存区
+git add -A
+# 将暂存区的修改放入本地仓库，并合并到上一个commit中
+git commit --amend
+</code></pre>
+
+<p>如果是多个人共用一个分支开发，每次提交应该使用一个独立的commit，如果使用&ndash;amend，另外一个人pull代码将会冲突，等到开发完成提pr之前再把多个commit合并成一个。</p>
+
+<h2 id="如何将多个commit合并成一个">如何将多个commit合并成一个</h2>
+
+<p>这是工作中比较常用的技巧，有两种方法。</p>
+
+<h3 id="使用rebase">使用rebase</h3>
+
+<p>首先使用git log找到要合并的commit里面最早的一条的hash值，复制下来，记做aaa吧。
+然后，通过git rebase -i aaa ，这个时候会出现一个commit的页面，在最顶部默认全部commit前面是pick:</p>
+
+<pre><code>
+pick dcaaa6c add more problems
+pick 33b40c3 solve more problems
+pick 7f3cbe4 solve some problems
+pick 1fd23bb test
+
+# Rebase 43ca4bf..1fd23bb onto 43ca4bf (4 commands)
+#
+# Commands:
+# p, pick = use commit
+# r, reword = use commit, but edit the commit message
+# e, edit = use commit, but stop for amending
+# s, squash = use commit, but meld into previous commit
+# f, fixup = like &quot;squash&quot;, but discard this commit's log message
+# x, exec = run command (the rest of the line) using shell
+# d, drop = remove commit
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+</code></pre>
+
+<p>下面有注释说明，pick意思是使用这个commit，我们要合并成一个commit，就把前面的改成s(squash)，意思是使用这个commit，但是会合并到上一个commit，变成这样子：</p>
+
+<pre><code>
+s dcaaa6c add more problems
+s 33b40c3 solve more problems
+s 7f3cbe4 solve some problems
+s 1fd23bb test
+
+</code></pre>
+
+<p>保存退出之后，将会出现下一个页面:</p>
+
+<pre><code>
+# This is a combination of 5 commits.
+# This is the 1st commit message:
+
+solve some problems
+
+# This is the commit message #2:
+
+add more problems
+
+# This is the commit message #3:
+
+solve more problems
+
+# This is the commit message #4:
+
+solve some problems
+
+# This is the commit message #5:
+
+test
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Mon Jun 25 07:39:33 2018 +0800
+#
+# interactive rebase in progress; onto 43ca4bf
+# Last commands done (4 commands done):
+#    s 7f3cbe4 solve some problems
+#    s ca161f2 test
+# No commands remaining.
+# You are currently rebasing branch 'master' on '43ca4bf'.
+#
+</code></pre>
+
+<p>这个时候，我们就要把commit的message合并成一个了，比如这样子：</p>
+
+<pre><code>
+test solve some problems
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Mon Jun 25 07:39:33 2018 +0800
+#
+# interactive rebase in progress; onto 43ca4bf
+# Last commands done (3 commands done):
+#    s 33b40c3 solve more problems
+#    s 7f3cbe4 solve some problems
+# Next command to do (1 remaining command):
+#    pick 1fd23bb test
+# You are currently rebasing branch 'master' on '43ca4bf'.
+#
+</code></pre>
+
+<p>再保存退出，这个时候git log来看就变成一个commit了。</p>
+
+<h3 id="使用reset">使用reset</h3>
+
+<p>git reset也是可以做到合并commit的效果，与其说合并commit，不如说是把前面的commit去掉，再提交一个commit。</p>
+
+<p>首先git log找到要合并的commit里面，最早的commit，并找到在它之前的一个commit的hash值，记做aaa吧。
+然后，通过git reset &ndash;soft aaa来将commit回到aaa的历史状态，&ndash;soft表示工作区的代码不丢弃，虽然回到那个历史状态，但是改动的代码还是会保留。
+最后，再git commit一下，编辑commit message，提交就是一个commit了。</p>
+
+<h2 id="在当前任务分支强制推送到远程分支">在当前任务分支强制推送到远程分支</h2>
+
+<p>做了&ndash;amend的commit和rebase或reset之后，往往需要强制推送到远程分支，由于一个分支一般只有一个人开发，强制更新是没有问题的，如果是master，在非特殊情况下是不允许的。所以我们有：</p>
+
+<pre><code>
+# 将本地分支feat-refract-register推送到远程的同名分支
+git push origin feat-refract-register -f
+</code></pre>
+
+<h2 id="应该经常rebase最新的master代码">应该经常rebase最新的master代码</h2>
+
+<p>我们之前的用法是在当前分支合并master的代码，这样子会增加一条merge的commit，每次merge master的代码，就会增加多一个commit，污染了整个commit的历史，而且不适合回滚。</p>
+
+<p>如果我们时刻保持只有一个commit，并且经常rebase master的代码，那提pr的时候将会非常顺利，不会有冲突，提交也是非常干净的。</p>
+
+<p>rebase的命令非常简单，在本地同步了远程master代码之后，在任务分支上，执行下面命令：</p>
+
+<pre><code>
+# 重新以本地master分支为base，将修改置于该base之上，并修复冲突
+git rebase master
+</code></pre>
+
+<p>rebase的时候有可能会有冲突，解决冲突之后，就用git add放到暂存区，然后用git rebase &ndash;continue继续进行rebase。</p>
+
+<p>如果当前改动提交了太多commit，那rebase将会很痛苦，因为rebase的原理会基于master分支应用每一个commit，如果每一个commit都有冲突，将要解决多次冲突，很麻烦，这就是为什么要时刻保持只有一个commit的原因。</p>
+
+<h2 id="如何回滚代码">如何回滚代码</h2>
+
+<p>git revert可以直接回滚代码，首先git log找到你要回滚的commit的hash值，记做aaa吧，然后:</p>
+
+<pre><code>
+git revert aaa
+</code></pre>
+
+<p>它的原理是，增加一个commit，对原commit做反向操作。</p>
+
+<p>操作完成之后，还要把本地的分支推送到远程分支，以达到回滚的效果。</p>
+
+<h2 id="本地的commit弄乱了-如何同步远程分支的代码并保留我的改动">本地的commit弄乱了，如何同步远程分支的代码并保留我的改动?</h2>
+
+<p>这是一个小技巧，同样是用git reset来实现的。</p>
+
+<p>首先，找到一个很久以前的commit的hash值，记做aaa吧。
+然后，git reset &ndash;soft aaa，它会将commit回退到aaa的状态，但是代码保留现在的。
+接着，git pull origin master，同步远程分支的代码下来，再commit现在的改动就行了。</p>
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Hank</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2018-09-26</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/learning-path-finding-algorithms/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Learning Path Finding Algorithms</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+          <a class="next" href="/post/list-rotate-algorithms/">
+            <span class="next-text nav-default">List Rotate Algorithms</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:yuanhang.zheng@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/zhengyhn" class="iconfont icon-github" title="github"></a>
+  <a href="http://zhengyhn.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+    <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2017 - 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Hank</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+<script></script>
+<script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script>
+<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.min.js?v=3.1.1"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

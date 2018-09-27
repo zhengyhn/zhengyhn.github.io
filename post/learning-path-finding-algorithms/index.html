@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>List Rotate Algorithms - Hank&#39;s Blog</title>
+  <title>Learning Path Finding Algorithms - Hank&#39;s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -30,7 +30,7 @@
 <meta name="generator" content="Hugo 0.37.1" />
 
 
-<link rel="canonical" href="http://zhengyhn.github.io/post/list-rotate-algorithms/" />
+<link rel="canonical" href="http://zhengyhn.github.io/post/learning-path-finding-algorithms/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -50,20 +50,16 @@
 
 
 
-<meta property="og:title" content="List Rotate Algorithms" />
+<meta property="og:title" content="Learning Path Finding Algorithms" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/list-rotate-algorithms/" />
+<meta property="og:url" content="http://zhengyhn.github.io/post/learning-path-finding-algorithms/" />
 
 
 
-<meta property="article:published_time" content="2018-09-13T00:00:00&#43;00:00"/>
+<meta property="article:published_time" content="2018-09-27T00:00:00&#43;00:00"/>
 
-<meta property="article:modified_time" content="2018-09-13T00:00:00&#43;00:00"/>
-
-
-
-
+<meta property="article:modified_time" content="2018-09-27T00:00:00&#43;00:00"/>
 
 
 
@@ -71,19 +67,23 @@
 
 
 
-<meta itemprop="name" content="List Rotate Algorithms">
+
+
+
+
+<meta itemprop="name" content="Learning Path Finding Algorithms">
 <meta itemprop="description" content="">
 
 
-<meta itemprop="datePublished" content="2018-09-13T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2018-09-13T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="985">
+<meta itemprop="datePublished" content="2018-09-27T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-09-27T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="502">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="List Rotate Algorithms"/>
+<meta name="twitter:title" content="Learning Path Finding Algorithms"/>
 <meta name="twitter:description" content=""/>
 
 <!--[if lte IE 9]>
@@ -151,13 +151,13 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">List Rotate Algorithms</h1>
+      <h1 class="post-title">Learning Path Finding Algorithms</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2018-09-13 </span>
+        <span class="post-time"> 2018-09-27 </span>
         
-        <span class="more-meta"> 约 985 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span class="more-meta"> 约 502 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -179,128 +179,126 @@
     <div class="post-content">
       <p></p>
 
-<p>最近在《编程珠玑》上看到一道很有趣的题目:</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib notebook
 
-<p>假设我们在开发一个编辑器，要实现一个功能，将下面代码的2个函数调换位置，该怎么做呢？如果空间复杂度要求$O(1)$，又应该怎么做呢？</p>
+N = 10
+OBSTALE = '1'
+ROAD = '*'
+START = 'S'
+END = 'E'
+game_map = np.array([[ROAD] * 10] * 10)
+game_map[1:5, 1] = OBSTALE
+game_map[8:10, 1] = OBSTALE
+game_map[2:6, 3] = OBSTALE
+game_map[7:10, 3] = OBSTALE
+game_map[1:5, 5] = OBSTALE
+game_map[6:8, 5] = OBSTALE
+game_map[0:3, 7] = OBSTALE
+game_map[4:6, 7] = OBSTALE
+game_map[0, 0] = START
+game_map[8, 7] = END
 
-<pre><code class="language-python">texts = [
-    'def add(a, b):',
-    '  return a + b',
-    ' ',
-    'def sub(a, b):',
-    '  retturn a - b',
-    ' '
-]
+for row in game_map:
+    for col in row:
+        print(col, end='')
+    print('')
 </code></pre>
 
-<p>其实这就是数组左旋转的问题，将数组的前3个元素移到数组的结尾。我最直接的想法，就是用另外一个数组保存前3个元素，然后将后3个元素往前面移动，
-最后把前面保存的3个元素放到结尾，代码也比较简洁:</p>
+<pre><code>S******1**
+*1***1*1**
+*1*1*1*1**
+*1*1*1****
+*1*1*1*1**
+***1***1**
+*****1****
+***1*1****
+*1*1***E**
+*1*1******
+</code></pre>
 
-<pre><code class="language-python">def left_rotate_normal(texts, rotate_len):
-    copy = texts[:rotate_len]
-    texts[:len(texts) - rotate_len] = texts[rotate_len:]
-    texts[len(texts) - rotate_len:] = copy
+<pre><code class="language-python">class Node:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
     
-test_texts = texts[:]
-print(test_texts)
-left_rotate_normal(test_texts, 3)
-print(test_texts)
-</code></pre>
-
-<pre><code>['def add(a, b):', '  return a + b', ' ', 'def sub(a, b):', '  retturn a - b', ' ']
-['def sub(a, b):', '  retturn a - b', ' ', 'def add(a, b):', '  return a + b', ' ']
-</code></pre>
-
-<p>测试结果，是没有问题的，这个算法的最大问题是，需要额外开辟空间，如果数组很大或要移动的部分很大，就会额外占用内存。</p>
-
-<p>书里面给出了两种不需要额外开辟空间的方法:</p>
-
-<p>第一种我叫它跳跃法吧，其实是将整块元素的移动分成一个一个元素的移动，每次移动一个元素，就把后面的补充上来, 以第一个元素为例，
-先用一个临时变量temp保存第一个元素$texts[0]$, 然后将$texts[i]$移动到$texts[0]$, $texts[2 * i]$移到到$texts[i]$，直到结束，最后将
-temp赋值回末尾空出来的位置。代码实现如下:</p>
-
-<pre><code class="language-python">def left_rotate_jump(texts, rotate_len):
-    i = 0
-    while i &lt; rotate_len:
-        temp = texts[i]
-        j = rotate_len
-        k = i
-        while j &lt; len(texts):
-            texts[k] = texts[j]
-            k = j
-            j *= 2
-        texts[j // 2] = temp
-        i += 1
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+    
+    def __hash__(self):
+        return N * self.x + self.y
+    
+    def __repr__(self):
+        return '({0}, {1})'.format(self.x, self.y)
+    
+class Edge:
+    def __init__(self, node1, node2, weight):
+        self.node1 = node1
+        self.node2 = node2
+        self.weight = weight
+    
+    def either(self):
+        return self.node1
+    
+    def other(self, node):
+        if node == self.node1:
+            return self.node2
+        else:
+            return self.node1
         
-test_texts = texts[:]
-print(test_texts)
-left_rotate_jump(test_texts, 3)
-print(test_texts)
+class Graph:
+    def __init__(self, game_map):
+        self.num_nodes = N * N
+        self.adj = {}
+        for i in range(0, len(game_map)):
+            for j in range(0, len(game_map[i])):
+                node = Node(i, j)
+                self.adj[node] = []
+        for i in range(0, len(game_map)):
+            for j in range(0, len(game_map[i])):
+                if game_map[i][j] != OBSTALE:
+                    k = i - 1
+                    while k &gt;= 0 and game_map[k][j] != OBSTALE:
+                        edge = Edge(Node(i, j), Node(k, j), i - k)
+                        self.add_edge(edge)
+                        k -= 1
+                    k = j + 1
+                    while k &lt; N and game_map[i][k] != OBSTALE:
+                        edge = Edge(Node(i, j), Node(i, k), k - j)
+                        self.add_edge(edge)
+                        k += 1
+                    k = i + 1
+                    while k &lt; N and game_map[k][j] != OBSTALE:
+                        edge = Edge(Node(i, j), Node(k, j), k - i)
+                        self.add_edge(edge)
+                        k += 1
+                    k = j - 1
+                    while k &gt;= 0 and game_map[i][k] != OBSTALE:
+                        edge = Edge(Node(i, j), Node(i, k), j - k)
+                        self.add_edge(edge)
+                        k -= 1
+                    
+    def add_edge(self, edge):
+        node1 = edge.either()
+        node2 = edge.other(node1)
+        self.adj[node1].append(node2)
+        self.adj[node2].append(node1)
+                        
+graph = Graph(game_map.tolist())
+for key, value in zip(range(3), graph.adj.items()):
+    print(value[0], value[1])
 </code></pre>
 
-<pre><code>['def add(a, b):', '  return a + b', ' ', 'def sub(a, b):', '  retturn a - b', ' ']
-['def sub(a, b):', 'def add(a, b):', '  return a + b', ' ', '  retturn a - b', ' ']
+<pre><code>(0, 0) [(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0), (9, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0), (9, 0)]
+(0, 1) [(0, 0), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 0), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6)]
+(0, 2) [(0, 0), (0, 1), (0, 3), (0, 4), (0, 5), (0, 6), (1, 2), (2, 2), (3, 2), (4, 2), (5, 2), (6, 2), (7, 2), (8, 2), (9, 2), (0, 1), (0, 0), (0, 3), (0, 4), (0, 5), (0, 6), (1, 2), (2, 2), (3, 2), (4, 2), (5, 2), (6, 2), (7, 2), (8, 2), (9, 2)]
 </code></pre>
 
-<p>还有一种方法，也是我觉得很神奇的算法，就是通过几次反转，就实现了数组的左旋转！原理是, 我们把数组分成2部分a和b，然后有这个恒等式:
-$$ ba = (a^rb^r)^r $$
-其中r是反转的意思。根据这个恒等式，就可以这么实现：</p>
-
-<pre><code class="language-python">def left_rotate_reverse(texts, rotate_len):
-    reverse(texts, 0, rotate_len - 1)
-    reverse(texts, rotate_len, len(texts) - 1)
-    reverse(texts, 0, len(texts) - 1)
-    
-def reverse(texts, start, end):
-    while start &lt; end:
-        temp = texts[start]
-        texts[start] = texts[end]
-        texts[end] = temp
-        start += 1
-        end -= 1
-
-test_texts = texts[:]
-print(test_texts)
-left_rotate_reverse(test_texts, 3)
-print(test_texts)
+<pre><code class="language-python">def floy(graph, start, end):
+    distance = [[float('inf') for _ in range(N * N)]] * (N * N)
+    next = []
 </code></pre>
-
-<pre><code>['def add(a, b):', '  return a + b', ' ', 'def sub(a, b):', '  retturn a - b', ' ']
-['def sub(a, b):', '  retturn a - b', ' ', 'def add(a, b):', '  return a + b', ' ']
-</code></pre>
-
-<p>非常神奇，而且很简洁！三种算法的时间复杂度都是$O(n)$，后面2种方法空间复杂度为$O(1)$，不过最后一种算法最简洁，也容易理解。</p>
-
-<p>现在来比较一下三种算法的性能:</p>
-
-<pre><code class="language-python">import timeit
-import random
-
-nums = [random.randint(0, 10000) for i in range(10000)]
-
-def test_left_rotate_reverse():
-    test_nums = nums[:]
-    left_rotate_reverse(nums, random.randint(0, len(test_nums)))
-    
-def test_left_rotate_jump():
-    test_nums = nums[:]
-    left_rotate_jump(nums, random.randint(0, len(test_nums)))
-
-def test_left_rotate_normal():
-    test_nums = nums[:]
-    left_rotate_normal(nums, random.randint(0, len(test_nums)))
-
-print(timeit.timeit('test_left_rotate_reverse()', number=1000, setup=&quot;from __main__ import test_left_rotate_reverse&quot;))
-print(timeit.timeit('test_left_rotate_jump()', number=1000, setup=&quot;from __main__ import test_left_rotate_jump&quot;))
-print(timeit.timeit('test_left_rotate_normal()', number=1000, setup=&quot;from __main__ import test_left_rotate_normal&quot;))
-</code></pre>
-
-<pre><code>2.267212925973581
-2.8630741160013713
-0.15271255999687128
-</code></pre>
-
-<p>多利用$O(N)$空间的正常方法居然是最快的！这也许是python的slice的功劳，而求逆的方法比跳转法要快一些。</p>
     </div>
 
     
@@ -311,7 +309,7 @@ print(timeit.timeit('test_left_rotate_normal()', number=1000, setup=&quot;from _
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
-    <span class="item-content">2018-09-13</span>
+    <span class="item-content">2018-09-27</span>
   </p>
   
   <p class="copyright-item">
@@ -346,14 +344,9 @@ print(timeit.timeit('test_left_rotate_normal()', number=1000, setup=&quot;from _
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/git-cheat-sheet-in-our-team/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Git Cheat Sheet in Our Team</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
         
-          <a class="next" href="/post/learning-string-sorting-algorithm/">
-            <span class="next-text nav-default">Learning String Sorting Algorithm</span>
+          <a class="next" href="/post/git-cheat-sheet-in-our-team/">
+            <span class="next-text nav-default">Git Cheat Sheet in Our Team</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
