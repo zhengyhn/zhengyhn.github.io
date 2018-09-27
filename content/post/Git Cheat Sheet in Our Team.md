@@ -1,9 +1,9 @@
 ---
 {
-  "date": "2018-09-26",
-  "slug": "Git Cheat Sheet in Our Team",
+  "title": "Git Cheat Sheet in Our Team",
   "subtitle": "Generic subtitle",
-  "title": "Git Cheat Sheet in Our Team"
+  "date": "2018-09-26",
+  "slug": "Git Cheat Sheet in Our Team"
 }
 ---
 <!--more-->

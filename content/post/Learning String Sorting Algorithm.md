@@ -1,9 +1,9 @@
 ---
 {
-  "date": "2018-09-08",
-  "slug": "Learning String Sorting Algorithm",
+  "title": "Learning String Sorting Algorithm",
   "subtitle": "Generic subtitle",
-  "title": "Learning String Sorting Algorithm"
+  "date": "2018-09-08",
+  "slug": "Learning String Sorting Algorithm"
 }
 ---
 <!--more-->
