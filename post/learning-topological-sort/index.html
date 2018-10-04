@@ -77,7 +77,7 @@
 
 <meta itemprop="datePublished" content="2018-08-26T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-08-26T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1434">
+<meta itemprop="wordCount" content="1431">
 
 
 
@@ -156,7 +156,7 @@
       <div class="post-meta">
         <span class="post-time"> 2018-08-26 </span>
         
-        <span class="more-meta"> 约 1434 字 </span>
+        <span class="more-meta"> 约 1431 字 </span>
         <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -260,10 +260,13 @@ nx.draw_networkx(G, pos, node_size=500, alpha=0.6, arrowsize=10, arrowstyle='-&g
 
 <h3 id="kanh算法">Kanh算法</h3>
 
-<p>Kanh算法的思想大概是这样子的:
-- 维护一个队列，将所有入度为0的节点依次排队
-- 对于队列中的每个节点，输出，然后删掉它与其他节点的边，即它指向的节点入度都要减1，这个时候如果有入度为0的节点，也放进队列
-- 不断循环上面一个步骤，直到所有节点都处理完</p>
+<p>Kanh算法的思想大概是这样子的:</p>
+
+<ul>
+<li>维护一个队列，将所有入度为0的节点依次排队</li>
+<li>对于队列中的每个节点，输出，然后删掉它与其他节点的边，即它指向的节点入度都要减1，这个时候如果有入度为0的节点，也放进队列</li>
+<li>不断循环上面一个步骤，直到所有节点都处理完</li>
+</ul>
 
 <p>首先，入度为0的节点表示它没有依赖任何节点，所以拓扑排序之后的结果里面，应该首先选取入度为0的节点，这个很好理解。
 接着，为什么要删掉该节点指向其他节点的边呢？其实就是，处理完这个节点之后，删掉这些边，剩下的子图，就是同一个子问题，不断解决子问题，最后就解决了整个问题。</p>
