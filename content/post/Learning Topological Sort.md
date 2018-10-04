@@ -1,9 +1,9 @@
 ---
 {
-  "title": "Learning Topological Sort",
-  "subtitle": "Generic subtitle",
   "date": "2018-08-26",
-  "slug": "Learning Topological Sort"
+  "slug": "Learning Topological Sort",
+  "subtitle": "Generic subtitle",
+  "title": "Learning Topological Sort"
 }
 ---
 <!--more-->
@@ -81,6 +81,7 @@ nx.draw_networkx(G, pos, node_size=500, alpha=0.6, arrowsize=10, arrowstyle='->'
 ### Kanh算法
 
 Kanh算法的思想大概是这样子的:
+
 - 维护一个队列，将所有入度为0的节点依次排队
 - 对于队列中的每个节点，输出，然后删掉它与其他节点的边，即它指向的节点入度都要减1，这个时候如果有入度为0的节点，也放进队列
 - 不断循环上面一个步骤，直到所有节点都处理完
