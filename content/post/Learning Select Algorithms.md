@@ -1,9 +1,9 @@
 ---
 {
-  "date": "2018-10-03",
-  "slug": "Learning Select Algorithms",
+  "title": "Learning Select Algorithms",
   "subtitle": "Generic subtitle",
-  "title": "Learning Select Algorithms"
+  "date": "2018-10-03",
+  "slug": "Learning Select Algorithms"
 }
 ---
 <!--more-->
