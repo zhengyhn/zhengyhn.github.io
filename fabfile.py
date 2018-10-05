@@ -4,6 +4,7 @@ import sys
 import shlex
 import subprocess as sp
 import time
+import copy
 from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
@@ -241,7 +242,7 @@ def update_notebook_metadata(notebook: Union[Path, str],
         'date': date,
         'slug': slug,
     }
-
+    old_notebook_data = copy.deepcopy(notebook_data)
     # update front-matter
     notebook_data['metadata']['front-matter'] = front_matter
 
@@ -252,8 +253,9 @@ def update_notebook_metadata(notebook: Union[Path, str],
     }
     notebook_data['metadata']['hugo-jupyter'] = hugo_jupyter
 
-    # write over old notebook with new front-matter
-    notebook_path.write_text(json.dumps(notebook_data))
+    if notebook_data != old_notebook_data:
+        # write over old notebook with new front-matter
+        notebook_path.write_text(json.dumps(notebook_data))
 
     # make the notebook trusted again, now that we've changed it
     sp.run(['jupyter', 'trust', str(notebook_path)])
@@ -280,8 +282,8 @@ class NotebookHandler(PatternMatchingEventHandler):
             # and render notebook until filename is
             # changed from untitled...
             if 'untitled' not in event.src_path.lower() and not event.src_path.startswith('.'):
-                # self.delete_notebook_md(event)
-                # update_notebook_metadata(event.src_path)
+                self.delete_notebook_md(event)
+                update_notebook_metadata(event.src_path)
                 render_to = self.get_render_to_field(event)
                 rendered = write_hugo_formatted_nb_to_md(event.src_path, render_to=render_to)
                 self.notebook_render[event.src_path].append(rendered)
