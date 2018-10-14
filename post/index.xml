@@ -6,10 +6,28 @@
     <description>Recent content in Posts on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 05 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Different Implementation of Binary Tree Traversal</title>
+      <link>http://zhengyhn.github.io/post/different-implementation-of-binary-tree-traversal/</link>
+      <pubDate>Sun, 14 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/different-implementation-of-binary-tree-traversal/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Learning SubString Searching Algorithms</title>
+      <link>http://zhengyhn.github.io/post/learning-substring-searching-algorithms/</link>
+      <pubDate>Sat, 06 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/learning-substring-searching-algorithms/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Leftist tree&#39;s implementation and application</title>
@@ -602,7 +620,7 @@ Encapsulation is not invisibility.</description>
       <pubDate>Wed, 24 Apr 2013 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/algorithm/kmp/</guid>
-      <description>动机 在被各大公司的笔试面试给鄙视之后，我要开始努力了。看了一本叫做 《C/C++面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于</description>
+      <description>动机 看了一本叫做《C/C++面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于是开始了KMP之旅！ 在网上看了好几篇中文文章，没一</description>
     </item>
     
     <item>

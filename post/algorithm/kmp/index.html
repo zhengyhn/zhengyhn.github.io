@@ -17,7 +17,7 @@
 
 
 <meta name="author" content="Hank" />
-  <meta name="description" content="动机 在被各大公司的笔试面试给鄙视之后，我要开始努力了。看了一本叫做 《C/C&#43;&#43;面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于" />
+  <meta name="description" content="动机 看了一本叫做《C/C&#43;&#43;面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于是开始了KMP之旅！ 在网上看了好几篇中文文章，没一" />
 
   <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
@@ -50,7 +50,7 @@
 
 
 <meta property="og:title" content="KMP算法-我的理解" />
-<meta property="og:description" content="动机 在被各大公司的笔试面试给鄙视之后，我要开始努力了。看了一本叫做 《C/C&#43;&#43;面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于" />
+<meta property="og:description" content="动机 看了一本叫做《C/C&#43;&#43;面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于是开始了KMP之旅！ 在网上看了好几篇中文文章，没一" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/algorithm/kmp/" />
 
@@ -71,19 +71,19 @@
 
 
 <meta itemprop="name" content="KMP算法-我的理解">
-<meta itemprop="description" content="动机 在被各大公司的笔试面试给鄙视之后，我要开始努力了。看了一本叫做 《C/C&#43;&#43;面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于">
+<meta itemprop="description" content="动机 看了一本叫做《C/C&#43;&#43;面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于是开始了KMP之旅！ 在网上看了好几篇中文文章，没一">
 
 
 <meta itemprop="datePublished" content="2013-04-24T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-04-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2483">
+<meta itemprop="wordCount" content="2785">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="KMP算法-我的理解"/>
-<meta name="twitter:description" content="动机 在被各大公司的笔试面试给鄙视之后，我要开始努力了。看了一本叫做 《C/C&#43;&#43;面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于"/>
+<meta name="twitter:description" content="动机 看了一本叫做《C/C&#43;&#43;面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于是开始了KMP之旅！ 在网上看了好几篇中文文章，没一"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -155,8 +155,8 @@
       <div class="post-meta">
         <span class="post-time"> 2013-04-24 </span>
         
-        <span class="more-meta"> 约 2483 字 </span>
-        <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span class="more-meta"> 约 2785 字 </span>
+        <span class="more-meta"> 预计阅读 6 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -190,16 +190,10 @@
 
 <h1 id="动机">动机</h1>
 
-<p>在被各大公司的笔试面试给鄙视之后，我要开始努力了。看了一本叫做
-《C/C++面试题》的电子书，里面提到找子字符串的算法，最好的是KMP，
+<p>看了一本叫做《C/C++面试题》的电子书，里面提到找子字符串的算法，最好的是KMP，
 于是开始了KMP之旅！</p>
 
-<p>在网上看了好几篇中文文章，没一篇看得懂，我承认我智商低，我承认我
-能力不够，但是搞数学和搞算法的人也太不个性化了，对用户太不友好了，
-文章关键是要让初学者看懂，不然你写的文章，菜鸟看不懂，大牛又不屑！</p>
-
-<p>没办法，本来以为看中文文章可以节省点时间，到头来还是要找老外的文章
-来看，找到了2篇文章，深有启发：</p>
+<p>在网上看了好几篇中文文章，没一篇看得懂，最后找到了2篇英文文章，深有启发：</p>
 
 <ol>
 <li><a href="http://www.geeksforgeeks.org/searching-for-patterns-set-2-kmp-algorithm/">searching-for-patterns-set-2-kmp-algorithm</a></li>
@@ -209,15 +203,12 @@
 <p>特别是第2篇，让我深刻理解了KMP中的预处理，而第1篇则让我学会了如何用高效的方法
 实现预处理。</p>
 
-<p>于是，我也来写一篇文章，用自己的理解来实现KMP算法，希望能帮到那些和我一样
-数学不好智商不高的人。</p>
+<p>于是，我也来写一篇文章，用自己的理解来实现KMP算法。</p>
 
 <h1 id="在哪里优化">在哪里优化？</h1>
 
-<p>如果要让我写一个程序来找到子串，以我的智商，我唯一能想到的方法就是一个一个找，
-当然，<a href="http://www-cs-faculty.stanford.edu/~uno/">knuth</a>
-和他的学生就不会这么笨，人家可是千古神书&rdquo;The Art of Computer
-Programming&rdquo;的作者，他其实是发现了下面的规律。比如，有字符串str：</p>
+<p>如果要让我写一个程序来找到子串，唯一能想到的方法就是一个一个找，这叫做暴力算法。
+KMP算法的作者，他其实是发现了下面的规律。比如，有字符串str：</p>
 
 <pre><code class="language-example">ababaabcbab
 </code></pre>
@@ -227,16 +218,14 @@ Programming&rdquo;的作者，他其实是发现了下面的规律。比如，�
 <pre><code class="language-example">ababab
 </code></pre>
 
-<p>匹配的时候，会发现，就差最后一个a就匹配成功了，太可惜了！就像过了一面和二面
-而最后被HR给灭了一样悲剧。好，这个不是问题，问题是，按照传统的做法，我们会
+<p>匹配的时候，会发现，就差最后一个a就匹配成功了，太可惜了！按照传统的做法，我们会
 从str右移一下，再从头比较，但是很明显，str的第二个字母b和pattern的第一个
-字母a不同，我们应该直接移2下，因为str中的第3个字母到第第5个字母为aba，而
-pattern开头的3个字母为aba，这样匹配的可能性比较大。这是偶然？还是这就是
-真理！</p>
+字母a不同，我们应该直接移2下，因为str中的第3个字母到第5个字母为aba，而
+pattern开头的3个字母为aba，这样匹配就不用重复比较前面已经比较过的地方了。这是偶然？还是真理?</p>
 
 <p>考虑str的前面6位，当pattern匹配到最后的a时，发现不匹配，于是应该往前退回
 3步，正好跳过最前面的ab，到达abaa。这样就省去了一次查找。这正是KMP算法对
-普通算法的优化之处。那么这个3是怎么算出来的呢？</p>
+普通算法的优化之处。可是这个3是怎么算出来的呢？下面来探索一下。</p>
 
 <h1 id="部分匹配表">部分匹配表</h1>
 
@@ -287,7 +276,8 @@ pattern开头的3个字母为aba，这样匹配的可能性比较大。这是偶
 </tbody>
 </table>
 
-<p>要计算这个表中的value，必须先理解下面的概念：</p>
+<p>可以看到，第5个字符a，它的value是3，这个3就是上面要回退的步数，所以，这个算法的核心是计算出来这个部分匹配表。
+要计算这个表中的value，必须先理解下面的概念：</p>
 
 <ol>
 <li><strong>真前缀</strong> :
@@ -299,14 +289,80 @@ pattern开头的3个字母为aba，这样匹配的可能性比较大。这是偶
 
 <p>那么部分匹配表中的value就是：</p>
 
-<pre><code class="language-example">以当前位置结束的前面子串的和后前缀一样的最长真前缀的长度
+<pre><code class="language-example">以当前位置结束的前面子串的所有真后缀和真前缀中，公共的那些里面，最长的子串的长度
 </code></pre>
 
-<p>你肯定看不懂，我来解释一下，如果要求第5个字符a的value，则我们只关心前5个字符
+<p>比较难懂，解释一下，如果要求第5个字符a的value，则我们只关心前5个字符
 ababa，它的真前缀有a, ab, aba, abab真后缀有a, ba, aba, baba, 则真前缀
 和真后缀一样的有：a, aba，而最长的是aba，它的长度是3,于是value为3。</p>
 
-<p>而这个3,就是上面所说的退回3步！</p>
+<p>那凭什么这样子算出来的value为3，就是要回退的步数呢？原理是这样的：</p>
+
+<p>对于模式ababab的子串ababa，它的真前缀为下面加粗的部分:</p>
+
+<p><strong>a</strong>baba</p>
+
+<p><strong>ab</strong>aba</p>
+
+<p><strong>aba</strong>ba</p>
+
+<p><strong>abab</strong>a</p>
+
+<p>真后缀为下面加粗部分:</p>
+
+<p>abab<strong>a</strong></p>
+
+<p>aba<strong>ba</strong></p>
+
+<p>ab<strong>aba</strong></p>
+
+<p>a<strong>baba</strong></p>
+
+<p>真前缀和真后缀一样的有a和aba，放在一起加粗显示来看:</p>
+
+<p><strong>a</strong>baba abab<strong>a</strong></p>
+
+<p><strong>aba</strong>ba ab<strong>aba</strong></p>
+
+<p>回到我们的例子中，有字符串ababaabcbab，现在要用模式ababab来匹配，一开始是这样的：</p>
+
+<pre><code>ababaabcbab
+|||||
+ababab
+</code></pre>
+
+<p>前面5个都匹配上了，现在我们要往后移动进行下一次匹配。暴力的方法是往后移动一位。而实际上我们观察到，由于前5个字符是匹配上的，
+所以原字符串前5个字符组成的子串跟模式的前5个字符组成的子串是一样的，那我们当成这2个子串都是模式，看一下他们相同的真前缀和真后缀。</p>
+
+<p>长度为3的相同真前缀和真后缀:</p>
+
+<p>ab<strong>aba</strong>abcbab</p>
+
+<p><strong>aba</strong>bab</p>
+
+<p>长度为1的相同真前缀和真后缀:</p>
+
+<p>abab<strong>a</strong>abcbab</p>
+
+<p><strong>a</strong>babab</p>
+
+<p>现在有两种移动方法：</p>
+
+<p>这样:</p>
+
+<p>ab<strong>aba</strong>abcbab</p>
+
+<p>__<strong>aba</strong>bab</p>
+
+<p>和这样:</p>
+
+<p>abab<strong>a</strong>abcbab</p>
+
+<p>____<strong>a</strong>babab</p>
+
+<p>当然是选择第一种，因为第一种离起点更近，选择第二种会漏掉第一种匹配的情况，所以我们才要选择最长的公共真前缀和真后缀。</p>
+
+<p>通过查看公共的真前缀和真后缀，我们知道，跳去哪个位置能够让下一次匹配开始，并且事先知道已经匹配了多少个字符。</p>
 
 <h1 id="如何快速计算部分匹配表">如何快速计算部分匹配表</h1>
 
@@ -314,6 +370,48 @@ ababa，它的真前缀有a, ab, aba, abab真后缀有a, ba, aba, baba, 则真�
 的话，那这个算法的效率就太低了，我们有更好的办法来计算。</p>
 
 <p>先看看上面的那个表的每一个value是怎么算出来的。</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">pattern</th>
+<th align="left">a</th>
+<th align="left">b</th>
+<th align="left">a</th>
+<th align="left">b</th>
+<th align="left">a</th>
+<th align="left">b</th>
+<th align="left">c</th>
+<th align="left">a</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">index</td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">3</td>
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">6</td>
+<td align="left">7</td>
+</tr>
+
+<tr>
+<td align="left">value</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">3</td>
+<td align="left">4</td>
+<td align="left">0</td>
+<td align="left">1</td>
+</tr>
+</tbody>
+</table>
 
 <ol>
 <li>第一个必然是0,因为没有真前缀和真后缀。</li>
@@ -348,12 +446,9 @@ ababa，它的真前缀有a, ab, aba, abab真后缀有a, ba, aba, baba, 则真�
 - 当全部匹配时，匹配成功，返回起始位置
 </code></pre>
 
-<p>为什么要回退part_tab[n -
-1]个位置呢？假定从位置k就开始匹配，则这个位置就是
-pattern拥有前n个字符的子串的真前缀位置，part_tab[n -
-1]中保存的就是pattern
-拥有前n个字符的子串的最长前后前缀的长度，在i位置，回退part_tab[n -
-1]就刚好
+<p>为什么要回退part_tab[n - 1]个位置呢？假定从位置k就开始匹配，则这个位置就是
+pattern拥有前n个字符的子串的真前缀位置，part_tab[n - 1]中保存的就是pattern
+拥有前n个字符的子串的最长前后前缀的长度，在i位置，回退part_tab[n - 1]就刚好
 跳过了无用的字符，到达下一个和位置k拥有一样的真前缀的位置。这样开始下一轮的查找
 才有意义。</p>
 
@@ -430,8 +525,7 @@ int index_of(char *str, char *pattern)
 
 <h1 id="总结">总结</h1>
 
-<p>这个算法，关键于是理解它是怎样从O(n * m)优化成O(n +
-m)的，理解在哪里优化了。
+<p>这个算法，关键于是理解它是怎样从O(n * m)优化成O(n + m)的，理解在哪里优化了。
 并且要知道辅助数组part_tab的用处及计算方法，后面的查找就很简单了。</p>
 
     </div>
