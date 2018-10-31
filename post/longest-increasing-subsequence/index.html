@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>比较高效的整数求幂法 - Hank&#39;s Blog</title>
+  <title>Longest Increasing Subsequence - Hank&#39;s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -17,7 +17,8 @@
 
 
 <meta name="author" content="Hank" />
-  <meta name="description" content="最近在看快速求fibonaci数列的方法，需要用到快速求幂法，于是参考了这篇文章 ， 做下笔记。 最直观的方法 如果叫我求一个整数的n次幂，我要么用" />
+  <meta name="description" content="
+" />
 
   <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
@@ -29,7 +30,7 @@
 <meta name="generator" content="Hugo 0.37.1" />
 
 
-<link rel="canonical" href="http://zhengyhn.github.io/post/algorithm/quick.exp/" />
+<link rel="canonical" href="http://zhengyhn.github.io/post/longest-increasing-subsequence/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -49,20 +50,16 @@
 
 
 
-<meta property="og:title" content="比较高效的整数求幂法" />
-<meta property="og:description" content="最近在看快速求fibonaci数列的方法，需要用到快速求幂法，于是参考了这篇文章 ， 做下笔记。 最直观的方法 如果叫我求一个整数的n次幂，我要么用" />
+<meta property="og:title" content="Longest Increasing Subsequence" />
+<meta property="og:description" content="" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/algorithm/quick.exp/" />
+<meta property="og:url" content="http://zhengyhn.github.io/post/longest-increasing-subsequence/" />
 
 
 
-<meta property="article:published_time" content="2013-03-11T00:00:00&#43;00:00"/>
+<meta property="article:published_time" content="2018-10-29T00:00:00&#43;00:00"/>
 
-<meta property="article:modified_time" content="2013-03-11T00:00:00&#43;00:00"/>
-
-
-
-
+<meta property="article:modified_time" content="2018-10-29T00:00:00&#43;00:00"/>
 
 
 
@@ -70,20 +67,24 @@
 
 
 
-<meta itemprop="name" content="比较高效的整数求幂法">
-<meta itemprop="description" content="最近在看快速求fibonaci数列的方法，需要用到快速求幂法，于是参考了这篇文章 ， 做下笔记。 最直观的方法 如果叫我求一个整数的n次幂，我要么用">
 
 
-<meta itemprop="datePublished" content="2013-03-11T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2013-03-11T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="644">
+
+
+<meta itemprop="name" content="Longest Increasing Subsequence">
+<meta itemprop="description" content="">
+
+
+<meta itemprop="datePublished" content="2018-10-29T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-10-29T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="838">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="比较高效的整数求幂法"/>
-<meta name="twitter:description" content="最近在看快速求fibonaci数列的方法，需要用到快速求幂法，于是参考了这篇文章 ， 做下笔记。 最直观的方法 如果叫我求一个整数的n次幂，我要么用"/>
+<meta name="twitter:title" content="Longest Increasing Subsequence"/>
+<meta name="twitter:description" content=""/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -150,12 +151,12 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">比较高效的整数求幂法</h1>
+      <h1 class="post-title">Longest Increasing Subsequence</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2013-03-11 </span>
+        <span class="post-time"> 2018-10-29 </span>
         
-        <span class="more-meta"> 约 644 字 </span>
+        <span class="more-meta"> 约 838 字 </span>
         <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -169,11 +170,15 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#最直观的方法">最直观的方法</a></li>
-<li><a href="#效率高的求法">效率高的求法</a></li>
-<li><a href="#神奇的二进制">神奇的二进制</a></li>
-<li><a href="#倒转任意进制数">倒转任意进制数</a></li>
-<li><a href="#较高效的整数求幂法">较高效的整数求幂法</a></li>
+<li>
+<ul>
+<li><a href="#暴力算法">暴力算法</a></li>
+<li><a href="#动态规划">动态规划</a></li>
+<li><a href="#二分查找法">二分查找法</a></li>
+<li><a href="#测试">测试</a></li>
+<li><a href="#性能测试">性能测试</a></li>
+<li><a href="#参考资料">参考资料</a></li>
+</ul></li>
 </ul>
 </nav>
   </div>
@@ -184,121 +189,145 @@
 
     
     <div class="post-content">
-      
+      <p></p>
 
-<p>最近在看快速求fibonaci数列的方法，需要用到快速求幂法，于是参考了<a href="http://blog.csdn.net/hkdgjqr/article/details/5381028">这篇文章</a>
-， 做下笔记。</p>
+<p>求最长递增子序列的长度也是动态规划里面的基础问题。记得当时大学的时候碰到这个问题，想破了脑袋也想不出来非暴力的解法，现在写起动态规划的算法还是比较得心应手的，证明这几年我的确是进步了。</p>
 
-<h1 id="最直观的方法">最直观的方法</h1>
+<p>下面重新复习这个问题，作此笔记。</p>
 
-<p>如果叫我求一个整数的n次幂，我要么用pow，要么写个循环直接相乘。
-比如要求：</p>
+<h2 id="暴力算法">暴力算法</h2>
 
-<pre><code class="language-example">5 ^ 55
+<p>思路是，遍历每个元素，往后面找到一个比它大的数，递归地调用，计算出来当前的最长递增子序列的长度，再取每个元素计算出来的长度取一个最大值。时间得杂度为$O(n!)$</p>
+
+<pre><code class="language-python">import random
+
+def lis_recursive(arr, i):
+    if i == len(arr) - 1:
+        return 1
+    max_len = 0
+    for j in range(i + 1, len(arr)):
+        if arr[j] &gt; arr[i]:
+            length = lis_recursive(arr, j)
+            if length &gt; max_len:
+                max_len = length
+    return max_len + 1
+
+def lis_bruteforce(arr):
+    max_len = 0
+    for i in range(len(arr)):
+        length = lis_recursive(arr, i)
+        if length &gt; max_len:
+            max_len = length
+    return max_len
 </code></pre>
 
-<p>的结果，很明显，要进行54次乘法。要知道，在目前的计算机体系架构中，乘法的计算
-是非常慢的。</p>
+<h2 id="动态规划">动态规划</h2>
 
-<h1 id="效率高的求法">效率高的求法</h1>
+<p>思路是，将上面的递归算法的递归每一步，用一个数组缓存起来结果，以避免重复计算，最后取最大的那个。时间复杂度为$O(n^2)$</p>
 
-<p>有的聪明人（不是我）就想到了减少乘法次数的方法：</p>
-
-<pre><code class="language-example">5 ^ 2 = 5 * 5
-5 ^ 4 = (5 ^ 2) * (5 ^ 2)
-5 ^ 8 = (5 ^ 4) * (5 ^ 4)
-5 ^ 16 = (5 ^ 8) * (5 ^ 8)
-5 ^ 32 = (5 ^ 16) * (5 ^ 16)
-
-5 ^ 55 = 5 ^ (32 + 16 + 4 + 2 + 1)
-       = 5 ^ 32 * 5 ^ 16 * 5 ^ 4 * 5 ^ 2 * 5
+<pre><code class="language-python">def lis_dp(arr):
+    max_len = 0
+    dp = [1 for j in range(0, len(arr))]
+    for i in range(len(arr) - 2, -1, -1):
+        for j in range(i + 1, len(arr)):
+            if arr[i] &lt; arr[j]:
+                dp[i] = max(dp[j] + 1, dp[i])
+        max_len = max(max_len, dp[i])
+    return max_len
 </code></pre>
 
-<p>现在关键是怎么求各个幂了，给出55,你怎么分解它成为32, 16, 4, 2, 1呢？</p>
+<h2 id="二分查找法">二分查找法</h2>
 
-<h1 id="神奇的二进制">神奇的二进制</h1>
+<p>这是一个非常巧妙的方法，基于的思想是，为了得到最长的递增子序列的长度，那当前元素肯定是越小越好，因为这样子后面才可以有更多的元素跟在后面。</p>
 
-<p>看一下55的二进制，为：</p>
+<p>用一个数组min_ends记录在i位置，当最长递增子序列长度为i + 1时，末尾的元素最小的那个，由于递增是有序的，所以可以用二分查找法来找到插入的位置，整个算法的时间复杂度为$O(nlogn)$</p>
 
-<pre><code class="language-example">0011 0111
+<pre><code class="language-python">def bin_search(arr, start, end, key):
+    while start &lt;= end:
+        mid = (start + end) // 2
+        if key &lt;= arr[mid]:
+            end = mid - 1
+        else:
+            start = mid + 1
+    return start
+
+def lis_bin_search(arr):
+    min_ends = [0 for i in range(len(arr))]
+    min_ends[0] = arr[0]
+    length = 1
+    for i in range(1, len(arr)):
+        pos = bin_search(min_ends, 0, length - 1, arr[i])
+        min_ends[pos] = arr[i]
+        if pos == length:
+            length += 1
+    return length
 </code></pre>
 
-<p>可以看到，二进制里面为1的就是要乘的数。于是可以想到，</p>
+<h2 id="测试">测试</h2>
 
-<pre><code class="language-example">我们从最低位开始，如果为1,则乘以这个位的2次幂，否则跳过。
+<p>做一个简单的测试，然后随机生成一些数据用于测试。</p>
+
+<pre><code class="language-python">arr = [3, 0, 2, 1, 4]
+print(lis_bruteforce(arr))
+print(lis_dp(arr))
+print(lis_bin_search(arr))
+
+for i in range(0, 100):
+    arr = [random.randint(0, 9) for i in range(10)]
+    result1 = lis_bruteforce(arr)
+    result2 = lis_dp(arr)
+    result3 = lis_bin_search(arr)
+    if result1 != result2 or result2 != result3:
+        print(result1, result2, result3)
 </code></pre>
 
-<p>现在问题又来的，怎么从最低位开始呢？</p>
-
-<h1 id="倒转任意进制数">倒转任意进制数</h1>
-
-<p>这其实是一个非常简单的算法，在我刚学C语言的时候就会了，不过当时比较笨，理解
-不够透彻。上代码：</p>
-
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-
-/* reverse a number NUM with base BASE,
- * return the reversed number in decimal. */
-int reverse_num(int base, int num);
-
-int main(int argc, char *argv[])
-{
-    printf(&quot;%d\n&quot;, reverse_num(10, 15));
-    printf(&quot;%#x\n&quot;, reverse_num(16, 0x32));
-
-    return 0;
-}
-
-int reverse_num(int base, int num)
-{
-    int new_num;
-
-    new_num = 0;
-    while (num &gt; 0) {
-        new_num *= base;
-        new_num += (num % base);
-        num /= base;
-    }
-    return new_num;
-}
+<pre><code>3
+3
+3
 </code></pre>
 
-<p>而对于二进制来说，求模和除法，还可以优化！
-于是我们就可以想到如何求幂了。</p>
+<p>发现3个算法的结果是一致的。</p>
 
-<h1 id="较高效的整数求幂法">较高效的整数求幂法</h1>
+<h2 id="性能测试">性能测试</h2>
 
-<p>尔等码农，直接上代码吧：</p>
+<p>对3个算法做性能测试:</p>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-python">import timeit
+import random
 
-/* calculate NUM ^ EXP，return the result */
-long long qpow(int num, int exp);
-
-int main(int argc, char *argv[])
-{
-    printf(&quot;%lld\n&quot;, qpow(5, 20));
-
-    return 0;
-}
-
-long long qpow(int num, int exp)
-{
-    long long pow, base;
-
-    pow = 1;
-    base = num;        //long may not be able to hold
-    while (exp &gt; 0) {
-        if ((exp &amp; 1) == 1) {   // (exp % 2) == 1
-            pow *= base;
-        }
-        base *= base;
-        exp &gt;&gt;= 1;        // exp /= 2;
-    }
-    return pow;
-}
+def test_lis_bruteforce():
+    length = random.randint(1, 100)
+    arr = [random.randint(0, 10) for i in range(length)]
+    lis_bruteforce(arr)
+    
+def test_lis_dp():
+    length = random.randint(1, 100)
+    arr = [random.randint(0, 10) for i in range(length)]
+    lis_dp(arr)
+ 
+def test_lis_bin_search():
+    length = random.randint(1, 100)
+    arr = [random.randint(0, 10) for i in range(length)]
+    lis_bin_search(arr)
+    
+print(timeit.timeit(test_lis_bruteforce, number=10, setup='from __main__ import test_lis_bruteforce'))
+print(timeit.timeit(test_lis_dp, number=10, setup='from __main__ import test_lis_dp'))
+print(timeit.timeit(test_lis_bin_search, number=10, setup='from __main__ import test_lis_bin_search'))
 </code></pre>
 
+<pre><code>2.092267832995276
+0.005408962009823881
+0.0011912080080946907
+</code></pre>
+
+<p>可以看到暴力算法非常慢，动态规划算法要快个几百倍，而二分查找的算法更快！</p>
+
+<h2 id="参考资料">参考资料</h2>
+
+<ul>
+<li><a href="https://www.felix021.com/blog/read.php?1587">长递增子序列 O(NlogN)算法 </a></li>
+<li><a href="https://leetcode.com/problems/longest-increasing-subsequence/solution/">leetcode</a></li>
+</ul>
     </div>
 
     
@@ -309,7 +338,7 @@ long long qpow(int num, int exp)
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
-    <span class="item-content">2013-03-11</span>
+    <span class="item-content">2018-10-29</span>
   </p>
   
   <p class="copyright-item">
@@ -344,14 +373,14 @@ long long qpow(int num, int exp)
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/pm/intro.org/">
+          <a class="prev" href="/post/longest-common-subsequence/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">简介</span>
+            <span class="prev-text nav-default">Longest common Subsequence</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/haskell/high.order.function.org/">
-            <span class="next-text nav-default">高阶函数</span>
+          <a class="next" href="/post/different-implementation-of-binary-tree-traversal/">
+            <span class="next-text nav-default">Different Implementation of Binary Tree Traversal</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

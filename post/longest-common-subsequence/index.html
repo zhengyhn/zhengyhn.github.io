@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>比较高效的整数求幂法 - Hank&#39;s Blog</title>
+  <title>Longest common Subsequence - Hank&#39;s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -17,7 +17,8 @@
 
 
 <meta name="author" content="Hank" />
-  <meta name="description" content="最近在看快速求fibonaci数列的方法，需要用到快速求幂法，于是参考了这篇文章 ， 做下笔记。 最直观的方法 如果叫我求一个整数的n次幂，我要么用" />
+  <meta name="description" content="
+" />
 
   <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
@@ -29,7 +30,7 @@
 <meta name="generator" content="Hugo 0.37.1" />
 
 
-<link rel="canonical" href="http://zhengyhn.github.io/post/algorithm/quick.exp/" />
+<link rel="canonical" href="http://zhengyhn.github.io/post/longest-common-subsequence/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -49,20 +50,16 @@
 
 
 
-<meta property="og:title" content="比较高效的整数求幂法" />
-<meta property="og:description" content="最近在看快速求fibonaci数列的方法，需要用到快速求幂法，于是参考了这篇文章 ， 做下笔记。 最直观的方法 如果叫我求一个整数的n次幂，我要么用" />
+<meta property="og:title" content="Longest common Subsequence" />
+<meta property="og:description" content="" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/algorithm/quick.exp/" />
+<meta property="og:url" content="http://zhengyhn.github.io/post/longest-common-subsequence/" />
 
 
 
-<meta property="article:published_time" content="2013-03-11T00:00:00&#43;00:00"/>
+<meta property="article:published_time" content="2018-10-31T00:00:00&#43;00:00"/>
 
-<meta property="article:modified_time" content="2013-03-11T00:00:00&#43;00:00"/>
-
-
-
-
+<meta property="article:modified_time" content="2018-10-31T00:00:00&#43;00:00"/>
 
 
 
@@ -70,20 +67,24 @@
 
 
 
-<meta itemprop="name" content="比较高效的整数求幂法">
-<meta itemprop="description" content="最近在看快速求fibonaci数列的方法，需要用到快速求幂法，于是参考了这篇文章 ， 做下笔记。 最直观的方法 如果叫我求一个整数的n次幂，我要么用">
 
 
-<meta itemprop="datePublished" content="2013-03-11T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2013-03-11T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="644">
+
+
+<meta itemprop="name" content="Longest common Subsequence">
+<meta itemprop="description" content="">
+
+
+<meta itemprop="datePublished" content="2018-10-31T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-10-31T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="444">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="比较高效的整数求幂法"/>
-<meta name="twitter:description" content="最近在看快速求fibonaci数列的方法，需要用到快速求幂法，于是参考了这篇文章 ， 做下笔记。 最直观的方法 如果叫我求一个整数的n次幂，我要么用"/>
+<meta name="twitter:title" content="Longest common Subsequence"/>
+<meta name="twitter:description" content=""/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -150,13 +151,13 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">比较高效的整数求幂法</h1>
+      <h1 class="post-title">Longest common Subsequence</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2013-03-11 </span>
+        <span class="post-time"> 2018-10-31 </span>
         
-        <span class="more-meta"> 约 644 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span class="more-meta"> 约 444 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -169,11 +170,12 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#最直观的方法">最直观的方法</a></li>
-<li><a href="#效率高的求法">效率高的求法</a></li>
-<li><a href="#神奇的二进制">神奇的二进制</a></li>
-<li><a href="#倒转任意进制数">倒转任意进制数</a></li>
-<li><a href="#较高效的整数求幂法">较高效的整数求幂法</a></li>
+<li>
+<ul>
+<li><a href="#暴力算法">暴力算法</a></li>
+<li><a href="#动态规划">动态规划</a></li>
+<li><a href="#测试">测试</a></li>
+</ul></li>
 </ul>
 </nav>
   </div>
@@ -184,121 +186,97 @@
 
     
     <div class="post-content">
-      
+      <p></p>
 
-<p>最近在看快速求fibonaci数列的方法，需要用到快速求幂法，于是参考了<a href="http://blog.csdn.net/hkdgjqr/article/details/5381028">这篇文章</a>
-， 做下笔记。</p>
+<p>求最长公共子序列的长度，是线性动态规划最基础的内容。现在我自己手写并理解两种实现算法，做此笔记。</p>
 
-<h1 id="最直观的方法">最直观的方法</h1>
+<h2 id="暴力算法">暴力算法</h2>
 
-<p>如果叫我求一个整数的n次幂，我要么用pow，要么写个循环直接相乘。
-比如要求：</p>
+<p>思路是，双重循环遍历2个数组，当发现2个元素相等时，递归地去找各自数组后面的子序列的最长公共子序列的长度，再加1就是当前最长的公共子序列的长度，然后取最大值。</p>
 
-<pre><code class="language-example">5 ^ 55
+<pre><code class="language-python">import random
+
+def lcs_recursive(arr1, arr2, left, right):
+    if left &gt;= len(arr1) or right &gt;= len(arr2):
+        return 0
+    
+    max_len = 0
+    for i in range(left, len(arr1)):
+        for j in range(right, len(arr2)):
+            if arr1[i] == arr2[j]:
+                length = lcs_recursive(arr1, arr2, i + 1, j + 1)
+                max_len = max(max_len, length + 1)
+    return max_len
+
+def lcs_bruteforce(arr1, arr2):
+    return lcs_recursive(arr1, arr2, 0, 0)
 </code></pre>
 
-<p>的结果，很明显，要进行54次乘法。要知道，在目前的计算机体系架构中，乘法的计算
-是非常慢的。</p>
+<h2 id="动态规划">动态规划</h2>
 
-<h1 id="效率高的求法">效率高的求法</h1>
+<p>思路是，维护一个二维数组，记录两个下标的当前状态，最长公共子序列的长度。</p>
 
-<p>有的聪明人（不是我）就想到了减少乘法次数的方法：</p>
-
-<pre><code class="language-example">5 ^ 2 = 5 * 5
-5 ^ 4 = (5 ^ 2) * (5 ^ 2)
-5 ^ 8 = (5 ^ 4) * (5 ^ 4)
-5 ^ 16 = (5 ^ 8) * (5 ^ 8)
-5 ^ 32 = (5 ^ 16) * (5 ^ 16)
-
-5 ^ 55 = 5 ^ (32 + 16 + 4 + 2 + 1)
-       = 5 ^ 32 * 5 ^ 16 * 5 ^ 4 * 5 ^ 2 * 5
+<pre><code class="language-python">def lcs_dp(arr1, arr2):
+    dp = [[0 for j in range(len(arr2) + 1)] for i in range(len(arr1) + 1)]
+    for i in range(len(arr1) - 1, -1, -1):
+        for j in range(len(arr2) - 1, -1, -1):
+            if arr1[i] == arr2[j]:
+                dp[i][j] = dp[i + 1][j + 1] + 1
+            else:
+                dp[i][j] = max(dp[i][j + 1], dp[i + 1][j])
+    return dp[0][0]
 </code></pre>
 
-<p>现在关键是怎么求各个幂了，给出55,你怎么分解它成为32, 16, 4, 2, 1呢？</p>
+<h2 id="测试">测试</h2>
 
-<h1 id="神奇的二进制">神奇的二进制</h1>
+<p>下面来测试一下:</p>
 
-<p>看一下55的二进制，为：</p>
+<pre><code class="language-python">arr1 = [3, 0, 2, 1, 4]
+arr2 = [0, 1, 2, 3, 4]
+print(lcs_bruteforce(arr1, arr2))
+print(lcs_dp(arr1, arr2))
 
-<pre><code class="language-example">0011 0111
+
+for i in range(0, 10):
+    arr1 = [random.randint(0, 9) for i in range(20)]
+    arr2 = [random.randint(0, 9) for i in range(20)]
+    result1 = lcs_bruteforce(arr1, arr2)
+    result2 = lcs_dp(arr1, arr2)
+    if result1 != result2:
+        print(result1, result2)
 </code></pre>
 
-<p>可以看到，二进制里面为1的就是要乘的数。于是可以想到，</p>
-
-<pre><code class="language-example">我们从最低位开始，如果为1,则乘以这个位的2次幂，否则跳过。
+<pre><code>3
+3
 </code></pre>
 
-<p>现在问题又来的，怎么从最低位开始呢？</p>
+<p>再做一个性能测试:</p>
 
-<h1 id="倒转任意进制数">倒转任意进制数</h1>
+<pre><code class="language-python">import timeit
+import random
 
-<p>这其实是一个非常简单的算法，在我刚学C语言的时候就会了，不过当时比较笨，理解
-不够透彻。上代码：</p>
-
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-
-/* reverse a number NUM with base BASE,
- * return the reversed number in decimal. */
-int reverse_num(int base, int num);
-
-int main(int argc, char *argv[])
-{
-    printf(&quot;%d\n&quot;, reverse_num(10, 15));
-    printf(&quot;%#x\n&quot;, reverse_num(16, 0x32));
-
-    return 0;
-}
-
-int reverse_num(int base, int num)
-{
-    int new_num;
-
-    new_num = 0;
-    while (num &gt; 0) {
-        new_num *= base;
-        new_num += (num % base);
-        num /= base;
-    }
-    return new_num;
-}
+def test_lcs_bruteforce():
+    length = 30
+    arr1 = [random.randint(0, 9) for i in range(length)]
+    arr2 = [random.randint(0, 9) for i in range(length)]
+    lcs_bruteforce(arr1, arr2)
+    
+def test_lcs_dp():
+    length = 30
+    arr1 = [random.randint(0, 9) for i in range(length)]
+    arr2 = [random.randint(0, 9) for i in range(length)]
+    lcs_dp(arr1, arr2)
+    
+print(timeit.timeit(test_lcs_bruteforce, number=2, setup='from __main__ import test_lcs_bruteforce'))
+print(timeit.timeit(test_lcs_dp, number=2, setup='from __main__ import test_lcs_dp'))
 </code></pre>
 
-<p>而对于二进制来说，求模和除法，还可以优化！
-于是我们就可以想到如何求幂了。</p>
-
-<h1 id="较高效的整数求幂法">较高效的整数求幂法</h1>
-
-<p>尔等码农，直接上代码吧：</p>
-
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-
-/* calculate NUM ^ EXP，return the result */
-long long qpow(int num, int exp);
-
-int main(int argc, char *argv[])
-{
-    printf(&quot;%lld\n&quot;, qpow(5, 20));
-
-    return 0;
-}
-
-long long qpow(int num, int exp)
-{
-    long long pow, base;
-
-    pow = 1;
-    base = num;        //long may not be able to hold
-    while (exp &gt; 0) {
-        if ((exp &amp; 1) == 1) {   // (exp % 2) == 1
-            pow *= base;
-        }
-        base *= base;
-        exp &gt;&gt;= 1;        // exp /= 2;
-    }
-    return pow;
-}
+<pre><code>12.163799556001322
+0.0012101709944545291
 </code></pre>
 
+<pre><code class="language-python">动态规划的速度比暴力算法快太多了！
+</code></pre>
     </div>
 
     
@@ -309,7 +287,7 @@ long long qpow(int num, int exp)
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
-    <span class="item-content">2013-03-11</span>
+    <span class="item-content">2018-10-31</span>
   </p>
   
   <p class="copyright-item">
@@ -344,14 +322,9 @@ long long qpow(int num, int exp)
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/pm/intro.org/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">简介</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
         
-          <a class="next" href="/post/haskell/high.order.function.org/">
-            <span class="next-text nav-default">高阶函数</span>
+          <a class="next" href="/post/longest-increasing-subsequence/">
+            <span class="next-text nav-default">Longest Increasing Subsequence</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

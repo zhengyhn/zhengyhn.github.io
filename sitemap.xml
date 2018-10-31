@@ -3,6 +3,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhengyhn.github.io/post/longest-common-subsequence/</loc>
+    <lastmod>2018-10-31T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/longest-increasing-subsequence/</loc>
+    <lastmod>2018-10-29T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://zhengyhn.github.io/post/different-implementation-of-binary-tree-traversal/</loc>
     <lastmod>2018-10-14T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -759,7 +773,7 @@
   
   <url>
     <loc>http://zhengyhn.github.io/</loc>
-    <lastmod>2018-10-14T00:00:00+00:00</lastmod>
+    <lastmod>2018-10-31T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -794,7 +808,7 @@
   
   <url>
     <loc>http://zhengyhn.github.io/post/</loc>
-    <lastmod>2018-10-14T00:00:00+00:00</lastmod>
+    <lastmod>2018-10-31T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
