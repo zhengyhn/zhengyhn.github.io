@@ -1,9 +1,9 @@
 ---
 {
-  "title": "Learning Strongly Connected Component Algorithms",
-  "subtitle": "Generic subtitle",
   "date": "2018-08-28",
-  "slug": "Learning Strongly Connected Component Algorithms"
+  "slug": "Learning Strongly Connected Component Algorithms",
+  "subtitle": "Generic subtitle",
+  "title": "Learning Strongly Connected Component Algorithms"
 }
 ---
 <!--more-->
@@ -109,10 +109,12 @@ nx.draw_networkx(G, pos, node_size=500, alpha=0.6, arrowsize=10, arrowstyle='->'
 这个算法实现不难，但是很难理解，我研究了整整一天才真正想明白它为什么是对的。
 
 要理解这个算法，有几个概念需要理解清楚:
-- 两点A, B在一个强连通分量里面，那么A一定有一条路径可以走到B，B也一事实上有一条路径走到A
+
+- 两点A, B在一个强连通分量里面，那么A一定有一条路径可以走到B，B也一定有一条路径走到A
 - 一个有向图的反向图，就是将该图的所有边的箭头反过来得到的图
 
 Koasaraju算法的步骤是这样的:
+
 - 对原图G的反向图GR做深度优先逆后序搜索，记下来搜索的路径
 - 根据这个路径做一次深度优先搜索，将可达的2个点归为一个连通分量中
 
