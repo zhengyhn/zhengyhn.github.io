@@ -16,59 +16,33 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" />
-  <meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为the c programming language一书的笔记 @&amp;lt;/font&amp;gt; 数据类型和大小 有关short,int,long的大小。 它们的大小由编译器决定，但是有一个规定" />
-
-  <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为the c programming language一书的笔记 @&amp;lt;/font&amp;gt; 数据类型和大小 有关short,int,long的大小。 它们的大小由编译器决定，但是有一个规定" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.37.1" />
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/clang/type_op_exp.org/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-
-
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.93844dae.min.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
 
 
 <meta property="og:title" content="tcpl读书笔记：类型与表达式" />
 <meta property="og:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为the c programming language一书的笔记 @&lt;/font&gt; 数据类型和大小 有关short,int,long的大小。 它们的大小由编译器决定，但是有一个规定" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/clang/type_op_exp.org/" />
-
-
-
-<meta property="article:published_time" content="2013-03-10T00:00:00&#43;00:00"/>
-
+<meta property="og:url" content="http://zhengyhn.github.io/post/clang/type_op_exp.org/" /><meta property="article:published_time" content="2013-03-10T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2013-03-10T00:00:00&#43;00:00"/>
-
-
-
-
-
-
-
-
-
-
 
 <meta itemprop="name" content="tcpl读书笔记：类型与表达式">
 <meta itemprop="description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为the c programming language一书的笔记 @&lt;/font&gt; 数据类型和大小 有关short,int,long的大小。 它们的大小由编译器决定，但是有一个规定">
@@ -76,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2013-03-10T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-03-10T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="904">
+<meta itemprop="wordCount" content="932">
 
 
 
@@ -155,17 +129,14 @@
       <div class="post-meta">
         <span class="post-time"> 2013-03-10 </span>
         
-        <span class="more-meta"> 约 904 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
+          <span class="more-meta"> 约 932 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
@@ -180,11 +151,6 @@
 </nav>
   </div>
 </div>
-
-    
-    
-
-    
     <div class="post-content">
       
 
@@ -246,7 +212,7 @@ short必须小于int,int必须小于long</p>
 
 <p>自己很笨，是自己不想思考呢？还是我真的被禁锢了思想。</p>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-.c">#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 
 int str2i(char *str)
@@ -278,7 +244,7 @@ int main()
 <li>有符号数和无符号数的比较和机器相关。</li>
 </ul>
 
-<pre><code class="language-example">-1L &lt; 1U 返回true，因为在比较时1U会转化为signed long。
+<pre><code class="language-.example">-1L &lt; 1U 返回true，因为在比较时1U会转化为signed long。
 而-1L &lt; 1UL 则返回false，因为在比较时-1L会转化为unsigned long，变成了一个很大的
 正数，因此实际上-1L &gt; 1UL。
 </code></pre>
@@ -287,7 +253,7 @@ int main()
 <li>练习：写一个函数htoi(s)，把十六进制字符串转化为十进制整数。</li>
 </ul>
 
-<pre><code class="language-c">int htoi(char *s)
+<pre><code class="language-.c">int htoi(char *s)
 {
     int i,len,result,value;
 
@@ -324,7 +290,7 @@ int main()
 <li>打印10个每行</li>
 </ol>
 
-<pre><code class="language-c">for(i = 0; i &lt; n; i++){
+<pre><code class="language-.c">for(i = 0; i &lt; n; i++){
     printf(&quot;%d%c&quot;,%d,(i % 10 == 9 || i == n - 1) ? '\n' : ' ');
 }
 </code></pre>
@@ -333,7 +299,7 @@ int main()
 <li>选择是否打印英文后面的复数</li>
 </ol>
 
-<pre><code class="language-c">printf(&quot;%d item%s.\n&quot;,n,n == 1 ? &quot;&quot; : &quot;s&quot;);
+<pre><code class="language-.c">printf(&quot;%d item%s.\n&quot;,n,n == 1 ? &quot;&quot; : &quot;s&quot;);
 </code></pre>
 
 <h1 id="运算符优先级">运算符优先级</h1>
@@ -366,7 +332,6 @@ int main()
 
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
@@ -381,41 +346,29 @@ int main()
     <span class="item-title">许可协议</span>
     <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
   </p>
-</div>
-
-    
-    
-<div class="post-reward">
+</div><div class="post-reward">
   <input type="checkbox" name="reward" id="reward" hidden />
   <label class="reward-button" for="reward">赞赏支持</label>
   <div class="qr-code">
     
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/wechat.jpg">
         <span>微信打赏</span>
       </label>
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/alipay.jpg">
         <span>支付宝打赏</span>
       </label>
   </div>
-</div>
-
-    <footer class="post-footer">
-      
-
+</div><footer class="post-footer">
       
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/clang/introduction.org/">
+        <a class="prev" href="/post/clang/introduction.org/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">tcpl读书笔记：简介与基础</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        
-          <a class="next" href="/post/clang/structure.org/">
+        <a class="next" href="/post/clang/structure.org/">
             <span class="next-text nav-default">tcpl读书笔记：结构体</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
@@ -425,9 +378,6 @@ int main()
   </article>
         </div>
         
-  
-
-  
 
       </div>
     </main>
@@ -451,14 +401,13 @@ int main()
 
   <div class="busuanzi-footer">
     <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-    <span class="division">|</span>
+      <span class="division">|</span>
     <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
   </div>
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
+    2017 - 
     2018
     <span class="heart">
       <i class="iconfont icon-heart"></i>
@@ -472,20 +421,15 @@ int main()
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-
-<script></script>
-<script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script>
-<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="/lib/js-sequence-diagrams/webfontloader-1.6.28.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.ece58db6.min.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -494,7 +438,7 @@ int main()
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 

@@ -6,10 +6,19 @@
     <description>Recent content on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 31 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 18 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Learning Bagging Algorithms</title>
+      <link>http://zhengyhn.github.io/post/learning-bagging-algorithms/</link>
+      <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/learning-bagging-algorithms/</guid>
+      <description>import random def max_value_recursive(weights, values, max_weight, i): if len(weights) == i: return 0 if max_weight - weights[i] &amp;lt;= 0: return 0 value_not_pick = max_value_recursive(weights, values, max_weight, i + 1) value_pick = max_value_recursive(weights, values, max_weight - weights[i], i + 1) return max(value_not_pick, values[i] + value_pick) def max_value(weights, values, max_weight): return max_value_recursive(weights, values, max_weight, 0) def max_value_dp(weights, values, max_weight): dp = [[0 for i in range(max_weight)] for i in range(len(weights))] i = len(weights) - 1 for j in range(weights[i], max_weight): dp[i][j] = values[i] for i in range(len(weights) - 2, -1, -1): for j in range(weights[i], max_weight): dp[i][j] = max(dp[i + 1][j], dp[i + 1][j - weights[i]] + values[i]) return dp[0][max_weight - 1] N = 25 W = 50 weights = [random.</description>
+    </item>
     
     <item>
       <title>Longest common Subsequence</title>
@@ -17,7 +26,7 @@
       <pubDate>Wed, 31 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/longest-common-subsequence/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>求最长公共子序列的长度，是线性动态规划最基础的内容。现在我自己手写并理解两种实现算法，做此笔记。 暴力算法 思路是，双重循环遍历2个数组，当发现</description>
     </item>
     
     <item>
@@ -26,7 +35,7 @@
       <pubDate>Mon, 29 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/longest-increasing-subsequence/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>求最长递增子序列的长度也是动态规划里面的基础问题。记得当时大学的时候碰到这个问题，想破了脑袋也想不出来非暴力的解法，现在写起动态规划的算法还</description>
     </item>
     
     <item>
@@ -35,7 +44,7 @@
       <pubDate>Sun, 14 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/different-implementation-of-binary-tree-traversal/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>最近在做leetcode时，发现了另外一种二叉树遍历的方法，于是总结回之前掌握的遍历方法，做此笔记。 建树 首先定义一棵树，val为元素的值，l</description>
     </item>
     
     <item>
@@ -44,7 +53,7 @@
       <pubDate>Sat, 06 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/learning-substring-searching-algorithms/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>def substr_kmp(string, pattern): if len(string) == 0 or len(pattern) == 0: return -1 next_table = [-1 for i in range(0, len(pattern))] i = 0 j = -1 while i &amp;lt; len(pattern) - 1: if j == -1 or pattern[i] == pattern[j]: i += 1 j += 1 next_table[i] = j else: j = next_table[j] print(next_table) i = 0 j = 0 while i &amp;lt; len(string) and j &amp;lt; len(pattern): if j == - 1 or string[i] == pattern[j]: i += 1 j += 1 else: j = next_table[j] print(i, j) if j == len(pattern): return i - j else: return -1 string = &#39;ababaababab&#39; pattern = &#39;ababab&#39; print(substr_kmp(string, pattern))  [-1, 0, 0, 1, 2, 3] 11 6 5 </description>
     </item>
     
     <item>
@@ -53,7 +62,7 @@
       <pubDate>Fri, 05 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/leftist-trees-implementation-and-application/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>不小心看到一种数据结构，叫左偏堆，又叫左偏树，据说跟二叉堆一样，可以实现优先队列的功能，而且比二叉堆实现起来简单，于是研究了一下。 需求 优先队</description>
     </item>
     
     <item>
@@ -62,7 +71,7 @@
       <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/different-version-of-quick-sort/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>最近在看《编程珠玑》，讲到快排的时候，发现除了我之前一直用的划分方法之外，还有一种划分方法，可以在大量元素相等的情况下保持较大的效率，查了一</description>
     </item>
     
     <item>
@@ -71,7 +80,7 @@
       <pubDate>Wed, 03 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/learning-select-algorithms/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>最近在看《编程珠玑》，有一道题我很感兴趣。 编写程序，在O(n)时间内从数组 x[0.. n-1]中找出第k个最小的元素。 我第一反应，就是利用快排的思想，</description>
     </item>
     
     <item>
@@ -80,7 +89,7 @@
       <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/learning-path-finding-algorithms/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>import numpy as np import matplotlib.pyplot as plt %matplotlib notebook N = 10 OBSTALE = &#39;1&#39; ROAD = &#39;*&#39; START = &#39;S&#39; END = &#39;E&#39; game_map = np.array([[ROAD] * 10] * 10) game_map[1:5, 1] = OBSTALE game_map[8:10, 1] = OBSTALE game_map[2:6, 3] = OBSTALE game_map[7:10, 3] = OBSTALE game_map[1:5, 5] = OBSTALE game_map[6:8, 5] = OBSTALE game_map[0:3, 7] = OBSTALE game_map[4:6, 7] = OBSTALE game_map[0, 0] = START game_map[8, 7] = END for row in game_map: for col in row: print(col, end=&#39;&#39;) print(&#39;&#39;)  S******1** *1***1*1** *1*1*1*1** *1*1*1**** *1*1*1*1** ***1***1** *****1**** ***1*1**** *1*1***E** *1*1******  class Node: def __init__(self, x, y): self.</description>
     </item>
     
     <item>
@@ -89,7 +98,7 @@
       <pubDate>Wed, 26 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/git-cheat-sheet-in-our-team/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>由于近期有团队成员对git不是很熟悉，加上团队对git操作没有规范，通过此文规范团队的git规范，同时让成员学会一些常用的git操作，提高工</description>
     </item>
     
     <item>
@@ -98,7 +107,7 @@
       <pubDate>Thu, 13 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/list-rotate-algorithms/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>最近在《编程珠玑》上看到一道很有趣的题目: 假设我们在开发一个编辑器，要实现一个功能，将下面代码的2个函数调换位置，该怎么做呢？如果空间复杂度</description>
     </item>
     
     <item>
@@ -107,7 +116,7 @@
       <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/learning-string-sorting-algorithm/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>场景 假设有一个手机号数组，要求对这个数组进行排序，怎么样排序最快呢？ 一般我们会用快排来实现，现场写一个快排: from collections import deque def swap(strs, i, j): temp = strs[i] strs[i] = strs[j] strs[j] =</description>
     </item>
     
     <item>
@@ -116,7 +125,7 @@
       <pubDate>Tue, 28 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/learning-strongly-connected-component-algorithms/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>引子 图论看到有向图的强连通分量部分，感觉非常有用，前面的无向图连通分量，还不知道应用在什么地方，现在来看看寻找强连通分量的算法有什么应用。 社</description>
     </item>
     
     <item>
@@ -125,7 +134,7 @@
       <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/learning-topological-sort/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>引子 拓扑排序是以前学图论的时候学到的，但是当时太年轻，不了解这个算法的应用。现在终于知道，它在一些任务依赖方法应用广泛，比如编译系统，各个模</description>
     </item>
     
     <item>
@@ -134,7 +143,7 @@
       <pubDate>Sat, 18 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/learning-kd-tree/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>最近在学习KD树，研究了一天，终于是搞懂了！把自己实现的代码记录下来。 KNN的算法思想非常简单，但是暴力的计算距离，计算量非常大，而KD树这</description>
     </item>
     
     <item>
@@ -143,7 +152,7 @@
       <pubDate>Fri, 03 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/bloom-filter-in-action/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>这是一篇内部小型技术分享的文章。 需求 在金融业务系统里面，判断用户是否是黑名单，这种场景应该很常见。 假设我们系统里面有一百万个黑名单用户，用手</description>
     </item>
     
     <item>
@@ -152,7 +161,7 @@
       <pubDate>Fri, 27 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/amazing-horners-rule/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>在看《算法导论》，思考题里面提到霍纳规则，出于好奇，查一下这个陌生的名词，结果发现了新大陆，原来在中国这个叫秦九韶算法，好像在中学的时候看过</description>
     </item>
     
     <item>
@@ -161,7 +170,7 @@
       <pubDate>Fri, 27 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/insert-sort-algorithm-in-python/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>最近在看《算法导论》，前面讲到插入排序，我第一反应，忘了这个算法是怎么样的，果然还是不够熟悉，那就再练习几次。 这个算法还是非常重要的，很多语</description>
     </item>
     
     <item>
@@ -170,7 +179,7 @@
       <pubDate>Fri, 29 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/how-to-get-the-square-of-n-using-newtons-method/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>这是一篇内部小型技术分享的文章。 这次我们要来学习一个求近似平方根的快速方法: 牛顿法。 先上代码: def sqrt(n): ret = n while ret * ret &amp;gt; n: ret = (ret + n / ret) / 2 return ret print(sqrt(4))</description>
     </item>
     
     <item>
@@ -179,7 +188,7 @@
       <pubDate>Sat, 09 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/how-to-check-two-segments-cross/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>在《集体智慧编程》的随机优化章节，有提到判断两条线段是否相交的算法，我觉得非常神奇，研究了好久，终于搞明白了。 如何判断两条线段相交 两点连成一</description>
     </item>
     
     <item>
@@ -197,7 +206,7 @@
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/implement-k-means-algorithm-myself/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>最近在看《集体智慧编程这本书》，再次学习k-means算法，虽然之前接触过很多，但是没有完全自己实现过，这次就试着根据算法思想，手写k-me</description>
     </item>
     
     <item>
@@ -206,7 +215,7 @@
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/math/play-with-the-central-limit-theorem/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>最近在看《深入浅出统计学》，里面提到中心极限定理，意思是： 给定一个任意分布(不管是二项分布还是其他分布)的总体，每次从这个总体里面抽一个样本</description>
     </item>
     
     <item>

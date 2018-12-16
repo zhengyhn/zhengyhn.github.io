@@ -16,59 +16,33 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" />
-  <meta name="description" content="简介 GTK(GIMP ToolKit)，是用于构建GUI的库来的。取这个名字，是因为GTK是用于开发GIMP (GNU image manipulation program)的，现在也用来开发GNOM" />
-
-  <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="简介 GTK(GIMP ToolKit)，是用于构建GUI的库来的。取这个名字，是因为GTK是用于开发GIMP (GNU image manipulation program)的，现在也用来开发GNOM" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.37.1" />
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/gtk/intro/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-
-
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.93844dae.min.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
 
 
 <meta property="og:title" content="gtk, introduction" />
 <meta property="og:description" content="简介 GTK(GIMP ToolKit)，是用于构建GUI的库来的。取这个名字，是因为GTK是用于开发GIMP (GNU image manipulation program)的，现在也用来开发GNOM" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/gtk/intro/" />
-
-
-
-<meta property="article:published_time" content="2013-02-21T00:00:00&#43;00:00"/>
-
+<meta property="og:url" content="http://zhengyhn.github.io/post/gtk/intro/" /><meta property="article:published_time" content="2013-02-21T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2013-02-21T00:00:00&#43;00:00"/>
-
-
-
-
-
-
-
-
-
-
 
 <meta itemprop="name" content="gtk, introduction">
 <meta itemprop="description" content="简介 GTK(GIMP ToolKit)，是用于构建GUI的库来的。取这个名字，是因为GTK是用于开发GIMP (GNU image manipulation program)的，现在也用来开发GNOM">
@@ -76,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2013-02-21T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-02-21T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1910">
+<meta itemprop="wordCount" content="1915">
 
 
 
@@ -155,17 +129,14 @@
       <div class="post-meta">
         <span class="post-time"> 2013-02-21 </span>
         
-        <span class="more-meta"> 约 1910 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
+          <span class="more-meta"> 约 1915 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
@@ -177,11 +148,6 @@
 </nav>
   </div>
 </div>
-
-    
-    
-
-    
     <div class="post-content">
       
 
@@ -201,7 +167,7 @@ Object Model Environment),它建立在GDK(GIMP Drawing Kit)的基础上。</p>
 <li>代码</li>
 </ul>
 
-<pre><code class="language-c">#include &lt;gtk/gtk.h&gt;
+<pre><code class="language-.c">#include &lt;gtk/gtk.h&gt;
 
 int main(int argc, char *argv[])
 {
@@ -249,7 +215,7 @@ int main(int argc, char *argv[])
 <li>代码</li>
 </ul>
 
-<pre><code class="language-c">#include &lt;gtk/gtk.h&gt;
+<pre><code class="language-.c">#include &lt;gtk/gtk.h&gt;
 
 void hello(GtkWidget *widget, gpointer data)
 {
@@ -302,18 +268,18 @@ int main(int argc, char *argv[])
 <li>编译的时候，我的是这样的：</li>
 </ul>
 
-<pre><code class="language-example">gcc -O2 hello.c -lm -o hello `pkg-config --cflags gtk+-2.0` 
+<pre><code class="language-.example">gcc -O2 hello.c -lm -o hello `pkg-config --cflags gtk+-2.0` 
 `pkg-config --libs gtk+-2.0`
 </code></pre>
 
 <p>pkg-config是一个小工具，如果系统没有则要安装。 在终端执行下面的命令：</p>
 
-<pre><code class="language-bash">pkg-config --cflags gtk+-2.0
+<pre><code class="language-.bash">pkg-config --cflags gtk+-2.0
 </code></pre>
 
 <p>会输出gtk+-2.0程序需要使用到的头文件目录,比如我的是这样的：</p>
 
-<pre><code class="language-example">-pthread -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include
+<pre><code class="language-.example">-pthread -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include
  -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo
  -I/usr/include/pixman-1 -I/usr/include/libpng15
  -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng15
@@ -324,12 +290,12 @@ int main(int argc, char *argv[])
 
 <p>在终端执行下面的命令：</p>
 
-<pre><code class="language-bash">pkg-config --libs gtk+-2.0
+<pre><code class="language-.bash">pkg-config --libs gtk+-2.0
 </code></pre>
 
 <p>会输出gcc编译gtk所需要的库参数，比如我的是这样的：</p>
 
-<pre><code class="language-example">-lgtk-x11-2.0 -lgdk-x11-2.0 -lpangocairo-1.0 -latk-1.0 -lcairo
+<pre><code class="language-.example">-lgtk-x11-2.0 -lgdk-x11-2.0 -lpangocairo-1.0 -latk-1.0 -lcairo
  -lgdk_pixbuf-2.0 -lgio-2.0 -lpangoft2-1.0 -lpango-1.0 -lgobject-2.0
  -lglib-2.0 -lfreetype -lfontconfig
 </code></pre>
@@ -355,14 +321,14 @@ int main(int argc, char *argv[])
 <p>调用了gtk~main后~，程序会睡眠，等待事件的发生，当有事件（如按下键盘一个键）
 发生时，发送者会发送信号，然后执行某一个操作。g~signalconnect的原型为~：</p>
 
-<pre><code class="language-c">gulong g_signal_connect(gpointer *object, const gchar *name,
+<pre><code class="language-.c">gulong g_signal_connect(gpointer *object, const gchar *name,
                         GCallback func, gpointer func_data);
 </code></pre>
 
 <p>其中object为信号的发送者，name为信号的名字，func是回调函数，即要执行的
 操作，func~data是给函数传递的数据~。 回调函数的一般原型为：</p>
 
-<pre><code class="language-c">void callback(GtkWidget *widget, gpointer data);
+<pre><code class="language-.c">void callback(GtkWidget *widget, gpointer data);
 </code></pre>
 
 <p>第一个参数widget为发送信号的widget，第二个参数data为传递过来的数据。
@@ -370,7 +336,7 @@ int main(int argc, char *argv[])
 明白了，它和g~signalconnect的作用几乎一样~，只是它的回调函数只接收一个
 参数，如：</p>
 
-<pre><code class="language-c">void callback(GtkObject *object);
+<pre><code class="language-.c">void callback(GtkObject *object);
 </code></pre>
 
 <p>因为gtk里面的很多库函数没有传送数据，所以才出现了这个东西专门用来回调那些
@@ -380,7 +346,7 @@ int main(int argc, char *argv[])
 <li>有关事件event的概念</li>
 </ul>
 
-<pre><code class="language-c">g_signal_connect(G_OBJECT(button), &quot;button_press_event&quot;,
+<pre><code class="language-.c">g_signal_connect(G_OBJECT(button), &quot;button_press_event&quot;,
                  G_CALLBACK(button_press_callback), NULL);
 static gint button_press_callback(GtkWidget *widget,
                                   GdkEventButton *event,
@@ -417,7 +383,7 @@ GdkEvent是一个联合体，是很多事件的名字的集合。</p>
 <li>修改过的hello world</li>
 </ul>
 
-<pre><code class="language-c">#include &lt;gtk/gtk.h&gt;
+<pre><code class="language-.c">#include &lt;gtk/gtk.h&gt;
 
 void hello(GtkWidget *widget, gpointer data)
 {
@@ -480,7 +446,6 @@ int main(int argc, char *argv[])
 
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
@@ -495,41 +460,29 @@ int main(int argc, char *argv[])
     <span class="item-title">许可协议</span>
     <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
   </p>
-</div>
-
-    
-    
-<div class="post-reward">
+</div><div class="post-reward">
   <input type="checkbox" name="reward" id="reward" hidden />
   <label class="reward-button" for="reward">赞赏支持</label>
   <div class="qr-code">
     
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/wechat.jpg">
         <span>微信打赏</span>
       </label>
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/alipay.jpg">
         <span>支付宝打赏</span>
       </label>
   </div>
-</div>
-
-    <footer class="post-footer">
-      
-
+</div><footer class="post-footer">
       
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/gtk/base/">
+        <a class="prev" href="/post/gtk/base/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">gtk, widget</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        
-          <a class="next" href="/post/haskell/types.org/">
+        <a class="next" href="/post/haskell/types.org/">
             <span class="next-text nav-default">types and typeclasses</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
@@ -539,9 +492,6 @@ int main(int argc, char *argv[])
   </article>
         </div>
         
-  
-
-  
 
       </div>
     </main>
@@ -565,14 +515,13 @@ int main(int argc, char *argv[])
 
   <div class="busuanzi-footer">
     <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-    <span class="division">|</span>
+      <span class="division">|</span>
     <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
   </div>
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
+    2017 - 
     2018
     <span class="heart">
       <i class="iconfont icon-heart"></i>
@@ -586,20 +535,15 @@ int main(int argc, char *argv[])
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-
-<script></script>
-<script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script>
-<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="/lib/js-sequence-diagrams/webfontloader-1.6.28.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.ece58db6.min.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -608,7 +552,7 @@ int main(int argc, char *argv[])
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 

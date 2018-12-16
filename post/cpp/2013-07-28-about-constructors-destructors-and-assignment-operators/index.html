@@ -16,40 +16,29 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" />
-  <meta name="description" content="What functions C&#43;&#43; will silently write and call? If we declare an empty class, the compiler will declare a constructor, a copy constructor, a copy assignment operator and a destructor for us.
+<meta name="author" content="Hank" /><meta name="description" content="What functions C&#43;&#43; will silently write and call? If we declare an empty class, the compiler will declare a constructor, a copy constructor, a copy assignment operator and a destructor for us.
 class Girl { };  But the compiler is not foolish, it will only generate them when needed.
 What do the generated functions do?
- For construtor, it will invoke the corresponding constructor and non-static members of its base class." />
-
-  <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+ For construtor, it will invoke the corresponding constructor and non-static members of its base class." /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.37.1" />
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/cpp/2013-07-28-about-constructors-destructors-and-assignment-operators/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-
-
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.93844dae.min.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
 
 
 <meta property="og:title" content="About Constructors Destructors and Assignment Operators" />
@@ -58,23 +47,8 @@ class Girl { };  But the compiler is not foolish, it will only generate them whe
 What do the generated functions do?
  For construtor, it will invoke the corresponding constructor and non-static members of its base class." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/cpp/2013-07-28-about-constructors-destructors-and-assignment-operators/" />
-
-
-
-<meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
-
+<meta property="og:url" content="http://zhengyhn.github.io/post/cpp/2013-07-28-about-constructors-destructors-and-assignment-operators/" /><meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
 <meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
-
-
-
-
-
-
-
-
-
-
 
 <meta itemprop="name" content="About Constructors Destructors and Assignment Operators">
 <meta itemprop="description" content="What functions C&#43;&#43; will silently write and call? If we declare an empty class, the compiler will declare a constructor, a copy constructor, a copy assignment operator and a destructor for us.
@@ -167,17 +141,14 @@ What do the generated functions do?
       <div class="post-meta">
         <span class="post-time"> 2016-05-14 </span>
         
-        <span class="more-meta"> 约 1006 字 </span>
-        <span class="more-meta"> 预计阅读 5 分钟 </span>
+          <span class="more-meta"> 约 1006 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
@@ -191,11 +162,6 @@ What do the generated functions do?
 </nav>
   </div>
 </div>
-
-    
-    
-
-    
     <div class="post-content">
       
 
@@ -485,7 +451,6 @@ It really helps.</p>
 
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
@@ -500,41 +465,29 @@ It really helps.</p>
     <span class="item-title">许可协议</span>
     <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
   </p>
-</div>
-
-    
-    
-<div class="post-reward">
+</div><div class="post-reward">
   <input type="checkbox" name="reward" id="reward" hidden />
   <label class="reward-button" for="reward">赞赏支持</label>
   <div class="qr-code">
     
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/wechat.jpg">
         <span>微信打赏</span>
       </label>
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/alipay.jpg">
         <span>支付宝打赏</span>
       </label>
   </div>
-</div>
-
-    <footer class="post-footer">
-      
-
+</div><footer class="post-footer">
       
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/2013-08-03-a-tour-to-the-badaling-great-wall/">
+        <a class="prev" href="/post/2013-08-03-a-tour-to-the-badaling-great-wall/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">A tour to The Badaling Great Wall</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        
-          <a class="next" href="/post/cpp/2013-08-09-always-pass-parameters-by-reference-to-const/">
+        <a class="next" href="/post/cpp/2013-08-09-always-pass-parameters-by-reference-to-const/">
             <span class="next-text nav-default">Always pass parameters by reference-to-const</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
@@ -544,9 +497,6 @@ It really helps.</p>
   </article>
         </div>
         
-  
-
-  
 
       </div>
     </main>
@@ -570,14 +520,13 @@ It really helps.</p>
 
   <div class="busuanzi-footer">
     <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-    <span class="division">|</span>
+      <span class="division">|</span>
     <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
   </div>
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
+    2017 - 
     2018
     <span class="heart">
       <i class="iconfont icon-heart"></i>
@@ -591,20 +540,15 @@ It really helps.</p>
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-
-<script></script>
-<script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script>
-<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="/lib/js-sequence-diagrams/webfontloader-1.6.28.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.ece58db6.min.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -613,7 +557,7 @@ It really helps.</p>
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 

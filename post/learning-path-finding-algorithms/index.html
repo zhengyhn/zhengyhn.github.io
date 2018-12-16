@@ -16,63 +16,36 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" />
-  <meta name="description" content="
-" />
-
-  <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="import numpy as np import matplotlib.pyplot as plt %matplotlib notebook N = 10 OBSTALE = &#39;1&#39; ROAD = &#39;*&#39; START = &#39;S&#39; END = &#39;E&#39; game_map = np.array([[ROAD] * 10] * 10) game_map[1:5, 1] = OBSTALE game_map[8:10, 1] = OBSTALE game_map[2:6, 3] = OBSTALE game_map[7:10, 3] = OBSTALE game_map[1:5, 5] = OBSTALE game_map[6:8, 5] = OBSTALE game_map[0:3, 7] = OBSTALE game_map[4:6, 7] = OBSTALE game_map[0, 0] = START game_map[8, 7] = END for row in game_map: for col in row: print(col, end=&#39;&#39;) print(&#39;&#39;)  S******1** *1***1*1** *1*1*1*1** *1*1*1**** *1*1*1*1** ***1***1** *****1**** ***1*1**** *1*1***E** *1*1******  class Node: def __init__(self, x, y): self." /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.37.1" />
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/learning-path-finding-algorithms/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-
-
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.93844dae.min.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-
-
 <meta property="og:title" content="Learning Path Finding Algorithms" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="import numpy as np import matplotlib.pyplot as plt %matplotlib notebook N = 10 OBSTALE = &#39;1&#39; ROAD = &#39;*&#39; START = &#39;S&#39; END = &#39;E&#39; game_map = np.array([[ROAD] * 10] * 10) game_map[1:5, 1] = OBSTALE game_map[8:10, 1] = OBSTALE game_map[2:6, 3] = OBSTALE game_map[7:10, 3] = OBSTALE game_map[1:5, 5] = OBSTALE game_map[6:8, 5] = OBSTALE game_map[0:3, 7] = OBSTALE game_map[4:6, 7] = OBSTALE game_map[0, 0] = START game_map[8, 7] = END for row in game_map: for col in row: print(col, end=&#39;&#39;) print(&#39;&#39;)  S******1** *1***1*1** *1*1*1*1** *1*1*1**** *1*1*1*1** ***1***1** *****1**** ***1*1**** *1*1***E** *1*1******  class Node: def __init__(self, x, y): self." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/learning-path-finding-algorithms/" />
-
-
-
-<meta property="article:published_time" content="2018-09-27T00:00:00&#43;00:00"/>
-
+<meta property="og:url" content="http://zhengyhn.github.io/post/learning-path-finding-algorithms/" /><meta property="article:published_time" content="2018-09-27T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2018-09-27T00:00:00&#43;00:00"/>
 
-
-
-
-
-
-
-
-
-
-
 <meta itemprop="name" content="Learning Path Finding Algorithms">
-<meta itemprop="description" content="">
+<meta itemprop="description" content="import numpy as np import matplotlib.pyplot as plt %matplotlib notebook N = 10 OBSTALE = &#39;1&#39; ROAD = &#39;*&#39; START = &#39;S&#39; END = &#39;E&#39; game_map = np.array([[ROAD] * 10] * 10) game_map[1:5, 1] = OBSTALE game_map[8:10, 1] = OBSTALE game_map[2:6, 3] = OBSTALE game_map[7:10, 3] = OBSTALE game_map[1:5, 5] = OBSTALE game_map[6:8, 5] = OBSTALE game_map[0:3, 7] = OBSTALE game_map[4:6, 7] = OBSTALE game_map[0, 0] = START game_map[8, 7] = END for row in game_map: for col in row: print(col, end=&#39;&#39;) print(&#39;&#39;)  S******1** *1***1*1** *1*1*1*1** *1*1*1**** *1*1*1*1** ***1***1** *****1**** ***1*1**** *1*1***E** *1*1******  class Node: def __init__(self, x, y): self.">
 
 
 <meta itemprop="datePublished" content="2018-09-27T00:00:00&#43;00:00" />
@@ -84,7 +57,7 @@
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Learning Path Finding Algorithms"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="import numpy as np import matplotlib.pyplot as plt %matplotlib notebook N = 10 OBSTALE = &#39;1&#39; ROAD = &#39;*&#39; START = &#39;S&#39; END = &#39;E&#39; game_map = np.array([[ROAD] * 10] * 10) game_map[1:5, 1] = OBSTALE game_map[8:10, 1] = OBSTALE game_map[2:6, 3] = OBSTALE game_map[7:10, 3] = OBSTALE game_map[1:5, 5] = OBSTALE game_map[6:8, 5] = OBSTALE game_map[0:3, 7] = OBSTALE game_map[4:6, 7] = OBSTALE game_map[0, 0] = START game_map[8, 7] = END for row in game_map: for col in row: print(col, end=&#39;&#39;) print(&#39;&#39;)  S******1** *1***1*1** *1*1*1*1** *1*1*1**** *1*1*1*1** ***1***1** *****1**** ***1*1**** *1*1***E** *1*1******  class Node: def __init__(self, x, y): self."/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -156,30 +129,20 @@
       <div class="post-meta">
         <span class="post-time"> 2018-09-27 </span>
         
-        <span class="more-meta"> 约 502 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 502 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  
   <div class="post-toc-content">
     
   </div>
 </div>
-
-    
-    
-
-    
     <div class="post-content">
-      <p></p>
-
-<pre><code class="language-python">import numpy as np
+      <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib notebook
 
@@ -301,7 +264,6 @@ for key, value in zip(range(3), graph.adj.items()):
 </code></pre>
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
@@ -316,41 +278,29 @@ for key, value in zip(range(3), graph.adj.items()):
     <span class="item-title">许可协议</span>
     <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
   </p>
-</div>
-
-    
-    
-<div class="post-reward">
+</div><div class="post-reward">
   <input type="checkbox" name="reward" id="reward" hidden />
   <label class="reward-button" for="reward">赞赏支持</label>
   <div class="qr-code">
     
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/wechat.jpg">
         <span>微信打赏</span>
       </label>
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/alipay.jpg">
         <span>支付宝打赏</span>
       </label>
   </div>
-</div>
-
-    <footer class="post-footer">
-      
-
+</div><footer class="post-footer">
       
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/learning-select-algorithms/">
+        <a class="prev" href="/post/learning-select-algorithms/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">Learning Select Algorithms</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        
-          <a class="next" href="/post/git-cheat-sheet-in-our-team/">
+        <a class="next" href="/post/git-cheat-sheet-in-our-team/">
             <span class="next-text nav-default">Git Cheat Sheet in Our Team</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
@@ -360,9 +310,6 @@ for key, value in zip(range(3), graph.adj.items()):
   </article>
         </div>
         
-  
-
-  
 
       </div>
     </main>
@@ -386,14 +333,13 @@ for key, value in zip(range(3), graph.adj.items()):
 
   <div class="busuanzi-footer">
     <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-    <span class="division">|</span>
+      <span class="division">|</span>
     <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
   </div>
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
+    2017 - 
     2018
     <span class="heart">
       <i class="iconfont icon-heart"></i>
@@ -407,20 +353,15 @@ for key, value in zip(range(3), graph.adj.items()):
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-
-<script></script>
-<script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script>
-<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="/lib/js-sequence-diagrams/webfontloader-1.6.28.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.ece58db6.min.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -429,7 +370,7 @@ for key, value in zip(range(3), graph.adj.items()):
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 

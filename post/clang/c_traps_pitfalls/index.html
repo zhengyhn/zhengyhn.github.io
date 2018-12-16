@@ -16,59 +16,33 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" />
-  <meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;c traps and pitfalls&amp;rdquo;一书的笔记 @&amp;lt;/font&amp;gt; 词法陷井 看下面的代码： y = x/*p; /* p points to the divisor */ 本意是x除以p指向的变量，" />
-
-  <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;c traps and pitfalls&amp;rdquo;一书的笔记 @&amp;lt;/font&amp;gt; 词法陷井 看下面的代码： y = x/*p; /* p points to the divisor */ 本意是x除以p指向的变量，" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.37.1" />
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/clang/c_traps_pitfalls/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-
-
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.93844dae.min.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
 
 
 <meta property="og:title" content="c陷井和缺陷" />
 <meta property="og:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;c traps and pitfalls&rdquo;一书的笔记 @&lt;/font&gt; 词法陷井 看下面的代码： y = x/*p; /* p points to the divisor */ 本意是x除以p指向的变量，" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/clang/c_traps_pitfalls/" />
-
-
-
-<meta property="article:published_time" content="2013-03-01T00:00:00&#43;00:00"/>
-
+<meta property="og:url" content="http://zhengyhn.github.io/post/clang/c_traps_pitfalls/" /><meta property="article:published_time" content="2013-03-01T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2013-03-01T00:00:00&#43;00:00"/>
-
-
-
-
-
-
-
-
-
-
 
 <meta itemprop="name" content="c陷井和缺陷">
 <meta itemprop="description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;c traps and pitfalls&rdquo;一书的笔记 @&lt;/font&gt; 词法陷井 看下面的代码： y = x/*p; /* p points to the divisor */ 本意是x除以p指向的变量，">
@@ -76,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2013-03-01T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-03-01T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1231">
+<meta itemprop="wordCount" content="1250">
 
 
 
@@ -155,17 +129,14 @@
       <div class="post-meta">
         <span class="post-time"> 2013-03-01 </span>
         
-        <span class="more-meta"> 约 1231 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 1250 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
@@ -179,11 +150,6 @@
 </nav>
   </div>
 </div>
-
-    
-    
-
-    
     <div class="post-content">
       
 
@@ -196,7 +162,7 @@
 <li>看下面的代码：</li>
 </ul>
 
-<pre><code class="language-example">y = x/*p;  /* p points to the divisor */
+<pre><code class="language-.example">y = x/*p;  /* p points to the divisor */
 </code></pre>
 
 <p>本意是x除以p指向的变量，而事实上这样写/*会认为是注释的开头。
@@ -208,14 +174,14 @@
 <li>!=的优先级要比&amp;之类的逻辑运算符高，所以不要有下面的写法</li>
 </ul>
 
-<pre><code class="language-example">if (flags &amp; FLAG != 0)
+<pre><code class="language-.example">if (flags &amp; FLAG != 0)
 </code></pre>
 
 <ul>
 <li>+号等运算符优先级要比[]{#和}的高，所以不要有下面的写法</li>
 </ul>
 
-<pre><code class="language-example">r = h &lt;&lt; 4 + 1
+<pre><code class="language-.example">r = h &lt;&lt; 4 + 1
 </code></pre>
 
 <ul>
@@ -249,12 +215,12 @@ sizeof，</li>
 <li>假设一个文件里面有下面的定义：</li>
 </ul>
 
-<pre><code class="language-example">char filename[] = &quot;/etc/passwd&quot;;
+<pre><code class="language-.example">char filename[] = &quot;/etc/passwd&quot;;
 </code></pre>
 
 <p>另外一个文件里面有下面的定义：</p>
 
-<pre><code class="language-example">char *filename;
+<pre><code class="language-.example">char *filename;
 </code></pre>
 
 <p>这2个变量的类型一样吗？虽然指针和数组很相似，但是它们不是同一样东西。
@@ -269,7 +235,7 @@ sizeof，</li>
 <li>表达式的顺序陷井。看下面的例子：</li>
 </ul>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-.c">#include &lt;stdio.h&gt;
 
 int main()
 {
@@ -291,7 +257,7 @@ int main()
 <p>会输出什么呢？我刚开始是这样想的，先计算右边，再赋值给左边，所以会输出
 10 20 30 作者再给了一个例子：</p>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-.c">#include &lt;stdio.h&gt;
 
 int main()
 {
@@ -321,7 +287,7 @@ i++，i已经超过了数组a的范围了。而事实上，结果还是 10 20 30
 <li>getchar()函数居然返回int!下面是从&lt;stdio.h&gt;复制过来的代码：</li>
 </ul>
 
-<pre><code class="language-c">/* Read a character from stdin.  */
+<pre><code class="language-.c">/* Read a character from stdin.  */
 __STDIO_INLINE int
 getchar (void)
 {
@@ -331,7 +297,7 @@ getchar (void)
 
 <p>而且putchar居然也是传进int参数，返回int参数</p>
 
-<pre><code class="language-c">/* Write a character to stdout.  */
+<pre><code class="language-.c">/* Write a character to stdout.  */
 __STDIO_INLINE int
 putchar (int __c)
 {
@@ -345,7 +311,7 @@ putchar (int __c)
 <li>宏不是函数，看下面的例子：</li>
 </ul>
 
-<pre><code class="language-c">#define max(a,b) ((a) &gt; (b) ? (a) : (b))
+<pre><code class="language-.c">#define max(a,b) ((a) &gt; (b) ? (a) : (b))
 
 largest = max(largest,x[i++]);
 </code></pre>
@@ -358,7 +324,7 @@ largest = max(largest,x[i++]);
 <li>宏不是类型定义，看下面的例子：</li>
 </ul>
 
-<pre><code class="language-c">#define STU struct student *
+<pre><code class="language-.c">#define STU struct student *
 typedef struct student *STUDENT;
 
 STU a, b;
@@ -367,7 +333,7 @@ STUDENT c, d;
 
 <p>后面的两条定义等价于：</p>
 
-<pre><code class="language-c">struct student *a, b;
+<pre><code class="language-.c">struct student *a, b;
 struct student *c, *d;
 </code></pre>
 
@@ -377,7 +343,6 @@ typedef的定义看起来有点别扭，但是在实际的代码中还是要使�
 
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
@@ -392,41 +357,29 @@ typedef的定义看起来有点别扭，但是在实际的代码中还是要使�
     <span class="item-title">许可协议</span>
     <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
   </p>
-</div>
-
-    
-    
-<div class="post-reward">
+</div><div class="post-reward">
   <input type="checkbox" name="reward" id="reward" hidden />
   <label class="reward-button" for="reward">赞赏支持</label>
   <div class="qr-code">
     
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/wechat.jpg">
         <span>微信打赏</span>
       </label>
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/alipay.jpg">
         <span>支付宝打赏</span>
       </label>
   </div>
-</div>
-
-    <footer class="post-footer">
-      
-
+</div><footer class="post-footer">
       
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/sevenhabbits/review_myself.org/">
+        <a class="prev" href="/post/sevenhabbits/review_myself.org/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">重新探索自我</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        
-          <a class="next" href="/post/test/dev_process.org/">
+        <a class="next" href="/post/test/dev_process.org/">
             <span class="next-text nav-default">软件测试读书笔记：软件开发过程</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
@@ -436,9 +389,6 @@ typedef的定义看起来有点别扭，但是在实际的代码中还是要使�
   </article>
         </div>
         
-  
-
-  
 
       </div>
     </main>
@@ -462,14 +412,13 @@ typedef的定义看起来有点别扭，但是在实际的代码中还是要使�
 
   <div class="busuanzi-footer">
     <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-    <span class="division">|</span>
+      <span class="division">|</span>
     <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
   </div>
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
+    2017 - 
     2018
     <span class="heart">
       <i class="iconfont icon-heart"></i>
@@ -483,20 +432,15 @@ typedef的定义看起来有点别扭，但是在实际的代码中还是要使�
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-
-<script></script>
-<script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script>
-<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="/lib/js-sequence-diagrams/webfontloader-1.6.28.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.ece58db6.min.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -505,7 +449,7 @@ typedef的定义看起来有点别扭，但是在实际的代码中还是要使�
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 

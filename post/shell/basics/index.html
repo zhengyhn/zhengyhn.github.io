@@ -16,59 +16,33 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" />
-  <meta name="description" content="特殊字符 # 在双引号和单引号里面的#不会被认为是注释开始，经\转义的#不会认为是注释开始。 echo &amp;quot;#这里不是注释&amp;quot; echo &#39;#这里不" />
-
-  <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="特殊字符 # 在双引号和单引号里面的#不会被认为是注释开始，经\转义的#不会认为是注释开始。 echo &amp;quot;#这里不是注释&amp;quot; echo &#39;#这里不" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.37.1" />
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/shell/basics/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-
-
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.93844dae.min.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
 
 
 <meta property="og:title" content="shell基础知识" />
 <meta property="og:description" content="特殊字符 # 在双引号和单引号里面的#不会被认为是注释开始，经\转义的#不会认为是注释开始。 echo &quot;#这里不是注释&quot; echo &#39;#这里不" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/shell/basics/" />
-
-
-
-<meta property="article:published_time" content="2013-08-13T00:00:00&#43;00:00"/>
-
+<meta property="og:url" content="http://zhengyhn.github.io/post/shell/basics/" /><meta property="article:published_time" content="2013-08-13T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2013-08-13T00:00:00&#43;00:00"/>
-
-
-
-
-
-
-
-
-
-
 
 <meta itemprop="name" content="shell基础知识">
 <meta itemprop="description" content="特殊字符 # 在双引号和单引号里面的#不会被认为是注释开始，经\转义的#不会认为是注释开始。 echo &quot;#这里不是注释&quot; echo &#39;#这里不">
@@ -76,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2013-08-13T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-08-13T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1544">
+<meta itemprop="wordCount" content="1548">
 
 
 
@@ -155,17 +129,14 @@
       <div class="post-meta">
         <span class="post-time"> 2013-08-13 </span>
         
-        <span class="more-meta"> 约 1544 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
+          <span class="more-meta"> 约 1548 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
@@ -200,11 +171,6 @@
 </nav>
   </div>
 </div>
-
-    
-    
-
-    
     <div class="post-content">
       
 
@@ -216,7 +182,7 @@
 <li>在双引号和单引号里面的#不会被认为是注释开始，经\转义的#不会认为是注释开始。</li>
 </ul>
 
-<pre><code class="language-bash">echo &quot;#这里不是注释&quot;
+<pre><code class="language-.bash">echo &quot;#这里不是注释&quot;
 echo '#这里不是注释'
 echo \#这里不是注释
 echo #这里不是注释
@@ -228,7 +194,7 @@ echo #这里不是注释
 <li>和C语言不同，这里分号用于在同一行中分隔两条命令，这一点和pascal很相似</li>
 </ul>
 
-<pre><code class="language-bash">if [ -z $1 ]; then
+<pre><code class="language-.bash">if [ -z $1 ]; then
     echo &quot;--&gt;must with paramether 'start' or 'stop'&quot;
 elif [ $1 == &quot;start&quot; ]; then
     echo &quot;starting...&quot;
@@ -251,7 +217,7 @@ fi
 <li>两个分号用于case语句中选项的结束符</li>
 </ul>
 
-<pre><code class="language-bash">case &quot;$1&quot; in
+<pre><code class="language-.bash">case &quot;$1&quot; in
     &quot;abc&quot;) echo &quot;\$1 = abc&quot; ;;
     &quot;xyz&quot;) echo &quot;\$1 = xyz&quot; ;;
 esac    
@@ -308,7 +274,7 @@ shell里面起空命令的作用，相当于汇编里面的NOP。</li>
 <li>它还表示true。比如：</li>
 </ul>
 
-<pre><code class="language-bash">while :
+<pre><code class="language-.bash">while :
 do
     echo &quot;wow&quot;
 done
@@ -316,7 +282,7 @@ done
 
 <p>相当于</p>
 
-<pre><code class="language-bash">while true
+<pre><code class="language-.bash">while true
 do
     echo &quot;wow&quot;
 done
@@ -326,20 +292,20 @@ done
 <li>它的退出状态是0</li>
 </ul>
 
-<pre><code class="language-bash">:
+<pre><code class="language-.bash">:
 echo $?
 </code></pre>
 
 <p>结果是：</p>
 
-<pre><code class="language-example">0
+<pre><code class="language-.example">0
 </code></pre>
 
 <ul>
 <li>在if/then结构中，用于空操作，相当于C语言中的分号。</li>
 </ul>
 
-<pre><code class="language-bash">if condition
+<pre><code class="language-.bash">if condition
 then 
     :
 else
@@ -351,7 +317,7 @@ fi
 <li>它还有一个巧妙的用法，就是防止当作命令使用。比如：</li>
 </ul>
 
-<pre><code class="language-bash">: ${username=`whoami`}
+<pre><code class="language-.bash">: ${username=`whoami`}
 echo $username
 </code></pre>
 
@@ -379,7 +345,7 @@ card到底是什么意思！</li>
 <li>两个*还有一个特殊功能，它表示递归的文件匹配。看下面的例子：</li>
 </ul>
 
-<pre><code class="language-bash">#!/bin/bash
+<pre><code class="language-.bash">#!/bin/bash
 
 shopt -s globstar
 
@@ -397,7 +363,7 @@ done
 <li>像C语言中的三目运算符一样，可以和?:一起构成if/then/else结构，但是必须要用双括号。</li>
 </ul>
 
-<pre><code class="language-bash">a=1
+<pre><code class="language-.bash">a=1
 b=2
 ((min = $a &lt; $b ? $a : $b))
 echo $min       
@@ -418,14 +384,14 @@ echo $min
 <li>第一个作用是命令组，有点像C语言中的区块的概念。</li>
 </ul>
 
-<pre><code class="language-bash">a=123
+<pre><code class="language-.bash">a=123
 (a=321;)
 echo $a
 </code></pre>
 
 <p>结果为：</p>
 
-<pre><code class="language-example">123
+<pre><code class="language-.example">123
 </code></pre>
 
 <ul>
@@ -438,14 +404,14 @@ echo $a
 <li>这个才是真正的区块，但是奇怪的是，这里的区块里面的变量外面却是可见的。</li>
 </ul>
 
-<pre><code class="language-bash">a=123
+<pre><code class="language-.bash">a=123
 { a=321; }
 echo $a
 </code></pre>
 
 <p>结果为：</p>
 
-<pre><code class="language-example">321
+<pre><code class="language-.example">321
 </code></pre>
 
 <p>注意{}里面要加空格。</p>
@@ -500,7 +466,6 @@ echo $a
 
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
@@ -515,41 +480,29 @@ echo $a
     <span class="item-title">许可协议</span>
     <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
   </p>
-</div>
-
-    
-    
-<div class="post-reward">
+</div><div class="post-reward">
   <input type="checkbox" name="reward" id="reward" hidden />
   <label class="reward-button" for="reward">赞赏支持</label>
   <div class="qr-code">
     
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/wechat.jpg">
         <span>微信打赏</span>
       </label>
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/alipay.jpg">
         <span>支付宝打赏</span>
       </label>
   </div>
-</div>
-
-    <footer class="post-footer">
-      
-
+</div><footer class="post-footer">
       
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/shell/getting.start/">
+        <a class="prev" href="/post/shell/getting.start/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">shell 编程！</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        
-          <a class="next" href="/post/algorithm/kmp/">
+        <a class="next" href="/post/algorithm/kmp/">
             <span class="next-text nav-default">KMP算法-我的理解</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
@@ -559,9 +512,6 @@ echo $a
   </article>
         </div>
         
-  
-
-  
 
       </div>
     </main>
@@ -585,14 +535,13 @@ echo $a
 
   <div class="busuanzi-footer">
     <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-    <span class="division">|</span>
+      <span class="division">|</span>
     <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
   </div>
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
+    2017 - 
     2018
     <span class="heart">
       <i class="iconfont icon-heart"></i>
@@ -606,20 +555,15 @@ echo $a
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-
-<script></script>
-<script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script>
-<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="/lib/js-sequence-diagrams/webfontloader-1.6.28.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.ece58db6.min.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -628,7 +572,7 @@ echo $a
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 

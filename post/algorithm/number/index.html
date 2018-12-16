@@ -16,59 +16,33 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" />
-  <meta name="description" content="基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：" />
-
-  <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.37.1" />
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/algorithm/number/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-
-
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.93844dae.min.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
 
 
 <meta property="og:title" content="数字的算法" />
 <meta property="og:description" content="基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/algorithm/number/" />
-
-
-
-<meta property="article:published_time" content="2013-03-13T00:00:00&#43;00:00"/>
-
+<meta property="og:url" content="http://zhengyhn.github.io/post/algorithm/number/" /><meta property="article:published_time" content="2013-03-13T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2013-03-13T00:00:00&#43;00:00"/>
-
-
-
-
-
-
-
-
-
-
 
 <meta itemprop="name" content="数字的算法">
 <meta itemprop="description" content="基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：">
@@ -155,17 +129,14 @@
       <div class="post-meta">
         <span class="post-time"> 2013-03-13 </span>
         
-        <span class="more-meta"> 约 4267 字 </span>
-        <span class="more-meta"> 预计阅读 9 分钟 </span>
+          <span class="more-meta"> 约 4267 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
@@ -188,11 +159,6 @@
 </nav>
   </div>
 </div>
-
-    
-    
-
-    
     <div class="post-content">
       
 
@@ -202,7 +168,7 @@
 
 <p>十进制有一个很傻逼但是很有趣的性质：</p>
 
-<pre><code class="language-example">任意3个个位数相加的和最多是两位数
+<pre><code class="language-.example">任意3个个位数相加的和最多是两位数
 </code></pre>
 
 <p>事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：</p>
@@ -227,7 +193,7 @@
 引用<a href="http://en.wikipedia.org/wiki/Multiplication_algorithm#Quarter_square_multiplication">wikipedia</a>
 的例子：</p>
 
-<pre><code class="language-example">Decimal:     Binary:
+<pre><code class="language-.example">Decimal:     Binary:
 11   3       1011  11
 5    6       101  110
 2   12       10  1100   #will delete
@@ -248,7 +214,7 @@
 
 <p>当然，最简单的是：</p>
 
-<pre><code class="language-example">3 11
+<pre><code class="language-.example">3 11
 1 22
   --
   33
@@ -260,7 +226,7 @@
 
 <p>马上用代码来实现：</p>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-.c">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 
 /* multiple two integer A and B */
@@ -328,7 +294,7 @@ int multiple(int a, int b)
 
 <p>同样，可以推理出来除法的算法（虽然我推不出来&hellip;），代码实现如下：</p>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-.c">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 
 struct Div {
@@ -423,7 +389,7 @@ struct Div divide(int divider, int divisor)
 
 <p>按照我个人的理解，是：</p>
 
-<pre><code class="language-example">x和y除了N有相同的余数当且仅当N整除(x - y)
+<pre><code class="language-.example">x和y除了N有相同的余数当且仅当N整除(x - y)
 </code></pre>
 
 <p>用书上的例子，令x = 253, y = 13, 253除以60余数为13, 13除以60余数也是13,
@@ -431,7 +397,7 @@ struct Div divide(int divider, int divisor)
 
 <p>下面这个图，能形象地说明这个问题：</p>
 
-<pre><code class="language-example">... -6 -3 0 3 6 ...        //余数为0
+<pre><code class="language-.example">... -6 -3 0 3 6 ...        //余数为0
 ... -5 -2 1 4 7 ...        //余数为1
 ... -4 -1 2 5 8 ...        //余数为2
 </code></pre>
@@ -479,7 +445,7 @@ x1 * y1 ≡ x2 * y2 (mod N)</p>
 
 <p>我等码农，还是用代码来实现一下吧：</p>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-.c">#include &lt;stdio.h&gt;
 
 /* calculate BASE^EXP % MOD, return the result */
 int mod_pow(int base, int exp, int mod);
@@ -509,7 +475,7 @@ int mod_pow(int base, int exp, int mod)
 否则保留原来结果，每次向高位前进的时候，基数都要翻一倍，并取模。
 用代码来说明问题吧：</p>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-.c">#include &lt;stdio.h&gt;
 
 /* calculate BASE^EXP % MOD, EXP &gt;= 0, return the result */
 int mod_pow(int base, int exp, int mod);
@@ -542,7 +508,7 @@ int mod_pow(int base, int exp, int mod)
 
 <p>后来发现原来这个算法称为“蒙格马利算法”，它要用到下面的这个定理作为引理：</p>
 
-<pre><code class="language-example">(a * b) % m = ((a % m) * (b % m)) % m
+<pre><code class="language-.example">(a * b) % m = ((a % m) * (b % m)) % m
 </code></pre>
 
 <h2 id="欧几里得最大公约数算法">欧几里得最大公约数算法</h2>
@@ -550,12 +516,12 @@ int mod_pow(int base, int exp, int mod)
 <p>首先，不要忘记这个英文名，Euclid。虽然这是一个非常古老的算法，但是有的时候你还是会
 忘记，因此，我要好好记住它。</p>
 
-<pre><code class="language-example">对于两个正整数x和y，有x &gt;= y，则gcd(x, y) = gcd(x mod y, y).
+<pre><code class="language-.example">对于两个正整数x和y，有x &gt;= y，则gcd(x, y) = gcd(x mod y, y).
 </code></pre>
 
 <p>记住容易，但是要能证明它，才是真正理解了。证明如下：</p>
 
-<pre><code class="language-example">有2个正整数x, y, x &gt;= y, 它们的最大公约数是gcd。
+<pre><code class="language-.example">有2个正整数x, y, x &gt;= y, 它们的最大公约数是gcd。
 令x = ky + r，则(x mod y) = r = x - ky，
 假设d为x和y的一个公约数，即d能整除x，d也能整除y，
 则d也能整除(x mod y)。
@@ -566,7 +532,7 @@ int mod_pow(int base, int exp, int mod)
 
 <p>用代码来实现：</p>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-.c">#include &lt;stdio.h&gt;
 
 /* return the greatest common divisor with x, y &gt;= 0,
  * implement using recursive method. */
@@ -620,7 +586,7 @@ int gcd(int x, int y)
 
 <h2 id="扩展欧几里得算法">扩展欧几里得算法</h2>
 
-<pre><code class="language-example">对于不全为0的正整数a和b，gcd(a, b)表示a和b的最大公约数，则必然存在整数对
+<pre><code class="language-.example">对于不全为0的正整数a和b，gcd(a, b)表示a和b的最大公约数，则必然存在整数对
 x和y，使得gcd(a, b) = ax + by
 </code></pre>
 
@@ -630,7 +596,7 @@ x和y，使得gcd(a, b) = ax + by
 , <a href="http://blog.csdn.net/lhfight/article/details/7755994">这篇文章</a>
 解决了我的一些迷惑。</p>
 
-<pre><code class="language-example">对于不定方程ax + by = c，已经a, b, c的值，求解满足方程的一组x, y。
+<pre><code class="language-.example">对于不定方程ax + by = c，已经a, b, c的值，求解满足方程的一组x, y。
 其中a, b, c, x, y都是整数。
 </code></pre>
 
@@ -673,7 +639,7 @@ x和y，使得gcd(a, b) = ax + by
 
 <p>废话少说，马上上代码：</p>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-.c">#include &lt;stdio.h&gt;
 
 /* extended euclidean algorithm:gcd(a, b) = ax + by
  * return gcd(a, b) */   
@@ -763,7 +729,7 @@ int extended_euclid(int a, int b, int *x, int *y)
 
 <p>代码实现非常简单，用到了上例中的扩展欧几里得算法的函数：</p>
 
-<pre><code class="language-c">/* calculate the multiplicative inverse of (a mod m), return
+<pre><code class="language-.c">/* calculate the multiplicative inverse of (a mod m), return
  * the inverse */   
 int mul_inverse(int a, int m);
 
@@ -806,7 +772,7 @@ int mul_inverse(int a, int m)
 
 <p>最直接的做法,使用定义来判断：</p>
 
-<pre><code class="language-example">typedef unsigned int uint;
+<pre><code class="language-.example">typedef unsigned int uint;
 
 /* judge whether an integer N is prime
  * in terms of the definition. */   
@@ -832,7 +798,7 @@ int is_prime_direct(uint n)
 超过n / 2的时候，就可以确定看来的数不可能整除n了，于是，可以提高一倍的
 速度。</p>
 
-<pre><code class="language-c">typedef unsigned int uint;
+<pre><code class="language-.c">typedef unsigned int uint;
 
 /* judge whether an integer N is prime
  * in terms of the definition and stop
@@ -873,7 +839,7 @@ int is_prime_half(uint n)
 我们做了很多重复工作，事实上只要判断到√53 就行了，因为后面的判断和前面是
 重复的。于是，就可以写出来更快的算法，速度又有了质的提高。</p>
 
-<pre><code class="language-c">#include &lt;math.h&gt;
+<pre><code class="language-.c">#include &lt;math.h&gt;
 
 typedef unsigned int uint;
 
@@ -911,7 +877,7 @@ n，还好我们有前面的快速求幂模法（也 称蒙格马利法）。</p
 
 <p>继续上代码：</p>
 
-<pre><code class="language-c">/* judge whether an integer N is prime
+<pre><code class="language-.c">/* judge whether an integer N is prime
  * in terms of fermat's little theorem */
 int is_prime_fermat(uint n);
 
@@ -970,7 +936,7 @@ int pow_mod(int base, int exp, int mod)
 <p>如果我们随机拿多个数a来测试，则会大大降低错误率。比如我取n /
 2个数来测试。</p>
 
-<pre><code class="language-c">int is_prime_fermat(uint n)
+<pre><code class="language-.c">int is_prime_fermat(uint n)
 {
     int base, i;
 
@@ -991,7 +957,6 @@ int pow_mod(int base, int exp, int mod)
 
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
@@ -1006,41 +971,29 @@ int pow_mod(int base, int exp, int mod)
     <span class="item-title">许可协议</span>
     <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
   </p>
-</div>
-
-    
-    
-<div class="post-reward">
+</div><div class="post-reward">
   <input type="checkbox" name="reward" id="reward" hidden />
   <label class="reward-button" for="reward">赞赏支持</label>
   <div class="qr-code">
     
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/wechat.jpg">
         <span>微信打赏</span>
       </label>
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/alipay.jpg">
         <span>支付宝打赏</span>
       </label>
   </div>
-</div>
-
-    <footer class="post-footer">
-      
-
+</div><footer class="post-footer">
       
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/test/config_comp.org/">
+        <a class="prev" href="/post/test/config_comp.org/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">配置测试与兼容性测试</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        
-          <a class="next" href="/post/pm/intro.org/">
+        <a class="next" href="/post/pm/intro.org/">
             <span class="next-text nav-default">简介</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
@@ -1050,9 +1003,6 @@ int pow_mod(int base, int exp, int mod)
   </article>
         </div>
         
-  
-
-  
 
       </div>
     </main>
@@ -1076,14 +1026,13 @@ int pow_mod(int base, int exp, int mod)
 
   <div class="busuanzi-footer">
     <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-    <span class="division">|</span>
+      <span class="division">|</span>
     <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
   </div>
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
+    2017 - 
     2018
     <span class="heart">
       <i class="iconfont icon-heart"></i>
@@ -1097,20 +1046,15 @@ int pow_mod(int base, int exp, int mod)
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-
-<script></script>
-<script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script>
-<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="/lib/js-sequence-diagrams/webfontloader-1.6.28.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.ece58db6.min.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -1119,7 +1063,7 @@ int pow_mod(int base, int exp, int mod)
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 

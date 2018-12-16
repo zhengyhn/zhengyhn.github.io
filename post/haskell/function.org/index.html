@@ -16,59 +16,33 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" />
-  <meta name="description" content="模式匹配(pattern matching) 这里的模式匹配有点像switch&amp;hellip;case&amp;hellip;下面的函数判断传入的参数是不是7 lucky :: (Integral a) =&amp;gt;" />
-
-  <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="模式匹配(pattern matching) 这里的模式匹配有点像switch&amp;hellip;case&amp;hellip;下面的函数判断传入的参数是不是7 lucky :: (Integral a) =&amp;gt;" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.37.1" />
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/haskell/function.org/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-
-
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.93844dae.min.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
 
 
 <meta property="og:title" content="函数中的语法" />
 <meta property="og:description" content="模式匹配(pattern matching) 这里的模式匹配有点像switch&hellip;case&hellip;下面的函数判断传入的参数是不是7 lucky :: (Integral a) =&gt;" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/haskell/function.org/" />
-
-
-
-<meta property="article:published_time" content="2013-03-06T00:00:00&#43;00:00"/>
-
+<meta property="og:url" content="http://zhengyhn.github.io/post/haskell/function.org/" /><meta property="article:published_time" content="2013-03-06T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2013-03-06T00:00:00&#43;00:00"/>
-
-
-
-
-
-
-
-
-
-
 
 <meta itemprop="name" content="函数中的语法">
 <meta itemprop="description" content="模式匹配(pattern matching) 这里的模式匹配有点像switch&hellip;case&hellip;下面的函数判断传入的参数是不是7 lucky :: (Integral a) =&gt;">
@@ -155,17 +129,14 @@
       <div class="post-meta">
         <span class="post-time"> 2013-03-06 </span>
         
-        <span class="more-meta"> 约 1254 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 1254 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
@@ -178,11 +149,6 @@
 </nav>
   </div>
 </div>
-
-    
-    
-
-    
     <div class="post-content">
       
 
@@ -190,7 +156,7 @@
 
 <p>这里的模式匹配有点像switch&hellip;case&hellip;下面的函数判断传入的参数是不是7</p>
 
-<pre><code class="language-haskell">lucky :: (Integral a) =&gt; a -&gt; String
+<pre><code class="language-.haskell">lucky :: (Integral a) =&gt; a -&gt; String
 lucky 7 = &quot;yes&quot;
 lucky x = &quot;no&quot;
 </code></pre>
@@ -199,7 +165,7 @@ lucky x = &quot;no&quot;
 这里的x表示任何变量（可以用任何名字表示）。
 可以想到，可以使用这个办法来实现递归：</p>
 
-<pre><code class="language-haskell">fact :: (Integral a) =&gt; a -&gt; a
+<pre><code class="language-.haskell">fact :: (Integral a) =&gt; a -&gt; a
 fact 0 = 1
 fact n = n * (fact (n - 1))
 </code></pre>
@@ -207,17 +173,17 @@ fact n = n * (fact (n - 1))
 <p>注意：如果找不到匹配项，则程序会崩溃。
 模式匹配也可以用于list中，我们知道在list中，:号可以用于在前面加入元素，如：</p>
 
-<pre><code class="language-haskell">1 : [2, 3]
+<pre><code class="language-.haskell">1 : [2, 3]
 </code></pre>
 
 <p>结果为：</p>
 
-<pre><code class="language-haskell">[1, 2, 3]
+<pre><code class="language-.haskell">[1, 2, 3]
 </code></pre>
 
 <p>模式x:xs用于表示把list的头绑定在x上，剩下的绑定在xs上，看下例：</p>
 
-<pre><code class="language-haskell">-- function head'
+<pre><code class="language-.haskell">-- function head'
 head' :: [a] -&gt; a
 head' [] = error &quot;list empty!&quot;
 head' (x:_) = x
@@ -225,7 +191,7 @@ head' (x:_) = x
 
 <p>又学习到了注释的写法，单选注释是&ndash;，多行注释是{- -}，如：</p>
 
-<pre><code class="language-haskell">-- comment
+<pre><code class="language-.haskell">-- comment
 {- ---------------------------
 -- comment.hs 
 -- Author: yuanhang zheng
@@ -235,7 +201,7 @@ head' (x:_) = x
 <p>有一种给模式起别名的表示方法，使用@，下次使用的时候就不用重新写这个模式了,
 这叫as pattern</p>
 
-<pre><code class="language-haskell">-- function first
+<pre><code class="language-.haskell">-- function first
 first :: String -&gt; String
 first &quot;&quot; = &quot;empty!&quot;
 first all@(x:rest) = &quot;first of &quot; ++ all ++ &quot;is&quot; ++ [x]
@@ -247,7 +213,7 @@ first all@(x:rest) = &quot;first of &quot; ++ all ++ &quot;is&quot; ++ [x]
 它就和if&hellip;else差不多，判断一个布尔表达式，使用管道符|,pipe，从上往下检查，
 一般最后一个就是otherwise，看下例：</p>
 
-<pre><code class="language-haskell">-- function checkAge
+<pre><code class="language-.haskell">-- function checkAge
 checkAge :: (Integral a) =&gt; a -&gt; String
 checkAge age
   | age &lt; 18             = &quot;too young!&quot;
@@ -264,7 +230,7 @@ matching检查的是一个模式。</p>
 
 <p>我们来写一个函数，传入收入和成本，计算是否有利润，这个程序太简单了：</p>
 
-<pre><code class="language-haskell">-- function showProfit
+<pre><code class="language-.haskell">-- function showProfit
 showProfit :: (RealFloat a) =&gt; a -&gt; a -&gt; String
 showProfit cost income
   | (income - cost) &lt; 0  = &quot;oh no!the profit is minus&quot;
@@ -277,7 +243,7 @@ cost)这个东西重复了很多次，程序员最忌的就是
 重复了，在其它语言里面，可以用一个变量来代替，这里我们也可以用，于是出来了where
 语句：</p>
 
-<pre><code class="language-haskell">-- function showProfit
+<pre><code class="language-.haskell">-- function showProfit
 showProfit :: (RealFloat a) =&gt; a -&gt; a -&gt; String
 showProfit cost income
   | profit &lt; 0  = &quot;oh no!the profit is minus&quot;
@@ -288,7 +254,7 @@ showProfit cost income
 
 <p>有点类型于C#中的where语句。 当然后面还可以加更多变量：</p>
 
-<pre><code class="language-haskell">where profit = income - const
+<pre><code class="language-.haskell">where profit = income - const
       one = 1
       two = 2
 </code></pre>
@@ -300,7 +266,7 @@ where语句后面还能定义函数。</p>
 
 <p>它和where非常像，</p>
 
-<pre><code class="language-haskell">-- function cylinder_volume
+<pre><code class="language-.haskell">-- function cylinder_volume
 cylinder_volume :: (RealFloat a) =&gt; a -&gt; a -&gt; a
 cylinder_volume radius height =
     let area = pi * radius * radius
@@ -312,7 +278,7 @@ cylinder_volume radius height =
 后面的，let是放到前面的。let绑定的是表达式，而where绑定的是语法结构。
 if和let还有下面这种奇葩的用法：</p>
 
-<pre><code class="language-haskell">*Main&gt; [if 1 &gt; 0 then &quot;abc&quot; else &quot;cba&quot;]
+<pre><code class="language-.haskell">*Main&gt; [if 1 &gt; 0 then &quot;abc&quot; else &quot;cba&quot;]
 [&quot;abc&quot;]
 *Main&gt; (let a = 1 in a + a) * 2
 4
@@ -321,7 +287,7 @@ if和let还有下面这种奇葩的用法：</p>
 <p>let后面如果有多个变量，并且在同一行，则用分号分开，最后一个变量后面可以加分号也
 可以不加。</p>
 
-<pre><code class="language-haskell">*Main&gt; (let a = 1; b = 2; c = 3 in a * b * c) + 1
+<pre><code class="language-.haskell">*Main&gt; (let a = 1; b = 2; c = 3 in a * b * c) + 1
 7
 </code></pre>
 
@@ -331,7 +297,7 @@ if和let还有下面这种奇葩的用法：</p>
 
 <p>和C语言中的case很像：</p>
 
-<pre><code class="language-haskell">-- function start
+<pre><code class="language-.haskell">-- function start
 start :: [a] -&gt; a
 start s = case s of [] -&gt; error &quot;empty&quot;
                     (x:_) -&gt; x
@@ -341,7 +307,6 @@ start s = case s of [] -&gt; error &quot;empty&quot;
 
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
@@ -356,41 +321,29 @@ start s = case s of [] -&gt; error &quot;empty&quot;
     <span class="item-title">许可协议</span>
     <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
   </p>
-</div>
-
-    
-    
-<div class="post-reward">
+</div><div class="post-reward">
   <input type="checkbox" name="reward" id="reward" hidden />
   <label class="reward-button" for="reward">赞赏支持</label>
   <div class="qr-code">
     
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/wechat.jpg">
         <span>微信打赏</span>
       </label>
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/alipay.jpg">
         <span>支付宝打赏</span>
       </label>
   </div>
-</div>
-
-    <footer class="post-footer">
-      
-
+</div><footer class="post-footer">
       
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/clang/matrix/">
+        <a class="prev" href="/post/clang/matrix/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">C语言实现的矩阵类</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        
-          <a class="next" href="/post/how-to-become-a-hacker/">
+        <a class="next" href="/post/how-to-become-a-hacker/">
             <span class="next-text nav-default">如何成为一个黑客</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
@@ -400,9 +353,6 @@ start s = case s of [] -&gt; error &quot;empty&quot;
   </article>
         </div>
         
-  
-
-  
 
       </div>
     </main>
@@ -426,14 +376,13 @@ start s = case s of [] -&gt; error &quot;empty&quot;
 
   <div class="busuanzi-footer">
     <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-    <span class="division">|</span>
+      <span class="division">|</span>
     <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
   </div>
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
+    2017 - 
     2018
     <span class="heart">
       <i class="iconfont icon-heart"></i>
@@ -447,20 +396,15 @@ start s = case s of [] -&gt; error &quot;empty&quot;
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-
-<script></script>
-<script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script>
-<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="/lib/js-sequence-diagrams/webfontloader-1.6.28.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.ece58db6.min.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -469,7 +413,7 @@ start s = case s of [] -&gt; error &quot;empty&quot;
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 

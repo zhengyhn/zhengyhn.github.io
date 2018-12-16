@@ -16,59 +16,33 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" />
-  <meta name="description" content="概述 haskell有类型推理机制，如果我们写一个数字，我们不用告诉编译器它是一个数字， 编译器能够推理出它是一个数字。 使用:t命令可以查看一个" />
-
-  <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="概述 haskell有类型推理机制，如果我们写一个数字，我们不用告诉编译器它是一个数字， 编译器能够推理出它是一个数字。 使用:t命令可以查看一个" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.37.1" />
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/haskell/types.org/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-
-
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.93844dae.min.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
 
 
 <meta property="og:title" content="types and typeclasses" />
 <meta property="og:description" content="概述 haskell有类型推理机制，如果我们写一个数字，我们不用告诉编译器它是一个数字， 编译器能够推理出它是一个数字。 使用:t命令可以查看一个" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/haskell/types.org/" />
-
-
-
-<meta property="article:published_time" content="2013-02-18T00:00:00&#43;00:00"/>
-
+<meta property="og:url" content="http://zhengyhn.github.io/post/haskell/types.org/" /><meta property="article:published_time" content="2013-02-18T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2013-02-18T00:00:00&#43;00:00"/>
-
-
-
-
-
-
-
-
-
-
 
 <meta itemprop="name" content="types and typeclasses">
 <meta itemprop="description" content="概述 haskell有类型推理机制，如果我们写一个数字，我们不用告诉编译器它是一个数字， 编译器能够推理出它是一个数字。 使用:t命令可以查看一个">
@@ -76,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2013-02-18T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-02-18T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1869">
+<meta itemprop="wordCount" content="1876">
 
 
 
@@ -155,17 +129,14 @@
       <div class="post-meta">
         <span class="post-time"> 2013-02-18 </span>
         
-        <span class="more-meta"> 约 1869 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
+          <span class="more-meta"> 约 1876 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
@@ -177,11 +148,6 @@
 </nav>
   </div>
 </div>
-
-    
-    
-
-    
     <div class="post-content">
       
 
@@ -197,7 +163,7 @@
 <li>使用:t命令可以查看一个表达式的类型。</li>
 </ul>
 
-<pre><code class="language-haskell">ghci&gt; :t 'a'
+<pre><code class="language-.haskell">ghci&gt; :t 'a'
 'a' :: Char
 ghci&gt; :t False
 False :: Bool
@@ -214,35 +180,35 @@ ghci&gt; :t ('a', &quot;aaa&quot;)
 <li>函数也有类型，看下面这个函数</li>
 </ul>
 
-<pre><code class="language-haskell">remove_uppercase str = [ ch | ch &lt;- str, ch `elem` ['a'..'z']]
+<pre><code class="language-.haskell">remove_uppercase str = [ ch | ch &lt;- str, ch `elem` ['a'..'z']]
 </code></pre>
 
 <p>查看它的类型：</p>
 
-<pre><code class="language-haskell">ghci&gt; :t remove_uppercase
+<pre><code class="language-.haskell">ghci&gt; :t remove_uppercase
 remove_uppercase :: [Char] -&gt; [Char]
 </code></pre>
 
 <p>如果带多个参数会怎么样呢？</p>
 
-<pre><code class="language-haskell">my_sum a b c = a + b + c
+<pre><code class="language-.haskell">my_sum a b c = a + b + c
 </code></pre>
 
 <p>这样，会得到下面的结果：</p>
 
-<pre><code class="language-haskell">ghci&gt; :t my_sum
+<pre><code class="language-.haskell">ghci&gt; :t my_sum
 my_sum :: Num a =&gt; a -&gt; a -&gt; a -&gt; a
 </code></pre>
 
 <p>这是什么乱七八糟的呢？先不管，我们给这个函数声明类型：</p>
 
-<pre><code class="language-haskell">my_sum :: Int -&gt; Int -&gt; Int -&gt; Int
+<pre><code class="language-.haskell">my_sum :: Int -&gt; Int -&gt; Int -&gt; Int
 my_sum a b c = a + b + c
 </code></pre>
 
 <p>再来看一下：</p>
 
-<pre><code class="language-haskell">ghci&gt; :t my_sum
+<pre><code class="language-.haskell">ghci&gt; :t my_sum
 my_sum :: Int -&gt; Int -&gt; Int -&gt; Int
 </code></pre>
 
@@ -291,7 +257,7 @@ my_sum :: Int -&gt; Int -&gt; Int -&gt; Int
 
 <p>操作list中有一个函数叫head，它的类型是：</p>
 
-<pre><code class="language-haskell">Prelude&gt; :t head
+<pre><code class="language-.haskell">Prelude&gt; :t head
 head :: [a] -&gt; a
 </code></pre>
 
@@ -299,7 +265,7 @@ head :: [a] -&gt; a
 type variable)，表明a可以是任意类型，这个有点像C++中的泛型。存在类型变量
 的函数称为多态函数(polymorphic function)。 再来看看fst函数：</p>
 
-<pre><code class="language-haskell">Prelude&gt; :t fst
+<pre><code class="language-.haskell">Prelude&gt; :t fst
 fst :: (a, b) -&gt; a
 </code></pre>
 
@@ -310,14 +276,14 @@ fst :: (a, b) -&gt; a
 <p>一个类型类是一个定义了一些动作的接口，如果一个类型是一个类型类的一部分，则这
 个类型实现了这个类型类定义的一些动作。</p>
 
-<pre><code class="language-haskell">Prelude&gt; :t (==)
+<pre><code class="language-.haskell">Prelude&gt; :t (==)
 (==) :: Eq a =&gt; a -&gt; a -&gt; Bool
 </code></pre>
 
 <p>这里，=&gt;右边表明==这个函数接受2个任意类型的参数，返回Bool类型，左边表明参数
 a必须是Eq类的成员。左边的称为类约束(class constraint)。 再看看elem：</p>
 
-<pre><code class="language-haskell">Prelude&gt; :t elem
+<pre><code class="language-.haskell">Prelude&gt; :t elem
 elem :: Eq a =&gt; a -&gt; [a] -&gt; Bool
 </code></pre>
 
@@ -329,7 +295,7 @@ elem :: Eq a =&gt; a -&gt; [a] -&gt; Bool
 &lt;=和compare</li>
 </ul>
 
-<pre><code class="language-haskell">Prelude&gt; 5 &gt; 2
+<pre><code class="language-.haskell">Prelude&gt; 5 &gt; 2
 True
 Prelude&gt; compare 5 3
 GT
@@ -342,7 +308,7 @@ GT
 <li>Show，用于显示字符串，它的成员实现的函数主要是show。</li>
 </ul>
 
-<pre><code class="language-haskell">Prelude&gt; show 1.23
+<pre><code class="language-.haskell">Prelude&gt; show 1.23
 &quot;1.23&quot;
 </code></pre>
 
@@ -352,13 +318,13 @@ GT
 
 <p>一个在Read成员中有的类型。</p>
 
-<pre><code class="language-haskell">Prelude&gt; read &quot;1.2&quot; + 2.1
+<pre><code class="language-.haskell">Prelude&gt; read &quot;1.2&quot; + 2.1
 3.3
 </code></pre>
 
 <p>它是怎么知道是哪个类型的呢？看下面的例子：</p>
 
-<pre><code class="language-haskell">Prelude&gt; read &quot;2&quot;
+<pre><code class="language-.haskell">Prelude&gt; read &quot;2&quot;
 
 &lt;interactive&gt;:19:1:
     No instance for (Read a0) arising from a use of `read'
@@ -376,14 +342,14 @@ GT
 
 <p>它提示错误了，因为它不知道是哪个类型。看一下read函数的类型：</p>
 
-<pre><code class="language-haskell">Prelude&gt; :t read
+<pre><code class="language-.haskell">Prelude&gt; :t read
 read :: Read a =&gt; String -&gt; a
 </code></pre>
 
 <p>它返回了a，表明可以是任意变量，而上例中两个数相加，是因为编译器猜到了类型，
 如果要用read函数，则最好是给它强制转换类型,通过加上::符号：</p>
 
-<pre><code class="language-haskell">Prelude&gt; read &quot;2&quot; :: Int
+<pre><code class="language-.haskell">Prelude&gt; read &quot;2&quot; :: Int
 2
 </code></pre>
 
@@ -400,7 +366,7 @@ Integer, Float, Double。其中()是空元组类型，它们都是可以枚举�
 
 <p>maxBound，看下例：</p>
 
-<pre><code class="language-haskell">Prelude&gt; :t minBound 
+<pre><code class="language-.haskell">Prelude&gt; :t minBound 
 minBound :: Bounded a =&gt; a
 Prelude&gt; minBound :: Int
 -9223372036854775808
@@ -412,7 +378,7 @@ Prelude&gt; maxBound :: Char
 
 <p>所有的元组都是它的成员：</p>
 
-<pre><code class="language-haskell">Prelude&gt; minBound :: (Bool, Char, Int)
+<pre><code class="language-.haskell">Prelude&gt; minBound :: (Bool, Char, Int)
 (False,'\NUL',-9223372036854775808)
 </code></pre>
 
@@ -422,7 +388,7 @@ Prelude&gt; maxBound :: Char
 
 <p>一个数字就是一个多态常量：</p>
 
-<pre><code class="language-haskell">Prelude&gt; :t 2
+<pre><code class="language-.haskell">Prelude&gt; :t 2
 2 :: Num a =&gt; a
 Prelude&gt; 2 :: Int
 2
@@ -442,7 +408,7 @@ Prelude&gt; 2 :: Double
 
 <p>一个有用的函数是fromIntegral，它的类型为：</p>
 
-<pre><code class="language-haskell">Prelude&gt; :t fromIntegral
+<pre><code class="language-.haskell">Prelude&gt; :t fromIntegral
 fromIntegral :: (Integral a, Num b) =&gt; a -&gt; b
 </code></pre>
 
@@ -454,7 +420,6 @@ fromIntegral :: (Integral a, Num b) =&gt; a -&gt; b
 
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
@@ -469,41 +434,29 @@ fromIntegral :: (Integral a, Num b) =&gt; a -&gt; b
     <span class="item-title">许可协议</span>
     <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
   </p>
-</div>
-
-    
-    
-<div class="post-reward">
+</div><div class="post-reward">
   <input type="checkbox" name="reward" id="reward" hidden />
   <label class="reward-button" for="reward">赞赏支持</label>
   <div class="qr-code">
     
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/wechat.jpg">
         <span>微信打赏</span>
       </label>
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/alipay.jpg">
         <span>支付宝打赏</span>
       </label>
   </div>
-</div>
-
-    <footer class="post-footer">
-      
-
+</div><footer class="post-footer">
       
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/gtk/intro/">
+        <a class="prev" href="/post/gtk/intro/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">gtk, introduction</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        
-          <a class="next" href="/post/clang/real.org/">
+        <a class="next" href="/post/clang/real.org/">
             <span class="next-text nav-default">Linux c编程一站式学习笔记：C语言本质</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
@@ -513,9 +466,6 @@ fromIntegral :: (Integral a, Num b) =&gt; a -&gt; b
   </article>
         </div>
         
-  
-
-  
 
       </div>
     </main>
@@ -539,14 +489,13 @@ fromIntegral :: (Integral a, Num b) =&gt; a -&gt; b
 
   <div class="busuanzi-footer">
     <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-    <span class="division">|</span>
+      <span class="division">|</span>
     <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
   </div>
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
+    2017 - 
     2018
     <span class="heart">
       <i class="iconfont icon-heart"></i>
@@ -560,20 +509,15 @@ fromIntegral :: (Integral a, Num b) =&gt; a -&gt; b
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-
-<script></script>
-<script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script>
-<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="/lib/js-sequence-diagrams/webfontloader-1.6.28.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.ece58db6.min.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -582,7 +526,7 @@ fromIntegral :: (Integral a, Num b) =&gt; a -&gt; b
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 

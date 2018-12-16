@@ -16,59 +16,33 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" />
-  <meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;linux c编程一站式学习&amp;rdquo;一书的笔记 @&amp;lt;/font&amp;gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以" />
-
-  <meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;linux c编程一站式学习&amp;rdquo;一书的笔记 @&amp;lt;/font&amp;gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.37.1" />
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/clang/real.org/" />
-
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-
-
-
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.93844dae.min.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
 
 
 <meta property="og:title" content="Linux c编程一站式学习笔记：C语言本质" />
 <meta property="og:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;linux c编程一站式学习&rdquo;一书的笔记 @&lt;/font&gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/clang/real.org/" />
-
-
-
-<meta property="article:published_time" content="2013-02-16T00:00:00&#43;00:00"/>
-
+<meta property="og:url" content="http://zhengyhn.github.io/post/clang/real.org/" /><meta property="article:published_time" content="2013-02-16T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2013-02-16T00:00:00&#43;00:00"/>
-
-
-
-
-
-
-
-
-
-
 
 <meta itemprop="name" content="Linux c编程一站式学习笔记：C语言本质">
 <meta itemprop="description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;linux c编程一站式学习&rdquo;一书的笔记 @&lt;/font&gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以">
@@ -76,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2013-02-16T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-02-16T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="11278">
+<meta itemprop="wordCount" content="11299">
 
 
 
@@ -155,17 +129,14 @@
       <div class="post-meta">
         <span class="post-time"> 2013-02-16 </span>
         
-        <span class="more-meta"> 约 11278 字 </span>
-        <span class="more-meta"> 预计阅读 23 分钟 </span>
+          <span class="more-meta"> 约 11299 字 </span>
+          <span class="more-meta"> 预计阅读 23 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
 
-    
-    
-<div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
-  
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
@@ -236,11 +207,6 @@
 </nav>
   </div>
 </div>
-
-    
-    
-
-    
     <div class="post-content">
       
 
@@ -373,7 +339,7 @@ double,在x86上，大部分编译器实现的为80位，因为x86的FPU是80位
 <p>promotion,另外，float要提升为double,这叫default argument
 promotion，例如：</p>
 
-<pre><code class="language-c">char c = 'a';
+<pre><code class="language-.c">char c = 'a';
 printf(&quot;%c&quot;, c);
 </code></pre>
 
@@ -420,7 +386,7 @@ short和bit-field在做算术运算之前要先提升为int，因为</li>
 
 <p>比如调用一个函数</p>
 
-<pre><code class="language-c">sort(arr, get_len(arr), is_sorted(arr));
+<pre><code class="language-.c">sort(arr, get_len(arr), is_sorted(arr));
 </code></pre>
 
 <p>get_len和is_sorted哪个先执行是不确定的，但是必须它们都完成之后才调用sort函数。</p>
@@ -430,7 +396,7 @@ short和bit-field在做算术运算之前要先提升为int，因为</li>
 <li>一个完整的定义末尾是序列点。如：</li>
 </ol>
 
-<pre><code class="language-example">int name,age;
+<pre><code class="language-.example">int name,age;
 </code></pre>
 
 <p>name后面是序列点，age后面也是。</p>
@@ -511,7 +477,7 @@ decoder)的作用在于解释CPU获取的指令的含义，执行</li>
 <li>代码simple.s</li>
 </ul>
 
-<pre><code class="language-example">.section .data
+<pre><code class="language-.example">.section .data
 .section .text
 .globl _start
 _start:
@@ -525,12 +491,12 @@ _start:
 <li>先要使用下面的命令用汇编器as把汇编指令翻译成机器指令，生成simple.o</li>
 </ul>
 
-<pre><code class="language-bash">as simple.s -o simple.o
+<pre><code class="language-.bash">as simple.s -o simple.o
 </code></pre>
 
 <p>再用链接器ld把simple.o链接成可执行文件simple</p>
 
-<pre><code class="language-bash">ld simple.o -o simple
+<pre><code class="language-.bash">ld simple.o -o simple
 </code></pre>
 
 <ul>
@@ -539,7 +505,7 @@ _start:
 
 <p>可以看到执行结果：</p>
 
-<pre><code class="language-example">[monkey@itlodge asm]$ ./simple 
+<pre><code class="language-.example">[monkey@itlodge asm]$ ./simple 
 [monkey@itlodge asm]$ echo $?
 4
 </code></pre>
@@ -595,7 +561,7 @@ eax中，edx必须为0,而除法可以任意选用，商必须保存在eax中，
 
 <p>代码biggest.s</p>
 
-<pre><code class="language-example"># find the maximum number
+<pre><code class="language-.example"># find the maximum number
 
 .section .data
 data_items:
@@ -626,7 +592,7 @@ exit:
 
 <p>编译运行结果：</p>
 
-<pre><code class="language-bash">[monkey@itlodge asm]$ as biggest.s -o biggest.o
+<pre><code class="language-.bash">[monkey@itlodge asm]$ as biggest.s -o biggest.o
 [monkey@itlodge asm]$ ld biggest.o -o biggest
 [monkey@itlodge asm]$ ./biggest 
 [monkey@itlodge asm]$ echo $?
@@ -652,12 +618,12 @@ exit:
 <li>通用格式为：</li>
 </ul>
 
-<pre><code class="language-example">address_or_offset(%base_or_offset, %index, multiplier)
+<pre><code class="language-.example">address_or_offset(%base_or_offset, %index, multiplier)
 </code></pre>
 
 <p>这种格式表示的地址是这样计算的：</p>
 
-<pre><code class="language-example">address = address_or_offset + base_or_offset + multiplier * index
+<pre><code class="language-.example">address = address_or_offset + base_or_offset + multiplier * index
 </code></pre>
 
 <p>其中address_or_offset,
@@ -705,7 +671,7 @@ mode)，使用address_or_offset和base_or_offset</li>
 
 <p>比如下面的一个C程序：</p>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-.c">#include &lt;stdio.h&gt;
 
 int main(int argc, char *argv[])
 {
@@ -717,7 +683,7 @@ int main(int argc, char *argv[])
 
 <p>通过编译之后，产生的汇编文件如下：</p>
 
-<pre><code class="language-example">    .file   &quot;t.c&quot;
+<pre><code class="language-.example">    .file   &quot;t.c&quot;
     .section    .rodata
 .LC0:
     .string &quot;yuanhang&quot;
@@ -754,7 +720,7 @@ main:
 
 <p>刚刚那个程序：</p>
 
-<pre><code class="language-example">[monkey@itlodge test]$ gcc -g t.c
+<pre><code class="language-.example">[monkey@itlodge test]$ gcc -g t.c
 [monkey@itlodge test]$ objdump -dS a.out &gt; t.txt
 ...
 00000000004004fc &lt;main&gt;:
@@ -788,12 +754,12 @@ int main(int argc, char *argv[])
 <li>gcc的一条命令：</li>
 </ul>
 
-<pre><code class="language-bash">gcc t.c -o t
+<pre><code class="language-.bash">gcc t.c -o t
 </code></pre>
 
 <p>可以分解为下面3条：</p>
 
-<pre><code class="language-bash">gcc -S t.c
+<pre><code class="language-.bash">gcc -S t.c
 gcc -c t.s
 gcc t.o -o t
 </code></pre>
@@ -804,7 +770,7 @@ gcc t.o -o t
 <li>看一个有关位域的例子：</li>
 </ul>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-.c">#include &lt;stdio.h&gt;
 
 typedef unsigned int uint;
 
@@ -842,7 +808,7 @@ int main(int argc, char *argv[])
 
 <p>运行结果为：</p>
 
-<pre><code class="language-example">[monkey@itlodge test]$ ./t
+<pre><code class="language-.example">[monkey@itlodge test]$ ./t
 size of demo:8
 values:1 5 513 17 129 24
 1b 60 24 10 18 0 0 0 
@@ -858,7 +824,7 @@ values:1 5 513 17 129 24
 
 <p>有了前面的例子的启发，我写了下面程序来验证：</p>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-.c">#include &lt;stdio.h&gt;
 
 union test {
     int num;
@@ -887,7 +853,7 @@ int main(int argc, char *argv[])
 使用__asm__(&ldquo;assembly code&rdquo;);来插入汇编语句，多条语句用\n\t分开
 完整的内联汇编格式为：</p>
 
-<pre><code class="language-example">__asm__(assembly template
+<pre><code class="language-.example">__asm__(assembly template
         : output operands
         : input operands
         : list of clobbered registers
@@ -896,7 +862,7 @@ int main(int argc, char *argv[])
 
 <p>除了assembly template，其它的都是可选的 看下面的例子：</p>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-.c">#include &lt;stdio.h&gt;
 
 int main(int argc, char *argv[])
 {
@@ -938,12 +904,12 @@ int main(int argc, char *argv[])
 <li>gcc使用下面的方式链接多个文件：</li>
 </ul>
 
-<pre><code class="language-example">gcc file1.c file2.c -o file
+<pre><code class="language-.example">gcc file1.c file2.c -o file
 </code></pre>
 
 <p>也可以这样：</p>
 
-<pre><code class="language-example">gcc -c file1.c
+<pre><code class="language-.example">gcc -c file1.c
 gcc -c file2.c
 gcc file1.o file2.o -o file
 </code></pre>
@@ -957,7 +923,7 @@ gcc file1.o file2.o -o file
 
 <p>我现在有3个文件， t.h</p>
 
-<pre><code class="language-c">#ifndef _T_H_
+<pre><code class="language-.c">#ifndef _T_H_
 #define _T_H_
 
 void hello(void);
@@ -967,7 +933,7 @@ void hello(void);
 
 <p>t.c</p>
 
-<pre><code class="language-c">#include &lt;stdio.h&gt;
+<pre><code class="language-.c">#include &lt;stdio.h&gt;
 #include &quot;t.h&quot;
 
 void hello(void)
@@ -978,7 +944,7 @@ void hello(void)
 
 <p>main.c</p>
 
-<pre><code class="language-c">#include &quot;t.h&quot;
+<pre><code class="language-.c">#include &quot;t.h&quot;
 
 int main(int argc, char *argv[])
 {
@@ -990,19 +956,19 @@ int main(int argc, char *argv[])
 
 <p>先编译成目标文件：</p>
 
-<pre><code class="language-bash">gcc -c t.c
+<pre><code class="language-.bash">gcc -c t.c
 </code></pre>
 
 <p>这时会生成和t.o 现在打包成一个静态库libt.a</p>
 
-<pre><code class="language-bash">ar rs libt.a t.o
+<pre><code class="language-.bash">ar rs libt.a t.o
 </code></pre>
 
 <p>这时会生成libt.a
 Note:r表示将后面的文件列表添加到文件包，s用于为静态库建立索引(ranlib有同样功能)
 现在把libt.a和main.c编译</p>
 
-<pre><code class="language-bash">gcc main.c -L. -lt -I. -o main
+<pre><code class="language-.bash">gcc main.c -L. -lt -I. -o main
 </code></pre>
 
 <p>这里，-L.表示在当前目录(.)找库文件，-lt表示使用libt文件，-I.表示在当前目录找头
@@ -1064,7 +1030,7 @@ name是库文件的符号链接，有的是 一个链接脚本。</p>
 <li>书上举了下面这个例子：</li>
 </ul>
 
-<pre><code class="language-example">#define VERSION 2
+<pre><code class="language-.example">#define VERSION 2
 #if defined x || y || VERSION &lt; 3
 </code></pre>
 
@@ -1096,7 +1062,7 @@ VERSION &lt; 3 然后把VERSION展开，变成了： #if 0 || y || 2 &lt; 3
 <p>注意，每条命令必须以一个tab开头,不能是空格
 每条命令，都会创建一个shell进程来执行 看下面的例子：</p>
 
-<pre><code class="language-example">main : main.o stack.o
+<pre><code class="language-.example">main : main.o stack.o
         gcc main.o stack.o -o main
 main.o : main.c main.h stack.h
         gcc -c main.c
@@ -1111,7 +1077,7 @@ stack.o : stack.c stack.h
 <li>在命令前加@，不显示命令本身，只显示它的结果，如：</li>
 </ul>
 
-<pre><code class="language-example">@echo &quot;cleaning project&quot;
+<pre><code class="language-.example">@echo &quot;cleaning project&quot;
 </code></pre>
 
 <ul>
@@ -1126,7 +1092,7 @@ stack.o : stack.c stack.h
 
 <p>时候就要添加一条特殊规则，把clean声明为一个伪目录：</p>
 
-<pre><code class="language-example">clean:
+<pre><code class="language-.example">clean:
         @echo &quot;clean&quot;
         -rm *.o
 .PHONY: clean
@@ -1149,7 +1115,7 @@ stack.o : stack.c stack.h
 <li>一个目标依赖的条件不一定写在一条规则上，可以分开写：</li>
 </ul>
 
-<pre><code class="language-example">main.o main.h stack.h
+<pre><code class="language-.example">main.o main.h stack.h
 main.o main.c
         gcc -c main.c
 </code></pre>
@@ -1161,7 +1127,7 @@ main.o main.c
 <li>隐含规则数据库可以用make -p打印出来，比如可以看到：</li>
 </ul>
 
-<pre><code class="language-example">CC = cc
+<pre><code class="language-.example">CC = cc
 </code></pre>
 
 <p>cc在/usr/bin中，可以看到它是符号链接，指向gcc</p>
@@ -1171,7 +1137,7 @@ main.o main.c
 <li>%.o: %.c是一种模式规则，看下面：</li>
 </ul>
 
-<pre><code class="language-example">main: main.o stack.o
+<pre><code class="language-.example">main: main.o stack.o
         gcc main.o stack.o -o main
 main.o: main.h stack.h
 stack.o: stack.h
@@ -1180,7 +1146,7 @@ stack.o: stack.h
 <p>上面的例子没有给出main.o的命令列表，这时它会查找隐含规则，发现隐含规则中有
 %.o: %.c这样一条模式规则可用，于是就加上了：</p>
 
-<pre><code class="language-example">main.o: main.c
+<pre><code class="language-.example">main.o: main.c
         cc -c -o main.o main.c
 </code></pre>
 
@@ -1192,7 +1158,7 @@ stack.o: stack.h
 <li>变量的值可以推迟到后面定义，如：</li>
 </ul>
 
-<pre><code class="language-example">a = $(b)
+<pre><code class="language-.example">a = $(b)
 b = ccc
 
 all:
@@ -1205,7 +1171,7 @@ all:
 <li>如果希望在遇到变量定义的时候立即展开，则用:=号，如：</li>
 </ul>
 
-<pre><code class="language-example">b := ccc
+<pre><code class="language-.example">b := ccc
 a := $(b)
 all:
         @echo $(a)
@@ -1215,7 +1181,7 @@ all:
 <li>对于?=号，如：</li>
 </ul>
 
-<pre><code class="language-example">a ?= $(b)
+<pre><code class="language-.example">a ?= $(b)
 </code></pre>
 
 <p>如果a没有定义过，那么?=相当于=，如果定义过，则什么也不做</p>
@@ -1224,7 +1190,7 @@ all:
 <li>对于+=号，是用于给变量追加值，如：</li>
 </ul>
 
-<pre><code class="language-example">objs = main.o
+<pre><code class="language-.example">objs = main.o
 objs += stack.o
 </code></pre>
 
@@ -1244,14 +1210,14 @@ objs += stack.o
 
 <p>如：</p>
 
-<pre><code class="language-example">main: main.o stack.o maze.o
+<pre><code class="language-.example">main: main.o stack.o maze.o
       gcc $^ -o $@
 </code></pre>
 
 <p>这样即使修改了目标的名字或者添加了条件，下面的命令也不需要修改
 对于\$?变量，看下面的例子：</p>
 
-<pre><code class="language-example">libstack.a: main.o stack.o
+<pre><code class="language-.example">libstack.a: main.o stack.o
         ar rs libstack.a $?
 </code></pre>
 
@@ -1294,7 +1260,7 @@ objs += stack.o
 <li>make的官方手册建议的写法是这样的：</li>
 </ul>
 
-<pre><code class="language-example">all: main
+<pre><code class="language-.example">all: main
 main: main.o stack.o
         gcc $^ -o $@
 clean:
@@ -1330,7 +1296,7 @@ include类型C语言中的#include，用于包含文件
 <li>在make的时候也可以加选项，如：</li>
 </ul>
 
-<pre><code class="language-example">make CFLAGS=-g
+<pre><code class="language-.example">make CFLAGS=-g
 </code></pre>
 
 <p>如果Makefile中也定义了CFLAGS，则命令行的值会覆盖掉Makefile中的值</p>
@@ -1378,7 +1344,7 @@ include类型C语言中的#include，用于包含文件
 <li>指向数组的指针：</li>
 </ul>
 
-<pre><code class="language-example">int (*arr)[10];
+<pre><code class="language-.example">int (*arr)[10];
 </code></pre>
 
 <p>指针arr指向数组arr,这个数组有10个int类型的元素。</p>
@@ -1387,7 +1353,7 @@ include类型C语言中的#include，用于包含文件
 <li>函数也是一种类型，函数指针，看下例：</li>
 </ul>
 
-<pre><code class="language-c">void hello(const char *str)
+<pre><code class="language-.c">void hello(const char *str)
 {
     printf(&quot;hello %s\n&quot;, str);
 }
@@ -1712,7 +1678,6 @@ vsnprintf，和上面的函数的唯一区别就是最后</li>
 
     </div>
 
-    
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
@@ -1727,41 +1692,29 @@ vsnprintf，和上面的函数的唯一区别就是最后</li>
     <span class="item-title">许可协议</span>
     <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
   </p>
-</div>
-
-    
-    
-<div class="post-reward">
+</div><div class="post-reward">
   <input type="checkbox" name="reward" id="reward" hidden />
   <label class="reward-button" for="reward">赞赏支持</label>
   <div class="qr-code">
     
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/wechat.jpg">
         <span>微信打赏</span>
       </label>
-    
-      <label class="qr-code-image" for="reward">
+    <label class="qr-code-image" for="reward">
         <img class="image" src="/images/alipay.jpg">
         <span>支付宝打赏</span>
       </label>
   </div>
-</div>
-
-    <footer class="post-footer">
-      
-
+</div><footer class="post-footer">
       
       <nav class="post-nav">
-        
-          <a class="prev" href="/post/haskell/types.org/">
+        <a class="prev" href="/post/haskell/types.org/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">types and typeclasses</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        
-          <a class="next" href="/post/haskell/intro.org/">
+        <a class="next" href="/post/haskell/intro.org/">
             <span class="next-text nav-default">introduction</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
@@ -1771,9 +1724,6 @@ vsnprintf，和上面的函数的唯一区别就是最后</li>
   </article>
         </div>
         
-  
-
-  
 
       </div>
     </main>
@@ -1797,14 +1747,13 @@ vsnprintf，和上面的函数的唯一区别就是最后</li>
 
   <div class="busuanzi-footer">
     <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-    <span class="division">|</span>
+      <span class="division">|</span>
     <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
   </div>
 
   <span class="copyright-year">
     &copy; 
-    
-      2017 - 
+    2017 - 
     2018
     <span class="heart">
       <i class="iconfont icon-heart"></i>
@@ -1818,20 +1767,15 @@ vsnprintf，和上面的函数的唯一区别就是最后</li>
       <i class="iconfont icon-up"></i>
     </div>
   </div>
-  
-<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-
-<script></script>
-<script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script>
-<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="/lib/js-sequence-diagrams/webfontloader-1.6.28.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.ece58db6.min.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -1840,7 +1784,7 @@ vsnprintf，和上面的函数的唯一区别就是最后</li>
       messageStyle: 'none'
     };
   </script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 
