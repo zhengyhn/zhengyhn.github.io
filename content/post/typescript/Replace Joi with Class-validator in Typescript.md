@@ -1,7 +1,7 @@
 ---
 {
 "categories": ["Typescript"],
-"date": "2018-12-31"
+"date": "2018-12-31",
 "tags": ["Typescript", "Web", "Nodejs"],
 "title": "Replace Joi with Class-validator in Typescript"
 }
