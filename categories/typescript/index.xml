@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Nodejs on Hank&#39;s Blog</title>
-    <link>http://zhengyhn.github.io/tags/nodejs/</link>
-    <description>Recent content in Nodejs on Hank&#39;s Blog</description>
+    <title>Typescript on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/categories/typescript/</link>
+    <description>Recent content in Typescript on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 31 Dec 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://zhengyhn.github.io/tags/nodejs/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://zhengyhn.github.io/categories/typescript/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>http://zhengyhn.github.io/post/typescript/replace-joi-with-class-validator-in-typescript/</guid>
       <description>引子 对每个接口的传入参数进行校验，是一个Web后端项目的必备功能，有一个npm包叫Joi可以很优雅的完成这个工作，比如这样子： const schema = { userId: Joi.string() };</description>
-    </item>
-    
-    <item>
-      <title>如何在Sails.js中使用generator</title>
-      <link>http://zhengyhn.github.io/post/how-to-use-generator-in-sails/</link>
-      <pubDate>Mon, 13 Mar 2017 22:50:49 +0800</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/how-to-use-generator-in-sails/</guid>
-      <description>由于历史原因，公司的App项目用Sails.js框架来开发，那时候还没有ES6，当然是一层一层callback下去，后来引进了Async和T</description>
     </item>
     
   </channel>

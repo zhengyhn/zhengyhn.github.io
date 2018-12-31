@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Replace Joi with Class-validator in Typescript - Hank&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Hank" /><meta name="description" content="引子 对每个接口的传入参数进行校验，是一个Web后端项目的必备功能，有一个npm包叫Joi可以很优雅的完成这个工作，比如这样子： const schema = { userId: Joi.string() };" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+
+
+<link rel="canonical" href="http://zhengyhn.github.io/post/typescript/replace-joi-with-class-validator-in-typescript/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.93844dae.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Replace Joi with Class-validator in Typescript" />
+<meta property="og:description" content="引子 对每个接口的传入参数进行校验，是一个Web后端项目的必备功能，有一个npm包叫Joi可以很优雅的完成这个工作，比如这样子： const schema = { userId: Joi.string() };" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://zhengyhn.github.io/post/typescript/replace-joi-with-class-validator-in-typescript/" /><meta property="article:published_time" content="2018-12-31T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2018-12-31T00:00:00&#43;00:00"/>
+
+<meta itemprop="name" content="Replace Joi with Class-validator in Typescript">
+<meta itemprop="description" content="引子 对每个接口的传入参数进行校验，是一个Web后端项目的必备功能，有一个npm包叫Joi可以很优雅的完成这个工作，比如这样子： const schema = { userId: Joi.string() };">
+
+
+<meta itemprop="datePublished" content="2018-12-31T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-12-31T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1853">
+
+
+
+<meta itemprop="keywords" content="Typescript,Web,Nodejs," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Replace Joi with Class-validator in Typescript"/>
+<meta name="twitter:description" content="引子 对每个接口的传入参数进行校验，是一个Web后端项目的必备功能，有一个npm包叫Joi可以很优雅的完成这个工作，比如这样子： const schema = { userId: Joi.string() };"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Hank&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Hank&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Replace Joi with Class-validator in Typescript</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-12-31 </span>
+        <div class="post-category">
+            <a href="/categories/typescript/"> Typescript </a>
+            </div>
+          <span class="more-meta"> 约 1853 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#引子">引子</a></li>
+<li><a href="#class-validaotr">Class-validaotr</a>
+<ul>
+<li><a href="#定义传入-返回结构">定义传入/返回结构</a></li>
+<li><a href="#使用class-transformer做转化">使用class-transformer做转化</a></li>
+<li><a href="#在-controller中使用">在Controller中使用</a></li>
+</ul></li>
+<li><a href="#新问题">新问题</a></li>
+<li><a href="#探索apidoc根据class-validator的定义生成">探索apidoc根据class-validator的定义生成</a></li>
+<li><a href="#造轮子-apidoc-plugin-class-validator">造轮子: apidoc-plugin-class-validator</a></li>
+<li><a href="#使用apidoc-plugin-class-validator">使用apidoc-plugin-class-validator</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="引子">引子</h2>
+
+<p>对每个接口的传入参数进行校验，是一个Web后端项目的必备功能，有一个npm包叫<a href="https://github.com/hapijs/joi">Joi</a>可以很优雅的完成这个工作，比如这样子：</p>
+
+<pre><code>const schema = {
+    userId: Joi.string()
+};
+const {error, value} = Joi.validate({ userId: 'a string' }, schema);
+</code></pre>
+
+<p>我们使用Typescript是希望得到明确的类型定义，减少出错的可能性。在一个后端项目中，给每个接口定义它的传入参数结构以及返回结果的结构，是一件很值得做的事情，因为这样给后续的维护带来极大的便利。比如这样子：</p>
+
+<pre><code>export type IFooParam = {
+  userId: string
+}
+
+export type IFooResponse = {
+  name: string
+}
+
+async foo (param: IFooParam): Promise&lt;IFooResponse&gt; {
+  // Your business code
+  return {name: 'bar'}
+}
+</code></pre>
+
+<p>现在问题就来了，如果传入参数希望加多一个字段，我们必须得修改2个地方，一个是Joi的校验，一个是IFooParam类型的定义。有没有好的办法解决这个问题呢？</p>
+
+<h2 id="class-validaotr">Class-validaotr</h2>
+
+<p>有一个npm包叫<a href="https://github.com/typestack/class-validator">class-validator</a>, 是采用注解的方式进行校验，底层使用的是老牌的校验包<a href="https://github.com/chriso/validator.js">validator.js</a>。其实一年前我就想试用这个class-validator包，但是没有成功，这次再试用一次，发现通过一些小包装，居然做到像Joi一样优雅的写法，而且更好用！</p>
+
+<h3 id="定义传入-返回结构">定义传入/返回结构</h3>
+
+<pre><code>import {Length, Min, Max} from 'class-validator'
+
+export class IRegister {
+  @Length(11)
+  phone: string
+
+  @Length(2, 10)
+  name: string
+
+  @Min(18)
+  @Max(50)
+  age: number
+}
+
+class Button {
+  text: string
+}
+
+export class ORegister {
+  /**
+   * user's id
+   */
+  userId: string
+
+  buttons: Button[]
+}
+</code></pre>
+
+<p>这里定义了2个类，IRegister为传入参数，通过class-validator规定的注解方式做校验，ORegister为返回结果。</p>
+
+<p>class-validator官方提供的方式还不能直接对一个请求的body进行校验，它要求必须要是IRegister类的一个对象，所以需要做一些处理。</p>
+
+<h3 id="使用class-transformer做转化">使用class-transformer做转化</h3>
+
+<p>跟class-validator的作者也开源了另外一个包，叫<a href="https://github.com/typestack/class-transformer">class-transformer</a>, 可以将一个json转成指定的类的对象，官方的例子是这样的：</p>
+
+<pre><code>import {plainToClass} from &quot;class-transformer&quot;;
+
+let users = plainToClass(User, userJson); // to convert user plain object a single user. also supports arrays
+</code></pre>
+
+<p>利用这一点，我们写一个小工具：</p>
+
+<pre><code>import * as classTransformer from 'class-transformer'
+import {validate} from 'class-validator'
+import * as lodash from 'lodash'
+
+export class ValidateUtil {
+  private static instance: ValidateUtil
+
+  private constructor () {
+  }
+
+  static getInstance () {
+    return this.instance || (this.instance = new ValidateUtil())
+  }
+
+  async validate (Clazz, data): Promise&lt;any&gt; {
+    const obj = classTransformer.plainToClass(Clazz, data)
+    const errors = await validate(obj)
+    if (errors.length &gt; 0) {
+      console.info(errors)
+      throw new Error(lodash.values(errors[0].constraints)[0])
+    }
+    return obj
+  }
+}
+</code></pre>
+
+<p>这个小工具提供了一个validate方法，第一个参数是一个类定义，第二个是一个json，它先利用class-transformer将json转成指定类的对象，然后使用class-validator做校验，如果校验错误将抛出错误，否则返回转化后的对象。</p>
+
+<h3 id="在-controller中使用">在Controller中使用</h3>
+
+<p>有了上面的工具，就可以方便地在代码中对传入参数做校验了，比如这样：</p>
+
+<pre><code>  static async register(ctx) {
+    const iRegister = await ValidateUtil.getInstance().validate(IRegister, ctx.request.body)
+    const oRegister = await UserService.register(iRegister)
+    ctx.body = oRegister
+  }
+</code></pre>
+
+<h2 id="新问题">新问题</h2>
+
+<p>到了这里，完美地使用class-validator替换掉了Joi。</p>
+
+<p>但是还有一个问题没解决，也是之前一直遗留的问题。</p>
+
+<p>我们使用<a href="http://apidocjs.com/">apidoc</a>编写接口文档，当新增或修改一个接口时，是通过编写一段注释，让apidoc自动生成html文档，将文档地址发给前端，可以减少双方的频繁沟通，而且对前端的体验也是非常好的。比如写这样一段注释：</p>
+
+<pre><code>  /**
+   * @api {post} /user/registerOld registerOld
+   * @apiGroup user
+   * @apiName registerOld
+   * @apiParam {String} name user's name
+   * @apiParam {Number} age user's age
+   * @apiSuccess {String} userId user's id 
+   */
+  router.post('/user/registerOld', UserController.register)
+</code></pre>
+
+<p>apidoc会帮我们生成这样的文档：
+<img src="../../../static/images/oldApidocDemo.png" alt="oldApidocDemo" /></p>
+
+<p>问题比较明显，当我们要新增一个参数时，需要修改一次类的定义，同时还要修改一次apidoc的注释，很烦，由于很烦，文档会慢慢变得没人维护，新同事就会吐槽没有文档或者文档太旧了。</p>
+
+<p>理想的情况是代码即文档，只需要修改类的定义，apidoc文档自动更新。</p>
+
+<h2 id="探索apidoc根据class-validator的定义生成">探索apidoc根据class-validator的定义生成</h2>
+
+<p>从同事的分享中得知一个废弃的npm包，叫<a href="https://www.npmjs.com/package/apidoc-plugin-ts">apidoc-plugin-ts</a>, 可以实现根据ts的interface定义来生成apidoc的。官方的例子：</p>
+
+<pre><code>filename: ./employers.ts
+ 
+export interface Employer {
+  /**
+   * Employer job title
+   */
+  jobTitle: string;
+  /**
+   * Employer personal details
+   */
+  personalDetails: {
+    name: string;
+    age: number;
+  }
+}
+</code></pre>
+
+<pre><code> @apiInterface (./employers.ts) {Person}
+</code></pre>
+
+<p>会转化成：</p>
+
+<pre><code> @apiSuccess {String} jobTitle Job title
+ @apiSuccess {Object} personalDetails Empoyer personal details
+ @apiSuccess {String} personalDetails.name
+ @apiSuccess {Number} personalDetails.age
+</code></pre>
+
+<p>虽然不知道为什么作者要废弃它，但是它的思想很好，源码也很有帮助。</p>
+
+<p>给我的启发是，参考这个npm包，写一个针对class定义来生成apidoc的插件就行了。</p>
+
+<h2 id="造轮子-apidoc-plugin-class-validator">造轮子: apidoc-plugin-class-validator</h2>
+
+<p>轮子的制造细节不适合在这里陈述，基本上参考apidoc-plugin-ts，目前已经发布在npm上了，<a href="https://www.npmjs.com/package/apidoc-plugin-class-validator">apidoc-plugin-class-validator</a></p>
+
+<h2 id="使用apidoc-plugin-class-validator">使用apidoc-plugin-class-validator</h2>
+
+<p>以上面的注册接口为例，使用方法：</p>
+
+<pre><code>  /**
+   * @api {post} /user/register register
+   * @apiGroup user
+   * @apiName register
+   * @apiParamClass (src/user/io/Register.ts) {IRegister}
+   * @apiSuccessClass (src/user/io/Register.ts) {ORegister}
+   */
+  router.post('/user/register', UserController.register)
+</code></pre>
+
+<p>就会生成文档：
+<img src="https://github.com/zhengyhn/apidoc-plugin-class-validator/blob/master/demo.png?raw=true" alt="demo" /></p>
+
+<p>后续新增字段，只需修改IRegister类的定义就行，真正做到了修改一处，处处生效，代码即文档的效果。</p>
+
+<p>文中的demo代码在<a href="https://github.com/zhengyhn/apidoc-plugin-class-validator-demo">这里</a>，这是一个简单的web后端项目，看代码更容易理解。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Hank</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2018-12-31</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div><div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.jpg">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/typescript/">Typescript</a>
+          <a href="/tags/web/">Web</a>
+          <a href="/tags/nodejs/">Nodejs</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/learning-bagging-algorithms/">
+            <span class="next-text nav-default">Learning Bagging Algorithms</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:yuanhang.zheng@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/zhengyhn" class="iconfont icon-github" title="github"></a>
+  <a href="http://zhengyhn.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Hank</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="/lib/js-sequence-diagrams/webfontloader-1.6.28.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.ece58db6.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

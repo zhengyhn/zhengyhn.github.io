@@ -6,10 +6,19 @@
     <description>Recent content on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 18 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 31 Dec 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Replace Joi with Class-validator in Typescript</title>
+      <link>http://zhengyhn.github.io/post/typescript/replace-joi-with-class-validator-in-typescript/</link>
+      <pubDate>Mon, 31 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/typescript/replace-joi-with-class-validator-in-typescript/</guid>
+      <description>引子 对每个接口的传入参数进行校验，是一个Web后端项目的必备功能，有一个npm包叫Joi可以很优雅的完成这个工作，比如这样子： const schema = { userId: Joi.string() };</description>
+    </item>
     
     <item>
       <title>Learning Bagging Algorithms</title>
@@ -297,10 +306,8 @@
       
       <guid>http://zhengyhn.github.io/about/</guid>
       <description>I am Hank, a programmer.
-Interested in machine learning, deep learning, NLP, web developing, and all about computer science.
-Like reading, coding, researching.
-Also interested in finance, accounting, psychology, law, drawing, music.
-I watching movies, reading commics, swimming, running for entertainment.</description>
+Interested in all about computer science.
+Also interested in finance, accounting, psychology, law, drawing, music.</description>
     </item>
     
     <item>
