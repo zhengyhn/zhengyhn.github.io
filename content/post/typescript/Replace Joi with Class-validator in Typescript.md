@@ -135,7 +135,7 @@ export class ValidateUtil {
   router.post('/user/registerOld', UserController.register)
 ```
 apidoc会帮我们生成这样的文档：
-![oldApidocDemo](../../../static/images/oldApidocDemo.png)
+![oldApidocDemo](/images/oldApidocDemo.png)
 
 问题比较明显，当我们要新增一个参数时，需要修改一次类的定义，同时还要修改一次apidoc的注释，很烦，由于很烦，文档会慢慢变得没人维护，新同事就会吐槽没有文档或者文档太旧了。
 
@@ -199,4 +199,4 @@ export interface Employer {
 
 后续新增字段，只需修改IRegister类的定义就行，真正做到了修改一处，处处生效，代码即文档的效果。
 
-文中的demo代码在[这里](https://github.com/zhengyhn/apidoc-plugin-class-validator-demo)，这是一个简单的web后端项目，看代码更容易理解。
+本文的demo代码在[这里](https://github.com/zhengyhn/apidoc-plugin-class-validator-demo)，这是一个简单的web后端项目，看代码更容易理解。
