@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>String permutations - Hank&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Hank" /><meta name="description" content="There is an interview problem. Given a string without duplicate characters, return all permutations of the string.
+First Try The straightforward idea is using recursive algorithms. We enum all characters for the first position and concatate the permutations of the rest substring.
+However, the speed is too slow when the string is a little logger, like &amp;ldquo;abcdefghi&amp;rdquo;.
+So, we have to try the iterative solution.
+There is an algorithm call &amp;ldquo;Next Permutation&amp;rdquo;." /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+
+
+<link rel="canonical" href="http://zhengyhn.github.io/post/algorithm/string-permutation/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.93844dae.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="String permutations" />
+<meta property="og:description" content="There is an interview problem. Given a string without duplicate characters, return all permutations of the string.
+First Try The straightforward idea is using recursive algorithms. We enum all characters for the first position and concatate the permutations of the rest substring.
+However, the speed is too slow when the string is a little logger, like &ldquo;abcdefghi&rdquo;.
+So, we have to try the iterative solution.
+There is an algorithm call &ldquo;Next Permutation&rdquo;." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://zhengyhn.github.io/post/algorithm/string-permutation/" /><meta property="article:published_time" content="2019-03-10T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-03-10T00:00:00&#43;00:00"/>
+
+<meta itemprop="name" content="String permutations">
+<meta itemprop="description" content="There is an interview problem. Given a string without duplicate characters, return all permutations of the string.
+First Try The straightforward idea is using recursive algorithms. We enum all characters for the first position and concatate the permutations of the rest substring.
+However, the speed is too slow when the string is a little logger, like &ldquo;abcdefghi&rdquo;.
+So, we have to try the iterative solution.
+There is an algorithm call &ldquo;Next Permutation&rdquo;.">
+
+
+<meta itemprop="datePublished" content="2019-03-10T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-03-10T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="372">
+
+
+
+<meta itemprop="keywords" content="Algorithm," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="String permutations"/>
+<meta name="twitter:description" content="There is an interview problem. Given a string without duplicate characters, return all permutations of the string.
+First Try The straightforward idea is using recursive algorithms. We enum all characters for the first position and concatate the permutations of the rest substring.
+However, the speed is too slow when the string is a little logger, like &ldquo;abcdefghi&rdquo;.
+So, we have to try the iterative solution.
+There is an algorithm call &ldquo;Next Permutation&rdquo;."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Hank&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Hank&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">String permutations</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-03-10 </span>
+        <div class="post-category">
+            <a href="/categories/algorithm/"> Algorithm </a>
+            </div>
+          <span class="more-meta"> 约 372 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#first-try">First Try</a></li>
+</ul></li>
+<li><a href="#next-permutation">Next Permutation</a>
+<ul>
+<li><a href="#show-me-the-code">Show me the code</a></li>
+<li><a href="#test">Test</a></li>
+<li><a href="#reference">Reference</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>There is an interview problem. Given a string without duplicate characters, return all permutations of the string.</p>
+
+<h4 id="first-try">First Try</h4>
+
+<p>The straightforward idea is using recursive algorithms.
+We enum all characters for the first position and concatate the permutations of the rest substring.</p>
+
+<p>However, the speed is too slow when the string is a little logger, like &ldquo;abcdefghi&rdquo;.</p>
+
+<p>So, we have to try the iterative solution.</p>
+
+<p>There is an algorithm call &ldquo;Next Permutation&rdquo;.</p>
+
+<h3 id="next-permutation">Next Permutation</h3>
+
+<p>The idea of this algorithm is great!</p>
+
+<p>First, from end to start, it find the position <strong>i</strong> where the former character is less than the current character.</p>
+
+<p>Second, from end to the position <strong>i</strong> found just now, it find the position <strong>j</strong> where the character at <strong>i - 1</strong> is less than the character at <strong>j</strong>.</p>
+
+<p>Then swap them.</p>
+
+<p>After that, the character from <strong>i</strong> to the end must have the order Bigger to Smaller. And we now reverse them.</p>
+
+<p>The result now is the next permutation of the string.</p>
+
+<p>When we find all next permutations of the given string until the next permutation become the string itself.</p>
+
+<p>Now we have all the permutations of the string.</p>
+
+<h4 id="show-me-the-code">Show me the code</h4>
+
+<pre><code>    public String nextPermutation(String string) {
+        char[] chars = string.toCharArray();
+        int i = chars.length - 1;
+        for (; i &gt; 0; --i) {
+            if (chars[i] &gt; chars[i - 1]) {
+                break;
+            }
+        }
+        if (i &gt; 0) {
+            int j = chars.length - 1;
+            for (; j &gt;= i; --j) {
+                if (chars[j] &gt; chars[i - 1]) {
+                    break;
+                }
+            }
+            swapChar(chars, j, i -1);
+        }
+        int end = chars.length - 1;
+        while (i &lt; end) {
+            swapChar(chars, i++, end--);
+        }
+        return new String(chars);
+    }
+
+    public List&lt;String&gt; permuteStringIter(String str) {
+        List&lt;String&gt; list = new ArrayList&lt;&gt;();
+        if (str.length() &lt;= 0) {
+            return list;
+        }
+        String string = str;
+        list.add(string);
+        while (true) {
+            String nextString = this.nextPermutation(string);
+            if (nextString.equals(str)) {
+                break;
+            }
+            list.add(nextString);
+            string = nextString;
+        }
+        return list;
+    }
+    private void swapChar(char[] nums, int i, int j) {
+        if (i == j) {
+            return;
+        }
+        char temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+</code></pre>
+
+<h4 id="test">Test</h4>
+
+<p>I test the string &ldquo;abcdefgh&rdquo; with two algorithms. The iterative one cost 69ms, but the recursive one cost 13322 ms.</p>
+
+<h4 id="reference">Reference</h4>
+
+<ul>
+<li><a href="https://leetcode.com/problems/next-permutation/">leetcode</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Hank</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2019-03-10</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div><div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.jpg">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/algorithm/">Algorithm</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/typescript/replace-joi-with-class-validator-in-typescript/">
+            <span class="next-text nav-default">Replace Joi with Class-validator in Typescript</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:yuanhang.zheng@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/zhengyhn" class="iconfont icon-github" title="github"></a>
+  <a href="http://zhengyhn.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Hank</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="/lib/js-sequence-diagrams/webfontloader-1.6.28.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.ece58db6.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

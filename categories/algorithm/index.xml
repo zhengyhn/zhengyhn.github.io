@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithm on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/categories/algorithm/</link>
+    <description>Recent content in Algorithm on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://zhengyhn.github.io/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>String permutations</title>
+      <link>http://zhengyhn.github.io/post/algorithm/string-permutation/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/algorithm/string-permutation/</guid>
+      <description>There is an interview problem. Given a string without duplicate characters, return all permutations of the string.
+First Try The straightforward idea is using recursive algorithms. We enum all characters for the first position and concatate the permutations of the rest substring.
+However, the speed is too slow when the string is a little logger, like &amp;ldquo;abcdefghi&amp;rdquo;.
+So, we have to try the iterative solution.
+There is an algorithm call &amp;ldquo;Next Permutation&amp;rdquo;.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -44,7 +44,7 @@
 <meta property="og:description" content="Hank&#39;s blog" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://zhengyhn.github.io/" />
-<meta property="og:updated_time" content="2018-12-31T00:00:00&#43;00:00"/>
+<meta property="og:updated_time" content="2019-03-10T00:00:00&#43;00:00"/>
 
 <meta itemprop="name" content="Hank&#39;s Blog">
 <meta itemprop="description" content="Hank&#39;s blog">
@@ -116,6 +116,33 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/algorithm/string-permutation/">String permutations</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-03-10 </span>
+      <div class="post-category">
+          <a href="/categories/algorithm/"> Algorithm </a>
+          </div>
+        <span class="more-meta"> 约 372 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      There is an interview problem. Given a string without duplicate characters, return all permutations of the string.
+First Try The straightforward idea is using recursive algorithms. We enum all characters for the first position and concatate the permutations of the rest substring.
+However, the speed is too slow when the string is a little logger, like &ldquo;abcdefghi&rdquo;.
+So, we have to try the iterative solution.
+There is an algorithm call &ldquo;Next Permutation&rdquo;.
+    </div>
+    <div class="read-more">
+      <a href="/post/algorithm/string-permutation/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/typescript/replace-joi-with-class-validator-in-typescript/">Replace Joi with Class-validator in Typescript</a></h1>
@@ -307,27 +334,6 @@
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/learning-path-finding-algorithms/">Learning Path Finding Algorithms</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-09-27 </span>
-      
-        <span class="more-meta"> 约 502 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      import numpy as np import matplotlib.pyplot as plt %matplotlib notebook N = 10 OBSTALE = '1' ROAD = '*' START = 'S' END = 'E' game_map = np.array([[ROAD] * 10] * 10) game_map[1:5, 1] = OBSTALE game_map[8:10, 1] = OBSTALE game_map[2:6, 3] = OBSTALE game_map[7:10, 3] = OBSTALE game_map[1:5, 5] = OBSTALE game_map[6:8, 5] = OBSTALE game_map[0:3, 7] = OBSTALE game_map[4:6, 7] = OBSTALE game_map[0, 0] = START game_map[8, 7] = END for row in game_map: for col in row: print(col, end='') print('')  S******1** *1***1*1** *1*1*1*1** *1*1*1**** *1*1*1*1** ***1***1** *****1**** ***1*1**** *1*1***E** *1*1******  class Node: def __init__(self, x, y): self.
-    </div>
-    <div class="read-more">
-      <a href="/post/learning-path-finding-algorithms/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -369,7 +375,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2018
+    2019
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
