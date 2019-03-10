@@ -7,7 +7,7 @@ categories: ["Algorithm"]
 
 There is an interview problem. Given a string without duplicate characters, return all permutations of the string.
 
-#### First Try
+### First Try
 The straightforward idea is using recursive algorithms.
 We enum all characters for the first position and concatate the permutations of the rest substring.
 
@@ -34,8 +34,8 @@ When we find all next permutations of the given string until the next permutatio
 
 Now we have all the permutations of the string.
 
-#### Show me the code
-```
+### Show me the code
+```java
     public String nextPermutation(String string) {
         char[] chars = string.toCharArray();
         int i = chars.length - 1;
@@ -86,8 +86,8 @@ Now we have all the permutations of the string.
         nums[j] = temp;
     }
 ```
-#### Test
+### Test
 I test the string "abcdefgh" with two algorithms. The iterative one cost 69ms, but the recursive one cost 13322 ms.
 
-#### Reference
+### Reference
 - [leetcode](https://leetcode.com/problems/next-permutation/)
