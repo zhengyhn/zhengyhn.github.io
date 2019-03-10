@@ -162,16 +162,11 @@ There is an algorithm call &ldquo;Next Permutation&rdquo;."/>
 <ul>
 <li>
 <ul>
-<li>
-<ul>
 <li><a href="#first-try">First Try</a></li>
-</ul></li>
-<li><a href="#next-permutation">Next Permutation</a>
-<ul>
+<li><a href="#next-permutation">Next Permutation</a></li>
 <li><a href="#show-me-the-code">Show me the code</a></li>
 <li><a href="#test">Test</a></li>
 <li><a href="#reference">Reference</a></li>
-</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -183,7 +178,7 @@ There is an algorithm call &ldquo;Next Permutation&rdquo;."/>
 
 <p>There is an interview problem. Given a string without duplicate characters, return all permutations of the string.</p>
 
-<h4 id="first-try">First Try</h4>
+<h3 id="first-try">First Try</h3>
 
 <p>The straightforward idea is using recursive algorithms.
 We enum all characters for the first position and concatate the permutations of the rest substring.</p>
@@ -212,9 +207,9 @@ We enum all characters for the first position and concatate the permutations of 
 
 <p>Now we have all the permutations of the string.</p>
 
-<h4 id="show-me-the-code">Show me the code</h4>
+<h3 id="show-me-the-code">Show me the code</h3>
 
-<pre><code>    public String nextPermutation(String string) {
+<pre><code class="language-java">    public String nextPermutation(String string) {
         char[] chars = string.toCharArray();
         int i = chars.length - 1;
         for (; i &gt; 0; --i) {
@@ -265,11 +260,11 @@ We enum all characters for the first position and concatate the permutations of 
     }
 </code></pre>
 
-<h4 id="test">Test</h4>
+<h3 id="test">Test</h3>
 
 <p>I test the string &ldquo;abcdefgh&rdquo; with two algorithms. The iterative one cost 69ms, but the recursive one cost 13322 ms.</p>
 
-<h4 id="reference">Reference</h4>
+<h3 id="reference">Reference</h3>
 
 <ul>
 <li><a href="https://leetcode.com/problems/next-permutation/">leetcode</a></li>
