@@ -101,6 +101,12 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
     hint = 30               # Display hint if the last modified time is more than these days ago.    # 如果文章最后更新于这天数之前，显示提醒
     warn = 180              # Display warning if the last modified time is more than these days ago.    # 如果文章最后更新于这天数之前，显示警告
 
+  [params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
+    owner = "zhengyhn"              # Your GitHub ID
+    repo = "zhengyhn.github.io"               # The repo to store comments
+    clientId = "3906b3202777c482f061"           # Your client ID
+    clientSecret = "fcbbda8eb9ee72273744d940ebeaab90486c8e4b"       # Your client secret
+
   [params.flowchartDiagrams]# see https://blog.olowolo.com/example-site/post/js-flowchart-diagrams/
     enable = true
     options = ""
