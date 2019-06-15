@@ -1,10 +1,8 @@
 ---
-{
-  "title": "阿里java开发者手册读书笔记",
-  "subtitle": "Generic subtitle",
-  "date": "2019-04-08",
-  "slug": ""
-}
+title: 阿里java开发者手册读书笔记
+date: "2019-04-08"
+tags: ["java"]
+categories: ["java"]
 ---
 
 ### POJO 类中布尔类型的变量，都不要加 is 前缀，否则部分框架解析会引起序列化错误
