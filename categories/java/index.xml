@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/categories/java/</link>
+    <description>Recent content in java on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 08 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://zhengyhn.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>阿里java开发者手册读书笔记</title>
+      <link>http://zhengyhn.github.io/post/alibaba-java-guide-note/</link>
+      <pubDate>Mon, 08 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/alibaba-java-guide-note/</guid>
+      <description>POJO 类中布尔类型的变量，都不要加 is 前缀，否则部分框架解析会引起序列化错误 心得：这个之前我写的代码的确会下意识地就用isXXX，现在遵守这个规范</description>
+    </item>
+    
+  </channel>
+</rss>

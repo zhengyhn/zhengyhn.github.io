@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhengyhn.github.io/post/react/react-tic-tac-toe/</loc>
+    <lastmod>2019-06-15T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://zhengyhn.github.io/post/alibaba-java-guide-note/</loc>
     <lastmod>2019-04-08T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -416,14 +423,14 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/2013-06-30-ruby-getting-started/</loc>
+    <loc>http://zhengyhn.github.io/post/ruby/2013-06-30-ruby-getting-started/</loc>
     <lastmod>2016-05-14T16:35:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/2013-07-25-some-basic-ruby/</loc>
+    <loc>http://zhengyhn.github.io/post/ruby/2013-07-25-some-basic-ruby/</loc>
     <lastmod>2016-05-14T16:35:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -816,7 +823,7 @@
   
   <url>
     <loc>http://zhengyhn.github.io/</loc>
-    <lastmod>2019-04-08T00:00:00+00:00</lastmod>
+    <lastmod>2019-06-15T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -837,7 +844,21 @@
   
   <url>
     <loc>http://zhengyhn.github.io/post/</loc>
-    <lastmod>2019-04-08T00:00:00+00:00</lastmod>
+    <lastmod>2019-06-15T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/tags/react/</loc>
+    <lastmod>2019-06-15T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/categories/react/</loc>
+    <lastmod>2019-06-15T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -880,6 +901,20 @@
   <url>
     <loc>http://zhengyhn.github.io/tags/web/</loc>
     <lastmod>2018-12-31T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/tags/java/</loc>
+    <lastmod>2019-04-08T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/categories/java/</loc>
+    <lastmod>2019-04-08T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>

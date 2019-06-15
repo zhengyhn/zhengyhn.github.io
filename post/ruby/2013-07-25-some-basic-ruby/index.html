@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Some basic Ruby - Hank&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Hank" /><meta name="description" content="String and name When defining a function, the parentheses are not necessary.So this one
+def say_hello name &amp;quot;Hello &amp;quot; &#43; name end puts say_hello &amp;quot;man&amp;quot;  is the same as this.
+def say_hello(name) &amp;quot;Hello &amp;quot; &#43; name end puts(say_hello(&amp;quot;man&amp;quot;))  However, when there are more than one parameters, it will be difficult to know which argument goes with which method invocation.So it&amp;rsquo;s recommended using parentheses in all but the simplest cases." /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+
+
+<link rel="canonical" href="http://zhengyhn.github.io/post/ruby/2013-07-25-some-basic-ruby/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Some basic Ruby" />
+<meta property="og:description" content="String and name When defining a function, the parentheses are not necessary.So this one
+def say_hello name &quot;Hello &quot; &#43; name end puts say_hello &quot;man&quot;  is the same as this.
+def say_hello(name) &quot;Hello &quot; &#43; name end puts(say_hello(&quot;man&quot;))  However, when there are more than one parameters, it will be difficult to know which argument goes with which method invocation.So it&rsquo;s recommended using parentheses in all but the simplest cases." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://zhengyhn.github.io/post/ruby/2013-07-25-some-basic-ruby/" /><meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
+<meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
+
+<meta itemprop="name" content="Some basic Ruby">
+<meta itemprop="description" content="String and name When defining a function, the parentheses are not necessary.So this one
+def say_hello name &quot;Hello &quot; &#43; name end puts say_hello &quot;man&quot;  is the same as this.
+def say_hello(name) &quot;Hello &quot; &#43; name end puts(say_hello(&quot;man&quot;))  However, when there are more than one parameters, it will be difficult to know which argument goes with which method invocation.So it&rsquo;s recommended using parentheses in all but the simplest cases.">
+
+
+<meta itemprop="datePublished" content="2016-05-14T16:35:19&#43;08:00" />
+<meta itemprop="dateModified" content="2016-05-14T16:35:19&#43;08:00" />
+<meta itemprop="wordCount" content="803">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Some basic Ruby"/>
+<meta name="twitter:description" content="String and name When defining a function, the parentheses are not necessary.So this one
+def say_hello name &quot;Hello &quot; &#43; name end puts say_hello &quot;man&quot;  is the same as this.
+def say_hello(name) &quot;Hello &quot; &#43; name end puts(say_hello(&quot;man&quot;))  However, when there are more than one parameters, it will be difficult to know which argument goes with which method invocation.So it&rsquo;s recommended using parentheses in all but the simplest cases."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Hank&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Hank&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Some basic Ruby</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2016-05-14 </span>
+        
+          <span class="more-meta"> 约 803 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#string-and-name">String and name</a></li>
+<li><a href="#arrays-and-hashes">Arrays and Hashes</a></li>
+<li><a href="#control-structures">Control Structures</a></li>
+<li><a href="#regular-expressions">Regular expressions</a></li>
+<li><a href="#blocks-and-iterators">Blocks and Iterators</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="string-and-name">String and name</h2>
+
+<p>When defining a function, the parentheses are not necessary.So this one</p>
+
+<pre><code>def say_hello name
+  &quot;Hello &quot; + name
+end
+
+puts say_hello &quot;man&quot;
+</code></pre>
+
+<p>is the same as this.</p>
+
+<pre><code>def say_hello(name)
+  &quot;Hello &quot; + name
+end
+
+puts(say_hello(&quot;man&quot;))
+</code></pre>
+
+<p>However, when there are more than one parameters, it will be difficult to
+know which argument goes with which method invocation.So it&rsquo;s recommended
+using parentheses in all but the simplest cases.</p>
+
+<p>We can use single-quote or double-quote to create a string.What&rsquo;s the
+difference?</p>
+
+<p>First, single-quoted string can&rsquo;t represent the escape character, and
+double-quoted string can.</p>
+
+<pre><code>puts '\nabc'
+puts &quot;\nabc&quot;
+</code></pre>
+
+<p>The above code will output this.</p>
+
+<pre><code>\nabc
+
+abc
+</code></pre>
+
+<p>Second, double-quoted string can be expression interpolated.</p>
+
+<pre><code>name = 'Tom'
+
+puts 'Hello #{name}'
+puts &quot;Hello #{name}&quot;
+</code></pre>
+
+<p>The above code will output this.</p>
+
+<pre><code>ruby test.rb
+Hello #{name}
+Hello Tom
+</code></pre>
+
+<p>And we can even invoke methods.</p>
+
+<pre><code>name = 'Tom'
+puts &quot;Hello #{name.upcase}&quot;
+</code></pre>
+
+<p>This will generate the following.</p>
+
+<pre><code>Hello TOM
+</code></pre>
+
+<p>When the expression is a global, instance or class variable, there is no need
+to use the braces.</p>
+
+<pre><code>@h = &quot;Hello&quot;    # @ means instance
+$name = 'Tom'    # $ means global
+
+puts &quot;#@h #$name&quot;
+</code></pre>
+
+<p>This will generate the same output.</p>
+
+<p>There are some conventions for the <strong>name</strong> in Ruby.</p>
+
+<ul>
+<li><p>Local variables, method parameters and method names <em>should</em> all start
+with a lowercase letter or an underscore.</p></li>
+
+<li><p>Class names, module names and constants <em>must</em> start with an uppercase
+letter.</p></li>
+
+<li><p>Global variables start with <code>$</code>.</p></li>
+
+<li><p>Instance variables begin with <code>@</code>.</p></li>
+
+<li><p>Class variables are prefixed with <code>@@</code>.</p></li>
+</ul>
+
+<h2 id="arrays-and-hashes">Arrays and Hashes</h2>
+
+<p>In ruby, arrays and hashes can hold objects of different types.</p>
+
+<pre><code>a = [1, 'abc', :sym]
+puts a
+</code></pre>
+
+<p>It will generate the following output.</p>
+
+<pre><code>1
+abc
+sym
+</code></pre>
+
+<p>By the way, <code>nil</code> is an object, represent <strong>nothing</strong>.</p>
+
+<p>If we want to create an array of string, we have to list all the strings.
+And we have to type lots of quotes and commas.However, <code>%w</code> can do it
+more easily.</p>
+
+<pre><code>a = ['a', 'b', 'c']
+b = %w{a b c}
+
+puts a
+puts b
+</code></pre>
+
+<p>It will generate the following output.</p>
+
+<pre><code>a
+b
+c
+a
+b
+c
+</code></pre>
+
+<p>The index of Array is integer, but the index of Hash is anything.</p>
+
+<p>It has the following form.</p>
+
+<pre><code>var = {
+  key1 =&gt; value1
+  key2 =&gt; value2
+  ...
+}
+</code></pre>
+
+<p>For example:</p>
+
+<pre><code>girl = {
+  :name =&gt; 'Mary',
+  :age =&gt; 20
+}
+
+puts &quot;#{girl[:name]} is #{girl[:age]} years old.&quot;
+</code></pre>
+
+<p>Output:</p>
+
+<pre><code>Mary is 20 years old.
+</code></pre>
+
+<p>A new Hash can also be created in this way.</p>
+
+<pre><code>decimal = Hash.new(0)
+puts decimal[:first]
+decimal[:first] = 1
+puts decimal[:first]
+</code></pre>
+
+<p>Ouput:</p>
+
+<pre><code>0
+1
+</code></pre>
+
+<p><code>0</code> is the default value for all keys.</p>
+
+<h2 id="control-structures">Control Structures</h2>
+
+<p>In Ruby, there is a <code>elsif</code> keyword instead of <code>else if</code>.</p>
+
+<p>The method <code>gets</code> return the next line from the standard input stream and
+return nil when get the <code>EOF</code>, so the following code can let all the inputs
+be upcase.</p>
+
+<pre><code>while line = gets
+  puts line.upcase
+end
+</code></pre>
+
+<p>If the <code>if</code> and <code>while</code> statement is just a single expression, we usually
+write them in this way.</p>
+
+<pre><code>puts 'Hey' if 2 &gt; 1
+
+i = 1
+puts i while (i += 1) &lt; 10
+</code></pre>
+
+<p>Someone say that this style is similar with <code>Perl</code>.</p>
+
+<h2 id="regular-expressions">Regular expressions</h2>
+
+<p>&rsquo;/&rsquo;   forward slash</p>
+
+<p>&rsquo;|&rsquo;   pipe</p>
+
+<p>The match operator is <code>=~</code>. For example,</p>
+
+<p>line = &ldquo;Perlppp&rdquo;</p>
+
+<pre><code>if line =~ /Perl|Python/
+  puts &quot;match&quot;
+end
+</code></pre>
+
+<p>The replace method is <code>sub</code> and <code>gsub</code>.</p>
+
+<p><code>sub(pattern, str)</code> will replace the first string that matched <code>pattern</code>
+with <code>str</code>.</p>
+
+<p><code>gsub(pattern, str)</code> will replace all the string that matched <code>pattern</code>
+with <code>str</code>. <code>g</code> means <strong>global</strong>.</p>
+
+<h2 id="blocks-and-iterators">Blocks and Iterators</h2>
+
+<p>This is a code block.</p>
+
+<pre><code>{ puts 'Hello World!' }
+</code></pre>
+
+<p>This is also a code block.</p>
+
+<pre><code>do
+  a = 1
+  puts a
+end
+</code></pre>
+
+<p>When we define a function like this,</p>
+
+<pre><code>def hello
+  puts &quot;Do some staff before calling the code block&quot;
+  yield
+  puts &quot;Do some staff after calling the code block&quot;
+end
+</code></pre>
+
+<p>now we can call this function in this way.</p>
+
+<pre><code>hello { puts 'Hello World' }
+</code></pre>
+
+<p><code>yield</code> will execute the code block <code>{ puts 'Hello World' }</code>. Here code
+is just like data. There may be many functions that should do some staff
+before calling them and do some staff after calling them. For example, logging
+and open/close file. This is call <a href="http://en.wikipedia.org/wiki/Aspect-oriented_programming">AOP</a>.</p>
+
+<p><code>yield</code> can also accept parameters.</p>
+
+<pre><code>def hello
+  puts &quot;Do some staff before calling the code block&quot;
+  yield('Hello ')
+  puts &quot;Do some staff after calling the code block&quot;
+end
+
+hello { |greet| puts greet + 'Ruby' }
+</code></pre>
+
+<p><strong>Code block</strong> is used to implement <strong>Iterator</strong>. The famouse function <code>each</code>
+is an example.</p>
+
+<pre><code>animals = %w(ant bee cat dog)
+animals.each { |animal| puts animal }
+</code></pre>
+
+<p>If we want to print 5 &lsquo;*&rsquo; in C/C++, we will do it in this way.</p>
+
+<pre><code>for (int i = 0; i &lt; 5; ++i) {
+    printf('*');
+}
+</code></pre>
+
+<p>But in Ruby, you can do it in an elegant way.</p>
+
+<pre><code>5.times { print '*' }
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Hank</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2016-05-14
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.jpg">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/ruby/2013-06-30-ruby-getting-started/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Ruby-getting started</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cpp/2013-08-25-some-interview-questions-about-array-and-string/">
+            <span class="next-text nav-default">Some interview questions about array and string</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2016-05-14 16:35:19 \x2b0800 CST',
+        title: 'Some basic Ruby',
+        link: decodeURI(location.href),
+        desc: 'String and name When defining a function, the parentheses are not necessary.So this one\ndef say_hello name \x26quot;Hello \x26quot; \x2b name end puts say_hello \x26quot;man\x26quot;  is the same as this.\ndef say_hello(name) \x26quot;Hello \x26quot; \x2b name end puts(say_hello(\x26quot;man\x26quot;))  However, when there are more than one parameters, it will be difficult to know which argument goes with which method invocation.So it\x26rsquo;s recommended using parentheses in all but the simplest cases.',
+        owner: 'zhengyhn',
+        repo: 'zhengyhn.github.io',
+        oauth: {
+          client_id: '3906b3202777c482f061',
+          client_secret: 'fcbbda8eb9ee72273744d940ebeaab90486c8e4b'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:yuanhang.zheng@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/zhengyhn" class="iconfont icon-github" title="github"></a>
+  <a href="http://zhengyhn.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Hank</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="/lib/js-sequence-diagrams/webfontloader-1.6.28.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

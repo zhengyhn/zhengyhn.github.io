@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Postponing definitions instead of preponing - Hank&#39;s Blog</title>
+  <title>React入门-井字游戏实现与完善 - Hank&#39;s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,8 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="Prepone definitions? Wrong! Before C99, you must prepone all the variables&amp;rsquo; definitions before any statements. But after C99 was released, you can put a variable&amp;rsquo;s definition in any place as long as before being used. I think this new feature is introduced by learning from C&#43;&#43;.
-This makes programer write codes more convenient. But I used to insist the old style. I even teach my students that they should use the old style when I was a TA of the course Programming with C." /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="前段时间换了家外企工作, 空闲时间比较多。 虽然我是做Java后端的，但是老外喜欢搞敏捷开发和全栈，所以也要写前端，既然是老外，那肯定是喜欢用R" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
@@ -27,7 +26,7 @@ This makes programer write codes more convenient. But I used to insist the old s
 <meta name="generator" content="Hugo 0.52 with even 4.0.0" />
 
 
-<link rel="canonical" href="http://zhengyhn.github.io/post/cpp/2013-08-11-postponing-definitions-instead-of-preponing/" />
+<link rel="canonical" href="http://zhengyhn.github.io/post/react/react-tic-tac-toe/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,29 +38,26 @@ This makes programer write codes more convenient. But I used to insist the old s
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
-<meta property="og:title" content="Postponing definitions instead of preponing" />
-<meta property="og:description" content="Prepone definitions? Wrong! Before C99, you must prepone all the variables&rsquo; definitions before any statements. But after C99 was released, you can put a variable&rsquo;s definition in any place as long as before being used. I think this new feature is introduced by learning from C&#43;&#43;.
-This makes programer write codes more convenient. But I used to insist the old style. I even teach my students that they should use the old style when I was a TA of the course Programming with C." />
+<meta property="og:title" content="React入门-井字游戏实现与完善" />
+<meta property="og:description" content="前段时间换了家外企工作, 空闲时间比较多。 虽然我是做Java后端的，但是老外喜欢搞敏捷开发和全栈，所以也要写前端，既然是老外，那肯定是喜欢用R" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/cpp/2013-08-11-postponing-definitions-instead-of-preponing/" /><meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
-<meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
+<meta property="og:url" content="http://zhengyhn.github.io/post/react/react-tic-tac-toe/" /><meta property="article:published_time" content="2019-06-15T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-06-15T00:00:00&#43;00:00"/>
 
-<meta itemprop="name" content="Postponing definitions instead of preponing">
-<meta itemprop="description" content="Prepone definitions? Wrong! Before C99, you must prepone all the variables&rsquo; definitions before any statements. But after C99 was released, you can put a variable&rsquo;s definition in any place as long as before being used. I think this new feature is introduced by learning from C&#43;&#43;.
-This makes programer write codes more convenient. But I used to insist the old style. I even teach my students that they should use the old style when I was a TA of the course Programming with C.">
-
-
-<meta itemprop="datePublished" content="2016-05-14T16:35:19&#43;08:00" />
-<meta itemprop="dateModified" content="2016-05-14T16:35:19&#43;08:00" />
-<meta itemprop="wordCount" content="605">
+<meta itemprop="name" content="React入门-井字游戏实现与完善">
+<meta itemprop="description" content="前段时间换了家外企工作, 空闲时间比较多。 虽然我是做Java后端的，但是老外喜欢搞敏捷开发和全栈，所以也要写前端，既然是老外，那肯定是喜欢用R">
 
 
+<meta itemprop="datePublished" content="2019-06-15T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-06-15T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1133">
 
-<meta itemprop="keywords" content="" />
+
+
+<meta itemprop="keywords" content="React," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Postponing definitions instead of preponing"/>
-<meta name="twitter:description" content="Prepone definitions? Wrong! Before C99, you must prepone all the variables&rsquo; definitions before any statements. But after C99 was released, you can put a variable&rsquo;s definition in any place as long as before being used. I think this new feature is introduced by learning from C&#43;&#43;.
-This makes programer write codes more convenient. But I used to insist the old style. I even teach my students that they should use the old style when I was a TA of the course Programming with C."/>
+<meta name="twitter:title" content="React入门-井字游戏实现与完善"/>
+<meta name="twitter:description" content="前段时间换了家外企工作, 空闲时间比较多。 虽然我是做Java后端的，但是老外喜欢搞敏捷开发和全栈，所以也要写前端，既然是老外，那肯定是喜欢用R"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -128,12 +124,14 @@ This makes programer write codes more convenient. But I used to insist the old s
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Postponing definitions instead of preponing</h1>
+      <h1 class="post-title">React入门-井字游戏实现与完善</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2016-05-14 </span>
-        
-          <span class="more-meta"> 约 605 字 </span>
+        <span class="post-time"> 2019-06-15 </span>
+        <div class="post-category">
+            <a href="/categories/react/"> React </a>
+            </div>
+          <span class="more-meta"> 约 1133 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -146,8 +144,14 @@ This makes programer write codes more convenient. But I used to insist the old s
 <ul>
 <li>
 <ul>
-<li><a href="#prepone-definitions-wrong">Prepone definitions? Wrong!</a></li>
-<li><a href="#define-and-then-assign-wrong">Define and then assign? Wrong!</a></li>
+<li><a href="#井字游戏"><strong>井字游戏</strong></a></li>
+<li><a href="#实现"><strong>实现</strong></a>
+<ul>
+<li><a href="#点击历史列表某一项时-这一项的文字加粗"><strong>点击历史列表某一项时，这一项的文字加粗</strong></a></li>
+<li><a href="#将原来硬编码写的九宫格改成用循环"><strong>将原来硬编码写的九宫格改成用循环</strong></a></li>
+<li><a href="#如果是平局-在界面上显示出来"><strong>如果是平局，在界面上显示出来</strong></a></li>
+<li><a href="#回放功能"><strong>回放功能</strong></a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -156,150 +160,186 @@ This makes programer write codes more convenient. But I used to insist the old s
     <div class="post-content">
       
 
-<h2 id="prepone-definitions-wrong">Prepone definitions? Wrong!</h2>
+<p>前段时间换了家外企工作, 空闲时间比较多。</p>
 
-<p>Before C99, you must prepone all the variables&rsquo; definitions before any
-statements. But after C99 was released, you can put a variable&rsquo;s definition
-in any place as long as before being used. I think this new feature is
-introduced by learning from C++.</p>
+<p>虽然我是做Java后端的，但是老外喜欢搞敏捷开发和全栈，所以也要写前端，既然是老外，那肯定是喜欢用React的，然而我之前从来没写过React，只能从基础一步一步来了。</p>
 
-<p>This makes programer write codes more convenient. But I used to insist the
-old style. I even teach my students that they should use the old style when
-I was a TA of the course <em>Programming with C</em>.</p>
+<h2 id="井字游戏"><strong>井字游戏</strong></h2>
 
-<p>However, now I realize that I was wrong. <strong>We should postpone variables&rsquo;</strong>
-<strong>definitions as long as possible</strong>. It&rsquo;s not for coding style, but for the
-effeciency of the program.</p>
+<p>井字游戏是React官方的入门实战教程的案例来的，在<a href="https://reactjs.org/tutorial/tutorial.html">这里</a>。</p>
 
-<p>Consider this program.</p>
+<p>这个游戏的规则是这样的:</p>
 
-<pre><code>#include &lt;cstdio&gt;
-#include &lt;iostream&gt;
+<ul>
+<li>一共9个格子的棋盘, 共2种棋子，分别是X和O</li>
+<li>每次，一个玩家将棋子下到一个格子上</li>
+<li>如果有3个相同棋子在横/竖/对角线上相连，那就赢了，否则就为和局</li>
+</ul>
 
-void
-save_pwd(const std::string&amp; pwd)
-{
-    std::string salted_pwd(&quot;abc&quot;);
+<p>最后的效果是这样的：</p>
 
-    if (pwd.size() &lt; 6) {
-        fprintf(stderr, &quot;Password too short.&quot;);
-        return;
+<figure>
+    <img src="/images/tic_tac_toe_original.gif"/> <figcaption>
+            <h4>original tic tac toe</h4>
+        </figcaption>
+</figure>
+
+
+<h2 id="实现"><strong>实现</strong></h2>
+
+<p>我的实现就是完全跟着官方教程来的，最后挑了一些有趣的课后作业完成，分别新增了下面的功能：</p>
+
+<ul>
+<li>点击历史列表某一项时，这一项的文字加粗</li>
+<li>将原来硬编码写的九宫格改成用循环</li>
+<li>如果是平局，在界面上显示出来</li>
+</ul>
+
+<p>都是比较简单的功能，我还想到了一个功能，就是给一个回放的按钮，点击可以回放整个游戏过程。</p>
+
+<p>所以，增加了上面的4个功能的实现，最终的效果变成:</p>
+
+<figure>
+    <img src="/images/tic_tac_toe_improved.gif"/> <figcaption>
+            <h4>improved tic tac toe</h4>
+        </figcaption>
+</figure>
+
+
+<h3 id="点击历史列表某一项时-这一项的文字加粗"><strong>点击历史列表某一项时，这一项的文字加粗</strong></h3>
+
+<p>在state里面加一个字段selectedIndex，表明现在选择的是哪一个历史项，这个字段会在渲染的时候使用。</p>
+
+<pre><code>    this.state = {
+      history: [
+        {
+          squares: Array(9).fill(null),
+        },
+      ],
+      currentStep: 0,
+      selectedIndex: -1,
+      xIsNext: true
+    };
+</code></pre>
+
+<p>在渲染的时候，代码改成这样：</p>
+
+<pre><code>    const moves = history.map((item, index) =&gt; {
+      const desc = index &gt; 0 ? `Go to move ${index}` : `Go to game start`
+      const textHtml = this.state.selectedIndex === index ? (&lt;b&gt;{desc}&lt;/b&gt;) : desc
+      return (
+        &lt;li key={index}&gt;
+          &lt;button onClick={() =&gt; this.jumpTo(index)}&gt;{textHtml}&lt;/button&gt;
+        &lt;/li&gt;
+      )
+    })
+</code></pre>
+
+<p>在生成整个历史列表时，要遍历每一项，这个时候，判断状态里面保存的选择的下标是不是跟某一项的下标相等，如果相等就在文字外面包一个加粗的标签。</p>
+
+<p>在点击某一项时，需要设置selectedIndex的值，代码变成这样子:</p>
+
+<pre><code>  jumpTo(i) {
+    this.setState({
+      currentStep: i,
+      selectedIndex: i,
+      xIsNext: (i &amp; 1) === 0
+    });
+  }
+</code></pre>
+
+<h3 id="将原来硬编码写的九宫格改成用循环"><strong>将原来硬编码写的九宫格改成用循环</strong></h3>
+
+<p>这里有点坑，本来我想用双重循环的，比如这样:</p>
+
+<pre><code>    let board = []
+    for (let i = 0; i &lt; 3; ++i) {
+      board.push(&lt;div className=&quot;board-row&quot;&gt;)
+      for (let j = 0; j &lt; 3; ++j) {
+        board.push((j) =&gt; {this.renderSquare(i * 3 + j)})
+      }
+      board.push(&lt;/div&gt;)
     }
-    salted_pwd += pwd;
-    ...
-}
-
-int
-main(int argc, char **argv)
-{
-    save_pwd(&quot;ddd&quot;);
-
-    return 0;
-}
+    return (
+      &lt;div&gt;
+        {board}
+      &lt;/div&gt;
+    );
 </code></pre>
 
-<p>When running this program, it will print an error and exit the function.
-The variable <code>salted_pwd</code> is not used. So, defining <code>salted_pwd</code> above
-the <code>if</code> statement will waste the memory, the time to allocate memory and
-the time to free memory. For the view of C++, you will pay for the cost of
-construction and destruction of the object <code>salted_pwd</code>.</p>
+<p>但是在这一行:</p>
 
-<h2 id="define-and-then-assign-wrong">Define and then assign? Wrong!</h2>
-
-<p>When I first learned programming in C, my teacher says that</p>
-
-<pre><code>int a;
-a = 1;
+<pre><code>board.push(&lt;div className=&quot;board-row&quot;&gt;)
 </code></pre>
 
-<p>is the same as</p>
+<p>它认为我没闭合标签，认为下面的代码还是内容，会报错, 所以最后我只能改成用map来写了，双重循环应该是可以的，刚入门，不熟悉。</p>
 
-<pre><code>int a = 1;
+<p>最后用map实现的代码长这样：</p>
+
+<pre><code>    let board = []
+    for (let i = 0; i &lt; 3; ++i) {
+      board.push(
+        &lt;div className=&quot;board-row&quot;&gt;
+        {[0, 1, 2].map((j) =&gt; this.renderSquare(i * 3 + j))}
+        &lt;/div&gt;
+      )
+    }
+    return (
+      &lt;div&gt;
+        {board}
+      &lt;/div&gt;
+    );
 </code></pre>
 
-<p>Now I realize that they are not the same and the latter is more effecient.</p>
+<h3 id="如果是平局-在界面上显示出来"><strong>如果是平局，在界面上显示出来</strong></h3>
 
-<p>For the former, <code>int a;</code> will allocate memory for the variable <code>a</code> and
-then fill zero bytes in the memory. Then <code>a = 1;</code> will write value <code>1</code>
-in the memory.
-For the latter, <code>int a = 1;</code> will directly allocate memory for the variable
-<code>a</code> and then write value <code>1</code> in the memory.
-In other words, you will pay more cost when using the former style.</p>
+<p>这个很简单，直接加一个判断，如果没有计算出来winner，并且全部棋子都摆满了棋盘，就认为是平局。代码如下：</p>
 
-<p>It seems that it makes little difference with the built-in type. When the
-type of the variable <code>a</code> is user-defined type, great difference appears.</p>
-
-<p>For example,</p>
-
-<pre><code>std::string str;
-...
-std::string = &quot;abc&quot;;
+<pre><code>    if (winner) {
+      status = `Winner: ${winner}`
+    } else if (history.length &gt; 9) {
+      status = `No Winner, it's draw`
+    }
 </code></pre>
 
-<p>This will first call the default constructor of <code>std::string</code> and then call
-the copy assignment operator. So the time and memory used in the default
-constructor is wasted.</p>
+<h3 id="回放功能"><strong>回放功能</strong></h3>
 
-<p>If we define an object in this way</p>
+<p>实现也比较简单，思路就是用history保存的状态，用setInterval重新设置一遍，在遍历到最后一个状态时用clearInterval停止。</p>
 
-<pre><code>std::string str(&quot;abc&quot;);
+<p>首先，加个按钮:</p>
+
+<pre><code>        &lt;div className=&quot;game-info&quot;&gt;
+          &lt;div&gt;{status}&lt;/div&gt;
+          &lt;ol&gt;{moves}&lt;/ol&gt;
+          &lt;div&gt;&lt;button onClick={() =&gt; this.playBack()}&gt;Play back&lt;/button&gt;&lt;/div&gt;
+        &lt;/div&gt;
 </code></pre>
 
-<p>or</p>
+<p>然后看这个按钮调用的逻辑：</p>
 
-<pre><code>std::string str = &quot;abc&quot;;
+<pre><code>  playBack() {
+    this.setState({
+      currentStep: 0,
+      selectedIndex: 0,
+      xIsNext: true
+    });
+    var intervalID = setInterval(() =&gt; {
+      this.setState({
+        currentStep: this.state.currentStep + 1,
+        selectedIndex: this.state.selectedIndex + 1,
+        xIsNext: (this.state.currentStep &amp; 1) === 0
+      });     
+      if (this.state.currentStep &gt;= this.state.history.length - 1) {
+        clearInterval(intervalID);
+        this.setState({
+          xIsNext: (this.state.currentStep &amp; 1) === 0
+        })
+      }
+    }, 1000)
+  }
 </code></pre>
 
-<p>, it will only call the copy constructor. This is more effecient.</p>
-
-<p>So now I prefer this way</p>
-
-<pre><code>for (int i = 0; i &lt; n; i++) {
-    ...
-}
-</code></pre>
-
-<p>instead of</p>
-
-<pre><code>int i;
-
-for (i = 0; i &lt; n; i++) {
-    ...
-}
-</code></pre>
-
-<p>Now there is a special case that is worth thinking.</p>
-
-<pre><code>Person p;
-for (int i = 0; i &lt; n; i++) {
-    p = persons[i];
-    ...
-}
-</code></pre>
-
-<p>and</p>
-
-<pre><code>for (int i = 0; i &lt; n; i++) {
-    Person p = persons[i];
-    ...
-}
-</code></pre>
-
-<p>, which is better?</p>
-
-<p>Let&rsquo;s analysis the performance of them.
-* The former need 1 construction, n assignments and 1 destruction. But it makes
-the object <code>p</code> in a larger scope, which increase the comprehensibility and
-maintainability of the program.
-* The latter need n constructions and n destructions.</p>
-
-<p>Which is more effecient? I think it all depends. If assignment is less expensive
-than the total of construction and destruction, we should use the former style.
-On the contray, we should use the latter style.</p>
-
-<p>The author of <strong>Effective C++</strong> prefers the latter, but I prefer the former,
-since I am sensitive with performance and I think memory allocation and free
-will be more expensive than assignment.</p>
+<p>整个实现就是这样的了！</p>
 
     </div>
 
@@ -311,7 +351,7 @@ will be more expensive than assignment.</p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2016-05-14
+        2019-06-15
         
     </span>
   </p>
@@ -336,15 +376,13 @@ will be more expensive than assignment.</p>
       </label>
   </div>
 </div><footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="/tags/react/">React</a>
+          </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/cpp/2013-09-25-my-c-plus-plus-coding-style/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">My C&#43;&#43; coding style</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/ruby/2013-06-30-ruby-getting-started/">
-            <span class="next-text nav-default">Ruby-getting started</span>
+        
+        <a class="next" href="/post/alibaba-java-guide-note/">
+            <span class="next-text nav-default">阿里java开发者手册读书笔记</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -357,10 +395,10 @@ will be more expensive than assignment.</p>
     <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var gitment = new Gitment({
-        id: '2016-05-14 16:35:19 \x2b0800 CST',
-        title: 'Postponing definitions instead of preponing',
+        id: '2019-06-15 00:00:00 \x2b0000 UTC',
+        title: 'React入门-井字游戏实现与完善',
         link: decodeURI(location.href),
-        desc: 'Prepone definitions? Wrong! Before C99, you must prepone all the variables\x26rsquo; definitions before any statements. But after C99 was released, you can put a variable\x26rsquo;s definition in any place as long as before being used. I think this new feature is introduced by learning from C\x2b\x2b.\nThis makes programer write codes more convenient. But I used to insist the old style. I even teach my students that they should use the old style when I was a TA of the course Programming with C.',
+        desc: '前段时间换了家外企工作, 空闲时间比较多。 虽然我是做Java后端的，但是老外喜欢搞敏捷开发和全栈，所以也要写前端，既然是老外，那肯定是喜欢用R',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {

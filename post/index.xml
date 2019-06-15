@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 08 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 15 Jun 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>React入门-井字游戏实现与完善</title>
+      <link>http://zhengyhn.github.io/post/react/react-tic-tac-toe/</link>
+      <pubDate>Sat, 15 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/react/react-tic-tac-toe/</guid>
+      <description>前段时间换了家外企工作, 空闲时间比较多。 虽然我是做Java后端的，但是老外喜欢搞敏捷开发和全栈，所以也要写前端，既然是老外，那肯定是喜欢用R</description>
+    </item>
     
     <item>
       <title>阿里java开发者手册读书笔记</title>
@@ -581,10 +590,10 @@ This makes programer write codes more convenient. But I used to insist the old s
     
     <item>
       <title>Ruby-getting started</title>
-      <link>http://zhengyhn.github.io/post/2013-06-30-ruby-getting-started/</link>
+      <link>http://zhengyhn.github.io/post/ruby/2013-06-30-ruby-getting-started/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/2013-06-30-ruby-getting-started/</guid>
+      <guid>http://zhengyhn.github.io/post/ruby/2013-06-30-ruby-getting-started/</guid>
       <description>Running ruby Interactive In the past, I always tested some ruby statements with irb. Now I can test a small ruby program in the following way.
 [monkey@itlodge octopress]$ ruby str = &amp;quot;abc&amp;quot; puts str Ctrl+d abc  After hit ruby, it allows me to type as many code as possible.Finally, press Ctrl+d will end the input and it will evaluate the code.
 Programs When writing a script, we always use #!</description>
@@ -592,10 +601,10 @@ Programs When writing a script, we always use #!</description>
     
     <item>
       <title>Some basic Ruby</title>
-      <link>http://zhengyhn.github.io/post/2013-07-25-some-basic-ruby/</link>
+      <link>http://zhengyhn.github.io/post/ruby/2013-07-25-some-basic-ruby/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/2013-07-25-some-basic-ruby/</guid>
+      <guid>http://zhengyhn.github.io/post/ruby/2013-07-25-some-basic-ruby/</guid>
       <description>String and name When defining a function, the parentheses are not necessary.So this one
 def say_hello name &amp;quot;Hello &amp;quot; + name end puts say_hello &amp;quot;man&amp;quot;  is the same as this.
 def say_hello(name) &amp;quot;Hello &amp;quot; + name end puts(say_hello(&amp;quot;man&amp;quot;))  However, when there are more than one parameters, it will be difficult to know which argument goes with which method invocation.So it&amp;rsquo;s recommended using parentheses in all but the simplest cases.</description>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>React on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/categories/react/</link>
+    <description>Recent content in React on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 15 Jun 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://zhengyhn.github.io/categories/react/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>React入门-井字游戏实现与完善</title>
+      <link>http://zhengyhn.github.io/post/react/react-tic-tac-toe/</link>
+      <pubDate>Sat, 15 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/react/react-tic-tac-toe/</guid>
+      <description>前段时间换了家外企工作, 空闲时间比较多。 虽然我是做Java后端的，但是老外喜欢搞敏捷开发和全栈，所以也要写前端，既然是老外，那肯定是喜欢用R</description>
+    </item>
+    
+  </channel>
+</rss>
