@@ -174,4 +174,4 @@ board.push(<div className="board-row">)
   }
 ```
 
-整个实现就是这样的了！
+整个实现就是这样的了！忘了要把源码附上，在[这里](https://github.com/zhengyhn/react-practise/tree/master/tic-tac-toe)
