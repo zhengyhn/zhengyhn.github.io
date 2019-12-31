@@ -30,6 +30,33 @@
     </item>
     
     <item>
+      <title>JDK</title>
+      <link>http://zhengyhn.github.io/tags/jdk/</link>
+      <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/tags/jdk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>http://zhengyhn.github.io/tags/java/</link>
+      <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java8</title>
+      <link>http://zhengyhn.github.io/tags/java8/</link>
+      <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/tags/java8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Nodejs</title>
       <link>http://zhengyhn.github.io/tags/nodejs/</link>
       <pubDate>Mon, 31 Dec 2018 00:00:00 +0000</pubDate>
@@ -53,6 +80,15 @@
       <pubDate>Thu, 30 Mar 2017 22:50:49 +0800</pubDate>
       
       <guid>http://zhengyhn.github.io/tags/redis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>String</title>
+      <link>http://zhengyhn.github.io/tags/string/</link>
+      <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/tags/string/</guid>
       <description></description>
     </item>
     

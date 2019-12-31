@@ -25,7 +25,7 @@ It seems perfect, but it&amp;rsquo;s a pitfall of C&#43;&#43;. Consider the foll
 
 
 
-<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/cpp/2013-08-15-do-not-hide-inherited-names/" />
@@ -45,7 +45,8 @@ It seems perfect, but it&amp;rsquo;s a pitfall of C&#43;&#43;. Consider the foll
 It seems perfect, but it&rsquo;s a pitfall of C&#43;&#43;. Consider the following example.
 #include &lt;cstdio&gt; #include &lt;iostream&gt; class Person { public: explicit Person() { } ~Person() { } void sleep() const { printf(&quot;Person sleep\n&quot;); } void sleep(const int sec) const { printf(&quot;Person sleep %d s\n&quot;, sec); } private: Person(const Person&amp;); const Person&amp; operator=(const Person&amp;); }; class Student:public Person { public: explicit Student() { } ~Person() { } void sleep() const { printf(&quot;Student sleep\n&quot;); } private: Student(const Student&amp;); const Student&amp; operator=(const Student&amp;); }; int main(int argc, char **argv) { Student stu; stu." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/cpp/2013-08-15-do-not-hide-inherited-names/" /><meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
+<meta property="og:url" content="http://zhengyhn.github.io/post/cpp/2013-08-15-do-not-hide-inherited-names/" />
+<meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
 <meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
 
 <meta itemprop="name" content="Do not hide inherited names">

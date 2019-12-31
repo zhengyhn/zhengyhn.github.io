@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/cpp/2013-07-26-initialized-before-used/" />
@@ -43,7 +43,8 @@
 <meta property="og:description" content="For constructor In the constructor, the statements in the body are assignments, not initializations.
 #include &lt;iostream&gt; class Girl { public: Girl(std::string name, int age) { name_ = name; // These are assignments, not initilizations. age_ = age; } private: std::string name_; int age_; };  If you do this, the program will be very slow.When calling the constructor, the program will call the default construtors to initialize the members, and then enter the body of the constructor." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/cpp/2013-07-26-initialized-before-used/" /><meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
+<meta property="og:url" content="http://zhengyhn.github.io/post/cpp/2013-07-26-initialized-before-used/" />
+<meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
 <meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
 
 <meta itemprop="name" content="Initialized before used">

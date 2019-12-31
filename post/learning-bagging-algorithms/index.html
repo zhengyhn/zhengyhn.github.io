@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/learning-bagging-algorithms/" />
@@ -41,7 +41,8 @@
 <meta property="og:title" content="Learning Bagging Algorithms" />
 <meta property="og:description" content="import random def max_value_recursive(weights, values, max_weight, i): if len(weights) == i: return 0 if max_weight - weights[i] &lt;= 0: return 0 value_not_pick = max_value_recursive(weights, values, max_weight, i &#43; 1) value_pick = max_value_recursive(weights, values, max_weight - weights[i], i &#43; 1) return max(value_not_pick, values[i] &#43; value_pick) def max_value(weights, values, max_weight): return max_value_recursive(weights, values, max_weight, 0) def max_value_dp(weights, values, max_weight): dp = [[0 for i in range(max_weight)] for i in range(len(weights))] i = len(weights) - 1 for j in range(weights[i], max_weight): dp[i][j] = values[i] for i in range(len(weights) - 2, -1, -1): for j in range(weights[i], max_weight): dp[i][j] = max(dp[i &#43; 1][j], dp[i &#43; 1][j - weights[i]] &#43; values[i]) return dp[0][max_weight - 1] N = 25 W = 50 weights = [random." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/learning-bagging-algorithms/" /><meta property="article:published_time" content="2018-11-18T00:00:00&#43;00:00"/>
+<meta property="og:url" content="http://zhengyhn.github.io/post/learning-bagging-algorithms/" />
+<meta property="article:published_time" content="2018-11-18T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2018-11-18T00:00:00&#43;00:00"/>
 
 <meta itemprop="name" content="Learning Bagging Algorithms">

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/" />
@@ -44,6 +44,7 @@
 <meta property="og:description" content="Hank&#39;s blog" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://zhengyhn.github.io/" />
+
 <meta property="og:updated_time" content="2016-05-14T16:35:19&#43;08:00"/>
 
 <meta itemprop="name" content="Hank&#39;s Blog">
@@ -116,6 +117,51 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-08-11-postponing-definitions-instead-of-preponing/">Postponing definitions instead of preponing</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 605 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Prepone definitions? Wrong! Before C99, you must prepone all the variables&rsquo; definitions before any statements. But after C99 was released, you can put a variable&rsquo;s definition in any place as long as before being used. I think this new feature is introduced by learning from C++.
+This makes programer write codes more convenient. But I used to insist the old style. I even teach my students that they should use the old style when I was a TA of the course Programming with C.
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/2013-08-11-postponing-definitions-instead-of-preponing/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/ruby/2013-06-30-ruby-getting-started/">Ruby-getting started</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 426 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Running ruby Interactive In the past, I always tested some ruby statements with irb. Now I can test a small ruby program in the following way.
+[monkey@itlodge octopress]$ ruby str = &quot;abc&quot; puts str Ctrl+d abc  After hit ruby, it allows me to type as many code as possible.Finally, press Ctrl+d will end the input and it will evaluate the code.
+Programs When writing a script, we always use #!
+    </div>
+    <div class="read-more">
+      <a href="/post/ruby/2013-06-30-ruby-getting-started/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/ruby/2013-07-25-some-basic-ruby/">Some basic Ruby</a></h1>
@@ -290,48 +336,6 @@ Encapsulation is not invisibility.
     </div>
     <div class="read-more">
       <a href="/post/shell/basics/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/algorithm/kmp/">KMP算法-我的理解</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2013-04-24 </span>
-      
-        <span class="more-meta"> 约 2807 字 </span>
-        <span class="more-meta"> 预计阅读 6 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      动机 看了一本叫做《C/C++面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于是开始了KMP之旅！ 在网上看了好几篇中文文章，没一
-    </div>
-    <div class="read-more">
-      <a href="/post/algorithm/kmp/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/programmer_interview/">程序员面试宝典读书笔记</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2013-04-24 </span>
-      
-        <span class="more-meta"> 约 314 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      C/C++程序设计 浮点数的存储 有下面的代码： #include &lt;stdio.h&gt; int main(int argc, char *argv[]) { int a; float *b = (float *)&amp;a; *b = 13.0f; printf(&quot;%d\n&quot;, a); printf(&quot;%#x\n&quot;, a); return 0; } 最后的输出会是多少呢？ 答案是： 1095761920 0x41500000 涉及到IEE
-    </div>
-    <div class="read-more">
-      <a href="/post/programmer_interview/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

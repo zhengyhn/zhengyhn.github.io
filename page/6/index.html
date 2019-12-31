@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/" />
@@ -44,6 +44,7 @@
 <meta property="og:description" content="Hank&#39;s blog" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://zhengyhn.github.io/" />
+
 <meta property="og:updated_time" content="2016-05-14T16:35:19&#43;08:00"/>
 
 <meta itemprop="name" content="Hank&#39;s Blog">
@@ -116,6 +117,54 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/datastructure/2013-10-03-implement-a-binary-search-tree/">Implement a binary search tree</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 198 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      A binary search tree is very useful in solving the real world problems. The red-black tree is one kind of binary search tree. For more information about binary search tree, please visit the wikipedia.
+Here is the specification of my binary search tree.
+ BinarySearchTree(), Create an empty binary search tree.
+ BinarySearchTree(const T&amp; root_val), Create an binary search tree whose root node is constructed from root_val.
+ BinarySearchTree(const T values[], const size_t&amp; size), Create an binary search tree from an array values.
+    </div>
+    <div class="read-more">
+      <a href="/post/datastructure/2013-10-03-implement-a-binary-search-tree/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/datastructure/2013-09-21-implement-a-circular-linked-list/">Implement a circular linked list</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 135 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      A circular linked list is the same as a singular linked list except that there last node points to the first node.
+Here is the specification of my CiLinkedList.
+ CiLinkedList(), Create an empty CiLinkedList. CiLinkedList(const CiLinkedList&amp; list), Create a CiLinkedList from another CiLinkedList list. CiLinkedList(const T&amp; value), Create a CiLinkedList whose first element is value. CiLinkedList(const T values[], size_t size), Create a CiLinkedList from an array values of size size.
+    </div>
+    <div class="read-more">
+      <a href="/post/datastructure/2013-09-21-implement-a-circular-linked-list/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/datastructure/2013-09-25-implement-a-queue/">Implement a queue</a></h1>
@@ -297,51 +346,6 @@ Why do I care about my coding style so much? Because I am a virgo.
     </div>
     <div class="read-more">
       <a href="/post/cpp/2013-09-25-my-c-plus-plus-coding-style/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-08-11-postponing-definitions-instead-of-preponing/">Postponing definitions instead of preponing</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 605 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Prepone definitions? Wrong! Before C99, you must prepone all the variables&rsquo; definitions before any statements. But after C99 was released, you can put a variable&rsquo;s definition in any place as long as before being used. I think this new feature is introduced by learning from C++.
-This makes programer write codes more convenient. But I used to insist the old style. I even teach my students that they should use the old style when I was a TA of the course Programming with C.
-    </div>
-    <div class="read-more">
-      <a href="/post/cpp/2013-08-11-postponing-definitions-instead-of-preponing/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/ruby/2013-06-30-ruby-getting-started/">Ruby-getting started</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 426 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Running ruby Interactive In the past, I always tested some ruby statements with irb. Now I can test a small ruby program in the following way.
-[monkey@itlodge octopress]$ ruby str = &quot;abc&quot; puts str Ctrl+d abc  After hit ruby, it allows me to type as many code as possible.Finally, press Ctrl+d will end the input and it will evaluate the code.
-Programs When writing a script, we always use #!
-    </div>
-    <div class="read-more">
-      <a href="/post/ruby/2013-06-30-ruby-getting-started/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

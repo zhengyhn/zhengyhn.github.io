@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.52 with even 4.0.0" />
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/learning-substring-searching-algorithms/" />
@@ -41,7 +41,8 @@
 <meta property="og:title" content="Learning SubString Searching Algorithms" />
 <meta property="og:description" content="def substr_kmp(string, pattern): if len(string) == 0 or len(pattern) == 0: return -1 next_table = [-1 for i in range(0, len(pattern))] i = 0 j = -1 while i &lt; len(pattern) - 1: if j == -1 or pattern[i] == pattern[j]: i &#43;= 1 j &#43;= 1 next_table[i] = j else: j = next_table[j] print(next_table) i = 0 j = 0 while i &lt; len(string) and j &lt; len(pattern): if j == - 1 or string[i] == pattern[j]: i &#43;= 1 j &#43;= 1 else: j = next_table[j] print(i, j) if j == len(pattern): return i - j else: return -1 string = &#39;ababaababab&#39; pattern = &#39;ababab&#39; print(substr_kmp(string, pattern))  [-1, 0, 0, 1, 2, 3] 11 6 5 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zhengyhn.github.io/post/learning-substring-searching-algorithms/" /><meta property="article:published_time" content="2018-10-06T00:00:00&#43;00:00"/>
+<meta property="og:url" content="http://zhengyhn.github.io/post/learning-substring-searching-algorithms/" />
+<meta property="article:published_time" content="2018-10-06T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2018-10-06T00:00:00&#43;00:00"/>
 
 <meta itemprop="name" content="Learning SubString Searching Algorithms">

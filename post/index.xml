@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 15 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 30 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>初步学习JDK的String类源码</title>
+      <link>http://zhengyhn.github.io/post/java/jdk-string-source-code/</link>
+      <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/java/jdk-string-source-code/</guid>
+      <description>最近有空看了部分 String 类的源码，下面只挑重点部分记录一下。 为什么要用 final 修饰类 第一个比较特别的就是，String 类是用 final 修饰的，表明这个类不可被继</description>
+    </item>
     
     <item>
       <title>React入门-井字游戏实现与完善</title>
@@ -165,6 +174,15 @@ There is an algorithm call &amp;ldquo;Next Permutation&amp;rdquo;.</description>
       <pubDate>Tue, 28 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/learning-strongly-connected-component-algorithms/</guid>
+      <description>引子 图论看到有向图的强连通分量部分，感觉非常有用，前面的无向图连通分量，还不知道应用在什么地方，现在来看看寻找强连通分量的算法有什么应用。 社</description>
+    </item>
+    
+    <item>
+      <title>Learning Strongly Connected Component Algorithms</title>
+      <link>http://zhengyhn.github.io/post/strongly-connected-component/</link>
+      <pubDate>Tue, 28 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/strongly-connected-component/</guid>
       <description>引子 图论看到有向图的强连通分量部分，感觉非常有用，前面的无向图连通分量，还不知道应用在什么地方，现在来看看寻找强连通分量的算法有什么应用。 社</description>
     </item>
     

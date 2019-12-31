@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JDK on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/tags/jdk/</link>
+    <description>Recent content in JDK on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 30 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://zhengyhn.github.io/tags/jdk/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>初步学习JDK的String类源码</title>
+      <link>http://zhengyhn.github.io/post/java/jdk-string-source-code/</link>
+      <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/java/jdk-string-source-code/</guid>
+      <description>最近有空看了部分 String 类的源码，下面只挑重点部分记录一下。 为什么要用 final 修饰类 第一个比较特别的就是，String 类是用 final 修饰的，表明这个类不可被继</description>
+    </item>
+    
+  </channel>
+</rss>
