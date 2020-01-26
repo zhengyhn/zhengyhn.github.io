@@ -23,7 +23,7 @@ public final class String
     private final char value[];
 ```
 
-跟预期一样
+跟预期一样。这里 value 数组定义成 final，表明指向数组的引用一旦赋值，将不能再改变，但是改变了 value 数组在堆上内存的内容，String 的内容还是变了，但是由于它是 private 的，只要 String 的成员方法不修改它的内容，其他类是无法修改它的内容的，这就实现了 String 的不可变特性。​
 
 ### 继承了 Serializable, Comparable 和 CharSequence 接口
 
@@ -80,7 +80,7 @@ return ((beginIndex == 0) && (endIndex == value.length)) ? this
                 : new String(value, beginIndex, subLen);
 ```
 
-看到有一些边界检查，会抛出常见的 StringIndexOutOfBoundsException 异常，这里发现，原来每一个异常类都应该要加上 serialVersionUID，因为基类 Throwable 就实现了 Serializable，本意是希望 IO 过程中可以将异常出转成字节。
+看到有一些边界检查，会抛出常见的 StringIndexOutOfBoundsException 异常，这里发现，原来每一个异常类都应该要加上 serialVersionUID，因为基类 Throwable 就实现了 Serializable，本意是希望 IO 过程中可以将异常转成字节。
 
 ```
 public class Throwable implements Serializable {
