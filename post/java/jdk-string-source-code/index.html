@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-12-30T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-30T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="960">
+<meta itemprop="wordCount" content="1079">
 
 
 
@@ -132,8 +132,8 @@
         <div class="post-category">
             <a href="/categories/java/"> Java </a>
             </div>
-          <span class="more-meta"> 约 960 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
+          <span class="more-meta"> 约 1079 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -176,7 +176,7 @@
 <pre><code>    private final char value[];
 </code></pre>
 
-<p>跟预期一样</p>
+<p>跟预期一样。这里 value 数组定义成 final，表明指向数组的引用一旦赋值，将不能再改变，但是改变了 value 数组在堆上内存的内容，String 的内容还是变了，但是由于它是 private 的，只要 String 的成员方法不修改它的内容，其他类是无法修改它的内容的，这就实现了 String 的不可变特性。​</p>
 
 <h3 id="继承了-serializable-comparable-和-charsequence-接口">继承了 Serializable, Comparable 和 CharSequence 接口</h3>
 
@@ -229,7 +229,7 @@
                 : new String(value, beginIndex, subLen);
 </code></pre>
 
-<p>看到有一些边界检查，会抛出常见的 StringIndexOutOfBoundsException 异常，这里发现，原来每一个异常类都应该要加上 serialVersionUID，因为基类 Throwable 就实现了 Serializable，本意是希望 IO 过程中可以将异常出转成字节。</p>
+<p>看到有一些边界检查，会抛出常见的 StringIndexOutOfBoundsException 异常，这里发现，原来每一个异常类都应该要加上 serialVersionUID，因为基类 Throwable 就实现了 Serializable，本意是希望 IO 过程中可以将异常转成字节。</p>
 
 <pre><code>public class Throwable implements Serializable {
     /** use serialVersionUID from JDK 1.0.2 for interoperability */
@@ -300,7 +300,11 @@
           <a href="/tags/jdk/">JDK</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/java/jdk-enum-source-code/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">初步学习JDK的Enum类源码</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/react/react-tic-tac-toe/">
             <span class="next-text nav-default">React入门-井字游戏实现与完善</span>
             <span class="next-text nav-mobile">下一篇</span>
@@ -359,7 +363,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2019
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

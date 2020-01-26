@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 30 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>初步学习JDK的Enum类源码</title>
+      <link>http://zhengyhn.github.io/post/java/jdk-enum-source-code/</link>
+      <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/java/jdk-enum-source-code/</guid>
+      <description>最近有空看了 Enum 类的源码，下面只挑重点部分记录一下。 抽象类 所有 enum 类型自动继承自 Enum 类，由于 java 的单继承特性，也就使得 enum 类型不能继承，个人觉得这是缺</description>
+    </item>
     
     <item>
       <title>初步学习JDK的String类源码</title>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>初步学习JDK的Enum类源码 - Hank&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Hank" /><meta name="description" content="最近有空看了 Enum 类的源码，下面只挑重点部分记录一下。 抽象类 所有 enum 类型自动继承自 Enum 类，由于 java 的单继承特性，也就使得 enum 类型不能继承，个人觉得这是缺" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="http://zhengyhn.github.io/post/java/jdk-enum-source-code/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="初步学习JDK的Enum类源码" />
+<meta property="og:description" content="最近有空看了 Enum 类的源码，下面只挑重点部分记录一下。 抽象类 所有 enum 类型自动继承自 Enum 类，由于 java 的单继承特性，也就使得 enum 类型不能继承，个人觉得这是缺" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://zhengyhn.github.io/post/java/jdk-enum-source-code/" />
+<meta property="article:published_time" content="2020-01-25T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2020-01-25T00:00:00&#43;00:00"/>
+
+<meta itemprop="name" content="初步学习JDK的Enum类源码">
+<meta itemprop="description" content="最近有空看了 Enum 类的源码，下面只挑重点部分记录一下。 抽象类 所有 enum 类型自动继承自 Enum 类，由于 java 的单继承特性，也就使得 enum 类型不能继承，个人觉得这是缺">
+
+
+<meta itemprop="datePublished" content="2020-01-25T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-01-25T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1527">
+
+
+
+<meta itemprop="keywords" content="Java,Enum&#39;,JDK," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="初步学习JDK的Enum类源码"/>
+<meta name="twitter:description" content="最近有空看了 Enum 类的源码，下面只挑重点部分记录一下。 抽象类 所有 enum 类型自动继承自 Enum 类，由于 java 的单继承特性，也就使得 enum 类型不能继承，个人觉得这是缺"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Hank&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Hank&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">初步学习JDK的Enum类源码</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-01-25 </span>
+        <div class="post-category">
+            <a href="/categories/java/"> Java </a>
+            </div>
+          <span class="more-meta"> 约 1527 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#抽象类">抽象类</a></li>
+<li><a href="#核心成员为-name-和-ordinal">核心成员为 name 和 ordinal</a></li>
+<li><a href="#实现-comparable-接口">实现 Comparable 接口</a></li>
+<li><a href="#valueof-方法">valueOf 方法</a></li>
+<li><a href="#实现-serializable-接口">实现 Serializable 接口</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>最近有空看了 Enum 类的源码，下面只挑重点部分记录一下。</p>
+
+<h3 id="抽象类">抽象类</h3>
+
+<p>所有 enum 类型自动继承自 Enum 类，由于 java 的单继承特性，也就使得 enum
+类型不能继承，个人觉得这是缺点之一，平时开发中会有一些公共的代码无法通过继承来共享。</p>
+
+<h3 id="核心成员为-name-和-ordinal">核心成员为 name 和 ordinal</h3>
+
+<pre><code>private final String name;
+private final int ordinal;
+</code></pre>
+
+<p>name 是定义 enum 时的名字，ordinal 是位置，从 0 开始</p>
+
+<h3 id="实现-comparable-接口">实现 Comparable 接口</h3>
+
+<p>Enum 可比较，实现的 compareTo 方法如下：</p>
+
+<pre><code>   public final int compareTo(E o) {
+        Enum&lt;?&gt; other = (Enum&lt;?&gt;)o;
+        Enum&lt;E&gt; self = this;
+        if (self.getClass() != other.getClass() &amp;&amp; // optimization
+            self.getDeclaringClass() != other.getDeclaringClass())
+            throw new ClassCastException();
+        return self.ordinal - other.ordinal;
+    }
+</code></pre>
+
+<p>通过 ordinal 可以很方便的实现 compareTo, 直接使用 2 个 enum 的 ordinal 相减。</p>
+
+<h3 id="valueof-方法">valueOf 方法</h3>
+
+<p>valueOf 方法是传入一个 enum 的 name，返回对应的 enum 对象。猜测的实现方式应该是维护一个单例的 HashMap，里面包含 name 到 enum 对象的映射。</p>
+
+<pre><code>public static &lt;T extends Enum&lt;T&gt;&gt; T valueOf(Class&lt;T&gt; enumType, String name) {
+T result = enumType.enumConstantDirectory().get(name);
+</code></pre>
+
+<p>这个 HashMap 通过<code>enumType.enumConstantDirectory()</code>获得的，
+这个方法是<code>Class</code>类的方法。</p>
+
+<pre><code>Map&lt;String, T&gt; enumConstantDirectory() {
+        if (enumConstantDirectory == null) {
+            T[] universe = getEnumConstantsShared();
+            if (universe == null)
+                throw new IllegalArgumentException(
+                    getName() + &quot; is not an enum type&quot;);
+            Map&lt;String, T&gt; m = new HashMap&lt;&gt;(2 * universe.length);
+            for (T constant : universe)
+                m.put(((Enum&lt;?&gt;)constant).name(), constant);
+            enumConstantDirectory = m;
+        }
+        return enumConstantDirectory;
+    }
+private volatile transient Map&lt;String, T&gt; enumConstantDirectory = null;
+</code></pre>
+
+<p><code>enumConstantDirectory</code>定义为<code>volatile</code>为<code>transient</code>。在多线程情景下使用<code>volatile</code>能保证<code>enumConstantDirectory</code>读取和写入都是主内存而不是线程的工作内存。使用<code>transient</code>是在序列化时忽略该字段，因为这个字段其实只用于本地，不需要作为信息进行网络传输等 IO 操作。</p>
+
+<p>这里实现了一个懒加载，只有第一次调用 valueOf 的时候才构造这个 map.</p>
+
+<p>然而这里有一个原子性的问题，如果多个线程同时检测到<code>enumConstantDirectory</code>为 null，会创建多次 HashMap，但是最终主存上只会有一份，多创建的 HashMap 最后会被垃圾回收掉，这样也问题不大。</p>
+
+<h3 id="实现-serializable-接口">实现 Serializable 接口</h3>
+
+<p>这里面学到的东西比较多。Enum 实现了 Serializable 接口，说明它是可以被序列化的。它有一段很值得学习的代码:</p>
+
+<pre><code>/**
+ * prevent default deserialization
+ */
+private void readObject(ObjectInputStream in) throws IOException,
+    ClassNotFoundException {
+    throw new InvalidObjectException(&quot;can't deserialize enum&quot;);
+}
+
+private void readObjectNoData() throws ObjectStreamException {
+    throw new InvalidObjectException(&quot;can't deserialize enum&quot;);
+}
+</code></pre>
+
+<p>这里写了，它是用于禁用默认反序列化的。为什么要这样做呢？先从 Enum 是怎么做序列化和反序列化开始。</p>
+
+<p>我们知道，序列化是通过<code>ObjectOutputStream</code>的<code>writeObject</code>方法实现的。</p>
+
+<pre><code>public final void writeObject(Object obj) throws IOException {
+        if (enableOverride) {
+            writeObjectOverride(obj);
+            return;
+        }
+        try {
+            writeObject0(obj, false);
+        } catch (IOException ex) {
+            if (depth == 0) {
+                writeFatalException(ex);
+            }
+            throw ex;
+        }
+    }
+</code></pre>
+
+<p>发现它调用的是<code>writeObject0</code>方法。再看<code>writeObject0</code>方法,</p>
+
+<pre><code>if (obj instanceof String) {
+    writeString((String) obj, unshared);
+} else if (cl.isArray()) {
+    writeArray(obj, desc, unshared);
+} else if (obj instanceof Enum) {
+    writeEnum((Enum&lt;?&gt;) obj, desc, unshared);
+} else if (obj instanceof Serializable) {
+    writeOrdinaryObject(obj, desc, unshared);
+} else {
+    if (extendedDebugInfo) {
+        throw new NotSerializableException(
+            cl.getName() + &quot;\n&quot; + debugInfoStack.toString());
+    } else {
+        throw new NotSerializableException(cl.getName());
+    }
+}
+</code></pre>
+
+<p>它判断如果是 Enum 对象，就调用<code>writeEnum</code>方法。再看进去：</p>
+
+<pre><code>    private void writeEnum(Enum&lt;?&gt; en,
+                           ObjectStreamClass desc,
+                           boolean unshared)
+        throws IOException
+    {
+        bout.writeByte(TC_ENUM);
+        ObjectStreamClass sdesc = desc.getSuperDesc();
+        writeClassDesc((sdesc.forClass() == Enum.class) ? desc : sdesc, false);
+        handles.assign(unshared ? null : en);
+        writeString(en.name(), false);
+</code></pre>
+
+<p>核心就在这里，原来 Enum 对象是先把 TC_ENUM 魔法数字，再把它的类描述和 name 写进去就行了。</p>
+
+<p>反序列化是通过<code>ObjectInputStream</code>的<code>readObject</code>方法实现的。
+一路看进去，核心是在<code>readEnum</code>方法里面：</p>
+
+<pre><code>String name = readString(false);
+Enum&lt;?&gt; result = null;
+Class&lt;?&gt; cl = desc.forClass();
+if (cl != null) {
+    try {
+        @SuppressWarnings(&quot;unchecked&quot;)
+        Enum&lt;?&gt; en = Enum.valueOf((Class)cl, name);
+        result = en;
+    } catch (IllegalArgumentException ex) {
+        throw (IOException) new InvalidObjectException(
+            &quot;enum constant &quot; + name + &quot; does not exist in &quot; +
+            cl).initCause(ex);
+    }
+    if (!unshared) {
+        handles.setObject(enumHandle, result);
+    }
+}
+</code></pre>
+
+<p>先取出来 name 和 class，再通过<code>Enum.valueOf</code>获得 Enum 对象。</p>
+
+<p>可以看到，Enum 不会使用默认的对象的反序列化方法进行反序列化，而是有自己的实现，那么，为什么还要禁用对象的默认反序列化方法呢？原因是 Enum 是要确保单例，如果网络传输过来一段被黑客篡改过的字节，把 TC_ENUM 魔法数字改成 TC_OBJECT，这样，反序列化就会调用<code>readOrdinaryObject</code>，这里面会判断，如果有重写<code>readObject</code>方法，会调用该方法，由于我们重写了这个方法并抛了一个异常，就避免了这种攻击的情况发生。同样的，如果只有类信息而没有数据，会检查有没有重写<code>readObjectNoData</code>, 如果有就调用，这样也避免了攻击。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Hank</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-01-25
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.jpg">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">Java</a>
+          <a href="/tags/enum/">Enum&#39;</a>
+          <a href="/tags/jdk/">JDK</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/java/jdk-string-source-code/">
+            <span class="next-text nav-default">初步学习JDK的String类源码</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2020-01-25 00:00:00 \x2b0000 UTC',
+        title: '初步学习JDK的Enum类源码',
+        link: decodeURI(location.href),
+        desc: '最近有空看了 Enum 类的源码，下面只挑重点部分记录一下。 抽象类 所有 enum 类型自动继承自 Enum 类，由于 java 的单继承特性，也就使得 enum 类型不能继承，个人觉得这是缺',
+        owner: 'zhengyhn',
+        repo: 'zhengyhn.github.io',
+        oauth: {
+          client_id: '3906b3202777c482f061',
+          client_secret: 'fcbbda8eb9ee72273744d940ebeaab90486c8e4b'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:yuanhang.zheng@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/zhengyhn" class="iconfont icon-github" title="github"></a>
+  <a href="http://zhengyhn.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Hank</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script><script></script><script src="/lib/flowchartDiagrams/raphael-2.2.7.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+    <script src="/lib/flowchartDiagrams/flowchart-1.8.0.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script><script></script><script src="/lib/js-sequence-diagrams/webfontloader-1.6.28.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/snap.svg-0.5.1.min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
+    <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

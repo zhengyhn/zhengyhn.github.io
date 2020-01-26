@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://zhengyhn.github.io/" />
 
-<meta property="og:updated_time" content="2018-10-05T00:00:00&#43;00:00"/>
+<meta property="og:updated_time" content="2018-10-06T00:00:00&#43;00:00"/>
 
 <meta itemprop="name" content="Hank&#39;s Blog">
 <meta itemprop="description" content="Hank&#39;s blog">
@@ -117,6 +117,27 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/learning-substring-searching-algorithms/">Learning SubString Searching Algorithms</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-10-06 </span>
+      
+        <span class="more-meta"> 约 118 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      def substr_kmp(string, pattern): if len(string) == 0 or len(pattern) == 0: return -1 next_table = [-1 for i in range(0, len(pattern))] i = 0 j = -1 while i &lt; len(pattern) - 1: if j == -1 or pattern[i] == pattern[j]: i += 1 j += 1 next_table[i] = j else: j = next_table[j] print(next_table) i = 0 j = 0 while i &lt; len(string) and j &lt; len(pattern): if j == - 1 or string[i] == pattern[j]: i += 1 j += 1 else: j = next_table[j] print(i, j) if j == len(pattern): return i - j else: return -1 string = 'ababaababab' pattern = 'ababab' print(substr_kmp(string, pattern))  [-1, 0, 0, 1, 2, 3] 11 6 5 
+    </div>
+    <div class="read-more">
+      <a href="/post/learning-substring-searching-algorithms/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/leftist-trees-implementation-and-application/">Leftist tree&#39;s implementation and application</a></h1>
@@ -306,27 +327,6 @@
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/learning-topological-sort/">Learning Topological Sort</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-08-26 </span>
-      
-        <span class="more-meta"> 约 1431 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      引子 拓扑排序是以前学图论的时候学到的，但是当时太年轻，不了解这个算法的应用。现在终于知道，它在一些任务依赖方法应用广泛，比如编译系统，各个模
-    </div>
-    <div class="read-more">
-      <a href="/post/learning-topological-sort/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -371,7 +371,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2019
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

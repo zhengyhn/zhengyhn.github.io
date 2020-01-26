@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://zhengyhn.github.io/" />
 
-<meta property="og:updated_time" content="2019-12-30T00:00:00&#43;00:00"/>
+<meta property="og:updated_time" content="2020-01-25T00:00:00&#43;00:00"/>
 
 <meta itemprop="name" content="Hank&#39;s Blog">
 <meta itemprop="description" content="Hank&#39;s blog">
@@ -119,14 +119,37 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/java/jdk-enum-source-code/">初步学习JDK的Enum类源码</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-01-25 </span>
+      <div class="post-category">
+          <a href="/categories/java/"> Java </a>
+          </div>
+        <span class="more-meta"> 约 1527 字 </span>
+        <span class="more-meta"> 预计阅读 4 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      最近有空看了 Enum 类的源码，下面只挑重点部分记录一下。 抽象类 所有 enum 类型自动继承自 Enum 类，由于 java 的单继承特性，也就使得 enum 类型不能继承，个人觉得这是缺
+    </div>
+    <div class="read-more">
+      <a href="/post/java/jdk-enum-source-code/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/java/jdk-string-source-code/">初步学习JDK的String类源码</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2019-12-30 </span>
       <div class="post-category">
           <a href="/categories/java/"> Java </a>
           </div>
-        <span class="more-meta"> 约 960 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span class="more-meta"> 约 1079 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
     </div>
   </header>
   
@@ -320,27 +343,6 @@ There is an algorithm call &ldquo;Next Permutation&rdquo;.
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/learning-substring-searching-algorithms/">Learning SubString Searching Algorithms</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-10-06 </span>
-      
-        <span class="more-meta"> 约 118 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      def substr_kmp(string, pattern): if len(string) == 0 or len(pattern) == 0: return -1 next_table = [-1 for i in range(0, len(pattern))] i = 0 j = -1 while i &lt; len(pattern) - 1: if j == -1 or pattern[i] == pattern[j]: i += 1 j += 1 next_table[i] = j else: j = next_table[j] print(next_table) i = 0 j = 0 while i &lt; len(string) and j &lt; len(pattern): if j == - 1 or string[i] == pattern[j]: i += 1 j += 1 else: j = next_table[j] print(i, j) if j == len(pattern): return i - j else: return -1 string = 'ababaababab' pattern = 'ababab' print(substr_kmp(string, pattern))  [-1, 0, 0, 1, 2, 3] 11 6 5 
-    </div>
-    <div class="read-more">
-      <a href="/post/learning-substring-searching-algorithms/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -382,7 +384,7 @@ There is an algorithm call &ldquo;Next Permutation&rdquo;.
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2019
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
