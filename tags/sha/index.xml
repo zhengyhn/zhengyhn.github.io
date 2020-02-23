@@ -17,7 +17,7 @@
       <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/java/implement-sha1/</guid>
-      <description>由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 rfc3174 算法的文档在RFC3174。这一份 standard 里面定义了</description>
+      <description>由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 算法的文档在RFC3174。这一份 standard 里面定义了很</description>
     </item>
     
   </channel>

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 rfc3174 算法的文档在RFC3174。这一份 standard 里面定义了" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 算法的文档在RFC3174。这一份 standard 里面定义了很" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
@@ -39,26 +39,26 @@
 
 
 <meta property="og:title" content="实现一下SHA1算法" />
-<meta property="og:description" content="由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 rfc3174 算法的文档在RFC3174。这一份 standard 里面定义了" />
+<meta property="og:description" content="由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 算法的文档在RFC3174。这一份 standard 里面定义了很" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/java/implement-sha1/" />
 <meta property="article:published_time" content="2020-02-23T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2020-02-23T00:00:00&#43;00:00"/>
 
 <meta itemprop="name" content="实现一下SHA1算法">
-<meta itemprop="description" content="由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 rfc3174 算法的文档在RFC3174。这一份 standard 里面定义了">
+<meta itemprop="description" content="由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 算法的文档在RFC3174。这一份 standard 里面定义了很">
 
 
 <meta itemprop="datePublished" content="2020-02-23T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-23T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1890">
+<meta itemprop="wordCount" content="1889">
 
 
 
 <meta itemprop="keywords" content="Java,SHA1,SHA,Security," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="实现一下SHA1算法"/>
-<meta name="twitter:description" content="由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 rfc3174 算法的文档在RFC3174。这一份 standard 里面定义了"/>
+<meta name="twitter:description" content="由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 算法的文档在RFC3174。这一份 standard 里面定义了很"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -132,7 +132,7 @@
         <div class="post-category">
             <a href="/categories/java/"> Java </a>
             </div>
-          <span class="more-meta"> 约 1890 字 </span>
+          <span class="more-meta"> 约 1889 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -147,12 +147,9 @@
 <ul>
 <li>
 <ul>
-<li><a href="#rfc3174">rfc3174</a>
-<ul>
 <li><a href="#输入内容长度限制和输出内容的长度">输入内容长度限制和输出内容的长度</a></li>
 <li><a href="#输入和输出">输入和输出</a></li>
 <li><a href="#padding-算法">Padding 算法</a></li>
-</ul></li>
 <li><a href="#处理算法">处理算法</a></li>
 <li><a href="#加到-gui-工具">加到 GUI 工具</a></li>
 <li><a href="#源码">源码</a></li>
@@ -168,18 +165,16 @@
 
 <p>由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。</p>
 
-<h3 id="rfc3174">rfc3174</h3>
-
 <p>算法的文档在<a href="https://tools.ietf.org/html/rfc3174">RFC3174</a>。这一份 standard 里面定义了很多规范，我们一个一个看。</p>
 
-<h4 id="输入内容长度限制和输出内容的长度">输入内容长度限制和输出内容的长度</h4>
+<h3 id="输入内容长度限制和输出内容的长度">输入内容长度限制和输出内容的长度</h3>
 
 <pre><code>When a message of any length &lt; 2^64 bits is input, the SHA-1 produces a 160-bit output called a message digest.
 </code></pre>
 
 <p>输入的内容转成二进制之后，长度必须小于 2^64 位。由于这是一个 Hash 算法，输出的长度是固定，SHA1 的输出长度是 160 位的二进制。</p>
 
-<h4 id="输入和输出">输入和输出</h4>
+<h3 id="输入和输出">输入和输出</h3>
 
 <p>对于使用方，我们一般是输入一段字符串给 SHA1，结果是得到一串固定长度的十六进制数字组成的字符串。
 由于输入的字符串是带字符编码的，所以我们需要先根据编码转成字节数组，再交给 SHA1 处理。
@@ -199,7 +194,7 @@ public String digest(String text) {
 
 </code></pre>
 
-<h4 id="padding-算法">Padding 算法</h4>
+<h3 id="padding-算法">Padding 算法</h3>
 
 <p>SHA1 算法中 512 位称为一个 block，padding 算法就是为了将输入的数据补全为 512 位的 n 倍。</p>
 
@@ -482,7 +477,7 @@ private int key(int t) {
         id: '2020-02-23 00:00:00 \x2b0000 UTC',
         title: '实现一下SHA1算法',
         link: decodeURI(location.href),
-        desc: '由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 rfc3174 算法的文档在RFC3174。这一份 standard 里面定义了',
+        desc: '由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 算法的文档在RFC3174。这一份 standard 里面定义了很',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
