@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-01-25T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-01-25T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1527">
+<meta itemprop="wordCount" content="1557">
 
 
 
@@ -132,7 +132,7 @@
         <div class="post-category">
             <a href="/categories/java/"> Java </a>
             </div>
-          <span class="more-meta"> 约 1527 字 </span>
+          <span class="more-meta"> 约 1557 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -204,26 +204,30 @@ T result = enumType.enumConstantDirectory().get(name);
 这个方法是<code>Class</code>类的方法。</p>
 
 <pre><code>Map&lt;String, T&gt; enumConstantDirectory() {
-        if (enumConstantDirectory == null) {
-            T[] universe = getEnumConstantsShared();
-            if (universe == null)
-                throw new IllegalArgumentException(
-                    getName() + &quot; is not an enum type&quot;);
-            Map&lt;String, T&gt; m = new HashMap&lt;&gt;(2 * universe.length);
-            for (T constant : universe)
-                m.put(((Enum&lt;?&gt;)constant).name(), constant);
-            enumConstantDirectory = m;
-        }
-        return enumConstantDirectory;
+    if (enumConstantDirectory == null) {
+        T[] universe = getEnumConstantsShared();
+        if (universe == null)
+            throw new IllegalArgumentException(
+                getName() + &quot; is not an enum type&quot;);
+        Map&lt;String, T&gt; m = new HashMap&lt;&gt;(2 * universe.length);
+        for (T constant : universe)
+            m.put(((Enum&lt;?&gt;)constant).name(), constant);
+        enumConstantDirectory = m;
     }
+    return enumConstantDirectory;
+}
 private volatile transient Map&lt;String, T&gt; enumConstantDirectory = null;
 </code></pre>
 
-<p><code>enumConstantDirectory</code>定义为<code>volatile</code>为<code>transient</code>。在多线程情景下使用<code>volatile</code>能保证<code>enumConstantDirectory</code>读取和写入都是主内存而不是线程的工作内存。使用<code>transient</code>是在序列化时忽略该字段，因为这个字段其实只用于本地，不需要作为信息进行网络传输等 IO 操作。</p>
+<p><code>enumConstantDirectory</code>定义为<code>volatile</code>和<code>transient</code>。</p>
+
+<p>在多线程情景下使用<code>volatile</code>能保证<code>enumConstantDirectory</code>读取和写入都是主内存而不是线程的工作内存。</p>
+
+<p>使用<code>transient</code>是在序列化时忽略该字段，因为这个字段其实只用于本地，不需要作为信息进行网络传输等 IO 操作。</p>
 
 <p>这里实现了一个懒加载，只有第一次调用 valueOf 的时候才构造这个 map.</p>
 
-<p>然而这里有一个原子性的问题，如果多个线程同时检测到<code>enumConstantDirectory</code>为 null，会创建多次 HashMap，但是最终主存上只会有一份，多创建的 HashMap 最后会被垃圾回收掉，这样也问题不大。</p>
+<p>然而这里有一个原子性的问题，如果多个线程同时检测到<code>enumConstantDirectory</code>为 null，会创建多个 HashMap，但是最终主存上只会有一份，多创建的 HashMap 最后会被垃圾回收掉，这样也问题不大。</p>
 
 <h3 id="实现-serializable-接口">实现 Serializable 接口</h3>
 
@@ -247,19 +251,19 @@ private void readObjectNoData() throws ObjectStreamException {
 <p>我们知道，序列化是通过<code>ObjectOutputStream</code>的<code>writeObject</code>方法实现的。</p>
 
 <pre><code>public final void writeObject(Object obj) throws IOException {
-        if (enableOverride) {
-            writeObjectOverride(obj);
-            return;
-        }
-        try {
-            writeObject0(obj, false);
-        } catch (IOException ex) {
-            if (depth == 0) {
-                writeFatalException(ex);
-            }
-            throw ex;
-        }
+    if (enableOverride) {
+        writeObjectOverride(obj);
+        return;
     }
+    try {
+        writeObject0(obj, false);
+    } catch (IOException ex) {
+        if (depth == 0) {
+            writeFatalException(ex);
+        }
+        throw ex;
+    }
+}
 </code></pre>
 
 <p>发现它调用的是<code>writeObject0</code>方法。再看<code>writeObject0</code>方法,</p>
@@ -284,19 +288,21 @@ private void readObjectNoData() throws ObjectStreamException {
 
 <p>它判断如果是 Enum 对象，就调用<code>writeEnum</code>方法。再看进去：</p>
 
-<pre><code>    private void writeEnum(Enum&lt;?&gt; en,
-                           ObjectStreamClass desc,
-                           boolean unshared)
-        throws IOException
-    {
-        bout.writeByte(TC_ENUM);
-        ObjectStreamClass sdesc = desc.getSuperDesc();
-        writeClassDesc((sdesc.forClass() == Enum.class) ? desc : sdesc, false);
-        handles.assign(unshared ? null : en);
-        writeString(en.name(), false);
+<pre><code>private void writeEnum(Enum&lt;?&gt; en,
+                       ObjectStreamClass desc,
+                       boolean unshared)
+    throws IOException
+{
+    bout.writeByte(TC_ENUM);
+    ObjectStreamClass sdesc = desc.getSuperDesc();
+    writeClassDesc((sdesc.forClass() == Enum.class) ? desc : sdesc, false);
+    handles.assign(unshared ? null : en);
+    writeString(en.name(), false);
+    ...
+}
 </code></pre>
 
-<p>核心就在这里，原来 Enum 对象是先把 TC_ENUM 魔法数字，再把它的类描述和 name 写进去就行了。</p>
+<p>核心就在这里，原来序列化 Enum 对象是先写 TC_ENUM 魔法数字，再把它的类描述和 name 写进去就行了。</p>
 
 <p>反序列化是通过<code>ObjectInputStream</code>的<code>readObject</code>方法实现的。
 一路看进去，核心是在<code>readEnum</code>方法里面：</p>
@@ -322,7 +328,13 @@ if (cl != null) {
 
 <p>先取出来 name 和 class，再通过<code>Enum.valueOf</code>获得 Enum 对象。</p>
 
-<p>可以看到，Enum 不会使用默认的对象的反序列化方法进行反序列化，而是有自己的实现，那么，为什么还要禁用对象的默认反序列化方法呢？原因是 Enum 是要确保单例，如果网络传输过来一段被黑客篡改过的字节，把 TC_ENUM 魔法数字改成 TC_OBJECT，这样，反序列化就会调用<code>readOrdinaryObject</code>，这里面会判断，如果有重写<code>readObject</code>方法，会调用该方法，由于我们重写了这个方法并抛了一个异常，就避免了这种攻击的情况发生。同样的，如果只有类信息而没有数据，会检查有没有重写<code>readObjectNoData</code>, 如果有就调用，这样也避免了攻击。</p>
+<p>可以看到，Enum 不会使用默认的对象的反序列化方法进行反序列化，而是有自己的实现，那么，为什么还要禁用对象的默认反序列化方法呢？</p>
+
+<p>原因是 Enum 是要确保单例的，如果网络传输过来一段被黑客篡改过的字节，把 TC_ENUM 魔法数字改成 TC_OBJECT，这样，反序列化就会调用<code>readOrdinaryObject</code>，这样每次都会 new 一个 Enum 对象，无法保证单例。</p>
+
+<p>反序列化这里面会判断，如果有重写<code>readObject</code>方法，会调用该方法，所以我们重写了这个方法并抛了一个异常，就避免了这种攻击的情况发生。</p>
+
+<p>同样的，如果只有类信息而没有数据，会检查有没有重写<code>readObjectNoData</code>, 如果有就调用，这样也避免了攻击。</p>
 
     </div>
 
@@ -365,7 +377,11 @@ if (cl != null) {
           <a href="/tags/jdk/">JDK</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/java/implement-sha1/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">实现一下SHA1算法</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/java/jdk-string-source-code/">
             <span class="next-text nav-default">初步学习JDK的String类源码</span>
             <span class="next-text nav-mobile">下一篇</span>

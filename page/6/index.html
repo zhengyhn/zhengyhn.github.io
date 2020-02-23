@@ -119,6 +119,29 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-08-15-do-not-hide-inherited-names/">Do not hide inherited names</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 388 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      In inheritance, there are some rules defined by C++, one of which is that the virables or the functions in the base class will be hidden if there are virables and functions with the same name.
+It seems perfect, but it&rsquo;s a pitfall of C++. Consider the following example.
+#include &lt;cstdio&gt; #include &lt;iostream&gt; class Person { public: explicit Person() { } ~Person() { } void sleep() const { printf(&quot;Person sleep\n&quot;); } void sleep(const int sec) const { printf(&quot;Person sleep %d s\n&quot;, sec); } private: Person(const Person&amp;); const Person&amp; operator=(const Person&amp;); }; class Student:public Person { public: explicit Student() { } ~Person() { } void sleep() const { printf(&quot;Student sleep\n&quot;); } private: Student(const Student&amp;); const Student&amp; operator=(const Student&amp;); }; int main(int argc, char **argv) { Student stu; stu.
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/2013-08-15-do-not-hide-inherited-names/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/datastructure/2013-09-21-implement-a-bidirectional-linked-list/">Implement a bidirectional linked list</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2016-05-14 </span>
@@ -322,30 +345,6 @@ First pass:
     </div>
     <div class="read-more">
       <a href="/post/cpp/2013-07-26-initialized-before-used/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-07-23-more-consts-enums-inlines-and-less-defines/">More consts enums inlines and less #defines</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 663 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      This is an old topic.
-For constants Consider a macro below.
-#define PI 3.14  There are several drawbacks when using a macro.
- It&rsquo;s hard to debug.As we all know, the macros are resolved by the preprocessor and the compiler know nothing about them.When you get an error when compiling the program, the error message may refer to 3.14 but not PI because PI is not in the symbol table.
-    </div>
-    <div class="read-more">
-      <a href="/post/cpp/2013-07-23-more-consts-enums-inlines-and-less-defines/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
