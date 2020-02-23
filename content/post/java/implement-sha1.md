@@ -7,11 +7,9 @@ categories: ['Java']
 
 由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。
 
-### rfc3174
-
 算法的文档在[RFC3174](https://tools.ietf.org/html/rfc3174)。这一份 standard 里面定义了很多规范，我们一个一个看。
 
-#### 输入内容长度限制和输出内容的长度
+### 输入内容长度限制和输出内容的长度
 
 ```
 When a message of any length < 2^64 bits is input, the SHA-1 produces a 160-bit output called a message digest.
@@ -19,7 +17,7 @@ When a message of any length < 2^64 bits is input, the SHA-1 produces a 160-bit 
 
 输入的内容转成二进制之后，长度必须小于 2^64 位。由于这是一个 Hash 算法，输出的长度是固定，SHA1 的输出长度是 160 位的二进制。
 
-#### 输入和输出
+### 输入和输出
 
 对于使用方，我们一般是输入一段字符串给 SHA1，结果是得到一串固定长度的十六进制数字组成的字符串。
 由于输入的字符串是带字符编码的，所以我们需要先根据编码转成字节数组，再交给 SHA1 处理。
@@ -40,7 +38,7 @@ public String digest(String text) {
 
 ```
 
-#### Padding 算法
+### Padding 算法
 
 SHA1 算法中 512 位称为一个 block，padding 算法就是为了将输入的数据补全为 512 位的 n 倍。
 
