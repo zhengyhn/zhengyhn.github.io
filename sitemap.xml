@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhengyhn.github.io/post/math/trigonometric_function_sum_difference_to_product/</loc>
+    <lastmod>2020-02-29T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://zhengyhn.github.io/post/java/implement-sha1/</loc>
     <lastmod>2020-02-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -31,7 +38,7 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/alibaba-java-guide-note/</loc>
+    <loc>http://zhengyhn.github.io/post/java/alibaba-java-guide-note/</loc>
     <lastmod>2019-04-08T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -367,56 +374,56 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/datastructure/2013-09-21-implement-a-bidirectional-linked-list/</loc>
+    <loc>http://zhengyhn.github.io/post/algorithm/2013-09-21-implement-a-bidirectional-linked-list/</loc>
     <lastmod>2016-05-14T16:35:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/datastructure/2013-10-03-implement-a-binary-search-tree/</loc>
+    <loc>http://zhengyhn.github.io/post/algorithm/2013-10-03-implement-a-binary-search-tree/</loc>
     <lastmod>2016-05-14T16:35:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/datastructure/2013-09-21-implement-a-circular-linked-list/</loc>
+    <loc>http://zhengyhn.github.io/post/algorithm/2013-09-21-implement-a-circular-linked-list/</loc>
     <lastmod>2016-05-14T16:35:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/datastructure/2013-09-25-implement-a-queue/</loc>
+    <loc>http://zhengyhn.github.io/post/algorithm/2013-09-25-implement-a-queue/</loc>
     <lastmod>2016-05-14T16:35:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/datastructure/2013-09-27-implement-a-queue-using-two-stacks/</loc>
+    <loc>http://zhengyhn.github.io/post/algorithm/2013-09-27-implement-a-queue-using-two-stacks/</loc>
     <lastmod>2016-05-14T16:35:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/datastructure/2013-09-12-implement-a-singular-linkedlist/</loc>
+    <loc>http://zhengyhn.github.io/post/algorithm/2013-09-12-implement-a-singular-linkedlist/</loc>
     <lastmod>2016-05-14T16:35:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/datastructure/2013-09-26-implement-a-stack/</loc>
+    <loc>http://zhengyhn.github.io/post/algorithm/2013-09-26-implement-a-stack/</loc>
     <lastmod>2016-05-14T16:35:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/datastructure/2013-09-26-implement-the-sorting-algorithms/</loc>
+    <loc>http://zhengyhn.github.io/post/algorithm/2013-09-26-implement-the-sorting-algorithms/</loc>
     <lastmod>2016-05-14T16:35:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -486,14 +493,14 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/elisp/data_type/</loc>
+    <loc>http://zhengyhn.github.io/post/misc/elisp_data_type/</loc>
     <lastmod>2013-08-13T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/elisp/arithmetic/</loc>
+    <loc>http://zhengyhn.github.io/post/misc/elisp_arithmetic/</loc>
     <lastmod>2013-08-13T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -773,14 +780,14 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/gtk/base/</loc>
+    <loc>http://zhengyhn.github.io/post/misc/gtk_base/</loc>
     <lastmod>2013-02-22T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/gtk/intro/</loc>
+    <loc>http://zhengyhn.github.io/post/misc/gtk_intro/</loc>
     <lastmod>2013-02-21T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -858,7 +865,7 @@
   
   <url>
     <loc>http://zhengyhn.github.io/</loc>
-    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-29T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -892,6 +899,20 @@
   </url>
   
   <url>
+    <loc>http://zhengyhn.github.io/tags/math/</loc>
+    <lastmod>2020-02-29T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/categories/math/</loc>
+    <lastmod>2020-02-29T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://zhengyhn.github.io/tags/nodejs/</loc>
     <lastmod>2018-12-31T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -907,7 +928,7 @@
   
   <url>
     <loc>http://zhengyhn.github.io/post/</loc>
-    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-29T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>

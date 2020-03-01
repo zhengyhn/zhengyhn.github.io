@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Math on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/categories/math/</link>
+    <description>Recent content in Math on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 29 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://zhengyhn.github.io/categories/math/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>三角函数和差化积公式推导</title>
+      <link>http://zhengyhn.github.io/post/math/trigonometric_function_sum_difference_to_product/</link>
+      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/math/trigonometric_function_sum_difference_to_product/</guid>
+      <description>一道函数单调性问题 遇到一道题: 判断 $y = cosx$在区间$(0, \pi)$上的单调性。 通过几何画图是很快看出来的，关键是怎么证明呢? 证明过程是</description>
+    </item>
+    
+  </channel>
+</rss>

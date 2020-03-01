@@ -13,10 +13,10 @@
     
     <item>
       <title>阿里java开发者手册读书笔记</title>
-      <link>http://zhengyhn.github.io/post/alibaba-java-guide-note/</link>
+      <link>http://zhengyhn.github.io/post/java/alibaba-java-guide-note/</link>
       <pubDate>Mon, 08 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/alibaba-java-guide-note/</guid>
+      <guid>http://zhengyhn.github.io/post/java/alibaba-java-guide-note/</guid>
       <description>POJO 类中布尔类型的变量，都不要加 is 前缀，否则部分框架解析会引起序列化错误 心得：这个之前我写的代码的确会下意识地就用isXXX，现在遵守这个规范</description>
     </item>
     

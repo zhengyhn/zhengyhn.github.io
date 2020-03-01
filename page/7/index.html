@@ -119,6 +119,28 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-07-26-initialized-before-used/">Initialized before used</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 414 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      For constructor In the constructor, the statements in the body are assignments, not initializations.
+#include &lt;iostream&gt; class Girl { public: Girl(std::string name, int age) { name_ = name; // These are assignments, not initilizations. age_ = age; } private: std::string name_; int age_; };  If you do this, the program will be very slow.When calling the constructor, the program will call the default construtors to initialize the members, and then enter the body of the constructor.
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/2013-07-26-initialized-before-used/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-07-23-more-consts-enums-inlines-and-less-defines/">More consts enums inlines and less #defines</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2016-05-14 </span>
@@ -305,7 +327,7 @@ Encapsulation is not invisibility.
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/elisp/data_type/">elisp笔记：introduction</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/misc/elisp_data_type/">elisp笔记：introduction</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2013-08-13 </span>
       
@@ -319,28 +341,7 @@ Encapsulation is not invisibility.
       lisp历史 原来lisp是list processing language,1950s后期推出，主要为了研究人工智能。 数据类型 概述 每个对象至少属于一种类型 对于打印
     </div>
     <div class="read-more">
-      <a href="/post/elisp/data_type/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/elisp/arithmetic/">elisp笔记：运算</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2013-08-13 </span>
-      
-        <span class="more-meta"> 约 295 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      声明：此文章为学习xahlee 的elisp教程 而写的笔记。 数学计算基础 运算符也是函数 和其它函数式语言一样，elisp中，加减乘除也是一个函数
-    </div>
-    <div class="read-more">
-      <a href="/post/elisp/arithmetic/" class="read-more-link">阅读更多</a>
+      <a href="/post/misc/elisp_data_type/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

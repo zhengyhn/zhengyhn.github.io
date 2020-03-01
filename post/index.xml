@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 23 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>三角函数和差化积公式推导</title>
+      <link>http://zhengyhn.github.io/post/math/trigonometric_function_sum_difference_to_product/</link>
+      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/math/trigonometric_function_sum_difference_to_product/</guid>
+      <description>一道函数单调性问题 遇到一道题: 判断 $y = cosx$在区间$(0, \pi)$上的单调性。 通过几何画图是很快看出来的，关键是怎么证明呢? 证明过程是</description>
+    </item>
     
     <item>
       <title>实现一下SHA1算法</title>
@@ -49,10 +58,10 @@
     
     <item>
       <title>阿里java开发者手册读书笔记</title>
-      <link>http://zhengyhn.github.io/post/alibaba-java-guide-note/</link>
+      <link>http://zhengyhn.github.io/post/java/alibaba-java-guide-note/</link>
       <pubDate>Mon, 08 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/alibaba-java-guide-note/</guid>
+      <guid>http://zhengyhn.github.io/post/java/alibaba-java-guide-note/</guid>
       <description>POJO 类中布尔类型的变量，都不要加 is 前缀，否则部分框架解析会引起序列化错误 心得：这个之前我写的代码的确会下意识地就用isXXX，现在遵守这个规范</description>
     </item>
     
@@ -492,10 +501,10 @@ It seems perfect, but it&amp;rsquo;s a pitfall of C++. Consider the following ex
     
     <item>
       <title>Implement a bidirectional linked list</title>
-      <link>http://zhengyhn.github.io/post/datastructure/2013-09-21-implement-a-bidirectional-linked-list/</link>
+      <link>http://zhengyhn.github.io/post/algorithm/2013-09-21-implement-a-bidirectional-linked-list/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/datastructure/2013-09-21-implement-a-bidirectional-linked-list/</guid>
+      <guid>http://zhengyhn.github.io/post/algorithm/2013-09-21-implement-a-bidirectional-linked-list/</guid>
       <description>A bidirectional linked list is the same as a singular linked list except that there are two links between two nodes.
 Here is the specification of my BiLinkedList.
  BiLinkedList(), Create an empty BiLinkedList. BiLinkedList(const BiLinkedList&amp;amp; list), Create a BiLinkedList from another BiLinkedList list. BiLinkedList(const T&amp;amp; value), Create a BiLinkedList whose first element is value. BiLinkedList(const T values[], size_t size), Create a BiLinkedList from an array values of size size. const BiLinkedList&amp;amp; operator=(const BiLinkedList&amp;amp; list), Support BiLinkedList assignment.</description>
@@ -503,10 +512,10 @@ Here is the specification of my BiLinkedList.
     
     <item>
       <title>Implement a binary search tree</title>
-      <link>http://zhengyhn.github.io/post/datastructure/2013-10-03-implement-a-binary-search-tree/</link>
+      <link>http://zhengyhn.github.io/post/algorithm/2013-10-03-implement-a-binary-search-tree/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/datastructure/2013-10-03-implement-a-binary-search-tree/</guid>
+      <guid>http://zhengyhn.github.io/post/algorithm/2013-10-03-implement-a-binary-search-tree/</guid>
       <description>A binary search tree is very useful in solving the real world problems. The red-black tree is one kind of binary search tree. For more information about binary search tree, please visit the wikipedia.
 Here is the specification of my binary search tree.
  BinarySearchTree(), Create an empty binary search tree.
@@ -516,10 +525,10 @@ Here is the specification of my binary search tree.
     
     <item>
       <title>Implement a circular linked list</title>
-      <link>http://zhengyhn.github.io/post/datastructure/2013-09-21-implement-a-circular-linked-list/</link>
+      <link>http://zhengyhn.github.io/post/algorithm/2013-09-21-implement-a-circular-linked-list/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/datastructure/2013-09-21-implement-a-circular-linked-list/</guid>
+      <guid>http://zhengyhn.github.io/post/algorithm/2013-09-21-implement-a-circular-linked-list/</guid>
       <description>A circular linked list is the same as a singular linked list except that there last node points to the first node.
 Here is the specification of my CiLinkedList.
  CiLinkedList(), Create an empty CiLinkedList. CiLinkedList(const CiLinkedList&amp;amp; list), Create a CiLinkedList from another CiLinkedList list. CiLinkedList(const T&amp;amp; value), Create a CiLinkedList whose first element is value. CiLinkedList(const T values[], size_t size), Create a CiLinkedList from an array values of size size.</description>
@@ -527,10 +536,10 @@ Here is the specification of my CiLinkedList.
     
     <item>
       <title>Implement a queue</title>
-      <link>http://zhengyhn.github.io/post/datastructure/2013-09-25-implement-a-queue/</link>
+      <link>http://zhengyhn.github.io/post/algorithm/2013-09-25-implement-a-queue/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/datastructure/2013-09-25-implement-a-queue/</guid>
+      <guid>http://zhengyhn.github.io/post/algorithm/2013-09-25-implement-a-queue/</guid>
       <description>A queue is based on the Linked List. The most explicit feature of a queue is FIFO(First in first out).
 Here is the specification of my Queue.
  Queue(), Create an empty queue. Queue(const T&amp;amp; value), Create a queue whose first element is value. Queue(const T values[], const size_t&amp;amp; size), Create a queue from an array values whose size is size. Queue(const Queue&amp;lt;T&amp;gt;&amp;amp; queue), Create a queue from another queue. const Queue&amp;lt;T&amp;gt;&amp;amp; operator=(const Queue&amp;lt;T&amp;gt;&amp;amp; queue), Support queue assignment.</description>
@@ -538,10 +547,10 @@ Here is the specification of my Queue.
     
     <item>
       <title>Implement a queue using two stacks</title>
-      <link>http://zhengyhn.github.io/post/datastructure/2013-09-27-implement-a-queue-using-two-stacks/</link>
+      <link>http://zhengyhn.github.io/post/algorithm/2013-09-27-implement-a-queue-using-two-stacks/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/datastructure/2013-09-27-implement-a-queue-using-two-stacks/</guid>
+      <guid>http://zhengyhn.github.io/post/algorithm/2013-09-27-implement-a-queue-using-two-stacks/</guid>
       <description>A queue can be implemented using two stacks. One stack store the elements appended to the queue. The other stack store the elements to be popped from the queue.
 Here is the specification of my Queue.
  StQueue(), Create an empty queue. StQueue(const T&amp;amp; value), Create a queue whose first element is value. StQueue(const T values[], const size_t&amp;amp; size), Create a queue from an array values whose size is size. StQueue(const StQueue&amp;lt;T&amp;gt;&amp;amp; queue), Create a queue from another queue.</description>
@@ -549,10 +558,10 @@ Here is the specification of my Queue.
     
     <item>
       <title>Implement a singular LinkedList</title>
-      <link>http://zhengyhn.github.io/post/datastructure/2013-09-12-implement-a-singular-linkedlist/</link>
+      <link>http://zhengyhn.github.io/post/algorithm/2013-09-12-implement-a-singular-linkedlist/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/datastructure/2013-09-12-implement-a-singular-linkedlist/</guid>
+      <guid>http://zhengyhn.github.io/post/algorithm/2013-09-12-implement-a-singular-linkedlist/</guid>
       <description>LinkedList is a very common data structure. Three years ago, I could write a singular LinkedList very quickly in C/C++. But the code is ugly and very ineffecient. Now I am going to implement a singular LinkedList in C++ in order to cracking the interview.
 Here is the specification of my LinkedList.
  LinkedList(), Create an empty LinkedList. LinkedList(const LinkedList&amp;amp; list), Create a LinkedList from another LinkedList list. LinkedList(const T&amp;amp; value), Create a LinkedList whose first element is value.</description>
@@ -560,10 +569,10 @@ Here is the specification of my LinkedList.
     
     <item>
       <title>Implement a stack</title>
-      <link>http://zhengyhn.github.io/post/datastructure/2013-09-26-implement-a-stack/</link>
+      <link>http://zhengyhn.github.io/post/algorithm/2013-09-26-implement-a-stack/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/datastructure/2013-09-26-implement-a-stack/</guid>
+      <guid>http://zhengyhn.github.io/post/algorithm/2013-09-26-implement-a-stack/</guid>
       <description>A stack is based on the Linked List. The most explicit feature of a stack is FILO(First in last out).
 Here is the specification of my Stack.
  Stack(), Create an empty stack. Stack(const T&amp;amp; value), Create a stack whose first element is value. Stack(const T values[], const size_t&amp;amp; size), Create a stack from an array values whose size is size. Stack(const Stack&amp;lt;T&amp;gt;&amp;amp; stack), Create a stack from another stack. const Stack&amp;lt;T&amp;gt;&amp;amp; operator=(const Stack&amp;lt;T&amp;gt;&amp;amp; stack), Support stack assignment.</description>
@@ -571,10 +580,10 @@ Here is the specification of my Stack.
     
     <item>
       <title>Implement the sorting algorithms</title>
-      <link>http://zhengyhn.github.io/post/datastructure/2013-09-26-implement-the-sorting-algorithms/</link>
+      <link>http://zhengyhn.github.io/post/algorithm/2013-09-26-implement-the-sorting-algorithms/</link>
       <pubDate>Sat, 14 May 2016 16:35:19 +0800</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/datastructure/2013-09-26-implement-the-sorting-algorithms/</guid>
+      <guid>http://zhengyhn.github.io/post/algorithm/2013-09-26-implement-the-sorting-algorithms/</guid>
       <description>The sorting algorithms are very important in programming interview. I have to be able to write them on a paper without even an error.
 Bubble Sort The immediate thought of bubble sort is that swapping the ajacent elements if they are of the wrong order in each pass until there are no swapping. For example, consider the array [5, 1, 4, 2, 8],
 First pass:
@@ -683,19 +692,19 @@ Encapsulation is not invisibility.</description>
     
     <item>
       <title>elisp笔记：introduction</title>
-      <link>http://zhengyhn.github.io/post/elisp/data_type/</link>
+      <link>http://zhengyhn.github.io/post/misc/elisp_data_type/</link>
       <pubDate>Tue, 13 Aug 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/elisp/data_type/</guid>
+      <guid>http://zhengyhn.github.io/post/misc/elisp_data_type/</guid>
       <description>lisp历史 原来lisp是list processing language,1950s后期推出，主要为了研究人工智能。 数据类型 概述 每个对象至少属于一种类型 对于打印</description>
     </item>
     
     <item>
       <title>elisp笔记：运算</title>
-      <link>http://zhengyhn.github.io/post/elisp/arithmetic/</link>
+      <link>http://zhengyhn.github.io/post/misc/elisp_arithmetic/</link>
       <pubDate>Tue, 13 Aug 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/elisp/arithmetic/</guid>
+      <guid>http://zhengyhn.github.io/post/misc/elisp_arithmetic/</guid>
       <description>声明：此文章为学习xahlee 的elisp教程 而写的笔记。 数学计算基础 运算符也是函数 和其它函数式语言一样，elisp中，加减乘除也是一个函数</description>
     </item>
     
@@ -1052,19 +1061,19 @@ Encapsulation is not invisibility.</description>
     
     <item>
       <title>gtk, widget</title>
-      <link>http://zhengyhn.github.io/post/gtk/base/</link>
+      <link>http://zhengyhn.github.io/post/misc/gtk_base/</link>
       <pubDate>Fri, 22 Feb 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/gtk/base/</guid>
+      <guid>http://zhengyhn.github.io/post/misc/gtk_base/</guid>
       <description>看下面一个装载widget的程序： #include &amp;lt;gtk/gtk.h&amp;gt; #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; #include &amp;lt;string.h&amp;gt; //macros #define BORDER_WIDTH 10 //global variables GtkWidget *win; GtkWidget *btn; GtkWidget *top_box; GtkWidget *separator; GtkWidget *bottom_box; GtkWidget *label; GtkWidget *quitbox; //functions gint delete_event(GtkWidget *widget, GdkEvent *event, gpointer data); void make_box(GtkWidget *parent, gboolean homogeneous, gint spacing, gboolean expand, gboolean fill, guint padding); void make_btn(GtkWidget *box, GtkWidget</description>
     </item>
     
     <item>
       <title>gtk, introduction</title>
-      <link>http://zhengyhn.github.io/post/gtk/intro/</link>
+      <link>http://zhengyhn.github.io/post/misc/gtk_intro/</link>
       <pubDate>Thu, 21 Feb 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/gtk/intro/</guid>
+      <guid>http://zhengyhn.github.io/post/misc/gtk_intro/</guid>
       <description>简介 GTK(GIMP ToolKit)，是用于构建GUI的库来的。取这个名字，是因为GTK是用于开发GIMP (GNU image manipulation program)的，现在也用来开发GNOM</description>
     </item>
     
