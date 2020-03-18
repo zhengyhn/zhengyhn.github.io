@@ -6,10 +6,19 @@
     <description>Recent content in Math on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 29 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 18 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/categories/math/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>1至n的平方和公式推导</title>
+      <link>http://zhengyhn.github.io/post/math/sum_of_square/</link>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/math/sum_of_square/</guid>
+      <description>高中学过这样一个公式: $$ 1^2 + 2^2 + &amp;hellip; + n^2 = \frac{n(n + 1)(2n + 1)}{6} $$ 当时说这个公式的证明超纲了，先记住。 现在来研究一下怎么证明。 要证明这个公式，先要证明立方</description>
+    </item>
     
     <item>
       <title>三角函数和差化积公式推导</title>
