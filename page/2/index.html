@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://zhengyhn.github.io/" />
 
-<meta property="og:updated_time" content="2018-10-31T00:00:00&#43;00:00"/>
+<meta property="og:updated_time" content="2018-11-18T00:00:00&#43;00:00"/>
 
 <meta itemprop="name" content="Hank&#39;s Blog">
 <meta itemprop="description" content="Hank&#39;s blog">
@@ -117,6 +117,27 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/learning-bagging-algorithms/">Learning Bagging Algorithms</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-11-18 </span>
+      
+        <span class="more-meta"> 约 192 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      import random def max_value_recursive(weights, values, max_weight, i): if len(weights) == i: return 0 if max_weight - weights[i] &lt;= 0: return 0 value_not_pick = max_value_recursive(weights, values, max_weight, i + 1) value_pick = max_value_recursive(weights, values, max_weight - weights[i], i + 1) return max(value_not_pick, values[i] + value_pick) def max_value(weights, values, max_weight): return max_value_recursive(weights, values, max_weight, 0) def max_value_dp(weights, values, max_weight): dp = [[0 for i in range(max_weight)] for i in range(len(weights))] i = len(weights) - 1 for j in range(weights[i], max_weight): dp[i][j] = values[i] for i in range(len(weights) - 2, -1, -1): for j in range(weights[i], max_weight): dp[i][j] = max(dp[i + 1][j], dp[i + 1][j - weights[i]] + values[i]) return dp[0][max_weight - 1] N = 25 W = 50 weights = [random.
+    </div>
+    <div class="read-more">
+      <a href="/post/learning-bagging-algorithms/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/longest-common-subsequence/">Longest common Subsequence</a></h1>
@@ -302,27 +323,6 @@
     </div>
     <div class="read-more">
       <a href="/post/git-cheat-sheet-in-our-team/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/list-rotate-algorithms/">List Rotate Algorithms</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-09-13 </span>
-      
-        <span class="more-meta"> 约 985 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      最近在《编程珠玑》上看到一道很有趣的题目: 假设我们在开发一个编辑器，要实现一个功能，将下面代码的2个函数调换位置，该怎么做呢？如果空间复杂度
-    </div>
-    <div class="read-more">
-      <a href="/post/list-rotate-algorithms/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

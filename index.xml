@@ -6,10 +6,19 @@
     <description>Recent content on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 18 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 29 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>一元二次方程求根公式推导</title>
+      <link>http://zhengyhn.github.io/post/math/quadratic_equation/</link>
+      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/math/quadratic_equation/</guid>
+      <description>一元二次方程 $ax^2 + bx + c = 0$的求根公式为: $$ x_{x1,x2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$ 推导过程 根据经验，左边如果可以写在平方的形式，通过开方，就可以求得根，所以我们的</description>
+    </item>
     
     <item>
       <title>1至n的平方和公式推导</title>

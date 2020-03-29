@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhengyhn.github.io/post/math/quadratic_equation/</loc>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://zhengyhn.github.io/post/math/sum_of_square/</loc>
     <lastmod>2020-03-18T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -829,14 +836,14 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/tags/algorithm/</loc>
+    <loc>http://zhengyhn.github.io/categories/algorithm/</loc>
     <lastmod>2019-03-10T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/categories/algorithm/</loc>
+    <loc>http://zhengyhn.github.io/tags/algorithm/</loc>
     <lastmod>2019-03-10T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
@@ -850,14 +857,14 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/tags/design/</loc>
+    <loc>http://zhengyhn.github.io/categories/design/</loc>
     <lastmod>2017-03-31T10:50:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/categories/design/</loc>
+    <loc>http://zhengyhn.github.io/tags/design/</loc>
     <lastmod>2017-03-31T10:50:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
@@ -872,7 +879,7 @@
   
   <url>
     <loc>http://zhengyhn.github.io/</loc>
-    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -885,14 +892,14 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/tags/java/</loc>
+    <loc>http://zhengyhn.github.io/categories/java/</loc>
     <lastmod>2020-02-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/categories/java/</loc>
+    <loc>http://zhengyhn.github.io/tags/java/</loc>
     <lastmod>2020-02-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
@@ -906,22 +913,15 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/tags/math/</loc>
-    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://zhengyhn.github.io/categories/math/</loc>
-    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/tags/nodejs/</loc>
-    <lastmod>2018-12-31T00:00:00+00:00</lastmod>
+    <loc>http://zhengyhn.github.io/tags/math/</loc>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -934,15 +934,15 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/</loc>
-    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <loc>http://zhengyhn.github.io/tags/nodejs/</loc>
+    <lastmod>2018-12-31T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/tags/react/</loc>
-    <lastmod>2019-06-15T00:00:00+00:00</lastmod>
+    <loc>http://zhengyhn.github.io/post/</loc>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -955,14 +955,21 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/tags/redis/</loc>
-    <lastmod>2017-03-30T22:50:49+08:00</lastmod>
+    <loc>http://zhengyhn.github.io/tags/react/</loc>
+    <lastmod>2019-06-15T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://zhengyhn.github.io/categories/redis/</loc>
+    <lastmod>2017-03-30T22:50:49+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/tags/redis/</loc>
     <lastmod>2017-03-30T22:50:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
@@ -1004,14 +1011,14 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/tags/typescript/</loc>
+    <loc>http://zhengyhn.github.io/categories/typescript/</loc>
     <lastmod>2018-12-31T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/categories/typescript/</loc>
+    <loc>http://zhengyhn.github.io/tags/typescript/</loc>
     <lastmod>2018-12-31T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
@@ -1025,13 +1032,6 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/tags/java/</loc>
-    <lastmod>2019-04-08T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://zhengyhn.github.io/categories/java/</loc>
     <lastmod>2019-04-08T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -1039,8 +1039,8 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/tags/leetcode/</loc>
-    <lastmod>2018-05-27T00:00:00+00:00</lastmod>
+    <loc>http://zhengyhn.github.io/tags/java/</loc>
+    <lastmod>2019-04-08T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -1053,7 +1053,7 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://zhengyhn.github.io/tags/leetcode/</loc>
     <lastmod>2018-05-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
@@ -1067,8 +1067,8 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/tags/%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2016-05-27T20:40:43+08:00</lastmod>
+    <loc>http://zhengyhn.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2018-05-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -1081,14 +1081,21 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/tags/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2016-05-27T20:50:49+08:00</lastmod>
+    <loc>http://zhengyhn.github.io/tags/%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2016-05-27T20:40:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://zhengyhn.github.io/categories/%E9%9D%A2%E8%AF%95/</loc>
+    <lastmod>2016-05-27T20:50:49+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/tags/%E9%9D%A2%E8%AF%95/</loc>
     <lastmod>2016-05-27T20:50:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
