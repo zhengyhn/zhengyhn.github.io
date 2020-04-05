@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+<meta name="generator" content="Hugo 0.54.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/math/quadratic_equation/" />
@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-03-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-03-29T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="388">
+<meta itemprop="wordCount" content="389">
 
 
 
@@ -132,7 +132,7 @@
         <div class="post-category">
             <a href="/categories/math/"> Math </a>
             </div>
-          <span class="more-meta"> 约 388 字 </span>
+          <span class="more-meta"> 约 389 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -186,7 +186,7 @@
 
 <p>两边开方，得:</p>
 
-<p>$$\vert{x + \frac{b}{2a}} = \pm \frac{\sqrt{b^2 - 4ac}}{2a} $$</p>
+<p>$$ x + \frac{b}{2a} = \pm \frac{\sqrt{b^2 - 4ac}}{2a} $$</p>
 
 <p>所以:</p>
 
@@ -204,19 +204,19 @@ $$ x_1x_2 = \frac{c}{a} $$</p>
 <p>$$ x_1 + x_2 = \frac{-b + \sqrt{b^2 - 4ac}}{2a} + \frac{-b - \sqrt{b^2 - 4ac}}{2a} = $$
 $$  \frac{-b}{2a} + \frac{-b}{2a} = \frac{b}{a} $$</p>
 
-<p>$$ x_1x_2 = \frac{-b + \sqrt{b^2 - 4ac}}{2a} * \frac{-b - \sqrt{b^2 - 4ac}}{2a} = $$
+<p>$$ x_1x_2 = \frac{-b + \sqrt{b^2 - 4ac}}{2a} \times \frac{-b - \sqrt{b^2 - 4ac}}{2a} = $$
 $$ \frac{(-b + \sqrt{b^2 - 4ac})(-b - \sqrt{b^2 - 4ac})}{4a^2} = $$
 $$ \frac{(-b)^2 - (b^2 - 4ac)}{4a^2} = \frac{c}{a} $$</p>
 
 <h2 id="抛物线的顶点坐标">抛物线的顶点坐标</h2>
 
-<p>对于抛物线 $ y = ax^2 + bx + c $, 它的顶点坐标是 $(-\frac{b}{2a}, c - \frac{b^2}{4ac})$</p>
+<p>对于抛物线 $ y = ax^2 + bx + c $, 它的顶点坐标是 $(-\frac{b}{2a}, \frac{4ac - b^2}{4a})$</p>
 
 <p>原理很简单，顶点处导数为0，所以有:</p>
 
 <p>$$ y&rsquo; = 2ax + b = 0 $$
 $$ x = -\frac{b}{2a} $$
-$$ y = a(-\frac{b}{2a})^2 - b\frac{b}{2a} + c = c - \frac{b^2}{4ac} $$</p>
+$$ y = a(-\frac{b}{2a})^2 - b\frac{b}{2a} + c = \frac{4ac - b^2}{4a} $$</p>
 
     </div>
 
@@ -257,7 +257,11 @@ $$ y = a(-\frac{b}{2a})^2 - b\frac{b}{2a} + c = c - \frac{b^2}{4ac} $$</p>
           <a href="/tags/math/">Math</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/math/frequently_used_inequation/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">常用不等式及证明</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/math/sum_of_square/">
             <span class="next-text nav-default">1至n的平方和公式推导</span>
             <span class="next-text nav-mobile">下一篇</span>
@@ -286,6 +290,10 @@ $$ y = a(-\frac{b}{2a})^2 - b\frac{b}{2a} + c = c - \frac{b^2}{4ac} $$</p>
       gitment.render('comments-gitment');
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
+
+  
+
+  
 
       </div>
     </main>

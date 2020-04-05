@@ -6,10 +6,19 @@
     <description>Recent content in Math on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 29 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/categories/math/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>常用不等式及证明</title>
+      <link>http://zhengyhn.github.io/post/math/frequently_used_inequation/</link>
+      <pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/math/frequently_used_inequation/</guid>
+      <description>和差不等式 $$ \vert a \pm b \vert \le \vert a \vert + \vert b \vert $$ $$ \vert \vert a \vert - \vert b \vert \vert \le \vert a - b \vert $$ 这 2 个不等式，应该是显然的，不需要证明了。 均值定理 $$ 若 a_1, a_2, &amp;hellip; a_n &amp;gt; 0,</description>
+    </item>
     
     <item>
       <title>一元二次方程求根公式推导</title>

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+<meta name="generator" content="Hugo 0.54.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/" />
@@ -117,6 +117,30 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-07-28-about-constructors-destructors-and-assignment-operators/">About Constructors Destructors and Assignment Operators</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 1006 字 </span>
+        <span class="more-meta"> 预计阅读 5 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      What functions C++ will silently write and call? If we declare an empty class, the compiler will declare a constructor, a copy constructor, a copy assignment operator and a destructor for us.
+class Girl { };  But the compiler is not foolish, it will only generate them when needed.
+What do the generated functions do?
+ For construtor, it will invoke the corresponding constructor and non-static members of its base class.
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/2013-07-28-about-constructors-destructors-and-assignment-operators/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-08-09-always-pass-parameters-by-reference-to-const/">Always pass parameters by reference-to-const</a></h1>
@@ -324,29 +348,6 @@ Here is the specification of my Queue.
     </div>
     <div class="read-more">
       <a href="/post/algorithm/2013-09-27-implement-a-queue-using-two-stacks/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-12-implement-a-singular-linkedlist/">Implement a singular LinkedList</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 262 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      LinkedList is a very common data structure. Three years ago, I could write a singular LinkedList very quickly in C/C++. But the code is ugly and very ineffecient. Now I am going to implement a singular LinkedList in C++ in order to cracking the interview.
-Here is the specification of my LinkedList.
- LinkedList(), Create an empty LinkedList. LinkedList(const LinkedList&amp; list), Create a LinkedList from another LinkedList list. LinkedList(const T&amp; value), Create a LinkedList whose first element is value.
-    </div>
-    <div class="read-more">
-      <a href="/post/algorithm/2013-09-12-implement-a-singular-linkedlist/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
