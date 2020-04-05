@@ -35,7 +35,7 @@ $$(x + \frac{b}{2a})^2 = \frac{b^2 - 4ac}{4a^2} $$
 
 两边开方，得:
 
-$$\vert{x + \frac{b}{2a}} = \pm \frac{\sqrt{b^2 - 4ac}}{2a} $$
+$$ x + \frac{b}{2a} = \pm \frac{\sqrt{b^2 - 4ac}}{2a} $$
 
 所以:
 
@@ -53,18 +53,18 @@ $$ x_1x_2 = \frac{c}{a} $$
 $$ x_1 + x_2 = \frac{-b + \sqrt{b^2 - 4ac}}{2a} + \frac{-b - \sqrt{b^2 - 4ac}}{2a} = $$
 $$  \frac{-b}{2a} + \frac{-b}{2a} = \frac{b}{a} $$
 
-$$ x_1x_2 = \frac{-b + \sqrt{b^2 - 4ac}}{2a} * \frac{-b - \sqrt{b^2 - 4ac}}{2a} = $$
+$$ x_1x_2 = \frac{-b + \sqrt{b^2 - 4ac}}{2a} \times \frac{-b - \sqrt{b^2 - 4ac}}{2a} = $$
 $$ \frac{(-b + \sqrt{b^2 - 4ac})(-b - \sqrt{b^2 - 4ac})}{4a^2} = $$
 $$ \frac{(-b)^2 - (b^2 - 4ac)}{4a^2} = \frac{c}{a} $$
 
 ## 抛物线的顶点坐标
 
-对于抛物线 $ y = ax^2 + bx + c $, 它的顶点坐标是 $(-\frac{b}{2a}, c - \frac{b^2}{4ac})$
+对于抛物线 $ y = ax^2 + bx + c $, 它的顶点坐标是 $(-\frac{b}{2a}, \frac{4ac - b^2}{4a})$
 
 原理很简单，顶点处导数为0，所以有:
 
 $$ y' = 2ax + b = 0 $$
 $$ x = -\frac{b}{2a} $$
-$$ y = a(-\frac{b}{2a})^2 - b\frac{b}{2a} + c = c - \frac{b^2}{4ac} $$
+$$ y = a(-\frac{b}{2a})^2 - b\frac{b}{2a} + c = \frac{4ac - b^2}{4a} $$
 
 
