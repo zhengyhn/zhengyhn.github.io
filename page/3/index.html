@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://zhengyhn.github.io/" />
 
-<meta property="og:updated_time" content="2018-09-26T00:00:00&#43;00:00"/>
+<meta property="og:updated_time" content="2018-09-27T00:00:00&#43;00:00"/>
 
 <meta itemprop="name" content="Hank&#39;s Blog">
 <meta itemprop="description" content="Hank&#39;s blog">
@@ -117,6 +117,27 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/learning-path-finding-algorithms/">Learning Path Finding Algorithms</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-09-27 </span>
+      
+        <span class="more-meta"> 约 502 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      import numpy as np import matplotlib.pyplot as plt %matplotlib notebook N = 10 OBSTALE = '1' ROAD = '*' START = 'S' END = 'E' game_map = np.array([[ROAD] * 10] * 10) game_map[1:5, 1] = OBSTALE game_map[8:10, 1] = OBSTALE game_map[2:6, 3] = OBSTALE game_map[7:10, 3] = OBSTALE game_map[1:5, 5] = OBSTALE game_map[6:8, 5] = OBSTALE game_map[0:3, 7] = OBSTALE game_map[4:6, 7] = OBSTALE game_map[0, 0] = START game_map[8, 7] = END for row in game_map: for col in row: print(col, end='') print('')  S******1** *1***1*1** *1*1*1*1** *1*1*1**** *1*1*1*1** ***1***1** *****1**** ***1*1**** *1*1***E** *1*1******  class Node: def __init__(self, x, y): self.
+    </div>
+    <div class="read-more">
+      <a href="/post/learning-path-finding-algorithms/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/git-cheat-sheet-in-our-team/">Git Cheat Sheet in Our Team</a></h1>
@@ -302,27 +323,6 @@
     </div>
     <div class="read-more">
       <a href="/post/amazing-horners-rule/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/insert-sort-algorithm-in-python/">Insert Sort Algorithm in Python</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2018-07-27 </span>
-      
-        <span class="more-meta"> 约 444 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      最近在看《算法导论》，前面讲到插入排序，我第一反应，忘了这个算法是怎么样的，果然还是不够熟悉，那就再练习几次。 这个算法还是非常重要的，很多语
-    </div>
-    <div class="read-more">
-      <a href="/post/insert-sort-algorithm-in-python/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
