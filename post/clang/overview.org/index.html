@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;linux c编程一站式学习&amp;rdquo;一书的笔记 @&amp;lt;/font&amp;gt; 程序和编程语言 平台这个词有很多说法，可以指计算机体系结构，也可以" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;linux c编程一站式学习&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 程序和编程语言 平台这个词有很多说法，可以指计算机体系结构，也可以指操" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/clang/overview.org/" />
@@ -34,31 +34,28 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="Linux c编程一站式学习笔记：C语言基础" />
-<meta property="og:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;linux c编程一站式学习&rdquo;一书的笔记 @&lt;/font&gt; 程序和编程语言 平台这个词有很多说法，可以指计算机体系结构，也可以" />
+<meta property="og:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;linux c编程一站式学习&quot;一书的笔记 @&lt;/font&gt; 程序和编程语言 平台这个词有很多说法，可以指计算机体系结构，也可以指操" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/clang/overview.org/" />
-<meta property="article:published_time" content="2013-02-13T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-02-13T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-02-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-02-13T00:00:00+00:00" />
 <meta itemprop="name" content="Linux c编程一站式学习笔记：C语言基础">
-<meta itemprop="description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;linux c编程一站式学习&rdquo;一书的笔记 @&lt;/font&gt; 程序和编程语言 平台这个词有很多说法，可以指计算机体系结构，也可以">
-
-
+<meta itemprop="description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;linux c编程一站式学习&quot;一书的笔记 @&lt;/font&gt; 程序和编程语言 平台这个词有很多说法，可以指计算机体系结构，也可以指操">
 <meta itemprop="datePublished" content="2013-02-13T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-02-13T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="4043">
+<meta itemprop="wordCount" content="4040">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux c编程一站式学习笔记：C语言基础"/>
-<meta name="twitter:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;linux c编程一站式学习&rdquo;一书的笔记 @&lt;/font&gt; 程序和编程语言 平台这个词有很多说法，可以指计算机体系结构，也可以"/>
+<meta name="twitter:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;linux c编程一站式学习&quot;一书的笔记 @&lt;/font&gt; 程序和编程语言 平台这个词有很多说法，可以指计算机体系结构，也可以指操"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -130,7 +127,7 @@
       <div class="post-meta">
         <span class="post-time"> 2013-02-13 </span>
         
-          <span class="more-meta"> 约 4043 字 </span>
+          <span class="more-meta"> 约 4040 字 </span>
           <span class="more-meta"> 预计阅读 9 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -140,121 +137,76 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#程序和编程语言">程序和编程语言</a></li>
-<li><a href="#自然语言和形式语言">自然语言和形式语言</a>
-<ul>
-<li><a href="#基本概念">基本概念</a></li>
-<li><a href="#区别">区别</a></li>
-</ul></li>
-<li><a href="#第一个程序">第一个程序</a></li>
-<li><a href="#常量-变量和表达式">常量、变量和表达式</a></li>
-<li><a href="#简单函数">简单函数</a></li>
-<li><a href="#分支语句">分支语句</a></li>
-<li><a href="#深入理解函数">深入理解函数</a></li>
-<li><a href="#循环语句">循环语句</a></li>
-<li><a href="#数组">数组</a></li>
-<li><a href="#代码风格">代码风格</a></li>
-<li><a href="#gdb">gdb</a></li>
-<li><a href="#排序和查找">排序和查找</a></li>
-</ul>
+  <ul>
+    <li><a href="#基本概念">基本概念</a></li>
+    <li><a href="#区别">区别</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;linux c编程一站式学习&rdquo;一书的笔记
+      <p>@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;linux c编程一站式学习&quot;一书的笔记
 @&lt;/font&gt;</p>
-
 <h1 id="程序和编程语言">程序和编程语言</h1>
-
 <ul>
 <li>平台这个词有很多说法，可以指计算机体系结构，也可以指操作系统，也可以开发平台（</li>
 </ul>
-
 <p>编译器，链接器等）。</p>
-
 <ul>
 <li>机器语言称为第一代语言1GL，汇编为2GL，C/C++，JAVA，Python等称为3GL，目前已经有</li>
 </ul>
-
 <p>了4GL和5GL，4GL以后的语言主要描述做什么，而不是一步步怎么做，SQL就是这样的。</p>
-
 <ul>
 <li>思考题：解释执行的语言比编译执行的语言有什么优缺点？</li>
 </ul>
-
 <ol>
 <li>优点</li>
 </ol>
-
 <ul>
 <li>执行过程简单，不需要通过编译阶段，直接解释执行</li>
 </ul>
-
 <ol>
 <li>缺点</li>
 </ol>
-
 <ul>
 <li>速度慢，缺少编译阶段的优化</li>
 <li>依赖平台</li>
 </ul>
-
 <h1 id="自然语言和形式语言">自然语言和形式语言</h1>
-
 <h2 id="基本概念">基本概念</h2>
-
 <p>自然语言就是人类讲的语言，不是人为设计的，而是自然进化的。</p>
-
 <p>形式语言为了特定应用而人为设计的语言。例如数字和运算符，化学式，当然还有编程语言。</p>
-
 <p>形式语言有严格的syntax规则，由token的规则和structure的规则组成。token
 称为记号，相当于自然语言中的单词和符号，structure称为结构，是指token的排列
 方式，token的规则称为lexical规则，structure的规则称为grammar规则。</p>
-
 <p>当我们阅读英语的一个句子的时候，我们不仅要搞清楚每个词(token)的意思，还要
 搞清楚整个句子的结构是怎样的（疑问句，定语从句什么的），当我们在处理代码的时候
 也会做同样的事情。分析句子的结构的过程叫parse(解析）。比如：</p>
-
-<pre><code class="language-.example">the other shoe fell
-</code></pre>
-
-<p>上面这个句子一旦解析完成，你就明白了它的意思，知道了shoe是什么意思，fell意味
+<pre><code class="language-{.example}" data-lang="{.example}">the other shoe fell
+</code></pre><p>上面这个句子一旦解析完成，你就明白了它的意思，知道了shoe是什么意思，fell意味
 着什么，是在什么上下文(context)中说的，还理解了它暗示了什么内容，这就是语义
 （semantic)。</p>
-
 <h2 id="区别">区别</h2>
-
 <ul>
 <li>歧义(ambiguity)：自然语言充满歧义，人们通过上下文(context)来防止歧义，而形式语言的设计要求不能有歧义，这就是上下文无关的形式语言。</li>
 <li>冗余(redundancy)：自然语言引入了很多冗余来解决歧义，所以人们说话比较啰嗦，而形式语言更简洁。</li>
 <li>与字面意思的一致：自然语言充满着隐喻（比喻拟人什么的），而形式语言中字面意思基本就是真实意思。</li>
 </ul>
-
 <h1 id="第一个程序">第一个程序</h1>
-
 <ul>
 <li>一个好的习惯是打开gcc的-Wall选项，以提示所有的警告信息。</li>
 </ul>
-
-<h1 id="常量-变量和表达式">常量、变量和表达式</h1>
-
+<h1 id="常量变量和表达式">常量、变量和表达式</h1>
 <ul>
 <li>界定符(delimiter)，</li>
 <li>windows上的文本文件用\r\n做行分隔符，许多应用层的网络协议（如HTTP）也</li>
 </ul>
-
 <p>是用\r\n换行，而Linux和各种Unix上则使用\n来分隔。</p>
-
 <ul>
 <li>在格式化字符串中占个位置，并不出现在最终打印结果，如%d，这种叫占位符(placeholder)</li>
-<li>为什么要规定\?呢，因为C语言中有一些三连符(trigraph)，在一些特殊的终端上缺少某些</li>
+<li>为什么要规定?呢，因为C语言中有一些三连符(trigraph)，在一些特殊的终端上缺少某些</li>
 </ul>
-
 <p>字符，需要三连符输入，比如用??=来表示#字符。</p>
-
 <ul>
 <li>下划线(underscore)</li>
 <li>C89中共有32个关键字，C99中有37个，增加了inline,restrict,~Bool~,~Complex~,~Imaginary~</li>
@@ -264,117 +216,80 @@
 <li>向下取整称为floor,向上取整称为ceiling。</li>
 <li>C语言中整数除法既不是floor,也不是ceiling，总是把小数部分截掉，在数轴上向0方向</li>
 </ul>
-
 <p>取整。也就是说，当操作数为正数时，使用floor,当操作数为负数时，使用ceiling</p>
-
 <ul>
 <li>ASCII，American Standard Code for Information Interchange</li>
 </ul>
-
 <h1 id="简单函数">简单函数</h1>
-
 <ul>
 <li>printf也有返回值，它返回打印的字符个数，我们调用printf不是为了得到它的返回值，</li>
 </ul>
-
 <p>而是利用它产生的副作用(side effect)——打印</p>
-
 <ul>
 <li>改变计算机存储单元里的数据或做输入输出操作都算side effect</li>
 <li>#, pound sign or number sign or hash sign</li>
 <li>尖括号&lt;&gt;,英文为angle bracket</li>
 <li>gcc必须要加-lm才能使用math.h，因为数学函数位于/lib/libm.so库文件中，-lm告诉</li>
 </ul>
-
 <p>编译器要到这个文件中找，大部分库都位于/lib/libc.so文件中，本来是要加-lc选项的，
 但是因为gcc默认就加这个选项，所以可以不加。</p>
-
 <ul>
 <li>C标准主要由两部分组成，一部分描述C语法（编译器），一部分描述C标准库。linux中最</li>
 </ul>
-
 <p>流行的C函数库是glic，几乎都实现在libc.so里（虽然我看了一下我的系统是libc.so.6,
 而libc.so只是libc.so.6的一个符号链接），数学函数在libm.so中，多线程的函数在
 libpthread.so中。</p>
-
 <ul>
 <li>在主函数中return 0;然后执行这个程序，再用shell命令：</li>
 </ul>
-
-<pre><code class="language-.bash">echo $?
-</code></pre>
-
-<p>可以看到返回的状态，刚学到bash shell中的这个东西，刚好用到了。</p>
-
+<pre><code class="language-{.bash}" data-lang="{.bash}">echo $?
+</code></pre><p>可以看到返回的状态，刚学到bash shell中的这个东西，刚好用到了。</p>
 <ul>
 <li>函数如果没有参数而留空，这是old
 style，不推荐使用。可惜我使用了多年，以后一定</li>
 </ul>
-
 <p>要纠正。</p>
-
 <ul>
 <li>形参：parameter。实参：argument。</li>
 <li>可以通过</li>
 </ul>
-
-<pre><code class="language-.bash">man 3 printf
-</code></pre>
-
-<p>来查看printf的说明 为什么是3呢？我用</p>
-
-<pre><code class="language-.bash">man man
-</code></pre>
-
-<p>查了一下，发现原来有下面的规定：</p>
-
+<pre><code class="language-{.bash}" data-lang="{.bash}">man 3 printf
+</code></pre><p>来查看printf的说明 为什么是3呢？我用</p>
+<pre><code class="language-{.bash}" data-lang="{.bash}">man man
+</code></pre><p>查了一下，发现原来有下面的规定：</p>
 <p>section number   description</p>
-
-<hr />
-
+<hr>
 <p>1                executable programs or shell commands
-  2                system calls
-  3                library calls
-  4                special files(usually found in /dev)
-  5                file formats and conventions(eg./etc/passwd)
-  6                games
-  7                miscellaneous
-  8                system administration commands(only for root)
-  9                kernel routines</p>
-
+2                system calls
+3                library calls
+4                special files(usually found in /dev)
+5                file formats and conventions(eg./etc/passwd)
+6                games
+7                miscellaneous
+8                system administration commands(only for root)
+9                kernel routines</p>
 <ul>
 <li>FHS,filesystem hierarchy standard</li>
 <li>原来printf也是一个shell命令来的。</li>
 <li>书上说全局变量使用变量表达式来初始化是不合法的，比如下面这个：</li>
 </ul>
-
-<pre><code class="language-.example">double pi = acos(-1.0);
-</code></pre>
-
-<p>我试了一下，发现没有错误，只有警告，而且可以运行。
+<pre><code class="language-{.example}" data-lang="{.example}">double pi = acos(-1.0);
+</code></pre><p>我试了一下，发现没有错误，只有警告，而且可以运行。
 但是为了规范，以后还是要提醒自己一定要只用常量表达式来初始化全局变量。
 而当我用宏来定义的时候，却可以：</p>
-
-<pre><code class="language-.example">#define PI acos(-1.0)
-</code></pre>
-
-<p>没有错误也没有警告，实践证明宏定义替换部分可以使用任意表达式，因为人
+<pre><code class="language-{.example}" data-lang="{.example}">#define PI acos(-1.0)
+</code></pre><p>没有错误也没有警告，实践证明宏定义替换部分可以使用任意表达式，因为人
 家只是替换而已！</p>
-
 <ul>
 <li>gcc的扩展特性居然允许嵌套定义函数！</li>
 </ul>
-
 <h1 id="分支语句">分支语句</h1>
-
 <ul>
 <li>C语言规定%两边的操作数必须为整型(char, int,
 long等），两个正数相除余数当然是</li>
 </ul>
-
 <p>正数，如果两个操作数中有负数，则C语言标准规定余数的符号总是与被除数相同。</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 
 int main()
 {
@@ -384,40 +299,29 @@ int main()
 
     return 0;
 }
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>&amp;的英文为ampersand，|英文为pipe sign，!英文为exclamation mark</li>
 </ul>
-
 <h1 id="深入理解函数">深入理解函数</h1>
-
 <ul>
 <li>log函数默认是以e为底，而以2为底的为log2函数，以10为底的为log10函数。</li>
 <li>欧几里得法求最大公约数的证明。本来这种东西小学就应该会的，可以我这种白痴</li>
 </ul>
-
 <p>要到现在才明白。</p>
-
-<pre><code class="language-.example">要求x,y的最大公约数，可以令q = x / y, r = x % y,
+<pre><code class="language-{.example}" data-lang="{.example}">要求x,y的最大公约数，可以令q = x / y, r = x % y,
 则有：x = q * y + r
 假设c能够整除y和r，则c一定能整除x，因为：
 c / x = c / (q * y + r) = c / (q * y) + c / r
 因为c能够同时整除y和r，则加号两边必然是2个整数，所以c / x也必然是整数，
 所以c一定能整除x。
 所以c能同时整除x和y，于是x和y的最大公约数就转化成了y和x % y的最大公约数。
-</code></pre>
-
-<h1 id="循环语句">循环语句</h1>
-
+</code></pre><h1 id="循环语句">循环语句</h1>
 <ul>
 <li>递归思路属于函数式编程，迭代思路属于命令式编程(imperative
 programming)</li>
 <li>duff&rsquo;s device（去google一下）</li>
 </ul>
-
 <h1 id="数组">数组</h1>
-
 <ul>
 <li>gcc带上-E参数可以打印出来预处理之后的代码。使用工具cpp(c
 preprocesser)也可以。</li>
@@ -425,91 +329,92 @@ preprocesser)也可以。</li>
 <li>各种类unix的系统都把1970年1月1日00:00:00这一时刻称为epoch（纪元），因为unix
 是在1969年发明。</li>
 </ul>
-
 <h1 id="代码风格">代码风格</h1>
-
 <ul>
 <li>,号和;号后面要加空格，这是英文的书写习惯。</li>
 <li>因为标准的unix终端是24 * 80的，所以一行达到80个字符一定要折行。</li>
 <li>函数内的注释尽可能少，写注释是说明代码“能做什么”，而不是说怎么做。只要代码</li>
 </ul>
-
 <p>写得清晰，“怎么做”是一目了然的，如果需要写注释才能解释清楚，说明代码可读性很
 差。</p>
-
 <ul>
 <li>常用的缩写：</li>
 </ul>
-
-<hr />
-
+<hr>
 <p>count                  cnt
-  block                  blk
-  length                 len
-  window                 win
-  number                 nr
-  temporary              temp
-  internationalization   i18n
-  trans                  x
-  transmit               xmt</p>
-
-<hr />
-
+block                  blk
+length                 len
+window                 win
+number                 nr
+temporary              temp
+internationalization   i18n
+trans                  x
+transmit               xmt</p>
+<hr>
 <h1 id="gdb">gdb</h1>
-
 <ul>
-<li>使用命令help可以查看帮助，再也不用去百度google了。</li>
-<li>直接按回车重复上一个命令</li>
-<li>start命令是开始执行程序，不是run!</li>
-<li>使用backtrace(bt)可以查看函数调用的栈帧。</li>
-<li>使用info(i)可以查看很多信息(locals等)</li>
-<li>使用finish运行到函数结束</li>
-<li>display跟踪显示，undisplay取消跟踪显示</li>
-
-<li><p>disable breakpoints可以用来禁用断点，需要时再enable</p></li>
-
-<li><p>总结gdb命令</p></li>
+<li>
+<p>使用命令help可以查看帮助，再也不用去百度google了。</p>
+</li>
+<li>
+<p>直接按回车重复上一个命令</p>
+</li>
+<li>
+<p>start命令是开始执行程序，不是run!</p>
+</li>
+<li>
+<p>使用backtrace(bt)可以查看函数调用的栈帧。</p>
+</li>
+<li>
+<p>使用info(i)可以查看很多信息(locals等)</p>
+</li>
+<li>
+<p>使用finish运行到函数结束</p>
+</li>
+<li>
+<p>display跟踪显示，undisplay取消跟踪显示</p>
+</li>
+<li>
+<p>disable breakpoints可以用来禁用断点，需要时再enable</p>
+</li>
+<li>
+<p>总结gdb命令</p>
+</li>
 </ul>
-
-<hr />
-
+<hr>
 <p>backtrace(bt)           查看各级函数调用及参数
-  finish                  连续运行到当前函数返回
-  frame(f)                选择栈帧，后面带帧编号
-  info(i)                 查看信息，后面带查看内容
-  list(l)                 列出源码，接着上次位置，每次列10行。
-  list(l) line number     后面带行号，则从那里开始
-  list(l) function name   列出某个函数的源码
-  next(n)                 执行下一语句
-  print(p)                打印表达式的值，可以修改变量的值或者调用函数
-  quit(q)                 退出
-  set var                 改变变量的值
-  start                   开始执行，停在第一行
-  step(s)                 执行下一语句，如果是函数则进入函数
-  break(b)                查看有哪些断点
-  break(b) line number    在某一行设置断点
-  break function name     在某个函数开头设置断点
-  break &hellip; if &hellip;        设置条件断点
-  continue&copy;             从当前位置开始连续运行程序
-  delete(d) bp-number     删除断点，后面的为断点号
-  disable bp-number       禁用断点
-  enable bp-number        启用断点
-  display var             跟踪查看某个变量
-  undisplay number        取消跟踪显示，后面的为跟踪显示号
-  run&reg;                  从头开始连续运行程序
-  watch var               设置观察点
-  info(i) watchpoints     查看设置了哪些观察点
-  x address               打印存储单元的内容</p>
-
-<hr />
-
+finish                  连续运行到当前函数返回
+frame(f)                选择栈帧，后面带帧编号
+info(i)                 查看信息，后面带查看内容
+list(l)                 列出源码，接着上次位置，每次列10行。
+list(l) line number     后面带行号，则从那里开始
+list(l) function name   列出某个函数的源码
+next(n)                 执行下一语句
+print(p)                打印表达式的值，可以修改变量的值或者调用函数
+quit(q)                 退出
+set var                 改变变量的值
+start                   开始执行，停在第一行
+step(s)                 执行下一语句，如果是函数则进入函数
+break(b)                查看有哪些断点
+break(b) line number    在某一行设置断点
+break function name     在某个函数开头设置断点
+break &hellip; if &hellip;        设置条件断点
+continue(c)             从当前位置开始连续运行程序
+delete(d) bp-number     删除断点，后面的为断点号
+disable bp-number       禁用断点
+enable bp-number        启用断点
+display var             跟踪查看某个变量
+undisplay number        取消跟踪显示，后面的为跟踪显示号
+run(r)                  从头开始连续运行程序
+watch var               设置观察点
+info(i) watchpoints     查看设置了哪些观察点
+x address               打印存储单元的内容</p>
+<hr>
 <h1 id="排序和查找">排序和查找</h1>
-
 <ul>
 <li>手刃插入排序</li>
 </ul>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 
 void insert_sort(int *arr, int num);
 
@@ -541,13 +446,10 @@ void insert_sort(int *arr, int num)
         arr[back + 1] = key;
     }
 }
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>手刃归并排序</li>
 </ul>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 
 #define N 5
 
@@ -609,13 +511,10 @@ void merge(int *arr, int begin, int middle, int end)
         arr[ai++] = right[ri++];
     }
 }
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>手刃二分查找</li>
 </ul>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 #include &lt;assert.h&gt;
 
@@ -673,7 +572,6 @@ int is_sorted(char *arr[], int len)
     return 1;
 }
 </code></pre>
-
     </div>
 
     <div class="post-copyright">
@@ -711,9 +609,9 @@ int is_sorted(char *arr[], int len)
 </div><footer class="post-footer">
       
       <nav class="post-nav">
-        <a class="prev" href="/post/haskell/intro.org/">
+        <a class="prev" href="/post/clang/real.org/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">introduction</span>
+            <span class="prev-text nav-default">Linux c编程一站式学习笔记：C语言本质</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
@@ -729,7 +627,7 @@ int is_sorted(char *arr[], int len)
         id: '2013-02-13 00:00:00 \x2b0000 UTC',
         title: 'Linux c编程一站式学习笔记：C语言基础',
         link: decodeURI(location.href),
-        desc: '@\x26lt;font color=\x26ldquo;red\x26rdquo;\x26gt; 本文为\x26rdquo;linux c编程一站式学习\x26rdquo;一书的笔记 @\x26lt;\/font\x26gt; 程序和编程语言 平台这个词有很多说法，可以指计算机体系结构，也可以',
+        desc: '@\x26lt;font color=\x26quot;red\x26rdquo;\x26gt; 本文为\x26quot;linux c编程一站式学习\x26quot;一书的笔记 @\x26lt;\/font\x26gt; 程序和编程语言 平台这个词有很多说法，可以指计算机体系结构，也可以指操',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -795,7 +693,10 @@ int is_sorted(char *arr[], int len)
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

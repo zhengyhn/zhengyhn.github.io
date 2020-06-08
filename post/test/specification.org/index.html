@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;software testing&amp;rdquo;一书的读书笔记 @&amp;lt;/font&amp;gt; 原来在项目经理写好产品说明书，软件测试师就要开始工作，检" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;software testing&amp;quot;一书的读书笔记 @&amp;lt;/font&amp;gt; 原来在项目经理写好产品说明书，软件测试师就要开始工作，检查产" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/test/specification.org/" />
@@ -34,31 +34,28 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="检查产品说明" />
-<meta property="og:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 原来在项目经理写好产品说明书，软件测试师就要开始工作，检" />
+<meta property="og:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 原来在项目经理写好产品说明书，软件测试师就要开始工作，检查产" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/test/specification.org/" />
-<meta property="article:published_time" content="2013-03-03T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-03-03T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-03-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-03-03T00:00:00+00:00" />
 <meta itemprop="name" content="检查产品说明">
-<meta itemprop="description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 原来在项目经理写好产品说明书，软件测试师就要开始工作，检">
-
-
+<meta itemprop="description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 原来在项目经理写好产品说明书，软件测试师就要开始工作，检查产">
 <meta itemprop="datePublished" content="2013-03-03T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-03-03T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1241">
+<meta itemprop="wordCount" content="1239">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="检查产品说明"/>
-<meta name="twitter:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 原来在项目经理写好产品说明书，软件测试师就要开始工作，检"/>
+<meta name="twitter:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 原来在项目经理写好产品说明书，软件测试师就要开始工作，检查产"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -130,7 +127,7 @@
       <div class="post-meta">
         <span class="post-time"> 2013-03-03 </span>
         
-          <span class="more-meta"> 约 1241 字 </span>
+          <span class="more-meta"> 约 1239 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -140,82 +137,57 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#黑盒测试和白盒测试">黑盒测试和白盒测试</a></li>
-<li><a href="#静态测试和动态测试">静态测试和动态测试</a></li>
-<li><a href="#测试产品说明-静态黑盒测试">测试产品说明&ndash;静态黑盒测试</a></li>
-<li><a href="#从高处测试产品说明">从高处测试产品说明</a>
-<ul>
-<li><a href="#假装自己是一个用户">假装自己是一个用户</a></li>
-<li><a href="#调查现有的标准和规范">调查现有的标准和规范</a></li>
-<li><a href="#调查市场上相似的产品">调查市场上相似的产品</a></li>
-</ul></li>
-<li><a href="#从低处测试产品说明">从低处测试产品说明</a>
-<ul>
-<li><a href="#检查产品说明的属性">检查产品说明的属性</a></li>
-<li><a href="#检查产品说明术语">检查产品说明术语</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#假装自己是一个用户">假装自己是一个用户</a></li>
+    <li><a href="#调查现有的标准和规范">调查现有的标准和规范</a></li>
+    <li><a href="#调查市场上相似的产品">调查市场上相似的产品</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#检查产品说明的属性">检查产品说明的属性</a></li>
+    <li><a href="#检查产品说明术语">检查产品说明术语</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记
+      <p>@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记
 @&lt;/font&gt;</p>
-
 <p>原来在项目经理写好产品说明书，软件测试师就要开始工作，检查产品说明书里面有
 没有什么bug，这样可以大大减少整个项目的开支。
 一个简单的计算器软件的产品说明书就需要几百页。</p>
-
 <h1 id="黑盒测试和白盒测试">黑盒测试和白盒测试</h1>
-
 <ul>
 <li>黑盒测试，black-box
 testing，测试师不知道软件里面是怎样操作的，他只给一个</li>
 </ul>
-
 <p>输入，得到一个输出。他不知道里面发生了什么，不知道为什么会得到那样的输出。
 黑盒测试有时也叫功能测试(functional testing)和动作测试(behavioral
 testing)。</p>
-
 <ul>
 <li>白盒测试，white-box
 testing，测试师查看了程序的源码，并以此为线索来制定测试</li>
 </ul>
-
 <p>用例，进行测试。白盒测试有时也叫clear-box testing。
 白盒测试有一个危险的地方是，测试师可能会被代码给束缚住，制定出来的测试用例都是
 为了迎合代码的。</p>
-
 <h1 id="静态测试和动态测试">静态测试和动态测试</h1>
-
 <ul>
 <li>静态测试, static testing，不运行软件地测试。</li>
 <li>动态测试, dynamic testing，运行软件来进行测试。</li>
 </ul>
-
 <p>书上有个例子非常好，当我们去买车的时候，踢一下轮胎，看一下车的漆和车篷，这是静态
 测试。启动车，听一下引擎的声音，开一下它试一下感觉，这是动态测试。</p>
-
-<h1 id="测试产品说明-静态黑盒测试">测试产品说明&ndash;静态黑盒测试</h1>
-
+<h1 id="测试产品说明--静态黑盒测试">测试产品说明&ndash;静态黑盒测试</h1>
 <p>产品说明书只是一个文档或者是一些图，没有运行，当然是静态的，它还没写代码，你也
 不能去查这个文档是怎样写出来的，所以是黑盒测试。</p>
-
 <h1 id="从高处测试产品说明">从高处测试产品说明</h1>
-
 <h2 id="假装自己是一个用户">假装自己是一个用户</h2>
-
 <p>调研一个这个产品面向的用户是哪些人(比如向市场经理或销售询问用户是哪类型的人)，
 理解这种类型的用户的期望和需求。还要假装自己是搞破坏的用户，不要假设用户都是
 好人，这在提高软件安全性上有很大的帮助。</p>
-
 <h2 id="调查现有的标准和规范">调查现有的标准和规范</h2>
-
 <p>一些一般需求考虑的标准和规范有：</p>
-
 <ul>
 <li>公司术语和习惯（如果是为某个企业做软件的话）</li>
 <li>工业标准</li>
@@ -223,11 +195,8 @@ testing，测试师查看了程序的源码，并以此为线索来制定测试<
 <li>GUI（软件要符合操作系统的GUI的使用习惯）</li>
 <li>安全标准</li>
 </ul>
-
 <h2 id="调查市场上相似的产品">调查市场上相似的产品</h2>
-
 <p>比如竞争者的产品，主要从下面的方面来进行比较：</p>
-
 <ul>
 <li>规模&ndash;特性的多少，代码量的多少，软件的大小</li>
 <li>复杂度</li>
@@ -235,11 +204,8 @@ testing，测试师查看了程序的源码，并以此为线索来制定测试<
 <li>高质量/可靠性</li>
 <li>安全性</li>
 </ul>
-
 <h1 id="从低处测试产品说明">从低处测试产品说明</h1>
-
 <h2 id="检查产品说明的属性">检查产品说明的属性</h2>
-
 <ul>
 <li>是否完整（有没有漏掉一些东西）</li>
 <li>是否精确(accuracy)</li>
@@ -250,11 +216,8 @@ testing，测试师查看了程序的源码，并以此为线索来制定测试<
 <li>是否code-free（好的产品说明书只说明产品，没有设计和代码）</li>
 <li>是否可测试</li>
 </ul>
-
 <h2 id="检查产品说明术语">检查产品说明术语</h2>
-
 <p>当看到出现下面的术语时，要小心了：</p>
-
 <ul>
 <li>always, every, all, none, never
 这些是表示绝对的术语，这时就要检查一下是否真的是这么绝对。</li>
@@ -330,7 +293,7 @@ mostly 这些术语很含糊，测试起来有难度。</li>
         id: '2013-03-03 00:00:00 \x2b0000 UTC',
         title: '检查产品说明',
         link: decodeURI(location.href),
-        desc: '@\x26lt;font color=\x26ldquo;red\x26rdquo;\x26gt; 本文为\x26rdquo;software testing\x26rdquo;一书的读书笔记 @\x26lt;\/font\x26gt; 原来在项目经理写好产品说明书，软件测试师就要开始工作，检',
+        desc: '@\x26lt;font color=\x26quot;red\x26rdquo;\x26gt; 本文为\x26quot;software testing\x26quot;一书的读书笔记 @\x26lt;\/font\x26gt; 原来在项目经理写好产品说明书，软件测试师就要开始工作，检查产',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -396,7 +359,10 @@ mostly 这些术语很含糊，测试起来有难度。</li>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

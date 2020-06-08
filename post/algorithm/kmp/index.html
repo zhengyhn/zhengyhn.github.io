@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/algorithm/kmp/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="动机 看了一本叫做《C/C&#43;&#43;面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于是开始了KMP之旅！ 在网上看了好几篇中文文章，没一" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/algorithm/kmp/" />
-<meta property="article:published_time" content="2013-04-24T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-04-24T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-04-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-04-24T00:00:00+00:00" />
 <meta itemprop="name" content="KMP算法-我的理解">
 <meta itemprop="description" content="动机 看了一本叫做《C/C&#43;&#43;面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于是开始了KMP之旅！ 在网上看了好几篇中文文章，没一">
-
-
 <meta itemprop="datePublished" content="2013-04-24T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-04-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2807">
+<meta itemprop="wordCount" content="2803">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="KMP算法-我的理解"/>
 <meta name="twitter:description" content="动机 看了一本叫做《C/C&#43;&#43;面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于是开始了KMP之旅！ 在网上看了好几篇中文文章，没一"/>
 
@@ -130,7 +127,7 @@
       <div class="post-meta">
         <span class="post-time"> 2013-04-24 </span>
         
-          <span class="more-meta"> 约 2807 字 </span>
+          <span class="more-meta"> 约 2803 字 </span>
           <span class="more-meta"> 预计阅读 6 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -139,68 +136,38 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#动机">动机</a></li>
-<li><a href="#在哪里优化">在哪里优化？</a></li>
-<li><a href="#部分匹配表">部分匹配表</a></li>
-<li><a href="#如何快速计算部分匹配表">如何快速计算部分匹配表</a></li>
-<li><a href="#查找">查找</a></li>
-<li><a href="#代码实现">代码实现</a></li>
-<li><a href="#总结">总结</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h1 id="动机">动机</h1>
-
+      <h1 id="动机">动机</h1>
 <p>看了一本叫做《C/C++面试题》的电子书，里面提到找子字符串的算法，最好的是KMP，
 于是开始了KMP之旅！</p>
-
 <p>在网上看了好几篇中文文章，没一篇看得懂，最后找到了2篇英文文章，深有启发：</p>
-
 <ol>
 <li><a href="http://www.geeksforgeeks.org/searching-for-patterns-set-2-kmp-algorithm/">searching-for-patterns-set-2-kmp-algorithm</a></li>
 <li><a href="http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in-my-own-words/">the-knuth-morris-pratt-algorithm-in-my-own-words</a></li>
 </ol>
-
 <p>特别是第2篇，让我深刻理解了KMP中的预处理，而第1篇则让我学会了如何用高效的方法
 实现预处理。</p>
-
 <p>于是，我也来写一篇文章，用自己的理解来实现KMP算法。</p>
-
 <h1 id="在哪里优化">在哪里优化？</h1>
-
 <p>如果要让我写一个程序来找到子串，唯一能想到的方法就是一个一个找，这叫做暴力算法。
 KMP算法的作者，他其实是发现了下面的规律。比如，有字符串str：</p>
-
-<pre><code class="language-.example">ababaabcbab
-</code></pre>
-
-<p>需要找的子字符串，称为 <strong>模式</strong> ，pattern，为：</p>
-
-<pre><code class="language-.example">ababab
-</code></pre>
-
-<p>匹配的时候，会发现，就差最后一个a就匹配成功了，太可惜了！按照传统的做法，我们会
+<pre><code class="language-{.example}" data-lang="{.example}">ababaabcbab
+</code></pre><p>需要找的子字符串，称为 <strong>模式</strong> ，pattern，为：</p>
+<pre><code class="language-{.example}" data-lang="{.example}">ababab
+</code></pre><p>匹配的时候，会发现，就差最后一个a就匹配成功了，太可惜了！按照传统的做法，我们会
 从str右移一下，再从头比较，但是很明显，str的第二个字母b和pattern的第一个
 字母a不同，我们应该直接移2下，因为str中的第3个字母到第5个字母为aba，而
 pattern开头的3个字母为aba，这样匹配就不用重复比较前面已经比较过的地方了。这是偶然？还是真理?</p>
-
 <p>考虑str的前面6位，当pattern匹配到最后的a时，发现不匹配，于是应该往前退回
 3步，正好跳过最前面的ab，到达abaa。这样就省去了一次查找。这正是KMP算法对
 普通算法的优化之处。可是这个3是怎么算出来的呢？下面来探索一下。</p>
-
 <h1 id="部分匹配表">部分匹配表</h1>
-
 <p>这个名字是<em>the-knuth-morris-pratt-algorithm-in-my-own-words</em> 这篇文章的
 作者起的，我觉得比较好理解，于是拿过来了。</p>
-
 <p>对每个模式，它自身的内容有一些规律，下表就是所谓的partial match table:</p>
-
 <table>
 <thead>
 <tr>
@@ -215,7 +182,6 @@ pattern开头的3个字母为aba，这样匹配就不用重复比较前面已经
 <th align="left">a</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">index</td>
@@ -228,7 +194,6 @@ pattern开头的3个字母为aba，这样匹配就不用重复比较前面已经
 <td align="left">6</td>
 <td align="left">7</td>
 </tr>
-
 <tr>
 <td align="left">value</td>
 <td align="left">0</td>
@@ -242,102 +207,59 @@ pattern开头的3个字母为aba，这样匹配就不用重复比较前面已经
 </tr>
 </tbody>
 </table>
-
 <p>可以看到，第5个字符a，它的value是3，这个3就是上面要回退的步数，所以，这个算法的核心是计算出来这个部分匹配表。
 要计算这个表中的value，必须先理解下面的概念：</p>
-
 <ol>
 <li><strong>真前缀</strong> :
 一个字符串，忽略最后一个字符，前面的任意长度的子字符串。如
-&ldquo;monkey&rdquo;的真前缀有&rdquo;m&rdquo;, &ldquo;mo&rdquo;, &ldquo;mon&rdquo;, &ldquo;monk&rdquo;, &ldquo;monke&rdquo;。</li>
+&ldquo;monkey&quot;的真前缀有&quot;m&rdquo;, &ldquo;mo&rdquo;, &ldquo;mon&rdquo;, &ldquo;monk&rdquo;, &ldquo;monke&rdquo;。</li>
 <li><strong>真后缀</strong> :字符串，忽略第一个字符，后面的任意长度的子字符串。如
-&ldquo;monkey&rdquo;的真后缀有&rdquo;y&rdquo;, &ldquo;ey&rdquo;, &ldquo;key&rdquo;, &ldquo;nkey&rdquo;, &ldquo;onkey&rdquo;。</li>
+&ldquo;monkey&quot;的真后缀有&quot;y&rdquo;, &ldquo;ey&rdquo;, &ldquo;key&rdquo;, &ldquo;nkey&rdquo;, &ldquo;onkey&rdquo;。</li>
 </ol>
-
 <p>那么部分匹配表中的value就是：</p>
-
-<pre><code class="language-.example">以当前位置结束的前面子串的所有真后缀和真前缀中，公共的那些里面，最长的子串的长度
-</code></pre>
-
-<p>比较难懂，解释一下，如果要求第5个字符a的value，则我们只关心前5个字符
+<pre><code class="language-{.example}" data-lang="{.example}">以当前位置结束的前面子串的所有真后缀和真前缀中，公共的那些里面，最长的子串的长度
+</code></pre><p>比较难懂，解释一下，如果要求第5个字符a的value，则我们只关心前5个字符
 ababa，它的真前缀有a, ab, aba, abab真后缀有a, ba, aba, baba, 则真前缀
 和真后缀一样的有：a, aba，而最长的是aba，它的长度是3,于是value为3。</p>
-
 <p>那凭什么这样子算出来的value为3，就是要回退的步数呢？原理是这样的：</p>
-
 <p>对于模式ababab的子串ababa，它的真前缀为下面加粗的部分:</p>
-
 <p><strong>a</strong>baba</p>
-
 <p><strong>ab</strong>aba</p>
-
 <p><strong>aba</strong>ba</p>
-
 <p><strong>abab</strong>a</p>
-
 <p>真后缀为下面加粗部分:</p>
-
 <p>abab<strong>a</strong></p>
-
 <p>aba<strong>ba</strong></p>
-
 <p>ab<strong>aba</strong></p>
-
 <p>a<strong>baba</strong></p>
-
 <p>真前缀和真后缀一样的有a和aba，放在一起加粗显示来看:</p>
-
 <p><strong>a</strong>baba abab<strong>a</strong></p>
-
 <p><strong>aba</strong>ba ab<strong>aba</strong></p>
-
 <p>回到我们的例子中，有字符串ababaabcbab，现在要用模式ababab来匹配，一开始是这样的：</p>
-
 <pre><code>ababaabcbab
 |||||
 ababab
-</code></pre>
-
-<p>前面5个都匹配上了，现在我们要往后移动进行下一次匹配。暴力的方法是往后移动一位。而实际上我们观察到，由于前5个字符是匹配上的，
+</code></pre><p>前面5个都匹配上了，现在我们要往后移动进行下一次匹配。暴力的方法是往后移动一位。而实际上我们观察到，由于前5个字符是匹配上的，
 所以原字符串前5个字符组成的子串跟模式的前5个字符组成的子串是一样的，那我们当成这2个子串都是模式，看一下他们相同的真前缀和真后缀。</p>
-
 <p>长度为3的相同真前缀和真后缀:</p>
-
 <p>ab<strong>aba</strong>abcbab</p>
-
 <p><strong>aba</strong>bab</p>
-
 <p>长度为1的相同真前缀和真后缀:</p>
-
 <p>abab<strong>a</strong>abcbab</p>
-
 <p><strong>a</strong>babab</p>
-
 <p>现在有两种移动方法：</p>
-
 <p>这样:</p>
-
 <p>ab<strong>aba</strong>abcbab</p>
-
 <p>__<strong>aba</strong>bab</p>
-
 <p>和这样:</p>
-
 <p>abab<strong>a</strong>abcbab</p>
-
 <p>____<strong>a</strong>babab</p>
-
 <p>当然是选择第一种，因为第一种离起点更近，选择第二种会漏掉第一种匹配的情况，所以我们才要选择最长的公共真前缀和真后缀。</p>
-
 <p>通过查看公共的真前缀和真后缀，我们知道，跳去哪个位置能够让下一次匹配开始，并且事先知道已经匹配了多少个字符。</p>
-
 <h1 id="如何快速计算部分匹配表">如何快速计算部分匹配表</h1>
-
 <p>如果按照上面所说的办法，把真前缀和真后缀穷举出来，然后看哪些相等，再看哪个最长
 的话，那这个算法的效率就太低了，我们有更好的办法来计算。</p>
-
 <p>先看看上面的那个表的每一个value是怎么算出来的。</p>
-
 <table>
 <thead>
 <tr>
@@ -352,7 +274,6 @@ ababab
 <th align="left">a</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="left">index</td>
@@ -365,7 +286,6 @@ ababab
 <td align="left">6</td>
 <td align="left">7</td>
 </tr>
-
 <tr>
 <td align="left">value</td>
 <td align="left">0</td>
@@ -379,7 +299,6 @@ ababab
 </tr>
 </tbody>
 </table>
-
 <ol>
 <li>第一个必然是0,因为没有真前缀和真后缀。</li>
 <li>第二个就要看第一个的情况，因为第一个是0,而b又不等于a,于是还是0。</li>
@@ -398,32 +317,23 @@ ababab
 那长度比1大的肯定不用比较了，直接用a和第一个a比较，发现
 一样，则值为1。</li>
 </ol>
-
 <p>这就是计算部分匹配表的算法，参考自<a href="http://www.geeksforgeeks.org/searching-for-patterns-set-2-kmp-algorithm/">这篇文章</a>
 ，这个表其实就是这个算法的关键。</p>
-
 <h1 id="查找">查找</h1>
-
 <p>光计算出来那个表是没用的，重要的是利用这个表来快速查找子串。方法为：</p>
-
-<pre><code class="language-.example">假设部分匹配表为part_tab
+<pre><code class="language-{.example}" data-lang="{.example}">假设部分匹配表为part_tab
 - 当不匹配时，直接往后搜索
 - 当前面匹配了n个，中间某个位置i不匹配时，则i要回退part_tab[n - 1]个位置，
   接着匹配下一个
 - 当全部匹配时，匹配成功，返回起始位置
-</code></pre>
-
-<p>为什么要回退part_tab[n - 1]个位置呢？假定从位置k就开始匹配，则这个位置就是
+</code></pre><p>为什么要回退part_tab[n - 1]个位置呢？假定从位置k就开始匹配，则这个位置就是
 pattern拥有前n个字符的子串的真前缀位置，part_tab[n - 1]中保存的就是pattern
 拥有前n个字符的子串的最长前后前缀的长度，在i位置，回退part_tab[n - 1]就刚好
 跳过了无用的字符，到达下一个和位置k拥有一样的真前缀的位置。这样开始下一轮的查找
 才有意义。</p>
-
 <h1 id="代码实现">代码实现</h1>
-
 <p>下面是我的简单实现，只经过少量测试。</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 
 // if found PATTERN in str, return the first position
@@ -488,10 +398,7 @@ int index_of(char *str, char *pattern)
      }
      return -1;
 }
-</code></pre>
-
-<h1 id="总结">总结</h1>
-
+</code></pre><h1 id="总结">总结</h1>
 <p>这个算法，关键于是理解它是怎样从O(n * m)优化成O(n + m)的，理解在哪里优化了。
 并且要知道辅助数组part_tab的用处及计算方法，后面的查找就很简单了。</p>
 
@@ -620,7 +527,10 @@ int index_of(char *str, char *pattern)
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

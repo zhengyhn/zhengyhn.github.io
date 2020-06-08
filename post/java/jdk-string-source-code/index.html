@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/java/jdk-string-source-code/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="最近有空看了部分 String 类的源码，下面只挑重点部分记录一下。 为什么要用 final 修饰类 第一个比较特别的就是，String 类是用 final 修饰的，表明这个类不可被继" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/java/jdk-string-source-code/" />
-<meta property="article:published_time" content="2019-12-30T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-12-30T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2019-12-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-12-30T00:00:00+00:00" />
 <meta itemprop="name" content="初步学习JDK的String类源码">
 <meta itemprop="description" content="最近有空看了部分 String 类的源码，下面只挑重点部分记录一下。 为什么要用 final 修饰类 第一个比较特别的就是，String 类是用 final 修饰的，表明这个类不可被继">
-
-
 <meta itemprop="datePublished" content="2019-12-30T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-30T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1079">
+<meta itemprop="wordCount" content="1077">
 
 
 
-<meta itemprop="keywords" content="Java,Java8,String,JDK," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Java,Java8,String,JDK," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="初步学习JDK的String类源码"/>
 <meta name="twitter:description" content="最近有空看了部分 String 类的源码，下面只挑重点部分记录一下。 为什么要用 final 修饰类 第一个比较特别的就是，String 类是用 final 修饰的，表明这个类不可被继"/>
 
@@ -132,7 +129,7 @@
         <div class="post-category">
             <a href="/categories/java/"> Java </a>
             </div>
-          <span class="more-meta"> 约 1079 字 </span>
+          <span class="more-meta"> 约 1077 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -142,48 +139,31 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#为什么要用-final-修饰类">为什么要用 final 修饰类</a></li>
-<li><a href="#使用-char-value-存储字符">使用 char value[]存储字符</a></li>
-<li><a href="#继承了-serializable-comparable-和-charsequence-接口">继承了 Serializable, Comparable 和 CharSequence 接口</a></li>
-<li><a href="#trim-方法到底去掉哪些字符">Trim 方法到底去掉哪些字符？</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#为什么要用-final-修饰类">为什么要用 final 修饰类</a></li>
+        <li><a href="#使用-char-value存储字符">使用 char value[]存储字符</a></li>
+        <li><a href="#继承了-serializable-comparable-和-charsequence-接口">继承了 Serializable, Comparable 和 CharSequence 接口</a></li>
+        <li><a href="#trim-方法到底去掉哪些字符">Trim 方法到底去掉哪些字符？</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>最近有空看了部分 String 类的源码，下面只挑重点部分记录一下。</p>
-
+      <p>最近有空看了部分 String 类的源码，下面只挑重点部分记录一下。</p>
 <h3 id="为什么要用-final-修饰类">为什么要用 final 修饰类</h3>
-
 <p>第一个比较特别的就是，String 类是用 final 修饰的，表明这个类不可被继承。</p>
-
 <pre><code>public final class String
-</code></pre>
-
-<p>为什么要防止被继承呢？经过一番研究和思考之后，目前比较靠谱的解析是：String 类是设计成不可变的。假设可以被继承，我们就可以写一个子类继承 String，然后覆盖它的部分方法，使得不可变性遭到破坏。最后，我们把这个子类传给使用方，使用方预期是一个不可变的 String 类，实际得到的是一个可变的子类，这样就出问题了。</p>
-
-<h3 id="使用-char-value-存储字符">使用 char value[]存储字符</h3>
-
+</code></pre><p>为什么要防止被继承呢？经过一番研究和思考之后，目前比较靠谱的解析是：String 类是设计成不可变的。假设可以被继承，我们就可以写一个子类继承 String，然后覆盖它的部分方法，使得不可变性遭到破坏。最后，我们把这个子类传给使用方，使用方预期是一个不可变的 String 类，实际得到的是一个可变的子类，这样就出问题了。</p>
+<h3 id="使用-char-value存储字符">使用 char value[]存储字符</h3>
 <pre><code>    private final char value[];
-</code></pre>
-
-<p>跟预期一样。这里 value 数组定义成 final，表明指向数组的引用一旦赋值，将不能再改变，但是改变了 value 数组在堆上内存的内容，String 的内容还是变了，但是由于它是 private 的，只要 String 的成员方法不修改它的内容，其他类是无法修改它的内容的，这就实现了 String 的不可变特性。​</p>
-
+</code></pre><p>跟预期一样。这里 value 数组定义成 final，表明指向数组的引用一旦赋值，将不能再改变，但是改变了 value 数组在堆上内存的内容，String 的内容还是变了，但是由于它是 private 的，只要 String 的成员方法不修改它的内容，其他类是无法修改它的内容的，这就实现了 String 的不可变特性。​</p>
 <h3 id="继承了-serializable-comparable-和-charsequence-接口">继承了 Serializable, Comparable 和 CharSequence 接口</h3>
-
 <p>IO 数据时字符串很常用，继承了 Serializable，就可以序列化成字节和从字节反序列回字符串。</p>
-
 <p>字符串是可以比较的，实现了 Comparable 接口。看了一下实现，有个地方跟我想象中的不一样。</p>
-
 <pre><code>    public int compareTo(String anotherString) {
         int len1 = value.length;
         int len2 = anotherString.value.length;
@@ -202,48 +182,28 @@
         }
         return len1 - len2;
     }
-</code></pre>
-
-<p>如果某个字符串 A 长度小于另外一个字符串 B，而前面的字符又相等，那是认为 A 小于 B 的。举个例子，&rdquo;abc&rdquo;小于&rdquo;abcd&rdquo;.</p>
-
+</code></pre><p>如果某个字符串 A 长度小于另外一个字符串 B，而前面的字符又相等，那是认为 A 小于 B 的。举个例子，&ldquo;abc&quot;小于&quot;abcd&rdquo;.</p>
 <p>看了一下 CharSequence 接口，有下面几个核心方法:</p>
-
 <pre><code>    int length();
     char charAt(int index);
     CharSequence subSequence(int start, int end);
     public String toString();
-</code></pre>
-
-<p>阅读 subSequence 方法的时候发现了很多宝藏。</p>
-
+</code></pre><p>阅读 subSequence 方法的时候发现了很多宝藏。</p>
 <p>首先 subSequence 很少用，原来 String 类让它直接调用了 substring 方法。</p>
-
 <pre><code>    public CharSequence subSequence(int beginIndex, int endIndex) {
         return this.substring(beginIndex, endIndex);
     }
-</code></pre>
-
-<p>在 substring 方法里面，我之前以为不管怎么样一定会返回一个新的 String 对象，其实并不是。当子子字符串就是原字符串时，返回本身，不然才新创建了一个对象。</p>
-
+</code></pre><p>在 substring 方法里面，我之前以为不管怎么样一定会返回一个新的 String 对象，其实并不是。当子子字符串就是原字符串时，返回本身，不然才新创建了一个对象。</p>
 <pre><code>return ((beginIndex == 0) &amp;&amp; (endIndex == value.length)) ? this
                 : new String(value, beginIndex, subLen);
-</code></pre>
-
-<p>看到有一些边界检查，会抛出常见的 StringIndexOutOfBoundsException 异常，这里发现，原来每一个异常类都应该要加上 serialVersionUID，因为基类 Throwable 就实现了 Serializable，本意是希望 IO 过程中可以将异常转成字节。</p>
-
+</code></pre><p>看到有一些边界检查，会抛出常见的 StringIndexOutOfBoundsException 异常，这里发现，原来每一个异常类都应该要加上 serialVersionUID，因为基类 Throwable 就实现了 Serializable，本意是希望 IO 过程中可以将异常转成字节。</p>
 <pre><code>public class Throwable implements Serializable {
     /** use serialVersionUID from JDK 1.0.2 for interoperability */
     private static final long serialVersionUID = -3042686055658047285L;
-</code></pre>
-
-<p>这个之前在项目中自定义异常时没有注意到这一点，一直都没加 serialVersionUID.</p>
-
+</code></pre><p>这个之前在项目中自定义异常时没有注意到这一点，一直都没加 serialVersionUID.</p>
 <p>最后，StringBuilder 和 StringBuffer 也实现了 CharSequence 接口</p>
-
 <h3 id="trim-方法到底去掉哪些字符">Trim 方法到底去掉哪些字符？</h3>
-
 <p>我以为只会去掉空格和 TAB, 回车，换行这些，原来不是这样的，而是 ascii 码表里面小于等于空格的字符都去掉，其实就是不可见字符。</p>
-
 <pre><code>        while ((st &lt; len) &amp;&amp; (val[st] &lt;= ' ')) {
             st++;
         }
@@ -251,11 +211,8 @@
             len--;
         }
         return ((st &gt; 0) || (len &lt; value.length)) ? substring(st, len) : this;
-</code></pre>
-
-<p>附一张 ascii 码表:
-<img src="/images/asciifull.gif" alt="ascii" title="ascii" /></p>
-
+</code></pre><p>附一张 ascii 码表:
+<img src="/images/asciifull.gif" alt="ascii" title="ascii"></p>
 <p>先学习这么多, 更深入的内容，下次再看。</p>
 
     </div>
@@ -388,7 +345,10 @@
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

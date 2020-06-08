@@ -18,16 +18,16 @@
 
 <meta name="author" content="Hank" /><meta name="description" content="A binary search tree is very useful in solving the real world problems. The red-black tree is one kind of binary search tree. For more information about binary search tree, please visit the wikipedia.
 Here is the specification of my binary search tree.
- BinarySearchTree(), Create an empty binary search tree.
- BinarySearchTree(const T&amp;amp; root_val), Create an binary search tree whose root node is constructed from root_val.
- BinarySearchTree(const T values[], const size_t&amp;amp; size), Create an binary search tree from an array values." /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+  BinarySearchTree(), Create an empty binary search tree.
+  BinarySearchTree(const T&amp;amp; root_val), Create an binary search tree whose root node is constructed from root_val.
+  BinarySearchTree(const T values[], const size_t&amp;amp; size), Create an binary search tree from an array values." /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/algorithm/2013-10-03-implement-a-binary-search-tree/" />
@@ -38,43 +38,40 @@ Here is the specification of my binary search tree.
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="Implement a binary search tree" />
 <meta property="og:description" content="A binary search tree is very useful in solving the real world problems. The red-black tree is one kind of binary search tree. For more information about binary search tree, please visit the wikipedia.
 Here is the specification of my binary search tree.
- BinarySearchTree(), Create an empty binary search tree.
- BinarySearchTree(const T&amp; root_val), Create an binary search tree whose root node is constructed from root_val.
- BinarySearchTree(const T values[], const size_t&amp; size), Create an binary search tree from an array values." />
+  BinarySearchTree(), Create an empty binary search tree.
+  BinarySearchTree(const T&amp; root_val), Create an binary search tree whose root node is constructed from root_val.
+  BinarySearchTree(const T values[], const size_t&amp; size), Create an binary search tree from an array values." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/algorithm/2013-10-03-implement-a-binary-search-tree/" />
-<meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
-<meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
-
+<meta property="article:published_time" content="2016-05-14T16:35:19+08:00" />
+<meta property="article:modified_time" content="2016-05-14T16:35:19+08:00" />
 <meta itemprop="name" content="Implement a binary search tree">
 <meta itemprop="description" content="A binary search tree is very useful in solving the real world problems. The red-black tree is one kind of binary search tree. For more information about binary search tree, please visit the wikipedia.
 Here is the specification of my binary search tree.
- BinarySearchTree(), Create an empty binary search tree.
- BinarySearchTree(const T&amp; root_val), Create an binary search tree whose root node is constructed from root_val.
- BinarySearchTree(const T values[], const size_t&amp; size), Create an binary search tree from an array values.">
-
-
+  BinarySearchTree(), Create an empty binary search tree.
+  BinarySearchTree(const T&amp; root_val), Create an binary search tree whose root node is constructed from root_val.
+  BinarySearchTree(const T values[], const size_t&amp; size), Create an binary search tree from an array values.">
 <meta itemprop="datePublished" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="dateModified" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="wordCount" content="198">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Implement a binary search tree"/>
 <meta name="twitter:description" content="A binary search tree is very useful in solving the real world problems. The red-black tree is one kind of binary search tree. For more information about binary search tree, please visit the wikipedia.
 Here is the specification of my binary search tree.
- BinarySearchTree(), Create an empty binary search tree.
- BinarySearchTree(const T&amp; root_val), Create an binary search tree whose root node is constructed from root_val.
- BinarySearchTree(const T values[], const size_t&amp; size), Create an binary search tree from an array values."/>
+  BinarySearchTree(), Create an empty binary search tree.
+  BinarySearchTree(const T&amp; root_val), Create an binary search tree whose root node is constructed from root_val.
+  BinarySearchTree(const T values[], const size_t&amp; size), Create an binary search tree from an array values."/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -155,51 +152,63 @@ Here is the specification of my binary search tree.
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>A binary search tree is very useful in solving the real world problems. The
 red-black tree is one kind of binary search tree. For more information about
 binary search tree, please visit the <a href="http://en.wikipedia.org/wiki/Binary_search_tree">wikipedia</a>.</p>
-
 <p>Here is the specification of my binary search tree.</p>
-
 <ul>
-<li><p><code>BinarySearchTree()</code>, Create an empty binary search tree.</p></li>
-
-<li><p><code>BinarySearchTree(const T&amp; root_val)</code>, Create an binary search tree whose
-root node is constructed from <code>root_val</code>.</p></li>
-
-<li><p><code>BinarySearchTree(const T values[], const size_t&amp; size)</code>, Create an binary
-search tree from an array <code>values</code>.</p></li>
-
-<li><p><code>BinarySearchTree(const BinarySearchTree&lt;T&gt;&amp; tree)</code>, Create an binary search
-tree from the other tree <code>tree</code>.</p></li>
-
-<li><p><code>const BinarySearchTree&amp; operator=(const BinarySearchTree&amp; tree)</code>, Support
-assignment between trees.</p></li>
-
-<li><p><code>~BinarySearchTree()</code>, free all the spaces.</p></li>
-
-<li><p><code>Node&lt;T&gt; * proot() const</code>, return the root pointer.</p></li>
-
-<li><p><code>void proot(Node&lt;T&gt; *root)</code>, set the root pointer to <code>root</code>.</p></li>
-
-<li><p><code>const T&amp; root() const</code>, return the data stored in the root node.</p></li>
-
-<li><p><code>bool is_empty() const</code>, return whether the tree is empty.</p></li>
-
-<li><p><code>void insert(const T&amp; value)</code>, insert a node with <code>value</code> into the tree.</p></li>
-
-<li><p><code>std::string inorder_string() const</code>, return the inorder travel string.</p></li>
-
-<li><p><code>std::vector&lt;T&gt; retrieve(const T&amp; key)</code>, return the search result of key
-<code>key</code>, the result may contain more than one element.</p></li>
-
-<li><p><code>void remove(const T&amp; key)</code>, delete the node with key <code>key</code>.</p></li>
+<li>
+<p><code>BinarySearchTree()</code>, Create an empty binary search tree.</p>
+</li>
+<li>
+<p><code>BinarySearchTree(const T&amp; root_val)</code>, Create an binary search tree whose
+root node is constructed from <code>root_val</code>.</p>
+</li>
+<li>
+<p><code>BinarySearchTree(const T values[], const size_t&amp; size)</code>, Create an binary
+search tree from an array <code>values</code>.</p>
+</li>
+<li>
+<p><code>BinarySearchTree(const BinarySearchTree&lt;T&gt;&amp; tree)</code>, Create an binary search
+tree from the other tree <code>tree</code>.</p>
+</li>
+<li>
+<p><code>const BinarySearchTree&amp; operator=(const BinarySearchTree&amp; tree)</code>, Support
+assignment between trees.</p>
+</li>
+<li>
+<p><code>~BinarySearchTree()</code>, free all the spaces.</p>
+</li>
+<li>
+<p><code>Node&lt;T&gt; * proot() const</code>, return the root pointer.</p>
+</li>
+<li>
+<p><code>void proot(Node&lt;T&gt; *root)</code>, set the root pointer to <code>root</code>.</p>
+</li>
+<li>
+<p><code>const T&amp; root() const</code>, return the data stored in the root node.</p>
+</li>
+<li>
+<p><code>bool is_empty() const</code>, return whether the tree is empty.</p>
+</li>
+<li>
+<p><code>void insert(const T&amp; value)</code>, insert a node with <code>value</code> into the tree.</p>
+</li>
+<li>
+<p><code>std::string inorder_string() const</code>, return the inorder travel string.</p>
+</li>
+<li>
+<p><code>std::vector&lt;T&gt; retrieve(const T&amp; key)</code>, return the search result of key
+<code>key</code>, the result may contain more than one element.</p>
+</li>
+<li>
+<p><code>void remove(const T&amp; key)</code>, delete the node with key <code>key</code>.</p>
+</li>
 </ul>
-
 <p><a href="https://github.com/zhengyhn/hugo-blog-code/tree/master/binary-search-tree">Here</a> is the code.</p>
 
     </div>
@@ -261,7 +270,7 @@ assignment between trees.</p></li>
         id: '2016-05-14 16:35:19 \x2b0800 CST',
         title: 'Implement a binary search tree',
         link: decodeURI(location.href),
-        desc: 'A binary search tree is very useful in solving the real world problems. The red-black tree is one kind of binary search tree. For more information about binary search tree, please visit the wikipedia.\nHere is the specification of my binary search tree.\n BinarySearchTree(), Create an empty binary search tree.\n BinarySearchTree(const T\x26amp; root_val), Create an binary search tree whose root node is constructed from root_val.\n BinarySearchTree(const T values[], const size_t\x26amp; size), Create an binary search tree from an array values.',
+        desc: 'A binary search tree is very useful in solving the real world problems. The red-black tree is one kind of binary search tree. For more information about binary search tree, please visit the wikipedia.\nHere is the specification of my binary search tree.\n  BinarySearchTree(), Create an empty binary search tree.\n  BinarySearchTree(const T\x26amp; root_val), Create an binary search tree whose root node is constructed from root_val.\n  BinarySearchTree(const T values[], const size_t\x26amp; size), Create an binary search tree from an array values.',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -327,7 +336,10 @@ assignment between trees.</p></li>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

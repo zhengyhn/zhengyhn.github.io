@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/shell/getting.start/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="引言 我非常欣赏这句话。 没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。 &ndash;Herbert Mayer 写脚本 我之前也写过一点点的bash shell，完全" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/shell/getting.start/" />
-<meta property="article:published_time" content="2013-08-13T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-08-13T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-08-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-08-13T00:00:00+00:00" />
 <meta itemprop="name" content="shell 编程！">
 <meta itemprop="description" content="引言 我非常欣赏这句话。 没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。 &ndash;Herbert Mayer 写脚本 我之前也写过一点点的bash shell，完全">
-
-
 <meta itemprop="datePublished" content="2013-08-13T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-08-13T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="325">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="shell 编程！"/>
 <meta name="twitter:description" content="引言 我非常欣赏这句话。 没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。 &ndash;Herbert Mayer 写脚本 我之前也写过一点点的bash shell，完全"/>
 
@@ -139,52 +136,33 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#引言">引言</a></li>
-<li><a href="#写脚本">写脚本</a></li>
-<li><a href="#执行脚本">执行脚本</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h1 id="引言">引言</h1>
-
+      <h1 id="引言">引言</h1>
 <p>我非常欣赏这句话。</p>
-
 <ul>
 <li>没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。
 &ndash;Herbert Mayer</li>
 </ul>
-
 <h1 id="写脚本">写脚本</h1>
-
 <p>我之前也写过一点点的bash shell，完全是为了少打一些命令。但是我之前
 写的代码很不规范，今天看了第一份代码，立刻发现了我应该注意的地方。</p>
-
 <ol>
 <li>注释#后面要加一个空格，一行写不完的注释后面几行的要以#+开头。</li>
 </ol>
-
-<pre><code class="language-.example"># this is a comment,but it may be
+<pre><code class="language-{.example}" data-lang="{.example}"># this is a comment,but it may be
 #+ too long
-</code></pre>
-
-<ol>
+</code></pre><ol>
 <li>程序的结束要写一个exit 0，这个就像C语言中的return 0</li>
 <li>引用变量，最好要加上双引号</li>
 <li>引用命令的执行结果使用``（和波浪号同一个键的那个符号）</li>
 <li>#!这个叫sha-bang</li>
 </ol>
-
 <h1 id="执行脚本">执行脚本</h1>
-
 <p>我以前总是通过先赋予文件可执行权限，再执行的方式运行脚本，今天看到的
 方法令我眼前一亮。</p>
-
 <ul>
 <li>通过bash filename或者sh filename的方式执行。</li>
 </ul>
@@ -314,7 +292,10 @@
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

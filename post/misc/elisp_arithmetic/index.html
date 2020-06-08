@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/misc/elisp_arithmetic/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="声明：此文章为学习xahlee 的elisp教程 而写的笔记。 数学计算基础 运算符也是函数 和其它函数式语言一样，elisp中，加减乘除也是一个函数" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/misc/elisp_arithmetic/" />
-<meta property="article:published_time" content="2013-08-13T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-08-13T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-08-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-08-13T00:00:00+00:00" />
 <meta itemprop="name" content="elisp笔记：运算">
 <meta itemprop="description" content="声明：此文章为学习xahlee 的elisp教程 而写的笔记。 数学计算基础 运算符也是函数 和其它函数式语言一样，elisp中，加减乘除也是一个函数">
-
-
 <meta itemprop="datePublished" content="2013-08-13T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-08-13T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="295">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="elisp笔记：运算"/>
 <meta name="twitter:description" content="声明：此文章为学习xahlee 的elisp教程 而写的笔记。 数学计算基础 运算符也是函数 和其它函数式语言一样，elisp中，加减乘除也是一个函数"/>
 
@@ -140,37 +137,30 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#数学计算基础">数学计算基础</a>
-<ul>
-<li><a href="#运算符也是函数">运算符也是函数</a></li>
-<li><a href="#判断对象的类型">判断对象的类型</a></li>
-<li><a href="#数字与字符串互转">数字与字符串互转</a></li>
-</ul></li>
-<li><a href="#数字操作">数字操作</a>
-<ul>
-<li><a href="#整数">整数</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#数学计算基础">数学计算基础</a>
+      <ul>
+        <li><a href="#运算符也是函数">运算符也是函数</a></li>
+        <li><a href="#判断对象的类型">判断对象的类型</a></li>
+        <li><a href="#数字与字符串互转">数字与字符串互转</a></li>
+      </ul>
+    </li>
+    <li><a href="#数字操作">数字操作</a>
+      <ul>
+        <li><a href="#整数">整数</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>声明：此文章为学习<a href="http://www.xahlee.org">xahlee</a>
+      <p>声明：此文章为学习<a href="http://www.xahlee.org">xahlee</a>
 的<a href="http://ergoemacs.org/emacs/elisp_basics.html">elisp教程</a> 而写的笔记。</p>
-
 <h2 id="数学计算基础">数学计算基础</h2>
-
 <h3 id="运算符也是函数">运算符也是函数</h3>
-
 <p>和其它函数式语言一样，elisp中，加减乘除也是一个函数。我做了下面的练习：</p>
-
-<pre><code class="language-.commonlisp">ELISP&gt; (+ 1 1)
+<pre><code class="language-{.commonlisp}" data-lang="{.commonlisp}">ELISP&gt; (+ 1 1)
 2
 ELISP&gt; (+ 1 2 3)
 6
@@ -192,18 +182,11 @@ ELISP&gt; (% 5 3)
 2
 ELISP&gt; (expt 2 10)
 1024
-</code></pre>
-
-<h3 id="判断对象的类型">判断对象的类型</h3>
-
+</code></pre><h3 id="判断对象的类型">判断对象的类型</h3>
 <p>规律为：类型+p，如：</p>
-
-<pre><code class="language-.commonlisp">(integerp 1)
-</code></pre>
-
-<p>用于判断1是不是整数,其中p表示predicate（是）。我做了下面的练习：</p>
-
-<pre><code class="language-.commonlisp">ELISP&gt; (integerp 3.)
+<pre><code class="language-{.commonlisp}" data-lang="{.commonlisp}">(integerp 1)
+</code></pre><p>用于判断1是不是整数,其中p表示predicate（是）。我做了下面的练习：</p>
+<pre><code class="language-{.commonlisp}" data-lang="{.commonlisp}">ELISP&gt; (integerp 3.)
 t
 ELISP&gt; (integerp 3)
 t
@@ -213,20 +196,13 @@ ELISP&gt; (stringp &quot;&quot;)
 t
 ELISP&gt; (listp '(1 2))
 t
-</code></pre>
-
-<h3 id="数字与字符串互转">数字与字符串互转</h3>
-
+</code></pre><h3 id="数字与字符串互转">数字与字符串互转</h3>
 <p>可以猜到函数，数字转字符串为number-to-string，字符串转数字为string-to-number：</p>
-
-<pre><code class="language-.commonlisp">ELISP&gt; (string-to-number &quot;1&quot;)
+<pre><code class="language-{.commonlisp}" data-lang="{.commonlisp}">ELISP&gt; (string-to-number &quot;1&quot;)
 1
 ELISP&gt; (number-to-string 1.0)
 &quot;1.0&quot;
-</code></pre>
-
-<h2 id="数字操作">数字操作</h2>
-
+</code></pre><h2 id="数字操作">数字操作</h2>
 <h3 id="整数">整数</h3>
 
     </div>
@@ -354,7 +330,10 @@ ELISP&gt; (number-to-string 1.0)
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

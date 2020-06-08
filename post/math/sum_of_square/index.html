@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/math/sum_of_square/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="高中学过这样一个公式: $$ 1^2 &#43; 2^2 &#43; &hellip; &#43; n^2 = \frac{n(n &#43; 1)(2n &#43; 1)}{6} $$ 当时说这个公式的证明超纲了，先记住。 现在来研究一下怎么证明。 要证明这个公式，先要证明立方" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/math/sum_of_square/" />
-<meta property="article:published_time" content="2020-03-18T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2020-03-18T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2020-03-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-18T00:00:00+00:00" />
 <meta itemprop="name" content="1至n的平方和公式推导">
 <meta itemprop="description" content="高中学过这样一个公式: $$ 1^2 &#43; 2^2 &#43; &hellip; &#43; n^2 = \frac{n(n &#43; 1)(2n &#43; 1)}{6} $$ 当时说这个公式的证明超纲了，先记住。 现在来研究一下怎么证明。 要证明这个公式，先要证明立方">
-
-
 <meta itemprop="datePublished" content="2020-03-18T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-03-18T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="591">
 
 
 
-<meta itemprop="keywords" content="Math," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Math," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="1至n的平方和公式推导"/>
 <meta name="twitter:description" content="高中学过这样一个公式: $$ 1^2 &#43; 2^2 &#43; &hellip; &#43; n^2 = \frac{n(n &#43; 1)(2n &#43; 1)}{6} $$ 当时说这个公式的证明超纲了，先记住。 现在来研究一下怎么证明。 要证明这个公式，先要证明立方"/>
 
@@ -142,88 +139,53 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#立方差公式">立方差公式</a></li>
-<li><a href="#1-至-n-的平方和公式">1 至 n 的平方和公式</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#立方差公式">立方差公式</a></li>
+        <li><a href="#1-至-n-的平方和公式">1 至 n 的平方和公式</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>高中学过这样一个公式:</p>
-
+      <p>高中学过这样一个公式:</p>
 <p>$$ 1^2 + 2^2 + &hellip; + n^2 = \frac{n(n + 1)(2n + 1)}{6} $$</p>
-
 <p>当时说这个公式的证明超纲了，先记住。</p>
-
 <p>现在来研究一下怎么证明。</p>
-
 <p>要证明这个公式，先要证明立方差公式。</p>
-
 <h3 id="立方差公式">立方差公式</h3>
-
 <p>我们知道平方差公式是这样的:</p>
-
 <p>$$ a^2 - b^2 = (a + b)(a - b) $$</p>
-
 <p>这个公式已经滚瓜烂熟了，一眼也能看出来，不需要证明。</p>
-
 <p>立方差公式是这样的:</p>
-
 <p>$$ a^3 - b^3 = (a - b)(a^2 + ab + b^2) $$</p>
-
 <p>怎么证明呢? 我们可以考虑，它应该跟 $ (a - b)^3 $ 有关，因为它分解之后会包含 $ a^3 $ 和 $ b^3 $.</p>
-
 <p>证明如下:</p>
-
 <p>$$ (a - b)^3 = (a - b)^2(a - b) = (a^2 - 2ab + b^2)(a - b) $$</p>
-
 <p>$$  = a^3 - a^2b - 2a^2b + 2ab^2 + ab^2 - b^3 = a^3 - 3a^2b + 3ab^2 - b^3 $$</p>
-
 <p>所以:</p>
-
 <p>$$ a^3 - b^3 = (a - b)^3 + 3a^2b - 3ab^2 = (a - b)^3 + 3ab(a - b) = (a - b)((a - b)^2 + 3ab) $$</p>
-
 <p>$$ = (a - b)(a^2 - 2ab + b^2 + 3ab) = (a - b)(a^2 + ab + b^2) $$</p>
-
 <p>证毕。</p>
-
 <h3 id="1-至-n-的平方和公式">1 至 n 的平方和公式</h3>
-
 <p>有了上面的公式，这里就可以使用一种技巧来证明 1 至 n 的平方和公式。</p>
-
 <p>$$ n^3 - (n - 1)^3 = (n - (n - 1))(n^2 + n(n - 1) + (n - 1)^2) $$
 $$                 = n^2 + n^2 - n + n^2 - 2n + 1 = 3n^2 - 3n + 1 $$</p>
-
 <p>$$ (n - 1)^3 - (n - 2)^3 = (n - 1 - (n - 2))((n - 1)^2 + (n - 1)(n - 2) + (n - 2)^2) $$
 $$  = (n - 1)^2 + (n - 1)(n - 1 - 1) + (n - 1 - 1)^2 $$
 $$  = (n - 1)^2 + (n - 1)^2 - (n - 1) + (n - 1)^2 - 2(n - 1) + 1 $$
 $$  = 3(n - 1)^2 - 3(n - 1) + 1 $$</p>
-
 <p>&hellip;</p>
-
 <p>$$ 2^3 - 1^3 = 3*2^2 - 3 * 2 + 1 $$</p>
-
 <p>$$ 1^3 - 0^3 = 3*1^2 - 3 * 1 + 1 $$</p>
-
 <p>把上面的式子左右都相加, 得</p>
-
 <p>$$ n^3 - 0^3 = 3(1^2 + 2^2 + &hellip; + n^2) - 3(1 + 2 + &hellip; + n) + n $$</p>
-
 <p>$$ 3(1^2 + 2^2 + 3^2 + &hellip; + n^2) = n^3 + 3(1 + 2 + &hellip; + n) - n $$</p>
-
 <p>$$ 1^2 + 2^2 + &hellip; + n^2 = \frac{n^3 - n}{3} + \frac{(1 + n)n}{2} $$</p>
-
 <p>$$  = \frac{2n^3 - 2n + 3(n + 1)n}{6} = \frac{n(2n^2 + 3n + 1)}{6} = \frac{n(n + 1)(2n + 1)}{6} $$</p>
-
 <p>证毕。</p>
 
     </div>
@@ -353,7 +315,10 @@ $$  = 3(n - 1)^2 - 3(n - 1) + 1 $$</p>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

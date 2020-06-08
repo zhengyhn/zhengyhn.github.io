@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="场景 假设有一个手机号数组，要求对这个数组进行排序，怎么样排序最快呢？ 一般我们会用快排来实现，现场写一个快排: from collections import deque def swap(strs, i, j): temp = strs[i] strs[i] = strs[j] strs[j] =" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/learning-string-sorting-algorithm/" />
@@ -34,31 +34,28 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="Learning String Sorting Algorithm" />
-<meta property="og:description" content="场景 假设有一个手机号数组，要求对这个数组进行排序，怎么样排序最快呢？ 一般我们会用快排来实现，现场写一个快排: from collections import deque def swap(strs, i, j): temp = strs[i] strs[i] = strs[j] strs[j] =" />
+<meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/learning-string-sorting-algorithm/" />
-<meta property="article:published_time" content="2018-09-08T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-09-08T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2018-09-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-09-08T00:00:00+00:00" />
 <meta itemprop="name" content="Learning String Sorting Algorithm">
-<meta itemprop="description" content="场景 假设有一个手机号数组，要求对这个数组进行排序，怎么样排序最快呢？ 一般我们会用快排来实现，现场写一个快排: from collections import deque def swap(strs, i, j): temp = strs[i] strs[i] = strs[j] strs[j] =">
-
-
+<meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2018-09-08T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-09-08T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="2522">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Learning String Sorting Algorithm"/>
-<meta name="twitter:description" content="场景 假设有一个手机号数组，要求对这个数组进行排序，怎么样排序最快呢？ 一般我们会用快排来实现，现场写一个快排: from collections import deque def swap(strs, i, j): temp = strs[i] strs[i] = strs[j] strs[j] ="/>
+<meta name="twitter:description" content=""/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -140,380 +137,329 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#场景">场景</a></li>
-<li><a href="#桶排序">桶排序</a></li>
-<li><a href="#lsd字符串排序">LSD字符串排序</a></li>
-<li><a href="#msd字符串排序算法">MSD字符串排序算法</a></li>
-<li><a href="#三向字符串排序">三向字符串排序</a></li>
-<li><a href="#参考资料">参考资料</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#场景">场景</a></li>
+    <li><a href="#桶排序">桶排序</a></li>
+    <li><a href="#lsd字符串排序">LSD字符串排序</a></li>
+    <li><a href="#msd字符串排序算法">MSD字符串排序算法</a></li>
+    <li><a href="#三向字符串排序">三向字符串排序</a></li>
+    <li><a href="#参考资料">参考资料</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <h2 id="场景">场景</h2>
-
 <p>假设有一个手机号数组，要求对这个数组进行排序，怎么样排序最快呢？</p>
-
 <p>一般我们会用快排来实现，现场写一个快排:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> deque
 
-<pre><code class="language-python">from collections import deque
-
-def swap(strs, i, j):
-    temp = strs[i]
-    strs[i] = strs[j]
-    strs[j] = temp
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">swap</span>(strs, i, j):
+    temp <span style="color:#f92672">=</span> strs[i]
+    strs[i] <span style="color:#f92672">=</span> strs[j]
+    strs[j] <span style="color:#f92672">=</span> temp
     
-def quick_sort(strs):
-    queue = deque([0, len(strs) - 1])
-    while len(queue) &gt; 0:
-        start = queue.popleft()
-        end = queue.popleft()
-        if start &gt;= end:
-            continue
-        pivot_idx = (start + end) // 2
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quick_sort</span>(strs):
+    queue <span style="color:#f92672">=</span> deque([<span style="color:#ae81ff">0</span>, len(strs) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>])
+    <span style="color:#66d9ef">while</span> len(queue) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+        start <span style="color:#f92672">=</span> queue<span style="color:#f92672">.</span>popleft()
+        end <span style="color:#f92672">=</span> queue<span style="color:#f92672">.</span>popleft()
+        <span style="color:#66d9ef">if</span> start <span style="color:#f92672">&gt;=</span> end:
+            <span style="color:#66d9ef">continue</span>
+        pivot_idx <span style="color:#f92672">=</span> (start <span style="color:#f92672">+</span> end) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
         swap(strs, pivot_idx, end)
-        # 左边最后一个元素位置
-        last_left = start - 1
-        for i in range(start, end):
-            if strs[i] &lt;= strs[end]:
-                last_left += 1
+        <span style="color:#75715e"># 左边最后一个元素位置</span>
+        last_left <span style="color:#f92672">=</span> start <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(start, end):
+            <span style="color:#66d9ef">if</span> strs[i] <span style="color:#f92672">&lt;=</span> strs[end]:
+                last_left <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
                 swap(strs, last_left, i)
-        last_left += 1
+        last_left <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
         swap(strs, last_left, end)
         
-        if start &lt; last_left - 1:
-            queue.append(start)
-            queue.append(last_left - 1)
-        if last_left + 1 &lt; end:
-            queue.append(last_left + 1)
-            queue.append(end)    
+        <span style="color:#66d9ef">if</span> start <span style="color:#f92672">&lt;</span> last_left <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>:
+            queue<span style="color:#f92672">.</span>append(start)
+            queue<span style="color:#f92672">.</span>append(last_left <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+        <span style="color:#66d9ef">if</span> last_left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> end:
+            queue<span style="color:#f92672">.</span>append(last_left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+            queue<span style="color:#f92672">.</span>append(end)    
             
-phones = []
-for i in range(0, 10):
-    phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, 11)])
-    phones.append(phone)
-print(phones)
+phones <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>):
+    phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">11</span>)])
+    phones<span style="color:#f92672">.</span>append(phone)
+<span style="color:#66d9ef">print</span>(phones)
 quick_sort(phones)
-print(phones)
-</code></pre>
-
-<pre><code>['25900803422', '82533056198', '36977030221', '82656350178', '50197010257', '55052712489', '80915203421', '78663941583', '72021821280', '23338950918']
+<span style="color:#66d9ef">print</span>(phones)
+</code></pre></div><pre><code>['25900803422', '82533056198', '36977030221', '82656350178', '50197010257', '55052712489', '80915203421', '78663941583', '72021821280', '23338950918']
 ['23338950918', '25900803422', '36977030221', '50197010257', '55052712489', '72021821280', '78663941583', '80915203421', '82533056198', '82656350178']
 </code></pre>
-
 <p>快排的平均时间复杂度为$O(NlogN)$, 最坏情况下为$O(N^2)$。</p>
-
 <p>如果用python内置的sort函数，来实现，代码如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> random
 
-<pre><code class="language-python">import random
+phones <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>):
+    phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">11</span>)])
+    phones<span style="color:#f92672">.</span>append(phone)
+<span style="color:#66d9ef">print</span>(phones)
 
-phones = []
-for i in range(0, 10):
-    phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, 11)])
-    phones.append(phone)
-print(phones)
-
-phones.sort()
-print(phones)
-</code></pre>
-
-<pre><code>['49993400585', '90540095748', '93341457109', '42794844210', '72054270540', '13814446283', '79563846731', '26819845915', '14973623007', '31301649154']
+phones<span style="color:#f92672">.</span>sort()
+<span style="color:#66d9ef">print</span>(phones)
+</code></pre></div><pre><code>['49993400585', '90540095748', '93341457109', '42794844210', '72054270540', '13814446283', '79563846731', '26819845915', '14973623007', '31301649154']
 ['13814446283', '14973623007', '26819845915', '31301649154', '42794844210', '49993400585', '72054270540', '79563846731', '90540095748', '93341457109']
 </code></pre>
-
 <p>python的sort的内部实现是TimSort，一种改良的归并排序，平均时间复杂度为$O(NlogN)$, 这个算法非常快，据说内部实现是1000多行的C语言代码。</p>
-
 <p>针对我们这个应用场景，《算法》一书里面讲到另外3种字符串排序算法，一种叫LSD字符串排序算法。它的时间复杂度可以达到$O(N * W)$，其中W是字符串的长度。一种叫MSD字符串排序算法，时间复杂度在$O(N)$至$O(N * W)$之间。还有一种叫三向快速排序，时间复杂度在$O(N)$至$O(N * logN)$之间。</p>
-
 <p>要理解这3个算法，首先要学会桶排序，或者叫基数排序。</p>
-
 <h2 id="桶排序">桶排序</h2>
-
 <p>桶排序是一种针对特定场景的排序，比如我已知一个数组每个元素的取值范围是0~9，它的思想就是用一个辅助数组来记录每个元素出现的次数，最后回写原数组。看代码:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nums <span style="color:#f92672">=</span> [random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>)]
 
-<pre><code class="language-python">nums = [random.randint(0, 9) for i in range(10)]
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bucket_sort</span>(arr):
+    aux <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> arr:
+        aux[i] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+    i, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(aux)):
+        <span style="color:#66d9ef">while</span> aux[i] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+            arr[j] <span style="color:#f92672">=</span> i
+            aux[i] <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+            j <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
 
-def bucket_sort(arr):
-    aux = [0] * 10
-    for i in arr:
-        aux[i] += 1
-    i, j = 0, 0
-    for i in range(0, len(aux)):
-        while aux[i] &gt; 0:
-            arr[j] = i
-            aux[i] -= 1
-            j += 1
-
-print(nums)
+<span style="color:#66d9ef">print</span>(nums)
 bucket_sort(nums)
-print(nums)
-</code></pre>
-
-<pre><code>[0, 1, 0, 9, 3, 2, 9, 2, 4, 5]
+<span style="color:#66d9ef">print</span>(nums)
+</code></pre></div><pre><code>[0, 1, 0, 9, 3, 2, 9, 2, 4, 5]
 [0, 0, 1, 2, 2, 3, 4, 5, 9, 9]
 </code></pre>
-
 <p>可以看到，桶排序的时间复杂度为$O(N + M)$，其中M为取值范围的大小，另外需要增加$O(M)$的空间复杂度。</p>
-
 <p>由于特定字符串的取值范围是固定的，比如手机号就是11个0~9的数字，如果使用桶排序，是不是可以大大提高速度呢？</p>
-
 <h2 id="lsd字符串排序">LSD字符串排序</h2>
-
 <p>LSD(Least-Significant-Digit)低位优先字符串排序，它的思想是这样的，从每个字符串的低位开始，对最低位做一次桶排序，完成之后，再往高位做桶排序，一共做W次桶排序，其中W是字符串的长度。注意，在我们这个应用场景里面，每个字符串的长度是一样的。代码实现如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">phones <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>):
+    phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">11</span>)])
+    phones<span style="color:#f92672">.</span>append(phone)
 
-<pre><code class="language-python">phones = []
-for i in range(0, 10):
-    phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, 11)])
-    phones.append(phone)
-
-def lsd_sort(strs):
-    # 从低位往高位
-    for i in range(len(strs[0]) - 1, -1, -1):
-        # 记录各个字符对应的字符串
-        aux = [[] for _ in range(10)]
-        for j in range(0, len(strs)):
-            idx = ord(strs[j][i]) - ord('0')
-            aux[idx].append(strs[j])
-        k = 0
-        for j in range(0, 10):
-            for item in aux[j]:
-                strs[k] = item
-                k += 1
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lsd_sort</span>(strs):
+    <span style="color:#75715e"># 从低位往高位</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(strs[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+        <span style="color:#75715e"># 记录各个字符对应的字符串</span>
+        aux <span style="color:#f92672">=</span> [[] <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>)]
+        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(strs)):
+            idx <span style="color:#f92672">=</span> ord(strs[j][i]) <span style="color:#f92672">-</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)
+            aux[idx]<span style="color:#f92672">.</span>append(strs[j])
+        k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>):
+            <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> aux[j]:
+                strs[k] <span style="color:#f92672">=</span> item
+                k <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
     
-print(phones)
+<span style="color:#66d9ef">print</span>(phones)
 lsd_sort(phones)
-print(phones)
-</code></pre>
-
-<pre><code>['04145432564', '86748121667', '26710905823', '51612671904', '86609844213', '30603651543', '51116348132', '48212721677', '70985842642', '46470938975']
+<span style="color:#66d9ef">print</span>(phones)
+</code></pre></div><pre><code>['04145432564', '86748121667', '26710905823', '51612671904', '86609844213', '30603651543', '51116348132', '48212721677', '70985842642', '46470938975']
 ['04145432564', '26710905823', '30603651543', '46470938975', '48212721677', '51116348132', '51612671904', '70985842642', '86609844213', '86748121667']
 </code></pre>
-
 <p>这个算法，每次M个循环里面，都做了1次N循环和1次10循环，所以总的时间复杂度$O(N * M)$。</p>
-
 <h2 id="msd字符串排序算法">MSD字符串排序算法</h2>
-
 <p>MSD(Most Significant Digital)高位优先字符串排序，它的思想是这样的，从每个字符串的高位开始，做一次桶排序，高位字符可能有很多是相同的，对它每组相同的字符，对它们的子字符串递归地做一次MSD排序，为了提高性能，当每组元素个数少于某个阀值时，做插入排序。这样子，大部分情况下，只需要看前面几个字符就可以完成整个排序。代码实现如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">phones <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>):
+    phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">11</span>)])
+    phones<span style="color:#f92672">.</span>append(phone)
 
-<pre><code class="language-python">phones = []
-for i in range(0, 10):
-    phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, 11)])
-    phones.append(phone)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">insert_sort</span>(strs, low, high, index):
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(low <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, high <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+        temp <span style="color:#f92672">=</span> strs[i]
+        j <span style="color:#f92672">=</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">while</span> j <span style="color:#f92672">&gt;=</span> low:
+            <span style="color:#66d9ef">if</span> temp[index:] <span style="color:#f92672">&lt;</span> strs[j][index:]:
+                strs[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> strs[j]
+            j <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+        strs[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> temp
 
-def insert_sort(strs, low, high, index):
-    for i in range(low + 1, high + 1):
-        temp = strs[i]
-        j = i - 1
-        while j &gt;= low:
-            if temp[index:] &lt; strs[j][index:]:
-                strs[j + 1] = strs[j]
-            j -= 1
-        strs[j + 1] = temp
-
-def msd_sort(strs):
-    # 从高位开始
-    msd_sort_r(strs, 0, len(strs) - 1, 0)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">msd_sort</span>(strs):
+    <span style="color:#75715e"># 从高位开始</span>
+    msd_sort_r(strs, <span style="color:#ae81ff">0</span>, len(strs) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>)
     
-def msd_sort_r(strs, low, high, index):
-    if high &lt;= low or index &gt;= len(strs[0]):
-        return
-    if high - low &lt;= 7:
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">msd_sort_r</span>(strs, low, high, index):
+    <span style="color:#66d9ef">if</span> high <span style="color:#f92672">&lt;=</span> low <span style="color:#f92672">or</span> index <span style="color:#f92672">&gt;=</span> len(strs[<span style="color:#ae81ff">0</span>]):
+        <span style="color:#66d9ef">return</span>
+    <span style="color:#66d9ef">if</span> high <span style="color:#f92672">-</span> low <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">7</span>:
         insert_sort(strs, low, high, index)
-        return
-    aux = [[] for _ in range(10)]
-    for i in range(low, high + 1):
-        idx = ord(strs[i][index]) - ord('0')
-        aux[idx].append(strs[i])
-    k = low
-    for i in range(0, len(aux)):
-        for item in aux[i]:
-            strs[k] = item
-            k += 1
-    for i in range(0, len(aux)):
-        msd_sort_r(strs, low, low + len(aux[i]) - 1, index + 1)
-        low += len(aux[i])
+        <span style="color:#66d9ef">return</span>
+    aux <span style="color:#f92672">=</span> [[] <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>)]
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(low, high <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+        idx <span style="color:#f92672">=</span> ord(strs[i][index]) <span style="color:#f92672">-</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)
+        aux[idx]<span style="color:#f92672">.</span>append(strs[i])
+    k <span style="color:#f92672">=</span> low
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(aux)):
+        <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> aux[i]:
+            strs[k] <span style="color:#f92672">=</span> item
+            k <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(aux)):
+        msd_sort_r(strs, low, low <span style="color:#f92672">+</span> len(aux[i]) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+        low <span style="color:#f92672">+=</span> len(aux[i])
         
-print(phones)
+<span style="color:#66d9ef">print</span>(phones)
 msd_sort(phones)
-print(phones)
-</code></pre>
-
-<pre><code>['08914475530', '36382806030', '17292598106', '79423140725', '61884265921', '96644424367', '48257134818', '92088637322', '12274980975', '99064046401']
+<span style="color:#66d9ef">print</span>(phones)
+</code></pre></div><pre><code>['08914475530', '36382806030', '17292598106', '79423140725', '61884265921', '96644424367', '48257134818', '92088637322', '12274980975', '99064046401']
 ['08914475530', '12274980975', '17292598106', '36382806030', '48257134818', '61884265921', '79423140725', '99064046401', '96644424367', '99064046401']
 </code></pre>
-
 <h2 id="三向字符串排序">三向字符串排序</h2>
-
 <p>快速排序的原理我们都知道，就是取一个参考元素，把比它小的元素放到左边，比它大的元素放到右边，然后递归下去。</p>
-
 <p>三向字符串排序的原理是这样的，取一个参考元素，从高位字符开始，高位字符比参考元素的小的在左边，比它大的在右边，中间的是高位元素相同的，这个时候，除了递归左右两边的，还要把高位元素相同的一组元素，按下一位继续排序。代码实现如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">phones <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>):
+    phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">11</span>)])
+    phones<span style="color:#f92672">.</span>append(phone)
 
-<pre><code class="language-python">phones = []
-for i in range(0, 10):
-    phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, 11)])
-    phones.append(phone)
-
-def quick3_sort(strs):
-    # 从高位开始
-    quick3_sort_r(strs, 0, len(strs) - 1, 0)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quick3_sort</span>(strs):
+    <span style="color:#75715e"># 从高位开始</span>
+    quick3_sort_r(strs, <span style="color:#ae81ff">0</span>, len(strs) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>)
     
-def quick3_sort_r(strs, low, high, index):
-    if high &lt;= low or index &gt;= len(strs[0]):
-        return
-    if high - low &lt;= 7:
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quick3_sort_r</span>(strs, low, high, index):
+    <span style="color:#66d9ef">if</span> high <span style="color:#f92672">&lt;=</span> low <span style="color:#f92672">or</span> index <span style="color:#f92672">&gt;=</span> len(strs[<span style="color:#ae81ff">0</span>]):
+        <span style="color:#66d9ef">return</span>
+    <span style="color:#66d9ef">if</span> high <span style="color:#f92672">-</span> low <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">7</span>:
         insert_sort(strs, low, high, index)
-        return
-    pivot_idx = low
-    i = low + 1
-    last_left = low - 1
-    first_right = high + 1
-    while i &lt; first_right:
-        if strs[i][index] &lt; strs[pivot_idx][index]:
-            last_left += 1
-            temp = strs[last_left]
-            strs[last_left] = strs[i]
-            strs[i] = temp
-            pivot_idx = last_left + 1
-        elif strs[i][index] &gt; strs[pivot_idx][index]:
-            first_right -= 1
-            temp = strs[first_right]
-            strs[first_right] = strs[i]
-            strs[i] = temp
-        else:
-            i += 1
+        <span style="color:#66d9ef">return</span>
+    pivot_idx <span style="color:#f92672">=</span> low
+    i <span style="color:#f92672">=</span> low <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+    last_left <span style="color:#f92672">=</span> low <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+    first_right <span style="color:#f92672">=</span> high <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;</span> first_right:
+        <span style="color:#66d9ef">if</span> strs[i][index] <span style="color:#f92672">&lt;</span> strs[pivot_idx][index]:
+            last_left <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+            temp <span style="color:#f92672">=</span> strs[last_left]
+            strs[last_left] <span style="color:#f92672">=</span> strs[i]
+            strs[i] <span style="color:#f92672">=</span> temp
+            pivot_idx <span style="color:#f92672">=</span> last_left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">elif</span> strs[i][index] <span style="color:#f92672">&gt;</span> strs[pivot_idx][index]:
+            first_right <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+            temp <span style="color:#f92672">=</span> strs[first_right]
+            strs[first_right] <span style="color:#f92672">=</span> strs[i]
+            strs[i] <span style="color:#f92672">=</span> temp
+        <span style="color:#66d9ef">else</span>:
+            i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
     quick3_sort_r(strs, low, last_left, index)
-    quick3_sort_r(strs, last_left + 1, first_right - 1, index + 1)
+    quick3_sort_r(strs, last_left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, first_right <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
     quick3_sort_r(strs, first_right, high, index)
         
-print(phones)
+<span style="color:#66d9ef">print</span>(phones)
 quick3_sort(phones)
-print(phones)
-</code></pre>
-
-<pre><code>['08104132906', '31709678996', '08273091795', '79987194126', '83552801655', '59365186752', '97600677349', '22396353108', '81547158280', '73500845523']
+<span style="color:#66d9ef">print</span>(phones)
+</code></pre></div><pre><code>['08104132906', '31709678996', '08273091795', '79987194126', '83552801655', '59365186752', '97600677349', '22396353108', '81547158280', '73500845523']
 ['08273091795', '08273091795', '31709678996', '73500845523', '81547158280', '97600677349', '97600677349', '83552801655', '83552801655', '97600677349']
 </code></pre>
-
 <p>来写个性能测试来比较一下这几种排序算法哪个更快。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> timeit
 
-<pre><code class="language-python">import timeit
+phone_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>
+N <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000</span>
 
-phone_len = 11
-N = 10000
-
-def lsd_sort_test():
-    phones = []
-    for i in range(0, N):
-        phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, phone_len)])
-        phones.append(phone)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lsd_sort_test</span>():
+    phones <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, N):
+        phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, phone_len)])
+        phones<span style="color:#f92672">.</span>append(phone)
     lsd_sort(phones)
    
-def msd_sort_test():
-    phones = []
-    for i in range(0, N):
-        phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, phone_len)])
-        phones.append(phone)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">msd_sort_test</span>():
+    phones <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, N):
+        phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, phone_len)])
+        phones<span style="color:#f92672">.</span>append(phone)
     msd_sort(phones)
 
-def quick3_sort_test():
-    phones = []
-    for i in range(0, N):
-        phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, phone_len)])
-        phones.append(phone)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quick3_sort_test</span>():
+    phones <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, N):
+        phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, phone_len)])
+        phones<span style="color:#f92672">.</span>append(phone)
     quick3_sort(phones)
     
-def timsort_test():
-    phones = []
-    for i in range(0, N):
-        phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, phone_len)])
-        phones.append(phone)
-    phones.sort()
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">timsort_test</span>():
+    phones <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, N):
+        phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, phone_len)])
+        phones<span style="color:#f92672">.</span>append(phone)
+    phones<span style="color:#f92672">.</span>sort()
     
-def quick_sort_test():
-    phones = []
-    for i in range(0, N):
-        phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, phone_len)])
-        phones.append(phone)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quick_sort_test</span>():
+    phones <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, N):
+        phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, phone_len)])
+        phones<span style="color:#f92672">.</span>append(phone)
     quick_sort(phones)
     
-print(timeit.timeit('lsd_sort_test()', number=10, setup=&quot;from __main__ import lsd_sort_test&quot;))
-print(timeit.timeit('msd_sort_test()', number=10, setup=&quot;from __main__ import msd_sort_test&quot;))
-print(timeit.timeit('quick3_sort_test()', number=10, setup=&quot;from __main__ import quick3_sort_test&quot;))
-print(timeit.timeit('timsort_test()', number=10, setup=&quot;from __main__ import timsort_test&quot;))
-print(timeit.timeit('quick_sort_test()', number=10, setup=&quot;from __main__ import quick_sort_test&quot;))
-</code></pre>
-
-<pre><code>2.858616407000227
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(<span style="color:#e6db74">&#39;lsd_sort_test()&#39;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;from __main__ import lsd_sort_test&#34;</span>))
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(<span style="color:#e6db74">&#39;msd_sort_test()&#39;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;from __main__ import msd_sort_test&#34;</span>))
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(<span style="color:#e6db74">&#39;quick3_sort_test()&#39;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;from __main__ import quick3_sort_test&#34;</span>))
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(<span style="color:#e6db74">&#39;timsort_test()&#39;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;from __main__ import timsort_test&#34;</span>))
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(<span style="color:#e6db74">&#39;quick_sort_test()&#39;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;from __main__ import quick_sort_test&#34;</span>))
+</code></pre></div><pre><code>2.858616407000227
 2.4598556860000826
 2.801925394014688
 2.146542837988818
 2.5571339470043313
 </code></pre>
-
 <p>测试发现，对于10000个随机11位字符串，内置的timsort算法是最快的，然后是MSD算法，然后是快排，然后是三向快速排序，然后是LSD排序算法。这下子啪啪啪打脸了，本来以为这个LSD算法$O(N * W)$的时间复杂度是比$O(NlogN)$要快，但是结果是比快排要慢。大概的原因是，由于字符串长度是11，共10000个用例，log2(10000)是13.28，只比11大一点点，由于LSD排序还要开辟新空间并回写到原数组，所以会慢一些，如果把字符串长度调小或者用例数量调大，LSD排序是要比快排快的。三向快速排序比普通快速排序慢的原因是，三向快速排序适合有公共前缀或者很多重复元素的情况下。
 假设字符串长度为3:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">phone_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+N <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000</span>
 
-<pre><code class="language-python">phone_len = 3
-N = 10000
-
-def lsd_sort_test():
-    phones = []
-    for i in range(0, N):
-        phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, phone_len)])
-        phones.append(phone)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lsd_sort_test</span>():
+    phones <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, N):
+        phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, phone_len)])
+        phones<span style="color:#f92672">.</span>append(phone)
     lsd_sort(phones)
 
-def msd_sort_test():
-    phones = []
-    for i in range(0, N):
-        phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, phone_len)])
-        phones.append(phone)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">msd_sort_test</span>():
+    phones <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, N):
+        phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, phone_len)])
+        phones<span style="color:#f92672">.</span>append(phone)
     msd_sort(phones)
     
-def quick3_sort_test():
-    phones = []
-    for i in range(0, N):
-        phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, phone_len)])
-        phones.append(phone)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quick3_sort_test</span>():
+    phones <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, N):
+        phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, phone_len)])
+        phones<span style="color:#f92672">.</span>append(phone)
     quick3_sort(phones)
     
-def timsort_test():
-    phones = []
-    for i in range(0, N):
-        phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, phone_len)])
-        phones.append(phone)
-    phones.sort()
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">timsort_test</span>():
+    phones <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, N):
+        phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, phone_len)])
+        phones<span style="color:#f92672">.</span>append(phone)
+    phones<span style="color:#f92672">.</span>sort()
     
-def quick_sort_test():
-    phones = []
-    for i in range(0, N):
-        phone = ''.join([chr(random.randint(0, 9) + ord('0')) for i in range(0, phone_len)])
-        phones.append(phone)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quick_sort_test</span>():
+    phones <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, N):
+        phone <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#f92672">+</span> ord(<span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, phone_len)])
+        phones<span style="color:#f92672">.</span>append(phone)
     quick_sort(phones)
     
-print(timeit.timeit('lsd_sort_test()', number=10, setup=&quot;from __main__ import lsd_sort_test&quot;))
-print(timeit.timeit('msd_sort_test()', number=10, setup=&quot;from __main__ import msd_sort_test&quot;))
-print(timeit.timeit('quick3_sort_test()', number=10, setup=&quot;from __main__ import quick3_sort_test&quot;))
-print(timeit.timeit('timsort_test()', number=10, setup=&quot;from __main__ import timsort_test&quot;))
-print(timeit.timeit('quick_sort_test()', number=10, setup=&quot;from __main__ import quick_sort_test&quot;))
-</code></pre>
-
-<pre><code>0.8569560649921186
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(<span style="color:#e6db74">&#39;lsd_sort_test()&#39;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;from __main__ import lsd_sort_test&#34;</span>))
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(<span style="color:#e6db74">&#39;msd_sort_test()&#39;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;from __main__ import msd_sort_test&#34;</span>))
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(<span style="color:#e6db74">&#39;quick3_sort_test()&#39;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;from __main__ import quick3_sort_test&#34;</span>))
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(<span style="color:#e6db74">&#39;timsort_test()&#39;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;from __main__ import timsort_test&#34;</span>))
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(<span style="color:#e6db74">&#39;quick_sort_test()&#39;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;from __main__ import quick_sort_test&#34;</span>))
+</code></pre></div><pre><code>0.8569560649921186
 0.8670862840081099
 1.2120806089951657
 0.7727651970053557
 1.326724906975869
 </code></pre>
-
 <p>TimSort真的是快，这算法真不是吹牛的，不愧是python和java的内置算法。</p>
-
 <h2 id="参考资料">参考资料</h2>
-
 <ul>
 <li>《算法》第4版</li>
 </ul>
@@ -576,7 +522,7 @@ print(timeit.timeit('quick_sort_test()', number=10, setup=&quot;from __main__ im
         id: '2018-09-08 00:00:00 \x2b0000 UTC',
         title: 'Learning String Sorting Algorithm',
         link: decodeURI(location.href),
-        desc: '场景 假设有一个手机号数组，要求对这个数组进行排序，怎么样排序最快呢？ 一般我们会用快排来实现，现场写一个快排: from collections import deque def swap(strs, i, j): temp = strs[i] strs[i] = strs[j] strs[j] =',
+        desc: '',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -642,7 +588,10 @@ print(timeit.timeit('quick_sort_test()', number=10, setup=&quot;from __main__ im
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

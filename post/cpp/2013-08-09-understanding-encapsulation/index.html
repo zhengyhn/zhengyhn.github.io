@@ -25,7 +25,7 @@ Encapsulation is not invisibility." /><meta name="keywords" content="Machine Lea
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/cpp/2013-08-09-understanding-encapsulation/" />
@@ -36,7 +36,8 @@ Encapsulation is not invisibility." /><meta name="keywords" content="Machine Lea
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -46,23 +47,19 @@ Why we need private It&rsquo;s related to a very important concept in C&#43;&#43
 Encapsulation is not invisibility." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/cpp/2013-08-09-understanding-encapsulation/" />
-<meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
-<meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
-
+<meta property="article:published_time" content="2016-05-14T16:35:19+08:00" />
+<meta property="article:modified_time" content="2016-05-14T16:35:19+08:00" />
 <meta itemprop="name" content="Understanding Encapsulation">
 <meta itemprop="description" content="Once I loved C very much and I thought it&rsquo;s the best programming language in the world. I used to argue that C can be used to implement the object-oriented design with struct. I used to argue that private and public is useless in C&#43;&#43;. However, now I know I was wrong.
 Why we need private It&rsquo;s related to a very important concept in C&#43;&#43;, that is, encapsulation.
 Encapsulation is not invisibility.">
-
-
 <meta itemprop="datePublished" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="dateModified" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="wordCount" content="573">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Understanding Encapsulation"/>
 <meta name="twitter:description" content="Once I loved C very much and I thought it&rsquo;s the best programming language in the world. I used to argue that C can be used to implement the object-oriented design with struct. I used to argue that private and public is useless in C&#43;&#43;. However, now I know I was wrong.
 Why we need private It&rsquo;s related to a very important concept in C&#43;&#43;, that is, encapsulation.
@@ -148,30 +145,21 @@ Encapsulation is not invisibility."/>
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#why-we-need-private">Why we need private</a></li>
-<li><a href="#prefer-non-member-non-friend-functions-to-member-functions">Prefer non-member non-friend functions to member functions</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#why-we-need-private">Why we need private</a></li>
+    <li><a href="#prefer-non-member-non-friend-functions-to-member-functions">Prefer non-member non-friend functions to member functions</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>Once I loved <em>C</em> very much and I thought it&rsquo;s the best programming language
+      <p>Once I loved <em>C</em> very much and I thought it&rsquo;s the best programming language
 in the world. I used to argue that <em>C</em> can be used to implement the
 object-oriented design with <code>struct</code>. I used to argue that <code>private</code> and
 <code>public</code> is useless in <em>C++</em>. However, now I know I was wrong.</p>
-
 <h2 id="why-we-need-private">Why we need private</h2>
-
 <p>It&rsquo;s related to a very important concept in C++, that is, <strong>encapsulation</strong>.</p>
-
 <p><strong>Encapsulation is not invisibility. It&rsquo;s maintainability.</strong></p>
-
 <p>Suppose a class is very popular and is used by many projects. For example,
 the <code>string</code> class. If every members in this class is <code>public</code>, the clients
 can use many interfaces to manipulate <code>string</code>. One day, when the <code>string</code>
@@ -180,17 +168,12 @@ have to modify there code. This is painful! If we declare some of the members
 <code>private</code> and change the name of the private members, only the implementations
 in the public member functions should be modified. None of the clients need to
 change their codes.</p>
-
 <p>Therefore, <strong>public means unchangable and public means unencapsulated</strong>.</p>
-
 <p>The public member functions should not be changed in the future. Since you don&rsquo;t
 know how your clients will use your class, don&rsquo;t expose the members that may be
 changed in the future to the clients.</p>
-
 <h2 id="prefer-non-member-non-friend-functions-to-member-functions">Prefer non-member non-friend functions to member functions</h2>
-
 <p>Consider the following class.</p>
-
 <pre><code>class Person {
 public:
     explicit Person()
@@ -211,10 +194,8 @@ private:
     std::string name;
 };
 </code></pre>
-
 <p>Somebody may want to use the functions together, so we add another member
 function.</p>
-
 <pre><code>class Person {
 public:
     explicit Person()
@@ -241,12 +222,9 @@ private:
     std::string name;
 };
 </code></pre>
-
 <p>This is straightforward, especially for those Java and C# programmers. Every
 functions should be in a class and everything is object. It&rsquo;s obvious, right?</p>
-
 <p>However, e have another option, that is, using the non-member function.</p>
-
 <pre><code>class Person {
 public:
     explicit Person()
@@ -274,26 +252,20 @@ person_say(const Person&amp; p)
     p.say_name();
 }
 </code></pre>
-
 <p>Which is better? It seems that they are the same.</p>
-
 <p>We should use the non-member function instead of the member function.</p>
-
 <p>As we all know, **the less the public member functions and the friend **
- <strong>functions, the greater encapsulation is</strong>, since member functions and
+<strong>functions, the greater encapsulation is</strong>, since member functions and
 friend functions are the only interface that can access the private members.</p>
-
 <p>In this example, if we add another public member function, we decrease the
 encapsulation of the class since this member function can access the private
 members of the class. But if we use the non-member non-friend function, it
 won&rsquo;t have impact with the class because it&rsquo;s the function outside.</p>
-
 <p>Does it explain that <em>C++</em> is not so object-oriented? From Java or C#, those
 programmers will say that everything is object and classes are everywhere.
 However, they are wrong. Object-oriented princiles state that <strong>data should be</strong>
 <strong>encapsulated as possible</strong>. Therefore, prefering non-member non-friend
 functions is more <em>object-oriented</em>.</p>
-
 <p>Until now, I can say that I really understand the meaning of encapsulation and
 why it&rsquo;s so important in object-oriented programming.</p>
 
@@ -422,7 +394,10 @@ why it&rsquo;s so important in object-oriented programming.</p>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

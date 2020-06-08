@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;鸟哥的linux私房菜基础学习篇(第三版)&amp;ldquo;一书的笔记 @&amp;lt;/font&amp;gt; 概念 原来BSD是指Berkeley Software Distribution. System V是AT" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;鸟哥的linux私房菜基础学习篇(第三版)&amp;ldquo;一书的笔记 @&amp;lt;/font&amp;gt; 概念 原来BSD是指Berkeley Software Distribution. System V是AT&amp;" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/linux/linux.org/" />
@@ -34,31 +34,28 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="鸟哥的linux私房菜笔记：linux是什么&amp;主机规划" />
-<meta property="og:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;鸟哥的linux私房菜基础学习篇(第三版)&ldquo;一书的笔记 @&lt;/font&gt; 概念 原来BSD是指Berkeley Software Distribution. System V是AT" />
+<meta property="og:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;鸟哥的linux私房菜基础学习篇(第三版)&ldquo;一书的笔记 @&lt;/font&gt; 概念 原来BSD是指Berkeley Software Distribution. System V是AT&" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/linux/linux.org/" />
-<meta property="article:published_time" content="2013-03-22T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-03-22T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-03-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-03-22T00:00:00+00:00" />
 <meta itemprop="name" content="鸟哥的linux私房菜笔记：linux是什么&amp;主机规划">
-<meta itemprop="description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;鸟哥的linux私房菜基础学习篇(第三版)&ldquo;一书的笔记 @&lt;/font&gt; 概念 原来BSD是指Berkeley Software Distribution. System V是AT">
-
-
+<meta itemprop="description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;鸟哥的linux私房菜基础学习篇(第三版)&ldquo;一书的笔记 @&lt;/font&gt; 概念 原来BSD是指Berkeley Software Distribution. System V是AT&">
 <meta itemprop="datePublished" content="2013-03-22T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-03-22T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1189">
+<meta itemprop="wordCount" content="1188">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="鸟哥的linux私房菜笔记：linux是什么&amp;主机规划"/>
-<meta name="twitter:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;鸟哥的linux私房菜基础学习篇(第三版)&ldquo;一书的笔记 @&lt;/font&gt; 概念 原来BSD是指Berkeley Software Distribution. System V是AT"/>
+<meta name="twitter:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;鸟哥的linux私房菜基础学习篇(第三版)&ldquo;一书的笔记 @&lt;/font&gt; 概念 原来BSD是指Berkeley Software Distribution. System V是AT&"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -130,7 +127,7 @@
       <div class="post-meta">
         <span class="post-time"> 2013-03-22 </span>
         
-          <span class="more-meta"> 约 1189 字 </span>
+          <span class="more-meta"> 约 1188 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -140,99 +137,65 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#概念">概念</a></li>
-<li><a href="#常识">常识</a></li>
-<li><a href="#ide">IDE</a></li>
-<li><a href="#磁盘">磁盘</a>
-<ul>
-<li><a href="#分区表">分区表</a></li>
-<li><a href="#mbr">MBR</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#分区表">分区表</a></li>
+    <li><a href="#mbr">MBR</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>@&lt;font color=&ldquo;red&rdquo;&gt;
-本文为&rdquo;鸟哥的linux私房菜基础学习篇(第三版)&ldquo;一书的笔记 @&lt;/font&gt;</p>
-
+      <p>@&lt;font color=&quot;red&rdquo;&gt;
+本文为&quot;鸟哥的linux私房菜基础学习篇(第三版)&ldquo;一书的笔记 @&lt;/font&gt;</p>
 <h1 id="概念">概念</h1>
-
 <p>原来BSD是指Berkeley Software Distribution.</p>
-
 <p>System V是AT&amp;T自家的Unix</p>
-
 <p>LSB, Linux Standard Base</p>
-
 <p>FHS, File system Hierarchy Standard</p>
-
 <h1 id="常识">常识</h1>
-
 <p>常见设备的文件名：</p>
-
 <p>设备                文件名</p>
-
-<hr />
-
+<hr>
 <p>IDE硬盘             /dev/hd[a-d]
-  SCSI/SATA/USB磁盘   /dev/sd[a-p]
-  软盘                /dev/fd[0-1]
-  25针打印机          /dev/lp[0-2]
-  USB打印机           /dev/lp[0-15]
-  USB鼠标             /dev/usb/mouse[0-15]
-                      我的是：
-                      /dev/input/mouse[0-15]
-  PS2鼠标             /dev/psaux
-  当前CDROM/DVDROM    /dev/cdrom</p>
-
+SCSI/SATA/USB磁盘   /dev/sd[a-p]
+软盘                /dev/fd[0-1]
+25针打印机          /dev/lp[0-2]
+USB打印机           /dev/lp[0-15]
+USB鼠标             /dev/usb/mouse[0-15]
+我的是：
+/dev/input/mouse[0-15]
+PS2鼠标             /dev/psaux
+当前CDROM/DVDROM    /dev/cdrom</p>
 <h1 id="ide">IDE</h1>
-
 <p>一般的主机会提供2个IDE接口，通常称为IDE1（primary）和IDE2（secondary），
 每个IDE接口可以连接2个IDE装置，通常称为master和slave，于是最多可连接4个IDE
 装置。如下表：</p>
-
 <p>IDE    master   slave</p>
-
-<hr />
-
+<hr>
 <p>IDE1   hda      hdb
-  IDE2   hdc      hdd</p>
-
+IDE2   hdc      hdd</p>
 <h1 id="磁盘">磁盘</h1>
-
 <p>磁盘第一个扇区记录了两个重要信息：</p>
-
 <ul>
 <li>Master Boot
 Recorder，即大名鼎鼎的MBR，用于安装系统引导程序，占446字节</li>
 <li>分区表(Partition Table)，记录整个磁盘的分区情况，共64字节</li>
 </ul>
-
 <h2 id="分区表">分区表</h2>
-
 <p>磁柱(cylinder)是文件系统的最小单位，也是分区的最小单位。</p>
-
 <p>第一个扇区中的64字节的分区表，只能记录4个分区记录，每个记录16字节，记录了起始
 磁柱号和结束磁柱号。</p>
-
 <p>是不是只有分4个区呢？不是的，有人想出了很好的方法，可以分很多区。使用的是
 extended partition的方法。</p>
-
-<pre><code class="language-.example">比如有400个磁柱，那么按照传统的方法，分成4个区为sda1:1-100, sda2:101-200,
+<pre><code class="language-{.example}" data-lang="{.example}">比如有400个磁柱，那么按照传统的方法，分成4个区为sda1:1-100, sda2:101-200,
 sda3:201-300, sda4:301-400，4个都是primary partition.
 如果使用extended partition的方法，则为sda1:1-100, sda2:101-400,sda2中
 没有直接保存分区表信息，而是指向另外的扇区，比如一共要分6个区，sda1已经是一个
 了，sda2中没有，sda3和sda4这2个名字是保留给主分区用的，这里已经不存在了，于是
 下一个是sda5:101-160, sda6:161-220, sda7:221-280, sda8:281-340,
 sda9:341-400。
-</code></pre>
-
-<p>晒一下我现在的分区情况：</p>
-
-<pre><code class="language-.example">Disk /dev/sda: 160.0 GB, 160041885696 bytes, 312581808 sectors
+</code></pre><p>晒一下我现在的分区情况：</p>
+<pre><code class="language-{.example}" data-lang="{.example}">Disk /dev/sda: 160.0 GB, 160041885696 bytes, 312581808 sectors
 Units = sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
@@ -245,22 +208,15 @@ Disk identifier: 0xc3ffc3ff
 /dev/sda6        92907520   310310911   108701696   83  Linux
 /dev/sda7       310312960   312578047     1132544   82  Linux swap / Solaris
 
-</code></pre>
-
-<p>可以看到sda2记录的是61448686-312578047, sda5又从61448688开始，sda7结束
+</code></pre><p>可以看到sda2记录的是61448686-312578047, sda5又从61448688开始，sda7结束
 位置为312578047.</p>
-
 <p>扩展分区只能有1个,由扩展分区分出来的区称为逻辑分区，扩展分区无法格式化。</p>
-
 <h2 id="mbr">MBR</h2>
-
 <p>CMOS是记录硬件各项参数且嵌入在主板上的存储器</p>
-
 <p>BIOS是一个写入主板的固件(firmware)，即一个写入硬件的软件程序，它是开机时执行
 的第一个软件程序。BIOS会根据设定从某个磁盘（硬盘，软盘，光盘，U盘）启动，然后
 从磁盘中的第一个扇区读取MBR，MBR中包含了bootloader，bootloader可以读取
 操作系统内核，于是就开始启动系统了。</p>
-
 <p>每个分区都有自己的启动扇区，在安装引导（比如grub)时，可以选择安装到MBR还是某个
 分区的启动扇区。</p>
 
@@ -323,7 +279,7 @@ Disk identifier: 0xc3ffc3ff
         id: '2013-03-22 00:00:00 \x2b0000 UTC',
         title: '鸟哥的linux私房菜笔记：linux是什么\x26主机规划',
         link: decodeURI(location.href),
-        desc: '@\x26lt;font color=\x26ldquo;red\x26rdquo;\x26gt; 本文为\x26rdquo;鸟哥的linux私房菜基础学习篇(第三版)\x26ldquo;一书的笔记 @\x26lt;\/font\x26gt; 概念 原来BSD是指Berkeley Software Distribution. System V是AT',
+        desc: '@\x26lt;font color=\x26quot;red\x26rdquo;\x26gt; 本文为\x26quot;鸟哥的linux私房菜基础学习篇(第三版)\x26ldquo;一书的笔记 @\x26lt;\/font\x26gt; 概念 原来BSD是指Berkeley Software Distribution. System V是AT\x26',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -389,7 +345,10 @@ Disk identifier: 0xc3ffc3ff
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

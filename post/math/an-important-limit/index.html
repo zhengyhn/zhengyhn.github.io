@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/math/an-important-limit/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="这个权限是: $$ \lim_{x \to 0}\frac{sinx}{x} = 1 $$ 证明方法是用几何方法，这里学到了不少东西。 先看图: sinx/x circle 证明: 做一个半径为 1 的圆，x 为该扇形的弧度，所以弧长 $\widehat{AB} = x, BO" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/math/an-important-limit/" />
-<meta property="article:published_time" content="2020-04-11T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2020-04-11T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2020-04-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-04-11T00:00:00+00:00" />
 <meta itemprop="name" content="一个重要权限的证明">
 <meta itemprop="description" content="这个权限是: $$ \lim_{x \to 0}\frac{sinx}{x} = 1 $$ 证明方法是用几何方法，这里学到了不少东西。 先看图: sinx/x circle 证明: 做一个半径为 1 的圆，x 为该扇形的弧度，所以弧长 $\widehat{AB} = x, BO">
-
-
 <meta itemprop="datePublished" content="2020-04-11T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-04-11T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="300">
 
 
 
-<meta itemprop="keywords" content="Math," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Math," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="一个重要权限的证明"/>
 <meta name="twitter:description" content="这个权限是: $$ \lim_{x \to 0}\frac{sinx}{x} = 1 $$ 证明方法是用几何方法，这里学到了不少东西。 先看图: sinx/x circle 证明: 做一个半径为 1 的圆，x 为该扇形的弧度，所以弧长 $\widehat{AB} = x, BO"/>
 
@@ -141,83 +138,50 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>这个权限是:</p>
-
 <p>$$ \lim_{x \to 0}\frac{sinx}{x} = 1 $$</p>
-
 <p>证明方法是用几何方法，这里学到了不少东西。</p>
-
 <p>先看图:</p>
-
 <figure>
     <img src="/images/sinx_x_circle.png" width="50%"/> <figcaption>
             <h4>sinx/x circle</h4>
         </figcaption>
 </figure>
 
-
 <p>证明:</p>
-
 <p>做一个半径为 1 的圆，x 为该扇形的弧度，所以弧长 $\widehat{AB} = x, BO = AO = 1 $,</p>
-
 <p>则:</p>
-
 <p>$$ sinx = \frac{BC}{BO} = BC $$</p>
-
 <p>由于:</p>
-
 <p>$$ sinx = \frac{AD}{DO} $$
 $$ cosx = \frac{AO}{DO} = \frac{1}{DO} $$</p>
-
 <p>两式相除，得:</p>
-
 <p>$$ tanx = \frac{\frac{AD}{DO}}{\frac{1}{DO}} = AD $$</p>
-
 <p>三角形 AOB 的面积为:</p>
-
 <p>$$ S_{\Delta AOB} = \frac{1}{2}BC \times AO = \frac{1}{2}BC \times 1 = \frac{1}{2}sinx $$</p>
-
 <p>扇形 AOB 的面积为:</p>
-
 <p>$$ S_{\widehat{AOB}} = \frac{1}{2}\widehat{AB} \times AO = \frac{1}{2}\widehat{AB} \times 1 = \frac{1}{2}x $$</p>
-
 <p>三角形 AOD 的面积为:</p>
-
 <p>$$ S_{\Delta AOD} = \frac{1}{2}AD \times AO = \frac{1}{2}AD \times 1 = \frac{1}{2}tanx $$</p>
-
 <p>从图中可以看出，</p>
-
 <p>三角形 AOB 的面积 &lt; 扇形 AOB 的面积 &lt; 三角形 AOD 的面积</p>
-
 <p>所以:</p>
-
 <p>$$ \frac{1}{2}sinx \lt \frac{1}{2}x \lt \frac{1}{2}tanx $$</p>
-
 <p>所以:</p>
-
 <p>$$ sinx \lt x \lt tanx $$</p>
-
 <p>都除以 sinx，得:</p>
-
 <p>$$ 1 \lt \frac{x}{sinx} \lt \frac{1}{cosx} $$</p>
-
 <p>取倒数，得:</p>
-
 <p>$$ cosx \lt \frac{sinx}{x} \lt 1 $$</p>
-
 <p>通过画图，容易得:</p>
-
 <p>$$ \lim_{x \to 0}cosx = 1$$</p>
-
 <p>$$ \lim_{x \to 0}1 = 1 $$</p>
-
 <p>根据夹逼定理，得
 $$ \lim_{x \to 0}\frac{sinx}{x} = 1 $$</p>
-
 <p>证毕。</p>
 
     </div>
@@ -259,7 +223,11 @@ $$ \lim_{x \to 0}\frac{sinx}{x} = 1 $$</p>
           <a href="/tags/math/">Math</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/math/adjugate_matrix_property/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">伴随矩阵恒等式的证明</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/math/frequently_used_inequation/">
             <span class="next-text nav-default">常用不等式及证明</span>
             <span class="next-text nav-mobile">下一篇</span>
@@ -343,7 +311,10 @@ $$ \lim_{x \to 0}\frac{sinx}{x} = 1 $$</p>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

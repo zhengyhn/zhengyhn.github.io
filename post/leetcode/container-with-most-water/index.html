@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/leetcode/container-with-most-water/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="题目 Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water. Note: You may not slant the container and n is at least 2." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/leetcode/container-with-most-water/" />
-<meta property="article:published_time" content="2018-05-27T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-05-27T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2018-05-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-05-27T00:00:00+00:00" />
 <meta itemprop="name" content="container-with-most-water">
 <meta itemprop="description" content="题目 Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water. Note: You may not slant the container and n is at least 2.">
-
-
 <meta itemprop="datePublished" content="2018-05-27T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-05-27T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="947">
 
 
 
-<meta itemprop="keywords" content="leetcode,算法," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="leetcode,算法," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="container-with-most-water"/>
 <meta name="twitter:description" content="题目 Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water. Note: You may not slant the container and n is at least 2."/>
 
@@ -142,39 +139,24 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#题目">题目</a></li>
-<li><a href="#思路一">思路一</a></li>
-<li><a href="#思路二">思路二</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h4 id="题目">题目</h4>
-
+      <h4 id="题目">题目</h4>
 <pre><code>Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.
 
 Note: You may not slant the container and n is at least 2.
-</code></pre>
-
-<h4 id="思路一">思路一</h4>
-
+</code></pre><h4 id="思路一">思路一</h4>
 <p>一开始我理解错了，以为是求相邻两条线段之间的面积最大，很快写了个方法提交上去，结果是Wrong Answer. 一看，原来是要任意两条线段之间的面积。</p>
-
 <p>直观的想法，就是暴力，遍历所有的两两线段，计算出面积，取面积最大的，提交上去，结果是Time Exceed Limit. 下面是暴力的代码:</p>
-
 <pre><code>class Solution {
   public:
     int maxArea(vector&lt;int&gt;&amp; height) {
@@ -196,35 +178,23 @@ Note: You may not slant the container and n is at least 2.
     }
 };
 
-</code></pre>
-
-<p>看来不能暴力，暴力的时间复杂度是O(n^2)。难道可以动态规划？但是想了一下，又没有重复子问题，看来这个方向不对。</p>
-
+</code></pre><p>看来不能暴力，暴力的时间复杂度是O(n^2)。难道可以动态规划？但是想了一下，又没有重复子问题，看来这个方向不对。</p>
 <h4 id="思路二">思路二</h4>
-
 <p>看来这个问题，在暴力的方法中，肯定存在一些步骤是没有必要的，只能通过观察。我尝试画了一下，举了几个例子，发现:</p>
-
 <ul>
 <li>每次取两条线段，面积的大小取决于最短的那一条，这叫做短板效应。</li>
 </ul>
-
 <p>想起来查理芒格那句话: 反过来想，总是反过来想。所以初始的时候，取最左边和最右边的两条线段，是不是当前最大的面积呢？之前我思考的时候总是取最前面的几条。</p>
-
 <p>最重要的发现是:</p>
-
 <ul>
 <li>如果取两条线段，计算了面积之后，我们移动较长的那条线段，不管怎么移动，后面算出来的面积都不会比初始的面积大
 因为面积的大小等于宽度乘以高度，一开始的宽度最大，由于面积的大小取决于最短的那一条, 所以后面取的线段，最短的高度一定是小于等于一开始的线段的高度，
 可是宽度又变小了，那么面积肯定变小。</li>
 </ul>
-
 <p>如果两条线段长度相等, 验证了一下，发现也符合这个规律。</p>
-
 <p>那这样就好办了，每次移动线段时，找到最短的线段，往中间移动，因为没必要再移动最长的线段了，这样可以大大减少不必要的计算，
 理论上O(n)的时间复杂度下就可以解决这个问题。</p>
-
 <p>下面是这种思路的代码:</p>
-
 <pre><code>class Solution {
   public:
     int maxArea(vector&lt;int&gt;&amp; height) {
@@ -251,10 +221,7 @@ Note: You may not slant the container and n is at least 2.
     }
 };
 
-</code></pre>
-
-<p>提交上去，居然打败了96%的人!</p>
-
+</code></pre><p>提交上去，居然打败了96%的人!</p>
 <p>一大早起来刷道题，还是很有成就感的，不说废话了，收拾东西上班去。</p>
 
     </div>
@@ -385,7 +352,10 @@ Note: You may not slant the container and n is at least 2.
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

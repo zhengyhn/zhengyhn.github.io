@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/linux/intuition.org/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="常识 当命令太长时，可以使用反斜杠\来防止按RET执行命令，能在下一行继续输入 可以用分号;来分隔命令，因为可以在同一行输入多个命令 显示日历：c" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/linux/intuition.org/" />
-<meta property="article:published_time" content="2013-03-28T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-03-28T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-03-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-03-28T00:00:00+00:00" />
 <meta itemprop="name" content="linux系统初识">
 <meta itemprop="description" content="常识 当命令太长时，可以使用反斜杠\来防止按RET执行命令，能在下一行继续输入 可以用分号;来分隔命令，因为可以在同一行输入多个命令 显示日历：c">
-
-
 <meta itemprop="datePublished" content="2013-03-28T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-03-28T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1626">
+<meta itemprop="wordCount" content="1622">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="linux系统初识"/>
 <meta name="twitter:description" content="常识 当命令太长时，可以使用反斜杠\来防止按RET执行命令，能在下一行继续输入 可以用分号;来分隔命令，因为可以在同一行输入多个命令 显示日历：c"/>
 
@@ -130,7 +127,7 @@
       <div class="post-meta">
         <span class="post-time"> 2013-03-28 </span>
         
-          <span class="more-meta"> 约 1626 字 </span>
+          <span class="more-meta"> 约 1622 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -139,212 +136,140 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#常识">常识</a></li>
-<li><a href="#man">man</a></li>
-<li><a href="#关机">关机</a></li>
-<li><a href="#文件管理">文件管理</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h1 id="常识">常识</h1>
-
+      <h1 id="常识">常识</h1>
 <ul>
 <li>当命令太长时，可以使用反斜杠\来防止按RET执行命令，能在下一行继续输入</li>
 <li>可以用分号;来分隔命令，因为可以在同一行输入多个命令</li>
 <li>显示日历：cal</li>
 </ul>
-
 <h1 id="man">man</h1>
-
 <p>man中查询的项后面的数字的含义：</p>
-
 <p>数字   含义</p>
-
-<hr />
-
+<hr>
 <p>1      shell命令或可执行文件
-  2      系统调用
-  3      C函数库
-  4      设备文件
-  5      配置文件
-  6      游戏
-  7      协议
-  8      管理员可用的命令
-  9      和kernel有关的文件</p>
-
+2      系统调用
+3      C函数库
+4      设备文件
+5      配置文件
+6      游戏
+7      协议
+8      管理员可用的命令
+9      和kernel有关的文件</p>
 <p>如：man fstab, man NULL</p>
-
 <p>其中1，5，8特别重要，但是怎么记住呢？man man就行了！</p>
-
 <p>man -f参数能够显示要查找的东西的简短解释, whatis也行。</p>
-
-<p>info这货好，man是用vim的快捷键的，而info则是用Emacs的快捷键的，正好适合我\^_\^.</p>
-
+<p>info这货好，man是用vim的快捷键的，而info则是用Emacs的快捷键的，正好适合我^_^.</p>
 <h1 id="关机">关机</h1>
-
 <p>ps -u 可以查看当前user的进程 ps -au 查看所有user的进程</p>
-
 <p>sync 可以将内存中的数据同步进硬盘。</p>
-
 <p>shutdown,
 halt和poweroff的区别，引用自<a href="http://serverfault.com/questions/191537/shutdown-what-is-difference-between-power-off-and-halt">serverfault</a></p>
-
 <ul>
-<li>shutdown -H now 相当于halt,会关机，最后显示器显示&rdquo;System halted&rdquo;</li>
+<li>shutdown -H now 相当于halt,会关机，最后显示器显示&quot;System halted&rdquo;</li>
 <li>shutdown -P now 相当于poweroff，会关机会关闭电源</li>
 <li>shutdown -h now 则由BIOS的设定而halt或者poweroff</li>
 </ul>
-
 <p>run level</p>
-
 <p>一共有7种执行等级，常见的4种为：</p>
-
 <ul>
 <li>run level 0:关机</li>
 <li>run level 3:纯文本模式</li>
 <li>run level 5: 图形接口模式</li>
 <li>run level 6: 重启</li>
 </ul>
-
 <p>因此，可以使用命令</p>
-
-<pre><code class="language-.example">init 0
-</code></pre>
-
-<p>来关机。</p>
-
+<pre><code class="language-{.example}" data-lang="{.example}">init 0
+</code></pre><p>来关机。</p>
 <h1 id="文件管理">文件管理</h1>
-
 <p>用户的相关信息放在了/etc/passwd里面，密码放到了/etc/shadow。所有的组的信息都
 放在了/etc/group里面。</p>
-
 <p>ls -l出来的信息，例如：</p>
-
-<pre><code class="language-.example">drwxr-xr-x  2 monkey sudo     4096 Feb 24 14:43 beijing
+<pre><code class="language-{.example}" data-lang="{.example}">drwxr-xr-x  2 monkey sudo     4096 Feb 24 14:43 beijing
 -rw-r--r--  1 monkey sudo    40914 Mar 21 20:39 caiji.jpg
-</code></pre>
-
-<p>第一部分是权限类型。以beijing那个目录为例，第一个是文件类型，有下面各种：</p>
-
+</code></pre><p>第一部分是权限类型。以beijing那个目录为例，第一个是文件类型，有下面各种：</p>
 <p>符号   类型</p>
-
-<hr />
-
-<p>d      directory目录
-  -      普通文件
-  l      link链接文件
-  b      block存储型设备文件
-  c      char字符型设备文件
-  p      pipe数据输送文件
-  s      socket网络端口文件</p>
-
+<hr>
+<p>d      directory目录</p>
+<ul>
+<li>
+<pre><code> 普通文件
+</code></pre>
+</li>
+</ul>
+<p>l      link链接文件
+b      block存储型设备文件
+c      char字符型设备文件
+p      pipe数据输送文件
+s      socket网络端口文件</p>
 <p>接下来的字符中3个为一组，第一组为owner的权限，第二组为所有群组的用户权限，
 第三组为其它人的权限。</p>
-
 <p>第二部分是一个数字，表示连接到该inode中。</p>
-
 <p>第三部分是owner,第四部分是group,第四部分是大小，单位为字节，第五部分为修改
 日期，最后一部分是文件名。</p>
-
 <p>chown可以同时改变用户和组，如：</p>
-
-<pre><code class="language-.example">sudo chown monkey:sudo caiji.jpg
-</code></pre>
-
-<p>就OK了，再也不用打2个命令了。另外使用-R选项还能递归修改整个目录的用户了组。</p>
-
+<pre><code class="language-{.example}" data-lang="{.example}">sudo chown monkey:sudo caiji.jpg
+</code></pre><p>就OK了，再也不用打2个命令了。另外使用-R选项还能递归修改整个目录的用户了组。</p>
 <p>chmode的另外一种非数字的改变权限方法：</p>
-
-<hr />
-
+<hr>
 <p>chmod   u   +   r   filename
-          g   -   w<br />
-          o   =   x<br />
-          a</p>
-
-<hr />
-
+g   -   w<br>
+o   =   x<br>
+a</p>
+<hr>
 <p>如：</p>
-
-<pre><code class="language-.example">[monkey@itlodge pictures]$ ls -l caiji.jpg 
+<pre><code class="language-{.example}" data-lang="{.example}">[monkey@itlodge pictures]$ ls -l caiji.jpg 
 -rw-r--r-- 1 monkey sudo 40914 Mar 21 20:39 caiji.jpg
 [monkey@itlodge pictures]$ chmod u=rwx,g=rw,o=r caiji.jpg 
 [monkey@itlodge pictures]$ ls -l caiji.jpg 
 -rwxrw-r-- 1 monkey sudo 40914 Mar 21 20:39 caiji.jpg
-</code></pre>
-
-<p>文件的权限：</p>
-
+</code></pre><p>文件的权限：</p>
 <ul>
 <li>r，可读取内容</li>
 <li>w，可编辑，增加，修改，但是不能删除</li>
 <li>x，可执行</li>
 </ul>
-
 <p>目录的权限：</p>
-
 <ul>
 <li>r，可ls</li>
 <li>w, 可新建文件，删除文件，重命名文件，移动文件</li>
 <li>x，进入目录</li>
 </ul>
-
 <p>除了文本文件和二进制文件，居然还有一种数据文件，由程序指定的特定格式。
 last命令可读取整个系统登陆的情况的数据，其实读取的是/var/log/wtmp
 这个文件，用cat是读取不了的。</p>
-
 <p>还有2种奇葩文件：socket和FIFO/pipe文件。</p>
-
 <p>根目录下的/srv是service的缩写，用于放服务文件的。/sys和/proc差不多，都是记录
 与内核相关的信息。</p>
-
 <p>/usr不是user的缩写，是unix software resource的缩写。</p>
-
 <p>pwd,
 如果当前目录是一个链接目录的话，则显示当前目录，加上-P则显示链接到的目录</p>
-
-<pre><code class="language-.example">[monkey@itlodge mail]$ pwd
+<pre><code class="language-{.example}" data-lang="{.example}">[monkey@itlodge mail]$ pwd
 /var/mail
 [monkey@itlodge mail]$ pwd -P
 /var/spool/mail
-</code></pre>
-
-<p>mkdir, 加上-p可以建立新目录里面的新目录。</p>
-
-<pre><code class="language-.example">[monkey@itlodge tmp]$ mkdir a/b/
+</code></pre><p>mkdir, 加上-p可以建立新目录里面的新目录。</p>
+<pre><code class="language-{.example}" data-lang="{.example}">[monkey@itlodge tmp]$ mkdir a/b/
 mkdir: cannot create directory ‘a/b/’: No such file or directory
 [monkey@itlodge tmp]$ mkdir -p a/b/
 [monkey@itlodge tmp]$ ls
 a
-</code></pre>
-
-<p>cp, 加上-a可以把文件的所有属性都一起复制过去，是真正的复制。</p>
-
+</code></pre><p>cp, 加上-a可以把文件的所有属性都一起复制过去，是真正的复制。</p>
 <p>居然还有一个rename工具，可以用来指重命名。</p>
-
 <p>od可以用来查看二进制文件。</p>
-
 <p>每个文件都会记录三种时间：</p>
-
 <ol>
 <li>修改时间mtime</li>
 <li>状态时间ctime</li>
 <li>访问时间atime</li>
 </ol>
-
 <p>ls默认显示的是mtime，cat等查看工具会更新atime，修改了权限等状态会更新ctime.</p>
-
 <p>文件居然还有隐藏属性，使用chattr可以改变属性，比如+i会让文件不能被删除。lsattr
 可以列出隐藏属性。</p>
-
 <p>file命令可以查看文件的属性。</p>
-
 <p>type能查询可执行指令的类型（alias还是builtin还是可执行文件）</p>
 
     </div>
@@ -472,7 +397,10 @@ a
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

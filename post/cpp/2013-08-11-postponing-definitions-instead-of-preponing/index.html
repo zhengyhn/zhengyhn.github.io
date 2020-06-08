@@ -24,7 +24,7 @@ This makes programer write codes more convenient. But I used to insist the old s
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/cpp/2013-08-11-postponing-definitions-instead-of-preponing/" />
@@ -35,7 +35,8 @@ This makes programer write codes more convenient. But I used to insist the old s
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -44,22 +45,18 @@ This makes programer write codes more convenient. But I used to insist the old s
 This makes programer write codes more convenient. But I used to insist the old style. I even teach my students that they should use the old style when I was a TA of the course Programming with C." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/cpp/2013-08-11-postponing-definitions-instead-of-preponing/" />
-<meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
-<meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
-
+<meta property="article:published_time" content="2016-05-14T16:35:19+08:00" />
+<meta property="article:modified_time" content="2016-05-14T16:35:19+08:00" />
 <meta itemprop="name" content="Postponing definitions instead of preponing">
 <meta itemprop="description" content="Prepone definitions? Wrong! Before C99, you must prepone all the variables&rsquo; definitions before any statements. But after C99 was released, you can put a variable&rsquo;s definition in any place as long as before being used. I think this new feature is introduced by learning from C&#43;&#43;.
 This makes programer write codes more convenient. But I used to insist the old style. I even teach my students that they should use the old style when I was a TA of the course Programming with C.">
-
-
 <meta itemprop="datePublished" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="dateModified" content="2016-05-14T16:35:19&#43;08:00" />
-<meta itemprop="wordCount" content="605">
+<meta itemprop="wordCount" content="603">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Postponing definitions instead of preponing"/>
 <meta name="twitter:description" content="Prepone definitions? Wrong! Before C99, you must prepone all the variables&rsquo; definitions before any statements. But after C99 was released, you can put a variable&rsquo;s definition in any place as long as before being used. I think this new feature is introduced by learning from C&#43;&#43;.
 This makes programer write codes more convenient. But I used to insist the old style. I even teach my students that they should use the old style when I was a TA of the course Programming with C."/>
@@ -134,7 +131,7 @@ This makes programer write codes more convenient. But I used to insist the old s
       <div class="post-meta">
         <span class="post-time"> 2016-05-14 </span>
         
-          <span class="more-meta"> 约 605 字 </span>
+          <span class="more-meta"> 约 603 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -144,36 +141,26 @@ This makes programer write codes more convenient. But I used to insist the old s
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#prepone-definitions-wrong">Prepone definitions? Wrong!</a></li>
-<li><a href="#define-and-then-assign-wrong">Define and then assign? Wrong!</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#prepone-definitions-wrong">Prepone definitions? Wrong!</a></li>
+    <li><a href="#define-and-then-assign-wrong">Define and then assign? Wrong!</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h2 id="prepone-definitions-wrong">Prepone definitions? Wrong!</h2>
-
+      <h2 id="prepone-definitions-wrong">Prepone definitions? Wrong!</h2>
 <p>Before C99, you must prepone all the variables&rsquo; definitions before any
 statements. But after C99 was released, you can put a variable&rsquo;s definition
 in any place as long as before being used. I think this new feature is
 introduced by learning from C++.</p>
-
 <p>This makes programer write codes more convenient. But I used to insist the
 old style. I even teach my students that they should use the old style when
 I was a TA of the course <em>Programming with C</em>.</p>
-
 <p>However, now I realize that I was wrong. <strong>We should postpone variables&rsquo;</strong>
 <strong>definitions as long as possible</strong>. It&rsquo;s not for coding style, but for the
 effeciency of the program.</p>
-
 <p>Consider this program.</p>
-
 <pre><code>#include &lt;cstdio&gt;
 #include &lt;iostream&gt;
 
@@ -194,110 +181,83 @@ int
 main(int argc, char **argv)
 {
     save_pwd(&quot;ddd&quot;);
-
+    
     return 0;
 }
 </code></pre>
-
 <p>When running this program, it will print an error and exit the function.
 The variable <code>salted_pwd</code> is not used. So, defining <code>salted_pwd</code> above
 the <code>if</code> statement will waste the memory, the time to allocate memory and
 the time to free memory. For the view of C++, you will pay for the cost of
 construction and destruction of the object <code>salted_pwd</code>.</p>
-
 <h2 id="define-and-then-assign-wrong">Define and then assign? Wrong!</h2>
-
 <p>When I first learned programming in C, my teacher says that</p>
-
 <pre><code>int a;
 a = 1;
 </code></pre>
-
 <p>is the same as</p>
-
 <pre><code>int a = 1;
 </code></pre>
-
 <p>Now I realize that they are not the same and the latter is more effecient.</p>
-
 <p>For the former, <code>int a;</code> will allocate memory for the variable <code>a</code> and
 then fill zero bytes in the memory. Then <code>a = 1;</code> will write value <code>1</code>
 in the memory.
 For the latter, <code>int a = 1;</code> will directly allocate memory for the variable
 <code>a</code> and then write value <code>1</code> in the memory.
 In other words, you will pay more cost when using the former style.</p>
-
 <p>It seems that it makes little difference with the built-in type. When the
 type of the variable <code>a</code> is user-defined type, great difference appears.</p>
-
 <p>For example,</p>
-
 <pre><code>std::string str;
 ...
 std::string = &quot;abc&quot;;
 </code></pre>
-
 <p>This will first call the default constructor of <code>std::string</code> and then call
 the copy assignment operator. So the time and memory used in the default
 constructor is wasted.</p>
-
 <p>If we define an object in this way</p>
-
 <pre><code>std::string str(&quot;abc&quot;);
 </code></pre>
-
 <p>or</p>
-
 <pre><code>std::string str = &quot;abc&quot;;
 </code></pre>
-
 <p>, it will only call the copy constructor. This is more effecient.</p>
-
 <p>So now I prefer this way</p>
-
 <pre><code>for (int i = 0; i &lt; n; i++) {
     ...
 }
 </code></pre>
-
 <p>instead of</p>
-
 <pre><code>int i;
 
 for (i = 0; i &lt; n; i++) {
     ...
 }
 </code></pre>
-
 <p>Now there is a special case that is worth thinking.</p>
-
 <pre><code>Person p;
 for (int i = 0; i &lt; n; i++) {
     p = persons[i];
     ...
 }
 </code></pre>
-
 <p>and</p>
-
 <pre><code>for (int i = 0; i &lt; n; i++) {
     Person p = persons[i];
     ...
 }
 </code></pre>
-
 <p>, which is better?</p>
-
-<p>Let&rsquo;s analysis the performance of them.
-* The former need 1 construction, n assignments and 1 destruction. But it makes
+<p>Let&rsquo;s analysis the performance of them.</p>
+<ul>
+<li>The former need 1 construction, n assignments and 1 destruction. But it makes
 the object <code>p</code> in a larger scope, which increase the comprehensibility and
-maintainability of the program.
-* The latter need n constructions and n destructions.</p>
-
+maintainability of the program.</li>
+<li>The latter need n constructions and n destructions.</li>
+</ul>
 <p>Which is more effecient? I think it all depends. If assignment is less expensive
 than the total of construction and destruction, we should use the former style.
 On the contray, we should use the latter style.</p>
-
 <p>The author of <strong>Effective C++</strong> prefers the latter, but I prefer the former,
 since I am sensitive with performance and I think memory allocation and free
 will be more expensive than assignment.</p>
@@ -427,7 +387,10 @@ will be more expensive than assignment.</p>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

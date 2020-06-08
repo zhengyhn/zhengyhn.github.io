@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nodejs on Hank&#39;s Blog</title>
@@ -17,7 +17,7 @@
       <pubDate>Mon, 31 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/typescript/replace-joi-with-class-validator-in-typescript/</guid>
-      <description>引子 对每个接口的传入参数进行校验，是一个Web后端项目的必备功能，有一个npm包叫Joi可以很优雅的完成这个工作，比如这样子： const schema = { userId: Joi.string() };</description>
+      <description></description>
     </item>
     
     <item>

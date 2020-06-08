@@ -25,7 +25,7 @@ Why do I care about my coding style so much? Because I am a virgo.
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/cpp/2013-09-25-my-c-plus-plus-coding-style/" />
@@ -36,7 +36,8 @@ Why do I care about my coding style so much? Because I am a virgo.
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -46,23 +47,19 @@ Why do I care about my coding style so much? Because I am a virgo.
  Always add a m_ prefix to the members and use this to refer to other member functions in the member function." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/cpp/2013-09-25-my-c-plus-plus-coding-style/" />
-<meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
-<meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
-
+<meta property="article:published_time" content="2016-05-14T16:35:19+08:00" />
+<meta property="article:modified_time" content="2016-05-14T16:35:19+08:00" />
 <meta itemprop="name" content="My C&#43;&#43; coding style">
 <meta itemprop="description" content="Every programmer has his/her own coding style. Time goes by, and my coding style is changing. There following is my note on c&#43;&#43; coding style. I will explain why I want to coding in that style.
 Why do I care about my coding style so much? Because I am a virgo.
  Always add a m_ prefix to the members and use this to refer to other member functions in the member function.">
-
-
 <meta itemprop="datePublished" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="dateModified" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="wordCount" content="776">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="My C&#43;&#43; coding style"/>
 <meta name="twitter:description" content="Every programmer has his/her own coding style. Time goes by, and my coding style is changing. There following is my note on c&#43;&#43; coding style. I will explain why I want to coding in that style.
 Why do I care about my coding style so much? Because I am a virgo.
@@ -147,106 +144,80 @@ Why do I care about my coding style so much? Because I am a virgo.
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>Every programmer has his/her own coding style. Time goes by, and my coding
 style is changing. There following is my note on c++ coding style. I will
 explain why I want to coding in that style.</p>
-
 <p>Why do I care about my coding style so much? Because I am a virgo.</p>
-
 <ul>
 <li><strong>Always add a <code>m_</code> prefix to the members and use <code>this</code> to refer to
 other member functions in the member function.</strong></li>
 </ul>
-
 <p>This seems ridiculous. But I prefer. In a member function, there may be
 various kinds of variables, such as memeber variables, global variables
 and local variables. If we don&rsquo;t add some flag to refer to the member
 variables, we will confused when we met a variable. Is it a local variable
 or a member variable? For example, there is a statement in a member function.</p>
-
 <pre><code>size1 = size2 + 1;
 </code></pre>
-
 <p>How can you know what this statement exactly means? Which <code>size</code> is the
 class&rsquo;s size? However, if we write this statement as this,</p>
-
 <pre><code>m_size1 = size2 + 1;
 </code></pre>
-
 <p>we can know that we set the class&rsquo;s size be the value of local variable <code>size</code>
 plus one. This code is readable and it can relieve the code reader&rsquo;s headache.</p>
-
 <p>For the member functions. When refering to a member function, always use
 <code>this</code>.</p>
-
 <pre><code>int *p = this-&gt;next();
 </code></pre>
-
 <p>Someone may argue that using <code>this</code> will let use write more code. My
 experience told me that the whole world is balanced. You make yourself happy
 and your code will make the code readers headache. Instead, you write readable
 codes with some extra typing and you will make the code readers happy. This is
 a balance and you can balance yourself. I am a so kind man and I always want
 those who read my codes be happy. So I will use <code>this</code> always.</p>
-
 <p>Note: In PHP, you must use <code>$this</code> to refer to members. In Python, you must
 use <code>self</code> to refer to members. In most of the source code in <strong>Android</strong>,
 members in C++ class is always with prefix <code>m_</code> and members in JAVA class is
 always with prefix <code>m</code>.</p>
-
 <ul>
 <li><strong>Always leave the return type name in a single line.</strong></li>
 </ul>
-
 <p>I used to leave the return type name on the left of a function name. The first
 time I saw some programmers put them in a single line is the
 <a href="http://en.wikipedia.org/wiki/Pintos">Pintos</a> project. I thought it&rsquo;s ugly.
 But after I worked on the code of <a href="http://en.wikipedia.org/wiki/Gold_(linker)">Gold</a>,
 I changed my mind. I followed the author&rsquo;s style, even in a main function.</p>
-
 <pre><code>int
 main(int argc, char *argv[]) { }
 </code></pre>
-
 <p>Why do I leave the return value in a line? Because, in many large project, most
 of the names of the return types are very long, most of the function names are
 very long and most of functions has several parameters which have a long type
 name. For example,</p>
-
 <pre><code>std::map&lt;size_t, LinkedList&lt;T&gt; *&gt; *
 get_map(const std::string&amp; name, bool is_global=true) const;
 </code></pre>
-
 <p>If you don&rsquo;t leave the return type name in a single line, the function
 declaration will becomes</p>
-
 <pre><code>std::map&lt;size_t, LinkedList&lt;T&gt; *&gt; * get_map(const std::string&amp; name, bool is_global=true) const;
 </code></pre>
-
 <p>which is very very ugly!</p>
-
 <p>If we leave the return type name in a single line, the code readers will see
 the return type of the function more quickly. So the code will be more readable.</p>
-
 <p>Someone may argue that it looks more beautiful to leave the return type name on
 the left of the function name when the type name is short like this.</p>
-
 <pre><code>int get(size_t index);
 </code></pre>
-
 <p>This may be right. But most of the return type name is long in a large project.
 So for consistence, I always leave them in a single line.</p>
-
 <ul>
 <li><strong>Use <code>return</code> or <code>continue</code> to avoid indentation</strong></li>
 </ul>
-
 <p>The code will look ugly when there are many indentations. For example,</p>
-
 <pre><code>if (arr != NULL &amp;&amp; begin &lt; end - 1) {
     ...
     while (top &gt; 0) {
@@ -262,10 +233,8 @@ So for consistence, I always leave them in a single line.</p>
     ...
 }
 </code></pre>
-
 <p>There are <strong>5</strong> level of indentations, which is very ugly. However, we can use
 <code>return</code> and <code>continue</code> to make it look better.</p>
-
 <pre><code>if (arr == NULL || begin &gt;= end - 1) {
     return;
 }
@@ -283,7 +252,6 @@ while (top &gt; 0) {
 }
 ...
 </code></pre>
-
 <p>Now, it&rsquo;s only <strong>3</strong> level of indentations, which looks more beautiful.
 This is an important skills to make my code more beautiful.</p>
 
@@ -412,7 +380,10 @@ This is an important skills to make my code more beautiful.</p>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

@@ -26,7 +26,7 @@ Nowadays, many programming languages have the garbage collection function. In C&
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/cpp/2013-08-01-cpp-resource-management/" />
@@ -37,7 +37,8 @@ Nowadays, many programming languages have the garbage collection function. In C&
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -48,24 +49,20 @@ I think less programmers can remember closing a file handler, especially in a la
 Nowadays, many programming languages have the garbage collection function. In C&#43;&#43;, since the destructor will be automatically called, we can release the resources automatically if we put the resource into an object." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/cpp/2013-08-01-cpp-resource-management/" />
-<meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
-<meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
-
+<meta property="article:published_time" content="2016-05-14T16:35:19+08:00" />
+<meta property="article:modified_time" content="2016-05-14T16:35:19+08:00" />
 <meta itemprop="name" content="Cpp Resource Management">
 <meta itemprop="description" content="I always forget freeing a memory that allocated from the heap.And I always forget closing the file handler.
 Resources include file descriptors, mutex locks, fonts, brushes, database connections and network sockets.
 I think less programmers can remember closing a file handler, especially in a large project.
 Nowadays, many programming languages have the garbage collection function. In C&#43;&#43;, since the destructor will be automatically called, we can release the resources automatically if we put the resource into an object.">
-
-
 <meta itemprop="datePublished" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="dateModified" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="wordCount" content="979">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Cpp Resource Management"/>
 <meta name="twitter:description" content="I always forget freeing a memory that allocated from the heap.And I always forget closing the file handler.
 Resources include file descriptors, mutex locks, fonts, brushes, database connections and network sockets.
@@ -152,34 +149,24 @@ Nowadays, many programming languages have the garbage collection function. In C&
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#provide-access-to-raw-resources">Provide access to raw resources</a></li>
-<li><a href="#keep-new-and-delete-in-the-same-form">Keep new and delete in the same form</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#provide-access-to-raw-resources">Provide access to raw resources</a></li>
+    <li><a href="#keep-new-and-delete-in-the-same-form">Keep new and delete in the same form</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>I always forget freeing a memory that allocated from the heap.And I always
+      <p>I always forget freeing a memory that allocated from the heap.And I always
 forget closing the file handler.</p>
-
 <p>Resources include file descriptors, mutex locks, fonts, brushes, database
 connections and network sockets.</p>
-
 <p>I think less programmers can remember closing a file handler, especially
 in a large project.</p>
-
 <p>Nowadays, many programming languages have the garbage collection function.
 In C++, since the destructor will be automatically called, we can release
 the resources automatically if we put the resource into an object.</p>
-
 <p>How can do that?Use the <em>smart pointer</em>:<code>std::auto_ptr</code>.</p>
-
 <pre><code>#include &lt;cstdio&gt;
 #include &lt;memory&gt;
 
@@ -192,20 +179,15 @@ main(int argc, char **argv)
         std::auto_ptr&lt;int&gt; ap(num);
     }
     // delete num;
-
+    
     return 0;
 }
 </code></pre>
-
 <p>If trying to delete num after the block, that will be a double free error.</p>
-
 <p>Reference from <a href="http://www.cplusplus.com/reference/memory/auto_ptr/">cplusplus.com</a>, <code>auto_ptr</code> is deprecated in C++11 and is replaced by <code>unique_ptr</code>.
 But they are similar.</p>
-
 <p>However, multiple <code>auto_ptr</code> cannot contain the same object.</p>
-
 <p>Here is the test program.</p>
-
 <pre><code>#include &lt;cstdio&gt;
 #include &lt;memory&gt;
 
@@ -223,52 +205,47 @@ main(int argc, char **argv)
         printf(&quot;%p\n&quot;, &amp;ap2);
     }
     // delete num;
-
+    
     return 0;
 }
 </code></pre>
-
 <p>And here is the gdb debug output information.</p>
-
 <pre><code>Temporary breakpoint 1, main (argc=1, argv=0x7fffffffe6e8) at test.cpp:7
-7       int *num = NULL;
+7	    int *num = NULL;
 (gdb) n
-9       num = new int();
+9		num = new int();
 (gdb) n
-10      std::auto_ptr&lt;int&gt; ap1(num);
+10		std::auto_ptr&lt;int&gt; ap1(num);
 (gdb) n
-11      std::auto_ptr&lt;int&gt; ap2(ap1);
+11		std::auto_ptr&lt;int&gt; ap2(ap1);
 (gdb) p ap1
 $1 = {_M_ptr = 0x601010}
 (gdb) p ap2
 $2 = {_M_ptr = 0x7fff00000001}
 (gdb) n
-13      printf(&quot;%p\n&quot;, &amp;ap1);
+13		printf(&quot;%p\n&quot;, &amp;ap1);
 (gdb) p ap1
 $3 = {_M_ptr = 0x0}
 (gdb) p ap2
 $4 = {_M_ptr = 0x601010}
 (gdb) n
 0x7fffffffe5e0
-14      ap1 = ap2;
+14		ap1 = ap2;
 (gdb) p ap1
 $5 = {_M_ptr = 0x0}
 (gdb) p ap2
 $6 = {_M_ptr = 0x601010}
 (gdb) n
-15      printf(&quot;%p\n&quot;, &amp;ap2);
+15		printf(&quot;%p\n&quot;, &amp;ap2);
 (gdb) p ap1
 $7 = {_M_ptr = 0x601010}
 (gdb) p ap2
 $8 = {_M_ptr = 0x0}
 (gdb) 
 </code></pre>
-
 <p>But there are another smart pointer that can do this.It&rsquo;s the
 <code>std::tr1::shared_ptr</code>.Mutiple shared_ptr can contain the same object.</p>
-
 <p>The testing program is as follow.</p>
-
 <pre><code>#include &lt;cstdio&gt;
 #include &lt;tr1/memory&gt;
 
@@ -285,47 +262,41 @@ main(int argc, char **argv)
         ap1 = ap2;
         printf(&quot;%p\n&quot;, &amp;ap2);
     }
-
+    
     return 0;
 }
 </code></pre>
-
 <p>And the gdb debug information is:</p>
-
 <pre><code>Temporary breakpoint 1, main (argc=1, argv=0x7fffffffe6e8) at test.cpp:7
-7       int *num = NULL;
+7	    int *num = NULL;
 (gdb) n
-9       num = new int();
+9		num = new int();
 (gdb) n
-10      std::tr1::shared_ptr&lt;int&gt; ap1(num);
+10		std::tr1::shared_ptr&lt;int&gt; ap1(num);
 (gdb) n
-11      std::tr1::shared_ptr&lt;int&gt; ap2(ap1);
+11		std::tr1::shared_ptr&lt;int&gt; ap2(ap1);
 (gdb) n
-13      printf(&quot;%p\n&quot;, &amp;ap1);
+13		printf(&quot;%p\n&quot;, &amp;ap1);
 (gdb) p ap1
 $1 = std::tr1::shared_ptr (count 2, weak 0) 0x602010
 (gdb) p ap2
 $2 = std::tr1::shared_ptr (count 2, weak 0) 0x602010
 (gdb) n
 0x7fffffffe5d0
-14      ap1 = ap2;
+14		ap1 = ap2;
 (gdb) n
-15      printf(&quot;%p\n&quot;, &amp;ap2);
+15		printf(&quot;%p\n&quot;, &amp;ap2);
 (gdb) p ap1
 $3 = std::tr1::shared_ptr (count 2, weak 0) 0x602010
 (gdb) p ap2
 $4 = std::tr1::shared_ptr (count 2, weak 0) 0x602010
 </code></pre>
-
 <p>We can see that both of <code>ap1</code> and <code>ap2</code> point to the same object.</p>
-
 <p>The <code>auto_ptr</code> and <code>shared_ptr</code> use <code>delete</code> but not <code>delete[]</code>,
 so they don&rsquo;t support array.But the <code>unique_ptr</code> support.</p>
-
 <p>Sometimes, the resource may be a mutex, and we don&rsquo;t want to remember
 unlocking the mutex every time we lock it.So a resource management object
 may be:</p>
-
 <pre><code>#include &lt;cstdio&gt;
 
 typedef int Mutex;
@@ -364,19 +335,15 @@ main(int argc, char **argv)
     {
         Lock ml(&amp;m);
     }
-
+    
     return 0;
 }
 </code></pre>
-
 <p>However, when we copy the <code>Lock</code> object, problems appear.</p>
-
 <pre><code>Lock ml2(ml);
 </code></pre>
-
 <p>The default copy constructor will directly copy the pointer <code>pMutex</code> to
 the target object.So we should let the object uncopyable.</p>
-
 <pre><code>private:
 Lock(const Lock&amp;);
 Lock&amp;
@@ -384,11 +351,9 @@ operator=(const Lock&amp;);
 
 Mutex *pMutex;
 </code></pre>
-
 <p>Multiple objects can use the same resource, so the resource may be existed
 until the last object has been destroyed.The <code>tr1::shared_ptr</code> provide a
 <code>deleter</code> and its <strong>shared ability</strong> to solve this problem.</p>
-
 <pre><code>class Lock {
 public:
     explicit Lock(Mutex *p)
@@ -400,16 +365,13 @@ private:
     Lock(const Lock&amp;);
     Lock&amp;
     operator=(const Lock&amp;);
-
+    
     std::tr1::shared_ptr&lt;Mutex&gt; pMutex;
 };
 </code></pre>
-
 <h2 id="provide-access-to-raw-resources">Provide access to raw resources</h2>
-
 <p>Sometimes we may only want to access the raw resource but the object that
 contains the resource.For example:</p>
-
 <pre><code>#include &lt;cstdio&gt;
 #include &lt;tr1/memory&gt;
 
@@ -429,18 +391,14 @@ main(int argc, char **argv)
     std::tr1::shared_ptr&lt;Mutex&gt; pMutex;
 
     printf(&quot;%d\n&quot;, pMutex);
-
+    
     return 0;
 }
 </code></pre>
-
 <p>Therefore, we must provide a method to access the raw resource.Like this.</p>
-
 <pre><code>    printf(&quot;%d\n&quot;, pMutex.get());
 </code></pre>
-
 <p>There are two ways, one is explicit and the other is implicit.</p>
-
 <pre><code>class MutexManager {
 public:
     explicit MutexManager(Mutex* p)
@@ -463,15 +421,13 @@ int
 main(int argc, char **argv)
 {
     MutexManager mm(createMutex());
-
+    
     printf(&quot;%d\n&quot;, mm.get());
-
+    
     return 0;
 }
 </code></pre>
-
 <p>This one above is exciplit conversion.And this one below is implicit.</p>
-
 <pre><code>class MutexManager {
 public:
     explicit MutexManager(Mutex* p)
@@ -499,28 +455,21 @@ int
 main(int argc, char **argv)
 {
     MutexManager mm(createMutex());
-
+    
     print(mm);
-
+    
     return 0;
 }
 </code></pre>
-
 <p>It&rsquo;s obviously that the explicit method is safer and the implicit method is
 more convenient for clients.</p>
-
 <h2 id="keep-new-and-delete-in-the-same-form">Keep new and delete in the same form</h2>
-
 <p>We all know that the following code is wrong.</p>
-
 <pre><code>std::string *str = new std::string[10];
 delete str;
 </code></pre>
-
 <p>We should use <code>delete []str;</code> instead of <code>delete str;</code>.</p>
-
 <p>But how about this?</p>
-
 <pre><code>#include &lt;iostream&gt;
 
 typedef std::string Lines[4];
@@ -534,12 +483,10 @@ main(int argc, char **argv)
     return 0;
 }
 </code></pre>
-
 <p>If let me delete the pointer p, I will use this <code>delete p;</code>.But I am wrong.
 I shouldn&rsquo;t look at the left of the pointer, that is, <code>std::string</code>.I should
 look at the right of the <code>new</code>, that is, <code>Lines</code>.So, in this case, we
 should use <code>delete []p;</code>.</p>
-
 <p>Avoid typedef for array types, use <code>vector</code> instead.</p>
 
     </div>
@@ -667,7 +614,10 @@ should use <code>delete []p;</code>.</p>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

@@ -25,7 +25,7 @@ Here is an example.
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/cpp/2013-08-09-always-pass-parameters-by-reference-to-const/" />
@@ -36,7 +36,8 @@ Here is an example.
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -46,23 +47,19 @@ Here is an example.
 #include &lt;iostream&gt; #include &lt;cstdio&gt; class Dog { public: Dog() { printf(&quot;Calling Dog&#39;s constructor\n&quot;); } Dog(const Dog&amp; d) { printf(&quot;Calling Dog&#39;s copy constructor\n&quot;); this-&gt;name = d.name; } virtual ~Dog() { printf(&quot;Calling Dog&#39;s destructor\n&quot;); } private: std::string name; }; void walk_the_dog(Dog d) { } int main(int argc, char **argv) { Dog dog; walk_the_dog(dog); return 0; }  The running result is as follows:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/cpp/2013-08-09-always-pass-parameters-by-reference-to-const/" />
-<meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
-<meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
-
+<meta property="article:published_time" content="2016-05-14T16:35:19+08:00" />
+<meta property="article:modified_time" content="2016-05-14T16:35:19+08:00" />
 <meta itemprop="name" content="Always pass parameters by reference-to-const">
 <meta itemprop="description" content="We all know that pass by value is not effecient.So we use pass by pointer in C.However, in C&#43;&#43;, we prefer pass by referece-to-const.
 Here is an example.
 #include &lt;iostream&gt; #include &lt;cstdio&gt; class Dog { public: Dog() { printf(&quot;Calling Dog&#39;s constructor\n&quot;); } Dog(const Dog&amp; d) { printf(&quot;Calling Dog&#39;s copy constructor\n&quot;); this-&gt;name = d.name; } virtual ~Dog() { printf(&quot;Calling Dog&#39;s destructor\n&quot;); } private: std::string name; }; void walk_the_dog(Dog d) { } int main(int argc, char **argv) { Dog dog; walk_the_dog(dog); return 0; }  The running result is as follows:">
-
-
 <meta itemprop="datePublished" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="dateModified" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="wordCount" content="433">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Always pass parameters by reference-to-const"/>
 <meta name="twitter:description" content="We all know that pass by value is not effecient.So we use pass by pointer in C.However, in C&#43;&#43;, we prefer pass by referece-to-const.
 Here is an example.
@@ -147,15 +144,13 @@ Here is an example.
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>We all know that <em>pass by value</em> is not effecient.So we use <em>pass by pointer</em>
 in C.However, in C++, we prefer <strong>pass by referece-to-const</strong>.</p>
-
 <p>Here is an example.</p>
-
 <pre><code>#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
 
@@ -189,54 +184,44 @@ main(int argc, char **argv)
 {
     Dog dog;
     walk_the_dog(dog);
-
+    
     return 0;
 }
 </code></pre>
-
 <p>The running result is as follows:</p>
-
 <pre><code>Calling Dog's constructor
 Calling Dog's copy constructor
 Calling Dog's destructor
 Calling Dog's destructor
 </code></pre>
-
 <p>Now, let&rsquo;s analysis this <em>passing by value</em> process.
 First, <code>Dog dog;</code> will call the constructor. Then, since the function
 <code>walk_the_dog</code> pass the parameter <code>d</code> by value, it will call the copy
 constructor. Before exiting the function, it will call the destructor of <code>Dog</code>
 to destroy the parameter <code>d</code>. In the end, before exiting the main function,
 the destructor of <code>Dog</code> will be called again to destroy the <code>dog</code> object.</p>
-
 <p>Now, it seems that <em>passing by value</em> will result in a call to copy constructor
 and a call to destructor. But, in fact, it will result in two call to copy
 constructor and two call to destructor. Note that there are a <code>string</code> object
 as the member of the class <code>Dog</code>, so there will be an extra call the copy
 constructor and destructor of the <code>string</code> object.</p>
-
 <p>Obviously, the cost of <em>passing by value</em> is very expensive.
 How is <em>passing by reference-to-const</em>?</p>
-
 <pre><code>void
 walk_the_dog(const Dog&amp; d)
 {
 
 }
 </code></pre>
-
 <p>Just modify a bit and the result will be:</p>
-
 <pre><code>Calling Dog's constructor
 Calling Dog's destructor
 </code></pre>
-
 <p>Note that the <code>const</code> is very important. If there is not a <code>const</code>, the
 compiler will put the object in the writable part of the memory so that it
 cannot be shared by other functions. If declared as <code>const</code>, the object
 will be put into the readonly part of the memory and can be shared by lots
 of functions so that the program need less memory.</p>
-
 <p>The implementation of reference is using the pointer in C. Therefore, it may
 be more effecient to pass the built-in type parameters by value than referece.
 It&rsquo;s true. If the parameter is an object of type <code>char</code>, which occupies
@@ -244,7 +229,6 @@ It&rsquo;s true. If the parameter is an object of type <code>char</code>, which 
 passing by value when the parameter is of built-in type? No, we should always
 pass the parameters by reference-to-const, since <strong>the compiler will always</strong>
 <strong>put the pointer in the register!</strong></p>
-
 <p>Finally, just remember, <strong>always pass the parameters by reference-to-const</strong>.</p>
 
     </div>
@@ -372,7 +356,10 @@ pass the parameters by reference-to-const, since <strong>the compiler will alway
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

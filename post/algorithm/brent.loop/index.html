@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/algorithm/brent.loop/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="判断一个链接有没有环，很著名的算法是Floyd判圈算法，也叫龟兔算法。但是，原来还有一种算法，可以比Floyd更快一点，这种算法叫做Bren" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/algorithm/brent.loop/" />
-<meta property="article:published_time" content="2018-01-06T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-01-06T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2018-01-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-01-06T00:00:00+00:00" />
 <meta itemprop="name" content="Brent判圈算法学习">
 <meta itemprop="description" content="判断一个链接有没有环，很著名的算法是Floyd判圈算法，也叫龟兔算法。但是，原来还有一种算法，可以比Floyd更快一点，这种算法叫做Bren">
-
-
 <meta itemprop="datePublished" content="2018-01-06T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-01-06T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="466">
 
 
 
-<meta itemprop="keywords" content="算法," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="算法," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Brent判圈算法学习"/>
 <meta name="twitter:description" content="判断一个链接有没有环，很著名的算法是Floyd判圈算法，也叫龟兔算法。但是，原来还有一种算法，可以比Floyd更快一点，这种算法叫做Bren"/>
 
@@ -142,43 +139,28 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#算法思想">算法思想</a></li>
-<li><a href="#代码实现">代码实现</a></li>
-<li><a href="#参考">参考</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>判断一个链接有没有环，很著名的算法是Floyd判圈算法，也叫龟兔算法。但是，原来还有一种算法，可以比Floyd更快一点，这种算法叫做Brent判圈算法。</p>
-
+      <p>判断一个链接有没有环，很著名的算法是Floyd判圈算法，也叫龟兔算法。但是，原来还有一种算法，可以比Floyd更快一点，这种算法叫做Brent判圈算法。</p>
 <h4 id="算法思想">算法思想</h4>
-
 <p>用2个指针rabbit和turtle从链表头出发。</p>
-
 <ul>
 <li>rabbit先一步一步走，最多走2步，如果走到尽头，则无环，如果和turtle相遇，则有环，否则，本轮结束。</li>
 <li>这个时候，把turtle放到rabbit当前位置，rabbit继续一步一步走，但是最多走4步，如果走到尽头，则无环，如果和turtle相遇，则有环，否则，本轮结束。</li>
 <li>然后，把turtle放到rabbit当前位置，rabbit继续一步一步走，但是最多走8步，如果走到尽头，则无环，如果和turtle相遇，则有环，否则，本轮结束。</li>
 <li>&hellip;</li>
 </ul>
-
 <p>跟Floyd算法相比，假设一个5个元素的圆圈链表（尾部元素指回头部），Floyd算法需要走3 * 5 = 15步，而Brent算法只需要走2 + 4 + 5 + 2 = 13步。</p>
-
 <h4 id="代码实现">代码实现</h4>
-
 <pre><code>    bool hasCycleBrent(ListNode *head) {
       ListNode *p1 = head;
       ListNode *p2 = head;
@@ -199,10 +181,7 @@
       return false;
     }
 
-</code></pre>
-
-<h4 id="参考">参考</h4>
-
+</code></pre><h4 id="参考">参考</h4>
 <ul>
 <li><a href="https://iam.tugraz.at/dform/dform_w10/wp-content/uploads/2010/11/brent_x0091_s-cycle-detection1.pdf">brent_x0091_s-cycle-detection</a></li>
 </ul>
@@ -334,7 +313,10 @@
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

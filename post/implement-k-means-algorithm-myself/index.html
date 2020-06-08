@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="最近在看《集体智慧编程这本书》，再次学习k-means算法，虽然之前接触过很多，但是没有完全自己实现过，这次就试着根据算法思想，手写k-me" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/implement-k-means-algorithm-myself/" />
@@ -34,31 +34,28 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="Implement k-means algorithm myself" />
-<meta property="og:description" content="最近在看《集体智慧编程这本书》，再次学习k-means算法，虽然之前接触过很多，但是没有完全自己实现过，这次就试着根据算法思想，手写k-me" />
+<meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/implement-k-means-algorithm-myself/" />
-<meta property="article:published_time" content="2018-05-20T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-05-20T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2018-05-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-05-20T00:00:00+00:00" />
 <meta itemprop="name" content="Implement k-means algorithm myself">
-<meta itemprop="description" content="最近在看《集体智慧编程这本书》，再次学习k-means算法，虽然之前接触过很多，但是没有完全自己实现过，这次就试着根据算法思想，手写k-me">
-
-
+<meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2018-05-20T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-05-20T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="956">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Implement k-means algorithm myself"/>
-<meta name="twitter:description" content="最近在看《集体智慧编程这本书》，再次学习k-means算法，虽然之前接触过很多，但是没有完全自己实现过，这次就试着根据算法思想，手写k-me"/>
+<meta name="twitter:description" content=""/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -139,105 +136,88 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>最近在看《集体智慧编程这本书》，再次学习k-means算法，虽然之前接触过很多，但是没有完全自己实现过，这次就试着根据算法思想，手写k-means算法。</p>
-
 <p>这里使用的数据是书里面的博客数据，第一行是表头，第一列是博客名称，后面的列是每个单词出现的次数，大概长这样：</p>
-
-<pre><code class="language-python">Blog	be	not	your
-Signal v. Noise - Medium	46	32	47
-Eschaton	13	21	1
-</code></pre>
-
-<p>k-means算法的思想大概是这样子的：</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Blog	be	<span style="color:#f92672">not</span>	your
+Signal v<span style="color:#f92672">.</span> Noise <span style="color:#f92672">-</span> Medium	<span style="color:#ae81ff">46</span>	<span style="color:#ae81ff">32</span>	<span style="color:#ae81ff">47</span>
+Eschaton	<span style="color:#ae81ff">13</span>	<span style="color:#ae81ff">21</span>	<span style="color:#ae81ff">1</span>
+</code></pre></div><p>k-means算法的思想大概是这样子的：</p>
 <ul>
 <li>先随机初始化k个点，称为中心点</li>
 <li>对于数据集中的每条记录，计算它与每个中心点的距离，把它归到距离它最近的中心点的分组中</li>
 <li>对于每个分组，通过均值计算中心点，得到新的中心点</li>
 <li>重复这个过程，直到每条记录的分组不再变化为止</li>
 </ul>
-
 <p>对于距离的计算，我使用皮尔逊相似度来计算，下面是距离计算的代码:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_mean</span>(vec):
+    values <span style="color:#f92672">=</span> [value <span style="color:#66d9ef">for</span> value <span style="color:#f92672">in</span> vec]
+    <span style="color:#66d9ef">return</span> sum(values) <span style="color:#f92672">/</span> len(values)
 
-<pre><code class="language-python">def get_mean(vec):
-    values = [value for value in vec]
-    return sum(values) / len(values)
 
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">distance_pearson</span>(left, right):
+    <span style="color:#75715e"># 计算均值</span>
+    left_mean <span style="color:#f92672">=</span> get_mean(left)
+    right_mean <span style="color:#f92672">=</span> get_mean(right)
+    <span style="color:#75715e"># 协方差</span>
+    covariant <span style="color:#f92672">=</span> sum([(left[key] <span style="color:#f92672">-</span> left_mean) <span style="color:#f92672">*</span> (right[key] <span style="color:#f92672">-</span> right_mean) <span style="color:#66d9ef">for</span> key <span style="color:#f92672">in</span> range(len(left))])
+    <span style="color:#75715e"># 标准差</span>
+    left_standard <span style="color:#f92672">=</span> math<span style="color:#f92672">.</span>sqrt(sum([math<span style="color:#f92672">.</span>pow(left[key] <span style="color:#f92672">-</span> left_mean, <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">for</span> key <span style="color:#f92672">in</span> range(len(left))]))
+    right_standard <span style="color:#f92672">=</span> math<span style="color:#f92672">.</span>sqrt(sum([math<span style="color:#f92672">.</span>pow(right[key] <span style="color:#f92672">-</span> right_mean, <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">for</span> key <span style="color:#f92672">in</span> range(len(left))]))
 
-def distance_pearson(left, right):
-    # 计算均值
-    left_mean = get_mean(left)
-    right_mean = get_mean(right)
-    # 协方差
-    covariant = sum([(left[key] - left_mean) * (right[key] - right_mean) for key in range(len(left))])
-    # 标准差
-    left_standard = math.sqrt(sum([math.pow(left[key] - left_mean, 2) for key in range(len(left))]))
-    right_standard = math.sqrt(sum([math.pow(right[key] - right_mean, 2) for key in range(len(left))]))
+    <span style="color:#75715e"># 1 - 皮尔逊相关度，越接近0距离越近，反之越远</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> (covariant <span style="color:#f92672">/</span> (left_standard <span style="color:#f92672">*</span> right_standard))
+</code></pre></div><p>下面是k-means的实现:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">k_means</span>(rows, distance<span style="color:#f92672">=</span>distance_pearson, k<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>):
+    <span style="color:#75715e"># 共m条记录，n个特征, 也就是n个单词</span>
+    rows <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(rows)
+    m, n <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>shape(rows)
+    <span style="color:#75715e"># 求出每个特征的最小值和最大值</span>
+    mins <span style="color:#f92672">=</span> rows<span style="color:#f92672">.</span>min(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+    maxs <span style="color:#f92672">=</span> rows<span style="color:#f92672">.</span>max(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
 
-    # 1 - 皮尔逊相关度，越接近0距离越近，反之越远
-    return 1 - (covariant / (left_standard * right_standard))
-</code></pre>
-
-<p>下面是k-means的实现:</p>
-
-<pre><code class="language-python">def k_means(rows, distance=distance_pearson, k=4):
-    # 共m条记录，n个特征, 也就是n个单词
-    rows = np.array(rows)
-    m, n = np.shape(rows)
-    # 求出每个特征的最小值和最大值
-    mins = rows.min(axis=0)
-    maxs = rows.max(axis=0)
-
-    # 初始化中心点
-    centers = []
-    clusters = [[] for i in range(k)]
-    for i in range(k):
-        # 随机生成的中心点，每个特征必须在最小值和最大值范围内
-        center = [random.randrange(mins[i], maxs[i]) for i in range(n)]
-        centers.append(center)
-    # 一直进行聚类，只有分组不再变化时才停止
-    change = True
-    while change:
-        change = False
-        # 对于每条记录，都计算距离
-        for i in range(m):
-            closest = 0xffff
-            closest_center = 0
-            # 找到距离最近的中心点
-            for j in range(len(centers)):
-                d = distance(rows[i], centers[j])
-                if d &lt; closest:
-                    closest = d
-                    closest_center = j
-            # 新该记录添加到该分组中，如果已经在了，就不用了
-            if i not in clusters[closest_center]:
-                clusters[closest_center].append(i)
-                change = True
-        # 通过均值重新计算分组的中心点
-        for i in range(len(clusters)):
-            cluster_rows = [rows[cluster] for cluster in clusters[i]]
-            centers[i] = np.mean(cluster_rows, axis=0)
-    return clusters
-</code></pre>
-
-<p>现在来对博客的数据进行聚类:</p>
-
-<pre><code class="language-python">col_names, row_names, rows = read_file('./blogdata.txt')
-clusters = k_means(rows, k=4)
-for i in range(len(clusters)):
-    for j in clusters[i]:
-        print(row_names[j])
-    print('')
-</code></pre>
-
-<pre><code class="language-python">看一下效果，是这样的：
-</code></pre>
-
-<pre><code class="language-python">Eschaton
+    <span style="color:#75715e"># 初始化中心点</span>
+    centers <span style="color:#f92672">=</span> []
+    clusters <span style="color:#f92672">=</span> [[] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(k)]
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(k):
+        <span style="color:#75715e"># 随机生成的中心点，每个特征必须在最小值和最大值范围内</span>
+        center <span style="color:#f92672">=</span> [random<span style="color:#f92672">.</span>randrange(mins[i], maxs[i]) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n)]
+        centers<span style="color:#f92672">.</span>append(center)
+    <span style="color:#75715e"># 一直进行聚类，只有分组不再变化时才停止</span>
+    change <span style="color:#f92672">=</span> True
+    <span style="color:#66d9ef">while</span> change:
+        change <span style="color:#f92672">=</span> False
+        <span style="color:#75715e"># 对于每条记录，都计算距离</span>
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(m):
+            closest <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xffff</span>
+            closest_center <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+            <span style="color:#75715e"># 找到距离最近的中心点</span>
+            <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(len(centers)):
+                d <span style="color:#f92672">=</span> distance(rows[i], centers[j])
+                <span style="color:#66d9ef">if</span> d <span style="color:#f92672">&lt;</span> closest:
+                    closest <span style="color:#f92672">=</span> d
+                    closest_center <span style="color:#f92672">=</span> j
+            <span style="color:#75715e"># 新该记录添加到该分组中，如果已经在了，就不用了</span>
+            <span style="color:#66d9ef">if</span> i <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> clusters[closest_center]:
+                clusters[closest_center]<span style="color:#f92672">.</span>append(i)
+                change <span style="color:#f92672">=</span> True
+        <span style="color:#75715e"># 通过均值重新计算分组的中心点</span>
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(clusters)):
+            cluster_rows <span style="color:#f92672">=</span> [rows[cluster] <span style="color:#66d9ef">for</span> cluster <span style="color:#f92672">in</span> clusters[i]]
+            centers[i] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mean(cluster_rows, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+    <span style="color:#66d9ef">return</span> clusters
+</code></pre></div><p>现在来对博客的数据进行聚类:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">col_names, row_names, rows <span style="color:#f92672">=</span> read_file(<span style="color:#e6db74">&#39;./blogdata.txt&#39;</span>)
+clusters <span style="color:#f92672">=</span> k_means(rows, k<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(clusters)):
+    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> clusters[i]:
+        <span style="color:#66d9ef">print</span>(row_names[j])
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;&#39;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#960050;background-color:#1e0010">看一下效果，是这样的：</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Eschaton
 Guy Kawasaki
 Google Blogoscoped
 The Dish
@@ -246,38 +226,38 @@ blog maverick
 Boing Boing
 BuzzMachine
 Copyblogger
-Latest from Crooks and Liars
+Latest <span style="color:#f92672">from</span> Crooks and Liars
 Deadspin
-kottke.org
+kottke<span style="color:#f92672">.</span>org
 Lifehack
 TechCrunch
-TMZ.com
-Seth Godin's Blog on marketing, tribes and respect
-Captain's Quarters
+TMZ<span style="color:#f92672">.</span>com
+Seth Godin<span style="color:#e6db74">&#39;s Blog on marketing, tribes and respect</span>
+Captain<span style="color:#e6db74">&#39;s Quarters</span>
 Joel on Software
 Kotaku
 ShoeMoney
-SpikedHumor - Today's Videos and Pictures
-Signal v. Noise - Medium
+SpikedHumor <span style="color:#f92672">-</span> Today<span style="color:#e6db74">&#39;s Videos and Pictures</span>
+Signal v<span style="color:#f92672">.</span> Noise <span style="color:#f92672">-</span> Medium
 
-John Battelle's Search Blog
+John Battelle<span style="color:#e6db74">&#39;s Search Blog</span>
 Creating Passionate Users
-Joi Ito's Web
+Joi Ito<span style="color:#e6db74">&#39;s Web</span>
 The Viral Garden
-PaulStamatiou.com - Technology, Design and Photography
+PaulStamatiou<span style="color:#f92672">.</span>com <span style="color:#f92672">-</span> Technology, Design <span style="color:#f92672">and</span> Photography
 WIL WHEATON dot NET
-43 Folders
-456 Berea Street
+<span style="color:#ae81ff">43</span> Folders
+<span style="color:#ae81ff">456</span> Berea Street
 Joel on Software
 Kotaku
 Lifehacker
-Matt Cutts: Gadgets, Google, and SEO
+Matt Cutts: Gadgets, Google, <span style="color:#f92672">and</span> SEO
 mezzoblue
-Neil Gaiman's Journal
-plasticbag.org
+Neil Gaiman<span style="color:#e6db74">&#39;s Journal</span>
+plasticbag<span style="color:#f92672">.</span>org
 Derek Powazek
 ProBlogger
-SpikedHumor - Today's Videos and Pictures
+SpikedHumor <span style="color:#f92672">-</span> Today<span style="color:#e6db74">&#39;s Videos and Pictures</span>
 Steve Pavlina
 ongoing by Tim Bray
 BuzzMachine
@@ -286,8 +266,8 @@ Guy Kawasaki
 
 Google Operating System
 NewsBusters
-O'Reilly Radar
-Seth Godin's Blog on marketing, tribes and respect
+O<span style="color:#e6db74">&#39;Reilly Radar</span>
+Seth Godin<span style="color:#e6db74">&#39;s Blog on marketing, tribes and respect</span>
 Slashdot
 ThinkProgress
 Engadget RSS Feed
@@ -296,19 +276,19 @@ PerezHilton
 Quick Online Tips
 Search Engine Roundtable
 ShoeMoney
-Techdirt.
+Techdirt<span style="color:#f92672">.</span>
 Wired
 The Write News
 Schneier on Security
 TechCrunch
-Captain's Quarters
+Captain<span style="color:#e6db74">&#39;s Quarters</span>
 
-Signal v. Noise - Medium
+Signal v<span style="color:#f92672">.</span> Noise <span style="color:#f92672">-</span> Medium
 Celebslam
 The Official Google Blog
 Mashable
 Autoblog
-Captain's Quarters
+Captain<span style="color:#e6db74">&#39;s Quarters</span>
 Schneier on Security
 Google Blogoscoped
 Lifehacker
@@ -316,9 +296,7 @@ Quick Online Tips
 Google Operating System
 Joel on Software
 Search Engine Roundtable
-</code></pre>
-
-<p>看到已经成功聚成了4类，表面看，好像看不出来聚类的效果怎么样，就当作拿来练手，实现的过程中，也加深了对这个算法的理解。</p>
+</code></pre></div><p>看到已经成功聚成了4类，表面看，好像看不出来聚类的效果怎么样，就当作拿来练手，实现的过程中，也加深了对这个算法的理解。</p>
     </div>
 
     <div class="post-copyright">
@@ -378,7 +356,7 @@ Search Engine Roundtable
         id: '2018-05-20 00:00:00 \x2b0000 UTC',
         title: 'Implement k-means algorithm myself',
         link: decodeURI(location.href),
-        desc: '最近在看《集体智慧编程这本书》，再次学习k-means算法，虽然之前接触过很多，但是没有完全自己实现过，这次就试着根据算法思想，手写k-me',
+        desc: '',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -444,7 +422,10 @@ Search Engine Roundtable
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

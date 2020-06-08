@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;software testing&amp;rdquo;一书的读书笔记 @&amp;lt;/font&amp;gt; 动态黑盒测试 动态，因为运行程序来测试。黑盒，因为看不到代" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;software testing&amp;quot;一书的读书笔记 @&amp;lt;/font&amp;gt; 动态黑盒测试 动态，因为运行程序来测试。黑盒，因为看不到代码。" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/test/blinder.org/" />
@@ -34,31 +34,28 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="带上眼罩测试软件" />
-<meta property="og:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 动态黑盒测试 动态，因为运行程序来测试。黑盒，因为看不到代" />
+<meta property="og:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 动态黑盒测试 动态，因为运行程序来测试。黑盒，因为看不到代码。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/test/blinder.org/" />
-<meta property="article:published_time" content="2013-03-10T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-03-10T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-03-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-03-10T00:00:00+00:00" />
 <meta itemprop="name" content="带上眼罩测试软件">
-<meta itemprop="description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 动态黑盒测试 动态，因为运行程序来测试。黑盒，因为看不到代">
-
-
+<meta itemprop="description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 动态黑盒测试 动态，因为运行程序来测试。黑盒，因为看不到代码。">
 <meta itemprop="datePublished" content="2013-03-10T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-03-10T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1178">
+<meta itemprop="wordCount" content="1176">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="带上眼罩测试软件"/>
-<meta name="twitter:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 动态黑盒测试 动态，因为运行程序来测试。黑盒，因为看不到代"/>
+<meta name="twitter:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 动态黑盒测试 动态，因为运行程序来测试。黑盒，因为看不到代码。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -130,7 +127,7 @@
       <div class="post-meta">
         <span class="post-time"> 2013-03-10 </span>
         
-          <span class="more-meta"> 约 1178 字 </span>
+          <span class="more-meta"> 约 1176 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -140,101 +137,72 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#动态黑盒测试">动态黑盒测试</a>
-<ul>
-<li><a href="#test-to-pass-and-test-to-fail">test-to-pass and test-to-fail</a></li>
-<li><a href="#等价划分-equivalence-partitioning">等价划分(equivalence partitioning)</a></li>
-<li><a href="#数据测试-data-testing">数据测试(data testing)</a>
-<ul>
-<li><a href="#边界情况">边界情况</a></li>
-<li><a href="#子边界情况">子边界情况</a></li>
-</ul></li>
-<li><a href="#状态测试">状态测试</a>
-<ul>
-<li><a href="#测试软件的逻辑">测试软件的逻辑</a></li>
-<li><a href="#测试不通过的状态">测试不通过的状态</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#其它的黑盒测试技术">其它的黑盒测试技术</a></li>
-</ul>
+  <ul>
+    <li><a href="#test-to-pass-and-test-to-fail">test-to-pass and test-to-fail</a></li>
+    <li><a href="#等价划分equivalence-partitioning">等价划分(equivalence partitioning)</a></li>
+    <li><a href="#数据测试data-testing">数据测试(data testing)</a>
+      <ul>
+        <li><a href="#边界情况">边界情况</a></li>
+        <li><a href="#子边界情况">子边界情况</a></li>
+      </ul>
+    </li>
+    <li><a href="#状态测试">状态测试</a>
+      <ul>
+        <li><a href="#测试软件的逻辑">测试软件的逻辑</a></li>
+        <li><a href="#测试不通过的状态">测试不通过的状态</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记
+      <p>@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记
 @&lt;/font&gt;</p>
-
 <h1 id="动态黑盒测试">动态黑盒测试</h1>
-
 <p>动态，因为运行程序来测试。黑盒，因为看不到代码。还有一个名字：behavioral
 testing.</p>
-
 <p>test
 case，测试用例，是你在测试软件的时候定义的特定输入。一般根据产品说明
 书来制定测试用例。</p>
-
 <h2 id="test-to-pass-and-test-to-fail">test-to-pass and test-to-fail</h2>
-
 <p>有2种方法来测试软件</p>
-
 <ol>
 <li>测试它通过</li>
 <li>测试它不通过</li>
 </ol>
-
 <p>就像测试一辆车一样，先要测试一下轮胎大小合不合适，刹车有没有问题等，再开足马
 力上路，看有没有问题。前者是测试它通过，后者是测试它不通过。如果不先测试它通
-过，则一上路你就会死掉。所以： @&lt;font color=&ldquo;red&rdquo;&gt;
+过，则一上路你就会死掉。所以： @&lt;font color=&quot;red&rdquo;&gt;
 测试软件，一定要先测试它通过，always run the test-to-pass cases first.
 @&lt;/font&gt;</p>
-
-<h2 id="等价划分-equivalence-partitioning">等价划分(equivalence partitioning)</h2>
-
+<h2 id="等价划分equivalence-partitioning">等价划分(equivalence partitioning)</h2>
 <p>把很多测试用例划分成很多等价的集合，每个集合里面的测试用例测试的是相同的内容，
 反映出来的是相同的bug。也叫equivalence classing。</p>
-
-<h2 id="数据测试-data-testing">数据测试(data testing)</h2>
-
+<h2 id="数据测试data-testing">数据测试(data testing)</h2>
 <p>把一个软件分成两个部分：数据和程序。
 数据包括键盘输入，鼠标点击，磁盘文件，终端输出等。</p>
-
 <h3 id="边界情况">边界情况</h3>
-
 <p>如果一个程序在边界情况都正确，则它在正常情况下也基本正确。
 在测试边界情况的时候，一般制定2个等价划分，一个测试在数据范围内，目的是让它
 通过，一个在数据范围外，目的是让它不通过。
 比如：如果一个程序的作用是把一个文件保存到磁盘上，则第一个等价划分是</p>
-
-<pre><code class="language-.example">{保存一个非常小的文件，保存一个非常大的文件}
-</code></pre>
-
-<p>第二个等价划分是：</p>
-
-<pre><code class="language-.example">{保存一个空文件，保存一个超出磁盘空间的文件}
-</code></pre>
-
-<h3 id="子边界情况">子边界情况</h3>
-
+<pre><code class="language-{.example}" data-lang="{.example}">{保存一个非常小的文件，保存一个非常大的文件}
+</code></pre><p>第二个等价划分是：</p>
+<pre><code class="language-{.example}" data-lang="{.example}">{保存一个空文件，保存一个超出磁盘空间的文件}
+</code></pre><h3 id="子边界情况">子边界情况</h3>
 <p>这种情况一般是不会被明显看出来的，或者是领域的专业边界问题，比如2的多少
 次幂这种边界问题，一般只有程序员知道，软件测试师可能不知道。
 要给default, empty, blank, null, zero, none划为同一个等价划分。
 要给invalid, wrong, incorrect, garbage划分为同一个等价划分，因为
 当你的软件出名的时候，就会有很多人不会正确地使用它。</p>
-
 <h2 id="状态测试">状态测试</h2>
-
-<p>前面讲的是测试数据，现在是测试程序。 @&lt;font color=&ldquo;red&rdquo;&gt;
+<p>前面讲的是测试数据，现在是测试程序。 @&lt;font color=&quot;red&rdquo;&gt;
 一个软件测试师一定要测试软件的状态和它们之间的转换 @&lt;/font&gt;</p>
-
 <h3 id="测试软件的逻辑">测试软件的逻辑</h3>
-
 <p>我们需要画一个转换图，一般情况下，这个图在产品说明书中可能会有，如果没有，
 则需要软件测试师来画，可以像程序流程图一样的东西，也可以像编译原理里面的
 有穷状态机的状态图一样的东西。 减少测试状态的个数的方法：</p>
-
 <ul>
 <li>至少遍历一次每个状态。</li>
 <li>测试那些看起来经常要经过的状态。</li>
@@ -242,32 +210,24 @@ case，测试用例，是你在测试软件的时候定义的特定输入。一�
 <li>测试所有的错误状态。</li>
 <li>测试随机状态转换。</li>
 </ul>
-
 <h3 id="测试不通过的状态">测试不通过的状态</h3>
-
 <ol>
 <li>竞争条件：比如使用同一台打印机，通信端口或者其它外设;使用不同的程序访问同一</li>
 </ol>
-
 <p>个数据库。</p>
-
 <ol>
 <li>重复：比如重复提交表单，分配内存不释放导致的内存泄露</li>
 <li>压力测试：在低内存，低磁盘，低CPU等情况下测试，目的就是要饿死那个软件</li>
 <li>加载测试：和压力测试相反，比如打开一个很大的很大的文件，同时进行成千上万的</li>
 </ol>
-
 <p>连接</p>
-
 <h1 id="其它的黑盒测试技术">其它的黑盒测试技术</h1>
-
 <ul>
 <li>把自己变成傻瓜用户</li>
 <li>像骇客一样思考</li>
 <li>相信自己的直觉</li>
 </ul>
-
-<p>@&lt;font color=&ldquo;red&rdquo;&gt; experience is the name everyone gives to their
+<p>@&lt;font color=&quot;red&rdquo;&gt; experience is the name everyone gives to their
 mistakes. &ndash;Oscar Wilde @&lt;/font&gt;</p>
 
     </div>
@@ -329,7 +289,7 @@ mistakes. &ndash;Oscar Wilde @&lt;/font&gt;</p>
         id: '2013-03-10 00:00:00 \x2b0000 UTC',
         title: '带上眼罩测试软件',
         link: decodeURI(location.href),
-        desc: '@\x26lt;font color=\x26ldquo;red\x26rdquo;\x26gt; 本文为\x26rdquo;software testing\x26rdquo;一书的读书笔记 @\x26lt;\/font\x26gt; 动态黑盒测试 动态，因为运行程序来测试。黑盒，因为看不到代',
+        desc: '@\x26lt;font color=\x26quot;red\x26rdquo;\x26gt; 本文为\x26quot;software testing\x26quot;一书的读书笔记 @\x26lt;\/font\x26gt; 动态黑盒测试 动态，因为运行程序来测试。黑盒，因为看不到代码。',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -395,7 +355,10 @@ mistakes. &ndash;Oscar Wilde @&lt;/font&gt;</p>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

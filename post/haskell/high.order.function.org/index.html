@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/haskell/high.order.function.org/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="curried function 我还是直接翻译成“用咖啡煮的函数吧”。 有一个有趣的现象： Prelude&gt; max 1 2 2 Prelude&gt; (max 1) 2 2 我刚开始觉得这太不可思议了，max 1居然可以执行，而且它的返" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/haskell/high.order.function.org/" />
-<meta property="article:published_time" content="2013-03-11T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-03-11T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-03-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-03-11T00:00:00+00:00" />
 <meta itemprop="name" content="高阶函数">
 <meta itemprop="description" content="curried function 我还是直接翻译成“用咖啡煮的函数吧”。 有一个有趣的现象： Prelude&gt; max 1 2 2 Prelude&gt; (max 1) 2 2 我刚开始觉得这太不可思议了，max 1居然可以执行，而且它的返">
-
-
 <meta itemprop="datePublished" content="2013-03-11T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-03-11T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="834">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="高阶函数"/>
 <meta name="twitter:description" content="curried function 我还是直接翻译成“用咖啡煮的函数吧”。 有一个有趣的现象： Prelude&gt; max 1 2 2 Prelude&gt; (max 1) 2 2 我刚开始觉得这太不可思议了，max 1居然可以执行，而且它的返"/>
 
@@ -140,135 +137,85 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#curried-function">curried function</a></li>
-<li><a href="#其它的高阶函数">其它的高阶函数</a></li>
-<li><a href="#一些库函数">一些库函数</a>
-<ul>
-<li><a href="#map">map</a></li>
-<li><a href="#filter">filter</a></li>
-</ul></li>
-<li><a href="#lambdas">lambdas</a></li>
-</ul>
+  <ul>
+    <li><a href="#map">map</a></li>
+    <li><a href="#filter">filter</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h1 id="curried-function">curried function</h1>
-
+      <h1 id="curried-function">curried function</h1>
 <p>我还是直接翻译成“用咖啡煮的函数吧”。 有一个有趣的现象：</p>
-
-<pre><code class="language-.haskell">Prelude&gt; max 1 2
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">Prelude&gt; max 1 2
 2
 Prelude&gt; (max 1) 2
 2
-</code></pre>
-
-<p>我刚开始觉得这太不可思议了，max
+</code></pre><p>我刚开始觉得这太不可思议了，max
 1居然可以执行，而且它的返回值还拿2来当参数！
 原来这个函数可以写成下面这两种形式：</p>
-
-<pre><code class="language-.haskell">Prelude&gt; :t max
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">Prelude&gt; :t max
 max :: Ord a =&gt; a -&gt; a -&gt; a
 Prelude&gt; :t max
 max :: Ord a =&gt; a -&gt; (a -&gt; a)
-</code></pre>
-
-<p>第二种，如果给max传一个参数x，则它返回一个函数，这个函数会接受一个参数y返回和x
+</code></pre><p>第二种，如果给max传一个参数x，则它返回一个函数，这个函数会接受一个参数y返回和x
 比较之后的最大值。
 这意味着我们可以传部分参数给一个函数。是不是只有库函数才这样的呢？不是！</p>
-
-<pre><code class="language-.haskell">-- addThree - adds three numbers, returns their sum
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">-- addThree - adds three numbers, returns their sum
 addThree :: (Num a) =&gt; a -&gt; a -&gt; a -&gt; a
 addThree x y z = x + y + z            
-</code></pre>
-
-<p>运行结果：</p>
-
-<pre><code class="language-.haskell">*Main&gt; addThree 1 2 3
+</code></pre><p>运行结果：</p>
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">*Main&gt; addThree 1 2 3
 6
 *Main&gt; ((addThree 1) 2) 3
 6
-</code></pre>
-
-<p>这令我非常震惊！ 中缀函数也能有这种用法：</p>
-
-<pre><code class="language-.haskell">{- isUpper - if a character is uppercase, return True,
+</code></pre><p>这令我非常震惊！ 中缀函数也能有这种用法：</p>
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">{- isUpper - if a character is uppercase, return True,
              otherwise, return False.
 -}
 isUpper :: Char -&gt; Bool
 isUpper = (`elem` ['A'..'Z'])
-</code></pre>
-
-<p>虽然只有一个参数，但是也能看到基本的形式是加一个括号，称为section。</p>
-
+</code></pre><p>虽然只有一个参数，但是也能看到基本的形式是加一个括号，称为section。</p>
 <h1 id="其它的高阶函数">其它的高阶函数</h1>
-
 <p>函数可以接受函数作为参数，也可以返回函数。
 实现一个标准库函数zipWith，接受一个函数，两个list，根据这个函数的作用返回
 2个list合并后的效果。</p>
-
-<pre><code class="language-.haskell">zip_with :: (a -&gt; b -&gt; c) -&gt; [a] -&gt; [b] -&gt; [c]
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">zip_with :: (a -&gt; b -&gt; c) -&gt; [a] -&gt; [b] -&gt; [c]
 zip_with _ [] _ = []
 zip_with _ _ [] = []
 zip_with func (xFirst:xRest) (yFirst:yRest) =
     (func xFirst yFirst) : (zip_with func xRest yRest)
-</code></pre>
-
-<p>使用一下：</p>
-
-<pre><code class="language-.haskell">*Main&gt; zip_with (*) [1, 2] [3, 4]
+</code></pre><p>使用一下：</p>
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">*Main&gt; zip_with (*) [1, 2] [3, 4]
 [3,8]
 *Main&gt; zip_with max [1, 2] [3, 4]
 [3,4]
-</code></pre>
-
-<p>这就是通用的函数，太厉害了！</p>
-
+</code></pre><p>这就是通用的函数，太厉害了！</p>
 <h1 id="一些库函数">一些库函数</h1>
-
 <h2 id="map">map</h2>
-
 <p>接受一个函数和一个list作为参数，把这个函数作用于list中的每个函数。</p>
-
-<pre><code class="language-.haskell">map :: (a -&gt; b) -&gt; [a] -&gt; [b]
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">map :: (a -&gt; b) -&gt; [a] -&gt; [b]
 map _ [] = []
 map f (first:rest) = f first : map f rest
-</code></pre>
-
-<p>关键是它的应用，这个函数用起来非常方便。</p>
-
-<pre><code class="language-.haskell">*Main&gt; map fst [(1, 2), (3, 4)]
+</code></pre><p>关键是它的应用，这个函数用起来非常方便。</p>
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">*Main&gt; map fst [(1, 2), (3, 4)]
 [1,3]
 *Main&gt; map (* 2) [1, 2, 3]
 [2,4,6]
-</code></pre>
-
-<h2 id="filter">filter</h2>
-
+</code></pre><h2 id="filter">filter</h2>
 <p>顾名思义，是用来过滤的，接受一个predicate，即判断函数，和一个list，返回一个
 满足条件的list。</p>
-
-<pre><code class="language-.haskell">filter :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">filter :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
 filter _ [] = []
 filter predicate (first:rest)
     | predicate first = first : filter predicate rest
     | otherwise = filter predicate rest
-</code></pre>
-
-<p>应用：</p>
-
-<pre><code class="language-.haskell">*Main&gt; filter' (&gt; 3) [1, 2, 3, 4]
+</code></pre><p>应用：</p>
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">*Main&gt; filter' (&gt; 3) [1, 2, 3, 4]
 [4]
-</code></pre>
-
-<p>上面这2个函数都可以通过list
+</code></pre><p>上面这2个函数都可以通过list
 comprehension来代替。但是使用这样的函数会更容易 理解，可读性更强。</p>
-
 <h1 id="lambdas">lambdas</h1>
-
 <p>其实就是匿名函数(anonymous function)。比如： map (+3) [1, 2, 3] 和 map
 (\x -&gt; x + 3) [1, 2, 3]是等价的。
 使用\来表示匿名函数，上例中，传入参数x，返回值为x + 3。</p>
@@ -398,7 +345,10 @@ comprehension来代替。但是使用这样的函数会更容易 理解，可读
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

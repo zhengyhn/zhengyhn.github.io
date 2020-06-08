@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/math/quadratic_equation/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="一元二次方程 $ax^2 &#43; bx &#43; c = 0$的求根公式为: $$ x_{x1,x2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$ 推导过程 根据经验，左边如果可以写在平方的形式，通过开方，就可以求得根，所以我们的" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/math/quadratic_equation/" />
-<meta property="article:published_time" content="2020-03-29T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2020-03-29T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2020-03-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-29T00:00:00+00:00" />
 <meta itemprop="name" content="一元二次方程求根公式推导">
 <meta itemprop="description" content="一元二次方程 $ax^2 &#43; bx &#43; c = 0$的求根公式为: $$ x_{x1,x2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$ 推导过程 根据经验，左边如果可以写在平方的形式，通过开方，就可以求得根，所以我们的">
-
-
 <meta itemprop="datePublished" content="2020-03-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-03-29T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="389">
 
 
 
-<meta itemprop="keywords" content="Math," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Math," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="一元二次方程求根公式推导"/>
 <meta name="twitter:description" content="一元二次方程 $ax^2 &#43; bx &#43; c = 0$的求根公式为: $$ x_{x1,x2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$ 推导过程 根据经验，左边如果可以写在平方的形式，通过开方，就可以求得根，所以我们的"/>
 
@@ -142,78 +139,46 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#推导过程">推导过程</a></li>
-<li><a href="#韦达公式">韦达公式</a></li>
-<li><a href="#抛物线的顶点坐标">抛物线的顶点坐标</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#推导过程">推导过程</a></li>
+    <li><a href="#韦达公式">韦达公式</a></li>
+    <li><a href="#抛物线的顶点坐标">抛物线的顶点坐标</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>一元二次方程 $ax^2 + bx + c = 0$的求根公式为:</p>
-
+      <p>一元二次方程 $ax^2 + bx + c = 0$的求根公式为:</p>
 <p>$$ x_{x1,x2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$</p>
-
 <h2 id="推导过程">推导过程</h2>
-
 <p>根据经验，左边如果可以写在平方的形式，通过开方，就可以求得根，所以我们的目标是通过变换，得到左式为平方的形式。</p>
-
 <p>因为</p>
-
 <p>$$ax^2 + bx + c = 0$$</p>
-
 <p>将c移到右边，得:</p>
-
 <p>$$ax^2 + bx = -c$$</p>
-
 <p>两边都除以a，得:</p>
-
 <p>$$x^2 + \frac{b}{a}x = -\frac{c}{a} $$</p>
-
 <p>两边都加上$(\frac{b}{2a})^2$, 得:</p>
-
 <p>$$x^2 + \frac{b}{a}x + (\frac{b}{2a})^2 = (\frac{b}{2a})^2 - \frac{c}{a} $$</p>
-
 <p>两边化简，得:</p>
-
 <p>$$(x + \frac{b}{2a})^2 = \frac{b^2 - 4ac}{4a^2} $$</p>
-
 <p>两边开方，得:</p>
-
 <p>$$ x + \frac{b}{2a} = \pm \frac{\sqrt{b^2 - 4ac}}{2a} $$</p>
-
 <p>所以:</p>
-
 <p>$$x_{x1,x2} = -\frac{b}{2a} \pm \frac{\sqrt{b^2 - 4ac}}{2a} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$</p>
-
 <h2 id="韦达公式">韦达公式</h2>
-
 <p>韦达公式是这样的:</p>
-
 <p>$$ x_1 + x_2 = -\frac{b}{a} $$
 $$ x_1x_2 = \frac{c}{a} $$</p>
-
 <p>推导很简单，直接来就行:</p>
-
 <p>$$ x_1 + x_2 = \frac{-b + \sqrt{b^2 - 4ac}}{2a} + \frac{-b - \sqrt{b^2 - 4ac}}{2a} = $$
 $$  \frac{-b}{2a} + \frac{-b}{2a} = \frac{b}{a} $$</p>
-
 <p>$$ x_1x_2 = \frac{-b + \sqrt{b^2 - 4ac}}{2a} \times \frac{-b - \sqrt{b^2 - 4ac}}{2a} = $$
 $$ \frac{(-b + \sqrt{b^2 - 4ac})(-b - \sqrt{b^2 - 4ac})}{4a^2} = $$
 $$ \frac{(-b)^2 - (b^2 - 4ac)}{4a^2} = \frac{c}{a} $$</p>
-
 <h2 id="抛物线的顶点坐标">抛物线的顶点坐标</h2>
-
 <p>对于抛物线 $ y = ax^2 + bx + c $, 它的顶点坐标是 $(-\frac{b}{2a}, \frac{4ac - b^2}{4a})$</p>
-
 <p>原理很简单，顶点处导数为0，所以有:</p>
-
 <p>$$ y&rsquo; = 2ax + b = 0 $$
 $$ x = -\frac{b}{2a} $$
 $$ y = a(-\frac{b}{2a})^2 - b\frac{b}{2a} + c = \frac{4ac - b^2}{4a} $$</p>
@@ -345,7 +310,10 @@ $$ y = a(-\frac{b}{2a})^2 - b\frac{b}{2a} + c = \frac{4ac - b^2}{4a} $$</p>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

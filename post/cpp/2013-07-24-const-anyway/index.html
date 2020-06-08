@@ -26,7 +26,7 @@ So the following two statements are the same." /><meta name="keywords" content="
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/cpp/2013-07-24-const-anyway/" />
@@ -37,7 +37,8 @@ So the following two statements are the same." /><meta name="keywords" content="
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -48,24 +49,20 @@ If const appears to the right of the asterisk, the pointer is constant.If const 
 So the following two statements are the same." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/cpp/2013-07-24-const-anyway/" />
-<meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
-<meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
-
+<meta property="article:published_time" content="2016-05-14T16:35:19+08:00" />
+<meta property="article:modified_time" content="2016-05-14T16:35:19+08:00" />
 <meta itemprop="name" content="Const anyway!">
 <meta itemprop="description" content="Const pointer const is versatile.I am always confused by the following syntax.
 const char *str = &quot;Hello&quot;; // const data, non-const pointer char * const str = &quot;Hello&quot;; // const pointer, non-const data  Now there is a tip to remember it.
 If const appears to the right of the asterisk, the pointer is constant.If const appears to the left of the asterisk, the data is constant.
 So the following two statements are the same.">
-
-
 <meta itemprop="datePublished" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="dateModified" content="2016-05-14T16:35:19&#43;08:00" />
-<meta itemprop="wordCount" content="524">
+<meta itemprop="wordCount" content="522">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Const anyway!"/>
 <meta name="twitter:description" content="Const pointer const is versatile.I am always confused by the following syntax.
 const char *str = &quot;Hello&quot;; // const data, non-const pointer char * const str = &quot;Hello&quot;; // const pointer, non-const data  Now there is a tip to remember it.
@@ -142,7 +139,7 @@ So the following two statements are the same."/>
       <div class="post-meta">
         <span class="post-time"> 2016-05-14 </span>
         
-          <span class="more-meta"> 约 524 字 </span>
+          <span class="more-meta"> 约 522 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -152,50 +149,36 @@ So the following two statements are the same."/>
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#const-pointer">Const pointer</a></li>
-<li><a href="#const-member-function">Const member function</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#const-pointer">Const pointer</a></li>
+    <li><a href="#const-member-function">Const member function</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h2 id="const-pointer">Const pointer</h2>
-
+      <h2 id="const-pointer">Const pointer</h2>
 <p><code>const</code> is versatile.I am always confused by the following syntax.</p>
-
 <pre><code>const char *str = &quot;Hello&quot;;    // const data, non-const pointer
 char * const str = &quot;Hello&quot;;    // const pointer, non-const data
 </code></pre>
-
 <p>Now there is a tip to remember it.</p>
-
 <p>If <code>const</code> appears to the right of the asterisk, the pointer is
 constant.If <code>const</code> appears to the left of the asterisk, the data
 is constant.</p>
-
 <p>So the following two statements are the same.</p>
-
 <pre><code>const char *str = &quot;Hello&quot;;
 char const *str = &quot;Hello&quot;;
 </code></pre>
-
-<p>In STL, <code>iterator</code> is just like a <code>T *</code> pointer.
-* <code>const std::vector&lt;int&gt;::iterator iter</code> is just like <code>T * const iter</code>.
-* <code>std::vector&lt;int&gt;::const_iterator cIter</code> is just like <code>const T *iter</code>.</p>
-
+<p>In STL, <code>iterator</code> is just like a <code>T *</code> pointer.</p>
+<ul>
+<li><code>const std::vector&lt;int&gt;::iterator iter</code> is just like <code>T * const iter</code>.</li>
+<li><code>std::vector&lt;int&gt;::const_iterator cIter</code> is just like <code>const T *iter</code>.</li>
+</ul>
 <p>So, in a loop, if we don&rsquo;t want to modify the data, use <code>const_iterator</code>.</p>
-
 <h2 id="const-member-function">Const member function</h2>
-
 <p>Sometimes, we have two version member functions.One is const and the other is
 not.</p>
-
 <pre><code>#include &lt;string&gt;
 #include &lt;iostream&gt;
 
@@ -204,7 +187,7 @@ public:
     Str(std::string str)
     :data(str)
     { }
-
+    
     const char&amp;
     operator[](std::size_t pos) const    // Const objects use this
     {
@@ -233,33 +216,27 @@ main(int argc, char **argv)
     Str nonconst_str(&quot;abc&quot;);
     std::cout &lt;&lt; nonconst_str[1] &lt;&lt; std::endl;
     nonconst_str[1] = 'a';
-
+    
     print(nonconst_str);
 
     return 0;
 }
 </code></pre>
-
 <p>In <code>main</code>, <code>nonconst_str</code> is a non-const object and it can be modified
 by <code>[]</code>.In <code>print</code>, <code>const Str&amp; const_str</code> means
 <strong>pass parameters by reference-to-const</strong>, so <code>const_str</code> is a const object.</p>
-
 <p>We observe that the <code>const</code> keyword is after the closing parenthesis of the
 argument list.This means the function is a const member function.</p>
-
 <p>Reference to <a href="http://msdn.microsoft.com/en-us/library/6ke686zh.aspx">MSDN</a>,
 <strong>A constant member function cannot modify any non-static members or call any</strong>
-<strong>member functions that aren&rsquo;t constant.</strong>That is, the cons member function
+**member functions that aren&rsquo;t constant.**That is, the cons member function
 can&rsquo;t modify the object that it is called.</p>
-
 <p>The above philosophy is called <strong>bitwise constness</strong> or <strong>physical constness</strong>.
 There are another philosophy called <strong>logical constness</strong>.Adherents to this
 philosophy argue that <strong>a const member function might modify some of the bits</strong>
 <strong>in the object on which it&rsquo;s invoked, but only in ways that clients cannot</strong>
 <strong>detect</strong>.</p>
-
 <p>For example, if we add a new member function <code>length()</code> to the above class.</p>
-
 <pre><code>    std::size_t
     length() const
     {
@@ -267,44 +244,34 @@ philosophy argue that <strong>a const member function might modify some of the b
 
         return len;
     }
-
+    
 private:
     std::string data;
     std::size_t len;
 </code></pre>
-
 <p>This will generate the following compiled error.</p>
-
 <pre><code>test.cpp:25:6: error: assignment of member ‘Str::len’ in read-only object
   len = data.length();
       ^
 </code></pre>
-
 <p>Since member variable <code>len</code> has been modified and the compiler use the
 <strong>bitwise const</strong>, error produces.However, return and object&rsquo;s length seems
 not modify the object it is called.</p>
-
 <p>To solved this problem, use the <strong>mutable</strong> keyword.It can free non-static
 data members from bitwise constness constraints.</p>
-
 <pre><code>mutable std::size_t len;
 </code></pre>
-
 <p>I beleive in code reusing forever!In the above example, the duplicate code
 in the two <code>operator[]</code> functions can be merged into one.</p>
-
 <p>Only then non-const function should be modified.</p>
-
 <pre><code>char&amp;
 operator[](std::size_t pos)    // Non-const objects use this
 {
     return const_cast&lt;char&amp;&gt;(static_cast&lt;const Str&amp;&gt;(*this)[pos]);
 }
 </code></pre>
-
 <p><code>static_cast&lt;const Str&amp;&gt;</code>will make <code>*this</code>const and then it can call
 <code>operator[]</code>.Finally, <code>const_cast</code> is used the free the const constraint.</p>
-
 <p>This is all about <code>const</code>, it&rsquo;s an amazing keyword.For readable and efficient
 code, use it anyway.</p>
 
@@ -433,7 +400,10 @@ code, use it anyway.</p>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

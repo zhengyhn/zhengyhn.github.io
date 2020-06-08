@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="求最长递增子序列的长度也是动态规划里面的基础问题。记得当时大学的时候碰到这个问题，想破了脑袋也想不出来非暴力的解法，现在写起动态规划的算法还" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/longest-increasing-subsequence/" />
@@ -34,31 +34,28 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="Longest Increasing Subsequence" />
-<meta property="og:description" content="求最长递增子序列的长度也是动态规划里面的基础问题。记得当时大学的时候碰到这个问题，想破了脑袋也想不出来非暴力的解法，现在写起动态规划的算法还" />
+<meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/longest-increasing-subsequence/" />
-<meta property="article:published_time" content="2018-10-29T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-10-29T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2018-10-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-10-29T00:00:00+00:00" />
 <meta itemprop="name" content="Longest Increasing Subsequence">
-<meta itemprop="description" content="求最长递增子序列的长度也是动态规划里面的基础问题。记得当时大学的时候碰到这个问题，想破了脑袋也想不出来非暴力的解法，现在写起动态规划的算法还">
-
-
+<meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2018-10-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-10-29T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="838">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Longest Increasing Subsequence"/>
-<meta name="twitter:description" content="求最长递增子序列的长度也是动态规划里面的基础问题。记得当时大学的时候碰到这个问题，想破了脑袋也想不出来非暴力的解法，现在写起动态规划的算法还"/>
+<meta name="twitter:description" content=""/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -140,154 +137,123 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#暴力算法">暴力算法</a></li>
-<li><a href="#动态规划">动态规划</a></li>
-<li><a href="#二分查找法">二分查找法</a></li>
-<li><a href="#测试">测试</a></li>
-<li><a href="#性能测试">性能测试</a></li>
-<li><a href="#参考资料">参考资料</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#暴力算法">暴力算法</a></li>
+    <li><a href="#动态规划">动态规划</a></li>
+    <li><a href="#二分查找法">二分查找法</a></li>
+    <li><a href="#测试">测试</a></li>
+    <li><a href="#性能测试">性能测试</a></li>
+    <li><a href="#参考资料">参考资料</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>求最长递增子序列的长度也是动态规划里面的基础问题。记得当时大学的时候碰到这个问题，想破了脑袋也想不出来非暴力的解法，现在写起动态规划的算法还是比较得心应手的，证明这几年我的确是进步了。</p>
-
 <p>下面重新复习这个问题，作此笔记。</p>
-
 <h2 id="暴力算法">暴力算法</h2>
-
 <p>思路是，遍历每个元素，往后面找到一个比它大的数，递归地调用，计算出来当前的最长递增子序列的长度，再取每个元素计算出来的长度取一个最大值。时间得杂度为$O(n!)$</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> random
 
-<pre><code class="language-python">import random
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lis_recursive</span>(arr, i):
+    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> len(arr) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    max_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, len(arr)):
+        <span style="color:#66d9ef">if</span> arr[j] <span style="color:#f92672">&gt;</span> arr[i]:
+            length <span style="color:#f92672">=</span> lis_recursive(arr, j)
+            <span style="color:#66d9ef">if</span> length <span style="color:#f92672">&gt;</span> max_len:
+                max_len <span style="color:#f92672">=</span> length
+    <span style="color:#66d9ef">return</span> max_len <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
 
-def lis_recursive(arr, i):
-    if i == len(arr) - 1:
-        return 1
-    max_len = 0
-    for j in range(i + 1, len(arr)):
-        if arr[j] &gt; arr[i]:
-            length = lis_recursive(arr, j)
-            if length &gt; max_len:
-                max_len = length
-    return max_len + 1
-
-def lis_bruteforce(arr):
-    max_len = 0
-    for i in range(len(arr)):
-        length = lis_recursive(arr, i)
-        if length &gt; max_len:
-            max_len = length
-    return max_len
-</code></pre>
-
-<h2 id="动态规划">动态规划</h2>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lis_bruteforce</span>(arr):
+    max_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(arr)):
+        length <span style="color:#f92672">=</span> lis_recursive(arr, i)
+        <span style="color:#66d9ef">if</span> length <span style="color:#f92672">&gt;</span> max_len:
+            max_len <span style="color:#f92672">=</span> length
+    <span style="color:#66d9ef">return</span> max_len
+</code></pre></div><h2 id="动态规划">动态规划</h2>
 <p>思路是，将上面的递归算法的递归每一步，用一个数组缓存起来结果，以避免重复计算，最后取最大的那个。时间复杂度为$O(n^2)$</p>
-
-<pre><code class="language-python">def lis_dp(arr):
-    max_len = 0
-    dp = [1 for j in range(0, len(arr))]
-    for i in range(len(arr) - 2, -1, -1):
-        for j in range(i + 1, len(arr)):
-            if arr[i] &lt; arr[j]:
-                dp[i] = max(dp[j] + 1, dp[i])
-        max_len = max(max_len, dp[i])
-    return max_len
-</code></pre>
-
-<h2 id="二分查找法">二分查找法</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lis_dp</span>(arr):
+    max_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    dp <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(arr))]
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(arr) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, len(arr)):
+            <span style="color:#66d9ef">if</span> arr[i] <span style="color:#f92672">&lt;</span> arr[j]:
+                dp[i] <span style="color:#f92672">=</span> max(dp[j] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, dp[i])
+        max_len <span style="color:#f92672">=</span> max(max_len, dp[i])
+    <span style="color:#66d9ef">return</span> max_len
+</code></pre></div><h2 id="二分查找法">二分查找法</h2>
 <p>这是一个非常巧妙的方法，基于的思想是，为了得到最长的递增子序列的长度，那当前元素肯定是越小越好，因为这样子后面才可以有更多的元素跟在后面。</p>
-
 <p>用一个数组min_ends记录在i位置，当最长递增子序列长度为i + 1时，末尾的元素最小的那个，由于递增是有序的，所以可以用二分查找法来找到插入的位置，整个算法的时间复杂度为$O(nlogn)$</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bin_search</span>(arr, start, end, key):
+    <span style="color:#66d9ef">while</span> start <span style="color:#f92672">&lt;=</span> end:
+        mid <span style="color:#f92672">=</span> (start <span style="color:#f92672">+</span> end) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
+        <span style="color:#66d9ef">if</span> key <span style="color:#f92672">&lt;=</span> arr[mid]:
+            end <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">else</span>:
+            start <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span> start
 
-<pre><code class="language-python">def bin_search(arr, start, end, key):
-    while start &lt;= end:
-        mid = (start + end) // 2
-        if key &lt;= arr[mid]:
-            end = mid - 1
-        else:
-            start = mid + 1
-    return start
-
-def lis_bin_search(arr):
-    min_ends = [0 for i in range(len(arr))]
-    min_ends[0] = arr[0]
-    length = 1
-    for i in range(1, len(arr)):
-        pos = bin_search(min_ends, 0, length - 1, arr[i])
-        min_ends[pos] = arr[i]
-        if pos == length:
-            length += 1
-    return length
-</code></pre>
-
-<h2 id="测试">测试</h2>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lis_bin_search</span>(arr):
+    min_ends <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(arr))]
+    min_ends[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> arr[<span style="color:#ae81ff">0</span>]
+    length <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, len(arr)):
+        pos <span style="color:#f92672">=</span> bin_search(min_ends, <span style="color:#ae81ff">0</span>, length <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, arr[i])
+        min_ends[pos] <span style="color:#f92672">=</span> arr[i]
+        <span style="color:#66d9ef">if</span> pos <span style="color:#f92672">==</span> length:
+            length <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span> length
+</code></pre></div><h2 id="测试">测试</h2>
 <p>做一个简单的测试，然后随机生成一些数据用于测试。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">arr <span style="color:#f92672">=</span> [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>]
+<span style="color:#66d9ef">print</span>(lis_bruteforce(arr))
+<span style="color:#66d9ef">print</span>(lis_dp(arr))
+<span style="color:#66d9ef">print</span>(lis_bin_search(arr))
 
-<pre><code class="language-python">arr = [3, 0, 2, 1, 4]
-print(lis_bruteforce(arr))
-print(lis_dp(arr))
-print(lis_bin_search(arr))
-
-for i in range(0, 100):
-    arr = [random.randint(0, 9) for i in range(10)]
-    result1 = lis_bruteforce(arr)
-    result2 = lis_dp(arr)
-    result3 = lis_bin_search(arr)
-    if result1 != result2 or result2 != result3:
-        print(result1, result2, result3)
-</code></pre>
-
-<pre><code>3
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">100</span>):
+    arr <span style="color:#f92672">=</span> [random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>)]
+    result1 <span style="color:#f92672">=</span> lis_bruteforce(arr)
+    result2 <span style="color:#f92672">=</span> lis_dp(arr)
+    result3 <span style="color:#f92672">=</span> lis_bin_search(arr)
+    <span style="color:#66d9ef">if</span> result1 <span style="color:#f92672">!=</span> result2 <span style="color:#f92672">or</span> result2 <span style="color:#f92672">!=</span> result3:
+        <span style="color:#66d9ef">print</span>(result1, result2, result3)
+</code></pre></div><pre><code>3
 3
 3
 </code></pre>
-
 <p>发现3个算法的结果是一致的。</p>
-
 <h2 id="性能测试">性能测试</h2>
-
 <p>对3个算法做性能测试:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> timeit
+<span style="color:#f92672">import</span> random
 
-<pre><code class="language-python">import timeit
-import random
-
-def test_lis_bruteforce():
-    length = random.randint(1, 100)
-    arr = [random.randint(0, 10) for i in range(length)]
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_lis_bruteforce</span>():
+    length <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>)
+    arr <span style="color:#f92672">=</span> [random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(length)]
     lis_bruteforce(arr)
     
-def test_lis_dp():
-    length = random.randint(1, 100)
-    arr = [random.randint(0, 10) for i in range(length)]
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_lis_dp</span>():
+    length <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>)
+    arr <span style="color:#f92672">=</span> [random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(length)]
     lis_dp(arr)
  
-def test_lis_bin_search():
-    length = random.randint(1, 100)
-    arr = [random.randint(0, 10) for i in range(length)]
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_lis_bin_search</span>():
+    length <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>)
+    arr <span style="color:#f92672">=</span> [random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(length)]
     lis_bin_search(arr)
     
-print(timeit.timeit(test_lis_bruteforce, number=10, setup='from __main__ import test_lis_bruteforce'))
-print(timeit.timeit(test_lis_dp, number=10, setup='from __main__ import test_lis_dp'))
-print(timeit.timeit(test_lis_bin_search, number=10, setup='from __main__ import test_lis_bin_search'))
-</code></pre>
-
-<pre><code>2.092267832995276
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(test_lis_bruteforce, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;from __main__ import test_lis_bruteforce&#39;</span>))
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(test_lis_dp, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;from __main__ import test_lis_dp&#39;</span>))
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(test_lis_bin_search, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;from __main__ import test_lis_bin_search&#39;</span>))
+</code></pre></div><pre><code>2.092267832995276
 0.005408962009823881
 0.0011912080080946907
 </code></pre>
-
 <p>可以看到暴力算法非常慢，动态规划算法要快个几百倍，而二分查找的算法更快！</p>
-
 <h2 id="参考资料">参考资料</h2>
-
 <ul>
 <li><a href="https://www.felix021.com/blog/read.php?1587">长递增子序列 O(NlogN)算法 </a></li>
 <li><a href="https://leetcode.com/problems/longest-increasing-subsequence/solution/">leetcode</a></li>
@@ -351,7 +317,7 @@ print(timeit.timeit(test_lis_bin_search, number=10, setup='from __main__ import 
         id: '2018-10-29 00:00:00 \x2b0000 UTC',
         title: 'Longest Increasing Subsequence',
         link: decodeURI(location.href),
-        desc: '求最长递增子序列的长度也是动态规划里面的基础问题。记得当时大学的时候碰到这个问题，想破了脑袋也想不出来非暴力的解法，现在写起动态规划的算法还',
+        desc: '',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -417,7 +383,10 @@ print(timeit.timeit(test_lis_bin_search, number=10, setup='from __main__ import 
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

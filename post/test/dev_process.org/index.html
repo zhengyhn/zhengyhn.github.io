@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;software testing&amp;rdquo;一书的读书笔记 @&amp;lt;/font&amp;gt; 产品的组成部分 用户需求 产品说明书 进度表 设计文档 架构 数据流" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;software testing&amp;quot;一书的读书笔记 @&amp;lt;/font&amp;gt; 产品的组成部分 用户需求 产品说明书 进度表 设计文档 架构 数据流程图" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/test/dev_process.org/" />
@@ -34,31 +34,28 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="软件测试读书笔记：软件开发过程" />
-<meta property="og:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 产品的组成部分 用户需求 产品说明书 进度表 设计文档 架构 数据流" />
+<meta property="og:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 产品的组成部分 用户需求 产品说明书 进度表 设计文档 架构 数据流程图" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/test/dev_process.org/" />
-<meta property="article:published_time" content="2013-03-01T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-03-01T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-03-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-03-01T00:00:00+00:00" />
 <meta itemprop="name" content="软件测试读书笔记：软件开发过程">
-<meta itemprop="description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 产品的组成部分 用户需求 产品说明书 进度表 设计文档 架构 数据流">
-
-
+<meta itemprop="description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 产品的组成部分 用户需求 产品说明书 进度表 设计文档 架构 数据流程图">
 <meta itemprop="datePublished" content="2013-03-01T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-03-01T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="686">
+<meta itemprop="wordCount" content="684">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="软件测试读书笔记：软件开发过程"/>
-<meta name="twitter:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 产品的组成部分 用户需求 产品说明书 进度表 设计文档 架构 数据流"/>
+<meta name="twitter:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 产品的组成部分 用户需求 产品说明书 进度表 设计文档 架构 数据流程图"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -130,7 +127,7 @@
       <div class="post-meta">
         <span class="post-time"> 2013-03-01 </span>
         
-          <span class="more-meta"> 约 686 字 </span>
+          <span class="more-meta"> 约 684 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -140,54 +137,43 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#产品的组成部分">产品的组成部分</a></li>
-<li><a href="#软件项目人员组成">软件项目人员组成</a></li>
-<li><a href="#软件开发生命周期模型">软件开发生命周期模型</a>
-<ul>
-<li><a href="#大爆炸模型">大爆炸模型</a></li>
-<li><a href="#code-and-fix模型">code-and-fix模型</a></li>
-<li><a href="#瀑布模型">瀑布模型</a></li>
-<li><a href="#螺旋模型">螺旋模型</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#大爆炸模型">大爆炸模型</a></li>
+    <li><a href="#code-and-fix模型">code-and-fix模型</a></li>
+    <li><a href="#瀑布模型">瀑布模型</a></li>
+    <li><a href="#螺旋模型">螺旋模型</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记
+      <p>@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记
 @&lt;/font&gt;</p>
-
 <h1 id="产品的组成部分">产品的组成部分</h1>
-
 <ol>
 <li>用户需求</li>
 <li>产品说明书</li>
 <li>进度表</li>
 <li>设计文档
-
 <ul>
 <li>架构</li>
 <li>数据流程图</li>
 <li>状态转换图</li>
 <li>流程图</li>
 <li>易懂的代码</li>
-</ul></li>
+</ul>
+</li>
 <li>测试文档
-
 <ul>
 <li>测试计划</li>
 <li>测试样例</li>
 <li>bug报告</li>
 <li>测试工具</li>
 <li>测试总结</li>
-</ul></li>
+</ul>
+</li>
 </ol>
-
 <h1 id="软件项目人员组成">软件项目人员组成</h1>
-
 <ul>
 <li>项目经理: 写产品说明书，管理进度，做重要决定</li>
 <li>系统架构师: 设计整个项目的架构，通常是技术专家。</li>
@@ -196,28 +182,19 @@
 <li>技术文档编写者: 写用户文档，技术文档的。</li>
 <li>配置管理和软件打包者: 把软件文档等打包，写安装说明的</li>
 </ul>
-
 <h1 id="软件开发生命周期模型">软件开发生命周期模型</h1>
-
 <h2 id="大爆炸模型">大爆炸模型</h2>
-
 <p>源自宇宙大爆炸，很多人和材料聚集在一起，开发一个项目，没有太多的用户需求书，
 产品说明书之类的东西，开发时间无法确定，一般不需要专门的测试师，这种模型适合
 那种不成熟的，需求非常明确的的项目。</p>
-
 <h2 id="code-and-fix模型">code-and-fix模型</h2>
-
 <p>开始于一份不怎么正式的产品说明书，然后进入编码-&gt;解决bug-&gt;编码-&gt;&hellip;的循环中，
 这种模型适合于小项目，软件测试师一般在循环里面不断地报告bug。</p>
-
 <h2 id="瀑布模型">瀑布模型</h2>
-
 <p>主要流程为：idea-&gt;analysis-&gt;design&ndash;&gt;development-&gt;test&ndash;&gt;final
 product 每做完一步，都要回顾一下前面的有没有做好，能不能进入下一步。
 一旦处在中间的某个步骤，你就不能回头，除非重做。</p>
-
 <h2 id="螺旋模型">螺旋模型</h2>
-
 <p>把整个项目分为多个层次，每个层次其实是一个瀑布模型里面的各个步骤，做完一个层次，
 开始准备下一个层次，并修正上一个层次的错误，如此下去，就像一个螺旋，把项目越做
 越大。 <em>~/pictures/spiral.jpg</em></p>
@@ -281,7 +258,7 @@ product 每做完一步，都要回顾一下前面的有没有做好，能不能
         id: '2013-03-01 00:00:00 \x2b0000 UTC',
         title: '软件测试读书笔记：软件开发过程',
         link: decodeURI(location.href),
-        desc: '@\x26lt;font color=\x26ldquo;red\x26rdquo;\x26gt; 本文为\x26rdquo;software testing\x26rdquo;一书的读书笔记 @\x26lt;\/font\x26gt; 产品的组成部分 用户需求 产品说明书 进度表 设计文档 架构 数据流',
+        desc: '@\x26lt;font color=\x26quot;red\x26rdquo;\x26gt; 本文为\x26quot;software testing\x26quot;一书的读书笔记 @\x26lt;\/font\x26gt; 产品的组成部分 用户需求 产品说明书 进度表 设计文档 架构 数据流程图',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -347,7 +324,10 @@ product 每做完一步，都要回顾一下前面的有没有做好，能不能
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/write-down-the-restructuredtext-syntax-i-frequently-use/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="reStructuredText用于排版非常好。但是，和C&#43;&#43;一样，越是灵活，越是可扩展，越是复杂。 有些语法，你永远记不住，我经常遇到一些表" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/write-down-the-restructuredtext-syntax-i-frequently-use/" />
-<meta property="article:published_time" content="2016-05-27T16:35:19&#43;08:00"/>
-<meta property="article:modified_time" content="2016-05-27T16:35:19&#43;08:00"/>
-
+<meta property="article:published_time" content="2016-05-27T16:35:19+08:00" />
+<meta property="article:modified_time" content="2016-05-27T16:35:19+08:00" />
 <meta itemprop="name" content="reStructuredText语法笔记">
 <meta itemprop="description" content="reStructuredText用于排版非常好。但是，和C&#43;&#43;一样，越是灵活，越是可扩展，越是复杂。 有些语法，你永远记不住，我经常遇到一些表">
-
-
 <meta itemprop="datePublished" content="2016-05-27T16:35:19&#43;08:00" />
 <meta itemprop="dateModified" content="2016-05-27T16:35:19&#43;08:00" />
 <meta itemprop="wordCount" content="358">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="reStructuredText语法笔记"/>
 <meta name="twitter:description" content="reStructuredText用于排版非常好。但是，和C&#43;&#43;一样，越是灵活，越是可扩展，越是复杂。 有些语法，你永远记不住，我经常遇到一些表"/>
 
@@ -139,34 +136,19 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#代码块">代码块</a></li>
-<li><a href="#引入代码文件">引入代码文件</a></li>
-<li><a href="#超链接">超链接</a></li>
-<li><a href="#斜体和粗体">斜体和粗体</a></li>
-<li><a href="#图片">图片</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>reStructuredText用于排版非常好。但是，和C++一样，越是灵活，越是可扩展，越是复杂。
+      <p>reStructuredText用于排版非常好。但是，和C++一样，越是灵活，越是可扩展，越是复杂。
 有些语法，你永远记不住，我经常遇到一些表示方法（比如说超链接），忘记了语法，每次都
 要去Google。为了不这么麻烦，我决定记下去，以免下次忘了又要去查。</p>
-
 <p>大部分都来自 <a href="http://sphinx-doc.org/rest.html">这里</a> 。</p>
-
 <h1 id="代码块">代码块</h1>
-
 <p>在段落的结尾使用 <code>::</code> 符号,
 然后输入一个空行，然后是代码（必须缩进，空2格或4格），
 然后是一个空行。比如</p>
-
 <p>代码如下:</p>
-
 <pre><code>#include &lt;iostream&gt;
 
 int
@@ -175,40 +157,25 @@ main(int argc, char *argv[])
     return 0;
 }
 </code></pre>
-
 <h1 id="引入代码文件">引入代码文件</h1>
-
 <p>对于我等码农来说，这应该算是最常用的了。格式为:</p>
-
 <pre><code>.. code-include:: source-code-file
 :lexer: language-name
 </code></pre>
-
 <h1 id="超链接">超链接</h1>
-
 <p>经常要引用一些大牛的博客，链接的格式为:</p>
-
 <pre><code>`链接文字 &lt;链接&gt;`_
 </code></pre>
-
 <p>比如， <a href="http://en.zhengyuanhang.com">我的英文博客</a> 。</p>
-
 <h1 id="斜体和粗体">斜体和粗体</h1>
-
 <p>斜体:</p>
-
 <pre><code>*这是斜体*
 </code></pre>
-
 <p>粗体:</p>
-
 <pre><code>**这是粗体**
 </code></pre>
-
 <h1 id="图片">图片</h1>
-
 <p>格式是这样的:</p>
-
 <pre><code>.. image:: /images/one_piece.gif
  :alt: one_piece
  :width: 200px
@@ -216,7 +183,6 @@ main(int argc, char *argv[])
  :scale: 80 %
  :align: left
 </code></pre>
-
 <p>align的选项是left, center, right。</p>
 
     </div>
@@ -344,7 +310,10 @@ main(int argc, char *argv[])
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

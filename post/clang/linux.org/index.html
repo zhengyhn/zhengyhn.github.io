@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;linux c编程一站式学习&amp;rdquo;一书的笔记 @&amp;lt;/font&amp;gt; 文件与I/O 再来一个hello world 我也来写一段汇编的hello world .data" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;linux c编程一站式学习&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 文件与I/O 再来一个hello world 我也来写一段汇编的hello world .data msg: .ascii" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/clang/linux.org/" />
@@ -34,31 +34,28 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="linux系统编程" />
-<meta property="og:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;linux c编程一站式学习&rdquo;一书的笔记 @&lt;/font&gt; 文件与I/O 再来一个hello world 我也来写一段汇编的hello world .data" />
+<meta property="og:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;linux c编程一站式学习&quot;一书的笔记 @&lt;/font&gt; 文件与I/O 再来一个hello world 我也来写一段汇编的hello world .data msg: .ascii" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/clang/linux.org/" />
-<meta property="article:published_time" content="2013-02-27T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-02-27T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-02-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-02-27T00:00:00+00:00" />
 <meta itemprop="name" content="linux系统编程">
-<meta itemprop="description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;linux c编程一站式学习&rdquo;一书的笔记 @&lt;/font&gt; 文件与I/O 再来一个hello world 我也来写一段汇编的hello world .data">
-
-
+<meta itemprop="description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;linux c编程一站式学习&quot;一书的笔记 @&lt;/font&gt; 文件与I/O 再来一个hello world 我也来写一段汇编的hello world .data msg: .ascii">
 <meta itemprop="datePublished" content="2013-02-27T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-02-27T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="5015">
+<meta itemprop="wordCount" content="5011">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="linux系统编程"/>
-<meta name="twitter:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;linux c编程一站式学习&rdquo;一书的笔记 @&lt;/font&gt; 文件与I/O 再来一个hello world 我也来写一段汇编的hello world .data"/>
+<meta name="twitter:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;linux c编程一站式学习&quot;一书的笔记 @&lt;/font&gt; 文件与I/O 再来一个hello world 我也来写一段汇编的hello world .data msg: .ascii"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -130,7 +127,7 @@
       <div class="post-meta">
         <span class="post-time"> 2013-02-27 </span>
         
-          <span class="more-meta"> 约 5015 字 </span>
+          <span class="more-meta"> 约 5011 字 </span>
           <span class="more-meta"> 预计阅读 11 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -140,48 +137,32 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#文件与i-o">文件与I/O</a>
-<ul>
-<li><a href="#再来一个hello-world">再来一个hello world</a></li>
-<li><a href="#open-close">open/close</a></li>
-<li><a href="#read-write">read/write</a></li>
-<li><a href="#lseek">lseek</a></li>
-<li><a href="#fcntl">fcntl</a></li>
-<li><a href="#ioctl">ioctl</a></li>
-<li><a href="#mmap">mmap</a></li>
-</ul></li>
-<li><a href="#文件系统">文件系统</a></li>
-<li><a href="#进程">进程</a></li>
-<li><a href="#shell脚本">shell脚本</a></li>
-<li><a href="#正则表达式">正则表达式</a></li>
-<li><a href="#信号">信号</a></li>
-<li><a href="#终端-作业控制与守护进程">终端、作业控制与守护进程</a></li>
-<li><a href="#线程">线程</a>
-<ul>
-<li><a href="#创建线程">创建线程</a></li>
-<li><a href="#终止线程">终止线程</a></li>
-</ul></li>
-<li><a href="#网络socket编程">网络socket编程</a></li>
-</ul>
+  <ul>
+    <li><a href="#再来一个hello-world">再来一个hello world</a></li>
+    <li><a href="#openclose">open/close</a></li>
+    <li><a href="#readwrite">read/write</a></li>
+    <li><a href="#lseek">lseek</a></li>
+    <li><a href="#fcntl">fcntl</a></li>
+    <li><a href="#ioctl">ioctl</a></li>
+    <li><a href="#mmap">mmap</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#创建线程">创建线程</a></li>
+    <li><a href="#终止线程">终止线程</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;linux c编程一站式学习&rdquo;一书的笔记
+      <p>@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;linux c编程一站式学习&quot;一书的笔记
 @&lt;/font&gt;</p>
-
-<h1 id="文件与i-o">文件与I/O</h1>
-
+<h1 id="文件与io">文件与I/O</h1>
 <h2 id="再来一个hello-world">再来一个hello world</h2>
-
 <ul>
 <li>我也来写一段汇编的hello world</li>
 </ul>
-
-<pre><code class="language-.example">.data
+<pre><code class="language-{.example}" data-lang="{.example}">.data
 msg:
         .ascii &quot;yuanhang zheng\n&quot;
         len = . - msg
@@ -200,28 +181,20 @@ _start:
         movl $1, %eax    #4 is sys_exit
         int $0x80
 
-</code></pre>
-
-<p>运行结果为：</p>
-
-<pre><code class="language-.example">[monkey@itlodge asm]$ as -o hello.o hello.s
+</code></pre><p>运行结果为：</p>
+<pre><code class="language-{.example}" data-lang="{.example}">[monkey@itlodge asm]$ as -o hello.o hello.s
 [monkey@itlodge asm]$ ld -o hello hello.o
 [monkey@itlodge asm]$ ./hello
 yuanhang zheng
-</code></pre>
-
-<p>对上面程序的几点说明：</p>
-
+</code></pre><p>对上面程序的几点说明：</p>
 <ol>
 <li>汇编中.ascii定义的字符串末尾没有隐含&rsquo;\0&rsquo;</li>
 <li>len的值是. - msg，即当前地址用.号表示，这是一种神奇的求长度方法！</li>
 </ol>
-
 <ul>
 <li>用C语言实现刚刚的程序</li>
 </ul>
-
-<pre><code class="language-.c">#include &lt;unistd.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;unistd.h&gt;
 
 #define LEN 15
 
@@ -234,121 +207,77 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-</code></pre>
-
-<p>事实上write和\s~exit就包装了上面两段代码~。其中头文件unistdh意思是unix
+</code></pre><p>事实上write和\s~exit就包装了上面两段代码~。其中头文件unistdh意思是unix
 standard。</p>
-
 <ul>
 <li>POSIX,portable operationg system
 interface,用于统一各种UNIX的函数接口。</li>
 </ul>
-
-<h2 id="open-close">open/close</h2>
-
+<h2 id="openclose">open/close</h2>
 <ul>
 <li>在linux系统编程中，我们可以使用标准C函数库里面的fopen和fclose，也可以使用系统的</li>
 </ul>
-
 <p>接口open/close</p>
-
 <ul>
 <li>open函数如下：</li>
 </ul>
-
-<pre><code class="language-.c">#include &lt;sys/types.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;sys/types.h&gt;
 #include &lt;sys/stat.h&gt;
 #include &lt;fcntl.h&gt;
 
 int open(const char *pathname, int flags);
 int open(const char *pathname, int flags, mode_t mode);
-</code></pre>
-
-<p>事实上是这样声明的：</p>
-
-<pre><code class="language-.c">int open(const char *pathname, int flags, ...);
-</code></pre>
-
-<p>flags有很多常数值选择，多个常数用按位或连接起来，这些宏定义都以O_开头（大写o），
+</code></pre><p>事实上是这样声明的：</p>
+<pre><code class="language-{.c}" data-lang="{.c}">int open(const char *pathname, int flags, ...);
+</code></pre><p>flags有很多常数值选择，多个常数用按位或连接起来，这些宏定义都以O_开头（大写o），
 表示or。</p>
-
 <ol>
 <li>必选项（必选一个且只能选一个）</li>
 </ol>
-
 <p>O_RDONLY   read only</p>
-
-<hr />
-
+<hr>
 <p>O_WRONLY   write only
-  O_RDWR     read and write</p>
-
+O_RDWR     read and write</p>
 <ol>
 <li>可选项（部分）</li>
 </ol>
-
 <p>O_APPEND   append</p>
-
-<hr />
-
+<hr>
 <p>O_CREAT    create if not exist, should give parameter &ldquo;mode&rdquo;
-  O_TRUNC    truncate as zero byte if exist, read and write</p>
-
+O_TRUNC    truncate as zero byte if exist, read and write</p>
 <p>open与fopen的一些区别：</p>
-
 <ul>
 <li>以可写的方式fopen时，如果文件不存在会自动创建，而用open必须要使用O_CREAT，否则</li>
 </ul>
-
 <p>出错。</p>
-
 <ul>
 <li>以可写的方式fopen时，如果文件已经存在则截断为0字节，而用open必须要使用O_TRUNC,</li>
 </ul>
-
 <p>否则出错。
 mode指定文件权限，这里学习到了权限字符与数字表示之间怎么计算，比如：</p>
-
-<pre><code class="language-.example">-rwxr-xr-x
-</code></pre>
-
-<p>这是一个很常见的权限，我们要把它分为3部分：</p>
-
-<pre><code class="language-.example">u/g/o rwx rwx rwx
-</code></pre>
-
-<p>记住下面的字符数字对应关系：</p>
-
+<pre><code class="language-{.example}" data-lang="{.example}">-rwxr-xr-x
+</code></pre><p>这是一个很常见的权限，我们要把它分为3部分：</p>
+<pre><code class="language-{.example}" data-lang="{.example}">u/g/o rwx rwx rwx
+</code></pre><p>记住下面的字符数字对应关系：</p>
 <p>u   g   o   r   w   x</p>
-
-<hr />
-
+<hr>
 <p>4   2   1   4   2   1</p>
-
 <p>好，开始计算，第一个为-，表示留空，即为0。第二段为rwx，即4 + 2 + 1 = 7。
 第三段和第四段为rw-，即4 + 1 = 5，最后整个权限为0755。
 作者在这里提到文件权限由open的mode参数和当前进程的umask掩码共同决定。
 通过下面的命令查看shell进程的umask掩码：</p>
-
-<pre><code class="language-.bash">[monkey@itlodge ~]$ umask
+<pre><code class="language-{.bash}" data-lang="{.bash}">[monkey@itlodge ~]$ umask
 0022
-</code></pre>
-
-<p>我的是0022。根据作者的推理，</p>
-
+</code></pre><p>我的是0022。根据作者的推理，</p>
 <ul>
 <li>当用touch创建一个文件时，创建权限是0666,</li>
 </ul>
-
 <p>而touch继承了shell进程的umask掩码，变成了0666 &amp; ~0022 = 0644。</p>
-
 <ul>
 <li>当用gcc编译生成一个可执行文件时，创建权限是0777,而最后是</li>
 </ul>
-
 <p>0777 &amp; ~0022 = 0755 下面来做个实验，写个程序：</p>
-
-<pre><code class="language-.c">#include &lt;unistd.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;unistd.h&gt;
 #include &lt;fcntl.h&gt;
 
 int main(int argc, char *argv[])
@@ -358,50 +287,32 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-</code></pre>
-
-<p>运行结果为：</p>
-
-<pre><code class="language-.bash">[monkey@itlodge c]$ ls -l abc.c
+</code></pre><p>运行结果为：</p>
+<pre><code class="language-{.bash}" data-lang="{.bash}">[monkey@itlodge c]$ ls -l abc.c
 -rw-r--r-- 1 monkey sudo 0 Feb 24 20:15 abc.c
-</code></pre>
-
-<p>可以看到，权限最终为0644。</p>
-
+</code></pre><p>可以看到，权限最终为0644。</p>
 <ul>
 <li>习题</li>
 </ul>
-
 <ol>
 <li>查找flags和mode参数用到的宏定义，我在fcntl-linux.h中找到如下：</li>
 </ol>
-
-<pre><code class="language-.c">#define O_RDONLY         00
+<pre><code class="language-{.c}" data-lang="{.c}">#define O_RDONLY         00
 #define O_WRONLY         01
 #define O_RDWR           02
 #ifndef O_CREAT
 # define O_CREAT       0100 /* Not fcntl.  */
 #endif
-</code></pre>
-
-<p>以0开头，都是8进制数，而且按位或之后各自占的位不影响。
+</code></pre><p>以0开头，都是8进制数，而且按位或之后各自占的位不影响。
 有关mode的宏则没找到。</p>
-
-<h2 id="read-write">read/write</h2>
-
-<pre><code class="language-.example">ssize_t read(int fd, void *buf, size_t count);
-</code></pre>
-
-<p>成功返回读取的字节数，出错返回-1并设置errno。这里ssize_t表明signed，
+<h2 id="readwrite">read/write</h2>
+<pre><code class="language-{.example}" data-lang="{.example}">ssize_t read(int fd, void *buf, size_t count);
+</code></pre><p>成功返回读取的字节数，出错返回-1并设置errno。这里ssize_t表明signed，
 文件的当前位置是记录在内核里面的而不是用户空间的I/O缓冲区。</p>
-
-<pre><code class="language-.example">ssize_t write(int fd, const void *buf, size_t count);
-</code></pre>
-
-<p>读常规文件是不会阻塞的，而从终端设备和网络中读就可能会阻塞。
+<pre><code class="language-{.example}" data-lang="{.example}">ssize_t write(int fd, const void *buf, size_t count);
+</code></pre><p>读常规文件是不会阻塞的，而从终端设备和网络中读就可能会阻塞。
 来看一下阻塞读终端的例子：</p>
-
-<pre><code class="language-.c">#include &lt;unistd.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;unistd.h&gt;
 #include &lt;stdlib.h&gt;
 
 #define BUFFER_SIZE 10
@@ -420,96 +331,64 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-</code></pre>
-
-<p>输出结果如下：</p>
-
-<pre><code class="language-.bash">[monkey@itlodge c]$ ./main 
+</code></pre><p>输出结果如下：</p>
+<pre><code class="language-{.bash}" data-lang="{.bash}">[monkey@itlodge c]$ ./main 
 hello
 hello
 [monkey@itlodge c]$ ./main 
 hello world
 hello worl[monkey@itlodge c]$ bash: d: command not found
-</code></pre>
-
-<p>在第二次，因为缓冲区只有10个字节，而hello
+</code></pre><p>在第二次，因为缓冲区只有10个字节，而hello
 world一共11个字符，所以还剩下最后一个
 d没有读，留在了内核的终端设备缓冲区里面，当main进程退出时，轮到shell进程执行，
 继续读取用户输入，读取到了d和换行符，把它当成一条命令。 @&lt;font
-color=&ldquo;red&rdquo;&gt; 至于书上说的非阻塞I/O，我不太明白，不敢下笔。
+color=&quot;red&rdquo;&gt; 至于书上说的非阻塞I/O，我不太明白，不敢下笔。
 @&lt;/font&gt;</p>
-
 <h2 id="lseek">lseek</h2>
-
 <p>off_t lseek(int fd, off_t offset, int whence);
 可以想像，它和fseek类似。偏移量允许超过文件末尾，这种情况，下一次写操作
 将延长文件，中间空洞部分读出来的都是0.
 和fseek的一点区别是，fseek成功时返回0,失败时返回-1,而lseek成功时返回
 当前偏移量失败时返回-1。</p>
-
 <h2 id="fcntl">fcntl</h2>
-
-<pre><code class="language-.c">int fcntl(int fd, int cmd);
+<pre><code class="language-{.c}" data-lang="{.c}">int fcntl(int fd, int cmd);
 int fcntl(int fd, int cmd, long arg);
 int fcntl(int fd, int cmd, struct flock *lock);
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>可以想像，它是用可变参数实现的，可变参数的类型和个数取决于cmd，常用的cmd</li>
 </ul>
-
 <p>有F_GETFL(拿到flags),F_SETFL(设置flag)。</p>
-
 <ul>
 <li>将一个标志flag与O_ACCMODE做与运算，可以拿到它的读写位，与O_APPEND做与</li>
 </ul>
-
 <p>运算，可以判断是否是append，与O_NONBLOCK做与运算，可以判断是否阻塞。</p>
-
 <ul>
 <li>学习到部分重定向语法：</li>
 </ul>
-
 <ol>
 <li>&gt;&gt; 是追加</li>
 <li>在重定向符号左边加数字，表示打开文件描述符为这个数字的文件，比如：</li>
 </ol>
-
-<pre><code class="language-.example">2&gt;&gt; temp.txt
-</code></pre>
-
-<p>表示将标准错误输出以追加的方式重定向到temp.txt中</p>
-
+<pre><code class="language-{.example}" data-lang="{.example}">2&gt;&gt; temp.txt
+</code></pre><p>表示将标准错误输出以追加的方式重定向到temp.txt中</p>
 <ol>
 <li>如果要重定向到标准输入/输出/错误呢？用符号&amp;，比如：</li>
 </ol>
-
-<pre><code class="language-.example">2&gt;&amp;1
-</code></pre>
-
-<p>将标准错误输出重定向到标准输出，注意&gt;后面不能有空格。</p>
-
+<pre><code class="language-{.example}" data-lang="{.example}">2&gt;&amp;1
+</code></pre><p>将标准错误输出重定向到标准输出，注意&gt;后面不能有空格。</p>
 <ul>
 <li>/dev/null设备文件只有一个作用，往它里面写任何数据都被直接丢弃。这种用法</li>
 </ul>
-
 <p>可以让命令安静地执行而不打印任何信息。</p>
-
 <h2 id="ioctl">ioctl</h2>
-
 <ul>
 <li>向设备发送的命令，有些命令也需要读写数据，但是这些数据有的不能用read/write</li>
 </ul>
-
 <p>来操作，而需要用ioctl，这些数据称为out-of-band数据，而用read/write来操作
 的数据称为in-band数据。</p>
-
-<pre><code class="language-.c">int ioctl(intd, int request, ...);
-</code></pre>
-
-<p>下面的例子用于获取终端窗口大小：</p>
-
-<pre><code class="language-.c">#include &lt;unistd.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">int ioctl(intd, int request, ...);
+</code></pre><p>下面的例子用于获取终端窗口大小：</p>
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;unistd.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;sys/ioctl.h&gt;
@@ -529,44 +408,30 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-</code></pre>
-
-<p>其中isatty用于判断是不是在tty中执行这个程序，如果是说明没有终端图形窗口。</p>
-
+</code></pre><p>其中isatty用于判断是不是在tty中执行这个程序，如果是说明没有终端图形窗口。</p>
 <h2 id="mmap">mmap</h2>
-
-<pre><code class="language-.c">void *mmap(void *addr, size_t len, int prot, 
+<pre><code class="language-{.c}" data-lang="{.c}">void *mmap(void *addr, size_t len, int prot, 
            int flag, int filedes, off_t off);
 int munmap(void *addr, size_t len);
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>如果addr为NULL，则内核会自己在进程地址空间中选择合适的地址映射。</li>
 <li>strace可以用于跟踪程序执行过程中用到的所有系统调用。我的系统原来没有</li>
 </ul>
-
 <p>这个工具，后来自己装的。</p>
-
 <h1 id="文件系统">文件系统</h1>
-
 <ul>
 <li>硬链接的建立，直接用ln</li>
 <li>符号链接文件里面保存的其实就是它指向的文件的路径</li>
 <li>ln只能创建目录的符号链接，但是不能创建目录的硬链接</li>
 <li>/dev/zero是一个特殊的设备文件，它没有磁盘数据块，对它进行读操作传给设备</li>
 </ul>
-
 <p>号为1,5的驱动程序,它可以看作是无穷大的。</p>
-
 <h1 id="进程">进程</h1>
-
 <ul>
 <li>环境变量</li>
 </ul>
-
 <p>打印环境变量：</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 
 int main(int argc, char *argv[])
 {
@@ -580,170 +445,114 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-</code></pre>
-
-<p>可以使用getenv取得环境变量，用setenv修改环境变量，unsetenv删除某个环境变量。</p>
-
-<pre><code class="language-.c">char *getenv(const char *name);
+</code></pre><p>可以使用getenv取得环境变量，用setenv修改环境变量，unsetenv删除某个环境变量。</p>
+<pre><code class="language-{.c}" data-lang="{.c}">char *getenv(const char *name);
 int setenv(const char *name, const char *value, int rewrite);
 void unsetenv(const char *name);
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>fork函数</li>
 </ul>
-
-<pre><code class="language-.c">pid_t fork(void);
-</code></pre>
-
-<p>用于创建一个新进程，</p>
-
+<pre><code class="language-{.c}" data-lang="{.c}">pid_t fork(void);
+</code></pre><p>用于创建一个新进程，</p>
 <ul>
 <li>exec函数</li>
 </ul>
-
 <p>用于进程运行时调用另外一个程序。</p>
-
 <ul>
 <li>wait和waitpid</li>
 </ul>
-
 <p>用于得到某进程的退出状态并彻底清除这个进程。</p>
-
-<pre><code class="language-.c">pid_t wait(int *status);
+<pre><code class="language-{.c}" data-lang="{.c}">pid_t wait(int *status);
 pid_t waitpid(pid_t pid, int *status, int options);
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>pipe</li>
 </ul>
-
-<pre><code class="language-.c">int pipe(int filedes[2]);
-</code></pre>
-
-<p>调用它时会在内核中开辟一块缓冲区（管道）用于通信，传进去的参数需要满足，</p>
-
-<pre><code class="language-.example">filedes[0]是读端，filedes[1]是写端
-</code></pre>
-
-<p>管道是用环形队列实现的，数据从写端流入，从读端流出。</p>
-
+<pre><code class="language-{.c}" data-lang="{.c}">int pipe(int filedes[2]);
+</code></pre><p>调用它时会在内核中开辟一块缓冲区（管道）用于通信，传进去的参数需要满足，</p>
+<pre><code class="language-{.example}" data-lang="{.example}">filedes[0]是读端，filedes[1]是写端
+</code></pre><p>管道是用环形队列实现的，数据从写端流入，从读端流出。</p>
 <h1 id="shell脚本">shell脚本</h1>
-
 <ul>
 <li>内建命令builtins，反是用which查不到的程序都是内建命令，如cd命令。</li>
 <li>source命令也是内建命令，不会创建子shell，而是直接执行脚本中的命令。</li>
 <li>export命令可以把本地变量导出为环境变量。</li>
-<li>命令代换也可以使用\$(命令)，这样免得打`号（不好打）</li>
-<li>\$(())用于算术代换，如：</li>
+<li>命令代换也可以使用$(命令)，这样免得打`号（不好打）</li>
+<li>$(())用于算术代换，如：</li>
 </ul>
-
-<pre><code class="language-.bash">a=5
+<pre><code class="language-{.bash}" data-lang="{.bash}">a=5
 echo $((a + 3))
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>交互shell指在提示符下输命令的shell，即用户登录后得到的shell，注意不是</li>
 </ul>
-
 <p>进入桌面后打开终端。这时，会这样：</p>
-
 <ol>
 <li>首先执行/etc/profile</li>
 <li>然后依次查找当前用户的.bash~profile~ .bash~login和~.profile，sh规定</li>
 </ol>
-
 <p>了.profile，而bash规定的则是以.bash~开头的~，如果没有则执行.profile。</p>
-
 <ol>
 <li>退出登录时会执行.bash~logout~（如果有）</li>
 </ol>
-
 <ul>
 <li>交互非登录shell启动，如进入桌面后打开终端（我经常这样干）,或者在shell提示</li>
 </ul>
-
 <p>符下再输入bash。这种情况下启动会执行~/.bashrc。如果你打开.bash_profile，
 你会发现在里面通常会调用.bashrc。</p>
-
 <ul>
 <li>命令test或[可以测试一个条件是否成立。其中[是一个命令，它需要]作为参数，各</li>
 </ul>
-
 <p>参数之间必须用空格分开。</p>
-
 <ul>
 <li>常见测试命令：</li>
 </ul>
-
 <p>[ -d DIR ]         if DIR exist and is a directory</p>
-
-<hr />
-
+<hr>
 <p>[ -f FILE ]        if FILE exist and is a file
-  [ -z STRING ]      if length of STRING is zero
-  [ -n STRING ]      if length of STRING is not zero
-  [ STR1 = STR2 ]    if STR1 is equals to STR2
-  [ STR1 != STR2 ]   if STR1 is not equals to STR2
-  [ ARG1 OP ARG2      ARG1,ARG2 are integer</p>
-
+[ -z STRING ]      if length of STRING is zero
+[ -n STRING ]      if length of STRING is not zero
+[ STR1 = STR2 ]    if STR1 is equals to STR2
+[ STR1 != STR2 ]   if STR1 is not equals to STR2
+[ ARG1 OP ARG2      ARG1,ARG2 are integer</p>
 <p>上面的op可以为-eq, -ne, -lt, -gt, -le, -ge。
 ！是非，-a是与(and)，-o是或(or)。</p>
-
 <ul>
 <li>下面的代码：</li>
 </ul>
-
-<pre><code class="language-.bash">if [ -f ~/.bashrc ]; then
+<pre><code class="language-{.bash}" data-lang="{.bash}">if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
-</code></pre>
-
-<p>这里其实是3条命令：</p>
-
+</code></pre><p>这里其实是3条命令：</p>
 <ol>
 <li>if [ -f ~/.bashrc ]</li>
 <li>then source ~/.bashrc</li>
 <li>fi</li>
 </ol>
-
 <ul>
 <li>调试方法</li>
 </ul>
-
-<pre><code class="language-.example">-n 读一遍脚本但不执行
+<pre><code class="language-{.example}" data-lang="{.example}">-n 读一遍脚本但不执行
 -v 一边执行，一边打印到标准错误输出
 -x 提供跟踪执行信息，打印第一条命令的结果
-</code></pre>
-
-<h1 id="正则表达式">正则表达式</h1>
-
+</code></pre><h1 id="正则表达式">正则表达式</h1>
 <ul>
 <li>sed是stream editor</li>
 <li>awk不仅可以以行为单位处理文件，还能以列为单位处理。</li>
 </ul>
-
 <h1 id="信号">信号</h1>
-
 <ul>
 <li>启动一个前台进程，按下ctrl-c，会产生一个硬件中断，终端驱动程序会将ctrl-c</li>
 </ul>
-
 <p>解释成一个SIGINT信号。</p>
-
 <ul>
 <li>用kill -l可以查看系统定义的信号列表。</li>
 <li>ctrl-\产生SIGQUIT，ctrl-z产生SIGSTP</li>
 <li>SIGINT默认是终止进程，SIGQUIT默认是终止进程并core dump</li>
 <li>当一个进程异常终止时，可以选择把进程的用户空间内存数据全部保存在磁盘上，文件名</li>
 </ul>
-
 <p>通常为core，这个动作称为core
 dump，以便调试。一个进程允许产生多大的core文件取 决于resource
 limit，可以用ulimit命令来改变resource limit，默认是不产生core 文件的。</p>
-
-<h1 id="终端-作业控制与守护进程">终端、作业控制与守护进程</h1>
-
+<h1 id="终端作业控制与守护进程">终端、作业控制与守护进程</h1>
 <ul>
 <li>在/dev中，ptyXX是主设备，ttyXX是从设备，伪终端数目取决于内核配置</li>
 <li>网络登录通过伪终端进行</li>
@@ -751,31 +560,23 @@ limit，可以用ulimit命令来改变resource limit，默认是不产生core �
 <li>ps
 axj命令列出来的进程中，用[]括起来的是内核线程，udevd负责/dev里面的设备，</li>
 </ul>
-
 <p>acpid用于电源管理，syslogd用于日志管理，守护进程通常以d结尾，表示deamon</p>
-
 <ul>
 <li>必须要给ps加上x才能看到守护进程</li>
 </ul>
-
 <h1 id="线程">线程</h1>
-
 <h2 id="创建线程">创建线程</h2>
-
-<pre><code class="language-.c">int pthread_create(pthread_t *restrict thread,
+<pre><code class="language-{.c}" data-lang="{.c}">int pthread_create(pthread_t *restrict thread,
         const pthread_attr_t *restrict attr,
         void *(*start_routine)(void *), 
         void *restrict arg);
-</code></pre>
-
-<p>thread是线程号的指针，attr是线程的属性，详细不清楚，传入NULL表示取默认属性。
+</code></pre><p>thread是线程号的指针，attr是线程的属性，详细不清楚，传入NULL表示取默认属性。
 start_routine是一个传入参数为void *返回值为void
 *的函数的指针。新线程执行
 的代码就是从这个函数中开始的，这个函数退出时，新线程也就退出了。后面的arg参数
 是传进回调函数start_routine的参数。 成功返回0,错误返回相应的错误号。
 看下面的例子：</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;pthread.h&gt;
@@ -817,49 +618,35 @@ void print_ids(const char *name)
     tid = pthread_self();
     printf(&quot;%s pid: %u tid: %u\n&quot;, name, pid, tid);
 }
-</code></pre>
-
-<p>getpid()用于获取当前进程的id，pthread_self()用于获取当前线程的id。
+</code></pre><p>getpid()用于获取当前进程的id，pthread_self()用于获取当前线程的id。
 pthread_create的错误码不保存在errno中，不能用perror直接打印，需要用strerror
 将错误码转换成错误信息之后再打印。</p>
-
 <h2 id="终止线程">终止线程</h2>
-
 <p>有3种方法：</p>
-
 <ol>
 <li>从线程函数中return，但是这样对主线程不适用。</li>
 <li>一个线程可以调用pthread_cancel终止同一进程中的另一个线程。</li>
 <li>pthread~exit可以终止自己~。</li>
 </ol>
-
 <h1 id="网络socket编程">网络socket编程</h1>
-
 <ul>
 <li>下面的函数可以用于网络字节序和主机字节序之间的转换。</li>
 </ul>
-
-<pre><code class="language-.c">#include &lt;arpa/inet.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;arpa/inet.h&gt;
 uint32_t htonl(uint32_t hostlong);
 uint16_t htons(uint16_t hostshort);
 uint32_t ntohl(uint32_t netlong);
 uint16_t ntohs(uint16_t netshort);
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>有关socket的基本数据类型和函数</li>
 </ul>
-
 <p>ipv4和ipv6的地址格式定义在netinet/in.h中，ipv4地址用sockaddr_in结构体表示，
 ipv6则用sockaddr_in6结构体，ipv4的地址类型定义为常数AF_INET，ipv6的为AF_INET6。</p>
-
 <ul>
 <li>最简单的TCP网络程序</li>
 </ul>
-
 <p>server.c</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include &lt;unistd.h&gt;
@@ -908,15 +695,11 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-</code></pre>
-
-<p>socket函数，ipv4需使用AF_INET，TCP使用SOCK_STREAM，表示面向流的协议。
+</code></pre><p>socket函数，ipv4需使用AF_INET，TCP使用SOCK_STREAM，表示面向流的协议。
 listen函数，第二个参数为最大连接数。
 inet_ntop函数，传入地址，返回点分式的IP，放到ipaddr中。</p>
-
 <p>client.c</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include &lt;unistd.h&gt;
@@ -957,9 +740,7 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-</code></pre>
-
-<p>客户端的端口号由内核自动分配。</p>
+</code></pre><p>客户端的端口号由内核自动分配。</p>
 
     </div>
 
@@ -1020,7 +801,7 @@ int main(int argc, char *argv[])
         id: '2013-02-27 00:00:00 \x2b0000 UTC',
         title: 'linux系统编程',
         link: decodeURI(location.href),
-        desc: '@\x26lt;font color=\x26ldquo;red\x26rdquo;\x26gt; 本文为\x26rdquo;linux c编程一站式学习\x26rdquo;一书的笔记 @\x26lt;\/font\x26gt; 文件与I\/O 再来一个hello world 我也来写一段汇编的hello world .data',
+        desc: '@\x26lt;font color=\x26quot;red\x26rdquo;\x26gt; 本文为\x26quot;linux c编程一站式学习\x26quot;一书的笔记 @\x26lt;\/font\x26gt; 文件与I\/O 再来一个hello world 我也来写一段汇编的hello world .data msg: .ascii',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -1086,7 +867,10 @@ int main(int argc, char *argv[])
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

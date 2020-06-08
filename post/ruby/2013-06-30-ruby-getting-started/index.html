@@ -25,7 +25,7 @@ Programs When writing a script, we always use #!" /><meta name="keywords" conten
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/ruby/2013-06-30-ruby-getting-started/" />
@@ -36,7 +36,8 @@ Programs When writing a script, we always use #!" /><meta name="keywords" conten
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -46,23 +47,19 @@ Programs When writing a script, we always use #!" /><meta name="keywords" conten
 Programs When writing a script, we always use #!" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/ruby/2013-06-30-ruby-getting-started/" />
-<meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
-<meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
-
+<meta property="article:published_time" content="2016-05-14T16:35:19+08:00" />
+<meta property="article:modified_time" content="2016-05-14T16:35:19+08:00" />
 <meta itemprop="name" content="Ruby-getting started">
 <meta itemprop="description" content="Running ruby Interactive In the past, I always tested some ruby statements with irb. Now I can test a small ruby program in the following way.
 [monkey@itlodge octopress]$ ruby str = &quot;abc&quot; puts str Ctrl&#43;d abc  After hit ruby, it allows me to type as many code as possible.Finally, press Ctrl&#43;d will end the input and it will evaluate the code.
 Programs When writing a script, we always use #!">
-
-
 <meta itemprop="datePublished" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="dateModified" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="wordCount" content="426">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Ruby-getting started"/>
 <meta name="twitter:description" content="Running ruby Interactive In the past, I always tested some ruby statements with irb. Now I can test a small ruby program in the following way.
 [monkey@itlodge octopress]$ ruby str = &quot;abc&quot; puts str Ctrl&#43;d abc  After hit ruby, it allows me to type as many code as possible.Finally, press Ctrl&#43;d will end the input and it will evaluate the code.
@@ -148,67 +145,46 @@ Programs When writing a script, we always use #!"/>
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#running-ruby">Running ruby</a>
-<ul>
-<li><a href="#interactive">Interactive</a></li>
-<li><a href="#programs">Programs</a></li>
-</ul></li>
-<li><a href="#ruby-documentation">Ruby documentation</a></li>
-</ul>
+  <ul>
+    <li><a href="#interactive">Interactive</a></li>
+    <li><a href="#programs">Programs</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h1 id="running-ruby">Running ruby</h1>
-
+      <h1 id="running-ruby">Running ruby</h1>
 <h2 id="interactive">Interactive</h2>
-
 <p>In the past, I always tested some ruby statements with <code>irb</code>. Now I can
 test a small ruby program in the following way.</p>
-
 <pre><code>[monkey@itlodge octopress]$ ruby
 str = &quot;abc&quot;
 puts str
 Ctrl+d
 abc
 </code></pre>
-
 <p>After hit <code>ruby</code>, it allows me to type as many code as possible.Finally,
 press <code>Ctrl+d</code> will end the input and it will evaluate the code.</p>
-
 <h2 id="programs">Programs</h2>
-
 <p>When writing a script, we always use <code>#!</code> and specific which language used
 to run the code.This is the Unix <a href="http://en.wikipedia.org/wiki/Shebang_%28Unix%29">Shebang</a> notation.For example:</p>
-
 <pre><code>#!/usr/bin/ruby -w
 puts &quot;abc&quot;
 </code></pre>
-
 <p>From the man page, I know that the <code>-w</code> option means <em>Enables verbose mode
 without printing version message at the beginning</em>.</p>
-
 <p>But, many guys like this style:</p>
-
 <pre><code>#!/usr/bin/env ruby
 puts &quot;abc&quot;
 </code></pre>
-
 <p>From the man page, I know that the <code>env</code> is a program that <em>run a program in
 a modified environment</em>.So it can search the <code>$PATH</code> and find the <code>ruby</code>
 program to run.</p>
-
 <h1 id="ruby-documentation">Ruby documentation</h1>
-
 <p>The site <a href="http://www.ruby-doc.org">ruby-doc.org</a> contains a complete set of the
 RDoc documentation for Ruby.</p>
-
 <p>The <code>ri</code> tool is very useful for looking up documentation.If you want to find
 the documentation for a class, just type <code>ri ClassName</code>. For example:</p>
-
 <pre><code>[monkey@itlodge ~]$ ri Vector
 = Vector &lt; Object
 
@@ -235,10 +211,8 @@ To enumerate the elements:
 *  #collect2(v)                         
 :
 </code></pre>
-
 <p>If you want to find the documentation for a method, just type
 <code>ri method's name</code>.For example:</p>
-
 <pre><code>[monkey@itlodge ~]$ ri sleep
 = .sleep
 
@@ -246,7 +220,7 @@ To enumerate the elements:
 === Implementation from Kernel
 ------------------------------------------------------------------------------
   sleep([duration])    -&gt; fixnum
-
+   
 
 ------------------------------------------------------------------------------
 
@@ -265,11 +239,9 @@ sleep forever.
 
 :
 </code></pre>
-
 <p>A method&rsquo;s name may be the same in different classes or modules.In this case,
 <code>ri</code> will list all of them.If you type <code>ri ClassName.method's name</code>, it
 will show only the documentation of the corresponding class&rsquo;s.</p>
-
 <p>More contributions, more reputations.If a class or module hasn&rsquo;t yet documented
 in RDoc, send an email to <code>suggestions@ruby-doc.org</code> to ask them to add.</p>
 
@@ -398,7 +370,10 @@ in RDoc, send an email to <code>suggestions@ruby-doc.org</code> to ask them to a
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

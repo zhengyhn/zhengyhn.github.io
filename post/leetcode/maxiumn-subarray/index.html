@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/leetcode/maxiumn-subarray/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="题目 Find the contiguous subarray within an array (containing at least one number) which has the largest sum. For example, given the array [-2, 1, -3, 4, -1, 2, 1, -5, 4], the contiguous subarray [4, -1, 2, 1] has the largest sum = 6. 思路一 首先，可以直接两重循环，找到所有的子数组，" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/leetcode/maxiumn-subarray/" />
-<meta property="article:published_time" content="2017-12-10T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2017-12-10T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2017-12-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-12-10T00:00:00+00:00" />
 <meta itemprop="name" content="maxiumn-subarray 和最大的子数组">
 <meta itemprop="description" content="题目 Find the contiguous subarray within an array (containing at least one number) which has the largest sum. For example, given the array [-2, 1, -3, 4, -1, 2, 1, -5, 4], the contiguous subarray [4, -1, 2, 1] has the largest sum = 6. 思路一 首先，可以直接两重循环，找到所有的子数组，">
-
-
 <meta itemprop="datePublished" content="2017-12-10T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2017-12-10T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="1372">
 
 
 
-<meta itemprop="keywords" content="leetcode,算法," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="leetcode,算法," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="maxiumn-subarray 和最大的子数组"/>
 <meta name="twitter:description" content="题目 Find the contiguous subarray within an array (containing at least one number) which has the largest sum. For example, given the array [-2, 1, -3, 4, -1, 2, 1, -5, 4], the contiguous subarray [4, -1, 2, 1] has the largest sum = 6. 思路一 首先，可以直接两重循环，找到所有的子数组，"/>
 
@@ -142,39 +139,24 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#题目">题目</a></li>
-<li><a href="#思路一">思路一</a></li>
-<li><a href="#思路二">思路二</a></li>
-<li><a href="#代码">代码</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h4 id="题目">题目</h4>
-
+      <h4 id="题目">题目</h4>
 <pre><code>Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
 
 For example, given the array [-2, 1, -3, 4, -1, 2, 1, -5, 4], 
 the contiguous subarray [4, -1, 2, 1] has the largest sum = 6.
-</code></pre>
-
-<h4 id="思路一">思路一</h4>
-
+</code></pre><h4 id="思路一">思路一</h4>
 <p>首先，可以直接两重循环，找到所有的子数组，然后计算出来和最大的那个，时间复杂度为O(n)，空间复杂度为O(1)。代码如下：</p>
-
 <pre><code>    int maxSubArray(vector&lt;int&gt;&amp; nums) {
       if (nums.size() == 1) {
         return nums[0];
@@ -191,16 +173,10 @@ the contiguous subarray [4, -1, 2, 1] has the largest sum = 6.
       }
       return result; 
     }
-</code></pre>
-
-<h4 id="思路二">思路二</h4>
-
+</code></pre><h4 id="思路二">思路二</h4>
 <p>举例子说明：</p>
-
 <p>题目要求数组[-2, 1, -3, 4, -1, 2, 1, -5, 4]的任意连续子数组中和最大的那个连续子数组的和。</p>
-
 <p>我们可以将该数组拆分成下面的数组：</p>
-
 <ul>
 <li>[-2, 1, -3, 4, -1, 2, 1, -5, 4]</li>
 <li>[-2, 1, -3, 4, -1, 2, 1, -5]</li>
@@ -212,19 +188,12 @@ the contiguous subarray [4, -1, 2, 1] has the largest sum = 6.
 <li>[-2, 1]</li>
 <li>[-2]</li>
 </ul>
-
 <p>对于这里的每个数组，可以求出来它的每个以最后一个元素为结束的子数组，看哪一个子数组的和最大。</p>
-
 <p>例如：</p>
-
 <p>[-2, 1, -3, 4, -1, 2, 1], 它的以最后一个元素为结束的子数组有[-2, 1, -3, 4, -1, 2, 1], [1, -3, 4, -1, 2, 1], [-3, 4, -1, 2, 1], [4, -1, 2, 1], [-1, 2, 1], [2, 1], [1]，和最大的是[4, -1, 2, 1], 和为6。</p>
-
 <p>[-2, 1, -3, 4, -1, 2], 它的以最后一个元素为结束的子数组有[-2, 1, -3, 4, -1, 2], [1, -3, 4, -1, 2], [-3, 4, -1, 2], [4, -1, 2], [-1, 2], [2], 和最大的是[4, -1, 2], 和为5。</p>
-
 <p>相比前面的思路一，我们相当于倒序遍历了所有的子数组，但是, 我们并不需要O(n^2)的时间复杂度，因为很多重复的计算可以利用，只需要遍历一次，时间复杂度为O(n)，而重复的计算，可以用变量记下来, 空间复杂度为O(n)。</p>
-
 <p>现在一步一步来求各个子数组array中, 最大子数组的和max, 要求array的子数组必须以array的最后一个元素结束</p>
-
 <ul>
 <li>max([-2]), 明显为-2，子数组为[-2]</li>
 <li>max([-2, 1]), 由于-2小于0，如果子数组以-2作为起点，肯定只会让和更小，所以应该以1作为起点，这里明显max([-2, 1]) = 1, 子数组为[1]</li>
@@ -236,11 +205,8 @@ the contiguous subarray [4, -1, 2, 1] has the largest sum = 6.
 <li>max([-2, 1, -3, 4, -1, 2, 1, -5])，由于上面计算得到的最优值为6，大于0，所以加上-5之后，目前max([-2, 1, -3, 4, -1, 2, 1, -5]) = 6 + -5 = 1, 子数组为[4, -1, 2, 1, -5]</li>
 <li>max([-2, 1, -3, 4, -1, 2, 1, -5, 4])，由于上面计算得到的最优值为1，大于0，所以加上4之后，目前max([-2, 1, -3, 4, -1, 2, 1, -5, 4]) = 1 + 4 = 5, 子数组为[4, -1, 2, 1, -5, 4]</li>
 </ul>
-
 <p>这个时候，我们再来看各个子数组的最大子数组的和，分别是1, -2, 3, 5, 6, 1, 5，最大的是6，对应的子数组是[4, -1, 2, 1], 就是题目的答案。</p>
-
 <h4 id="代码">代码</h4>
-
 <pre><code>    int maxSubArray(vector&lt;int&gt;&amp; nums) {
       int result = nums[0];
       int *max = new int[nums.size()];
@@ -257,9 +223,7 @@ the contiguous subarray [4, -1, 2, 1] has the largest sum = 6.
       }
       return result; 
     }
-</code></pre>
-
-<p>由于我们每一步都在根据上一步的结果做决策和规划，所以这叫做<strong>动态规则</strong> 。</p>
+</code></pre><p>由于我们每一步都在根据上一步的结果做决策和规划，所以这叫做<strong>动态规则</strong> 。</p>
 
     </div>
 
@@ -389,7 +353,10 @@ the contiguous subarray [4, -1, 2, 1] has the largest sum = 6.
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

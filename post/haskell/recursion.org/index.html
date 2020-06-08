@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/haskell/recursion.org/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="一些基本的递归函数 在haskell中，没有循环，有的只是函数，要完成一些事情，只能使用递归来做，而且 完成得比较好。看下面的求最大值函数： -- function" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/haskell/recursion.org/" />
-<meta property="article:published_time" content="2013-03-10T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-03-10T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-03-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-03-10T00:00:00+00:00" />
 <meta itemprop="name" content="递归">
 <meta itemprop="description" content="一些基本的递归函数 在haskell中，没有循环，有的只是函数，要完成一些事情，只能使用递归来做，而且 完成得比较好。看下面的求最大值函数： -- function">
-
-
 <meta itemprop="datePublished" content="2013-03-10T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-03-10T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="372">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="递归"/>
 <meta name="twitter:description" content="一些基本的递归函数 在haskell中，没有循环，有的只是函数，要完成一些事情，只能使用递归来做，而且 完成得比较好。看下面的求最大值函数： -- function"/>
 
@@ -139,23 +136,14 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#一些基本的递归函数">一些基本的递归函数</a></li>
-<li><a href="#快排">快排</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h1 id="一些基本的递归函数">一些基本的递归函数</h1>
-
+      <h1 id="一些基本的递归函数">一些基本的递归函数</h1>
 <p>在haskell中，没有循环，有的只是函数，要完成一些事情，只能使用递归来做，而且
 完成得比较好。看下面的求最大值函数：</p>
-
-<pre><code class="language-.haskell">-- function maxi, to get the maximum value of a list
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">-- function maxi, to get the maximum value of a list
 maxi :: (Ord a) =&gt; [a] -&gt; a
 maxi [] = error &quot;empty&quot;
 maxi [only] = only
@@ -163,32 +151,22 @@ maxi (first:rest)
      | first &gt; maxRest = first
      | otherwise = maxRest
      where maxRest = maxi rest
-</code></pre>
-
-<p>使用max函数，还可以简化这个函数：</p>
-
-<pre><code class="language-.haskell">-- function maxi, to get the maximum value of a list
+</code></pre><p>使用max函数，还可以简化这个函数：</p>
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">-- function maxi, to get the maximum value of a list
 maxi :: (Ord a) =&gt; [a] -&gt; a
 maxi [] = error &quot;empty&quot;
 maxi [only] = only
 maxi (first:rest) = max first (maxi rest)
-</code></pre>
-
-<p>再来看一个很牛逼的反转list的函数：</p>
-
-<pre><code class="language-.haskell">-- function rever, to reverse a list
+</code></pre><p>再来看一个很牛逼的反转list的函数：</p>
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">-- function rever, to reverse a list
 rever :: [a] -&gt; [a]
 rever [] = []
 rever (first:rest) = (rever rest) ++ [first]
-</code></pre>
-
-<h1 id="快排">快排</h1>
-
+</code></pre><h1 id="快排">快排</h1>
 <p>以前听人家说函数式编程语言，排序只要一行代码，我当时就笑话他，它肯定是用
 sort了，我用C++也是直接sort，也是一行代码。但是现在看到用haskell实现的
 快排，把算法都实现了，效率完全不亚于其他语言。</p>
-
-<pre><code class="language-.haskell">-- function qsort, sort a list using the quick sort algorithm
+<pre><code class="language-{.haskell}" data-lang="{.haskell}">-- function qsort, sort a list using the quick sort algorithm
 -- in ascending order
 qsort :: (Ord a) =&gt; [a] -&gt; [a]
 qsort [] = []
@@ -197,7 +175,6 @@ qsort (first:rest) =
           largerPart = qsort [elem | elem &lt;- rest, elem &gt;= first]
       in smallerPart ++ [first] ++ largerPart
 </code></pre>
-
     </div>
 
     <div class="post-copyright">
@@ -323,7 +300,10 @@ qsort (first:rest) =
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

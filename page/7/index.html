@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/" />
@@ -36,7 +36,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -44,13 +45,9 @@
 <meta property="og:description" content="Hank&#39;s blog" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://zhengyhn.github.io/" />
-
-<meta property="og:updated_time" content="2016-05-14T16:35:19&#43;08:00"/>
-
+<meta property="og:updated_time" content="2017-08-13T00:00:00+00:00" />
 <meta itemprop="name" content="Hank&#39;s Blog">
-<meta itemprop="description" content="Hank&#39;s blog">
-
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="Hank&#39;s blog"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hank&#39;s Blog"/>
 <meta name="twitter:description" content="Hank&#39;s blog"/>
 
@@ -117,6 +114,52 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-21-implement-a-circular-linked-list/">Implement a circular linked list</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 135 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      A circular linked list is the same as a singular linked list except that there last node points to the first node.
+Here is the specification of my CiLinkedList.
+ CiLinkedList(), Create an empty CiLinkedList. CiLinkedList(const CiLinkedList&amp; list), Create a CiLinkedList from another CiLinkedList list. CiLinkedList(const T&amp; value), Create a CiLinkedList whose first element is value. CiLinkedList(const T values[], size_t size), Create a CiLinkedList from an array values of size size.
+    </div>
+    <div class="read-more">
+      <a href="/post/algorithm/2013-09-21-implement-a-circular-linked-list/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-25-implement-a-queue/">Implement a queue</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 153 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      A queue is based on the Linked List. The most explicit feature of a queue is FIFO(First in first out).
+Here is the specification of my Queue.
+ Queue(), Create an empty queue. Queue(const T&amp; value), Create a queue whose first element is value. Queue(const T values[], const size_t&amp; size), Create a queue from an array values whose size is size. Queue(const Queue&lt;T&gt;&amp; queue), Create a queue from another queue. const Queue&lt;T&gt;&amp; operator=(const Queue&lt;T&gt;&amp; queue), Support queue assignment.
+    </div>
+    <div class="read-more">
+      <a href="/post/algorithm/2013-09-25-implement-a-queue/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-27-implement-a-queue-using-two-stacks/">Implement a queue using two stacks</a></h1>
@@ -192,7 +235,7 @@ Here is the specification of my Stack.
     <div class="post-meta">
       <span class="post-time"> 2016-05-14 </span>
       
-        <span class="more-meta"> 约 964 字 </span>
+        <span class="more-meta"> 约 933 字 </span>
         <span class="more-meta"> 预计阅读 5 分钟 </span>
     </div>
   </header>
@@ -248,7 +291,7 @@ First pass:
       This is an old topic.
 For constants Consider a macro below.
 #define PI 3.14  There are several drawbacks when using a macro.
- It&rsquo;s hard to debug.As we all know, the macros are resolved by the preprocessor and the compiler know nothing about them.When you get an error when compiling the program, the error message may refer to 3.14 but not PI because PI is not in the symbol table.
+  It&rsquo;s hard to debug.As we all know, the macros are resolved by the preprocessor and the compiler know nothing about them.When you get an error when compiling the program, the error message may refer to 3.14 but not PI because PI is not in the symbol table.
     </div>
     <div class="read-more">
       <a href="/post/cpp/2013-07-23-more-consts-enums-inlines-and-less-defines/" class="read-more-link">阅读更多</a>
@@ -285,7 +328,7 @@ Why do I care about my coding style so much? Because I am a virgo.
     <div class="post-meta">
       <span class="post-time"> 2016-05-14 </span>
       
-        <span class="more-meta"> 约 605 字 </span>
+        <span class="more-meta"> 约 603 字 </span>
         <span class="more-meta"> 预计阅读 3 分钟 </span>
     </div>
   </header>
@@ -297,52 +340,6 @@ This makes programer write codes more convenient. But I used to insist the old s
     </div>
     <div class="read-more">
       <a href="/post/cpp/2013-08-11-postponing-definitions-instead-of-preponing/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/ruby/2013-06-30-ruby-getting-started/">Ruby-getting started</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 426 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Running ruby Interactive In the past, I always tested some ruby statements with irb. Now I can test a small ruby program in the following way.
-[monkey@itlodge octopress]$ ruby str = &quot;abc&quot; puts str Ctrl+d abc  After hit ruby, it allows me to type as many code as possible.Finally, press Ctrl+d will end the input and it will evaluate the code.
-Programs When writing a script, we always use #!
-    </div>
-    <div class="read-more">
-      <a href="/post/ruby/2013-06-30-ruby-getting-started/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/ruby/2013-07-25-some-basic-ruby/">Some basic Ruby</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 803 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      String and name When defining a function, the parentheses are not necessary.So this one
-def say_hello name &quot;Hello &quot; + name end puts say_hello &quot;man&quot;  is the same as this.
-def say_hello(name) &quot;Hello &quot; + name end puts(say_hello(&quot;man&quot;))  However, when there are more than one parameters, it will be difficult to know which argument goes with which method invocation.So it&rsquo;s recommended using parentheses in all but the simplest cases.
-    </div>
-    <div class="read-more">
-      <a href="/post/ruby/2013-07-25-some-basic-ruby/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -412,7 +409,10 @@ def say_hello(name) &quot;Hello &quot; + name end puts(say_hello(&quot;man&quot;
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

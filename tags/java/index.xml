@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>java on Hank&#39;s Blog</title>
@@ -6,10 +6,37 @@
     <description>Recent content in java on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 08 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>实现一下SHA1算法</title>
+      <link>http://zhengyhn.github.io/post/java/implement-sha1/</link>
+      <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/java/implement-sha1/</guid>
+      <description>由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 算法的文档在RFC3174。这一份 standard 里面定义了很</description>
+    </item>
+    
+    <item>
+      <title>初步学习JDK的Enum类源码</title>
+      <link>http://zhengyhn.github.io/post/java/jdk-enum-source-code/</link>
+      <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/java/jdk-enum-source-code/</guid>
+      <description>最近有空看了 Enum 类的源码，下面只挑重点部分记录一下。 抽象类 所有 enum 类型自动继承自 Enum 类，由于 java 的单继承特性，也就使得 enum 类型不能继承，个人觉得这是缺</description>
+    </item>
+    
+    <item>
+      <title>初步学习JDK的String类源码</title>
+      <link>http://zhengyhn.github.io/post/java/jdk-string-source-code/</link>
+      <pubDate>Mon, 30 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/java/jdk-string-source-code/</guid>
+      <description>最近有空看了部分 String 类的源码，下面只挑重点部分记录一下。 为什么要用 final 修饰类 第一个比较特别的就是，String 类是用 final 修饰的，表明这个类不可被继</description>
+    </item>
     
     <item>
       <title>阿里java开发者手册读书笔记</title>

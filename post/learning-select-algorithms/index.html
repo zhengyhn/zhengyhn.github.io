@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="最近在看《编程珠玑》，有一道题我很感兴趣。 编写程序，在O(n)时间内从数组 x[0.. n-1]中找出第k个最小的元素。 我第一反应，就是利用快排的思想，" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/learning-select-algorithms/" />
@@ -34,31 +34,28 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="Learning Select Algorithms" />
-<meta property="og:description" content="最近在看《编程珠玑》，有一道题我很感兴趣。 编写程序，在O(n)时间内从数组 x[0.. n-1]中找出第k个最小的元素。 我第一反应，就是利用快排的思想，" />
+<meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/learning-select-algorithms/" />
-<meta property="article:published_time" content="2018-10-03T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-10-03T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2018-10-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-10-03T00:00:00+00:00" />
 <meta itemprop="name" content="Learning Select Algorithms">
-<meta itemprop="description" content="最近在看《编程珠玑》，有一道题我很感兴趣。 编写程序，在O(n)时间内从数组 x[0.. n-1]中找出第k个最小的元素。 我第一反应，就是利用快排的思想，">
-
-
+<meta itemprop="description" content="">
 <meta itemprop="datePublished" content="2018-10-03T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-10-03T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="2111">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Learning Select Algorithms"/>
-<meta name="twitter:description" content="最近在看《编程珠玑》，有一道题我很感兴趣。 编写程序，在O(n)时间内从数组 x[0.. n-1]中找出第k个最小的元素。 我第一反应，就是利用快排的思想，"/>
+<meta name="twitter:description" content=""/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -140,234 +137,193 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#quick-select算法">Quick Select算法</a></li>
-<li><a href="#heap-select算法">Heap Select算法</a></li>
-<li><a href="#bfprt算法">BFPRT算法</a></li>
-<li><a href="#参考链接">参考链接</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#quick-select算法">Quick Select算法</a></li>
+    <li><a href="#heap-select算法">Heap Select算法</a></li>
+    <li><a href="#bfprt算法">BFPRT算法</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>最近在看《编程珠玑》，有一道题我很感兴趣。</p>
-
 <p>编写程序，在O(n)时间内从数组 x[0.. n-1]中找出第k个最小的元素。</p>
-
 <p>我第一反应，就是利用快排的思想，不断地缩小查找空间，平均可以实现O(n)的时间复杂度，但是想了一下，最坏的情况下(倒序)，需要$O(n^2)$的时间复杂度。难道还有更快的方法吗？去看了一下答案，发现答案就是我想到的这种方法。出于好奇，我就去网上搜了一下，原来这个问题很多人都研究过，并且有好几种方法，而我想到的这个方法，就是快排的作者发明的，叫做quick select，而这种找出第k个最小元素的算法，也叫select算法，利用这些高效的算法来找出中位数，将是初中高中学数学的时候无法想象的，原来可以这样做！</p>
-
 <h2 id="quick-select算法">Quick Select算法</h2>
-
 <p>利用快排的思想，随机取一个参照元素，将所有比它小的元素放在左边，比它大的元素放在右边，这个时候看参照元素的下标，如果比k要大，说明我们要找的第k个元素在左边，否则就在右边。这个时候，如果运气好，我们就缩小了很大的搜索范围了，再继续以这种方法找下去，直到找到这个元素为止。</p>
-
 <p>看代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> random
 
-<pre><code class="language-python">import random
-
-def quick_select(arr, k):
-    left = 0
-    right = len(arr) - 1
-    while True:
-        if left &gt;= right:
-            return arr[left]
-        pivot_index = random.randint(left, right)
-        arr[right], arr[pivot_index] = arr[pivot_index], arr[right]
-        store_index = left
-        for i in range(left, right):
-            if arr[i] &lt; arr[right]:
-                arr[store_index], arr[i] = arr[i], arr[store_index]
-                store_index += 1
-        arr[right], arr[store_index] = arr[store_index], arr[right]
-        if k - 1 == store_index:
-            return arr[store_index]
-        elif k - 1 &lt; store_index:
-            right = store_index - 1
-        else:
-            left = store_index + 1
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quick_select</span>(arr, k):
+    left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    right <span style="color:#f92672">=</span> len(arr) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">if</span> left <span style="color:#f92672">&gt;=</span> right:
+            <span style="color:#66d9ef">return</span> arr[left]
+        pivot_index <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(left, right)
+        arr[right], arr[pivot_index] <span style="color:#f92672">=</span> arr[pivot_index], arr[right]
+        store_index <span style="color:#f92672">=</span> left
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(left, right):
+            <span style="color:#66d9ef">if</span> arr[i] <span style="color:#f92672">&lt;</span> arr[right]:
+                arr[store_index], arr[i] <span style="color:#f92672">=</span> arr[i], arr[store_index]
+                store_index <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        arr[right], arr[store_index] <span style="color:#f92672">=</span> arr[store_index], arr[right]
+        <span style="color:#66d9ef">if</span> k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">==</span> store_index:
+            <span style="color:#66d9ef">return</span> arr[store_index]
+        <span style="color:#66d9ef">elif</span> k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> store_index:
+            right <span style="color:#f92672">=</span> store_index <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">else</span>:
+            left <span style="color:#f92672">=</span> store_index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
     
-arr = [random.randint(0, 9) for i in range(0, 10)]
-print(arr)
-print(quick_select(arr, 3))
-</code></pre>
-
-<pre><code>[2, 7, 7, 4, 4, 3, 2, 6, 9, 6]
+arr <span style="color:#f92672">=</span> [random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>)]
+<span style="color:#66d9ef">print</span>(arr)
+<span style="color:#66d9ef">print</span>(quick_select(arr, <span style="color:#ae81ff">3</span>))
+</code></pre></div><pre><code>[2, 7, 7, 4, 4, 3, 2, 6, 9, 6]
 3
 </code></pre>
-
 <p>这里，随机生成了10个数字来做测试，看了一下，程序是正确的。</p>
-
 <p>容易得出，平均时间复杂度是$O(n)$，最坏情况下时间复杂度是$O(n^2)$。</p>
-
 <h2 id="heap-select算法">Heap Select算法</h2>
-
 <p>还有一种想法是，利用堆排序的思想，先用前k个元素构建一个大根堆，这个时候，堆顶元素是前k个元素里面最大的。然后，对于剩下的每个元素，如果比堆顶元素要小，就将它与堆顶元素交换，重新调整堆，调整后的前k个元素是目前最小的k个元素，一直这样操作到最后，前k个元素就是所有元素中最小的k个元素，由于堆顶的元素是最大的元素，所以堆顶的元素就是第k个最小元素。</p>
-
 <p>看代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> random
 
-<pre><code class="language-python">import random
-
-def heap_select(arr, k):
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">heap_select</span>(arr, k):
     build_heap(arr, k)
     
-    for i in range(k, len(arr)):
-        if arr[i] &lt; arr[0]:
-            arr[0], arr[i] = arr[i], arr[0]
-            ajust_heap(arr, 0, k - 1)
-    return arr[0]
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(k, len(arr)):
+        <span style="color:#66d9ef">if</span> arr[i] <span style="color:#f92672">&lt;</span> arr[<span style="color:#ae81ff">0</span>]:
+            arr[<span style="color:#ae81ff">0</span>], arr[i] <span style="color:#f92672">=</span> arr[i], arr[<span style="color:#ae81ff">0</span>]
+            ajust_heap(arr, <span style="color:#ae81ff">0</span>, k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+    <span style="color:#66d9ef">return</span> arr[<span style="color:#ae81ff">0</span>]
 
-def build_heap(arr, k):
-    start = (k - 2) // 2
-    while start &gt;= 0:
-        ajust_heap(arr, start, k - 1)
-        start -= 1
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_heap</span>(arr, k):
+    start <span style="color:#f92672">=</span> (k <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
+    <span style="color:#66d9ef">while</span> start <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>:
+        ajust_heap(arr, start, k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+        start <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
 
-def ajust_heap(arr, root, tail):
-    while root * 2 + 1 &lt;= tail:
-        left_child = root * 2 + 1
-        to_swap = root
-        if left_child &lt;= tail and arr[to_swap] &lt; arr[left_child]:
-            to_swap = left_child
-        right_child = left_child + 1
-        if right_child &lt;= tail and arr[to_swap] &lt; arr[right_child]:
-            to_swap = right_child
-        if to_swap != root:
-            arr[to_swap], arr[root] = arr[root], arr[to_swap]
-            root = to_swap
-        else:
-            return
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ajust_heap</span>(arr, root, tail):
+    <span style="color:#66d9ef">while</span> root <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;=</span> tail:
+        left_child <span style="color:#f92672">=</span> root <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+        to_swap <span style="color:#f92672">=</span> root
+        <span style="color:#66d9ef">if</span> left_child <span style="color:#f92672">&lt;=</span> tail <span style="color:#f92672">and</span> arr[to_swap] <span style="color:#f92672">&lt;</span> arr[left_child]:
+            to_swap <span style="color:#f92672">=</span> left_child
+        right_child <span style="color:#f92672">=</span> left_child <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">if</span> right_child <span style="color:#f92672">&lt;=</span> tail <span style="color:#f92672">and</span> arr[to_swap] <span style="color:#f92672">&lt;</span> arr[right_child]:
+            to_swap <span style="color:#f92672">=</span> right_child
+        <span style="color:#66d9ef">if</span> to_swap <span style="color:#f92672">!=</span> root:
+            arr[to_swap], arr[root] <span style="color:#f92672">=</span> arr[root], arr[to_swap]
+            root <span style="color:#f92672">=</span> to_swap
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">return</span>
 
-arr = [random.randint(0, 9) for i in range(0, 10)]
-print(arr)
-print(heap_select(arr, 3))
-</code></pre>
-
-<pre><code>[8, 6, 4, 9, 1, 1, 8, 4, 4, 7]
+arr <span style="color:#f92672">=</span> [random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>)]
+<span style="color:#66d9ef">print</span>(arr)
+<span style="color:#66d9ef">print</span>(heap_select(arr, <span style="color:#ae81ff">3</span>))
+</code></pre></div><pre><code>[8, 6, 4, 9, 1, 1, 8, 4, 4, 7]
 4
 </code></pre>
-
 <p>从这里可以看出来，堆这种数据结构是非常非常重要的，难怪面试的时候经常问这个。</p>
-
 <p>容易得出，时间复杂度是$O(nlogk)$</p>
-
 <h2 id="bfprt算法">BFPRT算法</h2>
-
 <p>还有一种没见过的算法，据说时间复杂度可以达到$O(n)$，是由5个人想出来的，所以就BFPRT算法，另外一个名字叫median of medians 。</p>
-
 <p>它的思想大概是这样的，将整个列表分为5个一组，对于每组，用插入排序或其他的方法快速求出来中位数，再将这些中位数作为一个列表再求出它们的中位数，最后找到一个参照元素，这个时候，跟quick select的思想一样，将比这个参照元素小的放在它左边，大的放在它右边，一样缩小查找范围，直到找出为止。这种思想的核心是，通过中位数的中位数来找到参照元素，不会像quick select那样，运气不好的时候会退化到$O(n^2)$，而是最坏情况下也保持$O(n)$的时间复杂度。</p>
-
 <p>看代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> random
 
-<pre><code class="language-python">import random
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bfprt_select</span>(arr, k):
+    idx <span style="color:#f92672">=</span> select(arr, <span style="color:#ae81ff">0</span>, len(arr) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, k)
+    <span style="color:#66d9ef">return</span> arr[idx]
 
-def bfprt_select(arr, k):
-    idx = select(arr, 0, len(arr) - 1, k)
-    return arr[idx]
-
-def select(arr, left, right, k):
-    while True:
-        if left &gt;= right:
-            return left
-        pivot_index = get_pivot(arr, left, right)
-        arr[right], arr[pivot_index] = arr[pivot_index], arr[right]
-        store_index = left
-        for i in range(left, right):
-            if arr[i] &lt; arr[right]:
-                arr[i], arr[store_index] = arr[store_index], arr[i]
-                store_index += 1
-        arr[right], arr[store_index] = arr[store_index], arr[right]
-        if k - 1 == store_index:
-            return store_index
-        elif k - 1 &gt; store_index:
-            left = store_index + 1
-        else:
-            right = store_index - 1
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">select</span>(arr, left, right, k):
+    <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">if</span> left <span style="color:#f92672">&gt;=</span> right:
+            <span style="color:#66d9ef">return</span> left
+        pivot_index <span style="color:#f92672">=</span> get_pivot(arr, left, right)
+        arr[right], arr[pivot_index] <span style="color:#f92672">=</span> arr[pivot_index], arr[right]
+        store_index <span style="color:#f92672">=</span> left
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(left, right):
+            <span style="color:#66d9ef">if</span> arr[i] <span style="color:#f92672">&lt;</span> arr[right]:
+                arr[i], arr[store_index] <span style="color:#f92672">=</span> arr[store_index], arr[i]
+                store_index <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        arr[right], arr[store_index] <span style="color:#f92672">=</span> arr[store_index], arr[right]
+        <span style="color:#66d9ef">if</span> k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">==</span> store_index:
+            <span style="color:#66d9ef">return</span> store_index
+        <span style="color:#66d9ef">elif</span> k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&gt;</span> store_index:
+            left <span style="color:#f92672">=</span> store_index <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">else</span>:
+            right <span style="color:#f92672">=</span> store_index <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
         
-def get_pivot(arr, left, right):
-    if right - left &lt; 5:
-        return select5(arr, left, right)
-    for i in range(left, right - 4, 5):
-        sub_right = i + 4
-        if sub_right &gt; right:
-            sub_right = right
-        median_index = select5(arr, i, sub_right)
-        arr[median_index], arr[left + (i - left) // 5] = arr[left + (i - left) // 5], arr[median_index]
-    return select(arr, left, left + (right - left) // 5, (right - left) // 10 + 1)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_pivot</span>(arr, left, right):
+    <span style="color:#66d9ef">if</span> right <span style="color:#f92672">-</span> left <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5</span>:
+        <span style="color:#66d9ef">return</span> select5(arr, left, right)
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(left, right <span style="color:#f92672">-</span> <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>):
+        sub_right <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>
+        <span style="color:#66d9ef">if</span> sub_right <span style="color:#f92672">&gt;</span> right:
+            sub_right <span style="color:#f92672">=</span> right
+        median_index <span style="color:#f92672">=</span> select5(arr, i, sub_right)
+        arr[median_index], arr[left <span style="color:#f92672">+</span> (i <span style="color:#f92672">-</span> left) <span style="color:#f92672">//</span> <span style="color:#ae81ff">5</span>] <span style="color:#f92672">=</span> arr[left <span style="color:#f92672">+</span> (i <span style="color:#f92672">-</span> left) <span style="color:#f92672">//</span> <span style="color:#ae81ff">5</span>], arr[median_index]
+    <span style="color:#66d9ef">return</span> select(arr, left, left <span style="color:#f92672">+</span> (right <span style="color:#f92672">-</span> left) <span style="color:#f92672">//</span> <span style="color:#ae81ff">5</span>, (right <span style="color:#f92672">-</span> left) <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
     
-def select5(arr, left, right):
-    for i in range(left + 1, right + 1):
-        temp = arr[i]
-        j = i - 1
-        while j &gt;= left and arr[j] &gt; temp:
-            arr[j + 1] = arr[j]
-            j -= 1
-        arr[j + 1] = temp
-    return left + (right - left) // 2
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">select5</span>(arr, left, right):
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, right <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+        temp <span style="color:#f92672">=</span> arr[i]
+        j <span style="color:#f92672">=</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">while</span> j <span style="color:#f92672">&gt;=</span> left <span style="color:#f92672">and</span> arr[j] <span style="color:#f92672">&gt;</span> temp:
+            arr[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> arr[j]
+            j <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+        arr[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> temp
+    <span style="color:#66d9ef">return</span> left <span style="color:#f92672">+</span> (right <span style="color:#f92672">-</span> left) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
         
-arr = [random.randint(0, 9) for i in range(0, 10)]
-print(arr)
-print(bfprt_select(arr, 9))
-</code></pre>
-
-<pre><code>[2, 3, 8, 7, 5, 2, 5, 7, 9, 6]
+arr <span style="color:#f92672">=</span> [random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>)]
+<span style="color:#66d9ef">print</span>(arr)
+<span style="color:#66d9ef">print</span>(bfprt_select(arr, <span style="color:#ae81ff">9</span>))
+</code></pre></div><pre><code>[2, 3, 8, 7, 5, 2, 5, 7, 9, 6]
 8
 </code></pre>
-
 <p>代码比较多，随机生成一些数据，看起来是正确的。</p>
-
 <p>为了验证程序没有问题，用3个算法都查找一次，如果3个结果都对，那程序不正确的概率接近于0了。测试一下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1000</span>):
+    arr <span style="color:#f92672">=</span> [random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1000</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1000</span>)]
+    k <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">999</span>)
+    quick_ret <span style="color:#f92672">=</span> quick_select(arr[:], k)
+    heap_ret <span style="color:#f92672">=</span> heap_select(arr[:], k)
+    bfprt_ret <span style="color:#f92672">=</span> bfprt_select(arr[:], k)
+    <span style="color:#66d9ef">if</span> quick_ret <span style="color:#f92672">!=</span> heap_ret <span style="color:#f92672">or</span> heap_ret <span style="color:#f92672">!=</span> bfprt_ret:
+        <span style="color:#66d9ef">print</span>(arr, k, quick_ret, heap_ret, bfprt_ret)
+</code></pre></div><p>没有任何输出，说明这3个程序99.99%的概率是对的。现在来看一下对3个算法做性能测试：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> timeit
 
-<pre><code class="language-python">for i in range(0, 1000):
-    arr = [random.randint(0, 1000) for i in range(0, 1000)]
-    k = random.randint(1, 999)
-    quick_ret = quick_select(arr[:], k)
-    heap_ret = heap_select(arr[:], k)
-    bfprt_ret = bfprt_select(arr[:], k)
-    if quick_ret != heap_ret or heap_ret != bfprt_ret:
-        print(arr, k, quick_ret, heap_ret, bfprt_ret)
-</code></pre>
-
-<p>没有任何输出，说明这3个程序99.99%的概率是对的。现在来看一下对3个算法做性能测试：</p>
-
-<pre><code class="language-python">import timeit
-
-N = 10000
-def test_quick_select():
-    arr = [random.randint(0, N) for i in range(0, N)]
-    k = random.randint(1, N - 1)
+N <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_quick_select</span>():
+    arr <span style="color:#f92672">=</span> [random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, N) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, N)]
+    k <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, N <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
     quick_select(arr, k)
 
-def test_heap_select():
-    arr = [random.randint(0, N) for i in range(0, N)]
-    k = random.randint(1, N - 1)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_heap_select</span>():
+    arr <span style="color:#f92672">=</span> [random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, N) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, N)]
+    k <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, N <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
     heap_select(arr, k)
     
-def test_bfprt_select():
-    arr = [random.randint(0, N) for i in range(0, N)]
-    k = random.randint(1, N - 1)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_bfprt_select</span>():
+    arr <span style="color:#f92672">=</span> [random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, N) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, N)]
+    k <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, N <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
     bfprt_select(arr, k)
     
 
-print(timeit.timeit('test_quick_select()', number=10, setup='from __main__ import test_quick_select'))
-print(timeit.timeit('test_heap_select()', number=10, setup='from __main__ import test_heap_select'))
-print(timeit.timeit('test_bfprt_select()', number=10, setup='from __main__ import test_bfprt_select'))
-</code></pre>
-
-<pre><code>0.26961762097198516
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(<span style="color:#e6db74">&#39;test_quick_select()&#39;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;from __main__ import test_quick_select&#39;</span>))
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(<span style="color:#e6db74">&#39;test_heap_select()&#39;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;from __main__ import test_heap_select&#39;</span>))
+<span style="color:#66d9ef">print</span>(timeit<span style="color:#f92672">.</span>timeit(<span style="color:#e6db74">&#39;test_bfprt_select()&#39;</span>, number<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, setup<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;from __main__ import test_bfprt_select&#39;</span>))
+</code></pre></div><pre><code>0.26961762097198516
 0.35226804204285145
 0.5465565109625459
 </code></pre>
-
 <p>看到这个结果，我惊呆了，bfprt算法居然比quick select慢！而且比heap select也慢！太不可思议了！说好的$O(n)$呢？这真是打脸了！</p>
-
 <p>查了一些资料，的确是，在现实的数据中，quick select是最快的，很多时候，我们运气都没那么差，选到的参照元素都能较快缩小搜索范围。而一般编程语言的标准库实现，会使用quick select和bfprt算法混合的方式，叫做<a href="https://en.wikipedia.org/wiki/Introselect">inroselect</a>算法，C++的<a href="https://en.cppreference.com/w/cpp/algorithm/nth_element">std::nth_element</a>就是这样实现的。</p>
-
 <p>总结一下，快排的思想非常有用，堆这种数据结构非常有用，实现方式也很优雅，而学习并实现了bfprt算法，对我个人算法能力的提高帮助很大！</p>
-
 <h2 id="参考链接">参考链接</h2>
-
 <ul>
 <li><a href="https://en.cppreference.com/w/cpp/algorithm/nth_element">std::nth_element</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Introselect">inroselect</a></li>
@@ -434,7 +390,7 @@ print(timeit.timeit('test_bfprt_select()', number=10, setup='from __main__ impor
         id: '2018-10-03 00:00:00 \x2b0000 UTC',
         title: 'Learning Select Algorithms',
         link: decodeURI(location.href),
-        desc: '最近在看《编程珠玑》，有一道题我很感兴趣。 编写程序，在O(n)时间内从数组 x[0.. n-1]中找出第k个最小的元素。 我第一反应，就是利用快排的思想，',
+        desc: '',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -500,7 +456,10 @@ print(timeit.timeit('test_bfprt_select()', number=10, setup='from __main__ impor
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

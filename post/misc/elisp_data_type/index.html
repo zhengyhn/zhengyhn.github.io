@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/misc/elisp_data_type/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="lisp历史 原来lisp是list processing language,1950s后期推出，主要为了研究人工智能。 数据类型 概述 每个对象至少属于一种类型 对于打印" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/misc/elisp_data_type/" />
-<meta property="article:published_time" content="2013-08-13T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-08-13T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-08-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-08-13T00:00:00+00:00" />
 <meta itemprop="name" content="elisp笔记：introduction">
 <meta itemprop="description" content="lisp历史 原来lisp是list processing language,1950s后期推出，主要为了研究人工智能。 数据类型 概述 每个对象至少属于一种类型 对于打印">
-
-
 <meta itemprop="datePublished" content="2013-08-13T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-08-13T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="572">
+<meta itemprop="wordCount" content="566">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="elisp笔记：introduction"/>
 <meta name="twitter:description" content="lisp历史 原来lisp是list processing language,1950s后期推出，主要为了研究人工智能。 数据类型 概述 每个对象至少属于一种类型 对于打印"/>
 
@@ -130,7 +127,7 @@
       <div class="post-meta">
         <span class="post-time"> 2013-08-13 </span>
         
-          <span class="more-meta"> 约 572 字 </span>
+          <span class="more-meta"> 约 566 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -140,124 +137,89 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#lisp历史">lisp历史</a></li>
-<li><a href="#数据类型">数据类型</a>
-<ul>
-<li><a href="#概述">概述</a></li>
-<li><a href="#整型">整型</a></li>
-<li><a href="#浮点型">浮点型</a></li>
-<li><a href="#字符类型">字符类型</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#整型">整型</a></li>
+    <li><a href="#浮点型">浮点型</a></li>
+    <li><a href="#字符类型">字符类型</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h1 id="lisp历史">lisp历史</h1>
-
+      <h1 id="lisp历史">lisp历史</h1>
 <ul>
 <li>原来lisp是list processing
 language,1950s后期推出，主要为了研究人工智能。</li>
 </ul>
-
 <h1 id="数据类型">数据类型</h1>
-
 <h2 id="概述">概述</h2>
-
 <ul>
 <li>每个对象至少属于一种类型</li>
 <li>对于打印出来的对象，一般都可读，但是有一些是不可读的.这些对象以hash表示法表示。</li>
 </ul>
-
 <p>即以#&lt;开头，以&gt;结束。比如：</p>
-
-<pre><code class="language-.example">(current-buffer)
+<pre><code class="language-{.example}" data-lang="{.example}">(current-buffer)
 #&lt;buffer *scratch*&gt;
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>在elisp中有两大类类型
-
 <ol>
 <li>用于lisp编程的类型</li>
 <li>用于emacs编辑的类型</li>
-</ol></li>
+</ol>
+</li>
 </ul>
-
 <h2 id="整型">整型</h2>
-
 <ul>
-<li>在32位机器上，整型是30位，即-2 \^ 29到2 \^ 29 -
+<li>在32位机器上，整型是30位，即-2 ^ 29到2 ^ 29 -
 1，64位的会提供更多，但是官方</li>
 </ul>
-
 <p>文档没有说明。</p>
-
 <ul>
 <li>elisp中不会检测溢出。</li>
 <li>整数的表示法一般为：</li>
 </ul>
-
 <p>(sign)digit(period) 即，1可以表示成+1,1,1.,+1.</p>
-
 <ul>
 <li>如果一个数字太小或太大，不在整数范围内，则会当成浮点数来存储。</li>
 </ul>
-
 <h2 id="浮点型">浮点型</h2>
-
 <ul>
 <li>使用C语言中的double来存储，实际上对于十进制浮点数内部是2的幂而不是10的幂。</li>
 </ul>
-
 <h2 id="字符类型">字符类型</h2>
-
 <ul>
 <li>字符其实就是一个整数</li>
 <li>在字符串和缓冲区中，字符的范围是0-4194303(22位整数),其中0-127个是ASCII码，而</li>
 </ul>
-
 <p>剩下的是非ASCII码。</p>
-
 <ul>
-<li>在C语言中，字符以&rsquo;a&rsquo;这种方式表示，而在elisp中，以?a这种方式表示</li>
+<li>在C语言中，字符以&rsquo;a'这种方式表示，而在elisp中，以?a这种方式表示</li>
 </ul>
-
-<pre><code class="language-.example">ELISP&gt; ?a
+<pre><code class="language-{.example}" data-lang="{.example}">ELISP&gt; ?a
 97
-</code></pre>
-
-<p>这种方式也可以用来表示标点符号(punctuation)字符，但是最好加一个\，因为有的字符
+</code></pre><p>这种方式也可以用来表示标点符号(punctuation)字符，但是最好加一个\，因为有的字符
 需要转义。</p>
-
-<pre><code class="language-.example">ELISP&gt; ?\\
+<pre><code class="language-{.example}" data-lang="{.example}">ELISP&gt; ?\\
 92
 ELISP&gt; ?\(
 40
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>部分字符的表示方法</li>
 </ul>
-
 <p>character presentation   corresponding integer   character</p>
-
-<hr />
-
+<hr>
 <p>?\a                      7                       C-g
-  ?\b                      8                       backspace
-  ?\t                      9                       tab
-  ?\n                      10                      newline
-  ?| 11                    vertical tab
-  ?\f                      12                      formfeed
-  ?\r                      13                      carriage return
-  ?\e                      27                      ESC
-  ?\s                      32                      space
-  ?\                       92                      backslash
-  ?\d                      127                     DEL</p>
+?\b                      8                       backspace
+?\t                      9                       tab
+?\n                      10                      newline
+?| 11                    vertical tab
+?\f                      12                      formfeed
+?\r                      13                      carriage return
+?\e                      27                      ESC
+?\s                      32                      space
+?\                       92                      backslash
+?\d                      127                     DEL</p>
 
     </div>
 
@@ -384,7 +346,10 @@ ELISP&gt; ?\(
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

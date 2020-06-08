@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;software testing&amp;rdquo;一书的读书笔记 @&amp;lt;/font&amp;gt; 什么是bug 当下面5种情况中的一种出现时，说明有bug了" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;software testing&amp;quot;一书的读书笔记 @&amp;lt;/font&amp;gt; 什么是bug 当下面5种情况中的一种出现时，说明有bug了 软件" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/test/stbg.org/" />
@@ -34,31 +34,28 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="软件测试读书笔记：软件测试背景" />
-<meta property="og:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 什么是bug 当下面5种情况中的一种出现时，说明有bug了" />
+<meta property="og:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 什么是bug 当下面5种情况中的一种出现时，说明有bug了 软件" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/test/stbg.org/" />
-<meta property="article:published_time" content="2013-03-01T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-03-01T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-03-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-03-01T00:00:00+00:00" />
 <meta itemprop="name" content="软件测试读书笔记：软件测试背景">
-<meta itemprop="description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 什么是bug 当下面5种情况中的一种出现时，说明有bug了">
-
-
+<meta itemprop="description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 什么是bug 当下面5种情况中的一种出现时，说明有bug了 软件">
 <meta itemprop="datePublished" content="2013-03-01T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-03-01T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="447">
+<meta itemprop="wordCount" content="445">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="软件测试读书笔记：软件测试背景"/>
-<meta name="twitter:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 什么是bug 当下面5种情况中的一种出现时，说明有bug了"/>
+<meta name="twitter:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 什么是bug 当下面5种情况中的一种出现时，说明有bug了 软件"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -130,7 +127,7 @@
       <div class="post-meta">
         <span class="post-time"> 2013-03-01 </span>
         
-          <span class="more-meta"> 约 447 字 </span>
+          <span class="more-meta"> 约 445 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -139,66 +136,42 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#什么是bug">什么是bug</a></li>
-<li><a href="#bug产生的原因">bug产生的原因：</a></li>
-<li><a href="#软件测试师的工作">软件测试师的工作</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记
+      <p>@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记
 @&lt;/font&gt;</p>
-
 <h1 id="什么是bug">什么是bug</h1>
-
 <ul>
 <li>当下面5种情况中的一种出现时，说明有bug了</li>
 </ul>
-
 <ol>
 <li>软件没有做产品说明书说应该做的事情。</li>
 </ol>
-
 <p>比如计算器相加应该得到正确结果，而它没有得到。</p>
-
 <ol>
 <li>软件做了产品说明书说不应该做的事情</li>
 </ol>
-
 <p>比如计算器死机了。</p>
-
 <ol>
 <li>软件做了产品说明书没有提到的事情</li>
 </ol>
-
 <p>比如某个计算器的产品说明书里面没有说要实现开平方功能，而这个软件却实现了，
 这也是一个bug，因为测试师没有准备这个功能的测试用例，可能会导致更多的错误。</p>
-
 <ol>
 <li>软件没有做产品说明书没有提到的但是应该做的事情</li>
 </ol>
-
 <p>比如产品说明书没有提到电池没电了会怎样，而程序员需要考虑这种情况，如果没有
 考虑，则也是一个bug。</p>
-
 <ol>
 <li>软件很难用，很慢，或者看起来不对劲</li>
 </ol>
-
 <p>比如说计算器的某个按键太小，哪里用起来不习惯等。</p>
-
 <h1 id="bug产生的原因">bug产生的原因：</h1>
-
 <p>一般人以为bug产生的原因是因为编码错误，而事实上，大部分bug是因为产品说明做得不好。
 下图是bug产生原因的统计图： <em>~/pictures/schema1.JPG</em></p>
-
 <h1 id="软件测试师的工作">软件测试师的工作</h1>
-
 <ul>
 <li>软件测试师的目标是尽早地找到bugs,并且确保它们被修复</li>
 </ul>
@@ -262,7 +235,7 @@
         id: '2013-03-01 00:00:00 \x2b0000 UTC',
         title: '软件测试读书笔记：软件测试背景',
         link: decodeURI(location.href),
-        desc: '@\x26lt;font color=\x26ldquo;red\x26rdquo;\x26gt; 本文为\x26rdquo;software testing\x26rdquo;一书的读书笔记 @\x26lt;\/font\x26gt; 什么是bug 当下面5种情况中的一种出现时，说明有bug了',
+        desc: '@\x26lt;font color=\x26quot;red\x26rdquo;\x26gt; 本文为\x26quot;software testing\x26quot;一书的读书笔记 @\x26lt;\/font\x26gt; 什么是bug 当下面5种情况中的一种出现时，说明有bug了 软件',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -328,7 +301,10 @@
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

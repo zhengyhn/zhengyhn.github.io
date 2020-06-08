@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/leetcode/n-queens/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="题目 The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other. Given an integer n, return all distinct solutions to the n-queens puzzle. Each solution contains a distinct board configuration of the n-queens&#39; placement, where &#39;Q&#39; and &#39;.&#39; both indicate a queen and an empty space respectively. For example, There exist two distinct solutions to" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/leetcode/n-queens/" />
-<meta property="article:published_time" content="2018-01-21T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2018-01-21T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2018-01-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-01-21T00:00:00+00:00" />
 <meta itemprop="name" content="N皇后问题">
 <meta itemprop="description" content="题目 The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other. Given an integer n, return all distinct solutions to the n-queens puzzle. Each solution contains a distinct board configuration of the n-queens&#39; placement, where &#39;Q&#39; and &#39;.&#39; both indicate a queen and an empty space respectively. For example, There exist two distinct solutions to">
-
-
 <meta itemprop="datePublished" content="2018-01-21T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-01-21T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="548">
 
 
 
-<meta itemprop="keywords" content="leetcode,算法," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="leetcode,算法," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="N皇后问题"/>
 <meta name="twitter:description" content="题目 The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other. Given an integer n, return all distinct solutions to the n-queens puzzle. Each solution contains a distinct board configuration of the n-queens&#39; placement, where &#39;Q&#39; and &#39;.&#39; both indicate a queen and an empty space respectively. For example, There exist two distinct solutions to"/>
 
@@ -142,28 +139,18 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#题目">题目</a></li>
-<li><a href="#我的思路">我的思路</a></li>
-<li><a href="#代码">代码</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h4 id="题目">题目</h4>
-
+      <h4 id="题目">题目</h4>
 <pre><code>The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
 
 Given an integer n, return all distinct solutions to the n-queens puzzle.
@@ -184,18 +171,11 @@ There exist two distinct solutions to the 4-queens puzzle:
   &quot;...Q&quot;,
   &quot;.Q..&quot;]
 ]
-</code></pre>
-
-<h4 id="我的思路">我的思路</h4>
-
+</code></pre><h4 id="我的思路">我的思路</h4>
 <p>本来这是很经典的问题，有很多人分享解决办法，不应该再发出来。但是，这次是我想了很久才想出来的，写下来纪念一下。</p>
-
 <p>转化成图，n * n的图，第一行有n个位置可以摆放，一共有n * n种状态，找出互相无法攻击的那些状态(上下左右对角线没有皇后)。</p>
-
 <p>直接使用深度优先搜索，遍历一棵n层的树，除了节节点，每个节点都有n个子节点，遇到无法遍历下去的，直接剪枝。递归可以解决，这里使用栈来实现非递归。</p>
-
 <h4 id="代码">代码</h4>
-
 <pre><code>class Solution {
   public:
     vector&lt;vector&lt;string&gt;&gt; solveNQueens(int n) {
@@ -277,7 +257,6 @@ There exist two distinct solutions to the 4-queens puzzle:
 };
 
 </code></pre>
-
     </div>
 
     <div class="post-copyright">
@@ -406,7 +385,10 @@ There exist two distinct solutions to the 4-queens puzzle:
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

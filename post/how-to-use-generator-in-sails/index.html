@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/how-to-use-generator-in-sails/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="由于历史原因，公司的App项目用Sails.js框架来开发，那时候还没有ES6，当然是一层一层callback下去，后来引进了Async和T" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/how-to-use-generator-in-sails/" />
-<meta property="article:published_time" content="2017-03-13T22:50:49&#43;08:00"/>
-<meta property="article:modified_time" content="2017-03-13T22:50:49&#43;08:00"/>
-
+<meta property="article:published_time" content="2017-03-13T22:50:49+08:00" />
+<meta property="article:modified_time" content="2017-03-13T22:50:49+08:00" />
 <meta itemprop="name" content="如何在Sails.js中使用generator">
 <meta itemprop="description" content="由于历史原因，公司的App项目用Sails.js框架来开发，那时候还没有ES6，当然是一层一层callback下去，后来引进了Async和T">
-
-
 <meta itemprop="datePublished" content="2017-03-13T22:50:49&#43;08:00" />
 <meta itemprop="dateModified" content="2017-03-13T22:50:49&#43;08:00" />
 <meta itemprop="wordCount" content="705">
 
 
 
-<meta itemprop="keywords" content="Nodejs," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Nodejs," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="如何在Sails.js中使用generator"/>
 <meta name="twitter:description" content="由于历史原因，公司的App项目用Sails.js框架来开发，那时候还没有ES6，当然是一层一层callback下去，后来引进了Async和T"/>
 
@@ -141,22 +138,16 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>由于历史原因，公司的App项目用Sails.js框架来开发，那时候还没有ES6，当然是一层一层callback下去，后来引进了Async和Thenjs，代码才清晰了很多，但是遇到复杂的业务逻辑，写起来依旧痛苦。</p>
-
 <p>在这个不写ES6都不好意思说写Nodejs的年代，天天写callback很不是滋味，所以必须找个机会在不换框架的情况也能使用yield来解决callback的问题。</p>
-
 <p>首先想到的肯定是用co这个包，它有一个wrap的方法，可以把generator转成callback，试想一下，如果所有的controller的每个方法，都用co.wrap一下，岂不是达到了想要的效果？看了下sails的源码，貌似必须要修改它的源码才行。那么问题来了，怎么样才能在不修改它源码的情况也能达到同样的效果呢？</p>
-
 <p>由于javascript默认对象传引用，所以是不是可以直接把加载到内存中的controller方法全部用co.wrap包一下呢？</p>
-
 <p>在看了sails的很多源码，经过很多次的尝试后，事实证明这种猜想是可以的！</p>
-
 <p>只需要在config/bootstrap.js文件加上下面的代码，就可以在controller中使用generator了。</p>
-
 <pre><code>var _ = require('lodash');
 var coExpress = require('co-express');
 
@@ -186,9 +177,7 @@ sails.modules.loadControllers(function (err, modules) {
     });
   });
 });
-</code></pre>
-
-<p>这里用了一个叫co-express的包，它的源码很简单，就是使用co.wrap包装了一下。重要的是，在修改了每个action之后，我们需要重新load一次routes和blueprints，这样才真正在内存中生效。</p>
+</code></pre><p>这里用了一个叫co-express的包，它的源码很简单，就是使用co.wrap包装了一下。重要的是，在修改了每个action之后，我们需要重新load一次routes和blueprints，这样才真正在内存中生效。</p>
 
     </div>
 
@@ -317,7 +306,10 @@ sails.modules.loadControllers(function (err, modules) {
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

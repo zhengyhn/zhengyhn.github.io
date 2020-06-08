@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/algorithm/number/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/algorithm/number/" />
-<meta property="article:published_time" content="2013-03-13T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-03-13T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-03-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-03-13T00:00:00+00:00" />
 <meta itemprop="name" content="数字的算法">
 <meta itemprop="description" content="基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：">
-
-
 <meta itemprop="datePublished" content="2013-03-13T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-03-13T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="4267">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="数字的算法"/>
 <meta name="twitter:description" content="基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质："/>
 
@@ -140,71 +137,48 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#基本代数">基本代数</a>
-<ul>
-<li><a href="#加法">加法</a></li>
-<li><a href="#乘法和除法">乘法和除法</a></li>
-</ul></li>
-<li><a href="#模代数">模代数</a>
-<ul>
-<li><a href="#求模运算">求模运算</a></li>
-<li><a href="#欧几里得最大公约数算法">欧几里得最大公约数算法</a></li>
-<li><a href="#扩展欧几里得算法">扩展欧几里得算法</a></li>
-</ul></li>
-<li><a href="#素性测试">素性测试</a>
-<ul>
-<li><a href="#费马小定理">费马小定理</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#加法">加法</a></li>
+    <li><a href="#乘法和除法">乘法和除法</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#求模运算">求模运算</a></li>
+    <li><a href="#欧几里得最大公约数算法">欧几里得最大公约数算法</a></li>
+    <li><a href="#扩展欧几里得算法">扩展欧几里得算法</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#费马小定理">费马小定理</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h1 id="基本代数">基本代数</h1>
-
+      <h1 id="基本代数">基本代数</h1>
 <h2 id="加法">加法</h2>
-
 <p>十进制有一个很傻逼但是很有趣的性质：</p>
-
-<pre><code class="language-.example">任意3个个位数相加的和最多是两位数
-</code></pre>
-
-<p>事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：</p>
-
-<hr />
-
+<pre><code class="language-{.example}" data-lang="{.example}">任意3个个位数相加的和最多是两位数
+</code></pre><p>事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：</p>
+<hr>
 <p>对于一个基数为b的k位数，它能表示的最大数为b^k^ - 1</p>
-
-<hr />
-
+<hr>
 <p>想要知道一个基数为b的数有多少位k，则：</p>
-
-<hr />
-
+<hr>
 <p>k = log~b~(N + 1)</p>
-
-<hr />
-
+<hr>
 <h2 id="乘法和除法">乘法和除法</h2>
-
 <p>这里出现了一种神奇的乘法算法，对于计算机来说效率非常高，
 引用<a href="http://en.wikipedia.org/wiki/Multiplication_algorithm#Quarter_square_multiplication">wikipedia</a>
 的例子：</p>
-
-<pre><code class="language-.example">Decimal:     Binary:
+<pre><code class="language-{.example}" data-lang="{.example}">Decimal:     Binary:
 11   3       1011  11
 5    6       101  110
 2   12       10  1100   #will delete
 1   24       1  11000
    ---          -----
     33         100001
-</code></pre>
-
-<p>算法是这样的：</p>
-
+</code></pre><p>算法是这样的：</p>
 <ol>
 <li>11除以2,取整为5;3乘以2为6</li>
 <li>5除以2,取整为2;6乘以2为12</li>
@@ -212,22 +186,16 @@
 <li>去掉2那一行，因为2是偶数。</li>
 <li>最后相加：3 + 6 + 24 = 33</li>
 </ol>
-
 <p>当然，最简单的是：</p>
-
-<pre><code class="language-.example">3 11
+<pre><code class="language-{.example}" data-lang="{.example}">3 11
 1 22
   --
   33
-</code></pre>
-
-<p>从右边的二进制可以看到，左边的数在右移，右边的数在左移，去掉的偶数行对应的
+</code></pre><p>从右边的二进制可以看到，左边的数在右移，右边的数在左移，去掉的偶数行对应的
 二进制数为0,因此不用相乘。左移和右移在计算机中运算是非常快，这种办法大大
 提高了乘法的效率。</p>
-
 <p>马上用代码来实现：</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 
 /* multiple two integer A and B */
@@ -289,13 +257,9 @@ int multiple(int a, int b)
         return sum;
     }
 }
-</code></pre>
-
-<p>上面代码中，用自己写的乘法和标准的乘法来判断，看看结果有没有错。</p>
-
+</code></pre><p>上面代码中，用自己写的乘法和标准的乘法来判断，看看结果有没有错。</p>
 <p>同样，可以推理出来除法的算法（虽然我推不出来&hellip;），代码实现如下：</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 
 struct Div {
@@ -374,79 +338,45 @@ struct Div divide(int divider, int divisor)
 
     return div;
 }
-</code></pre>
-
-<h1 id="模代数">模代数</h1>
-
+</code></pre><h1 id="模代数">模代数</h1>
 <h2 id="求模运算">求模运算</h2>
-
 <p>同余(congruent modulo)定理：</p>
-
-<hr />
-
+<hr>
 <p>x ≡ y (mod N) ↔ N divides (x - y)</p>
-
-<hr />
-
+<hr>
 <p>按照我个人的理解，是：</p>
-
-<pre><code class="language-.example">x和y除了N有相同的余数当且仅当N整除(x - y)
-</code></pre>
-
-<p>用书上的例子，令x = 253, y = 13, 253除以60余数为13, 13除以60余数也是13,
+<pre><code class="language-{.example}" data-lang="{.example}">x和y除了N有相同的余数当且仅当N整除(x - y)
+</code></pre><p>用书上的例子，令x = 253, y = 13, 253除以60余数为13, 13除以60余数也是13,
 253 - 13 = 240, 240能被60整除。</p>
-
 <p>下面这个图，能形象地说明这个问题：</p>
-
-<pre><code class="language-.example">... -6 -3 0 3 6 ...        //余数为0
+<pre><code class="language-{.example}" data-lang="{.example}">... -6 -3 0 3 6 ...        //余数为0
 ... -5 -2 1 4 7 ...        //余数为1
 ... -4 -1 2 5 8 ...        //余数为2
-</code></pre>
-
-<p>对多少取模，就有多少行。</p>
-
+</code></pre><p>对多少取模，就有多少行。</p>
 <p>替换规则：</p>
-
-<hr />
-
+<hr>
 <p>如果x1 ≡ x2 (mod N),且y1 ≡ y2 (mod N)，则 x1 + y1 ≡ x2 + y2 (mod N), 且
 x1 * y1 ≡ x2 * y2 (mod N)</p>
-
-<hr />
-
+<hr>
 <p>这个规则有非常重要的作用，在一些数论的题中，比如：</p>
-
-<hr />
-
+<hr>
 <p>2^345^ ≡ (2^5^)^69^ ≡ (32)^69^ ≡ (mod 31) 因为32 ≡ 1 (mod 31), 32 ≡ 1
 (mod 31)，所以 32^2^ ≡ 1^2^ (mod 31), &hellip; 32^69^ ≡ 1^69^ ≡ 1 (mod 31) =
 1</p>
-
-<hr />
-
+<hr>
 <p>模的幂算法：</p>
-
 <p>比较高效的算法，来自<a href="http://en.wikipedia.org/wiki/Modular_exponentiation">wikipedia</a>
 由下面的定理推出：</p>
-
-<hr />
-
+<hr>
 <p>c ≡ (a * b) (mod N) c ≡ (a * (b (mod N))) (mod N)</p>
-
-<hr />
-
+<hr>
 <p>于是：</p>
-
-<hr />
-
+<hr>
 <p>a^2^ (mod N) ≡ (a * (a (mod N))) (mod N) a^3^ (mod N) ≡ (a * ((a * (a
 (mod N))) (mod N))) (mod N) &hellip;</p>
-
-<hr />
-
+<hr>
 <p>我等码农，还是用代码来实现一下吧：</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 
 /* calculate BASE^EXP % MOD, return the result */
 int mod_pow(int base, int exp, int mod);
@@ -469,14 +399,11 @@ int mod_pow(int base, int exp, int mod)
     }
     return result;
 }
-</code></pre>
-
-<p>还有一种更快的算法，类似于前面的乘法和除法。这时候，其实是
+</code></pre><p>还有一种更快的算法，类似于前面的乘法和除法。这时候，其实是
 把幂看成一个二进制数，从最低位开始，如果为1则要像上面的算法一样计算结果，
 否则保留原来结果，每次向高位前进的时候，基数都要翻一倍，并取模。
 用代码来说明问题吧：</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 
 /* calculate BASE^EXP % MOD, EXP &gt;= 0, return the result */
 int mod_pow(int base, int exp, int mod);
@@ -503,37 +430,23 @@ int mod_pow(int base, int exp, int mod)
 
     return result;
 }
-</code></pre>
-
-<p>这个算法我的理解不是很透彻，先记下来再说。</p>
-
+</code></pre><p>这个算法我的理解不是很透彻，先记下来再说。</p>
 <p>后来发现原来这个算法称为“蒙格马利算法”，它要用到下面的这个定理作为引理：</p>
-
-<pre><code class="language-.example">(a * b) % m = ((a % m) * (b % m)) % m
-</code></pre>
-
-<h2 id="欧几里得最大公约数算法">欧几里得最大公约数算法</h2>
-
+<pre><code class="language-{.example}" data-lang="{.example}">(a * b) % m = ((a % m) * (b % m)) % m
+</code></pre><h2 id="欧几里得最大公约数算法">欧几里得最大公约数算法</h2>
 <p>首先，不要忘记这个英文名，Euclid。虽然这是一个非常古老的算法，但是有的时候你还是会
 忘记，因此，我要好好记住它。</p>
-
-<pre><code class="language-.example">对于两个正整数x和y，有x &gt;= y，则gcd(x, y) = gcd(x mod y, y).
-</code></pre>
-
-<p>记住容易，但是要能证明它，才是真正理解了。证明如下：</p>
-
-<pre><code class="language-.example">有2个正整数x, y, x &gt;= y, 它们的最大公约数是gcd。
+<pre><code class="language-{.example}" data-lang="{.example}">对于两个正整数x和y，有x &gt;= y，则gcd(x, y) = gcd(x mod y, y).
+</code></pre><p>记住容易，但是要能证明它，才是真正理解了。证明如下：</p>
+<pre><code class="language-{.example}" data-lang="{.example}">有2个正整数x, y, x &gt;= y, 它们的最大公约数是gcd。
 令x = ky + r，则(x mod y) = r = x - ky，
 假设d为x和y的一个公约数，即d能整除x，d也能整除y，
 则d也能整除(x mod y)。
 假设d为(x mod y)和y的一个公约数，由于x = ky + r = ky + (x mod y)，
 所以d也能整除x。
 因此，x和y的某个公约数等于x mod y和y对应的公约数，最大公约数当然也相等。
-</code></pre>
-
-<p>用代码来实现：</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+</code></pre><p>用代码来实现：</p>
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 
 /* return the greatest common divisor with x, y &gt;= 0,
  * implement using recursive method. */
@@ -583,64 +496,36 @@ int gcd(int x, int y)
     }
     return x;
 }
-</code></pre>
-
-<h2 id="扩展欧几里得算法">扩展欧几里得算法</h2>
-
-<pre><code class="language-.example">对于不全为0的正整数a和b，gcd(a, b)表示a和b的最大公约数，则必然存在整数对
+</code></pre><h2 id="扩展欧几里得算法">扩展欧几里得算法</h2>
+<pre><code class="language-{.example}" data-lang="{.example}">对于不全为0的正整数a和b，gcd(a, b)表示a和b的最大公约数，则必然存在整数对
 x和y，使得gcd(a, b) = ax + by
-</code></pre>
-
-<p>上面的定义引用自<a href="http://baike.baidu.com/view/1478219.htm#2">百度百科</a></p>
-
+</code></pre><p>上面的定义引用自<a href="http://baike.baidu.com/view/1478219.htm#2">百度百科</a></p>
 <p>它的一个应用是解不定方程。引用自<a href="http://blog.csdn.net/fioman/article/details/2455698">这里</a>
 , <a href="http://blog.csdn.net/lhfight/article/details/7755994">这篇文章</a>
 解决了我的一些迷惑。</p>
-
-<pre><code class="language-.example">对于不定方程ax + by = c，已经a, b, c的值，求解满足方程的一组x, y。
+<pre><code class="language-{.example}" data-lang="{.example}">对于不定方程ax + by = c，已经a, b, c的值，求解满足方程的一组x, y。
 其中a, b, c, x, y都是整数。
-</code></pre>
-
-<p>判断有无解的方法：如果c不是gcd(a, b)的倍数，则无解，否则有解。</p>
-
+</code></pre><p>判断有无解的方法：如果c不是gcd(a, b)的倍数，则无解，否则有解。</p>
 <p>求解的方法：</p>
-
 <p>假设ax~1~ + by~1~ = gcd(a, b), 两边除以gcd(a, b)，得到</p>
-
 <p>ax~1~ / gcd(a, b) + by~1~ / gcd(a, b) = 1，两边再同时乘以c，得到：</p>
-
 <p>ax~1~ * (c / gcd(a, b)) + by~1~ * (c / gcd(a, b)) = c = ax + by,</p>
-
 <p>于是:</p>
-
 <p>x = x1 * (c / gcd(a, b))</p>
-
 <p>y = y1 * (c / gcd(a, b))</p>
-
 <p>这样，求x, y就转化成为求x1和y1了。</p>
-
 <p>现在再来看看怎么求x1和y1。</p>
-
 <p>如果b = 0, 则gcd(a, b) = a，由ax1 + by1 = gcd(a, b) = a，得</p>
-
 <p>x1 = 1, y1为任意整数，比如y1 = 0。</p>
-
 <p>如果b不为0, 则有：</p>
-
 <p>ax1 + by1 = gcd(a, b) = gcd(b, a % b) = bx2 + (a % b)y2</p>
-
 <p>= bx2 + (a - (a / b) * b)y2 = bx2 + ay2 - (a / b) * b * y2</p>
-
 <p>于是有：</p>
-
 <p>x1 = y2, y1 = x2 - (a / b)y2</p>
-
 <p>因此，只要求出x2和y2，就能求出x1和y1了。这样类推下去，直到b =
 0，便能得到 一组解，最后可以求出x1和y1，然后就可以求出x和y了。</p>
-
 <p>废话少说，马上上代码：</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 
 /* extended euclidean algorithm:gcd(a, b) = ax + by
  * return gcd(a, b) */   
@@ -690,47 +575,27 @@ int extended_euclid(int a, int b, int *x, int *y)
 
     return gcd;
 }
-</code></pre>
-
-<p>它的另外一个应用是求解模的乘法逆元(multiplicative inverse)。
+</code></pre><p>它的另外一个应用是求解模的乘法逆元(multiplicative inverse)。
 对于我这种数学白痴，还是先来了解一下乘法逆元是个什么东西好了，引用自<a href="http://en.wikipedia.org/wiki/Modular_multiplicative_inverse">wikipedia</a>
 。</p>
-
 <p>整数a模m的乘法逆元是一个整数x，如果它们满足：</p>
-
 <p>a^-1^ ≡ x (mod m)</p>
-
 <p>也可以写成：</p>
-
 <p>ax ≡ aa^-1^ ≡ 1 (mod m)</p>
-
 <p>a的乘法逆元存在当且仅当a与m互质。</p>
-
 <p>好，了解完之后，再来看看怎么运用扩展欧几里得算法来求a模m的乘法逆元。</p>
-
 <p>要求a模m的乘法逆元x，有：</p>
-
 <p>ax ≡ 1 (mod m)</p>
-
 <p>即ax和1对m同余，且余数肯定为1,于是存在整数q，使得：</p>
-
 <p>ax = qm + 1</p>
-
 <p>于是，有：</p>
-
 <p>ax - mq = 1</p>
-
 <p>这个式子有点类似扩展欧几里得算法里面的</p>
-
 <p>ax + by = gcd(a, b)</p>
-
 <p>这个式子了。</p>
-
 <p>这里，a和m是已知的，gcd(a, m)为右边的1,q又是没有用的。</p>
-
 <p>代码实现非常简单，用到了上例中的扩展欧几里得算法的函数：</p>
-
-<pre><code class="language-.c">/* calculate the multiplicative inverse of (a mod m), return
+<pre><code class="language-{.c}" data-lang="{.c}">/* calculate the multiplicative inverse of (a mod m), return
  * the inverse */   
 int mul_inverse(int a, int m);
 
@@ -742,38 +607,22 @@ int mul_inverse(int a, int m)
 
     return inverse;
 }
-</code></pre>
-
-<p>最后，感谢<a href="http://www.cppblog.com/zoyi-zhang/articles/44811.html">这篇文章</a>
+</code></pre><p>最后，感谢<a href="http://www.cppblog.com/zoyi-zhang/articles/44811.html">这篇文章</a>
 帮助我理解乘法逆元。</p>
-
 <h1 id="素性测试">素性测试</h1>
-
 <p>primality testing. 合数的英文是composite.</p>
-
 <h2 id="费马小定理">费马小定理</h2>
-
 <p>fermat&rsquo;s little theorem：</p>
-
 <p>如果p是质数，则对于所有的1 ≤ a &lt; p, 有</p>
-
 <p>a^p-1^ ≡ 1 (mod p)</p>
-
 <p>如果a是任意整数，则有：</p>
-
 <p>a^p^ ≡ a (mod p), 也可以写成：</p>
-
 <p>a^p^ - a ≡ 0 (mod p)</p>
-
 <p>即a^p^ - a是p的倍数。</p>
-
 <p>这个定理的主要应用是进行素性测试。</p>
-
 <p>先来看一下怎么判断一个正整数是不是素数。</p>
-
 <p>最直接的做法,使用定义来判断：</p>
-
-<pre><code class="language-.example">typedef unsigned int uint;
+<pre><code class="language-{.example}" data-lang="{.example}">typedef unsigned int uint;
 
 /* judge whether an integer N is prime
  * in terms of the definition. */   
@@ -793,13 +642,10 @@ int is_prime_direct(uint n)
     }
     return 1;
 }
-</code></pre>
-
-<p>这个方法是从2到n-1遍历一次，看n能不能被其中一个数整除，事实上，当遍历
+</code></pre><p>这个方法是从2到n-1遍历一次，看n能不能被其中一个数整除，事实上，当遍历
 超过n / 2的时候，就可以确定看来的数不可能整除n了，于是，可以提高一倍的
 速度。</p>
-
-<pre><code class="language-.c">typedef unsigned int uint;
+<pre><code class="language-{.c}" data-lang="{.c}">typedef unsigned int uint;
 
 /* judge whether an integer N is prime
  * in terms of the definition and stop
@@ -820,27 +666,17 @@ int is_prime_half(uint n)
     }
     return 1;
 }   
-</code></pre>
-
-<p>我们再来想一下，如果要判断53是不是素数，发现：</p>
-
+</code></pre><p>我们再来想一下，如果要判断53是不是素数，发现：</p>
 <p>51不能被2整除，53 / 2 = 26，余数为1</p>
-
 <p>53不能被3整除，53 / 3 = 17，余数为2</p>
-
 <p>&hellip;</p>
-
 <p>53 不能被17整除, 53 / 17 = 3，余数为2</p>
-
 <p>&hellip;</p>
-
 <p>53不能被26整除，53 / 26 = 2，余数为1</p>
-
 <p>可以看出来有重复了，事实上判断2和判断26是一样的，判断3和判断17也是一样的，
 我们做了很多重复工作，事实上只要判断到√53 就行了，因为后面的判断和前面是
 重复的。于是，就可以写出来更快的算法，速度又有了质的提高。</p>
-
-<pre><code class="language-.c">#include &lt;math.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;math.h&gt;
 
 typedef unsigned int uint;
 
@@ -863,22 +699,15 @@ int is_prime_sqrt(uint n)
     }
     return 1;
 }   
-</code></pre>
-
-<p>现在我们就可以用费马小定理来测试素数了，比如要判断正整数n是不是素数，
+</code></pre><p>现在我们就可以用费马小定理来测试素数了，比如要判断正整数n是不是素数，
 我们可以在{1, &hellip;, n - 1}中随机取一个数a来测试，如果</p>
-
 <p>a^n-1^ ≡ 1 (mod n)</p>
-
 <p>则n可能是一个素数。说是可能，因为有一些合数也能通过费马测试，这些数被称为
 carmichael number(卡迈克尔数)，但是这些数出现的概率非常低。</p>
-
 <p>这里影响效率的操作主要是计算a^(n-1)^ mod
 n，还好我们有前面的快速求幂模法（也 称蒙格马利法）。</p>
-
 <p>继续上代码：</p>
-
-<pre><code class="language-.c">/* judge whether an integer N is prime
+<pre><code class="language-{.c}" data-lang="{.c}">/* judge whether an integer N is prime
  * in terms of fermat's little theorem */
 int is_prime_fermat(uint n);
 
@@ -929,15 +758,11 @@ int pow_mod(int base, int exp, int mod)
     }
     return result;
 }
-</code></pre>
-
-<p>我测试了一下，在判断1000以内的素数时，有12个合数被误以为是素数，说明概率还
+</code></pre><p>我测试了一下，在判断1000以内的素数时，有12个合数被误以为是素数，说明概率还
 是挺大的，因为我们还没有优化。</p>
-
 <p>如果我们随机拿多个数a来测试，则会大大降低错误率。比如我取n /
 2个数来测试。</p>
-
-<pre><code class="language-.c">int is_prime_fermat(uint n)
+<pre><code class="language-{.c}" data-lang="{.c}">int is_prime_fermat(uint n)
 {
     int base, i;
 
@@ -952,9 +777,7 @@ int pow_mod(int base, int exp, int mod)
     }
     return 1;
 }
-</code></pre>
-
-<p>这次我测试1000以内的素数就全部正确了。</p>
+</code></pre><p>这次我测试1000以内的素数就全部正确了。</p>
 
     </div>
 
@@ -1081,7 +904,10 @@ int pow_mod(int base, int exp, int mod)
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

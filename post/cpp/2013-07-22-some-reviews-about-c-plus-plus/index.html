@@ -25,7 +25,7 @@ extern int a; int max(int a, int b);  However, I never think about the declarati
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/cpp/2013-07-22-some-reviews-about-c-plus-plus/" />
@@ -36,7 +36,8 @@ extern int a; int max(int a, int b);  However, I never think about the declarati
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -46,23 +47,19 @@ Declaration just tells the compiler about the name and the type of something.It&
 extern int a; int max(int a, int b);  However, I never think about the declaration of class.Recently, I have to view some codes in a large project and I have found many of these declarations." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/cpp/2013-07-22-some-reviews-about-c-plus-plus/" />
-<meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
-<meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
-
+<meta property="article:published_time" content="2016-05-14T16:35:19+08:00" />
+<meta property="article:modified_time" content="2016-05-14T16:35:19+08:00" />
 <meta itemprop="name" content="Some reviews about C plus plus">
 <meta itemprop="description" content="Declaration and Definition I have already known the difference between declaration and definion, but now I find that my understanding is not complete.
 Declaration just tells the compiler about the name and the type of something.It&rsquo;s very common about the declaration of objects and functions.
 extern int a; int max(int a, int b);  However, I never think about the declaration of class.Recently, I have to view some codes in a large project and I have found many of these declarations.">
-
-
 <meta itemprop="datePublished" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="dateModified" content="2016-05-14T16:35:19&#43;08:00" />
-<meta itemprop="wordCount" content="570">
+<meta itemprop="wordCount" content="567">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Some reviews about C plus plus"/>
 <meta name="twitter:description" content="Declaration and Definition I have already known the difference between declaration and definion, but now I find that my understanding is not complete.
 Declaration just tells the compiler about the name and the type of something.It&rsquo;s very common about the declaration of objects and functions.
@@ -138,7 +135,7 @@ extern int a; int max(int a, int b);  However, I never think about the declarati
       <div class="post-meta">
         <span class="post-time"> 2016-05-14 </span>
         
-          <span class="more-meta"> 约 570 字 </span>
+          <span class="more-meta"> 约 567 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -147,59 +144,41 @@ extern int a; int max(int a, int b);  However, I never think about the declarati
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#declaration-and-definition">Declaration and Definition</a></li>
-<li><a href="#defaul-constructor">Defaul constructor</a></li>
-<li><a href="#copy-constructor-and-copy-assignment-operator">Copy constructor and copy assignment operator</a></li>
-<li><a href="#some-common-sense">Some common sense</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h1 id="declaration-and-definition">Declaration and Definition</h1>
-
+      <h1 id="declaration-and-definition">Declaration and Definition</h1>
 <p>I have already known the difference between <strong>declaration</strong> and <strong>definion</strong>,
 but now I find that my understanding is not complete.</p>
-
 <p><strong>Declaration</strong> just tells the compiler about the name and the type of
 something.It&rsquo;s very common about the declaration of <em>objects</em> and <em>functions</em>.</p>
-
 <pre><code>extern int a;
 
 int max(int a, int b);
 </code></pre>
-
 <p>However, I never think about the declaration of <em>class</em>.Recently, I have to
 view some codes in a large project and I have found many of these declarations.</p>
-
 <pre><code>class Option;
 class Parameter;
 </code></pre>
-
 <p>Additionally, there are many declarations of the <em>template class</em>.</p>
-
 <pre><code>template&lt;typename T&gt;
 class Swap;
 </code></pre>
-
 <p>Another interesting thing is that the official C++ definition of
 <em>function signature</em> excludes the return type.I think this is strange and I
 will consider it, anyway.</p>
-
 <p><strong>Definition</strong> gives the details of something to the compiler.In the past, I
 hold the opinion that <em>definition</em> always be related to <em>memory</em>.In fact, it is
-not allways.
-- For object, the definition tell the compiler about the memory asigned for the
-object.
-- For function or function template, the definition provides the function body.
-- For class or class template, the definition lists the members of the class.</p>
-
+not allways.</p>
+<ul>
+<li>For object, the definition tell the compiler about the memory asigned for the
+object.</li>
+<li>For function or function template, the definition provides the function body.</li>
+<li>For class or class template, the definition lists the members of the class.</li>
+</ul>
 <p>For example:</p>
-
 <pre><code>int a;
 
 int max(int a, int b)
@@ -214,35 +193,25 @@ public:
     ...
 };
 </code></pre>
-
 <h1 id="defaul-constructor">Defaul constructor</h1>
-
 <p>I found I can&rsquo;t tell whether a constructor is a <strong>default constructor</strong> or not.
 But now, I know.A <strong>default constructor</strong> is a constructor that can be called
 without any arguments.That is, either no parameters or every parameter is
 initialized.</p>
-
 <p>The following are default constructors.</p>
-
 <pre><code>Option();
 explicit Option(bool short = true);
 </code></pre>
-
 <p>And this one is not a default constructor.</p>
-
 <pre><code>explicit Option(bool short);
 </code></pre>
-
 <p>What the hell <strong>explicit</strong> is doing here?I have never used this reserved word
 even if I have learned C++ for several years.But this guy, <em>explicit</em>, is of
 great importance.</p>
-
 <p>Placing <em>explicit</em> before the constructor can prevent the objects of the class
 being used to perform implicit type conversions.Obviously, they can be used
 for explicit type conversions.</p>
-
 <p>For example, if we have two classes and a function.</p>
-
 <pre><code>class Dog {
     explicit Dog();
     ...
@@ -253,59 +222,39 @@ Cat aCat;
 
 void kill(Dog d);
 </code></pre>
-
 <p>Now call the <code>kill</code> function passing <code>aDog</code> as parameter.
-    kill(aDog);    // No problem.</p>
-
+kill(aDog);    // No problem.</p>
 <p>If with the <code>explicit</code> reserved word and call the <code>kill</code> function passing
 <code>aCat</code> as parameter, it will be error since it prevents implicit type
 conversions.</p>
-
 <pre><code>kill(aCat);    // Error, prevent implicit conversion.
 </code></pre>
-
 <p>But if without the <code>explicit</code> reserved word and call the <code>kill</code> function
 passing <code>aCat</code> as parameter, it will lead the compiler to perform unexpected
 type conversions.So the policy is:</p>
-
 <p><strong>Always declare the constructor as explicit.</strong></p>
-
 <h1 id="copy-constructor-and-copy-assignment-operator">Copy constructor and copy assignment operator</h1>
-
 <p>I have already known that this</p>
-
 <pre><code>Parameter p1;
 </code></pre>
-
 <p>will invoke the <em>default constructor</em> and this</p>
-
 <pre><code>Parameter p2(p1);
 </code></pre>
-
 <p>will invoke the <em>copy constructor</em> and this</p>
-
 <pre><code>p1 = p2;
 </code></pre>
-
 <p>will invoke the <em>copy assignment operator</em>, but I have never known that this</p>
-
 <pre><code>Parameter p3 = p2;
 </code></pre>
-
 <p>will not invoke the <em>copy assignment operator</em> but the <em>copy constructor</em>.</p>
-
 <p>This amazes me very much.But now I can distinguish it easily.</p>
-
 <p>If a new object is being defined, invoke the <em>copy constructor</em>.Otherwise,
 invoke the <em>copy assignment operator</em> since it&rsquo;s just the <strong>asignment</strong>.</p>
-
 <h1 id="some-common-sense">Some common sense</h1>
-
 <ul>
 <li>TR1, Technical Report 1, is a specification for new functionality in
 C++ standard library.</li>
 </ul>
-
 <p>This really deepens my understanding of C plus plus and now I am very
 interested in this great programming language.</p>
 
@@ -434,7 +383,10 @@ interested in this great programming language.</p>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

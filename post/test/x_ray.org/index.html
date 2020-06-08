@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;software testing&amp;rdquo;一书的读书笔记 @&amp;lt;/font&amp;gt; 动态白盒测试 显然，动态即要运行，白盒即要看到代码。dyn" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;software testing&amp;quot;一书的读书笔记 @&amp;lt;/font&amp;gt; 动态白盒测试 显然，动态即要运行，白盒即要看到代码。dynam" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/test/x_ray.org/" />
@@ -34,31 +34,28 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="带上X光眼镜测试软件" />
-<meta property="og:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 动态白盒测试 显然，动态即要运行，白盒即要看到代码。dyn" />
+<meta property="og:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 动态白盒测试 显然，动态即要运行，白盒即要看到代码。dynam" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/test/x_ray.org/" />
-<meta property="article:published_time" content="2013-03-17T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-03-17T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-03-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-03-17T00:00:00+00:00" />
 <meta itemprop="name" content="带上X光眼镜测试软件">
-<meta itemprop="description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 动态白盒测试 显然，动态即要运行，白盒即要看到代码。dyn">
-
-
+<meta itemprop="description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 动态白盒测试 显然，动态即要运行，白盒即要看到代码。dynam">
 <meta itemprop="datePublished" content="2013-03-17T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-03-17T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="402">
+<meta itemprop="wordCount" content="400">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="带上X光眼镜测试软件"/>
-<meta name="twitter:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记 @&lt;/font&gt; 动态白盒测试 显然，动态即要运行，白盒即要看到代码。dyn"/>
+<meta name="twitter:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记 @&lt;/font&gt; 动态白盒测试 显然，动态即要运行，白盒即要看到代码。dynam"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -130,7 +127,7 @@
       <div class="post-meta">
         <span class="post-time"> 2013-03-17 </span>
         
-          <span class="more-meta"> 约 402 字 </span>
+          <span class="more-meta"> 约 400 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -139,35 +136,21 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#动态白盒测试">动态白盒测试</a></li>
-<li><a href="#分块测试">分块测试</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;software testing&rdquo;一书的读书笔记
+      <p>@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;software testing&quot;一书的读书笔记
 @&lt;/font&gt;</p>
-
 <h1 id="动态白盒测试">动态白盒测试</h1>
-
 <p>显然，动态即要运行，白盒即要看到代码。dynamic white-box testing，
 也叫structural testing.</p>
-
 <p>这听起来和调试很相似，但是它和调试还是有很大区别的。</p>
-
 <ul>
 <li>动态白盒测试是要找到bug,而调试是要fix the bug</li>
 </ul>
-
 <p>解决一个问题的过程就包含了动态白盒测试和调试，因此两者之间有一部分重合，</p>
-
 <h1 id="分块测试">分块测试</h1>
-
 <ul>
 <li>单元测试(unit
 testing)：把整个软件分成很多的小模块，对每个小模块的测试</li>
@@ -175,7 +158,6 @@ testing)：把整个软件分成很多的小模块，对每个小模块的测试
 testing)：把一些模块集成在一起，对一组模块进行测试</li>
 <li>系统测试(system testing)：把所有的模块合并成一个系统进行测试</li>
 </ul>
-
 <p>主要有两种测试方法：自底向上测试(bottom-up
 testing)和自顶向下测试(top-down
 testing).对于bottom-up，需要自己写测试模块，称为测试驱动(test driver).</p>
@@ -239,7 +221,7 @@ testing).对于bottom-up，需要自己写测试模块，称为测试驱动(test
         id: '2013-03-17 00:00:00 \x2b0000 UTC',
         title: '带上X光眼镜测试软件',
         link: decodeURI(location.href),
-        desc: '@\x26lt;font color=\x26ldquo;red\x26rdquo;\x26gt; 本文为\x26rdquo;software testing\x26rdquo;一书的读书笔记 @\x26lt;\/font\x26gt; 动态白盒测试 显然，动态即要运行，白盒即要看到代码。dyn',
+        desc: '@\x26lt;font color=\x26quot;red\x26rdquo;\x26gt; 本文为\x26quot;software testing\x26quot;一书的读书笔记 @\x26lt;\/font\x26gt; 动态白盒测试 显然，动态即要运行，白盒即要看到代码。dynam',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -305,7 +287,10 @@ testing).对于bottom-up，需要自己写测试模块，称为测试驱动(test
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

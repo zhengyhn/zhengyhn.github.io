@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/redis-max-client-limit/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="最近出了一次事故，应用crash，并报错: max number of clients reached. 查了一下reids的连接： netstat -anp |grep 6379 | wc -l 发现，连接数达10000多个，大致扫了一下，发现" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/redis-max-client-limit/" />
-<meta property="article:published_time" content="2017-03-30T22:50:49&#43;08:00"/>
-<meta property="article:modified_time" content="2017-03-30T22:50:49&#43;08:00"/>
-
+<meta property="article:published_time" content="2017-03-30T22:50:49+08:00" />
+<meta property="article:modified_time" content="2017-03-30T22:50:49+08:00" />
 <meta itemprop="name" content="记一次redis连接数超限的事故">
 <meta itemprop="description" content="最近出了一次事故，应用crash，并报错: max number of clients reached. 查了一下reids的连接： netstat -anp |grep 6379 | wc -l 发现，连接数达10000多个，大致扫了一下，发现">
-
-
 <meta itemprop="datePublished" content="2017-03-30T22:50:49&#43;08:00" />
 <meta itemprop="dateModified" content="2017-03-30T22:50:49&#43;08:00" />
 <meta itemprop="wordCount" content="409">
 
 
 
-<meta itemprop="keywords" content="Redis," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Redis," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="记一次redis连接数超限的事故"/>
 <meta name="twitter:description" content="最近出了一次事故，应用crash，并报错: max number of clients reached. 查了一下reids的连接： netstat -anp |grep 6379 | wc -l 发现，连接数达10000多个，大致扫了一下，发现"/>
 
@@ -141,32 +138,24 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>最近出了一次事故，应用crash，并报错: max number of clients reached. 查了一下reids的连接：</p>
-
 <pre><code>netstat -anp |grep 6379 | wc -l
-</code></pre>
-
-<p>发现，连接数达10000多个，大致扫了一下，发现某个ip的连接占了7000多个。于是去把这个ip的服务器上的应用都停止掉了，可是连接数还是没降下来。
+</code></pre><p>发现，连接数达10000多个，大致扫了一下，发现某个ip的连接占了7000多个。于是去把这个ip的服务器上的应用都停止掉了，可是连接数还是没降下来。
 研究了一段时间，发现redis有client list和client kill的命令，想到，可以通过这种方式kill掉这个ip的client。
 但是进去redis里面执行client list和client kill命令，居然报错：max number of clients reached.</p>
-
 <p>中途有想过用tcpkill之类的工具，最后没采用这种方法。</p>
-
 <p>情急之下，想到了取巧的办法：</p>
-
 <ul>
 <li>先用config set maxclients 20000将最大连接数变成20000</li>
 <li>然后执行client list命令，发现不会报错了，那就是说明可以执行client kill了</li>
-<li>kill掉这些ip的客户端
-<code>
-sudo netstat -anp |grep 6379| grep 'xxx.xxx.xxx.xxx' | awk '{print $5}' | xargs -I % redis-cli -p 6379 client kill %
-</code>
-等tcp四次招手结束后，连接数终于降下来了</li>
+<li>kill掉这些ip的客户端</li>
 </ul>
+<pre><code>sudo netstat -anp |grep 6379| grep 'xxx.xxx.xxx.xxx' | awk '{print $5}' | xargs -I % redis-cli -p 6379 client kill %
+</code></pre><p>等tcp四次招手结束后，连接数终于降下来了</p>
 
     </div>
 
@@ -295,7 +284,10 @@ sudo netstat -anp |grep 6379| grep 'xxx.xxx.xxx.xxx' | awk '{print $5}' | xargs 
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

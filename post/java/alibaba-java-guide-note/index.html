@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/java/alibaba-java-guide-note/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="POJO 类中布尔类型的变量，都不要加 is 前缀，否则部分框架解析会引起序列化错误 心得：这个之前我写的代码的确会下意识地就用isXXX，现在遵守这个规范" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/java/alibaba-java-guide-note/" />
-<meta property="article:published_time" content="2019-04-08T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-04-08T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2019-04-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-04-08T00:00:00+00:00" />
 <meta itemprop="name" content="阿里java开发者手册读书笔记">
 <meta itemprop="description" content="POJO 类中布尔类型的变量，都不要加 is 前缀，否则部分框架解析会引起序列化错误 心得：这个之前我写的代码的确会下意识地就用isXXX，现在遵守这个规范">
-
-
 <meta itemprop="datePublished" content="2019-04-08T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-04-08T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2826">
+<meta itemprop="wordCount" content="2822">
 
 
 
-<meta itemprop="keywords" content="java," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="java," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="阿里java开发者手册读书笔记"/>
 <meta name="twitter:description" content="POJO 类中布尔类型的变量，都不要加 is 前缀，否则部分框架解析会引起序列化错误 心得：这个之前我写的代码的确会下意识地就用isXXX，现在遵守这个规范"/>
 
@@ -132,7 +129,7 @@
         <div class="post-category">
             <a href="/categories/java/"> java </a>
             </div>
-          <span class="more-meta"> 约 2826 字 </span>
+          <span class="more-meta"> 约 2822 字 </span>
           <span class="more-meta"> 预计阅读 6 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -142,54 +139,45 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#pojo-类中布尔类型的变量-都不要加-is-前缀-否则部分框架解析会引起序列化错误">POJO 类中布尔类型的变量，都不要加 is 前缀，否则部分框架解析会引起序列化错误</a></li>
-<li><a href="#杜绝完全不规范的缩写-避免望文不知义">杜绝完全不规范的缩写，避免望文不知义</a></li>
-<li><a href="#service-dao-层方法命名规约">Service/DAO 层方法命名规约</a></li>
-<li><a href="#避免通过一个类的对象引用访问此类的静态变量或静态方法-无谓增加编译器解析成本-直接用类名来访问即可">避免通过一个类的对象引用访问此类的静态变量或静态方法，无谓增加编译器解析成本，直接用类名来访问即可</a></li>
-<li><a href="#object-的-equals-方法容易抛空指针异常-应使用常量或确定有值的对象来调用-equals">Object 的 equals 方法容易抛空指针异常，应使用常量或确定有值的对象来调用 equals</a></li>
-<li><a href="#所有的相同类型的包装类对象之间值的比较-全部使用-equals-方法比较">所有的相同类型的包装类对象之间值的比较，全部使用 equals 方法比较</a></li>
-<li><a href="#关于基本数据类型与包装数据类型的使用标准如下">关于基本数据类型与包装数据类型的使用标准如下：</a></li>
-<li><a href="#arraylist-的-sublist-结果不可强转成-arraylist-否则会抛出-classcastexception-异常">ArrayList 的 subList 结果不可强转成 ArrayList，否则会抛出 ClassCastException 异常</a></li>
-<li><a href="#使用工具类-arrays-aslist-把数组转换成集合时-不能使用其修改集合相关的方法-它的-add-remove-clear-方法会抛出-unsupportedoperationexception-异常">使用工具类 Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方法，它的 add/remove/clear 方法会抛出 UnsupportedOperationException 异常</a></li>
-<li><a href="#使用-entryset-遍历-map-类集合-kv-而不是-keyset-方式进行遍历">使用 entrySet 遍历 Map 类集合 KV，而不是 keySet 方式进行遍历</a></li>
-<li><a href="#simpledateformat-是线程不安全的类-一般不要定义为-static-变量-如果定义为static-必须加锁-或者使用-dateutils-工具类">SimpleDateFormat 是线程不安全的类，一般不要定义为 static 变量，如果定义为static，必须加锁，或者使用 DateUtils 工具类</a></li>
-<li><a href="#避免-random-实例被多线程使用-虽然共享该实例是线程安全的-但会因竞争同一seed-导致的性能下降">避免 Random 实例被多线程使用，虽然共享该实例是线程安全的，但会因竞争同一seed 导致的性能下降。</a></li>
-<li><a href="#volatile-解决多线程内存不可见问题-对于一写多读-是可以解决变量同步问-但是如果多写-同样无法解决线程安全问题-如果是-count-操作-使用如下类实现-atomicinteger-count-new-atomicinteger-count-addandget-1-如果是-jdk8-推荐使用-longadder-对象-比-atomiclong-性能更好-减少乐观锁的重试次数">volatile 解决多线程内存不可见问题。对于一写多读，是可以解决变量同步问 但是如果多写，同样无法解决线程安全问题。如果是 count++操作，使用如下类实现： AtomicInteger count = new AtomicInteger(); count.addAndGet(1); 如果是 JDK8，推荐使用 LongAdder 对象，比 AtomicLong 性能更好（减少乐观锁的重试次数）</a></li>
-<li><a href="#获取当前毫秒数-system-currenttimemillis-而不是-new-date-gettime">获取当前毫秒数 System.currentTimeMillis(); 而不是 new Date().getTime()</a></li>
-<li><a href="#finally-块必须对资源对象-流对象进行关闭-有异常也要做-try-catch">finally 块必须对资源对象、流对象进行关闭，有异常也要做 try-catch</a></li>
-<li><a href="#对-trace-debug-info-级别的日志输出-必须使用条件输出形式或者使用占位符的方式">对 trace/debug/info 级别的日志输出，必须使用条件输出形式或者使用占位符的方式。</a></li>
-<li><a href="#表达是与否概念的字段-必须使用">表达是与否概念的字段，必须使用</a></li>
-<li><a href="#主键索引名为-pk-字段名-唯一索引名为-uk-字段名-普通索引名则为-idx-字段名">主键索引名为 pk_字段名；唯一索引名为 uk_字段名；普通索引名则为 idx_字段名</a></li>
-<li><a href="#小数类型为-decimal-禁止使用-float-和-double">小数类型为 decimal，禁止使用 float 和 double</a></li>
-<li><a href="#不得使用外键与级联-一切外键概念必须在应用层解决">不得使用外键与级联，一切外键概念必须在应用层解决</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#pojo-类中布尔类型的变量都不要加-is-前缀否则部分框架解析会引起序列化错误">POJO 类中布尔类型的变量，都不要加 is 前缀，否则部分框架解析会引起序列化错误</a></li>
+        <li><a href="#杜绝完全不规范的缩写避免望文不知义">杜绝完全不规范的缩写，避免望文不知义</a></li>
+        <li><a href="#servicedao-层方法命名规约">Service/DAO 层方法命名规约</a></li>
+        <li><a href="#避免通过一个类的对象引用访问此类的静态变量或静态方法无谓增加编译器解析成本直接用类名来访问即可">避免通过一个类的对象引用访问此类的静态变量或静态方法，无谓增加编译器解析成本，直接用类名来访问即可</a></li>
+        <li><a href="#object-的-equals-方法容易抛空指针异常应使用常量或确定有值的对象来调用-equals">Object 的 equals 方法容易抛空指针异常，应使用常量或确定有值的对象来调用 equals</a></li>
+        <li><a href="#所有的相同类型的包装类对象之间值的比较全部使用-equals-方法比较">所有的相同类型的包装类对象之间值的比较，全部使用 equals 方法比较</a></li>
+        <li><a href="#关于基本数据类型与包装数据类型的使用标准如下">关于基本数据类型与包装数据类型的使用标准如下：</a></li>
+        <li><a href="#arraylist-的-sublist-结果不可强转成-arraylist否则会抛出-classcastexception-异常">ArrayList 的 subList 结果不可强转成 ArrayList，否则会抛出 ClassCastException 异常</a></li>
+        <li><a href="#使用工具类-arraysaslist把数组转换成集合时不能使用其修改集合相关的方法它的-addremoveclear-方法会抛出-unsupportedoperationexception-异常">使用工具类 Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方法，它的 add/remove/clear 方法会抛出 UnsupportedOperationException 异常</a></li>
+        <li><a href="#使用-entryset-遍历-map-类集合-kv而不是-keyset-方式进行遍历">使用 entrySet 遍历 Map 类集合 KV，而不是 keySet 方式进行遍历</a></li>
+        <li><a href="#simpledateformat-是线程不安全的类一般不要定义为-static-变量如果定义为static必须加锁或者使用-dateutils-工具类">SimpleDateFormat 是线程不安全的类，一般不要定义为 static 变量，如果定义为static，必须加锁，或者使用 DateUtils 工具类</a></li>
+        <li><a href="#避免-random-实例被多线程使用虽然共享该实例是线程安全的但会因竞争同一seed-导致的性能下降">避免 Random 实例被多线程使用，虽然共享该实例是线程安全的，但会因竞争同一seed 导致的性能下降。</a></li>
+        <li><a href="#volatile-解决多线程内存不可见问题对于一写多读是可以解决变量同步问-但是如果多写同样无法解决线程安全问题如果是-count操作使用如下类实现-atomicinteger-count--new-atomicinteger-countaddandget1-如果是-jdk8推荐使用-longadder-对象比-atomiclong-性能更好减少乐观锁的重试次数">volatile 解决多线程内存不可见问题。对于一写多读，是可以解决变量同步问 但是如果多写，同样无法解决线程安全问题。如果是 count++操作，使用如下类实现： AtomicInteger count = new AtomicInteger(); count.addAndGet(1); 如果是 JDK8，推荐使用 LongAdder 对象，比 AtomicLong 性能更好（减少乐观锁的重试次数）</a></li>
+        <li><a href="#获取当前毫秒数-systemcurrenttimemillis-而不是-new-dategettime">获取当前毫秒数 System.currentTimeMillis(); 而不是 new Date().getTime()</a></li>
+        <li><a href="#finally-块必须对资源对象流对象进行关闭有异常也要做-try-catch">finally 块必须对资源对象、流对象进行关闭，有异常也要做 try-catch</a></li>
+        <li><a href="#对-tracedebuginfo-级别的日志输出必须使用条件输出形式或者使用占位符的方式">对 trace/debug/info 级别的日志输出，必须使用条件输出形式或者使用占位符的方式。</a></li>
+        <li><a href="#表达是与否概念的字段必须使用">表达是与否概念的字段，必须使用</a></li>
+        <li><a href="#主键索引名为-pk_字段名唯一索引名为-uk_字段名普通索引名则为-idx_字段名">主键索引名为 pk_字段名；唯一索引名为 uk_字段名；普通索引名则为 idx_字段名</a></li>
+        <li><a href="#小数类型为-decimal禁止使用-float-和-double">小数类型为 decimal，禁止使用 float 和 double</a></li>
+        <li><a href="#不得使用外键与级联一切外键概念必须在应用层解决">不得使用外键与级联，一切外键概念必须在应用层解决</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h3 id="pojo-类中布尔类型的变量-都不要加-is-前缀-否则部分框架解析会引起序列化错误">POJO 类中布尔类型的变量，都不要加 is 前缀，否则部分框架解析会引起序列化错误</h3>
-
+      <h3 id="pojo-类中布尔类型的变量都不要加-is-前缀否则部分框架解析会引起序列化错误">POJO 类中布尔类型的变量，都不要加 is 前缀，否则部分框架解析会引起序列化错误</h3>
 <ul>
 <li>心得：这个之前我写的代码的确会下意识地就用isXXX，现在遵守这个规范，因为一些RPC框架在反向解析的时候，“误以为”对应的属性名称是 deleted，导致属性获取不到，进而抛 出异常。</li>
 </ul>
-
-<h3 id="杜绝完全不规范的缩写-避免望文不知义">杜绝完全不规范的缩写，避免望文不知义</h3>
-
+<h3 id="杜绝完全不规范的缩写避免望文不知义">杜绝完全不规范的缩写，避免望文不知义</h3>
 <ul>
 <li>心得：反例举了2个例子，AbstractClass“缩写”命名成 AbsClass；condition“缩写”命名成 condi，此类随意缩写严重降低了代码的可阅读性。好吧，我就是把抽象类写成AbsXXX的，现在遵守这个规范，写全。</li>
 </ul>
-
-<h3 id="service-dao-层方法命名规约">Service/DAO 层方法命名规约</h3>
-
+<h3 id="servicedao-层方法命名规约">Service/DAO 层方法命名规约</h3>
 <ol>
 <li>获取单个对象的方法用 get 做前缀</li>
 <li>获取多个对象的方法用 list 做前缀，复数形式结尾如：listObjects。</li>
@@ -197,123 +185,95 @@
 <li>插入的方法用 save/insert 做前缀。</li>
 <li>删除的方法用 remove/delete 做前缀。</li>
 <li>修改的方法用 update 做前缀。</li>
-<li>心得：记录一下这些命名规范，之前是部分遵守</li>
 </ol>
-
-<h3 id="避免通过一个类的对象引用访问此类的静态变量或静态方法-无谓增加编译器解析成本-直接用类名来访问即可">避免通过一个类的对象引用访问此类的静态变量或静态方法，无谓增加编译器解析成本，直接用类名来访问即可</h3>
-
+<ul>
+<li>心得：记录一下这些命名规范，之前是部分遵守</li>
+</ul>
+<h3 id="避免通过一个类的对象引用访问此类的静态变量或静态方法无谓增加编译器解析成本直接用类名来访问即可">避免通过一个类的对象引用访问此类的静态变量或静态方法，无谓增加编译器解析成本，直接用类名来访问即可</h3>
 <ul>
 <li>心得：虽然没看源码直接证明，但是我猜，使用对象访问静态方法或静态变量，先要根据对象找到类，再调用类的静态方法或静态变量。另外，直接用类名，其实可读性更好，因为看变量还得去看这个变量是什么类型的。</li>
 </ul>
-
-<h3 id="object-的-equals-方法容易抛空指针异常-应使用常量或确定有值的对象来调用-equals">Object 的 equals 方法容易抛空指针异常，应使用常量或确定有值的对象来调用 equals</h3>
-
+<h3 id="object-的-equals-方法容易抛空指针异常应使用常量或确定有值的对象来调用-equals">Object 的 equals 方法容易抛空指针异常，应使用常量或确定有值的对象来调用 equals</h3>
 <ul>
-<li>正例：&rdquo;test&rdquo;.equals(object);</li>
+<li>正例：&ldquo;test&rdquo;.equals(object);</li>
 <li>反例：object.equals(&ldquo;test&rdquo;);</li>
 <li>说明：推荐使用 java.util.Objects#equals（JDK7 引入的工具类）</li>
 <li>心得：新学习了Objects.equals，并知道了这样子判断equals可以避免空指针</li>
 </ul>
-
-<h3 id="所有的相同类型的包装类对象之间值的比较-全部使用-equals-方法比较">所有的相同类型的包装类对象之间值的比较，全部使用 equals 方法比较</h3>
-
+<h3 id="所有的相同类型的包装类对象之间值的比较全部使用-equals-方法比较">所有的相同类型的包装类对象之间值的比较，全部使用 equals 方法比较</h3>
 <ul>
 <li>对于 Integer var = ? 在-128 至 127 范围内的赋值，Integer 对象是在 IntegerCache.cache 产生，会复用已有对象，这个区间内的 Integer 值可以直接使用==进行 判断，但是这个区间之外的所有数据，都会在堆上产生，并不会复用已有对象，这是一个大坑， 推荐使用 equals 方法进行判断。</li>
 <li>心得：这个的确是经常会忘记的</li>
 </ul>
-
 <h3 id="关于基本数据类型与包装数据类型的使用标准如下">关于基本数据类型与包装数据类型的使用标准如下：</h3>
-
 <p>1） 【强制】所有的 POJO 类属性必须使用包装数据类型。
 2） 【强制】RPC 方法的返回值和参数必须使用包装数据类型。
-3） 【推荐】所有的局部变量使用基本数据类型。
-- 比如显示成交总额涨跌情况，即正负 x%，x 为基本数据类型，调用的 RPC 服务，调用 不成功时，返回的是默认值，页面显示为 0%，这是不合理的，应该显示成中划线
-- 心得：POJO类使用包装类型，是因为上面所说的基本类型的默认值，应该要遵守。局部变量使用基本数据类型，是因为性能更好</p>
-
-<h3 id="arraylist-的-sublist-结果不可强转成-arraylist-否则会抛出-classcastexception-异常">ArrayList 的 subList 结果不可强转成 ArrayList，否则会抛出 ClassCastException 异常</h3>
-
+3） 【推荐】所有的局部变量使用基本数据类型。</p>
+<ul>
+<li>比如显示成交总额涨跌情况，即正负 x%，x 为基本数据类型，调用的 RPC 服务，调用 不成功时，返回的是默认值，页面显示为 0%，这是不合理的，应该显示成中划线</li>
+<li>心得：POJO类使用包装类型，是因为上面所说的基本类型的默认值，应该要遵守。局部变量使用基本数据类型，是因为性能更好</li>
+</ul>
+<h3 id="arraylist-的-sublist-结果不可强转成-arraylist否则会抛出-classcastexception-异常">ArrayList 的 subList 结果不可强转成 ArrayList，否则会抛出 ClassCastException 异常</h3>
 <ul>
 <li>说明：：subList 返回的是 ArrayList 的内部类 SubList，并不是 ArrayList 而是 ArrayList 的一个视图，对于 SubList 子列表的所有操作最终会反映到原列表上。</li>
 <li>心得：学习了subList这一点，之前没遇到过</li>
 </ul>
-
-<h3 id="使用工具类-arrays-aslist-把数组转换成集合时-不能使用其修改集合相关的方法-它的-add-remove-clear-方法会抛出-unsupportedoperationexception-异常">使用工具类 Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方法，它的 add/remove/clear 方法会抛出 UnsupportedOperationException 异常</h3>
-
+<h3 id="使用工具类-arraysaslist把数组转换成集合时不能使用其修改集合相关的方法它的-addremoveclear-方法会抛出-unsupportedoperationexception-异常">使用工具类 Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方法，它的 add/remove/clear 方法会抛出 UnsupportedOperationException 异常</h3>
 <ul>
 <li>说明：asList 的返回对象是一个 Arrays 内部类，并没有实现集合的修改方法。Arrays.asList
 体现的是适配器模式，只是转换接口，后台的数据仍是数组</li>
 <li>心得：学习了asList这一点，之前有写过，但是没有注意这一点</li>
 </ul>
-
-<h3 id="使用-entryset-遍历-map-类集合-kv-而不是-keyset-方式进行遍历">使用 entrySet 遍历 Map 类集合 KV，而不是 keySet 方式进行遍历</h3>
-
+<h3 id="使用-entryset-遍历-map-类集合-kv而不是-keyset-方式进行遍历">使用 entrySet 遍历 Map 类集合 KV，而不是 keySet 方式进行遍历</h3>
 <ul>
 <li>说明：keySet 其实是遍历了 2 次，一次是转为 Iterator 对象，另一次是从 hashMap 中取出 key 所对应的 value。而 entrySet 只是遍历了一次就把 key 和 value 都放到了 entry 中，效率更高。如果是 JDK8，使用 Map.foreach 方法。</li>
 <li>心得：学习了这一点，entrySet效率更高</li>
 </ul>
-
-<h3 id="simpledateformat-是线程不安全的类-一般不要定义为-static-变量-如果定义为static-必须加锁-或者使用-dateutils-工具类">SimpleDateFormat 是线程不安全的类，一般不要定义为 static 变量，如果定义为static，必须加锁，或者使用 DateUtils 工具类</h3>
-
+<h3 id="simpledateformat-是线程不安全的类一般不要定义为-static-变量如果定义为static必须加锁或者使用-dateutils-工具类">SimpleDateFormat 是线程不安全的类，一般不要定义为 static 变量，如果定义为static，必须加锁，或者使用 DateUtils 工具类</h3>
 <ul>
 <li>说明：可以使用synchronized或ThreadLocal来实现同步，或者用第三方类库。如果是 JDK8 的应用，可以使用 Instant 代替 Date，LocalDateTime 代替 Calendar， DateTimeFormatter 代替 SimpleDateFormat</li>
 <li>心得：知道了SimpleDateFormat的问题，并要学会用Java8的新特性</li>
 </ul>
-
-<h3 id="避免-random-实例被多线程使用-虽然共享该实例是线程安全的-但会因竞争同一seed-导致的性能下降">避免 Random 实例被多线程使用，虽然共享该实例是线程安全的，但会因竞争同一seed 导致的性能下降。</h3>
-
+<h3 id="避免-random-实例被多线程使用虽然共享该实例是线程安全的但会因竞争同一seed-导致的性能下降">避免 Random 实例被多线程使用，虽然共享该实例是线程安全的，但会因竞争同一seed 导致的性能下降。</h3>
 <ul>
 <li>说明：在 JDK7 之后，可以直接使用 API ThreadLocalRandom，而在 JDK7 之前，需要编
 码保证每个线程持有一个实例。</li>
 <li>知道了Random的问题，并要学会用Java7的新特性</li>
 </ul>
-
-<h3 id="volatile-解决多线程内存不可见问题-对于一写多读-是可以解决变量同步问-但是如果多写-同样无法解决线程安全问题-如果是-count-操作-使用如下类实现-atomicinteger-count-new-atomicinteger-count-addandget-1-如果是-jdk8-推荐使用-longadder-对象-比-atomiclong-性能更好-减少乐观锁的重试次数">volatile 解决多线程内存不可见问题。对于一写多读，是可以解决变量同步问 但是如果多写，同样无法解决线程安全问题。如果是 count++操作，使用如下类实现： AtomicInteger count = new AtomicInteger(); count.addAndGet(1); 如果是 JDK8，推荐使用 LongAdder 对象，比 AtomicLong 性能更好（减少乐观锁的重试次数）</h3>
-
+<h3 id="volatile-解决多线程内存不可见问题对于一写多读是可以解决变量同步问-但是如果多写同样无法解决线程安全问题如果是-count操作使用如下类实现-atomicinteger-count--new-atomicinteger-countaddandget1-如果是-jdk8推荐使用-longadder-对象比-atomiclong-性能更好减少乐观锁的重试次数">volatile 解决多线程内存不可见问题。对于一写多读，是可以解决变量同步问 但是如果多写，同样无法解决线程安全问题。如果是 count++操作，使用如下类实现： AtomicInteger count = new AtomicInteger(); count.addAndGet(1); 如果是 JDK8，推荐使用 LongAdder 对象，比 AtomicLong 性能更好（减少乐观锁的重试次数）</h3>
 <ul>
 <li>心得：学习了volatile的一写多读和多写的适应场景</li>
 </ul>
-
-<h3 id="获取当前毫秒数-system-currenttimemillis-而不是-new-date-gettime">获取当前毫秒数 System.currentTimeMillis(); 而不是 new Date().getTime()</h3>
-
+<h3 id="获取当前毫秒数-systemcurrenttimemillis-而不是-new-dategettime">获取当前毫秒数 System.currentTimeMillis(); 而不是 new Date().getTime()</h3>
 <ul>
 <li>说明：因为System.currentTimeMillis()速度更快</li>
 </ul>
-
-<h3 id="finally-块必须对资源对象-流对象进行关闭-有异常也要做-try-catch">finally 块必须对资源对象、流对象进行关闭，有异常也要做 try-catch</h3>
-
+<h3 id="finally-块必须对资源对象流对象进行关闭有异常也要做-try-catch">finally 块必须对资源对象、流对象进行关闭，有异常也要做 try-catch</h3>
 <ul>
 <li>说明：如果 JDK7 及以上，可以使用 try-with-resources 方式</li>
-<li>心得：学习了JDK7的新特性，以及异常屏敝，参考文章：<a href="https://juejin.im/entry/57f73e81bf22ec00647dacd0">https://juejin.im/entry/57f73e81bf22ec00647dacd0</a></li>
+<li>心得：学习了JDK7的新特性，以及异常屏敝，参考文章：https://juejin.im/entry/57f73e81bf22ec00647dacd0</li>
 </ul>
-
-<h3 id="对-trace-debug-info-级别的日志输出-必须使用条件输出形式或者使用占位符的方式">对 trace/debug/info 级别的日志输出，必须使用条件输出形式或者使用占位符的方式。</h3>
-
+<h3 id="对-tracedebuginfo-级别的日志输出必须使用条件输出形式或者使用占位符的方式">对 trace/debug/info 级别的日志输出，必须使用条件输出形式或者使用占位符的方式。</h3>
 <ul>
-<li>说明：logger.debug(&ldquo;Processing trade with id: &ldquo; + id + &rdquo; and symbol: &ldquo; + symbol);如果日志级别是 warn，上述日志不会打印，但是会执行字符串拼接操作，如果 symbol 是对象， 会执行 toString()方法，浪费了系统资源，执行了上述操作，最终日志却没有打印。使用占位符方式不会浪费资源：logger.debug(&ldquo;Processing trade with id: {} and symbol : {} &ldquo;, id, symbol);</li>
+<li>说明：logger.debug(&ldquo;Processing trade with id: &quot; + id + &quot; and symbol: &quot; + symbol);如果日志级别是 warn，上述日志不会打印，但是会执行字符串拼接操作，如果 symbol 是对象， 会执行 toString()方法，浪费了系统资源，执行了上述操作，最终日志却没有打印。使用占位符方式不会浪费资源：logger.debug(&ldquo;Processing trade with id: {} and symbol : {} &ldquo;, id, symbol);</li>
 <li>心得：学习了这种方式会浪费系统资源</li>
 </ul>
-
-<h3 id="表达是与否概念的字段-必须使用">表达是与否概念的字段，必须使用</h3>
-
-<p>is_xxx的方式命名，数据类型是unsigned tinyint（1表示是，0表示否）。
-- 表达逻辑删除的字段名is_deleted，1表示删除，0表示未删除
-- 心得：学了一招，立马用到项目中</p>
-
-<h3 id="主键索引名为-pk-字段名-唯一索引名为-uk-字段名-普通索引名则为-idx-字段名">主键索引名为 pk_字段名；唯一索引名为 uk_字段名；普通索引名则为 idx_字段名</h3>
-
+<h3 id="表达是与否概念的字段必须使用">表达是与否概念的字段，必须使用</h3>
+<p>is_xxx的方式命名，数据类型是unsigned tinyint（1表示是，0表示否）。</p>
+<ul>
+<li>表达逻辑删除的字段名is_deleted，1表示删除，0表示未删除</li>
+<li>心得：学了一招，立马用到项目中</li>
+</ul>
+<h3 id="主键索引名为-pk_字段名唯一索引名为-uk_字段名普通索引名则为-idx_字段名">主键索引名为 pk_字段名；唯一索引名为 uk_字段名；普通索引名则为 idx_字段名</h3>
 <ul>
 <li>心得：之前没注意索引命名的规范，学习了</li>
 </ul>
-
-<h3 id="小数类型为-decimal-禁止使用-float-和-double">小数类型为 decimal，禁止使用 float 和 double</h3>
-
+<h3 id="小数类型为-decimal禁止使用-float-和-double">小数类型为 decimal，禁止使用 float 和 double</h3>
 <ul>
 <li>说明：float 和 double 在存储的时候，存在精度损失的问题，很可能在值的比较时，得到不 正确的结果。如果存储的数据范围超过 decimal 的范围，建议将数据拆成整数和小数分开存储</li>
 <li>心得：例如金额</li>
 </ul>
-
-<h3 id="不得使用外键与级联-一切外键概念必须在应用层解决">不得使用外键与级联，一切外键概念必须在应用层解决</h3>
-
+<h3 id="不得使用外键与级联一切外键概念必须在应用层解决">不得使用外键与级联，一切外键概念必须在应用层解决</h3>
 <ul>
 <li>说明：以学生和成绩的关系为例，学生表中的 student_id 是主键，那么成绩表中的 student_id 则为外键。如果更新学生表中的 student_id，同时触发成绩表中的 student_id 更新，即为 级联更新。外键与级联更新适用于单机低并发，不适合分布式、高并发集群；级联更新是强阻 塞，存在数据库更新风暴的风险；外键影响数据库的插入速度</li>
 <li>心得：以前我建表都是会指定外键，现在学精了</li>
@@ -446,7 +406,10 @@
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

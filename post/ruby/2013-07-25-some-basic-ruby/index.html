@@ -25,7 +25,7 @@ def say_hello(name) &amp;quot;Hello &amp;quot; &#43; name end puts(say_hello(&am
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/ruby/2013-07-25-some-basic-ruby/" />
@@ -36,7 +36,8 @@ def say_hello(name) &amp;quot;Hello &amp;quot; &#43; name end puts(say_hello(&am
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -46,23 +47,19 @@ def say_hello name &quot;Hello &quot; &#43; name end puts say_hello &quot;man&qu
 def say_hello(name) &quot;Hello &quot; &#43; name end puts(say_hello(&quot;man&quot;))  However, when there are more than one parameters, it will be difficult to know which argument goes with which method invocation.So it&rsquo;s recommended using parentheses in all but the simplest cases." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/ruby/2013-07-25-some-basic-ruby/" />
-<meta property="article:published_time" content="2016-05-14T16:35:19&#43;08:00"/>
-<meta property="article:modified_time" content="2016-05-14T16:35:19&#43;08:00"/>
-
+<meta property="article:published_time" content="2016-05-14T16:35:19+08:00" />
+<meta property="article:modified_time" content="2016-05-14T16:35:19+08:00" />
 <meta itemprop="name" content="Some basic Ruby">
 <meta itemprop="description" content="String and name When defining a function, the parentheses are not necessary.So this one
 def say_hello name &quot;Hello &quot; &#43; name end puts say_hello &quot;man&quot;  is the same as this.
 def say_hello(name) &quot;Hello &quot; &#43; name end puts(say_hello(&quot;man&quot;))  However, when there are more than one parameters, it will be difficult to know which argument goes with which method invocation.So it&rsquo;s recommended using parentheses in all but the simplest cases.">
-
-
 <meta itemprop="datePublished" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="dateModified" content="2016-05-14T16:35:19&#43;08:00" />
 <meta itemprop="wordCount" content="803">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Some basic Ruby"/>
 <meta name="twitter:description" content="String and name When defining a function, the parentheses are not necessary.So this one
 def say_hello name &quot;Hello &quot; &#43; name end puts say_hello &quot;man&quot;  is the same as this.
@@ -148,146 +145,114 @@ def say_hello(name) &quot;Hello &quot; &#43; name end puts(say_hello(&quot;man&q
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#string-and-name">String and name</a></li>
-<li><a href="#arrays-and-hashes">Arrays and Hashes</a></li>
-<li><a href="#control-structures">Control Structures</a></li>
-<li><a href="#regular-expressions">Regular expressions</a></li>
-<li><a href="#blocks-and-iterators">Blocks and Iterators</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#string-and-name">String and name</a></li>
+    <li><a href="#arrays-and-hashes">Arrays and Hashes</a></li>
+    <li><a href="#control-structures">Control Structures</a></li>
+    <li><a href="#regular-expressions">Regular expressions</a></li>
+    <li><a href="#blocks-and-iterators">Blocks and Iterators</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h2 id="string-and-name">String and name</h2>
-
+      <h2 id="string-and-name">String and name</h2>
 <p>When defining a function, the parentheses are not necessary.So this one</p>
-
 <pre><code>def say_hello name
   &quot;Hello &quot; + name
 end
 
 puts say_hello &quot;man&quot;
 </code></pre>
-
 <p>is the same as this.</p>
-
 <pre><code>def say_hello(name)
   &quot;Hello &quot; + name
 end
 
 puts(say_hello(&quot;man&quot;))
 </code></pre>
-
 <p>However, when there are more than one parameters, it will be difficult to
 know which argument goes with which method invocation.So it&rsquo;s recommended
 using parentheses in all but the simplest cases.</p>
-
 <p>We can use single-quote or double-quote to create a string.What&rsquo;s the
 difference?</p>
-
 <p>First, single-quoted string can&rsquo;t represent the escape character, and
 double-quoted string can.</p>
-
 <pre><code>puts '\nabc'
 puts &quot;\nabc&quot;
 </code></pre>
-
 <p>The above code will output this.</p>
-
 <pre><code>\nabc
 
 abc
 </code></pre>
-
 <p>Second, double-quoted string can be expression interpolated.</p>
-
 <pre><code>name = 'Tom'
 
 puts 'Hello #{name}'
 puts &quot;Hello #{name}&quot;
 </code></pre>
-
 <p>The above code will output this.</p>
-
 <pre><code>ruby test.rb
 Hello #{name}
 Hello Tom
 </code></pre>
-
 <p>And we can even invoke methods.</p>
-
 <pre><code>name = 'Tom'
 puts &quot;Hello #{name.upcase}&quot;
 </code></pre>
-
 <p>This will generate the following.</p>
-
 <pre><code>Hello TOM
 </code></pre>
-
 <p>When the expression is a global, instance or class variable, there is no need
 to use the braces.</p>
-
 <pre><code>@h = &quot;Hello&quot;    # @ means instance
 $name = 'Tom'    # $ means global
 
 puts &quot;#@h #$name&quot;
 </code></pre>
-
 <p>This will generate the same output.</p>
-
 <p>There are some conventions for the <strong>name</strong> in Ruby.</p>
-
 <ul>
-<li><p>Local variables, method parameters and method names <em>should</em> all start
-with a lowercase letter or an underscore.</p></li>
-
-<li><p>Class names, module names and constants <em>must</em> start with an uppercase
-letter.</p></li>
-
-<li><p>Global variables start with <code>$</code>.</p></li>
-
-<li><p>Instance variables begin with <code>@</code>.</p></li>
-
-<li><p>Class variables are prefixed with <code>@@</code>.</p></li>
+<li>
+<p>Local variables, method parameters and method names <em>should</em> all start
+with a lowercase letter or an underscore.</p>
+</li>
+<li>
+<p>Class names, module names and constants <em>must</em> start with an uppercase
+letter.</p>
+</li>
+<li>
+<p>Global variables start with <code>$</code>.</p>
+</li>
+<li>
+<p>Instance variables begin with <code>@</code>.</p>
+</li>
+<li>
+<p>Class variables are prefixed with <code>@@</code>.</p>
+</li>
 </ul>
-
 <h2 id="arrays-and-hashes">Arrays and Hashes</h2>
-
 <p>In ruby, arrays and hashes can hold objects of different types.</p>
-
 <pre><code>a = [1, 'abc', :sym]
 puts a
 </code></pre>
-
 <p>It will generate the following output.</p>
-
 <pre><code>1
 abc
 sym
 </code></pre>
-
 <p>By the way, <code>nil</code> is an object, represent <strong>nothing</strong>.</p>
-
 <p>If we want to create an array of string, we have to list all the strings.
 And we have to type lots of quotes and commas.However, <code>%w</code> can do it
 more easily.</p>
-
 <pre><code>a = ['a', 'b', 'c']
 b = %w{a b c}
 
 puts a
 puts b
 </code></pre>
-
 <p>It will generate the following output.</p>
-
 <pre><code>a
 b
 c
@@ -295,20 +260,15 @@ a
 b
 c
 </code></pre>
-
 <p>The index of Array is integer, but the index of Hash is anything.</p>
-
 <p>It has the following form.</p>
-
 <pre><code>var = {
   key1 =&gt; value1
   key2 =&gt; value2
   ...
 }
 </code></pre>
-
 <p>For example:</p>
-
 <pre><code>girl = {
   :name =&gt; 'Mary',
   :age =&gt; 20
@@ -316,111 +276,76 @@ c
 
 puts &quot;#{girl[:name]} is #{girl[:age]} years old.&quot;
 </code></pre>
-
 <p>Output:</p>
-
 <pre><code>Mary is 20 years old.
 </code></pre>
-
 <p>A new Hash can also be created in this way.</p>
-
 <pre><code>decimal = Hash.new(0)
 puts decimal[:first]
 decimal[:first] = 1
 puts decimal[:first]
 </code></pre>
-
 <p>Ouput:</p>
-
 <pre><code>0
 1
 </code></pre>
-
 <p><code>0</code> is the default value for all keys.</p>
-
 <h2 id="control-structures">Control Structures</h2>
-
 <p>In Ruby, there is a <code>elsif</code> keyword instead of <code>else if</code>.</p>
-
 <p>The method <code>gets</code> return the next line from the standard input stream and
 return nil when get the <code>EOF</code>, so the following code can let all the inputs
 be upcase.</p>
-
 <pre><code>while line = gets
   puts line.upcase
 end
 </code></pre>
-
 <p>If the <code>if</code> and <code>while</code> statement is just a single expression, we usually
 write them in this way.</p>
-
 <pre><code>puts 'Hey' if 2 &gt; 1
 
 i = 1
 puts i while (i += 1) &lt; 10
 </code></pre>
-
 <p>Someone say that this style is similar with <code>Perl</code>.</p>
-
 <h2 id="regular-expressions">Regular expressions</h2>
-
-<p>&rsquo;/&rsquo;   forward slash</p>
-
-<p>&rsquo;|&rsquo;   pipe</p>
-
+<p>&lsquo;/&rsquo;   forward slash</p>
+<p>&lsquo;|&rsquo;   pipe</p>
 <p>The match operator is <code>=~</code>. For example,</p>
-
 <p>line = &ldquo;Perlppp&rdquo;</p>
-
 <pre><code>if line =~ /Perl|Python/
   puts &quot;match&quot;
 end
 </code></pre>
-
 <p>The replace method is <code>sub</code> and <code>gsub</code>.</p>
-
 <p><code>sub(pattern, str)</code> will replace the first string that matched <code>pattern</code>
 with <code>str</code>.</p>
-
 <p><code>gsub(pattern, str)</code> will replace all the string that matched <code>pattern</code>
 with <code>str</code>. <code>g</code> means <strong>global</strong>.</p>
-
 <h2 id="blocks-and-iterators">Blocks and Iterators</h2>
-
 <p>This is a code block.</p>
-
 <pre><code>{ puts 'Hello World!' }
 </code></pre>
-
 <p>This is also a code block.</p>
-
 <pre><code>do
   a = 1
   puts a
 end
 </code></pre>
-
 <p>When we define a function like this,</p>
-
 <pre><code>def hello
   puts &quot;Do some staff before calling the code block&quot;
   yield
   puts &quot;Do some staff after calling the code block&quot;
 end
 </code></pre>
-
 <p>now we can call this function in this way.</p>
-
 <pre><code>hello { puts 'Hello World' }
 </code></pre>
-
 <p><code>yield</code> will execute the code block <code>{ puts 'Hello World' }</code>. Here code
 is just like data. There may be many functions that should do some staff
 before calling them and do some staff after calling them. For example, logging
 and open/close file. This is call <a href="http://en.wikipedia.org/wiki/Aspect-oriented_programming">AOP</a>.</p>
-
 <p><code>yield</code> can also accept parameters.</p>
-
 <pre><code>def hello
   puts &quot;Do some staff before calling the code block&quot;
   yield('Hello ')
@@ -429,23 +354,17 @@ end
 
 hello { |greet| puts greet + 'Ruby' }
 </code></pre>
-
 <p><strong>Code block</strong> is used to implement <strong>Iterator</strong>. The famouse function <code>each</code>
 is an example.</p>
-
 <pre><code>animals = %w(ant bee cat dog)
 animals.each { |animal| puts animal }
 </code></pre>
-
 <p>If we want to print 5 &lsquo;*&rsquo; in C/C++, we will do it in this way.</p>
-
 <pre><code>for (int i = 0; i &lt; 5; ++i) {
     printf('*');
 }
 </code></pre>
-
 <p>But in Ruby, you can do it in an elegant way.</p>
-
 <pre><code>5.times { print '*' }
 </code></pre>
 
@@ -574,7 +493,10 @@ animals.each { |animal| puts animal }
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

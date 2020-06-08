@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/leetcode/battelships-in-a-board/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="题目 Given an 2D board, count how many battleships are in it. The battleships are represented with &#39;X&#39;s, empty slots are represented with &#39;.&#39;s. You may assume the following rules: You receive a valid board, made of only battleships or empty slots. Battleships can only be placed horizontally or vertically. In other words, they can only be made of the shape 1xN (1 row, N columns) or Nx1 (N" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/leetcode/battelships-in-a-board/" />
-<meta property="article:published_time" content="2017-12-23T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2017-12-23T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2017-12-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-12-23T00:00:00+00:00" />
 <meta itemprop="name" content="battelships-in-a-board">
 <meta itemprop="description" content="题目 Given an 2D board, count how many battleships are in it. The battleships are represented with &#39;X&#39;s, empty slots are represented with &#39;.&#39;s. You may assume the following rules: You receive a valid board, made of only battleships or empty slots. Battleships can only be placed horizontally or vertically. In other words, they can only be made of the shape 1xN (1 row, N columns) or Nx1 (N">
-
-
 <meta itemprop="datePublished" content="2017-12-23T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2017-12-23T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="452">
 
 
 
-<meta itemprop="keywords" content="leetcode,算法," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="leetcode,算法," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="battelships-in-a-board"/>
 <meta name="twitter:description" content="题目 Given an 2D board, count how many battleships are in it. The battleships are represented with &#39;X&#39;s, empty slots are represented with &#39;.&#39;s. You may assume the following rules: You receive a valid board, made of only battleships or empty slots. Battleships can only be placed horizontally or vertically. In other words, they can only be made of the shape 1xN (1 row, N columns) or Nx1 (N"/>
 
@@ -142,28 +139,18 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#题目">题目</a></li>
-<li><a href="#思路">思路</a></li>
-<li><a href="#代码">代码</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<h4 id="题目">题目</h4>
-
+      <h4 id="题目">题目</h4>
 <pre><code>Given an 2D board, count how many battleships are in it. The battleships are represented with 'X's, empty slots are represented with '.'s. You may assume the following rules:
 You receive a valid board, made of only battleships or empty slots.
 Battleships can only be placed horizontally or vertically. In other words, they can only be made of the shape 1xN (1 row, N columns) or Nx1 (N rows, 1 column), where N can be of any size.
@@ -180,14 +167,9 @@ XXXX
 This is an invalid board that you will not receive - as battleships will always have a cell separating between them.
 Follow up:
 Could you do it in one-pass, using only O(1) extra memory and without modifying the value of the board?
-</code></pre>
-
-<h4 id="思路">思路</h4>
-
+</code></pre><h4 id="思路">思路</h4>
 <p>一个二维的板上有很多个X，其中部分X属于一组，求的是一共有多少组。这是并查集的思想，可以遍历整个二维数组，初始每个X自身为一个组，当两个组可以合并时，组数就减一，最终的组数就是答案。根据题意，行相连或者列相连的为同一组，这可以用来判断两个并查集是否可以合并。</p>
-
 <h4 id="代码">代码</h4>
-
 <pre><code>#include &lt;iostream&gt;
 #include &lt;vector&gt;
 
@@ -233,7 +215,6 @@ int main() {
   return 0;
 }
 </code></pre>
-
     </div>
 
     <div class="post-copyright">
@@ -362,7 +343,10 @@ int main() {
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

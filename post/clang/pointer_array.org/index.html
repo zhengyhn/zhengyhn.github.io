@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为the c programming language一书的笔记 @&amp;lt;/font&amp;gt; 多维数组 对于一个二维数组，如果要作为函数参数来传递，必须要包含列数，行数可加可不加。 因为，传" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为the c programming language一书的笔记 @&amp;lt;/font&amp;gt; 多维数组 对于一个二维数组，如果要作为函数参数来传递，必须要包含列数，行数可加可不加。 因为，传" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/clang/pointer_array.org/" />
@@ -34,31 +34,28 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="tcpl读书笔记：指针和数组" />
-<meta property="og:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为the c programming language一书的笔记 @&lt;/font&gt; 多维数组 对于一个二维数组，如果要作为函数参数来传递，必须要包含列数，行数可加可不加。 因为，传" />
+<meta property="og:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为the c programming language一书的笔记 @&lt;/font&gt; 多维数组 对于一个二维数组，如果要作为函数参数来传递，必须要包含列数，行数可加可不加。 因为，传" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/clang/pointer_array.org/" />
-<meta property="article:published_time" content="2013-03-10T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-03-10T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-03-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-03-10T00:00:00+00:00" />
 <meta itemprop="name" content="tcpl读书笔记：指针和数组">
-<meta itemprop="description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为the c programming language一书的笔记 @&lt;/font&gt; 多维数组 对于一个二维数组，如果要作为函数参数来传递，必须要包含列数，行数可加可不加。 因为，传">
-
-
+<meta itemprop="description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为the c programming language一书的笔记 @&lt;/font&gt; 多维数组 对于一个二维数组，如果要作为函数参数来传递，必须要包含列数，行数可加可不加。 因为，传">
 <meta itemprop="datePublished" content="2013-03-10T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-03-10T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="297">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="tcpl读书笔记：指针和数组"/>
-<meta name="twitter:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为the c programming language一书的笔记 @&lt;/font&gt; 多维数组 对于一个二维数组，如果要作为函数参数来传递，必须要包含列数，行数可加可不加。 因为，传"/>
+<meta name="twitter:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为the c programming language一书的笔记 @&lt;/font&gt; 多维数组 对于一个二维数组，如果要作为函数参数来传递，必须要包含列数，行数可加可不加。 因为，传"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -139,60 +136,37 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#多维数组">多维数组</a></li>
-<li><a href="#命令行参数">命令行参数</a></li>
-<li><a href="#复杂的表示">复杂的表示</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为the c programming language一书的笔记
+      <p>@&lt;font color=&quot;red&rdquo;&gt; 本文为the c programming language一书的笔记
 @&lt;/font&gt;</p>
-
 <h1 id="多维数组">多维数组</h1>
-
 <ul>
 <li>对于一个二维数组，如果要作为函数参数来传递，必须要包含列数，行数可加可不加。</li>
 </ul>
-
 <p>因为，传递过去的是指向行的指针。比如,可以这样：</p>
-
-<pre><code class="language-.example">fun(int arr[2][13])
+<pre><code class="language-{.example}" data-lang="{.example}">fun(int arr[2][13])
 {
     ...
 }
-</code></pre>
-
-<p>也可以这样：</p>
-
-<pre><code class="language-.example">fun(int arr[][13])
+</code></pre><p>也可以这样：</p>
+<pre><code class="language-{.example}" data-lang="{.example}">fun(int arr[][13])
 {
     ...
 }
-</code></pre>
-
-<p>还可以这样：</p>
-
-<pre><code class="language-.example">fun(int (*arr)[13])
+</code></pre><p>还可以这样：</p>
+<pre><code class="language-{.example}" data-lang="{.example}">fun(int (*arr)[13])
 {
     ...
 }
-</code></pre>
-
-<p>注意，*arr一定要加括号，因为[]的优先级比*要高。</p>
-
+</code></pre><p>注意，*arr一定要加括号，因为[]的优先级比*要高。</p>
 <h1 id="命令行参数">命令行参数</h1>
-
 <ul>
 <li>看下面的代码：</li>
 </ul>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 
 int main(int argc, char *argv[])
 {
@@ -200,17 +174,12 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-</code></pre>
-
-<p>其中argc代表argument count，argv代表argument vector。
+</code></pre><p>其中argc代表argument count，argv代表argument vector。
 argv[0]是程序的名字,因此argc至少为1。</p>
-
 <h1 id="复杂的表示">复杂的表示</h1>
-
-<pre><code class="language-.example">- int (*p)[13]，指向int类型13个元素的数组的指针
+<pre><code class="language-{.example}" data-lang="{.example}">- int (*p)[13]，指向int类型13个元素的数组的指针
 - int *p[13]，一个包含13个int类型的指针的数组
 </code></pre>
-
     </div>
 
     <div class="post-copyright">
@@ -270,7 +239,7 @@ argv[0]是程序的名字,因此argc至少为1。</p>
         id: '2013-03-10 00:00:00 \x2b0000 UTC',
         title: 'tcpl读书笔记：指针和数组',
         link: decodeURI(location.href),
-        desc: '@\x26lt;font color=\x26ldquo;red\x26rdquo;\x26gt; 本文为the c programming language一书的笔记 @\x26lt;\/font\x26gt; 多维数组 对于一个二维数组，如果要作为函数参数来传递，必须要包含列数，行数可加可不加。 因为，传',
+        desc: '@\x26lt;font color=\x26quot;red\x26rdquo;\x26gt; 本文为the c programming language一书的笔记 @\x26lt;\/font\x26gt; 多维数组 对于一个二维数组，如果要作为函数参数来传递，必须要包含列数，行数可加可不加。 因为，传',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -336,7 +305,10 @@ argv[0]是程序的名字,因此argc至少为1。</p>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

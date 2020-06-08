@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/misc/gtk_base/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="看下面一个装载widget的程序： #include &lt;gtk/gtk.h&gt; #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string.h&gt; //macros #define BORDER_WIDTH 10 //global variables GtkWidget *win; GtkWidget *btn; GtkWidget *top_box; GtkWidget *separator; GtkWidget *bottom_box; GtkWidget *label; GtkWidget *quitbox; //functions gint delete_event(GtkWidget *widget, GdkEvent *event, gpointer data); void make_box(GtkWidget *parent, gboolean homogeneous, gint spacing, gboolean expand, gboolean fill, guint padding); void make_btn(GtkWidget *box, GtkWidget" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/misc/gtk_base/" />
-<meta property="article:published_time" content="2013-02-22T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-02-22T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-02-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-02-22T00:00:00+00:00" />
 <meta itemprop="name" content="gtk, widget">
 <meta itemprop="description" content="看下面一个装载widget的程序： #include &lt;gtk/gtk.h&gt; #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string.h&gt; //macros #define BORDER_WIDTH 10 //global variables GtkWidget *win; GtkWidget *btn; GtkWidget *top_box; GtkWidget *separator; GtkWidget *bottom_box; GtkWidget *label; GtkWidget *quitbox; //functions gint delete_event(GtkWidget *widget, GdkEvent *event, gpointer data); void make_box(GtkWidget *parent, gboolean homogeneous, gint spacing, gboolean expand, gboolean fill, guint padding); void make_btn(GtkWidget *box, GtkWidget">
-
-
 <meta itemprop="datePublished" content="2013-02-22T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-02-22T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="577">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="gtk, widget"/>
 <meta name="twitter:description" content="看下面一个装载widget的程序： #include &lt;gtk/gtk.h&gt; #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string.h&gt; //macros #define BORDER_WIDTH 10 //global variables GtkWidget *win; GtkWidget *btn; GtkWidget *top_box; GtkWidget *separator; GtkWidget *bottom_box; GtkWidget *label; GtkWidget *quitbox; //functions gint delete_event(GtkWidget *widget, GdkEvent *event, gpointer data); void make_box(GtkWidget *parent, gboolean homogeneous, gint spacing, gboolean expand, gboolean fill, guint padding); void make_btn(GtkWidget *box, GtkWidget"/>
 
@@ -139,13 +136,12 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>看下面一个装载widget的程序：</p>
-
-<pre><code class="language-.c">#include &lt;gtk/gtk.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;gtk/gtk.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
@@ -273,22 +269,14 @@ void make_btn(GtkWidget *box, GtkWidget *btn, gboolean expand,
     gtk_box_pack_start(GTK_BOX(box), btn, expand, fill, padding);
     gtk_widget_show(btn);
 }
-</code></pre>
-
-<p>这里用到一些陌生的函数：</p>
-
-<pre><code class="language-.c">void gtk_box_pack_start(GtkBox *box, GtkWidget *child,
+</code></pre><p>这里用到一些陌生的函数：</p>
+<pre><code class="language-{.c}" data-lang="{.c}">void gtk_box_pack_start(GtkBox *box, GtkWidget *child,
                         gboolean expand, gboolean fill, guint padding);
-</code></pre>
-
-<p>把child装进去box里面，expand表明是否展开，如果为FALSE则收缩。在expand为TRUE的情况
+</code></pre><p>把child装进去box里面，expand表明是否展开，如果为FALSE则收缩。在expand为TRUE的情况
 下，如果fill为TRUE，则会填充，容器之间没有间隔，如果为FALSE则有间隔。padding是
 widget两边的的间隔。 还有一个函数：</p>
-
-<pre><code class="language-.c">GtkWidget *gtk_hbox_new(gboolean homogeneous, gint spacing);
-</code></pre>
-
-<p>spacing为widget之间的间隔，homogeneous表明是否均匀。琢磨一下上面的例子，运行一下
+<pre><code class="language-{.c}" data-lang="{.c}">GtkWidget *gtk_hbox_new(gboolean homogeneous, gint spacing);
+</code></pre><p>spacing为widget之间的间隔，homogeneous表明是否均匀。琢磨一下上面的例子，运行一下
 就会明白了。</p>
 
     </div>
@@ -416,7 +404,10 @@ widget两边的的间隔。 还有一个函数：</p>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

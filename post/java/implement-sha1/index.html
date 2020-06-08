@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/java/implement-sha1/" />
@@ -34,7 +34,8 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -42,21 +43,17 @@
 <meta property="og:description" content="由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 算法的文档在RFC3174。这一份 standard 里面定义了很" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/java/implement-sha1/" />
-<meta property="article:published_time" content="2020-02-23T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2020-02-23T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2020-02-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-02-23T00:00:00+00:00" />
 <meta itemprop="name" content="实现一下SHA1算法">
 <meta itemprop="description" content="由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 算法的文档在RFC3174。这一份 standard 里面定义了很">
-
-
 <meta itemprop="datePublished" content="2020-02-23T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-02-23T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="1889">
 
 
 
-<meta itemprop="keywords" content="Java,SHA1,SHA,Security," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Java,SHA1,SHA,Security," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="实现一下SHA1算法"/>
 <meta name="twitter:description" content="由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。 算法的文档在RFC3174。这一份 standard 里面定义了很"/>
 
@@ -142,46 +139,33 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#输入内容长度限制和输出内容的长度">输入内容长度限制和输出内容的长度</a></li>
-<li><a href="#输入和输出">输入和输出</a></li>
-<li><a href="#padding-算法">Padding 算法</a></li>
-<li><a href="#处理算法">处理算法</a></li>
-<li><a href="#加到-gui-工具">加到 GUI 工具</a></li>
-<li><a href="#源码">源码</a></li>
-<li><a href="#总结">总结</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#输入内容长度限制和输出内容的长度">输入内容长度限制和输出内容的长度</a></li>
+        <li><a href="#输入和输出">输入和输出</a></li>
+        <li><a href="#padding-算法">Padding 算法</a></li>
+        <li><a href="#处理算法">处理算法</a></li>
+        <li><a href="#加到-gui-工具">加到 GUI 工具</a></li>
+        <li><a href="#源码">源码</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。</p>
-
+      <p>由于工作中经常会接触到数字签名，摘要算法等知识。现在准备实现一个最基础的摘要算法: SHA1。</p>
 <p>算法的文档在<a href="https://tools.ietf.org/html/rfc3174">RFC3174</a>。这一份 standard 里面定义了很多规范，我们一个一个看。</p>
-
 <h3 id="输入内容长度限制和输出内容的长度">输入内容长度限制和输出内容的长度</h3>
-
 <pre><code>When a message of any length &lt; 2^64 bits is input, the SHA-1 produces a 160-bit output called a message digest.
-</code></pre>
-
-<p>输入的内容转成二进制之后，长度必须小于 2^64 位。由于这是一个 Hash 算法，输出的长度是固定，SHA1 的输出长度是 160 位的二进制。</p>
-
+</code></pre><p>输入的内容转成二进制之后，长度必须小于 2^64 位。由于这是一个 Hash 算法，输出的长度是固定，SHA1 的输出长度是 160 位的二进制。</p>
 <h3 id="输入和输出">输入和输出</h3>
-
 <p>对于使用方，我们一般是输入一段字符串给 SHA1，结果是得到一串固定长度的十六进制数字组成的字符串。
 由于输入的字符串是带字符编码的，所以我们需要先根据编码转成字节数组，再交给 SHA1 处理。
 从 SHA1 的视角看，只认字节，它会对输入的字节数组进行一系列的处理，输出一个 20 个字节的数组，一共 160 位。</p>
-
 <p>最后，通过这 20 个字节的数组，每个字节转换成十六进制的字符串，拼接进来，就是最终的结果。</p>
-
 <pre><code>
 public String digest(String text) {
     byte[] result = hash(text.getBytes(StandardCharsets.UTF_8));
@@ -192,40 +176,25 @@ public String digest(String text) {
     return stringBuilder.toString();
 }
 
-</code></pre>
-
-<h3 id="padding-算法">Padding 算法</h3>
-
+</code></pre><h3 id="padding-算法">Padding 算法</h3>
 <p>SHA1 算法中 512 位称为一个 block，padding 算法就是为了将输入的数据补全为 512 位的 n 倍。</p>
-
 <p>比如：输入 a, 一共 1 个字节，1 * 8 = 8 位，不足 512 位，所以后面要补 512 - 8 = 504 位</p>
-
 <p>至于要补什么内容，规则是这样的:</p>
-
 <ul>
 <li>先在内容的后面补一个 1，这个 1 是指二进制的 1，补的是 1 位，所以转成字节就是 1000 0000, 十六进制就是 0x80</li>
 <li>再在末尾的 64 位补上输入内容的长度</li>
 </ul>
-
 <p>以刚刚 a 的例子来说，a 对应的 ascii 码为 97，转成二进制为 01100001, 所以初始内容为 01100001,</p>
-
 <p>后面补上二进制 1 之后，为 01100001 10000000,</p>
-
 <p>长度是 8 位，转换为二进制就是 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000</p>
-
 <p>最后的结果就是一个 512 位的二进制，01100001 10000000 &hellip; 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000</p>
-
 <p>中间的&hellip;都是补 0.</p>
-
 <p>有 2 个特殊 case:</p>
-
 <ul>
 <li>如果内容刚好是 512 位的倍数，需要 padding 吗？答案是需要的，需要再往后面补多 512 位</li>
 <li>如果内容的长度还差 1 ~ 9 位才到达 512 位的倍数，怎么办？答案是，需要往后面再补多 512 位</li>
 </ul>
-
 <p>实现的代码如下：</p>
-
 <pre><code>
 long bits = originalBytes.length * 8;
 int newLength = ((originalBytes.length / 64) + 1) * 64;
@@ -239,27 +208,18 @@ for (int i = bytes.length - 8; i &lt; bytes.length; ++i) {
     bytes[i] = (byte) ((bits &gt;&gt;&gt; (56 - (i - (bytes.length - 8)) * 8)) &amp; 0xff);
 }
 
-</code></pre>
-
-<h3 id="处理算法">处理算法</h3>
-
+</code></pre><h3 id="处理算法">处理算法</h3>
 <p>文档中有 2 种方法，我选择的是算法一。</p>
-
 <p>先定义几个算法中会用到的函数:</p>
-
 <ul>
 <li>S^n(X), 对 X 进行循环左移 n 位的操作</li>
 </ul>
-
 <pre><code>
 S^n(X)  =  (X &lt;&lt; n) OR (X &gt;&gt; 32-n)
 
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>f(t;B,C,D), 根据 t 的不同取值，对 B, C, D 进行相应位运算</li>
 </ul>
-
 <pre><code>
 f(t;B,C,D) = (B AND C) OR ((NOT B) AND D)         ( 0 &lt;= t &lt;= 19)
 
@@ -269,12 +229,9 @@ f(t;B,C,D) = (B AND C) OR (B AND D) OR (C AND D)  (40 &lt;= t &lt;= 59)
 
 f(t;B,C,D) = B XOR C XOR D                        (60 &lt;= t &lt;= 79)
 
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>K(t), 根据不同的 t，返回相应的魔法数字</li>
 </ul>
-
 <pre><code>
   K(t) = 5A827999         ( 0 &lt;= t &lt;= 19)
 
@@ -284,34 +241,27 @@ f(t;B,C,D) = B XOR C XOR D                        (60 &lt;= t &lt;= 79)
 
   K(t) = CA62C1D6         (60 &lt;= t &lt;= 79)
 
-</code></pre>
-
-<p>算法描述是这样的:</p>
-
+</code></pre><p>算法描述是这样的:</p>
 <p>对 Padding 过后的数据，每 512 位执行下面的操作:</p>
-
 <ul>
 <li>初始化 5 个魔法数字: H0 = 67452301, H1 = EFCDAB89, H2 = 98BADCFE, H3 = 10325476, H4 = C3D2E1F0</li>
 <li>将 512 位分成 16 份，每份包含 1 个字(word)，即 32 位，记为 W[0] ~ W[15]</li>
 <li>对于 t = 16 到 t = 79, 执行下面的操作
-
 <ul>
 <li>W(t) = S^1(W(t-3) XOR W(t-8) XOR W(t-14) XOR W(t-16)),</li>
-</ul></li>
+</ul>
+</li>
 <li>令 A = H0, B = H1, C = H2, D = H3, E = H4</li>
 <li>对于 t = 0 到 t = 79, 执行下面的操作
-
 <ul>
 <li>TEMP = S^5(A) + f(t;B,C,D) + E + W(t) + K(t);</li>
 <li>E = D; D = C; C = S^30(B); B = A; A = TEMP;</li>
-</ul></li>
+</ul>
+</li>
 <li>令 H0 = H0 + A, H1 = H1 + B, H2 = H2 + C, H3 = H3 + D, H4 = H4 + E</li>
 </ul>
-
 <p>最终的结果是 H0 H1 H2 H3 H4 拼成 5 个字(word)，一共 160 位。</p>
-
 <p>全部的代码实现如下:</p>
-
 <pre><code>
 public byte[] hash(byte[] originalBytes) {
     long bits = originalBytes.length * 8;
@@ -399,22 +349,13 @@ private int key(int t) {
     }
 }
 
-</code></pre>
-
-<h3 id="加到-gui-工具">加到 GUI 工具</h3>
-
+</code></pre><h3 id="加到-gui-工具">加到 GUI 工具</h3>
 <p>实现了算法之后，加到我以前写的一个 GUI 工具上面去，效果是这样的:</p>
-
-<p><img src="/images/sha1.png" alt="效果图" /></p>
-
+<p><img src="/images/sha1.png" alt="效果图"></p>
 <h3 id="源码">源码</h3>
-
 <p><a href="https://github.com/zhengyhn/crypto-tool">https://github.com/zhengyhn/crypto-tool</a></p>
-
 <h3 id="总结">总结</h3>
-
 <p>跟着文档写其实不难，难在阅读理解，我在实现过程中被 int 和 byte 之间互转的问题卡了很久，实际上还是基础不扎实，最后看了 open jdk 的实现以及 debug 它和我的的实现的不同才最终解决所有问题。</p>
-
 <p>不过 SHA1 现在已经不推荐使用了，因为出现了相同数据产生同样输出的碰撞情况，更推荐使用 SHA2 和 SHA256 等算法。不过，这依旧是哈希算法中最基础的算法，对我很有帮助。</p>
 
     </div>
@@ -547,7 +488,10 @@ private int key(int t) {
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},

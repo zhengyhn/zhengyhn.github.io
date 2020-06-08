@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;ldquo;red&amp;rdquo;&amp;gt; 本文为&amp;rdquo;linux c编程一站式学习&amp;rdquo;一书的笔记 @&amp;lt;/font&amp;gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;linux c编程一站式学习&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以如果" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="http://zhengyhn.github.io/post/clang/real.org/" />
@@ -34,31 +34,28 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
 <meta property="og:title" content="Linux c编程一站式学习笔记：C语言本质" />
-<meta property="og:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;linux c编程一站式学习&rdquo;一书的笔记 @&lt;/font&gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以" />
+<meta property="og:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;linux c编程一站式学习&quot;一书的笔记 @&lt;/font&gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以如果" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/clang/real.org/" />
-<meta property="article:published_time" content="2013-02-16T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2013-02-16T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2013-02-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-02-16T00:00:00+00:00" />
 <meta itemprop="name" content="Linux c编程一站式学习笔记：C语言本质">
-<meta itemprop="description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;linux c编程一站式学习&rdquo;一书的笔记 @&lt;/font&gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以">
-
-
+<meta itemprop="description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;linux c编程一站式学习&quot;一书的笔记 @&lt;/font&gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以如果">
 <meta itemprop="datePublished" content="2013-02-16T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2013-02-16T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="11299">
+<meta itemprop="wordCount" content="11277">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux c编程一站式学习笔记：C语言本质"/>
-<meta name="twitter:description" content="@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;linux c编程一站式学习&rdquo;一书的笔记 @&lt;/font&gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以"/>
+<meta name="twitter:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;linux c编程一站式学习&quot;一书的笔记 @&lt;/font&gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以如果"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -130,7 +127,7 @@
       <div class="post-meta">
         <span class="post-time"> 2013-02-16 </span>
         
-          <span class="more-meta"> 约 11299 字 </span>
+          <span class="more-meta"> 约 11277 字 </span>
           <span class="more-meta"> 预计阅读 23 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -140,223 +137,173 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#计算机中数的表示">计算机中数的表示</a>
-<ul>
-<li><a href="#二进制数表示法">二进制数表示法</a></li>
-<li><a href="#浮点数">浮点数</a></li>
-</ul></li>
-<li><a href="#数据类型详解">数据类型详解</a></li>
-<li><a href="#运算符详解">运算符详解</a></li>
-<li><a href="#计算机体系结构基础">计算机体系结构基础</a>
-<ul>
-<li><a href="#内存">内存</a></li>
-<li><a href="#设备">设备</a></li>
-<li><a href="#mmu">MMU</a></li>
-<li><a href="#存储设备">存储设备</a></li>
-</ul></li>
-<li><a href="#汇编基础">汇编基础</a>
-<ul>
-<li><a href="#最简单的汇编程序">最简单的汇编程序</a></li>
-<li><a href="#寄存器">寄存器</a></li>
-<li><a href="#寻址方式">寻址方式</a></li>
-<li><a href="#elf文件">ELF文件</a></li>
-</ul></li>
-<li><a href="#汇编与c的关系">汇编与C的关系</a>
-<ul>
-<li><a href="#常识">常识</a></li>
-<li><a href="#c内联汇编">C内联汇编</a></li>
-<li><a href="#volatile限定符">volatile限定符</a></li>
-</ul></li>
-<li><a href="#链接详解">链接详解</a>
-<ul>
-<li><a href="#链接库">链接库</a></li>
-<li><a href="#共享库">共享库</a></li>
-</ul></li>
-<li><a href="#预处理">预处理</a></li>
-<li><a href="#makefile基础">Makefile基础</a>
-<ul>
-<li><a href="#基本规则">基本规则</a></li>
-<li><a href="#隐含规则和模式规则">隐含规则和模式规则</a></li>
-<li><a href="#变量">变量</a></li>
-<li><a href="#自动处理头文件的依赖关系">自动处理头文件的依赖关系</a></li>
-</ul></li>
-<li><a href="#指针">指针</a>
-<ul>
-<li><a href="#指针与const">指针与const</a></li>
-<li><a href="#指针与数组与函数">指针与数组与函数</a></li>
-<li><a href="#类型分类">类型分类</a></li>
-</ul></li>
-<li><a href="#c标准库">C标准库</a>
-<ul>
-<li><a href="#字符串">字符串</a></li>
-<li><a href="#i-o库函数">I/O库函数</a>
-<ul>
-<li><a href="#文件基本概念">文件基本概念</a></li>
-<li><a href="#打开关闭文件">打开关闭文件</a></li>
-<li><a href="#errno和ferror">errno和ferror</a></li>
-<li><a href="#以字节为单位的i-o函数">以字节为单位的I/O函数</a></li>
-<li><a href="#操作位置的函数">操作位置的函数</a></li>
-<li><a href="#以字符串为单位的函数">以字符串为单位的函数</a></li>
-<li><a href="#以记录为单位的函数">以记录为单位的函数</a></li>
-<li><a href="#格式化i-o函数">格式化I/O函数</a></li>
-</ul></li>
-<li><a href="#数值字符串转换函数">数值字符串转换函数</a></li>
-<li><a href="#分配内存的函数">分配内存的函数</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#二进制数表示法">二进制数表示法</a></li>
+    <li><a href="#浮点数">浮点数</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#内存">内存</a></li>
+    <li><a href="#设备">设备</a></li>
+    <li><a href="#mmu">MMU</a></li>
+    <li><a href="#存储设备">存储设备</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#最简单的汇编程序">最简单的汇编程序</a></li>
+    <li><a href="#寄存器">寄存器</a></li>
+    <li><a href="#寻址方式">寻址方式</a></li>
+    <li><a href="#elf文件">ELF文件</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#常识">常识</a></li>
+    <li><a href="#c内联汇编">C内联汇编</a></li>
+    <li><a href="#volatile限定符">volatile限定符</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#链接库">链接库</a></li>
+    <li><a href="#共享库">共享库</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#基本规则">基本规则</a></li>
+    <li><a href="#隐含规则和模式规则">隐含规则和模式规则</a></li>
+    <li><a href="#变量">变量</a></li>
+    <li><a href="#自动处理头文件的依赖关系">自动处理头文件的依赖关系</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#指针与const">指针与const</a></li>
+    <li><a href="#指针与数组与函数">指针与数组与函数</a></li>
+    <li><a href="#类型分类">类型分类</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#字符串">字符串</a></li>
+    <li><a href="#io库函数">I/O库函数</a>
+      <ul>
+        <li><a href="#文件基本概念">文件基本概念</a></li>
+        <li><a href="#打开关闭文件">打开关闭文件</a></li>
+        <li><a href="#errno和ferror">errno和ferror</a></li>
+        <li><a href="#以字节为单位的io函数">以字节为单位的I/O函数</a></li>
+        <li><a href="#操作位置的函数">操作位置的函数</a></li>
+        <li><a href="#以字符串为单位的函数">以字符串为单位的函数</a></li>
+        <li><a href="#以记录为单位的函数">以记录为单位的函数</a></li>
+        <li><a href="#格式化io函数">格式化I/O函数</a></li>
+      </ul>
+    </li>
+    <li><a href="#数值字符串转换函数">数值字符串转换函数</a></li>
+    <li><a href="#分配内存的函数">分配内存的函数</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>@&lt;font color=&ldquo;red&rdquo;&gt; 本文为&rdquo;linux c编程一站式学习&rdquo;一书的笔记
+      <p>@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;linux c编程一站式学习&quot;一书的笔记
 @&lt;/font&gt;</p>
-
 <h1 id="计算机中数的表示">计算机中数的表示</h1>
-
 <h2 id="二进制数表示法">二进制数表示法</h2>
-
 <ul>
 <li>LSB称为第0位而不是第1位，所以如果一个数是32位，则MSB称为第31位。</li>
 <li>sign and magnitude表示法：</li>
 </ul>
-
 <p>第一位为符号位,在做加法运算时，需要这样：</p>
-
 <ol>
 <li>如果符号位相同，则符号位不变，其他位相加，在不溢出的情况下得到结果。</li>
 <li>如果符号位不同，则先比较非符号位谁大，然后用大数减小数，最后符号位</li>
 </ol>
-
 <p>和大数的相同，这样就保证了结果的正确性。
 !!这种方法，效率低，而且0的表示不唯一，既可以表示为1000 0000也可以表示
 为0000 0000</p>
-
 <ul>
 <li>1&rsquo;s complement表示法</li>
 </ul>
-
 <p>一句话概括：负数用1的补码(1&rsquo;s
 complement，也叫反码)表示，减法转换成加法，计算
 结果的最高位如果有进位则要加回到最低位上去。</p>
-
 <p>0000 1000 - 0000 0100 = 0000 1000 + (-0000 0100) =</p>
-
 <p>0000 1000 + 1111 1011 = 0000 0100</p>
-
 <p>!!这种方法，效率高了，正数和负数一样算，但是还是有2个0</p>
-
 <ul>
 <li>2&rsquo;s complement表示法</li>
 </ul>
-
-<p>为什么叫2的补码呢？因为对一个只有一位的二进制数b取补码就是1 - b + 1 = 1
-+ 1 - b = 10 - b，即2减去b。 如果要计算-1的补码，则为</p>
-
+<p>为什么叫2的补码呢？因为对一个只有一位的二进制数b取补码就是1 - b + 1 = 1</p>
+<ul>
+<li>1 - b = 10 - b，即2减去b。 如果要计算-1的补码，则为</li>
+</ul>
 <p>1111 1111 - 1000 0001 + 0000 0001 = 0111 1110 + 0000 0001 = 0111 1111</p>
-
 <p>!!这种方法，减法转换成加法，计算结果最高位的进位直接忽略，不需要加到低位</p>
-
 <ul>
 <li>溢出标志：相加过程中最高位产生的进位和次高位产生的进位如果相同则没有溢出，</li>
 </ul>
-
 <p>不同则溢出。</p>
-
 <h2 id="浮点数">浮点数</h2>
-
 <ul>
 <li>科学计数法：scientific notation</li>
 <li>尾数：mantissa或significand</li>
 <li>科学计数法基数(radix)是10,而浮点数的是2</li>
 <li>大致的模型如下：</li>
 </ul>
-
-<hr />
-
+<hr>
 <p>符号位   指数部分   尾数部分</p>
-
-<hr />
-
+<hr>
 <ul>
 <li>但是不能表示负数，于是有人想出来了一种偏移指数(biased
 exponent)的方法，</li>
 </ul>
-
 <p>规定一个偏移值，比如127,实际的指数要加上这个偏移值再填到指数部分，这样比
 127大的就表示正指数，比127小的就表示负指数。</p>
-
 <ul>
-<li>还有一个问题，浮点数的表示不唯一，9 = (0.1001) * 2 \^
+<li>还有一个问题，浮点数的表示不唯一，9 = (0.1001) * 2 ^
 4，还可以表示为：</li>
 </ul>
-
-<p>9 = (0.01001) * 2 \^
+<p>9 = (0.01001) * 2 ^
 5，为了解决这个问题，我们需要制定一个标准，规定最高位
 必须为1,也就是尾数必须是以0.1开头，这叫正规化(normalize)。由于尾数部分第一
 位必须是1,所以这个1就不用保存了，可以节省一位来提高精度。</p>
-
 <h1 id="数据类型详解">数据类型详解</h1>
-
 <ul>
 <li>ILP32和LP64规范</li>
 </ul>
-
 <p>type        ILP32   LP64</p>
-
-<hr />
-
+<hr>
 <p>char        8       8
-  short       16      16
-  int         32      32
-  long        32      64
-  long long   64      64
-  pointer     32      64</p>
-
+short       16      16
+int         32      32
+long        32      64
+long long   64      64
+pointer     32      64</p>
 <p>其中ILP32表示int,long,pointer是32位的。</p>
-
 <ul>
 <li>有的处理器有浮点运算单元（FPU, floating point
 unit），称为硬浮点(hard-float)，</li>
 </ul>
-
 <p>有的没有，用整数来模拟浮点运算，称为软浮点(soft-float)。</p>
-
 <ul>
 <li>float一般是32位，double一般是64位。</li>
 <li>而long
 double,在x86上，大部分编译器实现的为80位，因为x86的FPU是80位精度的。而</li>
 </ul>
-
 <p>gcc实现的是96位，还有的编译器实现的和double的一样，也有更高精度的，比如IBM的powerpc
 上的为128位。</p>
-
 <ul>
 <li>如果一个函数的形参类型未知，或者使用了不定参数&hellip;，那么调用的时候要对实参做integer</li>
 </ul>
-
 <p>promotion,另外，float要提升为double,这叫default argument
 promotion，例如：</p>
-
-<pre><code class="language-.c">char c = 'a';
+<pre><code class="language-{.c}" data-lang="{.c}">char c = 'a';
 printf(&quot;%c&quot;, c);
-</code></pre>
-
-<p>c要被提升为int型。</p>
-
+</code></pre><p>c要被提升为int型。</p>
 <ul>
 <li>signed或unsigned的char,
 short和bit-field在做算术运算之前要先提升为int，因为</li>
 </ul>
-
 <p>怕溢出。</p>
-
 <ul>
 <li>usual arithmetic conversion：</li>
 </ul>
-
 <ol>
 <li>if 有long double，则要转化成long double</li>
 <li>else if 有double，则要转化成double</li>
@@ -364,121 +311,83 @@ short和bit-field在做算术运算之前要先提升为int，因为</li>
 <li>else if 有int,则要转化成int</li>
 <li>对于有符号数和无符号数，则要转化成存储位数大的那个操作数的类型。</li>
 </ol>
-
 <h1 id="运算符详解">运算符详解</h1>
-
 <ul>
 <li>当操作数是有符号负数时，执行右移运算，高位补1还是0是不确定的，这是</li>
 </ul>
-
 <p>implementation-defined的，不同编译器有不同的实现。对于x86的gcc， 补1。</p>
-
 <ul>
 <li>最好只对无符号数做移位运算，防止出错。</li>
 <li>序列点(sequence point)的概念。</li>
 </ul>
-
 <p>C标准中规定某些点是序列点，当执行到这个点时，在此之前的副作用必须全部
 作用完毕，在此之后的副作用必须都没发生。</p>
-
 <ol>
 <li>调用一个函数时，在所有准备工作做完之后，函数调用开始之前是序列点。</li>
 </ol>
-
 <p>比如调用一个函数</p>
-
-<pre><code class="language-.c">sort(arr, get_len(arr), is_sorted(arr));
-</code></pre>
-
-<p>get_len和is_sorted哪个先执行是不确定的，但是必须它们都完成之后才调用sort函数。</p>
-
+<pre><code class="language-{.c}" data-lang="{.c}">sort(arr, get_len(arr), is_sorted(arr));
+</code></pre><p>get_len和is_sorted哪个先执行是不确定的，但是必须它们都完成之后才调用sort函数。</p>
 <ol>
 <li>? :和,和&amp;&amp;和||的第一个操作数求值之后是序列点</li>
 <li>一个完整的定义末尾是序列点。如：</li>
 </ol>
-
-<pre><code class="language-.example">int name,age;
-</code></pre>
-
-<p>name后面是序列点，age后面也是。</p>
-
+<pre><code class="language-{.example}" data-lang="{.example}">int name,age;
+</code></pre><p>name后面是序列点，age后面也是。</p>
 <h1 id="计算机体系结构基础">计算机体系结构基础</h1>
-
 <h2 id="内存">内存</h2>
-
 <ul>
 <li>一个内存地址对应的内存单元只能存一个字节。</li>
 <li>如果一个整数占用了4个字节，则这个数据是占用了连续的多个地址，这种情况下数据</li>
 </ul>
-
 <p>的地址为它所占内存单元的起始地址。</p>
-
 <ul>
 <li>指令译码器(instruction
 decoder)的作用在于解释CPU获取的指令的含义，执行</li>
 </ul>
-
 <p>相应操作。因为CPU获取到的指令由很多个字节组成，有的位表示内存地址，有的位表示
 寄存器编号，有的表示做什么操作。</p>
-
 <h2 id="设备">设备</h2>
-
 <ul>
 <li>有的设备像内存一样接到CPU的地址总线和数据总线上。设备中可供读写访问的单元通常</li>
 </ul>
-
 <p>称为设备寄存器，操作设备的过程就是读写这些设备寄存器的过程，比如向串口发送寄存器
 里写数据，串口设备就会把数据发送出去，读串口接收寄存器的值，就可以读取串口设备
 接收到的数据。</p>
-
 <ul>
 <li>有的设备集成在CPU里面，一些体系结构（如ARM），访问设备像访问内存一样，这种称为</li>
 </ul>
-
 <p>内存映射I/O。但是x86比较特殊，它对于设备有独立的端口地址空间，需要引出额外的地址
 线来连接CPU里面的设备，访问设备寄存器的时候使用特殊的in/out指令，这种称为端口I/O</p>
-
 <ul>
 <li>在x86上，硬盘是挂载在IDE，SATA或SCSI总线上的设备。</li>
 <li>每个设备都有一条中断线，通过中断控制器连接到CPU。</li>
 <li>事实上linux内核的绝大部分源码是设备驱动程序。设备驱动程序通常是内核里的一组</li>
 </ul>
-
 <p>函数，通过读写设备寄存器实现对设备的初始化，读和写等操作，有的设备还要提供一个
 中断处理函数。</p>
-
 <h2 id="mmu">MMU</h2>
-
 <ul>
 <li>如果CPU里面没有MMU，则不能使用虚拟内存机制</li>
 <li>异常的处理过程和中断类似，但是，中断是由外部设备产生的，而异常是由CPU内部</li>
 </ul>
-
 <p>产生的，中断产生的原因和CPU当前执行的指令无关，而异常的产生就是因为CPU当前
 执行的指令出了问题，例如除0操作。</p>
-
 <h2 id="存储设备">存储设备</h2>
-
 <ul>
 <li>cache是位于CPU里面的，cache一般使用的是SRAM，而内存一般使用的是DRAM，</li>
 </ul>
-
 <p>可以推测，DRAM电器比SRAM简单，容量大，但是速度慢。</p>
-
 <ul>
 <li>一级cache是用虚拟内存地址来寻址的，而二级cache则是用物理内存来寻址的。</li>
 <li>硬盘位于设备总线上，并不直接和CPU相连，CPU通过设备总线的控制器访问硬盘。</li>
 </ul>
-
 <h1 id="汇编基础">汇编基础</h1>
-
 <h2 id="最简单的汇编程序">最简单的汇编程序</h2>
-
 <ul>
 <li>代码simple.s</li>
 </ul>
-
-<pre><code class="language-.example">.section .data
+<pre><code class="language-{.example}" data-lang="{.example}">.section .data
 .section .text
 .globl _start
 _start:
@@ -486,83 +395,56 @@ _start:
         movl $4, %ebx
 
         int $0x80
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>先要使用下面的命令用汇编器as把汇编指令翻译成机器指令，生成simple.o</li>
 </ul>
-
-<pre><code class="language-.bash">as simple.s -o simple.o
-</code></pre>
-
-<p>再用链接器ld把simple.o链接成可执行文件simple</p>
-
-<pre><code class="language-.bash">ld simple.o -o simple
-</code></pre>
-
-<ul>
+<pre><code class="language-{.bash}" data-lang="{.bash}">as simple.s -o simple.o
+</code></pre><p>再用链接器ld把simple.o链接成可执行文件simple</p>
+<pre><code class="language-{.bash}" data-lang="{.bash}">ld simple.o -o simple
+</code></pre><ul>
 <li>执行这个程序，它的作用就是退出，退出状态是4,相当于C语言中的return 4;</li>
 </ul>
-
 <p>可以看到执行结果：</p>
-
-<pre><code class="language-.example">[monkey@itlodge asm]$ ./simple 
+<pre><code class="language-{.example}" data-lang="{.example}">[monkey@itlodge asm]$ ./simple 
 [monkey@itlodge asm]$ echo $?
 4
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>.section用于分段（数据段，代码段什么的），这里没有用到全局变量，所以数据段</li>
 </ul>
-
 <p>是空的。.text是代码段，后面的代码都是这个段里面的。</p>
-
 <ul>
 <li>.globl告诉汇编器，_start这个符号要被链接器用到，所以要标记它是一个全局符号，</li>
 </ul>
-
 <p>就相当于main函数一样，是一个程序的入口，</p>
-
 <ul>
 <li>movl是一条数据传送指令，mov的后缀l表示long，说明是32位的传送指令。</li>
-<li>\$1代表立即数，立即数前面要加\$，寄存器名前面要加%</li>
+<li>$1代表立即数，立即数前面要加$，寄存器名前面要加%</li>
 <li>为什么要赋一个1而不是其它立即数呢，因为_exit()系统调用的系统调用号为1</li>
 <li>mov指令第一个操作数是源操作数，第二个是目标操作数，和windows上的汇编不一样。</li>
 <li>eax寄存器保存的是系统调用号，ebx保存的是返回状态</li>
 <li>int指令是软中断指令，用来故意产生一个异常，立即数0x80是一个参数，在linux中，</li>
 </ul>
-
 <p>这个参数表示系统调用。</p>
-
 <ul>
 <li>x86汇编有两种语法:intel语法和AT&amp;T语法，windows使用intel语法，而类Unix</li>
 </ul>
-
 <p>系统都使用AT&amp;T语法。</p>
-
 <h2 id="寄存器">寄存器</h2>
-
 <ul>
 <li>x86的通用寄存器有eax, ebx, ecx, edx, edi,
 esi，大部分是可以任意选用的，</li>
 </ul>
-
 <p>但是有的指令规定某个寄存器只能用于某种用途，比如除法指令idivl要求被除数必须在
 eax中，edx必须为0,而除法可以任意选用，商必须保存在eax中，余数保存在edx中。</p>
-
 <ul>
 <li>x86的特殊寄存器有ebp, esp, eip, eflags.eip是程序计数器，eflags保存着</li>
 </ul>
-
 <p>计算过程中产生的标志位，ebp和esp用于维护函数调用的栈帧。</p>
-
 <ul>
 <li>求最大值的汇编程序</li>
 </ul>
-
 <p>代码biggest.s</p>
-
-<pre><code class="language-.example"># find the maximum number
+<pre><code class="language-{.example}" data-lang="{.example}"># find the maximum number
 
 .section .data
 data_items:
@@ -589,48 +471,32 @@ loop:
 exit:
         movl $1, %eax
         int $0x80
-</code></pre>
-
-<p>编译运行结果：</p>
-
-<pre><code class="language-.bash">[monkey@itlodge asm]$ as biggest.s -o biggest.o
+</code></pre><p>编译运行结果：</p>
+<pre><code class="language-{.bash}" data-lang="{.bash}">[monkey@itlodge asm]$ as biggest.s -o biggest.o
 [monkey@itlodge asm]$ ld biggest.o -o biggest
 [monkey@itlodge asm]$ ./biggest 
 [monkey@itlodge asm]$ echo $?
 9
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>data_items相当于数组</li>
 <li>.long表示定义的数占32位，没有用.globl，说明这个数组只在本文件内使用。</li>
 <li>.byte占8位，.ascii取值为相应字符的ASCII码</li>
 <li>edi保存的是数组当前的下标，eax是当前的值，ebx是最大值，所以最后返回</li>
 </ul>
-
 <p>状态的是最大值。</p>
-
 <ul>
 <li>data_items(, %edi, 4)是一种地址表示形式。</li>
 </ul>
-
 <h2 id="寻址方式">寻址方式</h2>
-
 <ul>
 <li>通用格式为：</li>
 </ul>
-
-<pre><code class="language-.example">address_or_offset(%base_or_offset, %index, multiplier)
-</code></pre>
-
-<p>这种格式表示的地址是这样计算的：</p>
-
-<pre><code class="language-.example">address = address_or_offset + base_or_offset + multiplier * index
-</code></pre>
-
-<p>其中address_or_offset,
+<pre><code class="language-{.example}" data-lang="{.example}">address_or_offset(%base_or_offset, %index, multiplier)
+</code></pre><p>这种格式表示的地址是这样计算的：</p>
+<pre><code class="language-{.example}" data-lang="{.example}">address = address_or_offset + base_or_offset + multiplier * index
+</code></pre><p>其中address_or_offset,
 multiplier必须是常数，base_or_offset,index必须是寄存器。
 省略这些项，表示它们是0</p>
-
 <ul>
 <li>直接寻址(direct addressing mode),只使用address_or_offset</li>
 <li>变址寻址(indexed addressing mode)，前面的data_items就是这种</li>
@@ -639,40 +505,31 @@ multiplier必须是常数，base_or_offset,index必须是寄存器。
 <li>基址寻址(base pointer addressing
 mode)，使用address_or_offset和base_or_offset</li>
 </ul>
-
 <p>寻址，如movl 4(%eax), %ebx</p>
-
 <ul>
 <li>立即数寻址(immediate addressing mode)</li>
 <li>寄存器寻址(register addressing mode)</li>
 </ul>
-
 <h2 id="elf文件">ELF文件</h2>
-
 <ul>
 <li>ELF格式是很多类UNIX系统都采用的文件格式，它有三种类型
-
 <ul>
 <li>可重定位的目标文件(relocatable or object file)</li>
 <li>可执行文件(executable file)</li>
 <li>共享库(shared object or shared library)，libc.so之类的</li>
-</ul></li>
+</ul>
+</li>
 <li>readelf工具可以查看.o文件和可执行文件</li>
 <li>hexdump工具可以打印出来ELF文件的十六进制表示和ASCII码表示</li>
 <li>objdump工具可以把机器指令反汇编</li>
 </ul>
-
 <h1 id="汇编与c的关系">汇编与C的关系</h1>
-
 <h2 id="常识">常识</h2>
-
 <ul>
 <li>要查看编译后的汇编代码，给gcc加上-S参数，这样只生成汇编文件而不产生可执行文件</li>
 </ul>
-
 <p>比如下面的一个C程序：</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 
 int main(int argc, char *argv[])
 {
@@ -680,11 +537,8 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-</code></pre>
-
-<p>通过编译之后，产生的汇编文件如下：</p>
-
-<pre><code class="language-.example">    .file   &quot;t.c&quot;
+</code></pre><p>通过编译之后，产生的汇编文件如下：</p>
+<pre><code class="language-{.example}" data-lang="{.example}">    .file   &quot;t.c&quot;
     .section    .rodata
 .LC0:
     .string &quot;yuanhang&quot;
@@ -713,15 +567,11 @@ main:
     .size   main, .-main
     .ident  &quot;GCC: (GNU) 4.7.2&quot;
     .section    .note.GNU-stack,&quot;&quot;,@progbits
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>如果在编译的时候加上-g参数，则在使用objdump工具反汇编时，可以看到C代码，还是</li>
 </ul>
-
 <p>刚刚那个程序：</p>
-
-<pre><code class="language-.example">[monkey@itlodge test]$ gcc -g t.c
+<pre><code class="language-{.example}" data-lang="{.example}">[monkey@itlodge test]$ gcc -g t.c
 [monkey@itlodge test]$ objdump -dS a.out &gt; t.txt
 ...
 00000000004004fc &lt;main&gt;:
@@ -745,33 +595,23 @@ int main(int argc, char *argv[])
   40051b:   c3                      retq   
   40051c:   0f 1f 40 00             nopl   0x0(%rax)
 ...
-</code></pre>
-
-<p>只复制了部分结果</p>
-
+</code></pre><p>只复制了部分结果</p>
 <ul>
 <li>gdb命令diassemble可以反汇编当前函数或指定函数</li>
-<li>gdb中表示寄存器要在前面加\$</li>
+<li>gdb中表示寄存器要在前面加$</li>
 <li>gcc的一条命令：</li>
 </ul>
-
-<pre><code class="language-.bash">gcc t.c -o t
-</code></pre>
-
-<p>可以分解为下面3条：</p>
-
-<pre><code class="language-.bash">gcc -S t.c
+<pre><code class="language-{.bash}" data-lang="{.bash}">gcc t.c -o t
+</code></pre><p>可以分解为下面3条：</p>
+<pre><code class="language-{.bash}" data-lang="{.bash}">gcc -S t.c
 gcc -c t.s
 gcc t.o -o t
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>可以用nm工具查看ELF文件的符号表</li>
 <li>返回状态被shell解释为无符号数，如果return -1，则会变成255</li>
 <li>看一个有关位域的例子：</li>
 </ul>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 
 typedef unsigned int uint;
 
@@ -805,27 +645,19 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-</code></pre>
-
-<p>运行结果为：</p>
-
-<pre><code class="language-.example">[monkey@itlodge test]$ ./t
+</code></pre><p>运行结果为：</p>
+<pre><code class="language-{.example}" data-lang="{.example}">[monkey@itlodge test]$ ./t
 size of demo:8
 values:1 5 513 17 129 24
 1b 60 24 10 18 0 0 0 
-</code></pre>
-
-<p>我们知道，byte数组和bitfield是共用存储空间的，所以可见bit-field的内存布局为：
+</code></pre><p>我们知道，byte数组和bitfield是共用存储空间的，所以可见bit-field的内存布局为：
 0000 0001 1000 0001 0000 0010 0100 0110 0000 0001 1011 高地址 6组全0
 低地址</p>
-
 <ul>
 <li>习题：写一个程序，判断平台是小端规则还是大端规则。</li>
 </ul>
-
 <p>有了前面的例子的启发，我写了下面程序来验证：</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 
 union test {
     int num;
@@ -846,24 +678,17 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-</code></pre>
-
-<h2 id="c内联汇编">C内联汇编</h2>
-
+</code></pre><h2 id="c内联汇编">C内联汇编</h2>
 <p>有的相关平台的指令必须要手写汇编，因为C语言中没有等价的概念，比如x86的端口I/O
 使用__asm__(&ldquo;assembly code&rdquo;);来插入汇编语句，多条语句用\n\t分开
 完整的内联汇编格式为：</p>
-
-<pre><code class="language-.example">__asm__(assembly template
+<pre><code class="language-{.example}" data-lang="{.example}">__asm__(assembly template
         : output operands
         : input operands
         : list of clobbered registers
 );
-</code></pre>
-
-<p>除了assembly template，其它的都是可选的 看下面的例子：</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+</code></pre><p>除了assembly template，其它的都是可选的 看下面的例子：</p>
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 
 int main(int argc, char *argv[])
 {
@@ -879,73 +704,50 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-</code></pre>
-
-<p>其中，为了区分%1这种占位符，eax前面要加两个%号。
+</code></pre><p>其中，为了区分%1这种占位符，eax前面要加两个%号。
 这里%0代表的是变量a,%1代表的是变量b，这两条movl指令其实就是把变量b的值
 先放到一个寄存器eax里面，然后再把eax里面的值放到变量a里面。
-&ldquo;r&rdquo;(b)表示分配一个寄存器保存变量b的值，而&rdquo;=r&rdquo;(a)表示把寄存器的值输出到
-变量a中，最后一个&rdquo;%eax&rdquo;告诉编译器在这期间eax要被改写，不要让eax寄存器
+&ldquo;r&rdquo;(b)表示分配一个寄存器保存变量b的值，而&quot;=r&rdquo;(a)表示把寄存器的值输出到
+变量a中，最后一个&rdquo;%eax&quot;告诉编译器在这期间eax要被改写，不要让eax寄存器
 保存其它值</p>
-
 <h2 id="volatile限定符">volatile限定符</h2>
-
 <ul>
 <li>gcc的编译优化选项有-00, -0, -01, -02, -03, -0s</li>
 </ul>
-
 <p>其中-00表示不优化，这是默认的选项，后面的1-3一个比一个优化得多，编译
 时间更长，-0s是为了缩小目标文件的尺寸而优化的。</p>
-
 <h1 id="链接详解">链接详解</h1>
-
 <h2 id="链接库">链接库</h2>
-
 <ul>
 <li>gcc使用下面的方式链接多个文件：</li>
 </ul>
-
-<pre><code class="language-.example">gcc file1.c file2.c -o file
-</code></pre>
-
-<p>也可以这样：</p>
-
-<pre><code class="language-.example">gcc -c file1.c
+<pre><code class="language-{.example}" data-lang="{.example}">gcc file1.c file2.c -o file
+</code></pre><p>也可以这样：</p>
+<pre><code class="language-{.example}" data-lang="{.example}">gcc -c file1.c
 gcc -c file2.c
 gcc file1.o file2.o -o file
-</code></pre>
-
-<p>gcc链接的作用其实是把一些段合并到同一个segment中，还要插入一些符号到生成的
+</code></pre><p>gcc链接的作用其实是把一些段合并到同一个segment中，还要插入一些符号到生成的
 脚本中，如果不使用-T选项指定脚本，默认使用ld作为链接脚本。</p>
-
 <ul>
 <li>使用ar工具打包静态库，静态库都是以.a作为后缀，表示archive，如：</li>
 </ul>
-
 <p>我现在有3个文件， t.h</p>
-
-<pre><code class="language-.c">#ifndef _T_H_
+<pre><code class="language-{.c}" data-lang="{.c}">#ifndef _T_H_
 #define _T_H_
 
 void hello(void);
 
 #endif /* _T_H_ */
-</code></pre>
-
-<p>t.c</p>
-
-<pre><code class="language-.c">#include &lt;stdio.h&gt;
+</code></pre><p>t.c</p>
+<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
 #include &quot;t.h&quot;
 
 void hello(void)
 {
     printf(&quot;hello\n&quot;);
 }
-</code></pre>
-
-<p>main.c</p>
-
-<pre><code class="language-.c">#include &quot;t.h&quot;
+</code></pre><p>main.c</p>
+<pre><code class="language-{.c}" data-lang="{.c}">#include &quot;t.h&quot;
 
 int main(int argc, char *argv[])
 {
@@ -953,315 +755,220 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-</code></pre>
-
-<p>先编译成目标文件：</p>
-
-<pre><code class="language-.bash">gcc -c t.c
-</code></pre>
-
-<p>这时会生成和t.o 现在打包成一个静态库libt.a</p>
-
-<pre><code class="language-.bash">ar rs libt.a t.o
-</code></pre>
-
-<p>这时会生成libt.a
+</code></pre><p>先编译成目标文件：</p>
+<pre><code class="language-{.bash}" data-lang="{.bash}">gcc -c t.c
+</code></pre><p>这时会生成和t.o 现在打包成一个静态库libt.a</p>
+<pre><code class="language-{.bash}" data-lang="{.bash}">ar rs libt.a t.o
+</code></pre><p>这时会生成libt.a
 Note:r表示将后面的文件列表添加到文件包，s用于为静态库建立索引(ranlib有同样功能)
 现在把libt.a和main.c编译</p>
-
-<pre><code class="language-.bash">gcc main.c -L. -lt -I. -o main
-</code></pre>
-
-<p>这里，-L.表示在当前目录(.)找库文件，-lt表示使用libt文件，-I.表示在当前目录找头
+<pre><code class="language-{.bash}" data-lang="{.bash}">gcc main.c -L. -lt -I. -o main
+</code></pre><p>这里，-L.表示在当前目录(.)找库文件，-lt表示使用libt文件，-I.表示在当前目录找头
 文件。</p>
-
 <h2 id="共享库">共享库</h2>
-
 <ul>
 <li>共享库只是指定了动态链接器和所需要的库文件，并没有真正做链接，只在运行时做动态</li>
 </ul>
-
 <p>链接，而静态库是真正链接起来的。</p>
-
 <ul>
 <li>组成共享库的目标文件要在编译的时候加上-fPIC选项，-f表示后面要加选项，FIC是其中</li>
 </ul>
-
 <p>一种，表示生成位置无关代码(position independent
 code)，生成的共享库，各段的 加载地址并不是绝对地址，可以加载到任意位置。</p>
-
 <ul>
 <li>使用-shared参数生成共享库，一般以.so结尾。</li>
 <li>共享库路径的搜索顺序：</li>
 </ul>
-
 <ol>
 <li>首先在环境变量LD_LIBRARY_PATH中查找</li>
 <li>从缓存文件/etc/ld.so.cache中查找，这个文件是由ldconfig工具读取</li>
 </ol>
-
 <p>/etc/ld.so.conf后生成的。</p>
-
 <ol>
 <li>从默认的系统路径中找(/usr/lib,/lib)</li>
 </ol>
-
 <ul>
 <li>当需要加上某个共享库文件时，先要把这个文件的绝对路径加到/etc/ld.so.conf文件中，</li>
 </ul>
-
 <p>再使用ldconfig工具更新缓存文件，这时就能使用了。</p>
-
 <ul>
 <li>还有一种方法，把这个文件拷贝到/usr/lib或/lib中，让它能找到并使用</li>
 <li>共享库的命名惯例</li>
 </ul>
-
 <p>每个共享库有3个文件名，real name, soname, linker name real
 name包含完整的版本号，如libzip.so.2.1.0
 soname是一个符号链接，包含了主版本号，如libzip.so.2。主版本号一致即可保证库函数
 的接口一致。 linker name只在编译链接的时候使用，有的linker
 name是库文件的符号链接，有的是 一个链接脚本。</p>
-
 <h1 id="预处理">预处理</h1>
-
 <ul>
 <li>转义字符的替换是在预处理阶段完成的</li>
 <li>#用于给两边加上双引号，##用于连接参数或字符串</li>
 <li>书上举了下面这个例子：</li>
 </ul>
-
-<pre><code class="language-.example">#define VERSION 2
+<pre><code class="language-{.example}" data-lang="{.example}">#define VERSION 2
 #if defined x || y || VERSION &lt; 3
-</code></pre>
-
-<p>先把VERSION定义为2,再看defined
+</code></pre><p>先把VERSION定义为2,再看defined
 x，x没有定义，所以替换为0（如果有定义则为1）， 变成了： #if 0 || y ||
 VERSION &lt; 3 然后把VERSION展开，变成了： #if 0 || y || 2 &lt; 3
 再把没有定义的变成0,于是： #if 0 || 0 || 2 &lt; 3 最后变成了： #if 1</p>
-
 <ul>
 <li>几个特殊的宏</li>
 </ul>
-
 <ol>
 <li>_~FILE~_~展开为当前文件的名字~</li>
 <li>_~LINE~_~展开为当前代码行的行号~。</li>
 <li>_~func~_~展开为当前函数名~</li>
 </ol>
-
 <h1 id="makefile基础">Makefile基础</h1>
-
 <h2 id="基本规则">基本规则</h2>
-
 <ul>
 <li>Makefile由一组rule组成，每条规则的格式为：</li>
 </ul>
-
 <p>target &hellip; : prerequisites &hellip; command1 command2 &hellip;</p>
-
 <p>注意，每条命令必须以一个tab开头,不能是空格
 每条命令，都会创建一个shell进程来执行 看下面的例子：</p>
-
-<pre><code class="language-.example">main : main.o stack.o
+<pre><code class="language-{.example}" data-lang="{.example}">main : main.o stack.o
         gcc main.o stack.o -o main
 main.o : main.c main.h stack.h
         gcc -c main.c
 stack.o : stack.c stack.h
         gcc -c stack.c
-</code></pre>
-
-<p>Makefile先要执行目标main，发现main.o stack.o需要更新，于是去执行main.o，
+</code></pre><p>Makefile先要执行目标main，发现main.o stack.o需要更新，于是去执行main.o，
 于是执行目录main.o，再执行目标stack.o，最后执行main</p>
-
 <ul>
 <li>在命令前加@，不显示命令本身，只显示它的结果，如：</li>
 </ul>
-
-<pre><code class="language-.example">@echo &quot;cleaning project&quot;
-</code></pre>
-
-<ul>
+<pre><code class="language-{.example}" data-lang="{.example}">@echo &quot;cleaning project&quot;
+</code></pre><ul>
 <li>在命令前面加-号，即使命令出错，也会继续执行后续命令，通常rm和mkdir命令前面</li>
 </ul>
-
 <p>要加-号，因为rm删除的文件或目录可能不存在，mkdir要创建的目录可能已经存在。</p>
-
 <ul>
 <li>如果有一个目标clean，而恰好又有clean这个文件，make就认为它不需要更新，这个</li>
 </ul>
-
 <p>时候就要添加一条特殊规则，把clean声明为一个伪目录：</p>
-
-<pre><code class="language-.example">clean:
+<pre><code class="language-{.example}" data-lang="{.example}">clean:
         @echo &quot;clean&quot;
         -rm *.o
 .PHONY: clean
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>一些约定的目标名字
-
 <ul>
 <li>all，执行主要的编译工作，通常为缺省目标</li>
 <li>install，安装，把可执行文件，配置文件，文档等拷到不同的目录下</li>
 <li>clean，清理二进制文件</li>
 <li>distclean，不仅删除二进制文件，也删除其它生成的文件（如文档）</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h2 id="隐含规则和模式规则">隐含规则和模式规则</h2>
-
 <ul>
 <li>一个目标依赖的条件不一定写在一条规则上，可以分开写：</li>
 </ul>
-
-<pre><code class="language-.example">main.o main.h stack.h
+<pre><code class="language-{.example}" data-lang="{.example}">main.o main.h stack.h
 main.o main.c
         gcc -c main.c
-</code></pre>
-
-<p>注意，其中只有一条规则允许有命令列表，其它规则不能有命令列表，否则会报警并采用
+</code></pre><p>注意，其中只有一条规则允许有命令列表，其它规则不能有命令列表，否则会报警并采用
 最后一条规则的命令列表</p>
-
 <ul>
 <li>隐含规则数据库可以用make -p打印出来，比如可以看到：</li>
 </ul>
-
-<pre><code class="language-.example">CC = cc
-</code></pre>
-
-<p>cc在/usr/bin中，可以看到它是符号链接，指向gcc</p>
-
+<pre><code class="language-{.example}" data-lang="{.example}">CC = cc
+</code></pre><p>cc在/usr/bin中，可以看到它是符号链接，指向gcc</p>
 <ul>
-<li>\$@取值为规则中的目标，\$&lt;取值为规则中的第一个条件。</li>
+<li>$@取值为规则中的目标，$&lt;取值为规则中的第一个条件。</li>
 <li>%.o: %.c是一种模式规则，看下面：</li>
 </ul>
-
-<pre><code class="language-.example">main: main.o stack.o
+<pre><code class="language-{.example}" data-lang="{.example}">main: main.o stack.o
         gcc main.o stack.o -o main
 main.o: main.h stack.h
 stack.o: stack.h
-</code></pre>
-
-<p>上面的例子没有给出main.o的命令列表，这时它会查找隐含规则，发现隐含规则中有
+</code></pre><p>上面的例子没有给出main.o的命令列表，这时它会查找隐含规则，发现隐含规则中有
 %.o: %.c这样一条模式规则可用，于是就加上了：</p>
-
-<pre><code class="language-.example">main.o: main.c
+<pre><code class="language-{.example}" data-lang="{.example}">main.o: main.c
         cc -c -o main.o main.c
-</code></pre>
-
-<p>同理，stack.o也是一样。</p>
-
+</code></pre><p>同理，stack.o也是一样。</p>
 <h2 id="变量">变量</h2>
-
 <ul>
 <li>变量的值可以推迟到后面定义，如：</li>
 </ul>
-
-<pre><code class="language-.example">a = $(b)
+<pre><code class="language-{.example}" data-lang="{.example}">a = $(b)
 b = ccc
 
 all:
         @echo $(a)
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>通常将CFLAGS定义成一些编译选项，如-g
 -lm等，把CPPFLAGS定义成预处理选项。</li>
 <li>如果希望在遇到变量定义的时候立即展开，则用:=号，如：</li>
 </ul>
-
-<pre><code class="language-.example">b := ccc
+<pre><code class="language-{.example}" data-lang="{.example}">b := ccc
 a := $(b)
 all:
         @echo $(a)
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>对于?=号，如：</li>
 </ul>
-
-<pre><code class="language-.example">a ?= $(b)
-</code></pre>
-
-<p>如果a没有定义过，那么?=相当于=，如果定义过，则什么也不做</p>
-
+<pre><code class="language-{.example}" data-lang="{.example}">a ?= $(b)
+</code></pre><p>如果a没有定义过，那么?=相当于=，如果定义过，则什么也不做</p>
 <ul>
 <li>对于+=号，是用于给变量追加值，如：</li>
 </ul>
-
-<pre><code class="language-.example">objs = main.o
+<pre><code class="language-{.example}" data-lang="{.example}">objs = main.o
 objs += stack.o
-</code></pre>
-
-<p>则objs最后变成了main.o stack.o，它会自动在前面加一个空格
+</code></pre><p>则objs最后变成了main.o stack.o，它会自动在前面加一个空格
 如果变量还没定义过就用+=，则它相当于=</p>
-
 <ul>
 <li>常用的特殊变量：
-
 <ul>
-<li>\$@，目标</li>
-<li>\$&lt;，第一个条件</li>
-<li>\$?，所有比目标新的条件，组成一个列表，以空格分开</li>
-<li>\$\^，所有条件</li>
-</ul></li>
+<li>$@，目标</li>
+<li>$&lt;，第一个条件</li>
+<li>$?，所有比目标新的条件，组成一个列表，以空格分开</li>
+<li>$^，所有条件</li>
 </ul>
-
+</li>
+</ul>
 <p>如：</p>
-
-<pre><code class="language-.example">main: main.o stack.o maze.o
+<pre><code class="language-{.example}" data-lang="{.example}">main: main.o stack.o maze.o
       gcc $^ -o $@
-</code></pre>
-
-<p>这样即使修改了目标的名字或者添加了条件，下面的命令也不需要修改
-对于\$?变量，看下面的例子：</p>
-
-<pre><code class="language-.example">libstack.a: main.o stack.o
+</code></pre><p>这样即使修改了目标的名字或者添加了条件，下面的命令也不需要修改
+对于$?变量，看下面的例子：</p>
+<pre><code class="language-{.example}" data-lang="{.example}">libstack.a: main.o stack.o
         ar rs libstack.a $?
-</code></pre>
-
-<p>这样，只对更新过的条件进行操作，没更新过的目标文件已经打包好了</p>
-
+</code></pre><p>这样，只对更新过的条件进行操作，没更新过的目标文件已经打包好了</p>
 <ul>
 <li>一些常用的隐含变量：</li>
 </ul>
-
 <p>name             description                 default value</p>
-
-<hr />
-
+<hr>
 <p>AR               static library archives     ar
-  ARFLAGS          static library options      rv
-  AS               assembly compiler           as
-  ASFLAGS          assembly compiler options   null
-  CC               c compiler                  cc
-  CFLAGS           c compiler options          null
-  CXX              c++ compiler                g++
-  CXXFLAGS         c++ compiler options        null
-  CPP              c preprocessor              \$(CC) -E
-  CPPFLAGS         c preprocessor optios       null
-  LD               linker                      ld
-  LDFLAGS          linker options              null
-  TARGET_ARCH     target dependent options    null
-  OUTPUT_OPTION   output                      -o \$@
-  LINK.o           link all .o files           \$(CC) \$(LDFLAGS) \$(TARGET_ARCH)
-  LINK.c           link all .c files           \$(CC) \$(CFLAGS) \$(CPPFLAGS) \$(LDFLAGS) \$(TARGET_ARCH)
-  LINK.cc          link all c++ files          \$(CXX) \$(CXXFLAGS) \$(CPPFLAGS) \$(LDFLAGS) \$(TARGET_ARCH)
-  COMPILER.c       compile .c files            \$(CC) \$(CFLAGS) \$(CPPFLAGS) \$(TARGET_ARCH) -c
-  COMPILER.cc      compile cpp files           \$(CXX) \$(CXXFLAGS) \$(CPPFLAGS) \$(TARGET_ARCH)
-  RM               remove                      rm -f</p>
-
+ARFLAGS          static library options      rv
+AS               assembly compiler           as
+ASFLAGS          assembly compiler options   null
+CC               c compiler                  cc
+CFLAGS           c compiler options          null
+CXX              c++ compiler                g++
+CXXFLAGS         c++ compiler options        null
+CPP              c preprocessor              $(CC) -E
+CPPFLAGS         c preprocessor optios       null
+LD               linker                      ld
+LDFLAGS          linker options              null
+TARGET_ARCH     target dependent options    null
+OUTPUT_OPTION   output                      -o $@
+LINK.o           link all .o files           $(CC) $(LDFLAGS) $(TARGET_ARCH)
+LINK.c           link all .c files           $(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+LINK.cc          link all c++ files          $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+COMPILER.c       compile .c files            $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+COMPILER.cc      compile cpp files           $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH)
+RM               remove                      rm -f</p>
 <h2 id="自动处理头文件的依赖关系">自动处理头文件的依赖关系</h2>
-
 <ul>
 <li>使用gcc的-M参数可以自动生成目标文件和源文件的依赖关系</li>
 <li>如果不需要系统的头文件关系，则使用-MM参数</li>
 <li>make的官方手册建议的写法是这样的：</li>
 </ul>
-
-<pre><code class="language-.example">all: main
+<pre><code class="language-{.example}" data-lang="{.example}">all: main
 main: main.o stack.o
         gcc $^ -o $@
 clean:
@@ -1275,48 +982,34 @@ include $(sources:.c=.d)
         $(CC) -MM $(CPPFLAGS) $&lt; &gt; $@.$$$$; \
         sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' &lt; $@.$$$$ &gt; $@; \
         rm -f $@.$$$$
-</code></pre>
-
-<p>部分解释一下，有的东西太复杂，没搞懂
-\$(sources:.c=.d)是一种变量替换，把sources里面所有的.c文件替换成.d文件，
+</code></pre><p>部分解释一下，有的东西太复杂，没搞懂
+$(sources:.c=.d)是一种变量替换，把sources里面所有的.c文件替换成.d文件，
 include类型C语言中的#include，用于包含文件
-4个\$读进来变成了2个\$，2个\$\$表示进程的ID</p>
-
+4个$读进来变成了2个$，2个$$表示进程的ID</p>
 <ul>
 <li>常用的命令行选项
-
 <ul>
 <li>-n,只打印要执行的命令，不会真的执行命令，用于检查makefile的执行顺序，</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>它不是顺序执行的</p>
-
 <ul>
 <li>-C，后面接目录，可以用于执行那个目录下的Makefile</li>
 <li>在make的时候也可以加选项，如：</li>
 </ul>
-
-<pre><code class="language-.example">make CFLAGS=-g
-</code></pre>
-
-<p>如果Makefile中也定义了CFLAGS，则命令行的值会覆盖掉Makefile中的值</p>
-
+<pre><code class="language-{.example}" data-lang="{.example}">make CFLAGS=-g
+</code></pre><p>如果Makefile中也定义了CFLAGS，则命令行的值会覆盖掉Makefile中的值</p>
 <h1 id="指针">指针</h1>
-
 <ul>
 <li>最初C语言没有通用的指针，就用char
 *当作通用的指针，需要转换的时候就用</li>
 </ul>
-
 <p>强制转换()，后来引进了void *，这时候可以隐式转换，不用强制转换了。</p>
-
 <ul>
 <li>规定指针不能相加</li>
 </ul>
-
 <h2 id="指针与const">指针与const</h2>
-
 <ul>
 <li>const int *a; a指向的内存单元不能更改，但是a能更改</li>
 <li>int const *a; a指向的内存单元能更改，但是a不能更改</li>
@@ -1325,36 +1018,26 @@ include类型C语言中的#include，用于包含文件
 <li>但是，指向const变量的指针或地址就不能传给指向const变量的指针</li>
 <li>良好的编程习惯要尽可能多地使用const，因为</li>
 </ul>
-
 <ol>
 <li>读代码的人可以放心地使用，不用但是内存单元会修改</li>
 <li>可以依靠编译器来检查出来bug</li>
 <li>可以让编译器优化成常量</li>
 </ol>
-
 <h2 id="指针与数组与函数">指针与数组与函数</h2>
-
 <ul>
 <li>char *argv[]中的[]表示指针而不是数组，等价于char
 **argv,写成[]这种形式是</li>
 </ul>
-
 <p>为了告诉读代码的人，它不是指向指针而是指向一个指针数组的首元素</p>
-
 <ul>
 <li>指向数组的指针：</li>
 </ul>
-
-<pre><code class="language-.example">int (*arr)[10];
-</code></pre>
-
-<p>指针arr指向数组arr,这个数组有10个int类型的元素。</p>
-
+<pre><code class="language-{.example}" data-lang="{.example}">int (*arr)[10];
+</code></pre><p>指针arr指向数组arr,这个数组有10个int类型的元素。</p>
 <ul>
 <li>函数也是一种类型，函数指针，看下例：</li>
 </ul>
-
-<pre><code class="language-.c">void hello(const char *str)
+<pre><code class="language-{.c}" data-lang="{.c}">void hello(const char *str)
 {
     printf(&quot;hello %s\n&quot;, str);
 }
@@ -1366,315 +1049,235 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-</code></pre>
-
-<p>定义了一个指向像hello这种函数类型(返回值是void，1个参数，而且第一个参数类型是
+</code></pre><p>定义了一个指向像hello这种函数类型(返回值是void，1个参数，而且第一个参数类型是
 const char *)的指针,然后就可以用f来操作函数了。</p>
-
 <h2 id="类型分类">类型分类</h2>
-
 <ul>
 <li>函数类型</li>
 <li>不完全类型
-
 <ul>
 <li>void</li>
 <li>不完全结构体，联合体，数组类型</li>
-</ul></li>
+</ul>
+</li>
 <li>对象类型
-
 <ul>
 <li>非标量类型(struct, union, array)</li>
 <li>标量类型
-
 <ul>
 <li>指针类型</li>
 <li>算术类型
-
 <ul>
 <li>浮点型(float, double, long double)</li>
 <li>整型
-
 <ul>
 <li>(unsigned)char, (unsigned)short, (unsigned)int,
 (unsigned)long</li>
 <li>位域</li>
 <li>枚举</li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h1 id="c标准库">C标准库</h1>
-
 <h2 id="字符串">字符串</h2>
-
 <ul>
 <li>void *memset(void *s, int c, size_t
 n);初始化字符串，把从s开始的n个字节</li>
 </ul>
-
 <p>都填充为c的值。</p>
-
 <ul>
 <li>void *memcpy(void *dest, const void *src, size_t n);</li>
 </ul>
-
 <p>从src拷贝n个字节到dest，如果内存重叠，不能正确拷贝</p>
-
 <ul>
 <li>void *memmove(void *dest, const void *src, size_t n);</li>
 </ul>
-
 <p>其实也是从src拷贝n个字节到dest，但是如果内存重叠，也可以正确拷贝</p>
-
 <ul>
-<li><p>restrict关键字告诉编译器，可以放心优化，传进来的指针不会指向重叠的内存空间。</p></li>
-
-<li><p>int memcmp(const void *s1, const void *s2, size_t n);</p></li>
+<li>
+<p>restrict关键字告诉编译器，可以放心优化，传进来的指针不会指向重叠的内存空间。</p>
+</li>
+<li>
+<p>int memcmp(const void *s1, const void *s2, size_t n);</p>
+</li>
 </ul>
-
-<p>比较内存中的字节，如果前n个字节一样则返回0,如果遇到不一样的字节，返回s1
-- s2的值</p>
-
+<p>比较内存中的字节，如果前n个字节一样则返回0,如果遇到不一样的字节，返回s1</p>
 <ul>
-<li><p>int strcasecmp(const char *s1, const char *s2);和</p></li>
-
-<li><p>int strncasecmp(const char *s1, const char *s2, size_t n);</p></li>
+<li>
+<p>s2的值</p>
+</li>
+<li>
+<p>int strcasecmp(const char *s1, const char *s2);和</p>
+</li>
+<li>
+<p>int strncasecmp(const char *s1, const char *s2, size_t n);</p>
+</li>
 </ul>
-
 <p>忽略大小写，但是不是标准C函数，而是POSIX中定义的。</p>
-
 <ul>
 <li>char *strchr(const char *s, int c);</li>
 </ul>
-
 <p>从左往右查找字符c，找到第一次出现的位置，返回这个位置</p>
-
 <ul>
 <li>char *strrchar(const char *s, int c);</li>
 </ul>
-
 <p>从右往左查找，r可以理解为reverse</p>
-
 <ul>
 <li>char *strstr(const char *haystack, const char *needle);</li>
 </ul>
-
 <p>haystack意为干草堆，needle是针，即大海捞针，表明是从haystack指向的字符串中查找
 needle指向的字符串，返回第一次出现的位置。</p>
-
 <ul>
 <li>char *strtok(char *str, const char *delim);</li>
 </ul>
-
 <p>这是一个奇怪的函数，根据界定符delim把字符串str分隔开来，每次分隔一个token，返回
 这个token的首地址。第一次调用传入str字符串，以后调用都传入NULL，函数内部实现中
 使用了静态指针变量，它会记住上次处理到了哪里，但是这样是不好的做法，这叫不可重入的。</p>
-
 <ul>
 <li>char *strtok_r(char *str, const char *delim, char **saveptr);</li>
 </ul>
-
 <p>这个函数，调用者自己维护一个saveptr来记住当前字符串处理到哪里，这种是可重入的，r
 代表reentrant，这个函数不属于C标准库，而是POSIX标准库中的。</p>
-
 <ul>
 <li>上面这2个函数要改写字符串，分隔符被替换为&rsquo;\0&rsquo;，不能用于常量字符串。strtok不是</li>
 </ul>
-
 <p>线程安全的。</p>
-
-<h2 id="i-o库函数">I/O库函数</h2>
-
+<h2 id="io库函数">I/O库函数</h2>
 <h3 id="文件基本概念">文件基本概念</h3>
-
 <ul>
 <li>文件可分为文本文件（源文件）和二进制文件（目标文件，可执行文件，库文件）。</li>
 <li>文本文件中的字节都是字符的某种编码（ASCII或UTF-8），二进制文件中的字节表示</li>
 </ul>
-
 <p>其它含义，有的表示指令，有的表示地址。</p>
-
 <ul>
 <li>od命令可以dump file in octal or hex format</li>
 </ul>
-
 <h3 id="打开关闭文件">打开关闭文件</h3>
-
 <ul>
 <li>FILE是结构体类型，它包含了文件描述符，I/O缓冲区和当前读写位置等信息，但是</li>
 </ul>
-
 <p>调用者不必知道FILE里面有哪些成员，调用者只需要把这个文件指针在库函数接口中传
 来传去就行了，操作由里面的函数来维护，这种思想叫封装！这种指针叫不透明指针，也
 叫句柄(handle)，它就像一个把手，抓住它就可以打开门或抽屉。</p>
-
 <ul>
 <li>FILE *fopen(const char *path, const char *mode);</li>
 </ul>
-
 <p>mode是由rwatb+六个字符组合而成的，r是read，w是write，a是append，t是text，
 b是binary，对于+号，有下面的约定： r+ 必须先允许读，再允许写 w+
 必须先允许写（不存在则创建，已存在则覆盖），再允许读 a+
 必须允许追加（不存在则创建），再允许读</p>
-
 <h3 id="errno和ferror">errno和ferror</h3>
-
 <ul>
 <li>errno是一个整数，当有错误产生时，它会赋值为错误码的number，直接打印只看到</li>
 </ul>
-
 <p>数字，如果使用perror函数，就可以打印出来字符串（错误的原因）了。</p>
-
 <ul>
 <li>char *strerror(int errnum);</li>
 </ul>
-
 <p>传进去错误码，返回错误原因，有的错误码并不存在errno中，这个时候这个函数就非常
 有用了，而不是只依赖于perror函数。</p>
-
-<h3 id="以字节为单位的i-o函数">以字节为单位的I/O函数</h3>
-
+<h3 id="以字节为单位的io函数">以字节为单位的I/O函数</h3>
 <ul>
 <li>int fgetc(FILE *stream);</li>
 </ul>
-
 <p>如果stream是stdin，则和int getchar(void);是等价的，出错或者读到文件结尾
 返回EOF</p>
-
 <ul>
 <li>为什么要返回int？因为需要返回EOF，为-1，如果读到字节0xff，返回char的话无法</li>
 </ul>
-
 <p>分清是EOF还是0xff，如果为int，则EOF是0xffffffff，而0xff为0x000000ff</p>
-
 <h3 id="操作位置的函数">操作位置的函数</h3>
-
 <ul>
 <li>int fseek(FILE *stream, long offset, int whence);</li>
 </ul>
-
 <p>成功返回0,出错返回-1并设置errno whence可以选择下面几个：</p>
-
 <ol>
 <li>SEEK_SET，从文件开头</li>
 <li>SEEK_CUR，从当前位置</li>
 <li>SEEK_END，从文件结尾</li>
 </ol>
-
 <ul>
 <li>long ftell(FILE *stream);</li>
 </ul>
-
 <p>返回当前读写的位置</p>
-
 <ul>
 <li>void rewind(FILE *stream);</li>
 </ul>
-
 <p>把读写位置移到到文件开头</p>
-
 <h3 id="以字符串为单位的函数">以字符串为单位的函数</h3>
-
 <ul>
 <li>char *fgets(char *s, int size, FILE *stream);</li>
 </ul>
-
 <p>指定长度，如果不指定长度，stream又是stdin，则和gets功能一样，gets是不推荐使用
 的函数，因为用户提供一个缓冲区，却不能指定缓冲区的大小。</p>
-
 <ul>
 <li>int fputs(const char *s, FILE *stream);</li>
 </ul>
-
 <p>成功返回一个非负整数，出错返回EOF</p>
-
 <h3 id="以记录为单位的函数">以记录为单位的函数</h3>
-
 <ul>
 <li>这里的记录指一串固定长度的字节，如一个整数，一个结构体和一个数组。</li>
 <li>size_t fread(void *ptr, size_t size, size_t nmemb, FILE
 *stream);</li>
 </ul>
-
 <p>size是记录的长度，nmemb是要读多少条记录。成功返回记录数nmemb，失败返回0
 size_t fwrite(const void *pstr, size_t size, size_t nmemb, FILE
 *stream);</p>
-
-<h3 id="格式化i-o函数">格式化I/O函数</h3>
-
+<h3 id="格式化io函数">格式化I/O函数</h3>
 <ul>
 <li>int fprintf(FILE *stream, const char *format, &hellip;);</li>
 </ul>
-
 <p>打印到指定的流中。</p>
-
 <ul>
 <li>int sprintf(char *str, const char *format, &hellip;);</li>
 </ul>
-
 <p>打印到指定的缓冲区中，没有指定长度，很容易产生缓冲区溢出错误。</p>
-
 <ul>
 <li>int snprintf(char *str, size_t size, const char *format, &hellip;);</li>
 <li>对于vprintf, vfprintf, vsprintf,
 vsnprintf，和上面的函数的唯一区别就是最后</li>
 </ul>
-
 <p>一个参数不是通过可变参数传进来的，而是通过va_list传进来的。</p>
-
 <ul>
 <li>同样有，scanf, fscanf, sscanf, vscanf, vsscanf, vfscanf</li>
 </ul>
-
 <h2 id="数值字符串转换函数">数值字符串转换函数</h2>
-
 <ul>
 <li>int atoi(const char *nptr);</li>
 </ul>
-
 <p>字符串转10进制整数</p>
-
 <ul>
 <li>double atof(const char *nptr);</li>
 </ul>
-
 <p>字符串转浮点数</p>
-
 <ul>
 <li>long int strtol(const char *nptr, char **endptr, int base);</li>
 </ul>
-
 <p>根据base，返回不同进制的整数 endptr返回后面未被识别的第一个字符
 如果超过范围，则返回它能表示的最大（最小）数，并设置errno</p>
-
 <ul>
 <li>double strtod(const char *nptr, char **endptr);</li>
 </ul>
-
 <p>是atof的增强版。</p>
-
 <h2 id="分配内存的函数">分配内存的函数</h2>
-
 <ul>
 <li>void *calloc(size_t nmemb, size_t size);</li>
 </ul>
-
 <p>分配nmemb个元素的内存空间，每个元素大小是size，并且负责清0,而malloc是不清零的。</p>
-
 <ul>
 <li>void *realloc(void *ptr, size_t size);</li>
 </ul>
-
 <p>内存空间使用一段时间之后需要改变大小，就可以使用这个函数，它会重新找一块足够的内存
 空间，把内容复制过来，并释放原来的内存空间。</p>
-
 <ul>
 <li>void *alloca(size_t size);</li>
 </ul>
-
 <p>这个是在栈上分配空间，不需要free，相当于变长数组，这不是C标准，而是POSIX标准。</p>
 
     </div>
@@ -1714,13 +1317,13 @@ vsnprintf，和上面的函数的唯一区别就是最后</li>
 </div><footer class="post-footer">
       
       <nav class="post-nav">
-        <a class="prev" href="/post/haskell/types.org/">
+        <a class="prev" href="/post/haskell/intro.org/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">types and typeclasses</span>
+            <span class="prev-text nav-default">introduction</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/haskell/intro.org/">
-            <span class="next-text nav-default">introduction</span>
+        <a class="next" href="/post/clang/overview.org/">
+            <span class="next-text nav-default">Linux c编程一站式学习笔记：C语言基础</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -1736,7 +1339,7 @@ vsnprintf，和上面的函数的唯一区别就是最后</li>
         id: '2013-02-16 00:00:00 \x2b0000 UTC',
         title: 'Linux c编程一站式学习笔记：C语言本质',
         link: decodeURI(location.href),
-        desc: '@\x26lt;font color=\x26ldquo;red\x26rdquo;\x26gt; 本文为\x26rdquo;linux c编程一站式学习\x26rdquo;一书的笔记 @\x26lt;\/font\x26gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以',
+        desc: '@\x26lt;font color=\x26quot;red\x26rdquo;\x26gt; 本文为\x26quot;linux c编程一站式学习\x26quot;一书的笔记 @\x26lt;\/font\x26gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以如果',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {
@@ -1802,7 +1405,10 @@ vsnprintf，和上面的函数的唯一区别就是最后</li>
     <script src="/lib/js-sequence-diagrams/underscore-1.8.3.min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script>
     <script src="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/lib/js-sequence-diagrams/sequence-diagram-2.0.1.min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
