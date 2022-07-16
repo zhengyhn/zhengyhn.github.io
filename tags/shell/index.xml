@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shell on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/tags/shell/</link>
+    <description>Recent content in Shell on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 16 Jul 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://zhengyhn.github.io/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>shell基础知识</title>
+      <link>http://zhengyhn.github.io/post/shell/basics/</link>
+      <pubDate>Sat, 16 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/shell/basics/</guid>
+      <description>本文整理自我多年前读Advanced Bash-Scripting Guide一书的笔记 特殊字符 # 在双引号和单引号里面的#不会被认为是注释开始，经\转义的#不会认为是注释</description>
+    </item>
+    
+  </channel>
+</rss>

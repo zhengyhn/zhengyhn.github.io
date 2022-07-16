@@ -3,7 +3,42 @@
   
   <url>
     <loc>http://zhengyhn.github.io/categories/</loc>
-    <lastmod>2020-06-08T00:00:00+00:00</lastmod>
+    <lastmod>2022-07-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/categories/devops/</loc>
+    <lastmod>2022-07-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/</loc>
+    <lastmod>2022-07-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/tags/shell/</loc>
+    <lastmod>2022-07-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/shell/basics/</loc>
+    <lastmod>2022-07-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/tags/</loc>
+    <lastmod>2022-07-16T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -17,20 +52,6 @@
   
   <url>
     <loc>http://zhengyhn.github.io/categories/math/</loc>
-    <lastmod>2020-06-08T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhengyhn.github.io/post/</loc>
-    <lastmod>2020-06-08T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhengyhn.github.io/tags/</loc>
     <lastmod>2020-06-08T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -801,13 +822,6 @@
   
   <url>
     <loc>http://zhengyhn.github.io/post/shell/getting.start/</loc>
-    <lastmod>2013-08-13T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhengyhn.github.io/post/shell/basics/</loc>
     <lastmod>2013-08-13T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

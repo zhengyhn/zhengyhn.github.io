@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>shell基础知识</title>
+      <link>http://zhengyhn.github.io/post/shell/basics/</link>
+      <pubDate>Sat, 16 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/shell/basics/</guid>
+      <description>本文整理自我多年前读Advanced Bash-Scripting Guide一书的笔记 特殊字符 # 在双引号和单引号里面的#不会被认为是注释开始，经\转义的#不会认为是注释</description>
+    </item>
+    
+    <item>
       <title>代数余子式异乘为0的证明</title>
       <link>http://zhengyhn.github.io/post/math/cofactor_zero/</link>
       <pubDate>Mon, 08 Jun 2020 00:00:00 +0000</pubDate>
@@ -780,15 +789,6 @@ Encapsulation is not invisibility.</description>
       
       <guid>http://zhengyhn.github.io/post/shell/getting.start/</guid>
       <description>引言 我非常欣赏这句话。 没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。 &amp;ndash;Herbert Mayer 写脚本 我之前也写过一点点的bash shell，完全</description>
-    </item>
-    
-    <item>
-      <title>shell基础知识</title>
-      <link>http://zhengyhn.github.io/post/shell/basics/</link>
-      <pubDate>Tue, 13 Aug 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/shell/basics/</guid>
-      <description>特殊字符 # 在双引号和单引号里面的#不会被认为是注释开始，经\转义的#不会认为是注释开始。 echo &amp;quot;#这里不是注释&amp;quot; echo &#39;#这里不</description>
     </item>
     
     <item>
