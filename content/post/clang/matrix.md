@@ -1,6 +1,8 @@
 ---
-date: 2013-03-06
+date: 2022-07-24
 title: C语言实现的矩阵类
+tags: ['c']
+categories: ['c']
 ---
 
 
@@ -10,7 +12,7 @@ title: C语言实现的矩阵类
 
 matrix.h
 
-``` {.c}
+```c
 #ifndef _MATRIX_H_
 #define _MATRIX_H_
 
@@ -76,7 +78,7 @@ void matrix_print(const Matrix *m);
 
 matrix.c
 
-``` {.c}
+```c
 #include "matrix.h"
 
 static void assert_matrix(const Matrix *);
@@ -334,7 +336,7 @@ static int is_square(const Matrix *m)
 
 main.c
 
-``` {.c}
+```c
 #include "matrix.h"
 
 #define M 5

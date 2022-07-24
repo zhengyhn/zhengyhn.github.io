@@ -1,26 +1,26 @@
 ---
-date: 2013-04-24
+date: 2022-07-17
 title: KMP算法-我的理解
+tags: ['Algorithm']
+categories: ['Algorithm']
 ---
 
-动机
-====
+# 动机
 
 看了一本叫做《C/C++面试题》的电子书，里面提到找子字符串的算法，最好的是KMP，
 于是开始了KMP之旅！
 
 在网上看了好几篇中文文章，没一篇看得懂，最后找到了2篇英文文章，深有启发：
 
-1.  [searching-for-patterns-set-2-kmp-algorithm](http://www.geeksforgeeks.org/searching-for-patterns-set-2-kmp-algorithm/)
-2.  [the-knuth-morris-pratt-algorithm-in-my-own-words](http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in-my-own-words/)
+-  [searching-for-patterns-set-2-kmp-algorithm](http://www.geeksforgeeks.org/searching-for-patterns-set-2-kmp-algorithm/)
+-  [the-knuth-morris-pratt-algorithm-in-my-own-words](http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in-my-own-words/)
 
 特别是第2篇，让我深刻理解了KMP中的预处理，而第1篇则让我学会了如何用高效的方法
 实现预处理。
 
 于是，我也来写一篇文章，用自己的理解来实现KMP算法。
 
-在哪里优化？
-============
+# 在哪里优化？
 
 如果要让我写一个程序来找到子串，唯一能想到的方法就是一个一个找，这叫做暴力算法。
 KMP算法的作者，他其实是发现了下面的规律。比如，有字符串str：
@@ -44,8 +44,7 @@ pattern开头的3个字母为aba，这样匹配就不用重复比较前面已经
 3步，正好跳过最前面的ab，到达abaa。这样就省去了一次查找。这正是KMP算法对
 普通算法的优化之处。可是这个3是怎么算出来的呢？下面来探索一下。
 
-部分匹配表
-==========
+# 部分匹配表
 
 这个名字是*the-knuth-morris-pratt-algorithm-in-my-own-words* 这篇文章的
 作者起的，我觉得比较好理解，于是拿过来了。
@@ -149,8 +148,7 @@ abab**a**abcbab
 通过查看公共的真前缀和真后缀，我们知道，跳去哪个位置能够让下一次匹配开始，并且事先知道已经匹配了多少个字符。
 
 
-如何快速计算部分匹配表
-======================
+# 如何快速计算部分匹配表
 
 如果按照上面所说的办法，把真前缀和真后缀穷举出来，然后看哪些相等，再看哪个最长
 的话，那这个算法的效率就太低了，我们有更好的办法来计算。
@@ -183,8 +181,7 @@ abab**a**abcbab
 这就是计算部分匹配表的算法，参考自[这篇文章](http://www.geeksforgeeks.org/searching-for-patterns-set-2-kmp-algorithm/)
 ，这个表其实就是这个算法的关键。
 
-查找
-====
+# 查找
 
 光计算出来那个表是没用的，重要的是利用这个表来快速查找子串。方法为：
 
@@ -202,8 +199,7 @@ pattern拥有前n个字符的子串的真前缀位置，part\_tab\[n - 1\]中保
 跳过了无用的字符，到达下一个和位置k拥有一样的真前缀的位置。这样开始下一轮的查找
 才有意义。
 
-代码实现
-========
+# 代码实现
 
 下面是我的简单实现，只经过少量测试。
 
@@ -275,8 +271,7 @@ int index_of(char *str, char *pattern)
 }
 ```
 
-总结
-====
+# 总结
 
 这个算法，关键于是理解它是怎样从O(n \* m)优化成O(n + m)的，理解在哪里优化了。
 并且要知道辅助数组part\_tab的用处及计算方法，后面的查找就很简单了。

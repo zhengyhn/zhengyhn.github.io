@@ -1,12 +1,13 @@
 ---
-date: 2013-03-03
+date: 2022-07-18
 title: 开幕
+tags: ['Algorithm']
+categories: ['Algorithm']
 ---
 
-@&lt;font color="red"&gt; 本文为"Algorithms"一书的笔记 @&lt;/font&gt;
+本文为"Algorithms"一书的笔记
 
-fibonacci
-=========
+# fibonacci
 
 书上给出了另外一种我想不到的解法：
 
@@ -53,8 +54,7 @@ if (fib[i] != 0) {
 
 这样可以避免每次计算，以空间换取时间。
 
-Big-oh notation
-===============
+# Big-oh notation
 
 每一本算法书都会讲这个东西，离散数学也讲这东西，基本讲一次忘一次，这次算是
 回忆，却让我理解更透彻了。 Ο(n)，英文读作：big oh of n 定义如下：
@@ -104,8 +104,7 @@ n \^ 2 + nlogn --&gt; n \^ 2 作为扩展，有如下定义：
 
 ------------------------------------------------------------------------
 
-more fibonacci algorithms
-=========================
+# more fibonacci algorithms
 
 第一种方法： 用矩阵来求
 
@@ -118,6 +117,7 @@ F0 + F1 = F2
 
 根据线性方程组转矩阵的方法，可以变成：
 
+$$
 \begin{equation}
 \left(
 \begin{array}{cc}
@@ -140,9 +140,10 @@ F2
 \end{array}
 \right)
 \end{equation}
+$$
 
 通过数学归纳法，可以推出：
-
+$$
 \begin{equation}
 \left(
 \begin{array}{cc}
@@ -165,7 +166,7 @@ F_{n+1}
 \end{array}
 \right)
 \end{equation}
-
+$$
 于是，可以写代码来实现这个算法了。
 
 main.c
@@ -459,7 +460,7 @@ doubling，引用自[这里](http://nayuki.eigenstate.org/page/fast-fibonacci-al
 。
 
 从上面的矩阵法中，可以推出下面这个等式：
-
+$$
 \begin{equation}
 \left(
 \begin{array}{cc}
@@ -475,12 +476,13 @@ F(n) & F(n+1)
 \end{array}
 \right)^n
 \end{equation}
+$$
 
 这个等式是可以通过数学归纳法证明的，也比较容易记忆（虽然我很不喜欢记公式，
 但是有的东西，能记住是非常好的）。
 
 于是，我们可以根据这个等式推出fast doubling的算法：
-
+$$
 \begin{equation}
 \begin{split}
 \left(
@@ -522,7 +524,7 @@ F(n)F(n-1) + F(n+1)F(n) & F(n)^2 + F(n+1)^2
 \right)
 \end{split}
 \end{equation}
-
+$$
 于是有：
 
 F(2n+1) = F(n)^2^ + F(n+1)^2^
