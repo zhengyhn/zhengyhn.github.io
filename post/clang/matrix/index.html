@@ -43,17 +43,17 @@
 <meta property="og:description" content="随着学习的深入，数学是必不可少的，最近复习到矩阵，于是用我最喜欢的C语言写 了一个矩阵类，使用面向对象的方法，只实现了简单的操作:新建，删除，" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/clang/matrix/" />
-<meta property="article:published_time" content="2013-03-06T00:00:00+00:00" />
-<meta property="article:modified_time" content="2013-03-06T00:00:00+00:00" />
+<meta property="article:published_time" content="2022-07-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-24T00:00:00+00:00" />
 <meta itemprop="name" content="C语言实现的矩阵类">
 <meta itemprop="description" content="随着学习的深入，数学是必不可少的，最近复习到矩阵，于是用我最喜欢的C语言写 了一个矩阵类，使用面向对象的方法，只实现了简单的操作:新建，删除，">
-<meta itemprop="datePublished" content="2013-03-06T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2013-03-06T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1496">
+<meta itemprop="datePublished" content="2022-07-24T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-07-24T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1494">
 
 
 
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="c," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="C语言实现的矩阵类"/>
 <meta name="twitter:description" content="随着学习的深入，数学是必不可少的，最近复习到矩阵，于是用我最喜欢的C语言写 了一个矩阵类，使用面向对象的方法，只实现了简单的操作:新建，删除，"/>
 
@@ -125,9 +125,11 @@
       <h1 class="post-title">C语言实现的矩阵类</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2013-03-06 </span>
-        
-          <span class="more-meta"> 约 1496 字 </span>
+        <span class="post-time"> 2022-07-24 </span>
+        <div class="post-category">
+            <a href="/categories/c/"> c </a>
+            </div>
+          <span class="more-meta"> 约 1494 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -144,422 +146,422 @@
 了一个矩阵类，使用面向对象的方法，只实现了简单的操作:新建，删除，加，减，
 乘，求幂，转置等，以后会再增加。</p>
 <p>matrix.h</p>
-<pre><code class="language-{.c}" data-lang="{.c}">#ifndef _MATRIX_H_
-#define _MATRIX_H_
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#ifndef _MATRIX_H_
+</span><span style="color:#75715e">#define _MATRIX_H_
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">//matrix element&#39;s type
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">double</span> matrix_t;
+<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> matrix Matrix;
 
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
+<span style="color:#66d9ef">struct</span> matrix {
+    <span style="color:#66d9ef">int</span> row_no;       <span style="color:#75715e">//row number
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> col_no;       <span style="color:#75715e">//column number
+</span><span style="color:#75715e"></span>    matrix_t <span style="color:#f92672">*</span>elem;   <span style="color:#75715e">//point to the elements
+</span><span style="color:#75715e"></span>};
 
-//matrix element's type
-typedef double matrix_t;
-typedef struct matrix Matrix;
+<span style="color:#75715e">/* create a matrix from a file pointed by FP, with
+</span><span style="color:#75715e"> * ROW_NO rows and COL_NO columns, return the pointer
+</span><span style="color:#75715e"> * to the matrix.
+</span><span style="color:#75715e"> * [note]:if FP is NULL, return an empty matrix */</span>
+Matrix <span style="color:#f92672">*</span>
+<span style="color:#a6e22e">matrix_from_file</span>(FILE <span style="color:#f92672">*</span>fp, <span style="color:#66d9ef">int</span> row_no, <span style="color:#66d9ef">int</span> col_no);
 
-struct matrix {
-    int row_no;       //row number
-    int col_no;       //column number
-    matrix_t *elem;   //point to the elements
-};
+<span style="color:#75715e">/* create a matrix from an two dimension pointer ARR with
+</span><span style="color:#75715e"> * ROW_NO rows and COL_NO columns, return the pointer
+</span><span style="color:#75715e"> * to the matrix.
+</span><span style="color:#75715e"> * [note]:if ARR is NULL, return an empty matrix */</span>
+Matrix <span style="color:#f92672">*</span>
+<span style="color:#a6e22e">matrix_from_array</span>(<span style="color:#66d9ef">float</span> <span style="color:#f92672">**</span>arr, <span style="color:#66d9ef">int</span> row_no, <span style="color:#66d9ef">int</span> col_no);
 
-/* create a matrix from a file pointed by FP, with
- * ROW_NO rows and COL_NO columns, return the pointer
- * to the matrix.
- * [note]:if FP is NULL, return an empty matrix */
-Matrix *
-matrix_from_file(FILE *fp, int row_no, int col_no);
+<span style="color:#75715e">/* free all memory */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_delete</span>(Matrix <span style="color:#f92672">*</span>m);
 
-/* create a matrix from an two dimension pointer ARR with
- * ROW_NO rows and COL_NO columns, return the pointer
- * to the matrix.
- * [note]:if ARR is NULL, return an empty matrix */
-Matrix *
-matrix_from_array(float **arr, int row_no, int col_no);
+<span style="color:#75715e">/* initial the matrix M as identity matrix */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_identity</span>(Matrix <span style="color:#f92672">*</span>m);
 
-/* free all memory */
-void matrix_delete(Matrix *m);
+<span style="color:#75715e">/* change all elements of matrix M to their opposite sign elements */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_minus</span>(Matrix <span style="color:#f92672">*</span>m);
 
-/* initial the matrix M as identity matrix */
-void matrix_identity(Matrix *m);
+<span style="color:#75715e">/* add two matrix M1 and M2, the result is matrix RESULT */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_add</span>(<span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>m1, <span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>m2, Matrix <span style="color:#f92672">*</span>result);
 
-/* change all elements of matrix M to their opposite sign elements */
-void matrix_minus(Matrix *m);
+<span style="color:#75715e">/* substract matrix SUBSTRAHEND from matrix MINUEND, the result is
+</span><span style="color:#75715e"> * matrix RESULT */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_substract</span>(Matrix <span style="color:#f92672">*</span>minuend, Matrix <span style="color:#f92672">*</span>substrahend, Matrix <span style="color:#f92672">*</span>result);
 
-/* add two matrix M1 and M2, the result is matrix RESULT */
-void matrix_add(const Matrix *m1, const Matrix *m2, Matrix *result);
+<span style="color:#75715e">/* multiple matrix LEFT and RIGHT, the result is matrix RESULT.
+</span><span style="color:#75715e"> * with a stupid algorithm. */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_multiple</span>(Matrix <span style="color:#f92672">*</span>left, Matrix <span style="color:#f92672">*</span>right, Matrix <span style="color:#f92672">*</span>result);
 
-/* substract matrix SUBSTRAHEND from matrix MINUEND, the result is
- * matrix RESULT */
-void matrix_substract(Matrix *minuend, Matrix *substrahend, Matrix *result);
+<span style="color:#75715e">/* calculate the matrix&#39;s power of exponent EXP, the result is
+</span><span style="color:#75715e"> * the matrix RESULT. */</span>   
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_power</span>(Matrix <span style="color:#f92672">*</span>m, <span style="color:#66d9ef">int</span> exp, Matrix <span style="color:#f92672">*</span>result);
 
-/* multiple matrix LEFT and RIGHT, the result is matrix RESULT.
- * with a stupid algorithm. */
-void matrix_multiple(Matrix *left, Matrix *right, Matrix *result);
+<span style="color:#75715e">/* calculate the transposition of matrix M, the result is TRANS */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_trans</span>(Matrix <span style="color:#f92672">*</span>m, Matrix <span style="color:#f92672">*</span>trans);
 
-/* calculate the matrix's power of exponent EXP, the result is
- * the matrix RESULT. */   
-void matrix_power(Matrix *m, int exp, Matrix *result);
+<span style="color:#75715e">/* print the matrix M */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_print</span>(<span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>m);
 
-/* calculate the transposition of matrix M, the result is TRANS */
-void matrix_trans(Matrix *m, Matrix *trans);
+<span style="color:#75715e">#endif </span><span style="color:#75715e">/* _MATRIX_H_ */</span><span style="color:#75715e">
+</span></code></pre></div><p>matrix.c</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;matrix.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">assert_matrix</span>(<span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>);
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">can_add</span>(<span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>m1, <span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>m2, <span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>result);
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">can_mul</span>(<span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>left, <span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>right,
+                   <span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>result);
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">is_square</span>(<span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>m);
 
-/* print the matrix M */
-void matrix_print(const Matrix *m);
-
-#endif /* _MATRIX_H_ */
-</code></pre><p>matrix.c</p>
-<pre><code class="language-{.c}" data-lang="{.c}">#include &quot;matrix.h&quot;
-
-static void assert_matrix(const Matrix *);
-static int can_add(const Matrix *m1, const Matrix *m2, const Matrix *result);
-static int can_mul(const Matrix *left, const Matrix *right,
-                   const Matrix *result);
-static int is_square(const Matrix *m);
-
-Matrix *
-matrix_from_file(FILE *fp, int row_no, int col_no)
+Matrix <span style="color:#f92672">*</span>
+<span style="color:#a6e22e">matrix_from_file</span>(FILE <span style="color:#f92672">*</span>fp, <span style="color:#66d9ef">int</span> row_no, <span style="color:#66d9ef">int</span> col_no)
 {
-    int i;
-    Matrix *m = (Matrix *)malloc(sizeof(Matrix));
+    <span style="color:#66d9ef">int</span> i;
+    Matrix <span style="color:#f92672">*</span>m <span style="color:#f92672">=</span> (Matrix <span style="color:#f92672">*</span>)malloc(<span style="color:#66d9ef">sizeof</span>(Matrix));
 
-    if (m == NULL) {
-        fprintf(stderr, &quot;memory no enough!&quot;);
-        exit(1);
+    <span style="color:#66d9ef">if</span> (m <span style="color:#f92672">==</span> NULL) {
+        fprintf(stderr, <span style="color:#e6db74">&#34;memory no enough!&#34;</span>);
+        exit(<span style="color:#ae81ff">1</span>);
     }
-    m-&gt;row_no = row_no;
-    m-&gt;col_no = col_no;
-    m-&gt;elem = (matrix_t *)malloc(row_no * col_no * sizeof(matrix_t));
-    if (m-&gt;elem == NULL) {
-        fprintf(stderr, &quot;memory no enough!&quot;);
-        exit(1);
+    m<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">=</span> row_no;
+    m<span style="color:#f92672">-&gt;</span>col_no <span style="color:#f92672">=</span> col_no;
+    m<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">=</span> (matrix_t <span style="color:#f92672">*</span>)malloc(row_no <span style="color:#f92672">*</span> col_no <span style="color:#f92672">*</span> <span style="color:#66d9ef">sizeof</span>(matrix_t));
+    <span style="color:#66d9ef">if</span> (m<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">==</span> NULL) {
+        fprintf(stderr, <span style="color:#e6db74">&#34;memory no enough!&#34;</span>);
+        exit(<span style="color:#ae81ff">1</span>);
     }
-    if (fp != NULL) {
-        for (i = 0; i &lt; row_no * col_no; i++) {
-            fscanf(fp, &quot;%lf&quot;, (m-&gt;elem + i));
+    <span style="color:#66d9ef">if</span> (fp <span style="color:#f92672">!=</span> NULL) {
+        <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> row_no <span style="color:#f92672">*</span> col_no; i<span style="color:#f92672">++</span>) {
+            fscanf(fp, <span style="color:#e6db74">&#34;%lf&#34;</span>, (m<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i));
         }
     }
 
-    return m;
+    <span style="color:#66d9ef">return</span> m;
 }
 
-Matrix *
-matrix_from_array(float **arr, int row_no, int col_no)
+Matrix <span style="color:#f92672">*</span>
+<span style="color:#a6e22e">matrix_from_array</span>(<span style="color:#66d9ef">float</span> <span style="color:#f92672">**</span>arr, <span style="color:#66d9ef">int</span> row_no, <span style="color:#66d9ef">int</span> col_no)
 {
-    int i, j;
-    Matrix *m = (Matrix *)malloc(sizeof(Matrix));
+    <span style="color:#66d9ef">int</span> i, j;
+    Matrix <span style="color:#f92672">*</span>m <span style="color:#f92672">=</span> (Matrix <span style="color:#f92672">*</span>)malloc(<span style="color:#66d9ef">sizeof</span>(Matrix));
 
-    if (m == NULL) {
-        fprintf(stderr, &quot;memory no enough!&quot;);
-        exit(1);
+    <span style="color:#66d9ef">if</span> (m <span style="color:#f92672">==</span> NULL) {
+        fprintf(stderr, <span style="color:#e6db74">&#34;memory no enough!&#34;</span>);
+        exit(<span style="color:#ae81ff">1</span>);
     }
-    m-&gt;row_no = row_no;
-    m-&gt;col_no = col_no;
-    m-&gt;elem = (matrix_t *)malloc(row_no * col_no * sizeof(matrix_t));
-    if (m-&gt;elem == NULL) {
-        fprintf(stderr, &quot;memory no enough!&quot;);
-        exit(1);
+    m<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">=</span> row_no;
+    m<span style="color:#f92672">-&gt;</span>col_no <span style="color:#f92672">=</span> col_no;
+    m<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">=</span> (matrix_t <span style="color:#f92672">*</span>)malloc(row_no <span style="color:#f92672">*</span> col_no <span style="color:#f92672">*</span> <span style="color:#66d9ef">sizeof</span>(matrix_t));
+    <span style="color:#66d9ef">if</span> (m<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">==</span> NULL) {
+        fprintf(stderr, <span style="color:#e6db74">&#34;memory no enough!&#34;</span>);
+        exit(<span style="color:#ae81ff">1</span>);
     }
-    if (arr != NULL) {
-        for (i = 0; i &lt; row_no; i++) {
-            for (j = 0; j &lt; col_no; j++) {
-                *(m-&gt;elem + i * col_no + j) = arr[i][j];
+    <span style="color:#66d9ef">if</span> (arr <span style="color:#f92672">!=</span> NULL) {
+        <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> row_no; i<span style="color:#f92672">++</span>) {
+            <span style="color:#66d9ef">for</span> (j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> col_no; j<span style="color:#f92672">++</span>) {
+                <span style="color:#f92672">*</span>(m<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i <span style="color:#f92672">*</span> col_no <span style="color:#f92672">+</span> j) <span style="color:#f92672">=</span> arr[i][j];
             }
         }
     }
 
-    return m;
+    <span style="color:#66d9ef">return</span> m;
 }
 
-void matrix_delete(Matrix *m)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_delete</span>(Matrix <span style="color:#f92672">*</span>m)
 {
     assert_matrix(m);
 
-    if (m-&gt;elem) {
-        free(m-&gt;elem);
+    <span style="color:#66d9ef">if</span> (m<span style="color:#f92672">-&gt;</span>elem) {
+        free(m<span style="color:#f92672">-&gt;</span>elem);
     }
     free(m);
 }
 
-void matrix_identity(Matrix *m)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_identity</span>(Matrix <span style="color:#f92672">*</span>m)
 {
-    int i;
+    <span style="color:#66d9ef">int</span> i;
 
     assert_matrix(m);
 
-    if (!is_square(m)) {
-        fprintf(stderr, &quot;identity: the matrix is not square!&quot;);
-        exit(1);
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>is_square(m)) {
+        fprintf(stderr, <span style="color:#e6db74">&#34;identity: the matrix is not square!&#34;</span>);
+        exit(<span style="color:#ae81ff">1</span>);
     }
-    for (i = 0; i &lt; m-&gt;row_no * m-&gt;col_no; i++) {
-        if (((i / m-&gt;col_no) * m-&gt;row_no) + (i / m-&gt;col_no) == i) {
-            *(m-&gt;elem + i) = 1;
-        } else {
-            *(m-&gt;elem + i) = 0;
+    <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">*</span> m<span style="color:#f92672">-&gt;</span>col_no; i<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">if</span> (((i <span style="color:#f92672">/</span> m<span style="color:#f92672">-&gt;</span>col_no) <span style="color:#f92672">*</span> m<span style="color:#f92672">-&gt;</span>row_no) <span style="color:#f92672">+</span> (i <span style="color:#f92672">/</span> m<span style="color:#f92672">-&gt;</span>col_no) <span style="color:#f92672">==</span> i) {
+            <span style="color:#f92672">*</span>(m<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#f92672">*</span>(m<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
         }
     }
 }
 
-void matrix_minus(Matrix *m)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_minus</span>(Matrix <span style="color:#f92672">*</span>m)
 {
-    int i;
+    <span style="color:#66d9ef">int</span> i;
 
     assert_matrix(m);
 
-    for (i = 0; i &lt; m-&gt;row_no * m-&gt;col_no; i++) {
-        *(m-&gt;elem + i) = -(*(m-&gt;elem + i));
+    <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">*</span> m<span style="color:#f92672">-&gt;</span>col_no; i<span style="color:#f92672">++</span>) {
+        <span style="color:#f92672">*</span>(m<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i) <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>(<span style="color:#f92672">*</span>(m<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i));
     }
 }
 
-void matrix_print(const Matrix *m)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_print</span>(<span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>m)
 {
-    int i, j;
+    <span style="color:#66d9ef">int</span> i, j;
 
     assert_matrix(m);
 
-    for (i = 0; i &lt; m-&gt;row_no; i++) {
-        for (j = 0; j &lt; m-&gt;col_no; j++) {
-            printf(&quot;%5g&quot;, *(m-&gt;elem + i * m-&gt;col_no + j));
+    <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m<span style="color:#f92672">-&gt;</span>row_no; i<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">for</span> (j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> m<span style="color:#f92672">-&gt;</span>col_no; j<span style="color:#f92672">++</span>) {
+            printf(<span style="color:#e6db74">&#34;%5g&#34;</span>, <span style="color:#f92672">*</span>(m<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i <span style="color:#f92672">*</span> m<span style="color:#f92672">-&gt;</span>col_no <span style="color:#f92672">+</span> j));
         }
-        printf(&quot;\n&quot;);
+        printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
     }
 }
 
-void matrix_add(const Matrix *m1, const Matrix *m2,
-                Matrix *result)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_add</span>(<span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>m1, <span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>m2,
+                Matrix <span style="color:#f92672">*</span>result)
 {
-    int i;
+    <span style="color:#66d9ef">int</span> i;
 
     assert_matrix(m1);
     assert_matrix(m2);
     assert_matrix(result);
 
-    if (!can_add(m1, m2, result)) {
-        fprintf(stderr, &quot;add: row number or column number not match!&quot;);
-        exit(1);
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>can_add(m1, m2, result)) {
+        fprintf(stderr, <span style="color:#e6db74">&#34;add: row number or column number not match!&#34;</span>);
+        exit(<span style="color:#ae81ff">1</span>);
     }
-    for (i = 0; i &lt; result-&gt;row_no * result-&gt;col_no; i++) {
-        *(result-&gt;elem + i) = *(m1-&gt;elem + i) + *(m2-&gt;elem + i);
+    <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> result<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">*</span> result<span style="color:#f92672">-&gt;</span>col_no; i<span style="color:#f92672">++</span>) {
+        <span style="color:#f92672">*</span>(result<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i) <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(m1<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i) <span style="color:#f92672">+</span> <span style="color:#f92672">*</span>(m2<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i);
     }
 }
 
-void matrix_substract(Matrix *minuend, Matrix *substrahend,
-                      Matrix *result)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_substract</span>(Matrix <span style="color:#f92672">*</span>minuend, Matrix <span style="color:#f92672">*</span>substrahend,
+                      Matrix <span style="color:#f92672">*</span>result)
 {
     matrix_minus(substrahend);
     matrix_add(minuend, substrahend, result);
     matrix_minus(substrahend);
 }
 
-void matrix_multiple(Matrix *left, Matrix *right, Matrix *result)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_multiple</span>(Matrix <span style="color:#f92672">*</span>left, Matrix <span style="color:#f92672">*</span>right, Matrix <span style="color:#f92672">*</span>result)
 {
-    int i, j, k, left_elem, right_elem;
+    <span style="color:#66d9ef">int</span> i, j, k, left_elem, right_elem;
     matrix_t sum;
-    Matrix *temp;
+    Matrix <span style="color:#f92672">*</span>temp;
 
     assert_matrix(left);
     assert_matrix(right);
     assert_matrix(result);
 
-    if (!can_mul(left, right, result)) {
-        fprintf(stderr, &quot;multiple: row number or column number not match!&quot;);
-        exit(1);
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>can_mul(left, right, result)) {
+        fprintf(stderr, <span style="color:#e6db74">&#34;multiple: row number or column number not match!&#34;</span>);
+        exit(<span style="color:#ae81ff">1</span>);
     }
-    if (result == left || result == right) {
-        temp = matrix_from_file(NULL, result-&gt;row_no, result-&gt;col_no);
-        for (i = 0; i &lt; result-&gt;row_no * result-&gt;col_no; i++) {
-            *(temp-&gt;elem + i) = *(result-&gt;elem + i);
+    <span style="color:#66d9ef">if</span> (result <span style="color:#f92672">==</span> left <span style="color:#f92672">||</span> result <span style="color:#f92672">==</span> right) {
+        temp <span style="color:#f92672">=</span> matrix_from_file(NULL, result<span style="color:#f92672">-&gt;</span>row_no, result<span style="color:#f92672">-&gt;</span>col_no);
+        <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> result<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">*</span> result<span style="color:#f92672">-&gt;</span>col_no; i<span style="color:#f92672">++</span>) {
+            <span style="color:#f92672">*</span>(temp<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i) <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(result<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i);
         }
-    } else {
-        temp = result;
+    } <span style="color:#66d9ef">else</span> {
+        temp <span style="color:#f92672">=</span> result;
     }
-    for (i = 0; i &lt; left-&gt;row_no; i++) {
-        for (j = 0; j &lt; right-&gt;col_no; j++) {
-            sum = 0.0;
-            for (k = 0; k &lt; left-&gt;col_no; k++) {
-                left_elem = *(left-&gt;elem + i * left-&gt;col_no + k);
-                right_elem = *(right-&gt;elem + j * right-&gt;col_no + k);
-                if ((left_elem != 0) &amp;&amp; (right_elem != 0)) {
-                    sum += left_elem * right_elem;
+    <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> left<span style="color:#f92672">-&gt;</span>row_no; i<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">for</span> (j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> right<span style="color:#f92672">-&gt;</span>col_no; j<span style="color:#f92672">++</span>) {
+            sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+            <span style="color:#66d9ef">for</span> (k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> left<span style="color:#f92672">-&gt;</span>col_no; k<span style="color:#f92672">++</span>) {
+                left_elem <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(left<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i <span style="color:#f92672">*</span> left<span style="color:#f92672">-&gt;</span>col_no <span style="color:#f92672">+</span> k);
+                right_elem <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(right<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> j <span style="color:#f92672">*</span> right<span style="color:#f92672">-&gt;</span>col_no <span style="color:#f92672">+</span> k);
+                <span style="color:#66d9ef">if</span> ((left_elem <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">&amp;&amp;</span> (right_elem <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>)) {
+                    sum <span style="color:#f92672">+=</span> left_elem <span style="color:#f92672">*</span> right_elem;
                 }
             }
-            *(temp-&gt;elem + i * temp-&gt;col_no + j) = sum;
+            <span style="color:#f92672">*</span>(temp<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i <span style="color:#f92672">*</span> temp<span style="color:#f92672">-&gt;</span>col_no <span style="color:#f92672">+</span> j) <span style="color:#f92672">=</span> sum;
         }
     }
-    if (result == left || result == right) {
-        for (i = 0; i &lt; result-&gt;row_no * result-&gt;col_no; i++) {
-            *(result-&gt;elem + i) = *(temp-&gt;elem + i);
+    <span style="color:#66d9ef">if</span> (result <span style="color:#f92672">==</span> left <span style="color:#f92672">||</span> result <span style="color:#f92672">==</span> right) {
+        <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> result<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">*</span> result<span style="color:#f92672">-&gt;</span>col_no; i<span style="color:#f92672">++</span>) {
+            <span style="color:#f92672">*</span>(result<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i) <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(temp<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i);
         }
     }
 }
 
-void matrix_power(Matrix *m, int exp, Matrix *result)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_power</span>(Matrix <span style="color:#f92672">*</span>m, <span style="color:#66d9ef">int</span> exp, Matrix <span style="color:#f92672">*</span>result)
 {
     matrix_identity(result);
 
-    while (exp &gt; 0) {
-        if ((exp &amp; 1) == 1) {
+    <span style="color:#66d9ef">while</span> (exp <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+        <span style="color:#66d9ef">if</span> ((exp <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
             matrix_multiple(m, result, result);
         }
         matrix_multiple(m, m, m);
-        exp &gt;&gt;= 1;
+        exp <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>;
     }
 }
 
-void matrix_trans(Matrix *m, Matrix *trans)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">matrix_trans</span>(Matrix <span style="color:#f92672">*</span>m, Matrix <span style="color:#f92672">*</span>trans)
 {
-    int i, j;
+    <span style="color:#66d9ef">int</span> i, j;
 
     assert_matrix(m);
     assert_matrix(trans);
 
-    if (!(m-&gt;row_no == trans-&gt;col_no &amp;&amp;
-          m-&gt;col_no == trans-&gt;row_no)) {
-        fprintf(stderr, &quot;row number or column number not match!&quot;);
-        exit(1);
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>(m<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">==</span> trans<span style="color:#f92672">-&gt;</span>col_no <span style="color:#f92672">&amp;&amp;</span>
+          m<span style="color:#f92672">-&gt;</span>col_no <span style="color:#f92672">==</span> trans<span style="color:#f92672">-&gt;</span>row_no)) {
+        fprintf(stderr, <span style="color:#e6db74">&#34;row number or column number not match!&#34;</span>);
+        exit(<span style="color:#ae81ff">1</span>);
     }
-    for (i = 0; i &lt; m-&gt;row_no; i++) {
-        for (j = 0; j &lt; m-&gt;col_no; j++) {
-            *(trans-&gt;elem + j * trans-&gt;col_no + i) =
-                *(m-&gt;elem + i * m-&gt;row_no + j);
+    <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m<span style="color:#f92672">-&gt;</span>row_no; i<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">for</span> (j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> m<span style="color:#f92672">-&gt;</span>col_no; j<span style="color:#f92672">++</span>) {
+            <span style="color:#f92672">*</span>(trans<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> j <span style="color:#f92672">*</span> trans<span style="color:#f92672">-&gt;</span>col_no <span style="color:#f92672">+</span> i) <span style="color:#f92672">=</span>
+                <span style="color:#f92672">*</span>(m<span style="color:#f92672">-&gt;</span>elem <span style="color:#f92672">+</span> i <span style="color:#f92672">*</span> m<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">+</span> j);
         }
     }
 }
 
-static void assert_matrix(const Matrix *m)
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">assert_matrix</span>(<span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>m)
 {
-    if (m == NULL) {
-        fprintf(stderr, &quot;the matrix is NULL!&quot;);
+    <span style="color:#66d9ef">if</span> (m <span style="color:#f92672">==</span> NULL) {
+        fprintf(stderr, <span style="color:#e6db74">&#34;the matrix is NULL!&#34;</span>);
     }
 }
 
-static int can_add(const Matrix *m1, const Matrix *m2,
-                   const Matrix *result)
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">can_add</span>(<span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>m1, <span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>m2,
+                   <span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>result)
 {
-    if (m1-&gt;row_no == m2-&gt;row_no &amp;&amp;
-        m1-&gt;col_no == m2-&gt;col_no &amp;&amp;
-        m1-&gt;row_no == result-&gt;row_no &amp;&amp;
-        m1-&gt;col_no == result-&gt;col_no) {
-        return 1;
-    } else {
-        return 0;
+    <span style="color:#66d9ef">if</span> (m1<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">==</span> m2<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">&amp;&amp;</span>
+        m1<span style="color:#f92672">-&gt;</span>col_no <span style="color:#f92672">==</span> m2<span style="color:#f92672">-&gt;</span>col_no <span style="color:#f92672">&amp;&amp;</span>
+        m1<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">==</span> result<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">&amp;&amp;</span>
+        m1<span style="color:#f92672">-&gt;</span>col_no <span style="color:#f92672">==</span> result<span style="color:#f92672">-&gt;</span>col_no) {
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
     }
 }
 
-static int can_mul(const Matrix *left, const Matrix *right,
-                   const Matrix *result)
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">can_mul</span>(<span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>left, <span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>right,
+                   <span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>result)
 {
-    if (left-&gt;col_no == right-&gt;row_no &amp;&amp;
-        right-&gt;row_no == result-&gt;row_no &amp;&amp;
-        right-&gt;col_no == result-&gt;col_no) {
-        return 1;
-    } else {
-        return 0;
+    <span style="color:#66d9ef">if</span> (left<span style="color:#f92672">-&gt;</span>col_no <span style="color:#f92672">==</span> right<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">&amp;&amp;</span>
+        right<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">==</span> result<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">&amp;&amp;</span>
+        right<span style="color:#f92672">-&gt;</span>col_no <span style="color:#f92672">==</span> result<span style="color:#f92672">-&gt;</span>col_no) {
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
     }
 }
 
-static int is_square(const Matrix *m)
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">is_square</span>(<span style="color:#66d9ef">const</span> Matrix <span style="color:#f92672">*</span>m)
 {
-    return m-&gt;row_no == m-&gt;col_no;
+    <span style="color:#66d9ef">return</span> m<span style="color:#f92672">-&gt;</span>row_no <span style="color:#f92672">==</span> m<span style="color:#f92672">-&gt;</span>col_no;
 }
-</code></pre><p>main.c</p>
-<pre><code class="language-{.c}" data-lang="{.c}">#include &quot;matrix.h&quot;
+</code></pre></div><p>main.c</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;matrix.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#define M 5
+</span><span style="color:#75715e">#define N 5
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">/* return the fibonacci number of NUM */</span>
+<span style="color:#66d9ef">float</span> <span style="color:#a6e22e">fibonacci</span>(<span style="color:#66d9ef">int</span> num);
 
-#define M 5
-#define N 5
-
-/* return the fibonacci number of NUM */
-float fibonacci(int num);
-
-int main(int argc, char *argv[])
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>argv[])
 {
-    Matrix *m1, *m2, *result;
-    FILE *fp;
+    Matrix <span style="color:#f92672">*</span>m1, <span style="color:#f92672">*</span>m2, <span style="color:#f92672">*</span>result;
+    FILE <span style="color:#f92672">*</span>fp;
 
-    fp = fopen(&quot;input.txt&quot;, &quot;r&quot;);
-    if (fp == NULL) {
-        perror(&quot;open input.txt&quot;);
-        exit(1);
+    fp <span style="color:#f92672">=</span> fopen(<span style="color:#e6db74">&#34;input.txt&#34;</span>, <span style="color:#e6db74">&#34;r&#34;</span>);
+    <span style="color:#66d9ef">if</span> (fp <span style="color:#f92672">==</span> NULL) {
+        perror(<span style="color:#e6db74">&#34;open input.txt&#34;</span>);
+        exit(<span style="color:#ae81ff">1</span>);
     }
-    m1 = matrix_from_file(fp, 5, 5);
-    m2 = matrix_from_file(fp, 5, 5);
-    result = matrix_from_file(NULL, 5, 5);
+    m1 <span style="color:#f92672">=</span> matrix_from_file(fp, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>);
+    m2 <span style="color:#f92672">=</span> matrix_from_file(fp, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>);
+    result <span style="color:#f92672">=</span> matrix_from_file(NULL, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>);
 
     matrix_print(m1);
-    printf(&quot;\n&quot;);
+    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 
     matrix_minus(m1);
     matrix_print(m1);
-    printf(&quot;\n&quot;);
+    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 
     matrix_add(m1, m2, result);
     matrix_print(result);
-    printf(&quot;\n&quot;);
+    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 
     matrix_substract(m2, m1, result);
     matrix_print(result);
-    printf(&quot;\n&quot;);
+    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 
     matrix_multiple(m1, m2, result);
     matrix_print(result);
-    printf(&quot;\n&quot;);
+    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 
     matrix_trans(m1, result);
     matrix_print(result);
-    printf(&quot;\n&quot;);
+    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
 
     matrix_delete(m1);
     matrix_delete(m2);
     fclose(fp);
     matrix_delete(result);
 
-    printf(&quot;%g\n&quot;, fibonacci(10));
+    printf(<span style="color:#e6db74">&#34;%g</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, fibonacci(<span style="color:#ae81ff">10</span>));
 
-    return 0;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 
-float fibonacci(int num)
+<span style="color:#66d9ef">float</span> <span style="color:#a6e22e">fibonacci</span>(<span style="color:#66d9ef">int</span> num)
 {
-    Matrix *m1, *m2, *exp;
-    float **arr, **vector, result;
-    int i, j;
+    Matrix <span style="color:#f92672">*</span>m1, <span style="color:#f92672">*</span>m2, <span style="color:#f92672">*</span>exp;
+    <span style="color:#66d9ef">float</span> <span style="color:#f92672">**</span>arr, <span style="color:#f92672">**</span>vector, result;
+    <span style="color:#66d9ef">int</span> i, j;
 
-    arr = (float **)malloc(2 * sizeof(float *));
-    for (i = 0; i &lt; 2; i++) {
-        arr[i] = (float *)malloc(2 * sizeof(float));
-        for (j = 0; j &lt; 2; j++) {
-            arr[i][j] = 1;
+    arr <span style="color:#f92672">=</span> (<span style="color:#66d9ef">float</span> <span style="color:#f92672">**</span>)malloc(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>));
+    <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>; i<span style="color:#f92672">++</span>) {
+        arr[i] <span style="color:#f92672">=</span> (<span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>)malloc(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">float</span>));
+        <span style="color:#66d9ef">for</span> (j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>; j<span style="color:#f92672">++</span>) {
+            arr[i][j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
         }
     }
-    arr[0][0] = 0;
+    arr[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 
-    vector = (float **)malloc(2 * sizeof(float *));
-    for (i = 0; i &lt; 2; i++) {
-        vector[i] = (float *)malloc(sizeof(float));
+    vector <span style="color:#f92672">=</span> (<span style="color:#66d9ef">float</span> <span style="color:#f92672">**</span>)malloc(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>));
+    <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>; i<span style="color:#f92672">++</span>) {
+        vector[i] <span style="color:#f92672">=</span> (<span style="color:#66d9ef">float</span> <span style="color:#f92672">*</span>)malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">float</span>));
     }
-    vector[0][0] = 0;
-    vector[1][0] = 1;
+    vector[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    vector[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
 
-    m1 = matrix_from_array(arr, 2, 2);
-    m2 = matrix_from_array(vector, 2, 1);
-    exp = matrix_from_file(NULL, 2, 2);
+    m1 <span style="color:#f92672">=</span> matrix_from_array(arr, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>);
+    m2 <span style="color:#f92672">=</span> matrix_from_array(vector, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>);
+    exp <span style="color:#f92672">=</span> matrix_from_file(NULL, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>);
 
     matrix_power(m1, num, exp);
     matrix_multiple(exp, m2, m2);
-    result = *(m2-&gt;elem);
+    result <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(m2<span style="color:#f92672">-&gt;</span>elem);
 
     matrix_delete(m1);
     matrix_delete(m2);
     matrix_delete(exp);
-    for (i = 0; i &lt; 2; i++) {
+    <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>; i<span style="color:#f92672">++</span>) {
         free(arr[i]);
     }
     free(arr);
-    for (i = 0; i &lt; 2; i++) {
+    <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>; i<span style="color:#f92672">++</span>) {
         free(vector[i]);
     }
     free(vector);
 
-    return result;
+    <span style="color:#66d9ef">return</span> result;
 }
-</code></pre><p>input.txt</p>
+</code></pre></div><p>input.txt</p>
 <pre><code class="language-{.example}" data-lang="{.example}">1 2 3 4 5
 6 7 8 9 10
 9 8 7 6 5
@@ -600,7 +602,7 @@ clean:
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2013-03-06
+        2022-07-24
         
     </span>
   </p>
@@ -625,15 +627,13 @@ clean:
       </label>
   </div>
 </div><footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="/tags/c/">c</a>
+          </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/haskell/recursion.org/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">递归</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/haskell/function.org/">
-            <span class="next-text nav-default">函数中的语法</span>
+        
+        <a class="next" href="/post/clang/exam/">
+            <span class="next-text nav-default">复习C/C&#43;&#43;</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -646,7 +646,7 @@ clean:
     <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var gitment = new Gitment({
-        id: '2013-03-06 00:00:00 \x2b0000 UTC',
+        id: '2022-07-24 00:00:00 \x2b0000 UTC',
         title: 'C语言实现的矩阵类',
         link: decodeURI(location.href),
         desc: '随着学习的深入，数学是必不可少的，最近复习到矩阵，于是用我最喜欢的C语言写 了一个矩阵类，使用面向对象的方法，只实现了简单的操作:新建，删除，',

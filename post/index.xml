@@ -6,10 +6,73 @@
     <description>Recent content in Posts on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 16 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 24 Jul 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C语言实现的矩阵类</title>
+      <link>http://zhengyhn.github.io/post/clang/matrix/</link>
+      <pubDate>Sun, 24 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/matrix/</guid>
+      <description>随着学习的深入，数学是必不可少的，最近复习到矩阵，于是用我最喜欢的C语言写 了一个矩阵类，使用面向对象的方法，只实现了简单的操作:新建，删除，</description>
+    </item>
+    
+    <item>
+      <title>复习C/C&#43;&#43;</title>
+      <link>http://zhengyhn.github.io/post/clang/exam/</link>
+      <pubDate>Sun, 24 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/exam/</guid>
+      <description>本文为《C笔试面试宝典》一书的笔记 new, delete, malloc, free的关系 new和delete是C++的运算符，new调用构造函数，delete调用析构函数。 d</description>
+    </item>
+    
+    <item>
+      <title>开幕</title>
+      <link>http://zhengyhn.github.io/post/algorithm/prologue/</link>
+      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/algorithm/prologue/</guid>
+      <description>本文为&amp;quot;Algorithms&amp;quot;一书的笔记 fibonacci 书上给出了另外一种我想不到的解法： #include &amp;lt;stdio.h&amp;gt; #define MAXN 100 int fib[MAXN]; int get_fib(int num); int main(int argc, char *argv[]) { printf(&amp;quot;%d\n&amp;quot;, get_fib(10)); return 0; } int</description>
+    </item>
+    
+    <item>
+      <title>比较高效的整数求幂法</title>
+      <link>http://zhengyhn.github.io/post/algorithm/quick.exp/</link>
+      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/algorithm/quick.exp/</guid>
+      <description>最近在看快速求fibonaci数列的方法，需要用到快速求幂法，于是参考了这篇文章 ， 做下笔记。 最直观的方法 如果叫我求一个整数的n次幂，我要么用</description>
+    </item>
+    
+    <item>
+      <title>KMP算法-我的理解</title>
+      <link>http://zhengyhn.github.io/post/algorithm/kmp/</link>
+      <pubDate>Sun, 17 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/algorithm/kmp/</guid>
+      <description>动机 看了一本叫做《C/C++面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于是开始了KMP之旅！ 在网上看了好几篇中文文章，没一</description>
+    </item>
+    
+    <item>
+      <title>数字的算法</title>
+      <link>http://zhengyhn.github.io/post/algorithm/number/</link>
+      <pubDate>Sun, 17 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/algorithm/number/</guid>
+      <description>基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：</description>
+    </item>
+    
+    <item>
+      <title>shell 编程！</title>
+      <link>http://zhengyhn.github.io/post/shell/getting.start/</link>
+      <pubDate>Sat, 16 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/shell/getting.start/</guid>
+      <description>引言 我非常欣赏这句话。 没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。 &amp;ndash;Herbert Mayer 写脚本 我之前也写过一点点的bash shell，完全</description>
+    </item>
     
     <item>
       <title>shell基础知识</title>
@@ -772,39 +835,12 @@ Encapsulation is not invisibility.</description>
     </item>
     
     <item>
-      <title>shell 编程！</title>
-      <link>http://zhengyhn.github.io/post/shell/getting.start/</link>
-      <pubDate>Tue, 13 Aug 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/shell/getting.start/</guid>
-      <description>引言 我非常欣赏这句话。 没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。 &amp;ndash;Herbert Mayer 写脚本 我之前也写过一点点的bash shell，完全</description>
-    </item>
-    
-    <item>
-      <title>KMP算法-我的理解</title>
-      <link>http://zhengyhn.github.io/post/algorithm/kmp/</link>
-      <pubDate>Wed, 24 Apr 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/algorithm/kmp/</guid>
-      <description>动机 看了一本叫做《C/C++面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于是开始了KMP之旅！ 在网上看了好几篇中文文章，没一</description>
-    </item>
-    
-    <item>
       <title>程序员面试宝典读书笔记</title>
       <link>http://zhengyhn.github.io/post/programmer_interview/</link>
       <pubDate>Wed, 24 Apr 2013 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/programmer_interview/</guid>
       <description>C/C++程序设计 浮点数的存储 有下面的代码： #include &amp;lt;stdio.h&amp;gt; int main(int argc, char *argv[]) { int a; float *b = (float *)&amp;amp;a; *b = 13.0f; printf(&amp;quot;%d\n&amp;quot;, a); printf(&amp;quot;%#x\n&amp;quot;, a); return 0; } 最后的输出会是多少呢？ 答案是： 1095761920 0x41500000 涉及到IEE</description>
-    </item>
-    
-    <item>
-      <title>复习C/C&#43;&#43;</title>
-      <link>http://zhengyhn.github.io/post/clang/exam/</link>
-      <pubDate>Sat, 20 Apr 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/clang/exam/</guid>
-      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为《C笔试面试宝典》一书的笔记 @&amp;lt;/font&amp;gt; new, delete, malloc, free的关系 new和delete是C++的运算符，new调用构造函数，delete调用析构函</description>
     </item>
     
     <item>
@@ -889,30 +925,12 @@ Encapsulation is not invisibility.</description>
     </item>
     
     <item>
-      <title>数字的算法</title>
-      <link>http://zhengyhn.github.io/post/algorithm/number/</link>
-      <pubDate>Wed, 13 Mar 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/algorithm/number/</guid>
-      <description>基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：</description>
-    </item>
-    
-    <item>
       <title>简介</title>
       <link>http://zhengyhn.github.io/post/pm/intro.org/</link>
       <pubDate>Wed, 13 Mar 2013 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/post/pm/intro.org/</guid>
       <description>项目 什么是项目 一个项目，就是为了创造一个独特的产品、服务或结果的临时性努力。 A project is a temporary endeavor undertaken to create a unique product, service or result. 而IT项目则是使用硬件、软件或网络</description>
-    </item>
-    
-    <item>
-      <title>比较高效的整数求幂法</title>
-      <link>http://zhengyhn.github.io/post/algorithm/quick.exp/</link>
-      <pubDate>Mon, 11 Mar 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/algorithm/quick.exp/</guid>
-      <description>最近在看快速求fibonaci数列的方法，需要用到快速求幂法，于是参考了这篇文章 ， 做下笔记。 最直观的方法 如果叫我求一个整数的n次幂，我要么用</description>
     </item>
     
     <item>
@@ -997,15 +1015,6 @@ Encapsulation is not invisibility.</description>
     </item>
     
     <item>
-      <title>C语言实现的矩阵类</title>
-      <link>http://zhengyhn.github.io/post/clang/matrix/</link>
-      <pubDate>Wed, 06 Mar 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/clang/matrix/</guid>
-      <description>随着学习的深入，数学是必不可少的，最近复习到矩阵，于是用我最喜欢的C语言写 了一个矩阵类，使用面向对象的方法，只实现了简单的操作:新建，删除，</description>
-    </item>
-    
-    <item>
       <title>函数中的语法</title>
       <link>http://zhengyhn.github.io/post/haskell/function.org/</link>
       <pubDate>Wed, 06 Mar 2013 00:00:00 +0000</pubDate>
@@ -1021,15 +1030,6 @@ Encapsulation is not invisibility.</description>
       
       <guid>http://zhengyhn.github.io/post/how-to-become-a-hacker/</guid>
       <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;how to become a hacker&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 什么是一个黑客 有一个社区，里面有共享的文化，有顶级的编程高手，有网络天</description>
-    </item>
-    
-    <item>
-      <title>开幕</title>
-      <link>http://zhengyhn.github.io/post/algorithm/prologue/</link>
-      <pubDate>Sun, 03 Mar 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/algorithm/prologue/</guid>
-      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;Algorithms&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; fibonacci 书上给出了另外一种我想不到的解法： #include &amp;lt;stdio.h&amp;gt; #define MAXN 100 int fib[MAXN]; int get_fib(int num); int main(int argc, char *argv[]) { printf(&amp;quot;%d\n&amp;quot;, get_fib(10)); return</description>
     </item>
     
     <item>

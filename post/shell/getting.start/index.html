@@ -43,17 +43,17 @@
 <meta property="og:description" content="引言 我非常欣赏这句话。 没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。 &ndash;Herbert Mayer 写脚本 我之前也写过一点点的bash shell，完全" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/shell/getting.start/" />
-<meta property="article:published_time" content="2013-08-13T00:00:00+00:00" />
-<meta property="article:modified_time" content="2013-08-13T00:00:00+00:00" />
+<meta property="article:published_time" content="2022-07-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-16T00:00:00+00:00" />
 <meta itemprop="name" content="shell 编程！">
 <meta itemprop="description" content="引言 我非常欣赏这句话。 没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。 &ndash;Herbert Mayer 写脚本 我之前也写过一点点的bash shell，完全">
-<meta itemprop="datePublished" content="2013-08-13T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2013-08-13T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2022-07-16T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-07-16T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="325">
 
 
 
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Shell," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="shell 编程！"/>
 <meta name="twitter:description" content="引言 我非常欣赏这句话。 没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。 &ndash;Herbert Mayer 写脚本 我之前也写过一点点的bash shell，完全"/>
 
@@ -125,8 +125,10 @@
       <h1 class="post-title">shell 编程！</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2013-08-13 </span>
-        
+        <span class="post-time"> 2022-07-16 </span>
+        <div class="post-category">
+            <a href="/categories/devops/"> DevOps </a>
+            </div>
           <span class="more-meta"> 约 325 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
@@ -149,17 +151,17 @@
 <h1 id="写脚本">写脚本</h1>
 <p>我之前也写过一点点的bash shell，完全是为了少打一些命令。但是我之前
 写的代码很不规范，今天看了第一份代码，立刻发现了我应该注意的地方。</p>
-<ol>
+<ul>
 <li>注释#后面要加一个空格，一行写不完的注释后面几行的要以#+开头。</li>
-</ol>
+</ul>
 <pre><code class="language-{.example}" data-lang="{.example}"># this is a comment,but it may be
 #+ too long
-</code></pre><ol>
+</code></pre><ul>
 <li>程序的结束要写一个exit 0，这个就像C语言中的return 0</li>
 <li>引用变量，最好要加上双引号</li>
 <li>引用命令的执行结果使用``（和波浪号同一个键的那个符号）</li>
 <li>#!这个叫sha-bang</li>
-</ol>
+</ul>
 <h1 id="执行脚本">执行脚本</h1>
 <p>我以前总是通过先赋予文件可执行权限，再执行的方式运行脚本，今天看到的
 方法令我眼前一亮。</p>
@@ -177,7 +179,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2013-08-13
+        2022-07-16
         
     </span>
   </p>
@@ -202,15 +204,17 @@
       </label>
   </div>
 </div><footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="/tags/shell/">Shell</a>
+          </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/misc/elisp_arithmetic/">
+        <a class="prev" href="/post/algorithm/number/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">elisp笔记：运算</span>
+            <span class="prev-text nav-default">数字的算法</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/algorithm/kmp/">
-            <span class="next-text nav-default">KMP算法-我的理解</span>
+        <a class="next" href="/post/shell/basics/">
+            <span class="next-text nav-default">shell基础知识</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -223,7 +227,7 @@
     <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var gitment = new Gitment({
-        id: '2013-08-13 00:00:00 \x2b0000 UTC',
+        id: '2022-07-16 00:00:00 \x2b0000 UTC',
         title: 'shell 编程！',
         link: decodeURI(location.href),
         desc: '引言 我非常欣赏这句话。 没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。 \x26ndash;Herbert Mayer 写脚本 我之前也写过一点点的bash shell，完全',

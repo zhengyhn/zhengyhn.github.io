@@ -6,10 +6,46 @@
     <description>Recent content in Algorithm on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Jul 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>开幕</title>
+      <link>http://zhengyhn.github.io/post/algorithm/prologue/</link>
+      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/algorithm/prologue/</guid>
+      <description>本文为&amp;quot;Algorithms&amp;quot;一书的笔记 fibonacci 书上给出了另外一种我想不到的解法： #include &amp;lt;stdio.h&amp;gt; #define MAXN 100 int fib[MAXN]; int get_fib(int num); int main(int argc, char *argv[]) { printf(&amp;quot;%d\n&amp;quot;, get_fib(10)); return 0; } int</description>
+    </item>
+    
+    <item>
+      <title>比较高效的整数求幂法</title>
+      <link>http://zhengyhn.github.io/post/algorithm/quick.exp/</link>
+      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/algorithm/quick.exp/</guid>
+      <description>最近在看快速求fibonaci数列的方法，需要用到快速求幂法，于是参考了这篇文章 ， 做下笔记。 最直观的方法 如果叫我求一个整数的n次幂，我要么用</description>
+    </item>
+    
+    <item>
+      <title>KMP算法-我的理解</title>
+      <link>http://zhengyhn.github.io/post/algorithm/kmp/</link>
+      <pubDate>Sun, 17 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/algorithm/kmp/</guid>
+      <description>动机 看了一本叫做《C/C++面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于是开始了KMP之旅！ 在网上看了好几篇中文文章，没一</description>
+    </item>
+    
+    <item>
+      <title>数字的算法</title>
+      <link>http://zhengyhn.github.io/post/algorithm/number/</link>
+      <pubDate>Sun, 17 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/algorithm/number/</guid>
+      <description>基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：</description>
+    </item>
     
     <item>
       <title>String permutations</title>

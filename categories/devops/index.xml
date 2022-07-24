@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>shell 编程！</title>
+      <link>http://zhengyhn.github.io/post/shell/getting.start/</link>
+      <pubDate>Sat, 16 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/shell/getting.start/</guid>
+      <description>引言 我非常欣赏这句话。 没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。 &amp;ndash;Herbert Mayer 写脚本 我之前也写过一点点的bash shell，完全</description>
+    </item>
+    
+    <item>
       <title>shell基础知识</title>
       <link>http://zhengyhn.github.io/post/shell/basics/</link>
       <pubDate>Sat, 16 Jul 2022 00:00:00 +0000</pubDate>

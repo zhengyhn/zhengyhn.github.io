@@ -43,17 +43,17 @@
 <meta property="og:description" content="基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/algorithm/number/" />
-<meta property="article:published_time" content="2013-03-13T00:00:00+00:00" />
-<meta property="article:modified_time" content="2013-03-13T00:00:00+00:00" />
+<meta property="article:published_time" content="2022-07-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-17T00:00:00+00:00" />
 <meta itemprop="name" content="数字的算法">
 <meta itemprop="description" content="基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：">
-<meta itemprop="datePublished" content="2013-03-13T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2013-03-13T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="4267">
+<meta itemprop="datePublished" content="2022-07-17T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-07-17T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="4272">
 
 
 
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Algorithm," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="数字的算法"/>
 <meta name="twitter:description" content="基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质："/>
 
@@ -125,9 +125,11 @@
       <h1 class="post-title">数字的算法</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2013-03-13 </span>
-        
-          <span class="more-meta"> 约 4267 字 </span>
+        <span class="post-time"> 2022-07-17 </span>
+        <div class="post-category">
+            <a href="/categories/algorithm/"> Algorithm </a>
+            </div>
+          <span class="more-meta"> 约 4272 字 </span>
           <span class="more-meta"> 预计阅读 9 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -147,10 +149,6 @@
     <li><a href="#欧几里得最大公约数算法">欧几里得最大公约数算法</a></li>
     <li><a href="#扩展欧几里得算法">扩展欧几里得算法</a></li>
   </ul>
-
-  <ul>
-    <li><a href="#费马小定理">费马小定理</a></li>
-  </ul>
 </nav>
   </div>
 </div>
@@ -160,13 +158,9 @@
 <p>十进制有一个很傻逼但是很有趣的性质：</p>
 <pre><code class="language-{.example}" data-lang="{.example}">任意3个个位数相加的和最多是两位数
 </code></pre><p>事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：</p>
-<hr>
-<p>对于一个基数为b的k位数，它能表示的最大数为b^k^ - 1</p>
-<hr>
+<p>对于一个基数为b的k位数，它能表示的最大数为$b^{k^ {-1}}$</p>
 <p>想要知道一个基数为b的数有多少位k，则：</p>
-<hr>
-<p>k = log~b~(N + 1)</p>
-<hr>
+<p>$$ k = log_b(N + 1) $$</p>
 <h2 id="乘法和除法">乘法和除法</h2>
 <p>这里出现了一种神奇的乘法算法，对于计算机来说效率非常高，
 引用<a href="http://en.wikipedia.org/wiki/Multiplication_algorithm#Quarter_square_multiplication">wikipedia</a>
@@ -341,9 +335,9 @@ struct Div divide(int divider, int divisor)
 </code></pre><h1 id="模代数">模代数</h1>
 <h2 id="求模运算">求模运算</h2>
 <p>同余(congruent modulo)定理：</p>
-<hr>
-<p>x ≡ y (mod N) ↔ N divides (x - y)</p>
-<hr>
+<p>$$
+x ≡ y (mod N) ↔ N divides (x - y)
+$$</p>
 <p>按照我个人的理解，是：</p>
 <pre><code class="language-{.example}" data-lang="{.example}">x和y除了N有相同的余数当且仅当N整除(x - y)
 </code></pre><p>用书上的例子，令x = 253, y = 13, 253除以60余数为13, 13除以60余数也是13,
@@ -611,7 +605,7 @@ int mul_inverse(int a, int m)
 帮助我理解乘法逆元。</p>
 <h1 id="素性测试">素性测试</h1>
 <p>primality testing. 合数的英文是composite.</p>
-<h2 id="费马小定理">费马小定理</h2>
+<h1 id="费马小定理">费马小定理</h1>
 <p>fermat&rsquo;s little theorem：</p>
 <p>如果p是质数，则对于所有的1 ≤ a &lt; p, 有</p>
 <p>a^p-1^ ≡ 1 (mod p)</p>
@@ -789,7 +783,7 @@ int pow_mod(int base, int exp, int mod)
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2013-03-13
+        2022-07-17
         
     </span>
   </p>
@@ -814,15 +808,17 @@ int pow_mod(int base, int exp, int mod)
       </label>
   </div>
 </div><footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="/tags/algorithm/">Algorithm</a>
+          </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/test/config_comp.org/">
+        <a class="prev" href="/post/algorithm/kmp/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">配置测试与兼容性测试</span>
+            <span class="prev-text nav-default">KMP算法-我的理解</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/pm/intro.org/">
-            <span class="next-text nav-default">简介</span>
+        <a class="next" href="/post/shell/getting.start/">
+            <span class="next-text nav-default">shell 编程！</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -835,7 +831,7 @@ int pow_mod(int base, int exp, int mod)
     <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var gitment = new Gitment({
-        id: '2013-03-13 00:00:00 \x2b0000 UTC',
+        id: '2022-07-17 00:00:00 \x2b0000 UTC',
         title: '数字的算法',
         link: decodeURI(location.href),
         desc: '基本代数 加法 十进制有一个很傻逼但是很有趣的性质： 任意3个个位数相加的和最多是两位数 事实上，对于任意进制，都有这个性质。 另外一个很有用的性质：',

@@ -6,10 +6,28 @@
     <description>Recent content in Categories on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 16 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 24 Jul 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>c</title>
+      <link>http://zhengyhn.github.io/categories/c/</link>
+      <pubDate>Sun, 24 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/categories/c/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Algorithm</title>
+      <link>http://zhengyhn.github.io/categories/algorithm/</link>
+      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/categories/algorithm/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>DevOps</title>
@@ -44,15 +62,6 @@
       <pubDate>Sat, 15 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/categories/react/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Algorithm</title>
-      <link>http://zhengyhn.github.io/categories/algorithm/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/categories/algorithm/</guid>
       <description></description>
     </item>
     

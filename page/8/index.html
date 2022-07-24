@@ -116,6 +116,168 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-27-implement-a-queue-using-two-stacks/">Implement a queue using two stacks</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 162 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      A queue can be implemented using two stacks. One stack store the elements appended to the queue. The other stack store the elements to be popped from the queue.
+Here is the specification of my Queue.
+ StQueue(), Create an empty queue. StQueue(const T&amp; value), Create a queue whose first element is value. StQueue(const T values[], const size_t&amp; size), Create a queue from an array values whose size is size. StQueue(const StQueue&lt;T&gt;&amp; queue), Create a queue from another queue.
+    </div>
+    <div class="read-more">
+      <a href="/post/algorithm/2013-09-27-implement-a-queue-using-two-stacks/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-12-implement-a-singular-linkedlist/">Implement a singular LinkedList</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 262 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      LinkedList is a very common data structure. Three years ago, I could write a singular LinkedList very quickly in C/C++. But the code is ugly and very ineffecient. Now I am going to implement a singular LinkedList in C++ in order to cracking the interview.
+Here is the specification of my LinkedList.
+ LinkedList(), Create an empty LinkedList. LinkedList(const LinkedList&amp; list), Create a LinkedList from another LinkedList list. LinkedList(const T&amp; value), Create a LinkedList whose first element is value.
+    </div>
+    <div class="read-more">
+      <a href="/post/algorithm/2013-09-12-implement-a-singular-linkedlist/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-26-implement-a-stack/">Implement a stack</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 161 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      A stack is based on the Linked List. The most explicit feature of a stack is FILO(First in last out).
+Here is the specification of my Stack.
+ Stack(), Create an empty stack. Stack(const T&amp; value), Create a stack whose first element is value. Stack(const T values[], const size_t&amp; size), Create a stack from an array values whose size is size. Stack(const Stack&lt;T&gt;&amp; stack), Create a stack from another stack. const Stack&lt;T&gt;&amp; operator=(const Stack&lt;T&gt;&amp; stack), Support stack assignment.
+    </div>
+    <div class="read-more">
+      <a href="/post/algorithm/2013-09-26-implement-a-stack/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-26-implement-the-sorting-algorithms/">Implement the sorting algorithms</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 933 字 </span>
+        <span class="more-meta"> 预计阅读 5 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      The sorting algorithms are very important in programming interview. I have to be able to write them on a paper without even an error.
+Bubble Sort The immediate thought of bubble sort is that swapping the ajacent elements if they are of the wrong order in each pass until there are no swapping. For example, consider the array [5, 1, 4, 2, 8],
+First pass:
+[5, 1, 4, 2, 8] =&gt; [1, 5, 4, 2, 8] =&gt; [1, 4, 5, 2, 8] =&gt; [1, 4, 2, 5, 8] =&gt; [1, 4, 2, 5, 8]
+    </div>
+    <div class="read-more">
+      <a href="/post/algorithm/2013-09-26-implement-the-sorting-algorithms/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-07-26-initialized-before-used/">Initialized before used</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 414 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      For constructor In the constructor, the statements in the body are assignments, not initializations.
+#include &lt;iostream&gt; class Girl { public: Girl(std::string name, int age) { name_ = name; // These are assignments, not initilizations. age_ = age; } private: std::string name_; int age_; };  If you do this, the program will be very slow.When calling the constructor, the program will call the default construtors to initialize the members, and then enter the body of the constructor.
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/2013-07-26-initialized-before-used/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-07-23-more-consts-enums-inlines-and-less-defines/">More consts enums inlines and less #defines</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 663 字 </span>
+        <span class="more-meta"> 预计阅读 4 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      This is an old topic.
+For constants Consider a macro below.
+#define PI 3.14  There are several drawbacks when using a macro.
+  It&rsquo;s hard to debug.As we all know, the macros are resolved by the preprocessor and the compiler know nothing about them.When you get an error when compiling the program, the error message may refer to 3.14 but not PI because PI is not in the symbol table.
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/2013-07-23-more-consts-enums-inlines-and-less-defines/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-09-25-my-c-plus-plus-coding-style/">My C&#43;&#43; coding style</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-14 </span>
+      
+        <span class="more-meta"> 约 776 字 </span>
+        <span class="more-meta"> 预计阅读 4 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Every programmer has his/her own coding style. Time goes by, and my coding style is changing. There following is my note on c++ coding style. I will explain why I want to coding in that style.
+Why do I care about my coding style so much? Because I am a virgo.
+ Always add a m_ prefix to the members and use this to refer to other member functions in the member function.
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/2013-09-25-my-c-plus-plus-coding-style/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-08-11-postponing-definitions-instead-of-preponing/">Postponing definitions instead of preponing</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2016-05-14 </span>
@@ -178,161 +340,6 @@ def say_hello(name) &quot;Hello &quot; + name end puts(say_hello(&quot;man&quot;
     </div>
     <div class="read-more">
       <a href="/post/ruby/2013-07-25-some-basic-ruby/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-08-25-some-interview-questions-about-array-and-string/">Some interview questions about array and string</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 1036 字 </span>
-        <span class="more-meta"> 预计阅读 5 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Hash Table In C++, the namespacestd::tr1 contains lots of hash tables. We can play with it.
-{% include_code careerup-array/careerup-hash.cpp %}
-Questions 1.1. Implement an algorithm to determine if a string has all unique characters. What if you can not use additional data structures?
-I have come up with 2 methods.
-  Iterate the string and compare each character to other character. This is the common way to solve this problem.
-    </div>
-    <div class="read-more">
-      <a href="/post/cpp/2013-08-25-some-interview-questions-about-array-and-string/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-07-22-some-reviews-about-c-plus-plus/">Some reviews about C plus plus</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 567 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Declaration and Definition I have already known the difference between declaration and definion, but now I find that my understanding is not complete.
-Declaration just tells the compiler about the name and the type of something.It&rsquo;s very common about the declaration of objects and functions.
-extern int a; int max(int a, int b);  However, I never think about the declaration of class.Recently, I have to view some codes in a large project and I have found many of these declarations.
-    </div>
-    <div class="read-more">
-      <a href="/post/cpp/2013-07-22-some-reviews-about-c-plus-plus/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-08-09-understanding-encapsulation/">Understanding Encapsulation</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 573 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Once I loved C very much and I thought it&rsquo;s the best programming language in the world. I used to argue that C can be used to implement the object-oriented design with struct. I used to argue that private and public is useless in C++. However, now I know I was wrong.
-Why we need private It&rsquo;s related to a very important concept in C++, that is, encapsulation.
-Encapsulation is not invisibility.
-    </div>
-    <div class="read-more">
-      <a href="/post/cpp/2013-08-09-understanding-encapsulation/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/misc/elisp_data_type/">elisp笔记：introduction</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2013-08-13 </span>
-      
-        <span class="more-meta"> 约 566 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      lisp历史 原来lisp是list processing language,1950s后期推出，主要为了研究人工智能。 数据类型 概述 每个对象至少属于一种类型 对于打印
-    </div>
-    <div class="read-more">
-      <a href="/post/misc/elisp_data_type/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/misc/elisp_arithmetic/">elisp笔记：运算</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2013-08-13 </span>
-      
-        <span class="more-meta"> 约 295 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      声明：此文章为学习xahlee 的elisp教程 而写的笔记。 数学计算基础 运算符也是函数 和其它函数式语言一样，elisp中，加减乘除也是一个函数
-    </div>
-    <div class="read-more">
-      <a href="/post/misc/elisp_arithmetic/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/shell/getting.start/">shell 编程！</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2013-08-13 </span>
-      
-        <span class="more-meta"> 约 325 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      引言 我非常欣赏这句话。 没有完美的编程语言。没有最好的语言，只有最合适或最不合适的语言。 &ndash;Herbert Mayer 写脚本 我之前也写过一点点的bash shell，完全
-    </div>
-    <div class="read-more">
-      <a href="/post/shell/getting.start/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/algorithm/kmp/">KMP算法-我的理解</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2013-04-24 </span>
-      
-        <span class="more-meta"> 约 2803 字 </span>
-        <span class="more-meta"> 预计阅读 6 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      动机 看了一本叫做《C/C++面试题》的电子书，里面提到找子字符串的算法，最好的是KMP， 于是开始了KMP之旅！ 在网上看了好几篇中文文章，没一
-    </div>
-    <div class="read-more">
-      <a href="/post/algorithm/kmp/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
