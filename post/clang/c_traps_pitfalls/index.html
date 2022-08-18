@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Hank" /><meta name="description" content="@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;c traps and pitfalls&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 词法陷井 看下面的代码： y = x/*p; /* p points to the divisor */ 本意是x除以p指向的变量，而事" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
+<meta name="author" content="Hank" /><meta name="description" content="本文为&amp;quot;c traps and pitfalls&amp;quot;一书的笔记 词法陷井 看下面的代码： y = x/*p; /* p points to the divisor */ 本意是x除以p指向的变量，而事实上这" /><meta name="keywords" content="Machine Learning, Deep Learning, Nodejs, Algorithm, C&#43;&#43;, Docker, NLP, Typescript, Linux, Redis, Mongodb, Leetcode" />
 
 
 
@@ -40,22 +40,22 @@
 
 
 <meta property="og:title" content="c陷井和缺陷" />
-<meta property="og:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;c traps and pitfalls&quot;一书的笔记 @&lt;/font&gt; 词法陷井 看下面的代码： y = x/*p; /* p points to the divisor */ 本意是x除以p指向的变量，而事" />
+<meta property="og:description" content="本文为&quot;c traps and pitfalls&quot;一书的笔记 词法陷井 看下面的代码： y = x/*p; /* p points to the divisor */ 本意是x除以p指向的变量，而事实上这" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://zhengyhn.github.io/post/clang/c_traps_pitfalls/" />
-<meta property="article:published_time" content="2013-03-01T00:00:00+00:00" />
-<meta property="article:modified_time" content="2013-03-01T00:00:00+00:00" />
+<meta property="article:published_time" content="2022-07-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-31T00:00:00+00:00" />
 <meta itemprop="name" content="c陷井和缺陷">
-<meta itemprop="description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;c traps and pitfalls&quot;一书的笔记 @&lt;/font&gt; 词法陷井 看下面的代码： y = x/*p; /* p points to the divisor */ 本意是x除以p指向的变量，而事">
-<meta itemprop="datePublished" content="2013-03-01T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2013-03-01T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1248">
+<meta itemprop="description" content="本文为&quot;c traps and pitfalls&quot;一书的笔记 词法陷井 看下面的代码： y = x/*p; /* p points to the divisor */ 本意是x除以p指向的变量，而事实上这">
+<meta itemprop="datePublished" content="2022-07-31T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-07-31T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1245">
 
 
 
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="c," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="c陷井和缺陷"/>
-<meta name="twitter:description" content="@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;c traps and pitfalls&quot;一书的笔记 @&lt;/font&gt; 词法陷井 看下面的代码： y = x/*p; /* p points to the divisor */ 本意是x除以p指向的变量，而事"/>
+<meta name="twitter:description" content="本文为&quot;c traps and pitfalls&quot;一书的笔记 词法陷井 看下面的代码： y = x/*p; /* p points to the divisor */ 本意是x除以p指向的变量，而事实上这"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -125,9 +125,11 @@
       <h1 class="post-title">c陷井和缺陷</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2013-03-01 </span>
-        
-          <span class="more-meta"> 约 1248 字 </span>
+        <span class="post-time"> 2022-07-31 </span>
+        <div class="post-category">
+            <a href="/categories/c/"> c </a>
+            </div>
+          <span class="more-meta"> 约 1245 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -136,29 +138,37 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#词法陷井">词法陷井</a></li>
+    <li><a href="#语法陷井">语法陷井</a></li>
+    <li><a href="#链接陷井">链接陷井</a></li>
+    <li><a href="#语义陷井">语义陷井</a></li>
+    <li><a href="#库函数陷井">库函数陷井</a></li>
+    <li><a href="#预处理陷井">预处理陷井</a></li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      <p>@&lt;font color=&quot;red&rdquo;&gt; 本文为&quot;c traps and pitfalls&quot;一书的笔记
-@&lt;/font&gt;</p>
-<h1 id="词法陷井">词法陷井</h1>
+      <p>本文为&quot;c traps and pitfalls&quot;一书的笔记</p>
+<h2 id="词法陷井">词法陷井</h2>
 <ul>
 <li>看下面的代码：</li>
 </ul>
-<pre><code class="language-{.example}" data-lang="{.example}">y = x/*p;  /* p points to the divisor */
-</code></pre><p>本意是x除以p指向的变量，而事实上这样写/*会认为是注释的开头。
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">y <span style="color:#f92672">=</span> x<span style="color:#75715e">/*p;  /* p points to the divisor */</span>
+</code></pre></div><p>本意是x除以p指向的变量，而事实上这样写/*会认为是注释的开头。
 所以，双目运算符两边加空格是非常好的。</p>
-<h1 id="语法陷井">语法陷井</h1>
+<h2 id="语法陷井">语法陷井</h2>
 <ul>
 <li>!=的优先级要比&amp;之类的逻辑运算符高，所以不要有下面的写法</li>
 </ul>
-<pre><code class="language-{.example}" data-lang="{.example}">if (flags &amp; FLAG != 0)
-</code></pre><ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">if</span> (flags <span style="color:#f92672">&amp;</span> FLAG <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>)
+</code></pre></div><ul>
 <li>+号等运算符优先级要比[]{#和}的高，所以不要有下面的写法</li>
 </ul>
-<pre><code class="language-{.example}" data-lang="{.example}">r = h &lt;&lt; 4 + 1
-</code></pre><ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">r <span style="color:#f92672">=</span> h <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</code></pre></div><ul>
 <li>运算符优先级的记忆方法</li>
 </ul>
 <ol>
@@ -176,101 +186,101 @@ sizeof，</li>
 </ol>
 <p>代数运算符 &gt; 移位运算符 &gt; 关系运算符 &gt; 逻辑运算符 &gt;
 赋值运算符 &gt; 条件运算符</p>
-<h1 id="链接陷井">链接陷井</h1>
+<h2 id="链接陷井">链接陷井</h2>
 <ul>
 <li>假设一个文件里面有下面的定义：</li>
 </ul>
-<pre><code class="language-{.example}" data-lang="{.example}">char filename[] = &quot;/etc/passwd&quot;;
-</code></pre><p>另外一个文件里面有下面的定义：</p>
-<pre><code class="language-{.example}" data-lang="{.example}">char *filename;
-</code></pre><p>这2个变量的类型一样吗？虽然指针和数组很相似，但是它们不是同一样东西。
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">char</span> filename[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/etc/passwd&#34;</span>;
+</code></pre></div><p>另外一个文件里面有下面的定义：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>filename;
+</code></pre></div><p>这2个变量的类型一样吗？虽然指针和数组很相似，但是它们不是同一样东西。
 第一个filename，它是一个字符串数组的名字，使用这个名字会生成一个指向这个
 字符串第一个字符的指针，仅在需要的时候生成，不会一直存在。
 第二个filename，它是一个指针，定义时就给它分配了空间，程序员想要让它指向
 哪里它就会指向哪里，如果不给它赋值，它会指向NULL</p>
-<h1 id="语义陷井">语义陷井</h1>
+<h2 id="语义陷井">语义陷井</h2>
 <ul>
 <li>表达式的顺序陷井。看下面的例子：</li>
 </ul>
-<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
-
-int main()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
 {
-    int a[] = { 1, 2, 3 };
-    int b[] = { 10, 20, 30};
-    int i = 0;
+    <span style="color:#66d9ef">int</span> a[] <span style="color:#f92672">=</span> { <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span> };
+    <span style="color:#66d9ef">int</span> b[] <span style="color:#f92672">=</span> { <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>};
+    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 
-    while (i &lt; 3) {
-        a[i++] = b[i];
+    <span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>) {
+        a[i<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> b[i];
     }
-    for (i = 0; i &lt; 3; i++) {
-        printf(&quot;%d\n&quot;, a[i]);
+    <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>; i<span style="color:#f92672">++</span>) {
+        printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, a[i]);
     }
 
-    return 0;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre><p>会输出什么呢？我刚开始是这样想的，先计算右边，再赋值给左边，所以会输出
+</code></pre></div><p>会输出什么呢？我刚开始是这样想的，先计算右边，再赋值给左边，所以会输出
 10 20 30 作者再给了一个例子：</p>
-<pre><code class="language-{.c}" data-lang="{.c}">#include &lt;stdio.h&gt;
-
-int main()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
 {
-    int a[] = { 1, 2, 3 };
-    int b[] = { 10, 20, 30};
-    int i = 0;
+    <span style="color:#66d9ef">int</span> a[] <span style="color:#f92672">=</span> { <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span> };
+    <span style="color:#66d9ef">int</span> b[] <span style="color:#f92672">=</span> { <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>};
+    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 
-    while (i &lt; 3) {
-        a[i] = b[i++];
+    <span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>) {
+        a[i] <span style="color:#f92672">=</span> b[i<span style="color:#f92672">++</span>];
     }
-    for (i = 0; i &lt; 3; i++) {
-        printf(&quot;%d\n&quot;, a[i]);
+    <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>; i<span style="color:#f92672">++</span>) {
+        printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, a[i]);
     }
 
-    return 0;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre><p>会输出什么呢？根据我刚才的推理，理应数组越界的，因为赋值给最后一个元素的时候，
+</code></pre></div><p>会输出什么呢？根据我刚才的推理，理应数组越界的，因为赋值给最后一个元素的时候，
 i++，i已经超过了数组a的范围了。而事实上，结果还是 10 20 30
 作者的解释是，编译器无法保证获取数组元素的操作先于i自增的操作，这是不确定的。
 所以在写程序的时候，最好分开写。</p>
-<h1 id="库函数陷井">库函数陷井</h1>
+<h2 id="库函数陷井">库函数陷井</h2>
 <ul>
 <li>getchar()函数居然返回int!下面是从&lt;stdio.h&gt;复制过来的代码：</li>
 </ul>
-<pre><code class="language-{.c}" data-lang="{.c}">/* Read a character from stdin.  */
-__STDIO_INLINE int
-getchar (void)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* Read a character from stdin.  */</span>
+__STDIO_INLINE <span style="color:#66d9ef">int</span>
+<span style="color:#a6e22e">getchar</span> (<span style="color:#66d9ef">void</span>)
 {
-  return _IO_getc (stdin);
+  <span style="color:#66d9ef">return</span> _IO_getc (stdin);
 }
-</code></pre><p>而且putchar居然也是传进int参数，返回int参数</p>
-<pre><code class="language-{.c}" data-lang="{.c}">/* Write a character to stdout.  */
-__STDIO_INLINE int
-putchar (int __c)
+</code></pre></div><p>而且putchar居然也是传进int参数，返回int参数</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* Write a character to stdout.  */</span>
+__STDIO_INLINE <span style="color:#66d9ef">int</span>
+<span style="color:#a6e22e">putchar</span> (<span style="color:#66d9ef">int</span> __c)
 {
-  return _IO_putc (__c, stdout);
+  <span style="color:#66d9ef">return</span> _IO_putc (__c, stdout);
 }
-</code></pre><h1 id="预处理陷井">预处理陷井</h1>
+</code></pre></div><h2 id="预处理陷井">预处理陷井</h2>
 <ul>
 <li>宏不是函数，看下面的例子：</li>
 </ul>
-<pre><code class="language-{.c}" data-lang="{.c}">#define max(a,b) ((a) &gt; (b) ? (a) : (b))
-
-largest = max(largest,x[i++]);
-</code></pre><p>虽然，在定义宏的时候很小心，加了很多括号，不至于有表达式优先级的问题，但是
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#define max(a,b) ((a) &gt; (b) ? (a) : (b))
+</span><span style="color:#75715e"></span>
+largest <span style="color:#f92672">=</span> max(largest,x[i<span style="color:#f92672">++</span>]);
+</code></pre></div><p>虽然，在定义宏的时候很小心，加了很多括号，不至于有表达式优先级的问题，但是
 这样调用还是背离了本义，因为x[i++]，会使i自加多次，因为宏只是替换，而不是
 拷贝参数。</p>
 <ul>
 <li>宏不是类型定义，看下面的例子：</li>
 </ul>
-<pre><code class="language-{.c}" data-lang="{.c}">#define STU struct student *
-typedef struct student *STUDENT;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#define STU struct student *
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> student <span style="color:#f92672">*</span>STUDENT;
 
 STU a, b;
 STUDENT c, d;
-</code></pre><p>后面的两条定义等价于：</p>
-<pre><code class="language-{.c}" data-lang="{.c}">struct student *a, b;
-struct student *c, *d;
-</code></pre><p>显然，第一条背离了本意，b定义成了结构体类型，而不是指向它的指针类型。虽然
+</code></pre></div><p>后面的两条定义等价于：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">struct</span> student <span style="color:#f92672">*</span>a, b;
+<span style="color:#66d9ef">struct</span> student <span style="color:#f92672">*</span>c, <span style="color:#f92672">*</span>d;
+</code></pre></div><p>显然，第一条背离了本意，b定义成了结构体类型，而不是指向它的指针类型。虽然
 typedef的定义看起来有点别扭，但是在实际的代码中还是要使用typedef，不要
 使用宏。</p>
 
@@ -284,7 +294,7 @@ typedef的定义看起来有点别扭，但是在实际的代码中还是要使�
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2013-03-01
+        2022-07-31
         
     </span>
   </p>
@@ -309,15 +319,17 @@ typedef的定义看起来有点别扭，但是在实际的代码中还是要使�
       </label>
   </div>
 </div><footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="/tags/c/">c</a>
+          </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/sevenhabbits/review_myself.org/">
+        <a class="prev" href="/post/haskell/high.order.function.org/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">重新探索自我</span>
+            <span class="prev-text nav-default">高阶函数</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/test/dev_process.org/">
-            <span class="next-text nav-default">软件测试读书笔记：软件开发过程</span>
+        <a class="next" href="/post/clang/matrix/">
+            <span class="next-text nav-default">C语言实现的矩阵类</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -330,10 +342,10 @@ typedef的定义看起来有点别扭，但是在实际的代码中还是要使�
     <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var gitment = new Gitment({
-        id: '2013-03-01 00:00:00 \x2b0000 UTC',
+        id: '2022-07-31 00:00:00 \x2b0000 UTC',
         title: 'c陷井和缺陷',
         link: decodeURI(location.href),
-        desc: '@\x26lt;font color=\x26quot;red\x26rdquo;\x26gt; 本文为\x26quot;c traps and pitfalls\x26quot;一书的笔记 @\x26lt;\/font\x26gt; 词法陷井 看下面的代码： y = x\/*p; \/* p points to the divisor *\/ 本意是x除以p指向的变量，而事',
+        desc: '本文为\x26quot;c traps and pitfalls\x26quot;一书的笔记 词法陷井 看下面的代码： y = x\/*p; \/* p points to the divisor *\/ 本意是x除以p指向的变量，而事实上这',
         owner: 'zhengyhn',
         repo: 'zhengyhn.github.io',
         oauth: {

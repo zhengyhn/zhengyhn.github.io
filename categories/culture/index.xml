@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>culture on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/categories/culture/</link>
+    <description>Recent content in culture on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 17 Aug 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://zhengyhn.github.io/categories/culture/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>如何成为一个黑客</title>
+      <link>http://zhengyhn.github.io/post/misc/how-to-become-a-hacker/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/misc/how-to-become-a-hacker/</guid>
+      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;how to become a hacker&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 什么是一个黑客 有一个社区，里面有共享的文化，有顶级的编程高手，有网络天</description>
+    </item>
+    
+  </channel>
+</rss>

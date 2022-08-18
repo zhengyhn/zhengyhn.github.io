@@ -13,10 +13,10 @@
     
     <item>
       <title>improve code readability</title>
-      <link>http://zhengyhn.github.io/post/improve-code-readability/</link>
+      <link>http://zhengyhn.github.io/post/design/improve-code-readability/</link>
       <pubDate>Fri, 27 May 2016 20:40:43 +0800</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/improve-code-readability/</guid>
+      <guid>http://zhengyhn.github.io/post/design/improve-code-readability/</guid>
       <description>这是我读 &amp;ldquo;the art of readable code&amp;rdquo; 一书做的笔记 简化循环和逻辑 making control flow easy to read 下面的代码: if (length &amp;gt;= 10) 要比: if (10 &amp;lt;= length) 更容易看懂。这是很显然的。而在C语言中，有的人为了</description>
     </item>
     

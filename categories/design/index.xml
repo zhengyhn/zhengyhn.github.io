@@ -13,10 +13,10 @@
     
     <item>
       <title>浅谈后端业务系统设计</title>
-      <link>http://zhengyhn.github.io/post/design-guide/</link>
+      <link>http://zhengyhn.github.io/post/design/design-guide/</link>
       <pubDate>Fri, 31 Mar 2017 10:50:49 +0800</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/design-guide/</guid>
+      <guid>http://zhengyhn.github.io/post/design/design-guide/</guid>
       <description>这里将说说个人对设计的想法，必然会有争议之处，内容包括系统之间设计，系统内部模块之间设计，细到每个函数的设计。 系统设计 不要为了拆系统而拆系统</description>
     </item>
     

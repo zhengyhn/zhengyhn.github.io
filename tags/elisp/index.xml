@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>elisp on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/tags/elisp/</link>
+    <description>Recent content in elisp on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 17 Aug 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://zhengyhn.github.io/tags/elisp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>elisp笔记：introduction</title>
+      <link>http://zhengyhn.github.io/post/emacs/elisp_data_type/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/emacs/elisp_data_type/</guid>
+      <description>lisp历史 原来lisp是list processing language,1950s后期推出，主要为了研究人工智能。 数据类型 概述 每个对象至少属于一种类型 对于打印</description>
+    </item>
+    
+    <item>
+      <title>elisp笔记：运算</title>
+      <link>http://zhengyhn.github.io/post/emacs/elisp_arithmetic/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/emacs/elisp_arithmetic/</guid>
+      <description>声明：此文章为学习xahlee 的elisp教程 而写的笔记。 数学计算基础 运算符也是函数 和其它函数式语言一样，elisp中，加减乘除也是一个函数</description>
+    </item>
+    
+    <item>
+      <title>org-mode 内嵌LaTex</title>
+      <link>http://zhengyhn.github.io/post/emacs/more.markup.org/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/emacs/more.markup.org/</guid>
+      <description>特殊符号 在表示数学公式上特别有用。比如要表示alpha和beta，则这样： \号后面加alpha，\号后面加beta 为了补全，原来是绑定在了M</description>
+    </item>
+    
+    <item>
+      <title>org-mode介绍</title>
+      <link>http://zhengyhn.github.io/post/emacs/intro.org/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/emacs/intro.org/</guid>
+      <description>什么是org-mode org-mode是用来写笔记，维护todo列表，写项目计划的。 文档结构 大纲 TAB键绑定在命令org-cycle上，它会</description>
+    </item>
+    
+  </channel>
+</rss>

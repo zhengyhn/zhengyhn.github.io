@@ -22,10 +22,10 @@
     
     <item>
       <title>如何在Sails.js中使用generator</title>
-      <link>http://zhengyhn.github.io/post/how-to-use-generator-in-sails/</link>
+      <link>http://zhengyhn.github.io/post/typescript/how-to-use-generator-in-sails/</link>
       <pubDate>Mon, 13 Mar 2017 22:50:49 +0800</pubDate>
       
-      <guid>http://zhengyhn.github.io/post/how-to-use-generator-in-sails/</guid>
+      <guid>http://zhengyhn.github.io/post/typescript/how-to-use-generator-in-sails/</guid>
       <description>由于历史原因，公司的App项目用Sails.js框架来开发，那时候还没有ES6，当然是一层一层callback下去，后来引进了Async和T</description>
     </item>
     

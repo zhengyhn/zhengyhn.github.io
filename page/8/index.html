@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hank&#39;s blog" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://zhengyhn.github.io/" />
-<meta property="og:updated_time" content="2017-08-13T00:00:00+00:00" />
+<meta property="og:updated_time" content="2022-08-17T00:00:00+00:00" />
 <meta itemprop="name" content="Hank&#39;s Blog">
 <meta itemprop="description" content="Hank&#39;s blog"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hank&#39;s Blog"/>
@@ -116,230 +116,231 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-27-implement-a-queue-using-two-stacks/">Implement a queue using two stacks</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/design/design-guide/">浅谈后端业务系统设计</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 162 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      A queue can be implemented using two stacks. One stack store the elements appended to the queue. The other stack store the elements to be popped from the queue.
-Here is the specification of my Queue.
- StQueue(), Create an empty queue. StQueue(const T&amp; value), Create a queue whose first element is value. StQueue(const T values[], const size_t&amp; size), Create a queue from an array values whose size is size. StQueue(const StQueue&lt;T&gt;&amp; queue), Create a queue from another queue.
-    </div>
-    <div class="read-more">
-      <a href="/post/algorithm/2013-09-27-implement-a-queue-using-two-stacks/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-12-implement-a-singular-linkedlist/">Implement a singular LinkedList</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 262 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      LinkedList is a very common data structure. Three years ago, I could write a singular LinkedList very quickly in C/C++. But the code is ugly and very ineffecient. Now I am going to implement a singular LinkedList in C++ in order to cracking the interview.
-Here is the specification of my LinkedList.
- LinkedList(), Create an empty LinkedList. LinkedList(const LinkedList&amp; list), Create a LinkedList from another LinkedList list. LinkedList(const T&amp; value), Create a LinkedList whose first element is value.
-    </div>
-    <div class="read-more">
-      <a href="/post/algorithm/2013-09-12-implement-a-singular-linkedlist/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-26-implement-a-stack/">Implement a stack</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 161 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      A stack is based on the Linked List. The most explicit feature of a stack is FILO(First in last out).
-Here is the specification of my Stack.
- Stack(), Create an empty stack. Stack(const T&amp; value), Create a stack whose first element is value. Stack(const T values[], const size_t&amp; size), Create a stack from an array values whose size is size. Stack(const Stack&lt;T&gt;&amp; stack), Create a stack from another stack. const Stack&lt;T&gt;&amp; operator=(const Stack&lt;T&gt;&amp; stack), Support stack assignment.
-    </div>
-    <div class="read-more">
-      <a href="/post/algorithm/2013-09-26-implement-a-stack/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-26-implement-the-sorting-algorithms/">Implement the sorting algorithms</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 933 字 </span>
+      <span class="post-time"> 2017-03-31 </span>
+      <div class="post-category">
+          <a href="/categories/design/"> Design </a>
+          </div>
+        <span class="more-meta"> 约 2097 字 </span>
         <span class="more-meta"> 预计阅读 5 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      The sorting algorithms are very important in programming interview. I have to be able to write them on a paper without even an error.
-Bubble Sort The immediate thought of bubble sort is that swapping the ajacent elements if they are of the wrong order in each pass until there are no swapping. For example, consider the array [5, 1, 4, 2, 8],
-First pass:
-[5, 1, 4, 2, 8] =&gt; [1, 5, 4, 2, 8] =&gt; [1, 4, 5, 2, 8] =&gt; [1, 4, 2, 5, 8] =&gt; [1, 4, 2, 5, 8]
+      这里将说说个人对设计的想法，必然会有争议之处，内容包括系统之间设计，系统内部模块之间设计，细到每个函数的设计。 系统设计 不要为了拆系统而拆系统
     </div>
     <div class="read-more">
-      <a href="/post/algorithm/2013-09-26-implement-the-sorting-algorithms/" class="read-more-link">阅读更多</a>
+      <a href="/post/design/design-guide/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-07-26-initialized-before-used/">Initialized before used</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/redis/redis-max-client-limit/">记一次redis连接数超限的事故</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 414 字 </span>
+      <span class="post-time"> 2017-03-30 </span>
+      <div class="post-category">
+          <a href="/categories/redis/"> Redis </a>
+          </div>
+        <span class="more-meta"> 约 409 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      最近出了一次事故，应用crash，并报错: max number of clients reached. 查了一下reids的连接： netstat -anp |grep 6379 | wc -l 发现，连接数达10000多个，大致扫了一下，发现
+    </div>
+    <div class="read-more">
+      <a href="/post/redis/redis-max-client-limit/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/typescript/how-to-use-generator-in-sails/">如何在Sails.js中使用generator</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-03-13 </span>
+      <div class="post-category">
+          <a href="/categories/nodejs/"> Nodejs </a>
+          </div>
+        <span class="more-meta"> 约 705 字 </span>
         <span class="more-meta"> 预计阅读 2 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      For constructor In the constructor, the statements in the body are assignments, not initializations.
-#include &lt;iostream&gt; class Girl { public: Girl(std::string name, int age) { name_ = name; // These are assignments, not initilizations. age_ = age; } private: std::string name_; int age_; };  If you do this, the program will be very slow.When calling the constructor, the program will call the default construtors to initialize the members, and then enter the body of the constructor.
+      由于历史原因，公司的App项目用Sails.js框架来开发，那时候还没有ES6，当然是一层一层callback下去，后来引进了Async和T
     </div>
     <div class="read-more">
-      <a href="/post/cpp/2013-07-26-initialized-before-used/" class="read-more-link">阅读更多</a>
+      <a href="/post/typescript/how-to-use-generator-in-sails/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-07-23-more-consts-enums-inlines-and-less-defines/">More consts enums inlines and less #defines</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/c-plus-plus-interview-review/">c plus plus interview review</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-27 </span>
+      <div class="post-category">
+          <a href="/categories/%E9%9D%A2%E8%AF%95/"> 面试 </a>
+          </div>
+        <span class="more-meta"> 约 2470 字 </span>
+        <span class="more-meta"> 预计阅读 5 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      这是我看了《C笔试面试宝典》一书的笔记 new, delete, malloc, free的关系 new和delete是C++的 运算符 ，new调用构造函数，delete调用析构函数
+    </div>
+    <div class="read-more">
+      <a href="/post/cpp/c-plus-plus-interview-review/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/design/improve-code-readability/">improve code readability</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-27 </span>
+      <div class="post-category">
+          <a href="/categories/%E7%BC%96%E7%A8%8B/"> 编程 </a>
+          </div>
+        <span class="more-meta"> 约 4481 字 </span>
+        <span class="more-meta"> 预计阅读 9 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      这是我读 &ldquo;the art of readable code&rdquo; 一书做的笔记 简化循环和逻辑 making control flow easy to read 下面的代码: if (length &gt;= 10) 要比: if (10 &lt;= length) 更容易看懂。这是很显然的。而在C语言中，有的人为了
+    </div>
+    <div class="read-more">
+      <a href="/post/design/improve-code-readability/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/misc/write-down-the-restructuredtext-syntax-i-frequently-use/">reStructuredText语法笔记</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-05-27 </span>
+      
+        <span class="more-meta"> 约 358 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      reStructuredText用于排版非常好。但是，和C++一样，越是灵活，越是可扩展，越是复杂。 有些语法，你永远记不住，我经常遇到一些表
+    </div>
+    <div class="read-more">
+      <a href="/post/misc/write-down-the-restructuredtext-syntax-i-frequently-use/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/misc/2013-08-03-a-tour-to-the-badaling-great-wall/">A tour to The Badaling Great Wall</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2016-05-14 </span>
       
-        <span class="more-meta"> 约 663 字 </span>
+        <span class="more-meta"> 约 749 字 </span>
         <span class="more-meta"> 预计阅读 4 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      This is an old topic.
-For constants Consider a macro below.
-#define PI 3.14  There are several drawbacks when using a macro.
-  It&rsquo;s hard to debug.As we all know, the macros are resolved by the preprocessor and the compiler know nothing about them.When you get an error when compiling the program, the error message may refer to 3.14 but not PI because PI is not in the symbol table.
+      Today, I went to the Badaling Great Wall alone.
+There is a saying that He who has never been to the Great Wall is not a true man.
+I had read this saying for many times when I was in high school, but I have never been to the Great Wall util today.
+I got up at 7:00am and began my tour at about 7:40am after the breakfast. It took me 30 minutes to arrive at Xi zhi men station from where I live.
     </div>
     <div class="read-more">
-      <a href="/post/cpp/2013-07-23-more-consts-enums-inlines-and-less-defines/" class="read-more-link">阅读更多</a>
+      <a href="/post/misc/2013-08-03-a-tour-to-the-badaling-great-wall/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-09-25-my-c-plus-plus-coding-style/">My C&#43;&#43; coding style</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-07-28-about-constructors-destructors-and-assignment-operators/">About Constructors Destructors and Assignment Operators</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2016-05-14 </span>
       
-        <span class="more-meta"> 约 776 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span class="more-meta"> 约 1006 字 </span>
+        <span class="more-meta"> 预计阅读 5 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      Every programmer has his/her own coding style. Time goes by, and my coding style is changing. There following is my note on c++ coding style. I will explain why I want to coding in that style.
-Why do I care about my coding style so much? Because I am a virgo.
- Always add a m_ prefix to the members and use this to refer to other member functions in the member function.
+      What functions C++ will silently write and call? If we declare an empty class, the compiler will declare a constructor, a copy constructor, a copy assignment operator and a destructor for us.
+class Girl { };  But the compiler is not foolish, it will only generate them when needed.
+What do the generated functions do?
+  For construtor, it will invoke the corresponding constructor and non-static members of its base class.
     </div>
     <div class="read-more">
-      <a href="/post/cpp/2013-09-25-my-c-plus-plus-coding-style/" class="read-more-link">阅读更多</a>
+      <a href="/post/cpp/2013-07-28-about-constructors-destructors-and-assignment-operators/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-08-11-postponing-definitions-instead-of-preponing/">Postponing definitions instead of preponing</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-08-09-always-pass-parameters-by-reference-to-const/">Always pass parameters by reference-to-const</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2016-05-14 </span>
       
-        <span class="more-meta"> 约 603 字 </span>
+        <span class="more-meta"> 约 433 字 </span>
         <span class="more-meta"> 预计阅读 3 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      Prepone definitions? Wrong! Before C99, you must prepone all the variables&rsquo; definitions before any statements. But after C99 was released, you can put a variable&rsquo;s definition in any place as long as before being used. I think this new feature is introduced by learning from C++.
-This makes programer write codes more convenient. But I used to insist the old style. I even teach my students that they should use the old style when I was a TA of the course Programming with C.
+      We all know that pass by value is not effecient.So we use pass by pointer in C.However, in C++, we prefer pass by referece-to-const.
+Here is an example.
+#include &lt;iostream&gt; #include &lt;cstdio&gt; class Dog { public: Dog() { printf(&quot;Calling Dog's constructor\n&quot;); } Dog(const Dog&amp; d) { printf(&quot;Calling Dog's copy constructor\n&quot;); this-&gt;name = d.name; } virtual ~Dog() { printf(&quot;Calling Dog's destructor\n&quot;); } private: std::string name; }; void walk_the_dog(Dog d) { } int main(int argc, char **argv) { Dog dog; walk_the_dog(dog); return 0; }  The running result is as follows:
     </div>
     <div class="read-more">
-      <a href="/post/cpp/2013-08-11-postponing-definitions-instead-of-preponing/" class="read-more-link">阅读更多</a>
+      <a href="/post/cpp/2013-08-09-always-pass-parameters-by-reference-to-const/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/ruby/2013-06-30-ruby-getting-started/">Ruby-getting started</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-07-24-const-anyway/">Const anyway!</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2016-05-14 </span>
       
-        <span class="more-meta"> 约 426 字 </span>
-        <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span class="more-meta"> 约 522 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      Running ruby Interactive In the past, I always tested some ruby statements with irb. Now I can test a small ruby program in the following way.
-[monkey@itlodge octopress]$ ruby str = &quot;abc&quot; puts str Ctrl+d abc  After hit ruby, it allows me to type as many code as possible.Finally, press Ctrl+d will end the input and it will evaluate the code.
-Programs When writing a script, we always use #!
+      Const pointer const is versatile.I am always confused by the following syntax.
+const char *str = &quot;Hello&quot;; // const data, non-const pointer char * const str = &quot;Hello&quot;; // const pointer, non-const data  Now there is a tip to remember it.
+If const appears to the right of the asterisk, the pointer is constant.If const appears to the left of the asterisk, the data is constant.
+So the following two statements are the same.
     </div>
     <div class="read-more">
-      <a href="/post/ruby/2013-06-30-ruby-getting-started/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/ruby/2013-07-25-some-basic-ruby/">Some basic Ruby</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 803 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      String and name When defining a function, the parentheses are not necessary.So this one
-def say_hello name &quot;Hello &quot; + name end puts say_hello &quot;man&quot;  is the same as this.
-def say_hello(name) &quot;Hello &quot; + name end puts(say_hello(&quot;man&quot;))  However, when there are more than one parameters, it will be difficult to know which argument goes with which method invocation.So it&rsquo;s recommended using parentheses in all but the simplest cases.
-    </div>
-    <div class="read-more">
-      <a href="/post/ruby/2013-07-25-some-basic-ruby/" class="read-more-link">阅读更多</a>
+      <a href="/post/cpp/2013-07-24-const-anyway/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

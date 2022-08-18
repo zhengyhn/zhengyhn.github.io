@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kde on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/tags/kde/</link>
+    <description>Recent content in kde on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 17 Aug 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://zhengyhn.github.io/tags/kde/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>kde introduction</title>
+      <link>http://zhengyhn.github.io/post/misc/kde_fundation.org/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/misc/kde_fundation.org/</guid>
+      <description>常识 KDE可以安装在智能手机和平板(tablet)上，而且居然可以安装在windows和mac上。 菜单 文件 关闭当前标签或文件：CTRL + W 关</description>
+    </item>
+    
+  </channel>
+</rss>

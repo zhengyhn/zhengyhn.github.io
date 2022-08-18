@@ -6,10 +6,19 @@
     <description>Recent content in c on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 24 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 17 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/categories/c/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>c陷井和缺陷</title>
+      <link>http://zhengyhn.github.io/post/clang/c_traps_pitfalls/</link>
+      <pubDate>Sun, 31 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/c_traps_pitfalls/</guid>
+      <description>本文为&amp;quot;c traps and pitfalls&amp;quot;一书的笔记 词法陷井 看下面的代码： y = x/*p; /* p points to the divisor */ 本意是x除以p指向的变量，而事实上这</description>
+    </item>
     
     <item>
       <title>C语言实现的矩阵类</title>

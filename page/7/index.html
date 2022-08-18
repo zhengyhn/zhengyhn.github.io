@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hank&#39;s blog" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://zhengyhn.github.io/" />
-<meta property="og:updated_time" content="2017-08-13T00:00:00+00:00" />
+<meta property="og:updated_time" content="2022-08-17T00:00:00+00:00" />
 <meta itemprop="name" content="Hank&#39;s Blog">
 <meta itemprop="description" content="Hank&#39;s blog"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hank&#39;s Blog"/>
@@ -116,236 +116,226 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2013-08-03-a-tour-to-the-badaling-great-wall/">A tour to The Badaling Great Wall</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/implement-k-means-algorithm-myself/">Implement k-means algorithm myself</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
+      <span class="post-time"> 2018-05-20 </span>
       
-        <span class="more-meta"> 约 749 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Today, I went to the Badaling Great Wall alone.
-There is a saying that He who has never been to the Great Wall is not a true man.
-I had read this saying for many times when I was in high school, but I have never been to the Great Wall util today.
-I got up at 7:00am and began my tour at about 7:40am after the breakfast. It took me 30 minutes to arrive at Xi zhi men station from where I live.
-    </div>
-    <div class="read-more">
-      <a href="/post/2013-08-03-a-tour-to-the-badaling-great-wall/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-07-28-about-constructors-destructors-and-assignment-operators/">About Constructors Destructors and Assignment Operators</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 1006 字 </span>
-        <span class="more-meta"> 预计阅读 5 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      What functions C++ will silently write and call? If we declare an empty class, the compiler will declare a constructor, a copy constructor, a copy assignment operator and a destructor for us.
-class Girl { };  But the compiler is not foolish, it will only generate them when needed.
-What do the generated functions do?
-  For construtor, it will invoke the corresponding constructor and non-static members of its base class.
-    </div>
-    <div class="read-more">
-      <a href="/post/cpp/2013-07-28-about-constructors-destructors-and-assignment-operators/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-08-09-always-pass-parameters-by-reference-to-const/">Always pass parameters by reference-to-const</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 433 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      We all know that pass by value is not effecient.So we use pass by pointer in C.However, in C++, we prefer pass by referece-to-const.
-Here is an example.
-#include &lt;iostream&gt; #include &lt;cstdio&gt; class Dog { public: Dog() { printf(&quot;Calling Dog's constructor\n&quot;); } Dog(const Dog&amp; d) { printf(&quot;Calling Dog's copy constructor\n&quot;); this-&gt;name = d.name; } virtual ~Dog() { printf(&quot;Calling Dog's destructor\n&quot;); } private: std::string name; }; void walk_the_dog(Dog d) { } int main(int argc, char **argv) { Dog dog; walk_the_dog(dog); return 0; }  The running result is as follows:
-    </div>
-    <div class="read-more">
-      <a href="/post/cpp/2013-08-09-always-pass-parameters-by-reference-to-const/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-07-24-const-anyway/">Const anyway!</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 522 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Const pointer const is versatile.I am always confused by the following syntax.
-const char *str = &quot;Hello&quot;; // const data, non-const pointer char * const str = &quot;Hello&quot;; // const pointer, non-const data  Now there is a tip to remember it.
-If const appears to the right of the asterisk, the pointer is constant.If const appears to the left of the asterisk, the data is constant.
-So the following two statements are the same.
-    </div>
-    <div class="read-more">
-      <a href="/post/cpp/2013-07-24-const-anyway/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-08-01-cpp-resource-management/">Cpp Resource Management</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 979 字 </span>
-        <span class="more-meta"> 预计阅读 5 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      I always forget freeing a memory that allocated from the heap.And I always forget closing the file handler.
-Resources include file descriptors, mutex locks, fonts, brushes, database connections and network sockets.
-I think less programmers can remember closing a file handler, especially in a large project.
-Nowadays, many programming languages have the garbage collection function. In C++, since the destructor will be automatically called, we can release the resources automatically if we put the resource into an object.
-    </div>
-    <div class="read-more">
-      <a href="/post/cpp/2013-08-01-cpp-resource-management/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpp/2013-08-15-do-not-hide-inherited-names/">Do not hide inherited names</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 388 字 </span>
+        <span class="more-meta"> 约 956 字 </span>
         <span class="more-meta"> 预计阅读 2 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      In inheritance, there are some rules defined by C++, one of which is that the virables or the functions in the base class will be hidden if there are virables and functions with the same name.
-It seems perfect, but it&rsquo;s a pitfall of C++. Consider the following example.
-#include &lt;cstdio&gt; #include &lt;iostream&gt; class Person { public: explicit Person() { } ~Person() { } void sleep() const { printf(&quot;Person sleep\n&quot;); } void sleep(const int sec) const { printf(&quot;Person sleep %d s\n&quot;, sec); } private: Person(const Person&amp;); const Person&amp; operator=(const Person&amp;); }; class Student:public Person { public: explicit Student() { } ~Person() { } void sleep() const { printf(&quot;Student sleep\n&quot;); } private: Student(const Student&amp;); const Student&amp; operator=(const Student&amp;); }; int main(int argc, char **argv) { Student stu; stu.
+      
     </div>
     <div class="read-more">
-      <a href="/post/cpp/2013-08-15-do-not-hide-inherited-names/" class="read-more-link">阅读更多</a>
+      <a href="/post/implement-k-means-algorithm-myself/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-21-implement-a-bidirectional-linked-list/">Implement a bidirectional linked list</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/math/play-with-the-central-limit-theorem/">Play with the central limit theorem</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
+      <span class="post-time"> 2018-05-01 </span>
       
-        <span class="more-meta"> 约 162 字 </span>
+        <span class="more-meta"> 约 306 字 </span>
         <span class="more-meta"> 预计阅读 1 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      A bidirectional linked list is the same as a singular linked list except that there are two links between two nodes.
-Here is the specification of my BiLinkedList.
- BiLinkedList(), Create an empty BiLinkedList. BiLinkedList(const BiLinkedList&amp; list), Create a BiLinkedList from another BiLinkedList list. BiLinkedList(const T&amp; value), Create a BiLinkedList whose first element is value. BiLinkedList(const T values[], size_t size), Create a BiLinkedList from an array values of size size. const BiLinkedList&amp; operator=(const BiLinkedList&amp; list), Support BiLinkedList assignment.
+      
     </div>
     <div class="read-more">
-      <a href="/post/algorithm/2013-09-21-implement-a-bidirectional-linked-list/" class="read-more-link">阅读更多</a>
+      <a href="/post/math/play-with-the-central-limit-theorem/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-10-03-implement-a-binary-search-tree/">Implement a binary search tree</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/leetcode/n-queens/">N皇后问题</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 198 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
+      <span class="post-time"> 2018-01-21 </span>
+      <div class="post-category">
+          <a href="/categories/leetcode/"> leetcode </a>
+          </div>
+        <span class="more-meta"> 约 548 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      A binary search tree is very useful in solving the real world problems. The red-black tree is one kind of binary search tree. For more information about binary search tree, please visit the wikipedia.
-Here is the specification of my binary search tree.
-  BinarySearchTree(), Create an empty binary search tree.
-  BinarySearchTree(const T&amp; root_val), Create an binary search tree whose root node is constructed from root_val.
-  BinarySearchTree(const T values[], const size_t&amp; size), Create an binary search tree from an array values.
+      题目 The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other. Given an integer n, return all distinct solutions to the n-queens puzzle. Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space respectively. For example, There exist two distinct solutions to
     </div>
     <div class="read-more">
-      <a href="/post/algorithm/2013-10-03-implement-a-binary-search-tree/" class="read-more-link">阅读更多</a>
+      <a href="/post/leetcode/n-queens/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-21-implement-a-circular-linked-list/">Implement a circular linked list</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/leetcode/sqrtx/">sqrtx 求整数平方根</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 135 字 </span>
+      <span class="post-time"> 2018-01-14 </span>
+      <div class="post-category">
+          <a href="/categories/leetcode/"> leetcode </a>
+          </div>
+        <span class="more-meta"> 约 486 字 </span>
         <span class="more-meta"> 预计阅读 1 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      A circular linked list is the same as a singular linked list except that there last node points to the first node.
-Here is the specification of my CiLinkedList.
- CiLinkedList(), Create an empty CiLinkedList. CiLinkedList(const CiLinkedList&amp; list), Create a CiLinkedList from another CiLinkedList list. CiLinkedList(const T&amp; value), Create a CiLinkedList whose first element is value. CiLinkedList(const T values[], size_t size), Create a CiLinkedList from an array values of size size.
+      题目 Implement int sqrt(int x). Compute and return the square root of x. x is guaranteed to be a non-negative integer. 我的思路 我能想到的只有暴力方法，从一个位置开始，一步一步加一，直到找到平方根。 代码 int mySqrt(int x) { long long times
     </div>
     <div class="read-more">
-      <a href="/post/algorithm/2013-09-21-implement-a-circular-linked-list/" class="read-more-link">阅读更多</a>
+      <a href="/post/leetcode/sqrtx/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/algorithm/2013-09-25-implement-a-queue/">Implement a queue</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/algorithm/brent.loop/">Brent判圈算法学习</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2016-05-14 </span>
-      
-        <span class="more-meta"> 约 153 字 </span>
+      <span class="post-time"> 2018-01-06 </span>
+      <div class="post-category">
+          <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+          </div>
+        <span class="more-meta"> 约 466 字 </span>
         <span class="more-meta"> 预计阅读 1 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      A queue is based on the Linked List. The most explicit feature of a queue is FIFO(First in first out).
-Here is the specification of my Queue.
- Queue(), Create an empty queue. Queue(const T&amp; value), Create a queue whose first element is value. Queue(const T values[], const size_t&amp; size), Create a queue from an array values whose size is size. Queue(const Queue&lt;T&gt;&amp; queue), Create a queue from another queue. const Queue&lt;T&gt;&amp; operator=(const Queue&lt;T&gt;&amp; queue), Support queue assignment.
+      判断一个链接有没有环，很著名的算法是Floyd判圈算法，也叫龟兔算法。但是，原来还有一种算法，可以比Floyd更快一点，这种算法叫做Bren
     </div>
     <div class="read-more">
-      <a href="/post/algorithm/2013-09-25-implement-a-queue/" class="read-more-link">阅读更多</a>
+      <a href="/post/algorithm/brent.loop/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/leetcode/find-all-duplicates-in-an-array/">find-all-duplicates-in-an-array</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-12-26 </span>
+      <div class="post-category">
+          <a href="/categories/leetcode/"> leetcode </a>
+          </div>
+        <span class="more-meta"> 约 553 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      题目 Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once. Find all the elements that appear twice in this array. Could you do it without extra space and in O(n) runtime? Example: Input: [4,3,2,7,8,2,3,1] Output: [2,3] 思路 想了好久，终于想出来了。首先，题目
+    </div>
+    <div class="read-more">
+      <a href="/post/leetcode/find-all-duplicates-in-an-array/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/leetcode/battelships-in-a-board/">battelships-in-a-board</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-12-23 </span>
+      <div class="post-category">
+          <a href="/categories/leetcode/"> leetcode </a>
+          </div>
+        <span class="more-meta"> 约 452 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      题目 Given an 2D board, count how many battleships are in it. The battleships are represented with 'X's, empty slots are represented with '.'s. You may assume the following rules: You receive a valid board, made of only battleships or empty slots. Battleships can only be placed horizontally or vertically. In other words, they can only be made of the shape 1xN (1 row, N columns) or Nx1 (N
+    </div>
+    <div class="read-more">
+      <a href="/post/leetcode/battelships-in-a-board/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/leetcode/array-partition-i/">array-partition-i</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-12-17 </span>
+      <div class="post-category">
+          <a href="/categories/leetcode/"> leetcode </a>
+          </div>
+        <span class="more-meta"> 约 670 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      题目 Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible. Note: n is a positive integer, which is in the range of [1, 10000]. All the integers in the array will be in the range
+    </div>
+    <div class="read-more">
+      <a href="/post/leetcode/array-partition-i/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/leetcode/merge-two-binary-trees/">merge-two-binary-trees 合并二叉树</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-12-12 </span>
+      <div class="post-category">
+          <a href="/categories/leetcode/"> leetcode </a>
+          </div>
+        <span class="more-meta"> 约 442 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      题目 Given two binary trees and imagine that when you put one of them to cover the other, some nodes of the two trees are overlapped while the others are not. You need to merge them into a new binary tree. The merge rule is that if two nodes overlap, then sum node values up as the new value of the merged node. Otherwise, the NOT null node will
+    </div>
+    <div class="read-more">
+      <a href="/post/leetcode/merge-two-binary-trees/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/leetcode/maxiumn-subarray/">maxiumn-subarray 和最大的子数组</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-12-10 </span>
+      <div class="post-category">
+          <a href="/categories/leetcode/"> leetcode </a>
+          </div>
+        <span class="more-meta"> 约 1372 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      题目 Find the contiguous subarray within an array (containing at least one number) which has the largest sum. For example, given the array [-2, 1, -3, 4, -1, 2, 1, -5, 4], the contiguous subarray [4, -1, 2, 1] has the largest sum = 6. 思路一 首先，可以直接两重循环，找到所有的子数组，
+    </div>
+    <div class="read-more">
+      <a href="/post/leetcode/maxiumn-subarray/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

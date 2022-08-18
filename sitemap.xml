@@ -2,42 +2,252 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhengyhn.github.io/about/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://zhengyhn.github.io/tags/c/</loc>
-    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://zhengyhn.github.io/categories/c/</loc>
-    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://zhengyhn.github.io/categories/</loc>
-    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/clang/matrix/</loc>
-    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
+    <loc>http://zhengyhn.github.io/tags/culture/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/categories/culture/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/tags/elisp/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/emacs/elisp_data_type/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/emacs/elisp_arithmetic/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/tags/emacs/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/categories/emacs/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/tags/gtk/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/misc/gtk_intro/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/misc/gtk_base/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/categories/gui/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/tags/haskell/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/categories/haskell/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/haskell/intro.org/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/tags/kde/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/misc/kde_fundation.org/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/tags/management/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/categories/management/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/emacs/more.markup.org/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/emacs/intro.org/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://zhengyhn.github.io/post/</loc>
-    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://zhengyhn.github.io/tags/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/haskell/types.org/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/haskell/function.org/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/misc/how-to-become-a-hacker/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/pm/intro.org/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/haskell/recursion.org/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/pm/env.org/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/haskell/high.order.function.org/</loc>
+    <lastmod>2022-08-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/clang/c_traps_pitfalls/</loc>
+    <lastmod>2022-07-31T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhengyhn.github.io/post/clang/matrix/</loc>
     <lastmod>2022-07-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -359,7 +569,7 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/different-implementation-of-binary-tree-traversal/</loc>
+    <loc>http://zhengyhn.github.io/post/algorithm/different-implementation-of-binary-tree-traversal/</loc>
     <lastmod>2018-10-14T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -380,7 +590,7 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/different-version-of-quick-sort/</loc>
+    <loc>http://zhengyhn.github.io/post/algorithm/different-version-of-quick-sort/</loc>
     <lastmod>2018-10-04T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -401,7 +611,7 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/git-cheat-sheet-in-our-team/</loc>
+    <loc>http://zhengyhn.github.io/post/design/git-cheat-sheet-in-our-team/</loc>
     <lastmod>2018-09-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -464,7 +674,7 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/insert-sort-algorithm-in-python/</loc>
+    <loc>http://zhengyhn.github.io/post/algorithm/insert-sort-algorithm-in-python/</loc>
     <lastmod>2018-07-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -590,20 +800,6 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/about/</loc>
-    <lastmod>2017-08-13T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhengyhn.github.io/</loc>
-    <lastmod>2017-08-13T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://zhengyhn.github.io/tags/design/</loc>
     <lastmod>2017-03-31T10:50:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -618,7 +814,7 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/design-guide/</loc>
+    <loc>http://zhengyhn.github.io/post/design/design-guide/</loc>
     <lastmod>2017-03-31T10:50:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -639,7 +835,7 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/redis-max-client-limit/</loc>
+    <loc>http://zhengyhn.github.io/post/redis/redis-max-client-limit/</loc>
     <lastmod>2017-03-30T22:50:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -653,7 +849,7 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/how-to-use-generator-in-sails/</loc>
+    <loc>http://zhengyhn.github.io/post/typescript/how-to-use-generator-in-sails/</loc>
     <lastmod>2017-03-13T22:50:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -681,7 +877,7 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/improve-code-readability/</loc>
+    <loc>http://zhengyhn.github.io/post/design/improve-code-readability/</loc>
     <lastmod>2016-05-27T20:40:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -702,14 +898,14 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/write-down-the-restructuredtext-syntax-i-frequently-use/</loc>
+    <loc>http://zhengyhn.github.io/post/misc/write-down-the-restructuredtext-syntax-i-frequently-use/</loc>
     <lastmod>2016-05-27T16:35:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/2013-08-03-a-tour-to-the-badaling-great-wall/</loc>
+    <loc>http://zhengyhn.github.io/post/misc/2013-08-03-a-tour-to-the-badaling-great-wall/</loc>
     <lastmod>2016-05-14T16:35:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -870,15 +1066,8 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/misc/elisp_data_type/</loc>
-    <lastmod>2013-08-13T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhengyhn.github.io/post/misc/elisp_arithmetic/</loc>
-    <lastmod>2013-08-13T00:00:00+00:00</lastmod>
+    <loc>http://zhengyhn.github.io/post/misc/programmer_interview/</loc>
+    <lastmod>2013-04-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -886,13 +1075,6 @@
   <url>
     <loc>http://zhengyhn.github.io/post/programmer_interview/</loc>
     <lastmod>2013-04-24T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhengyhn.github.io/post/pm/env.org/</loc>
-    <lastmod>2013-04-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -926,7 +1108,7 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/echoc/</loc>
+    <loc>http://zhengyhn.github.io/post/shell/echoc/</loc>
     <lastmod>2013-03-20T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -949,20 +1131,6 @@
   <url>
     <loc>http://zhengyhn.github.io/post/test/config_comp.org/</loc>
     <lastmod>2013-03-17T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhengyhn.github.io/post/pm/intro.org/</loc>
-    <lastmod>2013-03-13T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhengyhn.github.io/post/haskell/high.order.function.org/</loc>
-    <lastmod>2013-03-11T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -1017,27 +1185,6 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/haskell/recursion.org/</loc>
-    <lastmod>2013-03-10T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhengyhn.github.io/post/haskell/function.org/</loc>
-    <lastmod>2013-03-06T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhengyhn.github.io/post/how-to-become-a-hacker/</loc>
-    <lastmod>2013-03-04T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://zhengyhn.github.io/post/test/specification.org/</loc>
     <lastmod>2013-03-03T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -1073,13 +1220,6 @@
   </url>
   
   <url>
-    <loc>http://zhengyhn.github.io/post/clang/c_traps_pitfalls/</loc>
-    <lastmod>2013-03-01T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://zhengyhn.github.io/post/test/dev_process.org/</loc>
     <lastmod>2013-03-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -1096,34 +1236,6 @@
   <url>
     <loc>http://zhengyhn.github.io/post/clang/linux.org/</loc>
     <lastmod>2013-02-27T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhengyhn.github.io/post/misc/gtk_base/</loc>
-    <lastmod>2013-02-22T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhengyhn.github.io/post/misc/gtk_intro/</loc>
-    <lastmod>2013-02-21T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhengyhn.github.io/post/haskell/types.org/</loc>
-    <lastmod>2013-02-18T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhengyhn.github.io/post/haskell/intro.org/</loc>
-    <lastmod>2013-02-16T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

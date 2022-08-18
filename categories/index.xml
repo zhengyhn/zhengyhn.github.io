@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 24 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 17 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,54 @@
     <item>
       <title>c</title>
       <link>http://zhengyhn.github.io/categories/c/</link>
-      <pubDate>Sun, 24 Jul 2022 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
       
       <guid>http://zhengyhn.github.io/categories/c/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>culture</title>
+      <link>http://zhengyhn.github.io/categories/culture/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/categories/culture/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>emacs</title>
+      <link>http://zhengyhn.github.io/categories/emacs/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/categories/emacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GUI</title>
+      <link>http://zhengyhn.github.io/categories/gui/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/categories/gui/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>haskell</title>
+      <link>http://zhengyhn.github.io/categories/haskell/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/categories/haskell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>management</title>
+      <link>http://zhengyhn.github.io/categories/management/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/categories/management/</guid>
       <description></description>
     </item>
     

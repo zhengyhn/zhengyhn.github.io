@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>haskell on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/tags/haskell/</link>
+    <description>Recent content in haskell on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 17 Aug 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://zhengyhn.github.io/tags/haskell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>introduction</title>
+      <link>http://zhengyhn.github.io/post/haskell/intro.org/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/haskell/intro.org/</guid>
+      <description>what is haskell haskell是一种纯粹的函数式编程语言 没有副作用 一种懒惰的语言，只有当要显示结果的时候才执行函数 静态类型化，不用指定类型，编译器能自</description>
+    </item>
+    
+    <item>
+      <title>types and typeclasses</title>
+      <link>http://zhengyhn.github.io/post/haskell/types.org/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/haskell/types.org/</guid>
+      <description>概述 haskell有类型推理机制，如果我们写一个数字，我们不用告诉编译器它是一个数字， 编译器能够推理出它是一个数字。 使用:t命令可以查看一个</description>
+    </item>
+    
+    <item>
+      <title>函数中的语法</title>
+      <link>http://zhengyhn.github.io/post/haskell/function.org/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/haskell/function.org/</guid>
+      <description>模式匹配(pattern matching) 这里的模式匹配有点像switch&amp;hellip;case&amp;hellip;下面的函数判断传入的参数是不是7 lucky :: (Integral a) =&amp;gt;</description>
+    </item>
+    
+    <item>
+      <title>递归</title>
+      <link>http://zhengyhn.github.io/post/haskell/recursion.org/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/haskell/recursion.org/</guid>
+      <description>一些基本的递归函数 在haskell中，没有循环，有的只是函数，要完成一些事情，只能使用递归来做，而且 完成得比较好。看下面的求最大值函数： -- function</description>
+    </item>
+    
+    <item>
+      <title>高阶函数</title>
+      <link>http://zhengyhn.github.io/post/haskell/high.order.function.org/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/haskell/high.order.function.org/</guid>
+      <description>curried function 我还是直接翻译成“用咖啡煮的函数吧”。 有一个有趣的现象： Prelude&amp;gt; max 1 2 2 Prelude&amp;gt; (max 1) 2 2 我刚开始觉得这太不可思议了，max 1居然可以执行，而且它的返</description>
+    </item>
+    
+  </channel>
+</rss>

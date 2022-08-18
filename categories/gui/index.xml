@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GUI on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/categories/gui/</link>
+    <description>Recent content in GUI on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 17 Aug 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://zhengyhn.github.io/categories/gui/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>gtk, introduction</title>
+      <link>http://zhengyhn.github.io/post/misc/gtk_intro/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/misc/gtk_intro/</guid>
+      <description>简介 GTK(GIMP ToolKit)，是用于构建GUI的库来的。取这个名字，是因为GTK是用于开发GIMP (GNU image manipulation program)的，现在也用来开发GNOM</description>
+    </item>
+    
+    <item>
+      <title>gtk, widget</title>
+      <link>http://zhengyhn.github.io/post/misc/gtk_base/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/misc/gtk_base/</guid>
+      <description>看下面一个装载widget的程序： #include &amp;lt;gtk/gtk.h&amp;gt; #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; #include &amp;lt;string.h&amp;gt; //macros #define BORDER_WIDTH 10 //global variables GtkWidget *win; GtkWidget *btn; GtkWidget *top_box; GtkWidget *separator; GtkWidget *bottom_box; GtkWidget *label; GtkWidget *quitbox; //functions gint delete_event(GtkWidget *widget, GdkEvent *event, gpointer data); void make_box(GtkWidget *parent, gboolean homogeneous, gint spacing, gboolean expand, gboolean fill, guint padding); void make_btn(GtkWidget *box, GtkWidget</description>
+    </item>
+    
+    <item>
+      <title>kde introduction</title>
+      <link>http://zhengyhn.github.io/post/misc/kde_fundation.org/</link>
+      <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/misc/kde_fundation.org/</guid>
+      <description>常识 KDE可以安装在智能手机和平板(tablet)上，而且居然可以安装在windows和mac上。 菜单 文件 关闭当前标签或文件：CTRL + W 关</description>
+    </item>
+    
+  </channel>
+</rss>
