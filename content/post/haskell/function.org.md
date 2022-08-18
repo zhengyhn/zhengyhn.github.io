@@ -1,6 +1,8 @@
 ---
-date: 2013-03-06
+date: 2022-08-17
 title: 函数中的语法
+tags: ['haskell']
+categories: ['haskell']
 ---
 
 模式匹配(pattern matching)

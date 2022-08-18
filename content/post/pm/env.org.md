@@ -1,6 +1,8 @@
 ---
-date: 2013-04-01
+date: 2022-08-17
 title: 项目管理与信息技术环境
+tags: ['management']
+categories: ['management']
 ---
 
 系统观点

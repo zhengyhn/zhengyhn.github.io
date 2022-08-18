@@ -1,6 +1,8 @@
 ---
-date: 2013-03-13
+date: 2022-08-17
 title: 简介
+tags: ['management']
+categories: ['management']
 ---
 
 项目

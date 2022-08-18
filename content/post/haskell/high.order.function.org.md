@@ -1,6 +1,8 @@
 ---
-date: 2013-03-11
+date: 2022-08-17
 title: 高阶函数
+tags: ['haskell']
+categories: ['haskell']
 ---
 
 curried function

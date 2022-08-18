@@ -1,6 +1,8 @@
 ---
-date: 2013-03-04
+date: 2022-08-17
 title: 如何成为一个黑客
+tags: ['culture']
+categories: ['culture']
 ---
 
 @&lt;font color="red"&gt; 本文为"how to become a hacker"一书的笔记

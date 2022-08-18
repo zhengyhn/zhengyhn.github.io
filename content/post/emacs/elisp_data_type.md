@@ -1,6 +1,8 @@
 ---
-date: 2013-08-13
+date: 2022-08-17
 title: elisp笔记：introduction
+tags: ['emacs', 'elisp']
+categories: ['emacs']
 ---
 
 lisp历史

@@ -1,6 +1,8 @@
 ---
-date: 2013-02-16
+date: 2022-08-17
 title: introduction
+tags: ['haskell']
+categories: ['haskell']
 ---
 
 what is haskell

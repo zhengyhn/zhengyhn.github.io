@@ -1,6 +1,8 @@
 ---
-date: 2013-02-21
+date: 2022-08-17
 title: gtk, introduction
+tags: ['gtk']
+categories: ['GUI']
 ---
 
 简介

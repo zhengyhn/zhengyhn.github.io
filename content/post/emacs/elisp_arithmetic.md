@@ -1,6 +1,8 @@
 ---
-date: 2013-08-13
+date: 2022-08-17
 title: elisp笔记：运算
+tags: ['emacs', 'elisp']
+categories: ['emacs']
 ---
 
 声明：此文章为学习[xahlee](http://www.xahlee.org)

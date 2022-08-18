@@ -1,35 +1,34 @@
 ---
-date: 2013-03-01
+date: 2022-07-31
 title: c陷井和缺陷
+tags: ['c']
+categories: ['c']
 ---
 
-@&lt;font color="red"&gt; 本文为"c traps and pitfalls"一书的笔记
-@&lt;/font&gt;
+本文为"c traps and pitfalls"一书的笔记
 
-词法陷井
-========
+## 词法陷井
 
 -   看下面的代码：
 
-``` {.example}
+```c
 y = x/*p;  /* p points to the divisor */
 ```
 
 本意是x除以p指向的变量，而事实上这样写/\*会认为是注释的开头。
 所以，双目运算符两边加空格是非常好的。
 
-语法陷井
-========
+## 语法陷井
 
 -   !=的优先级要比&之类的逻辑运算符高，所以不要有下面的写法
 
-``` {.example}
+```c
 if (flags & FLAG != 0)
 ```
 
 -   +号等运算符优先级要比[]{#和}的高，所以不要有下面的写法
 
-``` {.example}
+```c
 r = h << 4 + 1
 ```
 
@@ -50,18 +49,17 @@ r = h << 4 + 1
 代数运算符 &gt; 移位运算符 &gt; 关系运算符 &gt; 逻辑运算符 &gt;
 赋值运算符 &gt; 条件运算符
 
-链接陷井
-========
+## 链接陷井
 
 -   假设一个文件里面有下面的定义：
 
-``` {.example}
+```c
 char filename[] = "/etc/passwd";
 ```
 
 另外一个文件里面有下面的定义：
 
-``` {.example}
+```c
 char *filename;
 ```
 
@@ -71,12 +69,11 @@ char *filename;
 第二个filename，它是一个指针，定义时就给它分配了空间，程序员想要让它指向
 哪里它就会指向哪里，如果不给它赋值，它会指向NULL
 
-语义陷井
-========
+## 语义陷井
 
 -   表达式的顺序陷井。看下面的例子：
 
-``` {.c}
+```c
 #include <stdio.h>
 
 int main()
@@ -99,7 +96,7 @@ int main()
 会输出什么呢？我刚开始是这样想的，先计算右边，再赋值给左边，所以会输出
 10 20 30 作者再给了一个例子：
 
-``` {.c}
+```c
 #include <stdio.h>
 
 int main()
@@ -124,12 +121,11 @@ i++，i已经超过了数组a的范围了。而事实上，结果还是 10 20 30
 作者的解释是，编译器无法保证获取数组元素的操作先于i自增的操作，这是不确定的。
 所以在写程序的时候，最好分开写。
 
-库函数陷井
-==========
+## 库函数陷井
 
 -   getchar()函数居然返回int!下面是从&lt;stdio.h&gt;复制过来的代码：
 
-``` {.c}
+```c
 /* Read a character from stdin.  */
 __STDIO_INLINE int
 getchar (void)
@@ -140,7 +136,7 @@ getchar (void)
 
 而且putchar居然也是传进int参数，返回int参数
 
-``` {.c}
+```c
 /* Write a character to stdout.  */
 __STDIO_INLINE int
 putchar (int __c)
@@ -149,12 +145,11 @@ putchar (int __c)
 }
 ```
 
-预处理陷井
-==========
+## 预处理陷井
 
 -   宏不是函数，看下面的例子：
 
-``` {.c}
+```c
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
 largest = max(largest,x[i++]);
@@ -166,7 +161,7 @@ largest = max(largest,x[i++]);
 
 -   宏不是类型定义，看下面的例子：
 
-``` {.c}
+```c
 #define STU struct student *
 typedef struct student *STUDENT;
 
@@ -176,7 +171,7 @@ STUDENT c, d;
 
 后面的两条定义等价于：
 
-``` {.c}
+```c
 struct student *a, b;
 struct student *c, *d;
 ```

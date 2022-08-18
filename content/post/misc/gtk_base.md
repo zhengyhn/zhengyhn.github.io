@@ -1,6 +1,8 @@
 ---
-date: 2013-02-22
+date: 2022-08-17
 title: gtk, widget
+tags: ['gtk']
+categories: ['GUI']
 ---
 
 看下面一个装载widget的程序：

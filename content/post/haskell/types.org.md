@@ -1,6 +1,8 @@
 ---
-date: 2013-02-18
+date: 2022-08-17
 title: types and typeclasses
+tags: ['haskell']
+categories: ['haskell']
 ---
 
 概述
