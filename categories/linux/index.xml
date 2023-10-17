@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linux on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/categories/linux/</link>
+    <description>Recent content in linux on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 26 Aug 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://zhengyhn.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>linux系统初识</title>
+      <link>http://zhengyhn.github.io/post/linux/intuition.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/linux/intuition.org/</guid>
+      <description>常识 当命令太长时，可以使用反斜杠\来防止按RET执行命令，能在下一行继续输入 可以用分号;来分隔命令，因为可以在同一行输入多个命令 显示日历：c</description>
+    </item>
+    
+    <item>
+      <title>鸟哥的linux私房菜笔记：linux是什么&amp;主机规划</title>
+      <link>http://zhengyhn.github.io/post/linux/linux.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/linux/linux.org/</guid>
+      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;鸟哥的linux私房菜基础学习篇(第三版)&amp;ldquo;一书的笔记 @&amp;lt;/font&amp;gt; 概念 原来BSD是指Berkeley Software Distribution. System V是AT&amp;</description>
+    </item>
+    
+    <item>
+      <title>鸟哥的linux私房菜笔记：计算机概论</title>
+      <link>http://zhengyhn.github.io/post/linux/computer.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/linux/computer.org/</guid>
+      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;鸟哥的linux私房菜基础学习篇(第三版)&amp;ldquo;一书的笔记 @&amp;lt;/font&amp;gt; 计算机常识 原来Eeepc就是现在所说的上网本net</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,10 +6,19 @@
     <description>Recent content in Math on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 08 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/tags/math/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>矩阵基础知识</title>
+      <link>http://zhengyhn.github.io/post/math/matrix.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/math/matrix.org/</guid>
+      <description>为了实习的笔试面试，一定要把以前丢掉的数学全部找回来，于是开始了复习之旅。 基本知识 矩阵能相乘if and only if第一个矩阵的列数等于第二个矩阵的行数</description>
+    </item>
     
     <item>
       <title>代数余子式异乘为0的证明</title>

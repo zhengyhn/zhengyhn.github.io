@@ -6,10 +6,37 @@
     <description>Recent content in c on Hank&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 17 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://zhengyhn.github.io/categories/c/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux c编程一站式学习笔记：C语言基础</title>
+      <link>http://zhengyhn.github.io/post/clang/overview.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/overview.org/</guid>
+      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;linux c编程一站式学习&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 程序和编程语言 平台这个词有很多说法，可以指计算机体系结构，也可以指操</description>
+    </item>
+    
+    <item>
+      <title>Linux c编程一站式学习笔记：C语言本质</title>
+      <link>http://zhengyhn.github.io/post/clang/real.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/real.org/</guid>
+      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;linux c编程一站式学习&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以如果</description>
+    </item>
+    
+    <item>
+      <title>linux系统编程</title>
+      <link>http://zhengyhn.github.io/post/clang/linux.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/linux.org/</guid>
+      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;linux c编程一站式学习&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 文件与I/O 再来一个hello world 我也来写一段汇编的hello world .data msg: .ascii</description>
+    </item>
     
     <item>
       <title>c陷井和缺陷</title>

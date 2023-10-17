@@ -12,6 +12,78 @@
     
     
     <item>
+      <title>learn python the hard way笔记</title>
+      <link>http://zhengyhn.github.io/post/python/python.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/python/python.org/</guid>
+      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;learn python the hard way&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 方法 在python交互窗口中，打help()，会进入帮助模式，这里可以查</description>
+    </item>
+    
+    <item>
+      <title>Linux c编程一站式学习笔记：C语言基础</title>
+      <link>http://zhengyhn.github.io/post/clang/overview.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/overview.org/</guid>
+      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;linux c编程一站式学习&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 程序和编程语言 平台这个词有很多说法，可以指计算机体系结构，也可以指操</description>
+    </item>
+    
+    <item>
+      <title>Linux c编程一站式学习笔记：C语言本质</title>
+      <link>http://zhengyhn.github.io/post/clang/real.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/real.org/</guid>
+      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;linux c编程一站式学习&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以如果</description>
+    </item>
+    
+    <item>
+      <title>linux系统初识</title>
+      <link>http://zhengyhn.github.io/post/linux/intuition.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/linux/intuition.org/</guid>
+      <description>常识 当命令太长时，可以使用反斜杠\来防止按RET执行命令，能在下一行继续输入 可以用分号;来分隔命令，因为可以在同一行输入多个命令 显示日历：c</description>
+    </item>
+    
+    <item>
+      <title>linux系统编程</title>
+      <link>http://zhengyhn.github.io/post/clang/linux.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/clang/linux.org/</guid>
+      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;linux c编程一站式学习&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 文件与I/O 再来一个hello world 我也来写一段汇编的hello world .data msg: .ascii</description>
+    </item>
+    
+    <item>
+      <title>矩阵基础知识</title>
+      <link>http://zhengyhn.github.io/post/math/matrix.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/math/matrix.org/</guid>
+      <description>为了实习的笔试面试，一定要把以前丢掉的数学全部找回来，于是开始了复习之旅。 基本知识 矩阵能相乘if and only if第一个矩阵的列数等于第二个矩阵的行数</description>
+    </item>
+    
+    <item>
+      <title>鸟哥的linux私房菜笔记：linux是什么&amp;主机规划</title>
+      <link>http://zhengyhn.github.io/post/linux/linux.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/linux/linux.org/</guid>
+      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;鸟哥的linux私房菜基础学习篇(第三版)&amp;ldquo;一书的笔记 @&amp;lt;/font&amp;gt; 概念 原来BSD是指Berkeley Software Distribution. System V是AT&amp;</description>
+    </item>
+    
+    <item>
+      <title>鸟哥的linux私房菜笔记：计算机概论</title>
+      <link>http://zhengyhn.github.io/post/linux/computer.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/linux/computer.org/</guid>
+      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;鸟哥的linux私房菜基础学习篇(第三版)&amp;ldquo;一书的笔记 @&amp;lt;/font&amp;gt; 计算机常识 原来Eeepc就是现在所说的上网本net</description>
+    </item>
+    
+    <item>
       <title>About me</title>
       <link>http://zhengyhn.github.io/about/</link>
       <pubDate>Wed, 17 Aug 2022 00:00:00 +0000</pubDate>
@@ -988,42 +1060,6 @@ Encapsulation is not invisibility.</description>
     </item>
     
     <item>
-      <title>linux系统初识</title>
-      <link>http://zhengyhn.github.io/post/linux/intuition.org/</link>
-      <pubDate>Thu, 28 Mar 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/linux/intuition.org/</guid>
-      <description>常识 当命令太长时，可以使用反斜杠\来防止按RET执行命令，能在下一行继续输入 可以用分号;来分隔命令，因为可以在同一行输入多个命令 显示日历：c</description>
-    </item>
-    
-    <item>
-      <title>learn python the hard way笔记</title>
-      <link>http://zhengyhn.github.io/post/python/python.org/</link>
-      <pubDate>Mon, 25 Mar 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/python/python.org/</guid>
-      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;learn python the hard way&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 方法 在python交互窗口中，打help()，会进入帮助模式，这里可以查</description>
-    </item>
-    
-    <item>
-      <title>鸟哥的linux私房菜笔记：linux是什么&amp;主机规划</title>
-      <link>http://zhengyhn.github.io/post/linux/linux.org/</link>
-      <pubDate>Fri, 22 Mar 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/linux/linux.org/</guid>
-      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;鸟哥的linux私房菜基础学习篇(第三版)&amp;ldquo;一书的笔记 @&amp;lt;/font&amp;gt; 概念 原来BSD是指Berkeley Software Distribution. System V是AT&amp;</description>
-    </item>
-    
-    <item>
-      <title>鸟哥的linux私房菜笔记：计算机概论</title>
-      <link>http://zhengyhn.github.io/post/linux/computer.org/</link>
-      <pubDate>Thu, 21 Mar 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/linux/computer.org/</guid>
-      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;鸟哥的linux私房菜基础学习篇(第三版)&amp;ldquo;一书的笔记 @&amp;lt;/font&amp;gt; 计算机常识 原来Eeepc就是现在所说的上网本net</description>
-    </item>
-    
-    <item>
       <title>一个带颜色输出的echo</title>
       <link>http://zhengyhn.github.io/post/shell/echoc/</link>
       <pubDate>Wed, 20 Mar 2013 00:00:00 +0000</pubDate>
@@ -1183,33 +1219,6 @@ Encapsulation is not invisibility.</description>
       
       <guid>http://zhengyhn.github.io/post/test/stbg.org/</guid>
       <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;software testing&amp;quot;一书的读书笔记 @&amp;lt;/font&amp;gt; 什么是bug 当下面5种情况中的一种出现时，说明有bug了 软件</description>
-    </item>
-    
-    <item>
-      <title>linux系统编程</title>
-      <link>http://zhengyhn.github.io/post/clang/linux.org/</link>
-      <pubDate>Wed, 27 Feb 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/clang/linux.org/</guid>
-      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;linux c编程一站式学习&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 文件与I/O 再来一个hello world 我也来写一段汇编的hello world .data msg: .ascii</description>
-    </item>
-    
-    <item>
-      <title>Linux c编程一站式学习笔记：C语言本质</title>
-      <link>http://zhengyhn.github.io/post/clang/real.org/</link>
-      <pubDate>Sat, 16 Feb 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/clang/real.org/</guid>
-      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;linux c编程一站式学习&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 计算机中数的表示 二进制数表示法 LSB称为第0位而不是第1位，所以如果</description>
-    </item>
-    
-    <item>
-      <title>Linux c编程一站式学习笔记：C语言基础</title>
-      <link>http://zhengyhn.github.io/post/clang/overview.org/</link>
-      <pubDate>Wed, 13 Feb 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://zhengyhn.github.io/post/clang/overview.org/</guid>
-      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;linux c编程一站式学习&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 程序和编程语言 平台这个词有很多说法，可以指计算机体系结构，也可以指操</description>
     </item>
     
   </channel>

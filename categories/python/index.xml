@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on Hank&#39;s Blog</title>
+    <link>http://zhengyhn.github.io/categories/python/</link>
+    <description>Recent content in python on Hank&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 26 Aug 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://zhengyhn.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>learn python the hard way笔记</title>
+      <link>http://zhengyhn.github.io/post/python/python.org/</link>
+      <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://zhengyhn.github.io/post/python/python.org/</guid>
+      <description>@&amp;lt;font color=&amp;quot;red&amp;rdquo;&amp;gt; 本文为&amp;quot;learn python the hard way&amp;quot;一书的笔记 @&amp;lt;/font&amp;gt; 方法 在python交互窗口中，打help()，会进入帮助模式，这里可以查</description>
+    </item>
+    
+  </channel>
+</rss>
